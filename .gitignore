@@ -1,0 +1,61 @@
+# Gitignore file for "HP CDS - Smart Testing Tool" project
+
+# IDE files (Intellij idea)
+.idea/
+*.iml
+*.ipr
+
+# File-based project format
+*.iws
+
+# OS X generated files
+.DS_Store
+
+# Project files
+.classpath
+.project
+.settings/
+
+# Web application files
+/web-app/WEB-INF/classes
+
+# Default HSQL database files for production mode
+/prodDb.*
+
+# General HSQL database files
+*Db.properties
+*Db.script
+/*DB.*
+
+# Datasource (Ex.: MySQL)
+/grails-app/conf/DataSource.groovy
+
+# Logs
+stacktrace.log
+/test/reports
+/logs
+/*.log
+
+# Project release file
+/*.war
+
+# Plugin release files
+/*.zip
+/plugin.xml
+
+# Older plugin install locations
+/plugins
+/web-app/plugins
+
+# "Temporary" build files
+/target-eclipse/
+/out/
+
+# Output directory (classes generated from sources)
+/target/
+
+/cobertura.ser
+/.link_to_grails_plugins/
+.metadata/*
+Servers/*
+
