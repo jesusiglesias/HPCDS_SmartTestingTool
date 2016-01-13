@@ -1,4 +1,6 @@
-# Gitignore file for "HP CDS - Smart Testing Tool" project
+/*-------------------------------------------------------------------------------------------*
+ *                GITIGNORE FILE FOR "HP CDS - SMART TESTING TOOL" PROJECT                   *
+ *-------------------------------------------------------------------------------------------*/
 
 # IDE files (Intellij idea)
 .idea/
@@ -16,6 +18,9 @@
 .project
 .settings/
 
+# Libraries
+lib/
+
 # Web application files
 /web-app/WEB-INF/classes
 
@@ -29,6 +34,10 @@
 
 # Datasource (Ex.: MySQL)
 /grails-app/conf/DataSource.groovy
+
+# Cache
+.asscache
+.slcache/
 
 # Logs
 stacktrace.log
