@@ -1,3 +1,7 @@
+/*-------------------------------------------------------------------------------------------*
+ *                                        CONFIGURATION                                      *
+ *-------------------------------------------------------------------------------------------*/
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -59,7 +63,6 @@ grails {
     }
 }
 
-
 grails.converters.encoding = "UTF-8"
 // scaffolding templates configuration
 grails.scaffolding.templates.domainSuffix = 'Instance'
@@ -95,8 +98,9 @@ environments {
     }
 }
 
-// log4j configuration
+// Log4j configuration
 log4j.main = {
+
     // Example of changing the log pattern for the default console appender:
     //
     //appenders {
