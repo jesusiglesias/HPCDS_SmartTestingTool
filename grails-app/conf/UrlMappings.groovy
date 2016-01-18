@@ -9,5 +9,10 @@ class UrlMappings {
 
         "/"(view:"/index")
         "500"(view:'/error')
+
+        // Humans.txt
+        "/humans.txt" (view: "extraInformation/humans")
+        // Robots.txt
+        "/robots.txt" (view: "extraInformation/robots")
 	}
 }
