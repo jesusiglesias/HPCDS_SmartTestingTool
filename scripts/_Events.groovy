@@ -2,16 +2,28 @@
  * Script to perform differents actions at different times with Apache Ant
  */
 
+// LogConfig path
+def LogConfigPath = "${basedir}/grails-app/conf/LogConfig.groovy"
+// DBConfig path
+def DBConfigPath = "${basedir}/grails-app/conf/DBConfig.groovy"
+
+// It adds file to destination path during run app start event
+eventRunAppStart = {
+
+    // Run app mode
+    ant.copy(todir: "${basedir}/target/classes/external-config") {
+        print('_Events():RunAppStart:copy:Logconfig,DBConfig')
+        fileset(file: LogConfigPath)
+        fileset(file: DBConfigPath)
+    }
+}
+
 // It adds file to destination path during war creation event
 eventCreateWarStart = { warName, stagingDir ->
 
-    // LogConfig.groovy path
-    def LogConfigPath = "${basedir}/grails-app/conf/LogConfig.groovy"
-    // DBConfig.groovy path
-    def DBConfigPath = "${basedir}/grails-app/conf/DBConfig.groovy"
-    
+    // War mode
     ant.copy(todir: "${stagingDir}/WEB-INF/classes/external-config") {
-        print ('_Events():CreateWarStart:copy:Logconfig.groovy')
+        print ('_Events():CreateWarStart:copy:Logconfig,DBConfig')
         fileset(file: LogConfigPath)
         fileset(file: DBConfigPath)
     }
@@ -52,6 +64,8 @@ eventCreateWarEnd = {warName, stagingDir ->
 eventWebXmlStart = { webXmlFile ->
 
     print("_Events():WebXmlStart:display_name")
+
+    // Web.xml file update
     def tmpWebXmlFile = new File(projectWorkDir, webXmlFile)
     ant.replace(file: tmpWebXmlFile, token: "@grails.app.version@",
             value: "${grailsAppVersion}")
