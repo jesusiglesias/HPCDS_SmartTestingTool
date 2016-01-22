@@ -1,22 +1,15 @@
 /**
- * Script to perform actions at different times
+ * Script to perform differents actions at different times with Apache Ant
  */
-
-// Read properties from file
-ant.property file: 'application.properties'
-def appName = ant.project.properties.'app.name'
-
-// LogConfig.groovy path
-def LogConfigPath = "${basedir}/grails-app/conf/LogConfig.groovy"
-// DBConfig.groovy path
-def DBConfigPath = "${basedir}/grails-app/conf/DBConfig.groovy"
-// logs dir path
-def deleteLogDir = "${basedir}/logs"
-// .log file path
-def deleteLogFile = "/tmp/${appName}_Error.log"
 
 // It adds file to destination path during war creation event
 eventCreateWarStart = { warName, stagingDir ->
+
+    // LogConfig.groovy path
+    def LogConfigPath = "${basedir}/grails-app/conf/LogConfig.groovy"
+    // DBConfig.groovy path
+    def DBConfigPath = "${basedir}/grails-app/conf/DBConfig.groovy"
+    
     ant.copy(todir: "${stagingDir}/WEB-INF/classes/external-config") {
         print ('_Events():CreateWarStart:copy:Logconfig.groovy')
         fileset(file: LogConfigPath)
@@ -24,9 +17,20 @@ eventCreateWarStart = { warName, stagingDir ->
     }
 }
 
+// It deletes the "logs" directory and its contents recursively
 // It performs tasks when war creation event finishes
 eventCreateWarEnd = {warName, stagingDir ->
 
+    // Read properties from file
+    ant.property file: 'application.properties'
+    def appName = ant.project.properties.'app.name'
+
+    // logs dir path
+    def deleteLogDir = "${basedir}/logs"
+    // .log file path
+    def deleteLogFile = "/tmp/${appName}_Error.log"
+
+    // Environments
     def devEnv = 'development'
     def testEnv = 'test'
     def prodEnv = "production"
