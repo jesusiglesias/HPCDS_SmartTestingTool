@@ -6,13 +6,14 @@ import org.apache.log4j.Level
 import org.apache.log4j.PatternLayout
 import org.apache.log4j.rolling.RollingFileAppender
 import org.apache.log4j.rolling.TimeBasedRollingPolicy
+import grails.util.Metadata
 
 /* Log configuration
  =================================================================== */
 
 // App name
 //def appName = "${myAppName}"
-def myAppName = grails.util.Metadata.current.'app.name'
+def myAppName = Metadata.current.'app.name'
 // Log dir
 def logHome= './logs'
 // Log name
@@ -56,10 +57,10 @@ log4j.main = {
         // Log files created depending on the environment
         environments {
             development {
-                rollingFile name: "debugLog", threshold: Level.toLevel(DEBUG), fileName: logName('Debug'), append: false, layout: customPatternExtended, maxFileSize: "100MB", maxBackupIndex: 5
+                rollingFile name: "debugLog", threshold: Level.toLevel(DEBUG), fileName: logName('Debug'), append: false, layout: customPatternExtended, maxFileSize: "100MB"
             }
             test {
-                rollingFile name: "warnLog", threshold: Level.toLevel(WARN), fileName: logName('Warn'), append: false, layout: customPatternExtended, maxFileSize: "100MB", maxBackupIndex: 5
+                rollingFile name: "warnLog", threshold: Level.toLevel(WARN), fileName: logName('Warn'), append: false, layout: customPatternExtended, maxFileSize: "100MB"
             }
             production {
 
@@ -73,7 +74,7 @@ log4j.main = {
                 new File(backupDir).mkdirs()
                 // Delete "backups" directory and ".log" file in "/tmp"
                 new File("/tmp/backups").deleteDir()
-                new File("/tmp/" + myAppName + "_Error.log").delete()
+                new File("/tmp/${myAppName}_Error.log").delete()
 
                 def rollingFile = new RollingFileAppender(
                         name: "errorLog",
@@ -86,7 +87,7 @@ log4j.main = {
                 // Rolling policy
                 // Rollover each day, compress and save in logs/backups directory.
                 def rollingPolicy = new TimeBasedRollingPolicy(
-                        fileNamePattern: backupDir + myAppName + '.%d{yyyy-MM-dd-HH-mm}.log.gz',
+                        fileNamePattern: "${backupDir}${myAppName}.%d{yyyy-MM-dd}.log.gz",
                         activeFileName: logName('Error'),
                 )
 
