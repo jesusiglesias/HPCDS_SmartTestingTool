@@ -9,7 +9,9 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
+
+// Name war creation task
+grails.project.war.file = "target/${appName}-${grails.util.Environment.current.name}##${appVersion}.war"
 
 grails.project.fork = [
     // Configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
@@ -27,11 +29,11 @@ grails.project.fork = [
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
+
     // Inherit Grails' default dependencies
     inherits("global") {
-        // Specify dependency exclusions here; for example, uncomment this to disable ehcache:
-        // Excludes 'ehcache'
     }
+
     log "error" // Log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
     legacyResolve false // Whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
@@ -44,16 +46,19 @@ grails.project.dependency.resolution = {
         mavenLocal()
         grailsCentral()
         mavenCentral()
+
         // Uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+
     }
 
     // Dependencies
     dependencies {
         // Log4j Extra RollingFileAppender
         compile 'log4j:apache-log4j-extras:1.2.17'
+
         // MySQL
         runtime 'mysql:mysql-connector-java:5.1.37'
 
