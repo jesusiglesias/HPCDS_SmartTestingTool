@@ -1,0 +1,43 @@
+/*-------------------------------------------------------------------------------------------*
+ *                                   DATABASE CONFIGURATION                                  *
+ *-------------------------------------------------------------------------------------------*/
+
+// General configuration
+dataSource {
+    pooled = true
+    driverClassName = "" // Defined in DBConfig.groovy
+    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+    username = "" // Defined in DBConfig.groovy
+    password = "" // Defined in DBConfig.groovy
+}
+
+// Hibernate configuration
+hibernate {
+    cache.use_second_level_cache=true
+    cache.use_query_cache=true
+    //cache.provider_class='com.opensymphony.oscache.hibernate.OSCacheProvider'
+    cache.provider_class = 'net.sf.ehcache.hibernate.EhCacheProvider'
+}
+
+// Environments configuration
+environments {
+    development {
+        dataSource {
+            dbCreate = "create-drop"
+            url = "" // Defined in DBConfig.groovy
+        }
+    }
+    test {
+        dataSource {
+            dbCreate = "update"
+            url = "" // Defined in DBConfig.groovy
+        }
+    }
+    production {
+        dataSource {
+            dbCreate = "update"
+            url = "" // Defined in DBConfig.groovy
+        }
+    }
+}
+

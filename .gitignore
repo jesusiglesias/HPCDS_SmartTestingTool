@@ -33,7 +33,7 @@ lib/
 /*DB.*
 
 # Datasource (Ex.: MySQL)
-/grails-app/conf/DataSource.groovy
+/grails-app/conf/DBConfig.groovy
 
 # Cache
 .asscache
