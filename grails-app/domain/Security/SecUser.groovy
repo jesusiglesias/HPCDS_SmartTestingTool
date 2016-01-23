@@ -13,6 +13,8 @@ class SecUser implements Serializable {
 
 	String username
 	String password
+	// Email field
+	String email
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -47,6 +49,7 @@ class SecUser implements Serializable {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+		email blank: false, unique: true, email: true
 	}
 
 	static mapping = {
