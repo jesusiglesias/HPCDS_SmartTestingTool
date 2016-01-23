@@ -91,3 +91,20 @@ environments {
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
+
+/* Spring Security Core configuration
+ ============================================================================================= */
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'Security.SecUser'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'Security.SecUserSecRole'
+grails.plugin.springsecurity.authority.className = 'Security.SecRole'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                ['permitAll'],
+	'/index':           ['permitAll'],
+	'/index.gsp':       ['permitAll'],
+	'/assets/**':       ['permitAll'],
+	'/**/js/**':        ['permitAll'],
+	'/**/css/**':       ['permitAll'],
+	'/**/images/**':    ['permitAll'],
+	'/**/favicon.ico':  ['permitAll']
+]
+

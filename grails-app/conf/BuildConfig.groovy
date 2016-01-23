@@ -75,6 +75,8 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:2.5.7"
         // Cache
         compile ':cache:1.1.8'
+        // Spring Security Core
+        compile "org.grails.plugins:spring-security-core:2.0.0"
         // Scaffolding method
         compile ":scaffolding:2.1.2"
 
