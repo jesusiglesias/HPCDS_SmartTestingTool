@@ -24,10 +24,12 @@ class BootStrap {
             // Creating new users
             def newAdmin = SecUser.findByUsername('admin_stt') ?: new SecUser(
                     username: 'admin_stt',
-                    password: 'sttadmintfg')
+                    password: 'sttadmintfg',
+                    email: 'admin_stt@stt.com')
             def newUser = SecUser.findByUsername('user_stt') ?: new SecUser(
                     username: 'user_stt',
-                    password: 'sttusertfg')
+                    password: 'sttusertfg',
+                    email: 'user_stt@stt.com')
 
             // Validation of new users
             def validAdmin = newAdmin.validate()
