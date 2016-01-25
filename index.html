@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>SMART TESTING TOOL by jesusiglesias</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">SMART TESTING TOOL</h1>
+      <h2 class="project-tagline">HP CDS </h2>
+      <a href="https://github.com/jesusiglesias/HPCDS_SmartTestingTool" class="btn">View on GitHub</a>
+      <a href="https://github.com/jesusiglesias/HPCDS_SmartTestingTool/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/jesusiglesias/HPCDS_SmartTestingTool/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="hp-cds---smart-testing-tool-project" class="anchor" href="#hp-cds---smart-testing-tool-project" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HP CDS - SMART TESTING TOOL PROJECT</h1>
+
+<h2>
+<a id="contents-of-this-file" class="anchor" href="#contents-of-this-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CONTENTS OF THIS FILE</h2>
+
+<hr>
+
+<ul>
+<li>General requirements</li>
+<li>Recommended tools</li>
+<li>Installation</li>
+<li>Configuration</li>
+<li>Branches</li>
+<li>Version</li>
+<li>Help</li>
+<li>Contributors</li>
+</ul>
+
+<h3>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h3>
+
+<p><strong>Smart testing tool</strong> is a HP CDS solution for online evaluation of different topics through test that it intended as a tool for internal qualification of personnel. </p>
+
+<h3>
+<a id="general-requirements" class="anchor" href="#general-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>General requirements</h3>
+
+<p>This project requires the following tools for the right running:</p>
+
+<ul>
+<li>
+<strong><a href="http://tomcat.apache.org">Apache Tomcat</a></strong> - open source software implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies. The latest stable version released to date is: 8.0.30.</li>
+<li>
+<strong><a href="https://grails.org/download.html">Grails SDK</a></strong> - a powerful Groovy-based web application framework for the JVM. The version used in the project was the 2.5.3.</li>
+<li>
+<strong><a href="http://www.oracle.com/technetwork/es/java/javase/downloads/index.html">Java JDK</a></strong> - Java SE Development Kit for Java Developers. The latest stable version released to date is: 8u72.</li>
+<li>
+<strong><a href="http://dev.mysql.com/downloads/mysql/">MySQL</a></strong> - the world's most popular open source database. The latest stable version released to date is: 5.7.10.</li>
+</ul>
+
+<h2>
+<a id="recommended-tools" class="anchor" href="#recommended-tools" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Recommended tools</h2>
+
+<p>The following tools are recommended:</p>
+
+<ul>
+<li>MySQL database management. For example: <strong><a href="https://www.mysql.com/products/workbench/">MySQL Workbench</a></strong>.</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>There are two ways to process the installation. The first is faster and easier while the second requires a more complex and time consuming process.</p>
+
+<ul>
+<li><p>The first way[^1] consists to deploy the <em>.war</em> file attached in the project in a JSP/Servlet container, as for example: Tomcat. To do this, you must start Tomcat and type in the browser the following url (localhost mode): <strong><code>http://localhost:8080</code></strong>. Then, you select <em>"Tomcat Web Application Manager Section"</em> and in <em>"WAR file to deploy"</em> section you choose the file <em>.war</em> and press in <em>Deploy</em> button. Once completed these steps, your project will be available at the following URL: <strong><code>http://localhost:8080/[WarFileNameORprojectName]</code></strong>.</p></li>
+<li><p>The second way[^2] is to clone the complete project and open it in a IDE (Integrated Development Environment). This type of installation permits to modify the project and deploy it directly running the app with the IDE or deploying in a external container, hence, like
+the first way. Here, it is necessary to obtain the <em>.war</em> file to deploy in a container. For this, you type in console the next command: <strong><code>grails war</code></strong> or <strong><code>grails prod war</code></strong>. A file will be generated in <strong>/projectPath/target</strong> directory. Then, you can follow the above steps.</p></li>
+</ul>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>In both cases, it is necessary to create the database. For this project, the database's name used for the production environment is: <strong>PROD_HPCDS_SMTT</strong> or if you prefer setting it for yourself, you must:</p>
+
+<ul>
+<li>Create the <strong>DBConfig.groovy</strong> file located in <strong>/projectPath/grails-app/conf/</strong> and add the database configuration. The schema of this file using <strong>MySQL</strong> is:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>// Custom general configuration
+dataSource {
+    driverClassName = <span class="pl-s"><span class="pl-pds">"</span>com.mysql.jdbc.Driver<span class="pl-pds">"</span></span>
+    username = <span class="pl-s"><span class="pl-pds">"</span>username<span class="pl-pds">"</span></span>
+    password = <span class="pl-s"><span class="pl-pds">"</span>password<span class="pl-pds">"</span></span>
+}
+
+// Custom environments configuration
+environments {
+    development {
+        dataSource {
+            url = <span class="pl-s"><span class="pl-pds">"</span>jdbc:mysql://localhost/nameDB?useUnicode=yes&amp;characterEncoding=UTF-8<span class="pl-pds">"</span></span>
+        }
+    }
+    <span class="pl-c1">test</span> {
+        dataSource {
+            url = <span class="pl-s"><span class="pl-pds">"</span>jdbc:mysql://localhost/nameDB?useUnicode=yes&amp;characterEncoding=UTF-8<span class="pl-pds">"</span></span>
+        }
+    }
+    production {
+        dataSource {
+            url = <span class="pl-s"><span class="pl-pds">"</span>jdbc:mysql://localhost/nameDB?useUnicode=yes&amp;characterEncoding=UTF-8<span class="pl-pds">"</span></span>
+        }
+    }
+}</pre></div>
+
+<ul>
+<li>Or locate this file in the <em>.war</em> file in <strong><code>/WEB-INF/classes/external-config/</code></strong> and modify it with the desired configuration. Also, if the <em>.war</em> file is deployed in a container, this configuration can be established in the following path: <strong><code>/tomcatPath/web-apps/WarFileNameORprojectName/WEB-INF/classes/external-config/</code></strong>. Then, you only have to restart the application from Tomcat to add or update the new configuration.</li>
+</ul>
+
+<p>If you decide to continue the second mode, you must make sure you have installed an IDE such as: <strong>IntelliJ IDEA</strong>. Besides, you need:</p>
+
+<ul>
+<li>Configure the database with above steps.</li>
+<li>Add the the following <em>.jar</em> in the <em>lib</em> directory of the project:
+
+<ul>
+<li>
+<strong><a href="http://dev.mysql.com/downloads/connector/j/">MySQL Connector</a></strong> - JDBC Driver for MySQL.<br>
+</li>
+<li>
+<strong><a href="http://www.simonsite.org.uk/download.htm">Log4j Rolling Appender</a></strong> - for Log4j functionality. </li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="branches" class="anchor" href="#branches" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Branches</h2>
+
+<ul>
+<li>
+<code>master</code> is the main branch that contains the different versions of the project.</li>
+<li>
+<code>develop</code> is the development branch where it has been working throughout the project.</li>
+<li>
+<code>gh-pages</code> is the branch that saves the site of the project in <em>GitHub</em>.</li>
+</ul>
+
+<h2>
+<a id="version" class="anchor" href="#version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Version</h2>
+
+<p>The current version is: <strong>1.0.0</strong></p>
+
+<h2>
+<a id="help" class="anchor" href="#help" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Help</h2>
+
+<p>If you don't know how to use or configure <em>Apache Tomcat</em> and <em>MySQL</em> or need general support, I would recommend the following resources for learning and asking questions:</p>
+
+<ul>
+<li><strong><a href="http://tomcat.apache.org/tomcat-8.0-doc/index.html">Apache Tomcat Documentation</a></strong></li>
+<li><strong><a href="https://grails.org/wiki/Documentation">Grails Wiki</a></strong></li>
+<li><strong><a href="http://www.oracle.com/technetwork/java/javase/documentation/jdk8-doc-downloads-2133158.html">Java JDK Documentation</a></strong></li>
+<li><strong><a href="https://dev.mysql.com/doc/refman/5.7/en/">MySQL Documentation</a></strong></li>
+</ul>
+
+<h2>
+<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors</h2>
+
+<p>This project has been developed by <strong>Jesús Iglesias</strong>, student at University of Valladolid (UVa), like end of degree work for the <em>HP CDS</em> company.</p>
+
+<p>For questions directly pertaining to the project, you can contact with the author via <a href="https://github.com/jesusiglesias">Github</a> or <a href="jesusgiglesias@gmail.com">Email</a>.</p>
+
+<p>[^1]: It requires to create the database in the OS.
+[^2]: It requires to create the database and an extra configuration of the project.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jesusiglesias/HPCDS_SmartTestingTool">SMART TESTING TOOL</a> is maintained by <a href="https://github.com/jesusiglesias">jesusiglesias</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-72819882-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
