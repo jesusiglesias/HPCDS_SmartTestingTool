@@ -1,26 +1,51 @@
 <%=packageName ? "package ${packageName}\n\n" : ''%>
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
+/**
+ * Class that represents to the ${className} controller.
+ */
 @Transactional(readOnly = true)
 class ${className}Controller {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    /**
+     * It lists the main data of all ${className} of the database.
+     *
+     * @param max Maximum number of ${className} to list.
+     * @return ${className} ${className} list with their information and number of ${className} in the database.
+     */
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond ${className}.list(params), model:[${propertyName}Count: ${className}.count()]
     }
 
+    /**
+     * It shows the information of a ${propertyName}.
+     *
+     * @param ${propertyName} It represents the ${className} to show.
+     * @return ${propertyName} Data of the ${propertyName}.
+     */
     def show(${className} ${propertyName}) {
         respond ${propertyName}
     }
 
+    /**
+     * It creates a new ${propertyName}.
+     *
+     * @return return If the ${propertyName} is null or has errors.
+     */
     def create() {
         respond new ${className}(params)
     }
 
+    /**
+     * It saves a ${className} in database.
+     *
+     * @param ${propertyName} It represents the ${className} to save.
+     * @return return If the ${className} instance is null or has errors.
+     */
     @Transactional
     def save(${className} ${propertyName}) {
         if (${propertyName} == null) {
@@ -44,10 +69,22 @@ class ${className}Controller {
         }
     }
 
+    /**
+     * It edits a existing ${className} with the new values of each field.
+     *
+     * @param ${propertyName} It represents the ${className} to edit.
+     * @return ${propertyName} It represents the ${propertyName}.
+     */
     def edit(${className} ${propertyName}) {
         respond ${propertyName}
     }
 
+    /**
+     * It updates a existing ${className} in database.
+     *
+     * @param ${propertyName} It represents the ${className} information to update.
+     * @return return If the ${className} instance is null or has errors.
+     */
     @Transactional
     def update(${className} ${propertyName}) {
         if (${propertyName} == null) {
@@ -71,6 +108,12 @@ class ${className}Controller {
         }
     }
 
+    /**
+     * It deletes a existing ${className} in database.
+     *
+     * @param ${propertyName} It represents the ${className} information to delete.
+     * @return return If the ${propertyName} is null, the notFound function is called.
+     */
     @Transactional
     def delete(${className} ${propertyName}) {
 
@@ -90,6 +133,9 @@ class ${className}Controller {
         }
     }
 
+    /**
+     * Its redirects to not found page if the ${propertyName} was not found.
+     */
     protected void notFound() {
         request.withFormat {
             form multipartForm {
