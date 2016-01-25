@@ -19,8 +19,10 @@ beans = {
         targetUrlParameter = conf.successHandler.targetUrlParameter
         useReferer = conf.successHandler.useReferer
         redirectStrategy = ref('redirectStrategy')
-        adminUrl = "/user/create"
-        userUrl = "/user"
+        // Admin url defined in config
+        adminUrl = application.config.springsecurity.urlredirection.admin
+        // User url defined in config
+        userUrl = application.config.springsecurity.urlredirection.user
     }
 }
 

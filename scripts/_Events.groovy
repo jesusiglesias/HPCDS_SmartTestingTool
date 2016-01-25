@@ -1,5 +1,5 @@
 /**
- * Script to perform differents actions at different times with Apache Ant
+ * Script to perform different actions at different times with Apache Ant.
  */
 
 // LogConfig path

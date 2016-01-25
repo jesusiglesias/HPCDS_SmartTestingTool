@@ -86,6 +86,7 @@ If you decide to continue the second mode, you must make sure you have installed
     
 * `master` is the main branch that contains the different versions of the project.
 * `develop` is the development branch where it has been working throughout the project.
+* `gh-pages` is the branch that saves the site of the project in GitHub.
 
 ## Version
 

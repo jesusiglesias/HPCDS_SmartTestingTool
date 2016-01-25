@@ -1,6 +1,5 @@
 package User
 
-// Imports
 import Enumerations.Sex
 
 /**
@@ -8,6 +7,7 @@ import Enumerations.Sex
  */
 class User {
 
+    // Attributes
     String address
     String avatar
     Date birthDate
@@ -19,6 +19,7 @@ class User {
     String surname
     Integer zipCode
 
+    // Restrictions on the attributes of the entity
     static constraints = {
     }
 }

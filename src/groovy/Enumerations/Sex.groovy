@@ -1,7 +1,7 @@
 package Enumerations
 
 /**
- * Sex enumeration
+ * Sex enumeration.
  */
 public enum Sex {
 
@@ -11,7 +11,11 @@ public enum Sex {
 
     String gender
 
-    // Constructor
+    /**
+     * It establishes the gender of an user.
+     *
+     * @param gender String that represents the gender.
+     */
     public Sex(String gender) {
         this.gender = gender
     }

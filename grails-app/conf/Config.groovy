@@ -101,10 +101,15 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                ['permitAll'],
 	'/index':           ['permitAll'],
 	'/index.gsp':       ['permitAll'],
+    '/User/**':         ['ROLE_ADMIN', 'ROLE_USER'],
 	'/assets/**':       ['permitAll'],
 	'/**/js/**':        ['permitAll'],
 	'/**/css/**':       ['permitAll'],
 	'/**/images/**':    ['permitAll'],
 	'/**/favicon.ico':  ['permitAll']
 ]
+
+// URL redirection
+springsecurity.urlredirection.admin='/user'
+springsecurity.urlredirection.user='/user/create'
 
