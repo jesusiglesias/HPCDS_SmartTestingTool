@@ -6,12 +6,12 @@ import grails.util.Environment
 import Security.*
 
 /**
- * Configuration during application startup and destruction
+ * Configuration during application startup and destruction.
  */
 class BootStrap {
 
     /**
-     * Initial operations when application start
+     * Initial operations when application start.
      */
     def init = { servletContext ->
 
@@ -30,13 +30,13 @@ class BootStrap {
     }
 
     /**
-     * Final operations when application finishes
+     * Final operations when application finishes.
      */
     def destroy = {
     }
 
     /**
-     * Populating the database in development or test environments
+     * Populating the database in development or test environments.
      */
     void createInitialUsersDevTest() {
         log.debug("BootStrap:init():createInitialUsersDevTest")
@@ -90,7 +90,7 @@ class BootStrap {
     }
 
     /**
-     * Populating the database in production environment
+     * Populating the database in production environment.
      */
     void createInitialUsersProd() {
         log.debug("BootStrap:init():createInitialUsersProd")

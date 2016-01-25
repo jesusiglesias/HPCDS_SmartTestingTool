@@ -1,9 +1,9 @@
 /*-------------------------------------------------------------------------------------------*
- *                                        URL MAPPINGS                                       *
+ *                                      URL MAPPINGS                                         *
  *-------------------------------------------------------------------------------------------*/
 
 /**
- * It allows to configurate the Grails' URL Mapping infrastructure.
+ * It allows to configure the Grails' URL Mapping infrastructure.
  */
 class UrlMappings {
 

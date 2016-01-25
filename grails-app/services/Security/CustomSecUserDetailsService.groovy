@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 
 /**
- * It implements authentication by email or username
+ * It implements authentication by email or username.
  */
 @Transactional
 class CustomSecUserDetailsService implements GrailsUserDetailsService {
@@ -24,9 +24,9 @@ class CustomSecUserDetailsService implements GrailsUserDetailsService {
      * @param username The username identifying the user whose data is required.
      * @param loadRoles Whether to load roles at the same time as loading the user.
      *
-     * @return A fully populated user record (never <code>null</code>)
+     * @return A fully populated user record (never <code>null</code>).
      *
-     * @throws UsernameNotFoundException If the user could not be found
+     * @throws UsernameNotFoundException If the user could not be found.
      */
     UserDetails loadUserByUsername(String username, boolean loadRoles) throws UsernameNotFoundException {
         return loadUserByUsername(username)
@@ -37,9 +37,9 @@ class CustomSecUserDetailsService implements GrailsUserDetailsService {
      *
      * @param username The username identifying the user whose data is required.
      *
-     * @return A fully populated user record (never <code>null</code>)
+     * @return A fully populated user record (never <code>null</code>).
      *
-     * @throws UsernameNotFoundException If the user could not be found
+     * @throws UsernameNotFoundException If the user could not be found.
      */
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 

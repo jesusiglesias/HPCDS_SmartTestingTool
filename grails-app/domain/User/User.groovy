@@ -4,7 +4,7 @@ package User
 import Enumerations.Sex
 
 /**
- * It represents the general user information
+ * It represents the general user information.
  */
 class User {
 
