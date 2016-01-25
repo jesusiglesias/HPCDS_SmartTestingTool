@@ -37,7 +37,7 @@ There are two ways to process the installation. The first is faster and easier w
 
 * The first way[^1] consists to deploy the *.war* file attached in the project in a JSP/Servlet container, as for example: Tomcat. To do this, you must start Tomcat and type in the browser the following url (localhost mode): **`http://localhost:8080`**. Then, you select *"Tomcat Web Application Manager Section"* and in *"WAR file to deploy"* section you choose the file *.war* and press in *Deploy* button. Once completed these steps, your project will be available at the following URL: **`http://localhost:8080/[WarFileNameORprojectName]`**.
 
-* The second way[^1][^2] is to clone the complete project and open it in a IDE (Integrated Development Environment). This type of installation permits to modify the project and deploy it directly running the app with the IDE or deploying in a external container, hence, like
+* The second way[^2] is to clone the complete project and open it in a IDE (Integrated Development Environment). This type of installation permits to modify the project and deploy it directly running the app with the IDE or deploying in a external container, hence, like
 the first way. Here, it is necessary to obtain the *.war* file to deploy in a container. For this, you type in console the next command: **`grails war`** or **`grails prod war`**. A file will be generated in **/projectPath/target** directory. Then, you can follow the above steps.
 
 ## Configuration
@@ -103,10 +103,10 @@ If you don't know how to use or configure *Apache Tomcat* and *MySQL* or need ge
     
 This project has been developed by **Jesús Iglesias**, student at University of Valladolid (UVa), like end of degree work for the *HP CDS* company.
 
-For questions directly pertaining to the project, you can contact with the author via [Github](https://github.com/jesusiglesias) or [Email](email:jesusgiglesias@gmail.com).
+For questions directly pertaining to the project, you can contact with the author via [Github](https://github.com/jesusiglesias) or [Email](jesusgiglesias@gmail.com).
     
 [^1]: It requires to create the database in the OS.
-[^2]: It requires extra configuration of the project.
+[^2]: It requires to create the database and an extra configuration of the project.
 
 [//]:# (Reference links used in the body.)
 
@@ -123,4 +123,6 @@ For questions directly pertaining to the project, you can contact with the autho
    [MySQL Connector]: <http://dev.mysql.com/downloads/connector/j/>
    [Log4j Rolling Appender]: <http://www.simonsite.org.uk/download.htm>
    
+
+
 
