@@ -26,15 +26,17 @@
 					
 						<g:sortableColumn property="address" title="${message(code: 'user.address.label', default: 'Address')}" />
 					
+						<g:sortableColumn property="avatar" title="${message(code: 'user.avatar.label', default: 'Avatar')}" />
+					
 						<g:sortableColumn property="birthDate" title="${message(code: 'user.birthDate.label', default: 'Birth Date')}" />
+					
+						<g:sortableColumn property="city" title="${message(code: 'user.city.label', default: 'City')}" />
 					
 						<g:sortableColumn property="country" title="${message(code: 'user.country.label', default: 'Country')}" />
 					
-						<g:sortableColumn property="phone" title="${message(code: 'user.phone.label', default: 'Phone')}" />
-					
+						<g:sortableColumn property="name" title="${message(code: 'user.name.label', default: 'Name')}" />
+
 						<g:sortableColumn property="sex" title="${message(code: 'user.sex.label', default: 'Sex')}" />
-					
-						<g:sortableColumn property="urlProfileImage" title="${message(code: 'user.urlProfileImage.label', default: 'Url Profile Image')}" />
 					
 					</tr>
 				</thead>
@@ -44,15 +46,17 @@
 					
 						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "address")}</g:link></td>
 					
+						<td>${fieldValue(bean: userInstance, field: "avatar")}</td>
+					
 						<td><g:formatDate date="${userInstance.birthDate}" /></td>
+					
+						<td>${fieldValue(bean: userInstance, field: "city")}</td>
 					
 						<td>${fieldValue(bean: userInstance, field: "country")}</td>
 					
-						<td>${fieldValue(bean: userInstance, field: "phone")}</td>
+						<td>${fieldValue(bean: userInstance, field: "name")}</td>
 
 						<td>${message(code:'enumerations.sex.'+fieldValue(bean: userInstance, field: "sex"))}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "urlProfileImage")}</td>
 					
 					</tr>
 				</g:each>

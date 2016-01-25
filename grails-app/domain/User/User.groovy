@@ -9,11 +9,14 @@ import Enumerations.Sex
 class User {
 
     String address
+    String avatar
     Date birthDate
+    String city
     String country
+    String name
     String phone
     Sex sex
-    String urlProfileImage
+    String surname
     Integer zipCode
 
     static constraints = {

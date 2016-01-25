@@ -32,6 +32,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${userInstance?.avatar}">
+				<li class="fieldcontain">
+					<span id="avatar-label" class="property-label"><g:message code="user.avatar.label" default="Avatar" /></span>
+					
+						<span class="property-value" aria-labelledby="avatar-label"><g:fieldValue bean="${userInstance}" field="avatar"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${userInstance?.birthDate}">
 				<li class="fieldcontain">
 					<span id="birthDate-label" class="property-label"><g:message code="user.birthDate.label" default="Birth Date" /></span>
@@ -41,11 +50,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${userInstance?.city}">
+				<li class="fieldcontain">
+					<span id="city-label" class="property-label"><g:message code="user.city.label" default="City" /></span>
+					
+						<span class="property-value" aria-labelledby="city-label"><g:fieldValue bean="${userInstance}" field="city"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${userInstance?.country}">
 				<li class="fieldcontain">
 					<span id="country-label" class="property-label"><g:message code="user.country.label" default="Country" /></span>
 					
 						<span class="property-value" aria-labelledby="country-label"><g:fieldValue bean="${userInstance}" field="country"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${userInstance?.name}">
+				<li class="fieldcontain">
+					<span id="name-label" class="property-label"><g:message code="user.name.label" default="Name" /></span>
+					
+						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${userInstance}" field="name"/></span>
 					
 				</li>
 				</g:if>
@@ -60,19 +87,19 @@
 				</g:if>
 			
 				<g:if test="${userInstance?.sex}">
-				<li class="fieldcontain">
-					<span id="sex-label" class="property-label"><g:message code="user.sex.label" default="Sex" /></span>
-					
+					<li class="fieldcontain">
+						<span id="sex-label" class="property-label"><g:message code="user.sex.label" default="Sex" /></span>
+
 						<span class="property-value" aria-labelledby="sex-label">${message(code:'enumerations.sex.'+fieldValue(bean: userInstance, field: "sex"))}</span>
-					
-				</li>
+
+					</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.urlProfileImage}">
+				<g:if test="${userInstance?.surname}">
 				<li class="fieldcontain">
-					<span id="urlProfileImage-label" class="property-label"><g:message code="user.urlProfileImage.label" default="Url Profile Image" /></span>
+					<span id="surname-label" class="property-label"><g:message code="user.surname.label" default="Surname" /></span>
 					
-						<span class="property-value" aria-labelledby="urlProfileImage-label"><g:fieldValue bean="${userInstance}" field="urlProfileImage"/></span>
+						<span class="property-value" aria-labelledby="surname-label"><g:fieldValue bean="${userInstance}" field="surname"/></span>
 					
 				</li>
 				</g:if>
