@@ -2,7 +2,8 @@
  *                                        CONFIGURATION                                      *
  *-------------------------------------------------------------------------------------------*/
 
-// Location of external files
+/* Location of external files
+ ============================================================================================= */
 grails.config.locations = [ "classpath:./external-config/LogConfig.groovy", // Log4j war mode
                           //  "file:./grails-app/conf/LogConfig.groovy", // Log4j run-app mode
                             "classpath:./external-config/DBConfig.groovy", // DataSource war mode
@@ -92,6 +93,11 @@ environments {
     }
 }
 
+/* Other configurations
+ ============================================================================================= */
+// Default value of pagination
+paginate.defaultValue=10
+
 /* Spring Security Core configuration
  ============================================================================================= */
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'Security.SecUser'
@@ -102,6 +108,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/index':           ['permitAll'],
 	'/index.gsp':       ['permitAll'],
     '/User/**':         ['ROLE_ADMIN', 'ROLE_USER'],
+    '/Topic/**':        ['ROLE_ADMIN', 'ROLE_USER'],
+    '/Test/**':         ['ROLE_ADMIN', 'ROLE_USER'],
 	'/assets/**':       ['permitAll'],
 	'/**/js/**':        ['permitAll'],
 	'/**/css/**':       ['permitAll'],
@@ -112,4 +120,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 // URL redirection
 springsecurity.urlredirection.admin='/user'
 springsecurity.urlredirection.user='/user/create'
+
+
 
