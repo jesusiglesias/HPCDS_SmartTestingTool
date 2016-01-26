@@ -140,6 +140,9 @@ log4j.main = {
             'org.hibernate',
             'net.sf.ehcache.hibernate'
 
+    // Debug type
+    debug 'org.hibernate.SQL'
+
     // Logging
     environments {
         development {
