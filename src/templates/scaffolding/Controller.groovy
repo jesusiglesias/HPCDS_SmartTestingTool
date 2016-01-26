@@ -1,6 +1,7 @@
 <%=packageName ? "package ${packageName}\n\n" : ''%>
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import org.springframework.beans.factory.annotation.Value
 
 /**
  * Class that represents to the ${className} controller.
@@ -10,6 +11,11 @@ class ${className}Controller {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    // Default value of pagination
+    // TODO Add dollar symbol
+    @Value('{paginate.defaultValue:10}')
+    def defaultPag
+
     /**
      * It lists the main data of all ${className} of the database.
      *
@@ -17,7 +23,16 @@ class ${className}Controller {
      * @return ${className} ${className} list with their information and number of ${className} in the database.
      */
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        //params.max = Math.min(max ?: 10, 100)
+
+        // Protecting against attack when max is a negative number. If is 0, max = defaultPag
+        max = max ?: defaultPag.toInteger()
+        // If max < 0, return all records (This is dangerous)
+        if (max < 0) {
+            max = defaultPag.toInteger()
+        }
+        params.max = Math.min(max, 100)
+
         respond ${className}.list(params), model:[${propertyName}Count: ${className}.count()]
     }
 

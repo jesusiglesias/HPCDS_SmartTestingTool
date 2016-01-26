@@ -4,12 +4,11 @@
 class @artifact.name@ {
 
     // Attributes
-    String x
-    String name
     String description
+    String name
     Date initDate
     Date endDate
-    Integer xx
+    Integer number
 
     // Restrictions on the attributes of the entity
     static constraints = {

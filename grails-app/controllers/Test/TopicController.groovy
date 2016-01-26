@@ -25,7 +25,7 @@ class TopicController {
     def index(Integer max) {
         //params.max = Math.min(max ?: 10, 100)
 
-        // Protecting against attack when max is a negative number. If is 0, max = defaultPag
+        // Protecting against attacks when max is a negative number. If is 0, max = defaultPag
         max = max ?: defaultPag.toInteger()
         // If max < 0, return all records (This is dangerous)
         if (max < 0) {

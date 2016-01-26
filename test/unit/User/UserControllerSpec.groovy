@@ -1,6 +1,5 @@
 package User
 
-
 import grails.test.mixin.*
 import spock.lang.*
 
