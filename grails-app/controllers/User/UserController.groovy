@@ -102,7 +102,7 @@ class UserController {
      * It updates a existing user in database.
      *
      * @param userInstance It represents the user information to update.
-     * @return If the user instance is null or has errors.
+     * @return return If the user instance is null or has errors.
      */
     @Transactional
     def update(User userInstance) {
