@@ -93,7 +93,6 @@ class BootStrap {
      * Populating the database in production environment.
      */
     void createInitialUsersProd() {
-        log.debug("BootStrap:init():createInitialUsersProd")
 
         // It checks data existence
         if (!SecUser.count() && !SecRole.count()) {
@@ -123,13 +122,11 @@ class BootStrap {
                 if (!newAdmin.authorities.contains(adminRole)) {
                     SecUserSecRole.create newAdmin, adminRole, true
                 }
-
-                log.debug("BootStrap:init():Admin users have been created")
             } else {
                 log.error("BootStrap:init():Admin users have not been created")
             }
         } else {
-            log.warn("BooStrap:init():Existing admin or role data")
+            log.error("BooStrap:init():Existing admin or role data. Initial data were not created")
         }
     }
 
