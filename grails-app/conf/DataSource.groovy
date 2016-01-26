@@ -6,9 +6,9 @@
 dataSource {
     pooled = true
     driverClassName = "" // Defined in DBConfig.groovy
-    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-    username = "" // Defined in DBConfig.groovy
-    password = "" // Defined in DBConfig.groovy
+    dialect = ""         // Defined in DBConfig.groovy
+    username = ""        // Defined in DBConfig.groovy
+    password = ""        // Defined in DBConfig.groovy
 }
 
 // Hibernate configuration

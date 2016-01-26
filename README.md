@@ -49,6 +49,7 @@ In both cases, it is necessary to create the database. For this project, the dat
 // Custom general configuration
 dataSource {
     driverClassName = "com.mysql.jdbc.Driver"
+    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
     username = "username"
     password = "password"
 }
