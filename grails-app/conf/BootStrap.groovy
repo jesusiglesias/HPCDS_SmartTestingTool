@@ -2,6 +2,8 @@
  *                                         BOOTSTRAP                                         *
  *-------------------------------------------------------------------------------------------*/
 
+import grails.plugin.springsecurity.SpringSecurityUtils
+import grails.plugin.springsecurity.SecurityFilterPosition
 import grails.util.Environment
 import Security.*
 
@@ -10,10 +12,21 @@ import Security.*
  */
 class BootStrap {
 
+    def authenticationManager
+    def concurrentSessionController
+    def securityContextPersistenceFilter
+    def authenticationProcessingFilter
+    def concurrentSessionControlStrategy
+
     /**
      * Initial operations when application start.
      */
     def init = { servletContext ->
+
+        // It establishes the sessionAuthenticationStrategy, hence, it is enforced at authentication time various rules about concurrent sessions
+        // The filter calls the SessionRegistry for the given session id. If there is a session information and it is marked as expired, it forces a redirect to the provided 'expiredUrl'
+        SpringSecurityUtils.clientRegisterFilter('concurrencyFilter', SecurityFilterPosition.CONCURRENT_SESSION_FILTER)
+        authenticationProcessingFilter.sessionAuthenticationStrategy = concurrentSessionControlStrategy
 
         // Database populating depending on the environment
         switch (Environment.current) {

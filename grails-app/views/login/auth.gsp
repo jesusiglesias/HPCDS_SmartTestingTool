@@ -93,6 +93,11 @@
             <div class='login_message'>${flash.message}</div>
         </g:if>
 
+        <!-- Invalid session message/Concurrent sessions -->
+        <g:if test='${flash.invalidSession}'>
+            <div class='login_message'>${flash.invalidSession}</div>
+        </g:if>
+
         <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
             <p>
                 <label for='username'><g:message code="springSecurity.login.username.label"/>:</label>

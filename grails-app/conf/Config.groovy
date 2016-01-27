@@ -114,7 +114,9 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':        ['permitAll'],
 	'/**/css/**':       ['permitAll'],
 	'/**/images/**':    ['permitAll'],
-	'/**/favicon.ico':  ['permitAll']
+	'/**/favicon.ico':  ['permitAll'],
+    // Concurrent sessions
+    '/customTasksUser/invalidSession':     ['permitAll']
 ]
 
 // URL redirection
