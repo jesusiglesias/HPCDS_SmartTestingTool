@@ -38,13 +38,13 @@ There are two ways to process the installation. The first is faster and easier w
 * The first way[^1] consists to deploy the *.war* file attached in the project in a JSP/Servlet container, as for example: Tomcat. To do this, you must start Tomcat and type in the browser the following url (localhost mode): **`http://localhost:8080`**. Then, you select *"Tomcat Web Application Manager Section"* and in *"WAR file to deploy"* section you choose the file *.war* and press in *Deploy* button. Once completed these steps, your project will be available at the following URL: **`http://localhost:8080/[WarFileNameORprojectName]`**.
 
 * The second way[^2] is to clone the complete project and open it in a IDE (Integrated Development Environment). This type of installation permits to modify the project and deploy it directly running the app with the IDE or deploying in a external container, hence, like
-the first way. Here, it is necessary to obtain the *.war* file to deploy in a container. For this, you type in console the next command: **`grails war`** or **`grails prod war`**. A file will be generated in **/projectPath/target** directory. Then, you can follow the above steps.
+the first way. Here, it is necessary to obtain the *.war* file to deploy in a external container. For this, you type in console the next command: **`grails war`** or **`grails prod war`**. A file will be generated in **/projectPath/target** directory. Then, you can follow the above steps.
 
 ## Configuration
 
 In both cases, it is necessary to create the database. For this project, the database's name used for the production environment is: **PROD_HPCDS_SMTT** or if you prefer setting it for yourself, you must:
 
-* Create the **DBConfig.groovy** file located in **/projectPath/grails-app/conf/** and add the database configuration. The schema of this file using **MySQL** is:
+* In second way, you must create the **DBConfig.groovy** file located in **/projectPath/grails-app/conf/** and add the database configuration. The schema of this file using **MySQL** is:
 ```sh
 // Custom general configuration
 dataSource {
@@ -74,7 +74,7 @@ environments {
 }
 ```
 
-* Or locate this file in the *.war* file in **`/WEB-INF/classes/external-config/`** and modify it with the desired configuration. Also, if the *.war* file is deployed in a container, this configuration can be established in the following path: **`/tomcatPath/web-apps/WarFileNameORprojectName/WEB-INF/classes/external-config/`**. Then, you only have to restart the application from Tomcat to add or update the new configuration.
+* In first way, you must locate this file in the *.war* file in **`/WEB-INF/classes/external-config/`** and modify it with the desired configuration. Also, if the *.war* file is deployed in a container, this configuration can be established in the following path: **`/tomcatPath/web-apps/WarFileNameORprojectName/WEB-INF/classes/external-config/`**. Then, you only have to restart the application from Tomcat to add or update the new configuration.
 
 If you decide to continue the second mode, you must make sure you have installed an IDE such as: **IntelliJ IDEA**. Besides, you need:
 
@@ -82,6 +82,8 @@ If you decide to continue the second mode, you must make sure you have installed
 * Add the the following *.jar* in the *lib* directory of the project:
     * **[MySQL Connector]** - JDBC Driver for MySQL.  
     * **[Log4j Rolling Appender]** - for Log4j functionality. 
+
+Besides, in both cases the log configuration can be modified the same way, hence, in the same directories as in previous cases should find the **LogConfig.groovy** file. On this occasion, the data of this file can be updated in a external container without restarting the application. You just have to go to the appropriate section in back-end to reload the new configuration.
 
 ## Branches
     
@@ -91,7 +93,7 @@ If you decide to continue the second mode, you must make sure you have installed
 
 ## Version
 
-The current version is: **1.0.0**
+The current version is: **1.1.0**
 
 ## Help
 If you don't know how to use or configure *Apache Tomcat* and *MySQL* or need general support, I would recommend the following resources for learning and asking questions:
@@ -125,6 +127,3 @@ For questions directly pertaining to the project, you can contact with the autho
    [MySQL Connector]: <http://dev.mysql.com/downloads/connector/j/>
    [Log4j Rolling Appender]: <http://www.simonsite.org.uk/download.htm>
    
-
-
-
