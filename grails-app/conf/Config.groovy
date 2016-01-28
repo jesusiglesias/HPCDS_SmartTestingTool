@@ -5,9 +5,9 @@
 /* Location of external files
  ============================================================================================= */
 grails.config.locations = [ "classpath:./external-config/LogConfig.groovy", // Log4j war mode
-                          //  "file:./grails-app/conf/LogConfig.groovy", // Log4j run-app mode
-                            "classpath:./external-config/DBConfig.groovy", // DataSource war mode
-                          //  "file:./grails-app/conf/DBConfig.groovy", // DataSource war mode
+                            //"file:${userHome}/LogConfig.groovy", // Log4j run-app mode
+                            "classpath:./external-config/DBConfig.groovy" // DataSource war mode
+                            //"file:${userHome}/DBConfig.groovy", // DataSource war mode
                           ]
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
@@ -115,8 +115,14 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/css/**':       ['permitAll'],
 	'/**/images/**':    ['permitAll'],
 	'/**/favicon.ico':  ['permitAll'],
+
+    /* Custom tasks user
+    ======================================================*/
     // Concurrent sessions
-    '/customTasksUser/invalidSession':     ['permitAll']
+    '/customTasksUser/invalidSession':     ['permitAll'],
+    // Reload config
+    '/customTasksUser/reloadConfig':       ['ROLE_ADMIN']
+
 ]
 
 // URL redirection

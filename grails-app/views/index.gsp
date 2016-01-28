@@ -109,6 +109,13 @@
 			   content you may choose. Below is a list of controllers that are currently deployed in this application,
 			   click on each to execute its default action:</p>
 
+			<sec:ifAllGranted roles="ROLE_ADMIN">
+				<g:if test="${flash.reloadConfig}">
+					${flash.reloadConfig}
+				</g:if>
+				<g:link uri="/reloadConfig"> Recargar configuración </g:link>
+			</sec:ifAllGranted>
+
 			<div id="controller-list" role="navigation">
 				<h2>Available Controllers:</h2>
 				<ul>

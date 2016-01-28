@@ -17,9 +17,15 @@ class UrlMappings {
         "/"(view:"/index")
         "500"(view:'/error')
 
-        // Concurrent sessions in user role
+        /* Custom tasks user
+        ======================================================*/
+        // Concurrent sessions
         "/login/concurrentSession" (controller: 'customTasksUser', action: 'invalidSession')
+        // Reload config
+        "/reloadConfig" (controller: 'customTasksUser', action: 'reloadConfig')
 
+        /* Information files
+        ======================================================*/
         // Humans.txt
         "/humans.txt" (view: "extraInformation/humans")
         // Robots.txt
