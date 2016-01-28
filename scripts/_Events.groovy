@@ -11,7 +11,7 @@ def DBConfigPath = "${basedir}/grails-app/conf/DBConfig.groovy"
 eventRunAppStart = {
 
     // Run app mode
-    ant.copy(todir: "${basedir}/target/classes/external-config") {
+    ant.copy(todir: "${basedir}/target/classes/external-config", overwrite:true) {
         print('_Events:RunAppStart():copy:Logconfig,DBConfig')
         fileset(file: LogConfigPath)
         fileset(file: DBConfigPath)
@@ -22,7 +22,7 @@ eventRunAppStart = {
 eventCreateWarStart = { warName, stagingDir ->
 
     // War mode
-    ant.copy(todir: "${stagingDir}/WEB-INF/classes/external-config") {
+    ant.copy(todir: "${stagingDir}/WEB-INF/classes/external-config", overwrite:true) {
         print ('_Events:CreateWarStart():copy:Logconfig,DBConfig')
         fileset(file: LogConfigPath)
         fileset(file: DBConfigPath)
@@ -53,7 +53,7 @@ eventCreateWarEnd = {warName, stagingDir ->
         ant.delete(dir:deleteLogDir)
     }
 
-    // It deletes log in /tmp directory
+    // It deletes log file in /tmp directory
     if (System.getProperty('grails.env') == prodEnv) {
         print ("_Events:CreateWarEnd():deleteFile:.log")
         ant.delete(file:deleteLogFile)
