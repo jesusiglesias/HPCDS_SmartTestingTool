@@ -76,7 +76,7 @@
 <ul>
 <li><p>The first way[^1] consists to deploy the <em>.war</em> file attached in the project in a JSP/Servlet container, as for example: Tomcat. To do this, you must start Tomcat and type in the browser the following url (localhost mode): <strong><code>http://localhost:8080</code></strong>. Then, you select <em>"Tomcat Web Application Manager Section"</em> and in <em>"WAR file to deploy"</em> section you choose the file <em>.war</em> and press in <em>Deploy</em> button. Once completed these steps, your project will be available at the following URL: <strong><code>http://localhost:8080/[WarFileNameORprojectName]</code></strong>.</p></li>
 <li><p>The second way[^2] is to clone the complete project and open it in a IDE (Integrated Development Environment). This type of installation permits to modify the project and deploy it directly running the app with the IDE or deploying in a external container, hence, like
-the first way. Here, it is necessary to obtain the <em>.war</em> file to deploy in a container. For this, you type in console the next command: <strong><code>grails war</code></strong> or <strong><code>grails prod war</code></strong>. A file will be generated in <strong>/projectPath/target</strong> directory. Then, you can follow the above steps.</p></li>
+the first way. Here, it is necessary to obtain the <em>.war</em> file to deploy in a external container. For this, you type in console the next command: <strong><code>grails war</code></strong> or <strong><code>grails prod war</code></strong>. A file will be generated in <strong>/projectPath/target</strong> directory. Then, you can follow the above steps.</p></li>
 </ul>
 
 <h2>
@@ -134,6 +134,9 @@ environments {
 </ul>
 </li>
 </ul>
+
+<p>Besides, in both cases the log configuration can be modified the same way, hence, in the same directories as in previous cases should find the <strong>LogConfig.groovy</strong> file. On this occasion, the data of this file can be updated in a external
+    container without restarting the application. You just have to go to the appropriate section in back-end to reload the new configuration.</p>
 
 <h2>
 <a id="branches" class="anchor" href="#branches" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Branches</h2>
