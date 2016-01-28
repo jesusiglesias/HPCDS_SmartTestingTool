@@ -140,12 +140,12 @@ log4j.main = {
             'org.hibernate',
             'net.sf.ehcache.hibernate'
 
-    // Debug type
-    debug 'org.hibernate.SQL'
-
     // Logging
     environments {
         development {
+            // Debug type
+            debug 'org.hibernate.SQL'
+
             debug stdout: infoLogged, debugLog: infoLogged, additivity: false
 
             root {
@@ -155,6 +155,9 @@ log4j.main = {
             }
         }
         test {
+            // Debug type
+            debug 'org.hibernate.SQL'
+
             warn stdout: infoLogged, warnLog: infoLogged, additivity: false
             root {
                 warn 'warnLog', 'stdout'
