@@ -42,7 +42,6 @@ class CustomTasksUserController {
         locations.findAll {
             // It checks only in classpath and Log4j file
             return (it instanceof String || it instanceof GString) && (it.toString().contains("classpath:") && it.toString().contains("LogConfig"))
-            // return (it instanceof String || it instanceof GString) && (it.toString().contains("classpath:LogConfig") || it.toString().contains("file:LogConfig"))
 
         }.each { String filePath ->
             try {
@@ -73,11 +72,12 @@ class CustomTasksUserController {
                     // TODO Add default
                     flash.reloadConfig = g.message(code: "customTasksUser.reloadConfig.success", default: "")
 
-                }
-                log.debug("CustomTasksUserController:reloadConfig():No changes")
+                } else {
+                    log.debug("CustomTasksUserController:reloadConfig():No changes")
 
-                // TODO Add default
-                flash.reloadConfig = g.message(code: "customTasksUser.reloadConfig.noChanges" , default: "")
+                    // TODO Add default
+                    flash.reloadConfig = g.message(code: "customTasksUser.reloadConfig.noChanges" , default: "")
+                }
             }
         }
         redirect(uri: '/')
