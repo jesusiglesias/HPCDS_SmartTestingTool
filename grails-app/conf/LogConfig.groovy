@@ -155,8 +155,8 @@ log4j.main = {
             }
         }
         test {
-            // Debug type
-            debug 'org.hibernate.SQL'
+            // Warn type
+            warn 'org.hibernate.SQL'
 
             warn stdout: infoLogged, warnLog: infoLogged, additivity: false
             root {
