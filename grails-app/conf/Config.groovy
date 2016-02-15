@@ -7,7 +7,7 @@
 grails.config.locations = [ "classpath:./external-config/LogConfig.groovy", // Log4j war mode
                             //"file:${userHome}/LogConfig.groovy", // Log4j run-app mode
                             "classpath:./external-config/DBConfig.groovy" // DataSource war mode
-                            //"file:${userHome}/DBConfig.groovy", // DataSource war mode
+                            //"file:${userHome}/DBConfig.groovy", // DataSource run-app mode
                           ]
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
