@@ -15,7 +15,7 @@ class UrlMappings {
         }
 
         "/"(view:"/index")
-        "404"(view: '/error')
+        "404"(view: '/notFound')
         "500"(view:'/error')
 
         /* Custom tasks user
