@@ -31,12 +31,14 @@ class CustomTasksUserController {
         // Redirection to admin url
         if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
             log.debug("CustomTasksUserController:loggedIn():adminRole")
+
             redirect uri: adminUrlRedirection
             return
         }
         // Redirection to user url
         if (SpringSecurityUtils.ifAllGranted('ROLE_USER')) {
             log.debug("CustomTasksUserController:loggedIn():userRole")
+
             redirect uri: userUrlRedirection
             return
         }
@@ -110,6 +112,7 @@ class CustomTasksUserController {
                 }
             }
         }
-        redirect(uri: '/')
+        // TODO
+        redirect(uri: '/index')
     }
 }

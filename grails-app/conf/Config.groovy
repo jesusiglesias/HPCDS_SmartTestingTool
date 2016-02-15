@@ -134,7 +134,10 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 ]
 
-// Default URL - If true, always redirects to the value of successHandler.defaultTargetUrl (default: /) after successful authentication; otherwise
+// URL of login page (default: "/login/auth")
+grails.plugin.springsecurity.auth.loginFormUrl='/'
+
+// Default URL - If true, always redirects to the value of successHandler.defaultTargetUrl (default: "/") after successful authentication; otherwise
 // redirects to originally-requested page.
 grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
 // Default post-login URL if there is no saved request that triggered the login

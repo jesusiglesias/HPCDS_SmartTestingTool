@@ -15,7 +15,7 @@ class UrlMappings {
         }
 
         // Homepage
-        "/"(controller: 'login')
+        "/"(controller: 'login', action: 'auth')
 
         /****************************/
         // TODO
