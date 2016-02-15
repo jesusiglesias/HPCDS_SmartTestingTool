@@ -124,10 +124,10 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
     /* Custom tasks user
     ======================================================*/
+    '/customTasksUser/**':                 ['permitAll'],
     // LoggedIn
     '/customTasksUser/loggedIn':           ['ROLE_ADMIN', 'ROLE_USER'],
     // Concurrent sessions
-    '/customTasksUser/**':                 ['permitAll'],
     '/customTasksUser/invalidSession':     ['permitAll'],
     // Reload Log config
     '/customTasksUser/reloadLogConfig':    ['ROLE_ADMIN']
