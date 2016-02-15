@@ -15,14 +15,15 @@ class UrlMappings {
         }
 
         "/"(view:"/index")
+        "404"(view: '/error')
         "500"(view:'/error')
 
         /* Custom tasks user
         ======================================================*/
         // Concurrent sessions
         "/login/concurrentSession" (controller: 'customTasksUser', action: 'invalidSession')
-        // Reload config
-        "/reloadConfig" (controller: 'customTasksUser', action: 'reloadConfig')
+        // Reload log config
+        "/reloadLogConfig" (controller: 'customTasksUser', action: 'reloadLogConfig')
 
         /* Information files
         ======================================================*/

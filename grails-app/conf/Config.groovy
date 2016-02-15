@@ -104,24 +104,27 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'Security.SecUser'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'Security.SecUserSecRole'
 grails.plugin.springsecurity.authority.className = 'Security.SecRole'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/':                ['permitAll'],
+	'/**':              ['permitAll'], /** It includes: /humans.txt, /robots.txt **/
 	'/index':           ['permitAll'],
 	'/index.gsp':       ['permitAll'],
+    '/assets/**':       ['permitAll'],
+    '/**/js/**':        ['permitAll'],
+    '/**/css/**':       ['permitAll'],
+    '/**/images/**':    ['permitAll'],
+    '/**/favicon.ico':  ['permitAll'],
+
     '/User/**':         ['ROLE_ADMIN', 'ROLE_USER'],
     '/Topic/**':        ['ROLE_ADMIN', 'ROLE_USER'],
     '/Test/**':         ['ROLE_ADMIN', 'ROLE_USER'],
-	'/assets/**':       ['permitAll'],
-	'/**/js/**':        ['permitAll'],
-	'/**/css/**':       ['permitAll'],
-	'/**/images/**':    ['permitAll'],
-	'/**/favicon.ico':  ['permitAll'],
+
 
     /* Custom tasks user
     ======================================================*/
     // Concurrent sessions
+    '/customTasksUser/**':                 ['permitAll'],
     '/customTasksUser/invalidSession':     ['permitAll'],
-    // Reload config
-    '/customTasksUser/reloadConfig':       ['ROLE_ADMIN']
+    // Reload Log config
+    '/customTasksUser/reloadLogConfig':    ['ROLE_ADMIN']
 
 ]
 

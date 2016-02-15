@@ -28,7 +28,7 @@ class CustomTasksUserController {
     /**
      * It reloads automatically the changes done in Log4j external file.
      */
-    def reloadConfig () {
+    def reloadLogConfig () {
         log.debug("CustomTasksUserController:reloadConfig()")
 
         // External files of properties
