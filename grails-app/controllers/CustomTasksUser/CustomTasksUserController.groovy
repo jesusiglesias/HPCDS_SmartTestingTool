@@ -3,14 +3,44 @@ package CustomTasksUser
 import grails.util.Environment
 import grails.util.Holders
 import org.codehaus.groovy.grails.plugins.log4j.Log4jConfig
+import grails.plugin.springsecurity.SpringSecurityUtils
+import org.springframework.beans.factory.annotation.Value
 
 /**
  * It contains the habitual custom tasks of the user.
  */
 class CustomTasksUserController {
 
-    //to store the hash of external config files
+    // Store the hash of external config files
     private static Map<String, Integer> fileHashMap = [:]
+
+    // Obtain the default url of users
+    @Value('${springsecurity.urlredirection.admin}')
+    def adminUrlRedirection
+    @Value('${springsecurity.urlredirection.user}')
+    def userUrlRedirection
+
+    /**
+     * It obtains the default url redirection based on role from the call successHandler.defaultTargetUrl
+     *
+     * @return
+     */
+    def loggedIn () {
+        log.debug("CustomTasksUserController:loggedIn()")
+
+        // Redirection to admin url
+        if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
+            log.debug("CustomTasksUserController:loggedIn():adminRole")
+            redirect uri: adminUrlRedirection
+            return
+        }
+        // Redirection to user url
+        if (SpringSecurityUtils.ifAllGranted('ROLE_USER')) {
+            log.debug("CustomTasksUserController:loggedIn():userRole")
+            redirect uri: userUrlRedirection
+            return
+        }
+    }
 
     /**
      * It creates a flash message about a invalid session of the user with user role.

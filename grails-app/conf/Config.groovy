@@ -105,8 +105,13 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'Security.SecUs
 grails.plugin.springsecurity.authority.className = 'Security.SecRole'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**':              ['permitAll'], /** It includes: /humans.txt, /robots.txt **/
+
+       // TODO
 	'/index':           ['permitAll'],
 	'/index.gsp':       ['permitAll'],
+        /*****/
+
+
     '/assets/**':       ['permitAll'],
     '/**/js/**':        ['permitAll'],
     '/**/css/**':       ['permitAll'],
@@ -117,9 +122,10 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/Topic/**':        ['ROLE_ADMIN', 'ROLE_USER'],
     '/Test/**':         ['ROLE_ADMIN', 'ROLE_USER'],
 
-
     /* Custom tasks user
     ======================================================*/
+    // LoggedIn
+    '/customTasksUser/loggedIn':           ['ROLE_ADMIN', 'ROLE_USER'],
     // Concurrent sessions
     '/customTasksUser/**':                 ['permitAll'],
     '/customTasksUser/invalidSession':     ['permitAll'],
@@ -128,7 +134,13 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 ]
 
-// URL redirection
+// Default URL - If true, always redirects to the value of successHandler.defaultTargetUrl (default: /) after successful authentication; otherwise
+// redirects to originally-requested page.
+grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
+// Default post-login URL if there is no saved request that triggered the login
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/login/loggedIn'
+
+// URL redirection based on role
 springsecurity.urlredirection.admin='/user'
 springsecurity.urlredirection.user='/user/create'
 

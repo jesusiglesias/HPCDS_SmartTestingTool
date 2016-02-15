@@ -14,12 +14,22 @@ class UrlMappings {
             }
         }
 
-        "/"(view:"/index")
+        // Homepage
+        "/"(controller: 'login')
+
+        /****************************/
+        // TODO
+        // Provisional
+        "/index"(view: 'index')
+
+        // Errors
         "404"(view: '/notFound')
         "500"(view:'/error')
 
         /* Custom tasks user
         ======================================================*/
+        // LoggedIn
+        "/login/loggedIn" (controller: 'customTasksUser', action: 'loggedIn')
         // Concurrent sessions
         "/login/concurrentSession" (controller: 'customTasksUser', action: 'invalidSession')
         // Reload log config
