@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value
  */
 class CustomTasksUserController {
 
+    def springSecurityService
+
     // Store the hash of external config files
     private static Map<String, Integer> fileHashMap = [:]
 
@@ -19,6 +21,8 @@ class CustomTasksUserController {
     def adminUrlRedirection
     @Value('${springsecurity.urlredirection.user}')
     def userUrlRedirection
+    @Value('${springsecurity.urlredirection.noRole}')
+    def rootUrlRedirection
 
     /**
      * It obtains the default url redirection based on role from the call successHandler.defaultTargetUrl
@@ -34,12 +38,15 @@ class CustomTasksUserController {
 
             redirect uri: adminUrlRedirection
             return
-        }
-        // Redirection to user url
-        if (SpringSecurityUtils.ifAllGranted('ROLE_USER')) {
+        } else if (SpringSecurityUtils.ifAllGranted('ROLE_USER')) {  // Redirection to user url
             log.debug("CustomTasksUserController:loggedIn():userRole")
 
             redirect uri: userUrlRedirection
+            return
+        } else { // Redirection to /noRole url
+            log.error("CustomTasksUserController:loggedIn():noRole:User:${springSecurityService.authentication.principal.username}") // It obtains the username from cache by principal
+            // TODO Página que pida al usuario deslogear
+            redirect uri: rootUrlRedirection
             return
         }
     }

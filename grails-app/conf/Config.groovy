@@ -126,9 +126,11 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     ======================================================*/
     '/customTasksUser/**':                 ['permitAll'],
     // LoggedIn
-    '/customTasksUser/loggedIn':           ['ROLE_ADMIN', 'ROLE_USER'],
+    '/customTasksUser/loggedIn':           ['IS_AUTHENTICATED_REMEMBERED'],
+    // No role
+    '/noRole':                             ['IS_AUTHENTICATED_REMEMBERED'], // User must be authenticated by explicit login or remember me cookie
     // Concurrent sessions
-    '/customTasksUser/invalidSession':     ['permitAll'],
+    '/customTasksUser/invalidSession':     ['ROLE_USER'],
     // Reload Log config
     '/customTasksUser/reloadLogConfig':    ['ROLE_ADMIN']
 
@@ -146,6 +148,8 @@ grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/login/loggedIn'
 // URL redirection based on role
 springsecurity.urlredirection.admin='/user'
 springsecurity.urlredirection.user='/user/create'
+springsecurity.urlredirection.noRole='/noRole'
+
 
 
 

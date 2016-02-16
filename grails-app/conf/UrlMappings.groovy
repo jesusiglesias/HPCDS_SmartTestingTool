@@ -30,6 +30,8 @@ class UrlMappings {
         ======================================================*/
         // LoggedIn
         "/login/loggedIn" (controller: 'customTasksUser', action: 'loggedIn')
+        // Error: no role
+        "/noRole" (view: 'noRole')
         // Concurrent sessions
         "/login/concurrentSession" (controller: 'customTasksUser', action: 'invalidSession')
         // Reload log config
