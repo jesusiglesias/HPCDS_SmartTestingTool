@@ -113,7 +113,7 @@
 				<g:if test="${flash.reloadConfig}">
 					${flash.reloadConfig}
 				</g:if>
-				<g:link uri="/reloadConfig"> Recargar configuración </g:link>
+				<g:link uri="/reloadLogConfig"> Recargar configuración </g:link>
 			</sec:ifAllGranted>
 
 			<div id="controller-list" role="navigation">

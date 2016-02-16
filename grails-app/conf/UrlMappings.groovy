@@ -34,6 +34,8 @@ class UrlMappings {
         "/noRole" (view: 'noRole')
         // Concurrent sessions
         "/login/concurrentSession" (controller: 'customTasksUser', action: 'invalidSession')
+        // Fail authentication
+        "/authFail" (controller: 'customTasksUser', action: 'authFail')
         // Reload log config
         "/reloadLogConfig" (controller: 'customTasksUser', action: 'reloadLogConfig')
 

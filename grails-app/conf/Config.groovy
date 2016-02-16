@@ -131,6 +131,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/noRole':                             ['IS_AUTHENTICATED_REMEMBERED'], // User must be authenticated by explicit login or remember me cookie
     // Concurrent sessions
     '/customTasksUser/invalidSession':     ['ROLE_USER'],
+    // Fail authentication
+    '/customTasksUser/authFail':           ['permitAll'],
     // Reload Log config
     '/customTasksUser/reloadLogConfig':    ['ROLE_ADMIN']
 
@@ -138,6 +140,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 // URL of login page (default: "/login/auth")
 grails.plugin.springsecurity.auth.loginFormUrl='/'
+grails.plugin.springsecurity.failureHandler.defaultFailureUrl='/authFail'
 
 // Default URL - If true, always redirects to the value of successHandler.defaultTargetUrl (default: "/") after successful authentication; otherwise
 // redirects to originally-requested page.
@@ -145,10 +148,14 @@ grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
 // Default post-login URL if there is no saved request that triggered the login
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/login/loggedIn'
 
+// It stores the last username in a HTTP session
+grails.plugin.springsecurity.apf.storeLastUsername=true
+
 // URL redirection based on role
 springsecurity.urlredirection.admin='/user'
 springsecurity.urlredirection.user='/user/create'
 springsecurity.urlredirection.noRole='/noRole'
+
 
 
 

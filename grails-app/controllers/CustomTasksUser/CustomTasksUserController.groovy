@@ -5,6 +5,11 @@ import grails.util.Holders
 import org.codehaus.groovy.grails.plugins.log4j.Log4jConfig
 import grails.plugin.springsecurity.SpringSecurityUtils
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.security.authentication.AccountExpiredException
+import org.springframework.security.authentication.CredentialsExpiredException
+import org.springframework.security.authentication.DisabledException
+import org.springframework.security.authentication.LockedException
+import org.springframework.security.web.WebAttributes
 
 /**
  * It contains the habitual custom tasks of the user.
@@ -25,9 +30,9 @@ class CustomTasksUserController {
     def rootUrlRedirection
 
     /**
-     * It obtains the default url redirection based on role from the call successHandler.defaultTargetUrl
+     * It obtains the default url redirection based on role from the call successHandler.defaultTargetUrl.
      *
-     * @return
+     * @return urlRedirection   Url to redirection to the user.
      */
     def loggedIn () {
         log.debug("CustomTasksUserController:loggedIn()")
@@ -45,6 +50,7 @@ class CustomTasksUserController {
             return
         } else { // Redirection to /noRole url
             log.error("CustomTasksUserController:loggedIn():noRole:User:${springSecurityService.authentication.principal.username}") // It obtains the username from cache by principal
+
             // TODO Página que pida al usuario deslogear
             redirect uri: rootUrlRedirection
             return
@@ -61,6 +67,52 @@ class CustomTasksUserController {
 
         // TODO Add default
         flash.invalidSession =  g.message(code: "customTasksUser.login.invalidSession")
+        redirect (controller: 'login', action: 'auth', params: params)
+    }
+
+    /**
+     * If the login fails, then the user will be redirected to "/" URL, displaying a message.
+     *
+     * @return failMessage Message to show to the user.
+     */
+    def authFail() {
+        log.debug("CustomTasksUserController:authFail()")
+
+        // TODO Add default
+        String failMessage = ''
+
+        // Fail exceptions
+        def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
+        if (exception) {
+            if (exception instanceof AccountExpiredException) {
+                log.error("CustomTasksUserController:authFail():accountExpired:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
+
+                failMessage = g.message(code: "springSecurity.errors.login.expired")
+            }
+            else if (exception instanceof CredentialsExpiredException) {
+                log.error("CustomTasksUserController:authFail():passwordExpired:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
+
+                failMessage = g.message(code: "springSecurity.errors.login.passwordExpired")
+            }
+            else if (exception instanceof DisabledException) {
+                log.debug("CustomTasksUserController:authFail():enabled")
+
+                failMessage = g.message(code: "springSecurity.errors.login.disabled")
+            }
+            else if (exception instanceof LockedException) {
+                log.error("CustomTasksUserController:authFail():accountLocked:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
+
+                failMessage = g.message(code: "springSecurity.errors.login.locked")
+            }
+            else {
+                log.debug("CustomTasksUserController:authFail():fail")
+
+                failMessage = g.message(code: "springSecurity.errors.login.fail")
+            }
+        }
+
+        // TODO Add default
+        flash.message = failMessage
         redirect (controller: 'login', action: 'auth', params: params)
     }
 
