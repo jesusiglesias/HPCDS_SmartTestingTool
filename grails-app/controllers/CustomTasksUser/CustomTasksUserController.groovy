@@ -40,20 +40,16 @@ class CustomTasksUserController {
         // Redirection to admin url
         if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
             log.debug("CustomTasksUserController:loggedIn():adminRole")
-
             redirect uri: adminUrlRedirection
-            return
+
         } else if (SpringSecurityUtils.ifAllGranted('ROLE_USER')) {  // Redirection to user url
             log.debug("CustomTasksUserController:loggedIn():userRole")
-
             redirect uri: userUrlRedirection
-            return
+
         } else { // Redirection to /noRole url
             log.error("CustomTasksUserController:loggedIn():noRole:User:${springSecurityService.authentication.principal.username}") // It obtains the username from cache by principal
-
             // TODO Página que pida al usuario deslogear
             redirect uri: rootUrlRedirection
-            return
         }
     }
 
@@ -113,7 +109,7 @@ class CustomTasksUserController {
 
         // TODO Add default
         flash.message = failMessage
-        redirect (controller: 'login', action: 'auth', params: params)
+        redirect (controller: 'login', action: 'auth')
     }
 
     /**

@@ -124,7 +124,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
     /* Custom tasks user
     ======================================================*/
-    '/customTasksUser/**':                 ['permitAll'],
     // LoggedIn
     '/customTasksUser/loggedIn':           ['IS_AUTHENTICATED_REMEMBERED'],
     // No role
@@ -134,8 +133,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     // Fail authentication
     '/customTasksUser/authFail':           ['permitAll'],
     // Reload Log config
-    '/customTasksUser/reloadLogConfig':    ['ROLE_ADMIN']
-
+    '/customTasksUser/reloadLogConfig':    ['ROLE_ADMIN'],
+    '/customTasksUser/**':                 ['permitAll']
 ]
 
 // URL of login page (default: "/login/auth")
