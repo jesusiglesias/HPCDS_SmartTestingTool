@@ -143,7 +143,7 @@ grails.plugin.springsecurity.failureHandler.defaultFailureUrl='/authFail'
 
 // Default URL - If true, always redirects to the value of successHandler.defaultTargetUrl (default: "/") after successful authentication; otherwise
 // redirects to originally-requested page.
-grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
+grails.plugin.springsecurity.successHandler.alwaysUseDefault = false
 // Default post-login URL if there is no saved request that triggered the login
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/login/loggedIn'
 
