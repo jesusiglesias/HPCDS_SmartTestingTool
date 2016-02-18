@@ -17,10 +17,10 @@ class AnswerController {
     def defaultPag
 
     /**
-     * It lists the main data of all answer of the database.
+     * It lists the main data of all answers of the database.
      *
-     * @param max Maximum number of answer to list.
-     * @return Answer Answer list with their information and number of answer in the database.
+     * @param max Maximum number of answers to list.
+     * @return Answer Answers list with their information and number of answers in the database.
      */
     def index(Integer max) {
         //params.max = Math.min(max ?: 10, 100)

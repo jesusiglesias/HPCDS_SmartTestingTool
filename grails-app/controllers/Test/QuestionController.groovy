@@ -17,10 +17,10 @@ class QuestionController {
     def defaultPag
 
     /**
-     * It lists the main data of all question of the database.
+     * It lists the main data of all questions of the database.
      *
-     * @param max Maximum number of question to list.
-     * @return Question Question list with their information and number of question in the database.
+     * @param max Maximum number of questions to list.
+     * @return Question Questions list with their information and number of questions in the database.
      */
     def index(Integer max) {
         //params.max = Math.min(max ?: 10, 100)

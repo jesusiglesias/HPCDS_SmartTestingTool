@@ -17,10 +17,10 @@ class EvaluationController {
     def defaultPag
 
     /**
-     * It lists the main data of all evaluation of the database.
+     * It lists the main data of all evaluations of the database.
      *
-     * @param max Maximum number of evaluation to list.
-     * @return Evaluation Evaluation list with their information and number of evaluation in the database.
+     * @param max Maximum number of evaluations to list.
+     * @return Evaluation Evaluations list with their information and number of evaluations in the database.
      */
     def index(Integer max) {
         //params.max = Math.min(max ?: 10, 100)

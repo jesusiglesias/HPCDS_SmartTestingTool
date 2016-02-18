@@ -17,10 +17,10 @@ class CatalogController {
     def defaultPag
 
     /**
-     * It lists the main data of all catalog of the database.
+     * It lists the main data of all catalogs of the database.
      *
-     * @param max Maximum number of catalog to list.
-     * @return Catalog Catalog list with their information and number of catalog in the database.
+     * @param max Maximum number of catalogs to list.
+     * @return Catalog Catalogs list with their information and number of catalogs in the database.
      */
     def index(Integer max) {
         //params.max = Math.min(max ?: 10, 100)

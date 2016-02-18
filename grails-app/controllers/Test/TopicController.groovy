@@ -17,10 +17,10 @@ class TopicController {
     def defaultPag
 
     /**
-     * It lists the main data of all topic of the database.
+     * It lists the main data of all topics of the database.
      *
-     * @param max Maximum number of topic to list.
-     * @return Topic Topic list with their information and number of topic in the database.
+     * @param max Maximum number of topics to list.
+     * @return Topic Topics list with their information and number of topics in the database.
      */
     def index(Integer max) {
         //params.max = Math.min(max ?: 10, 100)

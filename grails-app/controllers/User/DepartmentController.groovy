@@ -17,10 +17,10 @@ class DepartmentController {
     def defaultPag
 
     /**
-     * It lists the main data of all department of the database.
+     * It lists the main data of all departments of the database.
      *
-     * @param max Maximum number of department to list.
-     * @return Department Department list with their information and number of department in the database.
+     * @param max Maximum number of departments to list.
+     * @return Department Departments list with their information and number of departments in the database.
      */
     def index(Integer max) {
         //params.max = Math.min(max ?: 10, 100)
