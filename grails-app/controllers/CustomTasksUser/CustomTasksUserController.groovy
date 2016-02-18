@@ -67,7 +67,7 @@ class CustomTasksUserController {
     }
 
     /**
-     * If the login fails, then the user will be redirected to "/" URL, displaying a message.
+     * Callback after a failed login. Redirects to the "/" page with a warning message.
      *
      * @return failMessage Message to show to the user.
      */
