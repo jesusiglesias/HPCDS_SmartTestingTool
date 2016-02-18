@@ -132,7 +132,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     // No role
     '/noRole':                             ['IS_AUTHENTICATED_REMEMBERED'], // User must be authenticated by explicit login or remember me cookie
     // Concurrent sessions
-    '/customTasksUser/invalidSession':     ['ROLE_USER'],
+    '/customTasksUser/invalidSession':     ['permitAll'],
     // Fail authentication
     '/customTasksUser/authFail':           ['permitAll'],
     // Switch Admin to User

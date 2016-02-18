@@ -37,7 +37,7 @@ class UrlMappings {
         // Error: no role
         "/noRole" (view: 'noRole')
         // Concurrent sessions
-        "/login/concurrentSession" (controller: 'customTasksUser', action: 'invalidSession')
+        "/concurrentSession" (controller: 'customTasksUser', action: 'invalidSession')
         // Fail authentication
         "/authFail" (controller: 'customTasksUser', action: 'authFail')
         // Switch Admin to User

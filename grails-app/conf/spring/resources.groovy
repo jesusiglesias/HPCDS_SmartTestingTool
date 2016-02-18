@@ -40,7 +40,7 @@ beans = {
     concurrencyFilter(ConcurrentSessionFilter) {
         sessionRegistry = sessionRegistry // Ensure that every registered session’s “last updated” time is always correct and check if the session is expired then call the configured logout handlers
         logoutHandlers = [ref("rememberMeServices"), ref("securityContextLogoutHandler")] // It updates logout handlers
-        expiredUrl='/login/concurrentSession' // Redirect the user to this url if the number of active sessions for this user exceeds the maximum allowed limit
+        expiredUrl='/concurrentSession' // Redirect the user to this url if the number of active sessions for this user exceeds the maximum allowed limit
     }
 
     concurrentSessionControlStrategy(CustomConcurrentSessionControlStrategy, sessionRegistry) {
