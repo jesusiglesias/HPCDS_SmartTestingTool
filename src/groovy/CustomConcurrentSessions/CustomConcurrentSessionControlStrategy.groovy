@@ -12,7 +12,7 @@ class CustomConcurrentSessionControlStrategy extends ConcurrentSessionControlStr
     /**
      * It updates the session registry.
      *
-     * @param sessionRegistry Session id and principial of a user.
+     * @param sessionRegistry Session id and principal of a user.
      */
     CustomConcurrentSessionControlStrategy(SessionRegistry sessionRegistry) {
         super(sessionRegistry)
