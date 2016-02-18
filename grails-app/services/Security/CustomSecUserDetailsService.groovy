@@ -2,7 +2,6 @@ package Security
 
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.SpringSecurityUtils
-import grails.plugin.springsecurity.userdetails.GrailsUser
 import grails.plugin.springsecurity.userdetails.GrailsUserDetailsService
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -11,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 /**
  * It implements authentication by email or username.
  */
-@Transactional
 class CustomSecUserDetailsService implements GrailsUserDetailsService {
 
     // Some Spring Security classes (e.g. RoleHierarchyVoter) expect at least * one role, so we give a user with
@@ -41,6 +39,7 @@ class CustomSecUserDetailsService implements GrailsUserDetailsService {
      *
      * @throws UsernameNotFoundException If the user could not be found.
      */
+    @Transactional(readOnly=true, noRollbackFor=[IllegalArgumentException, UsernameNotFoundException]) // It is transactional, but read-only, to avoid lazy loading exceptions when accessing the authorities collection
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         SecUser.withTransaction { status ->
@@ -53,15 +52,10 @@ class CustomSecUserDetailsService implements GrailsUserDetailsService {
 
             def authorities = user.authorities.collect {new SimpleGrantedAuthority(it.authority)}
 
-            return new GrailsUser(user.username, user.password, user.enabled, !user.accountExpired,
+            // Email field added to constructor
+            return new CustomUserDetails(user.username, user.password, user.enabled, !user.accountExpired,
                     !user.passwordExpired, !user.accountLocked,
-                    authorities ?: NO_ROLES, user.id)
+                    authorities ?: NO_ROLES, user.id, user.email)
         }
     }
 }
-
-
-
-
-
-

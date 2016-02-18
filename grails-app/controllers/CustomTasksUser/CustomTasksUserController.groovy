@@ -47,7 +47,7 @@ class CustomTasksUserController {
             redirect uri: userUrlRedirection
 
         } else { // Redirection to /noRole url
-            log.error("CustomTasksUserController:loggedIn():noRole:User:${springSecurityService.authentication.principal.username}") // It obtains the username from cache by principal
+            log.error("CustomTasksUserController:loggedIn():noRole:User:${springSecurityService.authentication.principal.username}:Email:${springSecurityService.authentication.principal.email}") // It obtains the username and email from cache by principal
             // TODO Página que pida al usuario deslogear
             redirect uri: rootUrlRedirection
         }
