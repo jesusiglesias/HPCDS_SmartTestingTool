@@ -91,7 +91,7 @@ class CustomTasksUserController {
                 failMessage = g.message(code: "springSecurity.errors.login.passwordExpired")
             }
             else if (exception instanceof DisabledException) {
-                log.debug("CustomTasksUserController:authFail():enabled")
+                log.error("CustomTasksUserController:authFail():accountDisabled:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
                 failMessage = g.message(code: "springSecurity.errors.login.disabled")
             }
@@ -110,6 +110,53 @@ class CustomTasksUserController {
         // TODO Add default
         flash.message = failMessage
         redirect (controller: 'login', action: 'auth')
+    }
+
+    /**
+     * If the switch fails, then the user will be redirected to its default URL, displaying a message.
+     *
+     * @return switchFailMessage Message to show to the user.
+     */
+    def switchFail () {
+        log.debug("CustomTasksUserController:switchFail()")
+
+        // TODO Add default and change message
+        String switchFailMessage = ''
+
+        // Switch fail exceptions
+        def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
+        if (exception) {
+            if (exception instanceof AccountExpiredException) {
+                log.error("CustomTasksUserController:switchFail():accountExpired:admin_switch")
+
+                switchFailMessage = g.message(code: "springSecurity.errors.login.expired")
+            } else if (exception instanceof CredentialsExpiredException) {
+                log.error("CustomTasksUserController:switchFail():passwordExpired:admin_switch")
+
+                switchFailMessage = g.message(code: "springSecurity.errors.login.passwordExpired")
+            } else if (exception instanceof DisabledException) {
+                log.error("CustomTasksUserController:switchFail():disabled:admin_switch")
+
+                switchFailMessage = g.message(code: "springSecurity.errors.login.disabled")
+            } else if (exception instanceof LockedException) {
+                log.error("CustomTasksUserController:switchFail():accountLocked:admin_switch")
+
+                switchFailMessage = g.message(code: "springSecurity.errors.login.locked")
+            }
+        }
+
+        // TODO Add default
+        flash.message = switchFailMessage
+
+        // Redirection to admin url
+        if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
+            log.debug("CustomTasksUserController:switchFail():adminRole:admin_switch")
+            redirect uri: adminUrlRedirection
+
+        } else if (SpringSecurityUtils.ifAllGranted('ROLE_USER')) {  // Redirection to user url
+            log.debug("CustomTasksUserController:switchFail():userRole:admin_switch")
+            redirect uri: userUrlRedirection
+        }
     }
 
     /**

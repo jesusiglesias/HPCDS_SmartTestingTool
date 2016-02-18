@@ -18,6 +18,29 @@
 	</head>
 	<body>
 		<div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a></div>
+		<sec:ifLoggedIn>
+			Logged in as <sec:username/>
+		</sec:ifLoggedIn>
+
+		<sec:ifSwitched>
+			<a href='${request.contextPath}/j_spring_security_exit_user'>
+				Resume as <sec:switchedUserOriginalUsername/>
+			</a>
+		</sec:ifSwitched>
+		<sec:ifNotSwitched>
+			<sec:ifAllGranted roles='ROLE_ADMIN'>
+				<form action='${request.contextPath}/j_spring_security_switch_user'
+					  method='POST'>
+					<g:hiddenField name="stt_hp_username" value="admin_switch" />
+					<input type='submit' value='Switch'/>
+				</form>
+			</sec:ifAllGranted>
+		</sec:ifNotSwitched>
+
+		<g:if test='${flash.message}'>
+			<div class='login_message'>${flash.message}</div>
+		</g:if>
+
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

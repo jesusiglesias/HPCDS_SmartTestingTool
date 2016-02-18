@@ -96,7 +96,7 @@ environments {
 /* Other configurations
  ============================================================================================= */
 // Default value of pagination
-paginate.defaultValue=10
+paginate.defaultValue = 10
 
 /* Spring Security Core configuration
  ============================================================================================= */
@@ -106,7 +106,7 @@ grails.plugin.springsecurity.authority.className = 'Security.SecRole'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**':              ['permitAll'], /** It includes: /humans.txt, /robots.txt **/
 
-       // TODO
+    // TODO
 	'/index':           ['permitAll'],
 	'/index.gsp':       ['permitAll'],
         /*****/
@@ -132,14 +132,18 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksUser/invalidSession':     ['ROLE_USER'],
     // Fail authentication
     '/customTasksUser/authFail':           ['permitAll'],
+    // Switch Admin to User
+    '/customTasksUser/switchFail':         ['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY', "authentication.name == 'admin_switch'"],
+    '/j_spring_security_switch_user':      ['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'],
+    '/j_spring_security_exit_user':        ["authentication.name == 'admin_switch'"],
     // Reload Log config
     '/customTasksUser/reloadLogConfig':    ['ROLE_ADMIN'],
     '/customTasksUser/**':                 ['permitAll']
 ]
 
 // URL of login page (default: "/login/auth")
-grails.plugin.springsecurity.auth.loginFormUrl='/'
-grails.plugin.springsecurity.failureHandler.defaultFailureUrl='/authFail'
+grails.plugin.springsecurity.auth.loginFormUrl = '/'
+grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/authFail'
 
 // Default URL - If true, always redirects to the value of successHandler.defaultTargetUrl (default: "/") after successful authentication; otherwise
 // redirects to originally-requested page.
@@ -148,14 +152,35 @@ grails.plugin.springsecurity.successHandler.alwaysUseDefault = false
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/login/loggedIn'
 
 // It stores the last username in a HTTP session
-grails.plugin.springsecurity.apf.storeLastUsername=true
+grails.plugin.springsecurity.apf.storeLastUsername = true
+
+// Login form parameters
+grails.plugin.springsecurity.apf.usernameParameter = 'stt_hp_username'
+grails.plugin.springsecurity.apf.passwordParameter = 'stt_hp_password'
+
+/*  Remember me cookie configuration
+======================================================*/
+// Remember-me cookie name; should be unique per application
+grails.plugin.springsecurity.rememberMe.cookieName = 'STT_remember_me'
+// Max age of the cookie in seconds
+grails.plugin.springsecurity.rememberMe.tokenValiditySeconds = 604800
+// Value used to encode cookies; should be unique per application
+grails.plugin.springsecurity.rememberMe.key = 'sttHPCDSTfg'
+// Login form cookie parameter
+grails.plugin.springsecurity.rememberMe.parameter = '_stt_hp_remember_me'
+
+/*  Switch user configuration
+======================================================*/
+// Activate switch user filter
+grails.plugin.springsecurity.useSwitchUserFilter = true
+// Url for redirect after switching
+grails.plugin.springsecurity.switchUser.targetUrl = '/login/loggedIn'
+// Url for redirect after an error during an attempt to switch
+grails.plugin.springsecurity.switchUser.switchFailureUrl = '/switchFail'
+// Username request parameter name
+grails.plugin.springsecurity.switchUser.usernameParameter = 'stt_hp_username'
 
 // URL redirection based on role
-springsecurity.urlredirection.admin='/user'
-springsecurity.urlredirection.user='/user/create'
-springsecurity.urlredirection.noRole='/noRole'
-
-
-
-
-
+springsecurity.urlredirection.admin = '/user'
+springsecurity.urlredirection.user = '/user/create'
+springsecurity.urlredirection.noRole = '/noRole'

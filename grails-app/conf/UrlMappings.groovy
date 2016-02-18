@@ -36,6 +36,8 @@ class UrlMappings {
         "/login/concurrentSession" (controller: 'customTasksUser', action: 'invalidSession')
         // Fail authentication
         "/authFail" (controller: 'customTasksUser', action: 'authFail')
+        // Switch Admin to User
+        "/switchFail" (controller: 'customTasksUser', action: 'switchFail')
         // Reload log config
         "/reloadLogConfig" (controller: 'customTasksUser', action: 'reloadLogConfig')
 
