@@ -26,6 +26,10 @@ class UrlMappings {
         "404"(view: '/notFound')
         "500"(view:'/error')
 
+        /* Login controller
+        ======================================================*/
+        "/reauthenticate" (controller: 'login', action: 'full')
+
         /* Custom tasks user
         ======================================================*/
         // LoggedIn

@@ -105,18 +105,21 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'Security.SecUs
 grails.plugin.springsecurity.authority.className = 'Security.SecRole'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**':              ['permitAll'], /** It includes: /humans.txt, /robots.txt **/
-
-    // TODO
-	'/index':           ['permitAll'],
-	'/index.gsp':       ['permitAll'],
-        /*****/
-
-
     '/assets/**':       ['permitAll'],
     '/**/js/**':        ['permitAll'],
     '/**/css/**':       ['permitAll'],
     '/**/images/**':    ['permitAll'],
     '/**/favicon.ico':  ['permitAll'],
+
+    /* Login controller
+    ======================================================*/
+    '/login/full':      ['IS_AUTHENTICATED_REMEMBERED'],
+    '/login/**':        ['permitAll'],
+
+    // TODO
+	'/index':           ['permitAll'],
+	'/index.gsp':       ['permitAll'],
+        /*****/
 
     '/User/**':         ['ROLE_ADMIN', 'ROLE_USER'],
     '/Topic/**':        ['ROLE_ADMIN', 'ROLE_USER'],
