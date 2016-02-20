@@ -1,0 +1,500 @@
+/*-------------------------------------------------------------------------------------------*
+*                                      AUTHENTICATION                                        *
+*-------------------------------------------------------------------------------------------*/
+
+.login {
+  background-color: #8bbd96;
+}
+
+/* Sign up button */
+.login a {
+    color: #000000 !important;
+}
+
+/* Logo image */
+.login .logo {
+  margin: 120px 20px 70px auto;
+  padding: 15px;
+  text-align: center;
+}
+
+/* Form box */
+.login .content {
+  width: 400px;
+  margin: 60px auto 60px auto;
+}
+
+/* Title and subtitle */
+.login .content .form-title {
+  margin-bottom: 25px;
+}
+
+/* Title */
+.login .form-title {
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 500 !important;
+}
+
+/* Subtitle */
+.login .form-subtitle {
+  color: #D8ECDD;
+  font-size: 17px;
+  font-weight: 300 !important;
+  padding-left: 10px;
+}
+
+/* Login and forget form */
+.login .content .login-form,
+.login .content .forget-form {
+  padding: 0;
+  margin: 0;
+}
+
+/* Form group - inline
+======================================================*/
+.form-group.form-md-line-input {
+  position: relative;
+  margin: 35px 0 30px 0;
+  padding-top: 20px;
+}
+
+/* Copyright distance*/
+.form-group.form-md-line-input:last-child {
+  margin-bottom: 10px;
+}
+
+.form-group.form-md-line-input .form-control {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid rgba(198, 240, 213, 0.66);
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  color: #e5fff3;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/* Label */
+.form-group.form-md-line-input.form-md-floating-label .form-control ~ label {
+  font-size: 16px;
+  top: 25px;
+  transition: 0.2s ease all;
+  color: #105d41;
+}
+
+/* Line */
+.form-group.form-md-line-input .form-control ~ label,
+.form-group.form-md-line-input .form-control ~ .form-control-focus {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* Line after */
+.form-group.form-md-line-input .form-control ~ label:after,
+.form-group.form-md-line-input .form-control ~ .form-control-focus:after {
+  content: '';
+  position: absolute;
+  z-index: 5;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  visibility: hidden;
+  transition: 0.2s ease all;
+}
+
+.form-group.form-md-line-input .form-control ~ label {
+  margin-bottom: 0;
+  opacity: 1;
+}
+
+/*  Label after */
+.form-group.form-md-line-input .form-control.edited:not([readonly]) ~ label,
+.form-group.form-md-line-input .form-control.edited:not([readonly]) ~ .form-control-focus,
+.form-group.form-md-line-input .form-control:focus:not([readonly]) ~ label,
+.form-group.form-md-line-input .form-control:focus:not([readonly]) ~ .form-control-focus,
+.form-group.form-md-line-input .form-control.focus:not([readonly]) ~ label,
+.form-group.form-md-line-input .form-control.focus:not([readonly]) ~ .form-control-focus {
+  color: #ffffff;
+}
+
+.form-group.form-md-line-input.form-md-floating-label .form-control[readonly] ~ label,
+.form-group.form-md-line-input.form-md-floating-label .form-control.edited ~ label,
+.form-group.form-md-line-input.form-md-floating-label .form-control.form-control-static ~ label,
+.form-group.form-md-line-input.form-md-floating-label .form-control:focus:not([readonly]) ~ label,
+.form-group.form-md-line-input.form-md-floating-label .form-control.focus:not([readonly]) ~ label {
+  top: 0;
+  font-size: 13px;
+}
+
+/* Line after */
+.form-group.form-md-line-input .form-control.edited:not([readonly]) ~ label:after,
+.form-group.form-md-line-input .form-control.edited:not([readonly]) ~ .form-control-focus:after,
+.form-group.form-md-line-input .form-control:focus:not([readonly]) ~ label:after,
+.form-group.form-md-line-input .form-control:focus:not([readonly]) ~ .form-control-focus:after,
+.form-group.form-md-line-input .form-control.focus:not([readonly]) ~ label:after,
+.form-group.form-md-line-input .form-control.focus:not([readonly]) ~ .form-control-focus:after {
+  visibility: visible;
+  left: 0;
+  width: 100%;
+  background: #105d41;
+}
+
+.form-group.form-md-line-input .form-control.edited:not([readonly]) ~ label,
+.form-group.form-md-line-input .form-control:focus:not([readonly]) ~ label,
+.form-group.form-md-line-input .form-control.focus:not([readonly]) ~ label {
+  opacity: 1 ;
+  filter: alpha(opacity=100);
+}
+
+/* Text line below */
+.form-group.form-md-line-input .form-control.edited:not([readonly]) ~ .help-block,
+.form-group.form-md-line-input .form-control:focus:not([readonly]) ~ .help-block,
+.form-group.form-md-line-input .form-control.focus:not([readonly]) ~ .help-block {
+  color: #105d41;
+  opacity: 1 ;
+  filter: alpha(opacity=100);
+}
+
+.form-group.form-md-line-input .help-block {
+  position: absolute;
+  margin: 5px 0 0 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Icon */
+.form-group.form-md-line-input + .input-icon {
+  padding-top: 0;
+}
+
+.form-group.form-md-line-input > .input-icon > i {
+  left: 0;
+  bottom: 0;
+  margin: 9px 2px 10px 10px;
+  color: #fff5f5;
+}
+
+.form-group.form-md-line-input > .input-icon .form-control {
+  padding-left: 34px;
+}
+
+.form-group.form-md-line-input > .input-icon > label {
+  margin-top: -20px;
+}
+
+.form-group.form-md-line-input > .input-icon.right .form-control {
+  padding-left: 0;
+  padding-right: 34px;
+}
+
+.form-group.form-md-line-input > .input-icon.right > i {
+  left: auto;
+  right: 8px;
+  margin: 11px 2px 10px 10px;
+}
+
+.form-group.form-md-line-input.has-success .form-control.edited:not([readonly]) ~ i,
+.form-group.form-md-line-input.has-success .form-control.form-control-static ~ i,
+.form-group.form-md-line-input.has-success .form-control:focus:not([readonly]) ~ i,
+.form-group.form-md-line-input.has-success .form-control.focus:not([readonly]) ~ i {
+  color: #105d41;
+}
+
+/* Remember me and password
+======================================================*/
+/* Remember me and forgot password */
+.login .content .form-actions {
+  clear: both;
+  padding: 0 32px 20px 32px;
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+/* Remember me and forgot password block */
+.action-remember-password {
+  margin-bottom: 60px;
+}
+
+/* Remember me */
+.form-actions .rememberme {
+  margin: 8px 5px 0 0;
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 400 !important;
+}
+
+.form-actions .rememberme:active,
+.form-actions .rememberme:focus,
+.form-actions .rememberme:hover{
+  color: #105d41 !important;
+}
+
+/* Forgot password */
+.form-actions .forget-password-block {
+  margin-top: 8px;
+}
+
+.login .content .forget-password {
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 400 !important;
+  text-decoration: none; /* Delete underline */
+}
+
+.login .content .forget-password:active,
+.login .content .forget-password:focus,
+.login .content .forget-password:hover{
+  color: #105d41 !important;
+}
+
+/* Line */
+.login-options {
+  margin: 20px 0 35px 0;
+  border-top: 1px solid #105d41;
+}
+
+/* Buttons */
+.login .btn {
+  font-weight: 600;
+  padding: 10px 30px !important;
+  font-size: 13px;
+}
+
+/* Create an account button
+======================================================*/
+/* Sign up button */
+.login .content .create-account {
+  text-align: center;
+}
+
+.login .content .create-account p a {
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.login .content .create-account a {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.login .content .form-actions .btn {
+  margin-top: 1px;
+}
+
+/*  Copyright */
+.login .copyright {
+  text-align: center;
+  margin: 70px auto 0 0;
+  padding: 0;
+  color: black;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Author's name */
+.login .copyright a {
+  text-decoration: none;
+}
+
+.login .copyright a:active,
+.login .copyright a:focus,
+.login .copyright a:hover{
+  color: #ffffff !important;
+}
+
+/* Logo HP CDS*/
+.logoHP{
+  text-align: center;
+  width: 100%;
+  margin: 50px 0 20px 0;
+}
+
+.logoHP img {
+  width: 120px;
+  height: 120px;
+}
+
+/* Forget form
+======================================================*/
+.login .content .forget-form {
+  display: none;
+}
+
+/* Buttons block */
+.login .content .forget-form .form-actions {
+  border: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Position of title and subtitle */
+.login .content .forget-form .form-title {
+  margin-bottom: -15px;
+}
+
+/* Distance between title and subtitle*/
+.login .content .forget-form .form-title p{
+  margin: 5px 0 0 0 !important;
+}
+
+/* Subtitle */
+.login .content .forget-form .form-title .form-subtitle {
+  padding-left: 0;
+}
+
+/* Buttons block */
+.login .content .forget-form .form-actions {
+  margin-top: 50px;
+}
+
+/* Register form TODO
+======================================================*/
+.login .content .register-form {
+  display: none;
+}
+
+.login .content .register-form .form-actions {
+  border: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.login .content .hint {
+  color: #b7d1e2;
+  padding: 0;
+  font-size: 14px;
+  margin: 15px 0 7px 0;
+}
+
+.login .content select.form-control {
+  padding-left: 9px;
+  padding-right: 9px;
+}
+
+
+.login .content .form-actions .checkbox {
+  margin-top: 8px;
+  display: inline-block;
+}
+
+/* Notifications
+======================================================*/
+.alert-notuser-reauth-invalidsession {
+  margin: 35px 0 20px 0;
+}
+
+.alert-danger-custom {
+  background-color: #C16868 !important;
+  border-color: #040202 !important;
+  color: #FFFFFF !important;
+}
+
+.alert-warning-custom {
+  color: #76610E;
+}
+
+.alert-warning-custom h5 {
+  color: #534510;
+}
+
+.alert-reauthentication {
+  margin-top: 0 !important;
+}
+
+/* Media queries
+======================================================*/
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+  /* Logo image */
+  .login .logo {
+    margin: 70px 5px 70px auto;
+    padding: 0;
+  }
+
+  /* Form box */
+  .login .content {
+    width: 300px;
+  }
+
+  .form-group.form-md-line-input {
+    position: relative;
+    margin: 35px 0 45px 0;
+    padding-top: 20px;
+  }
+
+  /* Remember me */
+  .form-actions .rememberme {
+    font-size: 14px;
+  }
+
+  /* Forgot password */
+  .login .content .forget-password {
+    font-size: 14px;
+  }
+
+  /* TODO */
+  .login .content h3 {
+    font-size: 22px;
+  }
+
+  .login .checkbox {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 375px) {
+
+  /* Form box */
+  .login .content {
+    width: 280px;
+  }
+}
+
+
+/*
+.login .content .form-control {
+  background-color: #8CC5AC;
+  border: 1px solid #56b580;
+  height: 43px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+} */
+
+/* Fields box */
+/*
+.login .content .form-control:focus,
+.login .content .form-control:active {
+    border: 1px solid #2d684d;
+} */
+
+/* Placeholder color */
+/*
+.login .content .form-control::-moz-placeholder {  Firefox 19+
+  color: #e7ffe9;
+}
+
+.login .content .form-control:-moz-placeholder {  Firefox 4-18
+  color: #e7ffe9;
+}
+
+.login .content .form-control:-ms-input-placeholder {  IE
+  color: #e7ffe9;
+}
+
+.login .content .form-control::-webkit-input-placeholder {  Webkit
+  color: #e7ffe9;
+} */
