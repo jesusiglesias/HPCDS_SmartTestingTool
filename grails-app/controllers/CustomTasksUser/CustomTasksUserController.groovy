@@ -32,7 +32,7 @@ class CustomTasksUserController {
     /**
      * It obtains the default url redirection based on role from the call successHandler.defaultTargetUrl.
      *
-     * @return urlRedirection   Url to redirection to the user.
+     * @return urlRedirection Url to redirection to the user.
      */
     def loggedIn () {
         log.debug("CustomTasksUserController:loggedIn()")
@@ -61,8 +61,7 @@ class CustomTasksUserController {
     def invalidSession() {
         log.debug("CustomTasksUserController:invalidSession()")
 
-        // TODO Add default
-        flash.invalidSession =  g.message(code: "customTasksUser.login.invalidSession")
+        flash.errorLoginSession =  g.message(code: "customTasksUser.login.invalidSession", default: 'Your user account is logged in from another browser or location.')
         redirect (controller: 'login', action: 'auth', params: params)
     }
 
@@ -74,8 +73,8 @@ class CustomTasksUserController {
     def authFail() {
         log.debug("CustomTasksUserController:authFail()")
 
-        // TODO Add default
         String failMessage = ''
+        String failUserMessage = ''
 
         // Fail exceptions
         def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
@@ -83,32 +82,32 @@ class CustomTasksUserController {
             if (exception instanceof AccountExpiredException) {
                 log.error("CustomTasksUserController:authFail():accountExpired:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
-                failMessage = g.message(code: "springSecurity.errors.login.expired")
+                failMessage = g.message(code: "customTasksUser.login.expired", default: 'Sorry, your user account has expired. Please, you contact with the administrator.')
             }
             else if (exception instanceof CredentialsExpiredException) {
                 log.error("CustomTasksUserController:authFail():passwordExpired:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
-                failMessage = g.message(code: "springSecurity.errors.login.passwordExpired")
+                failMessage = g.message(code: "customTasksUser.login.passwordExpired", default: 'Sorry, your password has expired. Please, you contact with the administrator.')
             }
             else if (exception instanceof DisabledException) {
                 log.error("CustomTasksUserController:authFail():accountDisabled:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
-                failMessage = g.message(code: "springSecurity.errors.login.disabled")
+                failMessage = g.message(code: "customTasksUser.login.disabled", default: 'Sorry, your account is disabled. Please, you check your email to activate it.')
             }
             else if (exception instanceof LockedException) {
                 log.error("CustomTasksUserController:authFail():accountLocked:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
-                failMessage = g.message(code: "springSecurity.errors.login.locked")
+                failMessage = g.message(code: "customTasksUser.login.locked", default: 'Sorry, your account is locked. Please, you check your email to activate it.')
             }
             else {
                 log.debug("CustomTasksUserController:authFail():fail")
 
-                failMessage = g.message(code: "springSecurity.errors.login.fail")
+                failUserMessage = g.message(code: "customTasksUser.login.fail", default: '<strong>Sorry, we were not able to find a user with these credentials.</strong>')
             }
         }
 
-        // TODO Add default
-        flash.message = failMessage
+        flash.errorLoginSession = failMessage
+        flash.errorLoginUser = failUserMessage
         redirect (controller: 'login', action: 'auth')
     }
 

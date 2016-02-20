@@ -90,10 +90,9 @@ class LoginController {
 
 		def config = SpringSecurityUtils.securityConfig
 
-		// TODO Add default
-		flash.message = "Por razones de seguridad, es necesario que se autentifique de nuevo para realizar esta acción"
+		flash.reauthenticate = g.message(code: "views.login.auth.warning.reauthentication", default: 'For security reasons, it is necessary to authenticate again to do this action.')
 
-		// TODO
+		// TODO Delete
 		//render view: 'auth', params: params,
 		render view: 'auth',
 			model: [hasCookie: authenticationTrustResolver.isRememberMe(SCH.context?.authentication),
