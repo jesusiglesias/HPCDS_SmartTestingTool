@@ -134,7 +134,7 @@
     height: 120px;
 }
 
-/* Pulse animation - 404 Not found, 500 Internal Error
+/* Pulse animation - 404 Not Found, 500 Internal Error
 ======================================================*/
 .animation-pulse {
     animation-name: pulse;
@@ -238,7 +238,7 @@
     }
 }
 
-/* Tossing animation - 503 Unavailable service
+/* Tossing animation - 503 Unavailable Service
 ======================================================*/
 .animation-tossing {
     animation-name: tossing;
@@ -382,7 +382,41 @@
     }
 }
 
-/* PullDown animation - No role
+/* FadeInLeft animation - Not Allowed
+======================================================*/
+.animation-fadeInLeft {
+    animation-name: fadeInLeft;
+    -webkit-animation-name: fadeInLeft;
+    animation-duration: 0.75s;
+    -webkit-animation-duration: 0.75s;
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
+    visibility: visible !important;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        transform: translateX(+100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeInLeft {
+    0% {
+        -webkit-transform: translateX(+100%);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+/* PullDown animation - No Role
 ======================================================*/
 .animation-pullDown {
     animation-name: pullDown;
