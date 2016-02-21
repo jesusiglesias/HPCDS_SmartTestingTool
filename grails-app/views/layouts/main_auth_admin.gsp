@@ -15,7 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><g:layoutTitle default="${message(code: 'layouts.main_auth_admin.head.title')}"/></title>
+    <!-- TODO -->
+    <title><g:message code="layouts.main_auth_admin.head.title" default=""/></title>
 
     <!-- TODO -->
     <meta name="description" content="Smart Testing Tool is a HP CDS solution for online evaluation of different subjects through testing that

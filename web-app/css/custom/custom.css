@@ -65,6 +65,14 @@ input:-webkit-autofill:active {
     opacity: 1 !important;
 }
 
+/* Custom logout button with icon
+   Delete default style */
+.button-logout{
+    background:none;
+    border:none;
+    text-transform: uppercase;
+}
+
 /* Media queries
 ======================================================*/
 /* Landscape phone to portrait tablet */
