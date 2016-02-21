@@ -22,6 +22,9 @@
     <meta name="author" content="Jesús Iglesias García"/>
     <meta name="keywords" content="HP CDS, Smart Testing Tool, online test, evaluation test, english testing tool, test online, evaluacion online, Jesus Iglesias, TFG, Universidad de Valladolid, UVa"/>
 
+    <!-- Disallow robots -->
+    <meta name="robots" content="noindex, nofollow">
+
     <!-- FAVICON -->
     <link rel="shortcut icon" href="${assetPath(src: 'favicon/favicon.ico')}" type="image/x-icon">
     <link rel="icon" href="${assetPath(src: 'favicon/favicon.ico')}" type="image/x-icon">
