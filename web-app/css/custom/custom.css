@@ -55,6 +55,16 @@ input:-webkit-autofill:active {
     opacity: 1;
 }
 
+/* Error pages */
+.back-to-top-error {
+    background: #4DB3A2 url(../../img/cd-top-arrow.svg) no-repeat center 50% !important;
+}
+
+.back-to-top-error:hover {
+    background-color: #3D9082 !important;
+    opacity: 1 !important;
+}
+
 /* Media queries
 ======================================================*/
 /* Landscape phone to portrait tablet */

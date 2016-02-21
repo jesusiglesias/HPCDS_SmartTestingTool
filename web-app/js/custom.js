@@ -11,7 +11,7 @@ $(document).ready(function() {
     // Browser window scroll (in pixels) after which the "back to top" link is shown
     var offset = 300;
     // Browser window scroll (in pixels) after which the "back to top" link opacity is reduced
-    var offset_opacity = 500;
+    var offset_opacity = 400;
     // Duration of the top scrolling animation (in ms)
     var scroll_top_duration = 700;
 
