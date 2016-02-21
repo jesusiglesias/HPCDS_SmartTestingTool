@@ -25,14 +25,15 @@
     <!-- Disallow robots -->
     <meta name="robots" content="noindex, nofollow">
 
+    <!-- LOAD TITLE -->
+    <title><g:layoutTitle/></title>
+
     <!-- FAVICON -->
     <link rel="shortcut icon" href="${assetPath(src: 'favicon/favicon.ico')}" type="image/x-icon">
     <link rel="icon" href="${assetPath(src: 'favicon/favicon.ico')}" type="image/x-icon">
 
     <!-- HUMANS.TXT -->
     <link type="text/plain" rel="author" href="${createLink(uri: '/humans.txt')}"/>
-
-    <title><g:message code="views.errors.notFound" default="Page not found"/></title>
 
     <!-- GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
