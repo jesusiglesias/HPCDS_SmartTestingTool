@@ -236,7 +236,9 @@
         <div class="auth-section">
             <div class="copyright"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias"> Jesús Iglesias García </g:link></div>
             <div class="logoHP">
-                <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
+                <g:link uri="https://www.hpcds.com/es/">
+                    <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
+                </g:link>
             </div>
          </div>
     </g:if>
@@ -244,10 +246,10 @@
     <!-- Back to top -->
     <g:link href="#" class="back-to-top"><g:message code="views.general.backtotop" default="Top"/></g:link>
 
-    <!-- LOAD JAVASCRIPT TODO -->
+    <!-- LOAD JAVASCRIPT -->
+    <!-- Enable responsive CSS code on browsers that don't support it -->
     <!--[if lt IE 9]>
     <script src="../js/respond.min.js"></script>
-    <script src="../js/excanvas.min.js"></script>
     <![endif]-->
 
     <!-- CORE PLUGINS -->
