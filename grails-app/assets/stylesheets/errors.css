@@ -1,3 +1,7 @@
+/*-------------------------------------------------------------------------------------------*
+*                            INTERNAL SERVER ERROR PAGE - DEVELOPMENT                        *
+*-------------------------------------------------------------------------------------------*/
+
 h1, h2 {
 	margin: 10px 25px 5px;
 }
@@ -30,13 +34,13 @@ h2 {
 	        box-shadow: 0 0 2px rgba(0,0,0,0.2);
 }
 
-/* error details */
+/* Error details */
 .error-details {
-	border-top: 1px solid #FFAAAA;
+	border-top: 1px solid #ff9292;
 	   -mox-box-shadow: 0 0 2px rgba(0,0,0,0.2);
 	-webkit-box-shadow: 0 0 2px rgba(0,0,0,0.2);
 	        box-shadow: 0 0 2px rgba(0,0,0,0.2);
-	border-bottom: 1px solid #FFAAAA;
+	border-bottom: 1px solid #ff929a;
 	   -mox-box-shadow: 0 0 2px rgba(0,0,0,0.2);
 	-webkit-box-shadow: 0 0 2px rgba(0,0,0,0.2);
 	        box-shadow: 0 0 2px rgba(0,0,0,0.2);
@@ -62,14 +66,14 @@ h2 {
 	display: block;
 }
 
-/* stack trace */
+/* Stack trace */
 .stack {
 	padding: 5px;
 	overflow: auto;
 	height: 150px;
 }
 
-/* code snippet */
+/* Code snippet */
 .snippet {
 	background-color: #fff;
 	font-family: monospace;
@@ -95,7 +99,7 @@ h2 {
 }
 
 .snippet .error .lineNumber {
-	background-color: #faa;
+	background-color: #ff908e;
 	color: #333;
 	font-weight: bold;
 }
@@ -106,4 +110,8 @@ h2 {
 
 .snippet .line:last-child .lineNumber {
 	padding-bottom: 5px;
+}
+
+.exception-dev-container {
+	margin: 0 30px;
 }

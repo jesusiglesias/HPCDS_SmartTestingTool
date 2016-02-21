@@ -1,0 +1,437 @@
+/*-------------------------------------------------------------------------------------------*
+*                                       ERROR PAGES                                          *
+*-------------------------------------------------------------------------------------------*/
+
+.error-page {
+    background-color: #ebebeb;
+}
+
+/* Back button */
+.error-page a {
+    color: #ffffff !important;
+}
+
+/* Logo image */
+.logo-error {
+    margin: 120px 0 50px auto;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Error box */
+#error-container {
+    padding: 0 20px;
+    position: relative;
+}
+
+/* Description of the error page */
+.description-error {
+    font-weight: 400 !important;
+}
+
+/* Error code */
+#error-container h1 {
+    font-size: 96px;
+    color: black;
+    margin-bottom: 40px;
+}
+
+/* Error description */
+#error-container h3 {
+    font-size: 21px !important;
+    color: black;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.text-danger {
+    color: #D35058 !important;
+}
+
+.text-danger:hover,
+.text-danger:focus {
+    color: #CB3B46 !important;
+}
+
+.text-warning {
+    color: #E7AD38 !important;
+}
+.text-warning:hover,
+.text-warning:focus {
+    color: #e69733 !important;
+}
+
+.text-success {
+    color: #4DB3A2 !important;
+}
+.text-success:hover,
+.text-success:focus {
+    color: #105d41 !important;
+}
+
+/* Back button box */
+.error-page .content-error {
+    width: 400px;
+    margin: 60px auto 60px auto;
+}
+
+/* Buttons */
+.error-page .btn {
+    padding: 10px 30px !important;
+    font-size: 13px;
+}
+
+/* Back icon */
+.icon-back {
+    color: #ffffff;
+}
+
+.icon-back:active,
+.icon-back:hover,
+.icon-back:focus {
+    color:  #3FD5C0;
+}
+
+/*  Copyright */
+.error-page .copyright {
+    text-align: center;
+    margin: 70px auto 0 0;
+    padding: 0;
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Author's name */
+.error-page .copyright a {
+    text-decoration: none;
+    color: black !important;
+}
+
+.error-page .copyright a:active,
+.error-page .copyright a:focus,
+.error-page .copyright a:hover{
+    color: #4DB3A2 !important;
+}
+
+/* Logo HP CDS*/
+.logoHP-error-page{
+    text-align: center;
+    width: 100%;
+    margin: 50px 0 20px 0;
+}
+
+.logoHP-error-page img {
+    width: 120px;
+    height: 120px;
+}
+
+/* Pulse animation - 404 Not found, 500 Internal Error
+======================================================*/
+.animation-pulse {
+    animation-name: pulse;
+    -webkit-animation-name: pulse;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(0.95);
+        opacity: 0.7;
+    }
+    50% {
+        -webkit-transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: scale(0.95);
+        opacity: 0.7;
+    }
+}
+
+/* Hatch animation - 403 Forbidden
+======================================================*/
+.animation-hatch {
+    animation-name: hatch;
+    -webkit-animation-name: hatch;
+    animation-duration: 2s;
+    -webkit-animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+    transform-origin: 50% 100%;
+    -ms-transform-origin: 50% 100%;
+    -webkit-transform-origin: 50% 100%;
+    visibility: visible !important;
+}
+
+@keyframes hatch {
+    0% {
+        transform: rotate(0deg) scaleY(0.6);
+    }
+    20% {
+        transform: rotate(-2deg) scaleY(1.05);
+    }
+    35% {
+        transform: rotate(2deg) scaleY(1);
+    }
+    50% {
+        transform: rotate(-2deg);
+    }
+    65% {
+        transform: rotate(1deg);
+    }
+    80% {
+        transform: rotate(-1deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@-webkit-keyframes hatch {
+    0% {
+        -webkit-transform: rotate(0deg) scaleY(0.6);
+    }
+    20% {
+        -webkit-transform: rotate(-2deg) scaleY(1.05);
+    }
+    35% {
+        -webkit-transform: rotate(2deg) scaleY(1);
+    }
+    50% {
+        -webkit-transform: rotate(-2deg);
+    }
+    65% {
+        -webkit-transform: rotate(1deg);
+    }
+    80% {
+        -webkit-transform: rotate(-1deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+    }
+}
+
+/* Tossing animation - 503 Unavailable service
+======================================================*/
+.animation-tossing {
+    animation-name: tossing;
+    -webkit-animation-name: tossing;
+    animation-duration: 2.5s;
+    -webkit-animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes tossing {
+    0% {
+        transform: rotate(-4deg);
+    }
+    50% {
+        transform: rotate(4deg);
+    }
+    100% {
+        transform: rotate(-4deg);
+    }
+}
+
+@-webkit-keyframes tossing {
+    0% {
+        -webkit-transform: rotate(-4deg);
+    }
+    50% {
+        -webkit-transform: rotate(4deg);
+    }
+    100% {
+        -webkit-transform: rotate(-4deg);
+    }
+}
+
+/* FloatingHor animation - 401 Unauthorized
+======================================================*/
+.animation-floatingHor {
+    animation-name: floatingHor;
+    -webkit-animation-name: floatingHor;
+    animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes floatingHor {
+    0% {
+        transform: translateX(0%);
+    }
+    50% {
+        transform: translateX(8%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes floatingHor {
+    0% {
+        -webkit-transform: translateX(0%);
+    }
+    50% {
+        -webkit-transform: translateX(8%);
+    }
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+
+/* BugEntrance animation - 400 Bad Request
+======================================================*/
+.animation-bigEntrance {
+    animation-name: bigEntrance;
+    -webkit-animation-name: bigEntrance;
+    animation-duration: 1.6s;
+    -webkit-animation-duration: 1.6s;
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
+    visibility: visible !important;
+}
+
+@keyframes bigEntrance {
+    0% {
+        transform: scale(0.3) rotate(6deg) translateX(-30%) translateY(30%);
+        opacity: 0.2;
+    }
+    30% {
+        transform: scale(1.03) rotate(-2deg) translateX(2%) translateY(-2%);
+        opacity: 1;
+    }
+    45% {
+        transform: scale(0.98) rotate(1deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+    60% {
+        transform: scale(1.01) rotate(-1deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+    75% {
+        transform: scale(0.99) rotate(1deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+    90% {
+        transform: scale(1.01) rotate(0deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(0deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes bigEntrance {
+    0% {
+        -webkit-transform: scale(0.3) rotate(6deg) translateX(-30%) translateY(30%);
+        opacity: 0.2;
+    }
+    30% {
+        -webkit-transform: scale(1.03) rotate(-2deg) translateX(2%) translateY(-2%);
+        opacity: 1;
+    }
+    45% {
+        -webkit-transform: scale(0.98) rotate(1deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+    60% {
+        -webkit-transform: scale(1.01) rotate(-1deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+    75% {
+        -webkit-transform: scale(0.99) rotate(1deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+    90% {
+        -webkit-transform: scale(1.01) rotate(0deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: scale(1) rotate(0deg) translateX(0%) translateY(0%);
+        opacity: 1;
+    }
+}
+
+/* Media queries
+======================================================*/
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+    /* Logo image */
+    .logo-error {
+        margin: 70px 5px 40px auto;
+        padding: 0;
+    }
+
+    /* Form box */
+    .error-page .content-error {
+        width: 300px;
+        margin: 40px auto 40px auto;
+    }
+
+    /*  Copyright */
+    .error-page .copyright {
+        margin: 50px auto 0 0;
+    }
+
+    /* Error code */
+    #error-container h1 {
+        font-size: 86px;
+    }
+
+    /* Error description */
+    #error-container h3 {
+        font-size: 19px !important;
+    }
+}
+
+@media (max-width: 375px) {
+
+    /* Form box */
+    .error-page .content-error {
+        width: 280px;
+        margin: 30px auto 30px auto;
+    }
+
+    /* Error code */
+    #error-container h1 {
+        font-size: 83px;
+    }
+
+    /* Error description */
+    #error-container h3 {
+        font-size: 18px !important;
+    }
+
+    /*  Copyright */
+    .error-page .copyright {
+        margin: 40px auto 0 0;
+    }
+
+    /* Logo HP CDS*/
+    .logoHP-error-page{
+        margin: 40px 0 20px 0;
+    }
+}

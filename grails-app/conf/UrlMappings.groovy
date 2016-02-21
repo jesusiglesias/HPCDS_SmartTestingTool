@@ -23,8 +23,12 @@ class UrlMappings {
         "/index"(view: 'index')
 
         // Errors
-        "404"(view: '/notFound')
-        "500"(view:'/error')
+        "400"(view: '/error/badRequest')
+        "401"(view: '/error/unauthorized')
+        "403"(view: '/login/denied')
+        "404"(view: '/error/notFound')
+        "500"(view: '/error/internalError')
+        "503"(view: '/error/unavailableService')
 
         /* Login controller
         ======================================================*/
