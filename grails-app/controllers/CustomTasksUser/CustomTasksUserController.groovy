@@ -1,11 +1,13 @@
 package CustomTasksUser
 
+import grails.transaction.Transactional
 import grails.util.Environment
 import grails.util.Holders
 import org.codehaus.groovy.grails.plugins.log4j.Log4jConfig
 import grails.plugin.springsecurity.SpringSecurityUtils
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.AccountExpiredException
+import org.springframework.security.authentication.AuthenticationServiceException
 import org.springframework.security.authentication.CredentialsExpiredException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.LockedException
@@ -60,7 +62,7 @@ class CustomTasksUserController {
     def invalidSession() {
         log.debug("CustomTasksUserController:invalidSession()")
 
-        flash.errorLoginSession =  g.message(code: "customTasksUser.login.invalidSession", default: 'Your user account is logged in from another browser or location.')
+        flash.errorInvalidSessionAuthenticationException =  g.message(code: "customTasksUser.login.invalidSession", default: 'Your user account is logged in from another browser or location.')
         redirect (controller: 'login', action: 'auth', params: params)
     }
 
@@ -74,6 +76,7 @@ class CustomTasksUserController {
 
         String failMessage = ''
         String failUserMessage = ''
+        String failAuthenticationMessage = ''
 
         // Fail exceptions
         def exception = session[WebAttributes.AUTHENTICATION_EXCEPTION]
@@ -98,15 +101,21 @@ class CustomTasksUserController {
 
                 failMessage = g.message(code: "customTasksUser.login.locked", default: 'Sorry, your account is locked. Please, you check your email to activate it.')
             }
-            else {
+            else if (exception instanceof AuthenticationServiceException) {
+                log.error("CustomTasksUserController:authFail():authenticationService")
+
+                failAuthenticationMessage = g.message(code: "customTasksUser.login.authenticationException", default: 'An internal error has occurred during log in.')
+            } else {
                 log.debug("CustomTasksUserController:authFail():fail")
 
                 failUserMessage = g.message(code: "customTasksUser.login.fail", default: '<strong>Sorry, we were not able to find a user with these credentials.</strong>')
             }
         }
 
-        flash.errorLoginSession = failMessage
+        // TODO
+        flash.errorLogin = failMessage
         flash.errorLoginUser = failUserMessage
+        flash.errorInvalidSessionAuthenticationException = failAuthenticationMessage
         redirect (controller: 'login', action: 'auth')
     }
 
@@ -156,6 +165,102 @@ class CustomTasksUserController {
             redirect uri: userUrlRedirection
         }
     }
+
+    /**
+     * Render the view to restore the password
+     *
+     * @return restore_pass View
+     */
+    def restore_pass(){
+        render view: '/restore/restore_pass'
+    }
+
+    /**
+     * Send email
+     *
+     * @return TODO
+     */
+    @Transactional(readOnly = false)
+    def send_email(){
+
+        def errors = []
+
+        def valid_email = userService.validate_email(params.email) // Validación email
+
+        if(valid_email.valid && valid_email.exist){ // Si es válido y existe
+
+            if (!userService.send_email(params.email)) {
+                println("entro !userService")
+                transactionStatus.setRollbackOnly()
+                errors?.add("Error al enviar el email")
+            } else {
+                //redirect action:'auth', controller:'login' // Redirección login
+                redirect uri: '/'
+                return
+            }
+
+        }else{ // Se añade el error encontrado
+
+            if (!valid_email.valid) { // No es válido
+                errors?.add(!valid_email.valid?"user.email.invalid.label":null)
+            } else { // No existe
+                errors?.add(!valid_email.exist?"user.email.exist.label":null)
+            }
+        }
+
+        render view:'/restore/restore_pass', model:[errors:errors] // Renderizar la misma vista para mostrar los errores
+    }
+
+    /**
+     * Si el token existe, es del tipo correcto y no ha sido usado
+     * muestro la vista de cambio de contraseña sino muestro el error 404
+     * @param token
+     * @return
+     */
+    def change_pass(String token) {
+        if (userService.check_token(token)) {
+            render view: '/restore/change_pass'
+        } else {
+            render view: '/error'
+            //response.sendError(404)
+        }
+    }
+
+    /**
+     * Verifico que el token exista y sea del tipo correcto
+     * que no haya sido usado. Si se cumple se actualiza la contraseña
+     * que consta de su validación primero
+     * @return
+     */
+    @Transactional(readOnly = false)
+    def update_pass(){
+
+        def errors = []
+        if(userService.check_token(params.token)){ // Se verifica la integridad del token
+
+            def update_user = userService.update_pass(params) // Intento de actualizar el password (validación)
+
+            if(update_user.response){ // Respuesta true
+                //redirect action:'auth', controller:'login'
+                println ("Contraseña modificada correctamente")
+                redirect uri: '/'
+                return
+            }
+
+            if (!update_user.valid) { // Contraseña inválida (no cumple los requisitos)
+                errors?.add(!update_user.valid?"user.password.error":null)
+            } else if (!update_user.match) { // Contraseña diferente (confirmPassword)
+                errors?.add(!update_user.match?"user.password.confirm.error":null)
+            } else { // Contraseña no es diferente a la anterior
+                errors?.add(!update_user.passwordSame?"user.password.same":null)
+            }
+
+        }else{ // Intento de alterar el token
+            errors.add('user.invalid.token') // Error token inválido
+        }
+        render view: '/restore/change_pass', model:['errors': errors]
+    }
+
 
     /**
      * It reloads automatically the changes done in Log4j external file.

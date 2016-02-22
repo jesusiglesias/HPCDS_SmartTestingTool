@@ -97,7 +97,7 @@
                 <span class="form-subtitle"><g:message code="views.login.auth.form.subtitle" default="Please login."/></span>
             </div>
 
-            <!-- Not user notification  -->
+            <!-- Not user notification -->
             <g:if test='${flash.errorLoginUser}'>
                 <div class="alert alert-danger alert-danger-custom alert-dismissable alert-notuser-reauth-invalidsession fade in">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
@@ -114,12 +114,12 @@
                 </div>
             </g:if>
 
-            <!-- Invalid session notification -->
-            <g:if test='${flash.errorLoginSession}'>
+            <!-- Invalid session notification, authentication service exception -->
+            <g:if test='${flash.errorInvalidSessionAuthenticationException}'>
                 <div class="alert alert-block alert-danger alert-danger-custom alert-dismissable alert-notuser-reauth-invalidsession fade in">
                     <button type="button" class="close" data-dismiss="alert"></button>
                     <h5 class="alert-heading alert-reauthentication">${raw(g.message(code:'views.login.auth.error.title', default:'<strong>Error!</strong>'))} </h5>
-                    <p> ${flash.errorLoginSession} </p>
+                    <p> ${flash.errorInvalidSessionAuthenticationException} </p>
                 </div>
             </g:if>
         </div>
