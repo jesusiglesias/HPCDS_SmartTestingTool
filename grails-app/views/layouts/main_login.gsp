@@ -1,5 +1,5 @@
 <!-------------------------------------------------------------------------------------------*
- *                                       ERROR PAGES                                         *
+ *                                    LOGIN TASKS PAGES                                      *
  *------------------------------------------------------------------------------------------->
 
 <!DOCTYPE html>
@@ -22,9 +22,6 @@
     <meta name="author" content="Jesús Iglesias García"/>
     <meta name="keywords" content="HP CDS, Smart Testing Tool, online test, evaluation test, english testing tool, test online, evaluacion online, Jesus Iglesias, TFG, Universidad de Valladolid, UVa"/>
 
-    <!-- Disallow robots -->
-    <meta name="robots" content="noindex, nofollow">
-
     <!-- LOAD TITLE -->
     <title><g:layoutTitle/></title>
 
@@ -38,15 +35,28 @@
     <!-- GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.2.3/css/simple-line-icons.css">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'uniform.default.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css/error', file: 'error.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/notification', file: 'sweetalert2.css')}" type="text/css"/>
+
+
+    <!-- PAGE LEVEL PLUGINS -->
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'select2.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'select2-bootstrap.min.css')}" type="text/css"/>
 
     <!-- THEME GLOBAL STYLES -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'components-md.css')}" type="text/css" id="style_components"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'plugins-md.css')}" type="text/css"/>
+
+    <!-- PAGE LEVEL STYLES -->
+    <link rel="stylesheet" href="${resource(dir: 'css/authentication', file: 'authentication.css')}" type="text/css"/>
 
     <!-- LOAD JS -->
     <asset:javascript src="application.js"/>
+    <!-- Notification -->
+    <g:javascript src="notification/sweetalert2.min.js"/>
 
     <!-- HTML5 SHIV, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -59,46 +69,45 @@
 </head> <!-- /.HEAD -->
 
 <!-- BODY -->
-<body class="error-page">
+<body class="login">
 
     <!-- Logo -->
-    <div class="logo-error">
+    <div class="logo">
         <g:link uri="/">
-            <asset:image src="logo/logo_error_pages.png" alt="SMART TESTING TOOL"/>
+            <asset:image src="logo/logo_auth.png" alt="SMART TESTING TOOL"/>
         </g:link>
     </div>
 
     <!-- LOAD BODY OTHER VIEWS -->
     <g:layoutBody/>
 
-    <!-- Back button -->
-    <div class="content-error">
-        <g:link uri="/" class="btn green-dark btn-block">
-            <i class="fa fa-chevron-circle-left fa-lg icon-back"></i>
-            <g:message code="layouts.error_pages.back" default="Go back to homepage"/>
-        </g:link>
-    </div>
-
-
-    <div class="copyright"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias"> Jesús Iglesias García </g:link></div>
-    <div class="logoHP-error-page">
-        <g:link uri="https://www.hpcds.com/es/">
-            <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
-        </g:link>
-    </div>
-
     <!-- Back to top -->
-    <g:link href="#" class="back-to-top back-to-top-error"><g:message code="views.general.backtotop" default="Top"/></g:link>
+    <g:link href="#" class="back-to-top"><g:message code="views.general.backtotop" default="Top"/></g:link>
 
     <!-- LOAD JAVASCRIPT -->
     <!-- Enable responsive CSS code on browsers that don't support it -->
     <!--[if lt IE 9]>
-            <script src="../js/respond.min.js"></script>
-            <![endif]-->
+        <script src="../js/respond.min.js"></script>
+        <![endif]-->
 
     <!-- CORE PLUGINS -->
+    <!-- TODO -->
     <g:javascript src="bootstrap.min.js"/>
+    <g:javascript src="js.cookie.min.js"/>
+    <g:javascript src="bootstrap-hover-dropdown.min.js"/>
+    <g:javascript src="jquery.slimscroll.min.js"/>
+    <g:javascript src="jquery.blockui.min.js"/>
+    <g:javascript src="jquery.uniform.min.js"/>
     <g:javascript src="custom.js"/>
+
+    <!-- THEME GLOBAL SCRIPT -->
+    <g:javascript src="app.js"/>
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <g:javascript src="authentication/authentication.js"/>
+    <g:javascript src="authentication/jquery.validate.min.js"/>
+    <g:javascript src="authentication/additional-methods.min.js"/>
+    <g:javascript src="authentication/select2.full.min.js"/>
 
 </body>
 </html>

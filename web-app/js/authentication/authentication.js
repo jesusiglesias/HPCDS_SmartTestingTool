@@ -135,7 +135,7 @@ var Login = function() {
             }
         });
 
-        $('.forget-form input').keypress(function(e) {
+     /*   $('.forget-form input').keypress(function(e) {
             if (e.which == 13) {
                 if ($('.forget-form').validate().form()) {
                     $('.forget-form').submit();
@@ -154,7 +154,7 @@ var Login = function() {
             jQuery('.auth-section').show();
             jQuery('.login-form').show();
             jQuery('.forget-form').hide();
-        });
+        }); */
 
     }
 

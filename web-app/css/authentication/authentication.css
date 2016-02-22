@@ -6,8 +6,9 @@
   background-color: #8bbd96;
 }
 
-/* Sign up button */
-.login a {
+/* Sign up button and author link */
+.signup-button,
+.author-link {
     color: #000000 !important;
 }
 
@@ -328,10 +329,6 @@
 
 /* Forget form
 ======================================================*/
-.login .content .forget-form {
-  display: none;
-}
-
 /* Buttons block */
 .login .content .forget-form .form-actions {
   border: 0;
