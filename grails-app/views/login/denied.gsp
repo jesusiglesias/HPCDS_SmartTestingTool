@@ -6,7 +6,7 @@
 <!-- HEAD -->
 <head>
 	<meta name="layout" content="main_error"/>
-	<title><g:message code="springSecurity.denied.title" default="403 | Forbidden"/></title>
+	<title><g:message code="views.errors.denied" default="403 | Forbidden"/></title>
 </head> <!-- /.HEAD -->
 
 <!-- BODY -->
