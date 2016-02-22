@@ -18,6 +18,11 @@
     text-align: center;
 }
 
+.logo-error img,
+.logoHP-error-page img{
+    color: black;
+}
+
 /* Error box */
 #error-container,
 #error-container-noRole {
