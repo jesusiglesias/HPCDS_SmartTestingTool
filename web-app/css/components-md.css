@@ -556,6 +556,7 @@ fieldset[disabled] .form-group.form-md-line-input .form-control {
 
 */
 
+
 /* Checkbox
 ======================================================*/
 .md-checkbox {
@@ -6899,16 +6900,19 @@ Form Layouts
 /* Help blocks */
 .help-block {
   margin-top: 5px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+}
 
 .help-inline {
   font-size: 13px;
   color: #737373;
   display: inline-block;
-  padding: 5px; }
+  padding: 5px;
+}
 
 .form-inline input {
-  margin-bottom: 0px !important; }
+  margin-bottom: 0px !important;
+}
 
 /* Control Label */
 .control-label {
@@ -6919,10 +6923,12 @@ Form Layouts
 .form-group .required {
   color: #e02222;
   font-size: 12px;
-  padding-left: 2px; }
+  padding-left: 2px;
+}
 
 .form {
-  padding: 0 !important; }
+  padding: 0 !important;
+}
 
 .portlet-form .form-body,
 .form .form-body {

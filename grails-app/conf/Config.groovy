@@ -98,6 +98,30 @@ environments {
 // Default value of pagination
 paginate.defaultValue = 10
 
+/* Mail configuration
+ ============================================================================================= */
+grails {
+    mail {
+        host = "smtp.gmail.com"
+        port = 465
+        username = 'info.smartestingtool@gmail.com'
+        password = "stt2016tfg"
+        props = ["mail.smtp.auth":"true",
+                 "mail.smtp.socketFactory.port":"465",
+                 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                 "mail.smtp.socketFactory.fallback":"false"]
+    }
+}
+
+/* Jasypt encryptation
+ ============================================================================================= */
+jasypt {
+    algorithm = "PBEWITHSHA256AND256BITAES-CBC-BC"
+    providerName = "BC"
+    password = "sttHPCDSTfg"
+    keyObtentionIterations = 1000
+}
+
 /* Spring Security Core configuration
  ============================================================================================= */
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'Security.SecUser'
@@ -139,6 +163,11 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksUser/switchFail':         ['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY', "authentication.name == 'admin_switch'"],
     '/j_spring_security_switch_user':      ['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'],
     '/j_spring_security_exit_user':        ["authentication.name == 'admin_switch'"],
+    // Restore password
+    'customTasksUser/restorePassword':     ['permitAll'],
+    'customTasksUser/sendEmail':           ['permitAll'],
+    'customTasksUser/changePass':          ['permitAll'],
+    'customTasksUser/updatePass':          ['permitAll'],
     // Reload Log config
     '/customTasksUser/reloadLogConfig':    ['ROLE_ADMIN'],
     '/customTasksUser/**':                 ['permitAll']

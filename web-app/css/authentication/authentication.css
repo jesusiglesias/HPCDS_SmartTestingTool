@@ -163,7 +163,7 @@
 .form-group.form-md-line-input .form-control:focus:not([readonly]) ~ .help-block,
 .form-group.form-md-line-input .form-control.focus:not([readonly]) ~ .help-block {
   color: #105d41;
-  opacity: 1 ;
+  opacity: 1;
   filter: alpha(opacity=100);
 }
 
@@ -207,11 +207,40 @@
   margin: 11px 2px 10px 10px;
 }
 
+/* Icon after */
 .form-group.form-md-line-input.has-success .form-control.edited:not([readonly]) ~ i,
 .form-group.form-md-line-input.has-success .form-control.form-control-static ~ i,
 .form-group.form-md-line-input.has-success .form-control:focus:not([readonly]) ~ i,
 .form-group.form-md-line-input.has-success .form-control.focus:not([readonly]) ~ i {
   color: #105d41;
+}
+
+/* Error in line */
+.form-group.form-md-line-input.has-error .form-control.edited:not([readonly]) ~ label:after,
+.form-group.form-md-line-input.has-error .form-control.edited:not([readonly]) ~ .form-control-focus:after,
+.form-group.form-md-line-input.has-error .form-control.form-control-static ~ label:after,
+.form-group.form-md-line-input.has-error .form-control.form-control-static ~ .form-control-focus:after,
+.form-group.form-md-line-input.has-error .form-control:focus:not([readonly]) ~ label:after,
+.form-group.form-md-line-input.has-error .form-control:focus:not([readonly]) ~ .form-control-focus:after,
+.form-group.form-md-line-input.has-error .form-control.focus:not([readonly]) ~ label:after,
+.form-group.form-md-line-input.has-error .form-control.focus:not([readonly]) ~ .form-control-focus:after {
+  background: #C16868;
+}
+
+/* Error in icon */
+.form-group.form-md-line-input.has-error .form-control.edited:not([readonly]) ~ i,
+.form-group.form-md-line-input.has-error .form-control.form-control-static ~ i,
+.form-group.form-md-line-input.has-error .form-control:focus:not([readonly]) ~ i,
+.form-group.form-md-line-input.has-error .form-control.focus:not([readonly]) ~ i {
+  color: #C16868;
+}
+
+/* Error in help block */
+.form-group.form-md-line-input.has-error .form-control.edited:not([readonly]) ~ .help-block,
+.form-group.form-md-line-input.has-error .form-control.form-control-static ~ .help-block,
+.form-group.form-md-line-input.has-error .form-control:focus:not([readonly]) ~ .help-block,
+.form-group.form-md-line-input.has-error .form-control.focus:not([readonly]) ~ .help-block {
+  color: #C16868;
 }
 
 /* Remember me and password
@@ -336,6 +365,11 @@
   padding-bottom: 0;
 }
 
+/* New password form */
+.newPassword-form {
+  margin-bottom: 25px !important;
+}
+
 /* Position of title and subtitle */
 .login .content .forget-form .form-title {
   margin-bottom: -15px;
@@ -392,8 +426,24 @@
   margin: 35px 0 20px 0;
 }
 
+/* Forgot password alert */
+.alert-restorePassword {
+  margin: 50px 0 -20px 0;
+}
+
+/* New password alert */
+.alert-newPassword {
+  margin: 40px 0 -20px 0;
+}
+
 .alert-danger-custom {
   background-color: #C16868 !important;
+  border-color: #040202 !important;
+  color: #FFFFFF !important;
+}
+
+.alert-success-custom {
+  background-color: #4F904D !important;
   border-color: #040202 !important;
   color: #FFFFFF !important;
 }

@@ -1,5 +1,6 @@
 package CustomTasksUser
 
+import Security.Token
 import grails.transaction.Transactional
 import grails.util.Environment
 import grails.util.Holders
@@ -19,6 +20,7 @@ import org.springframework.security.web.WebAttributes
 class CustomTasksUserController {
 
     def springSecurityService
+    def customTasksUserService
 
     // Store the hash of external config files
     private static Map<String, Integer> fileHashMap = [:]
@@ -112,7 +114,6 @@ class CustomTasksUserController {
             }
         }
 
-        // TODO
         flash.errorLogin = failMessage
         flash.errorLoginUser = failUserMessage
         flash.errorInvalidSessionAuthenticationException = failAuthenticationMessage
@@ -127,7 +128,7 @@ class CustomTasksUserController {
     def switchFail () {
         log.debug("CustomTasksUserController:switchFail()")
 
-        // TODO Add default and change message
+        // TODO Add default and change message and authentication exception
         String switchFailMessage = ''
 
         // Switch fail exceptions
@@ -166,99 +167,129 @@ class CustomTasksUserController {
         }
     }
 
+    /*-------------------------------------------------------------------------------------------*
+     *                                     RESTORE PASSWORD                                      *
+    *-------------------------------------------------------------------------------------------*/
     /**
-     * Render the view to restore the password
+     * It renders the view to restore the password.
      *
-     * @return restore_pass View
+     * @return restorePassword View to introduce the email of the user account.
      */
-    def restore_pass(){
-        render view: '/restore/restore_pass'
+    def restorePassword(){
+        render view: '/login/restorePassword'
     }
 
     /**
-     * Send email
+     * It checks the user email and sends an email to restore the password.
      *
-     * @return TODO
+     * @return restorePassword View to inform the user of the success or failure of the action.
      */
     @Transactional(readOnly = false)
-    def send_email(){
+    def sendEmail(){
+        log.debug("CustomTasksUserController:sendEmail():email:${params.email}")
 
-        def errors = []
+        // Email validation
+        def valid_email = customTasksUserService.validate_email(params.email)
 
-        def valid_email = userService.validate_email(params.email) // Validación email
+        // Email is valid and exists
+        if(valid_email.valid && valid_email.exist){
 
-        if(valid_email.valid && valid_email.exist){ // Si es válido y existe
+            if (!customTasksUserService.send_email(params.email)) {
+                log.debug("CustomTasksUserController:sendEmail():NOTMailSent")
 
-            if (!userService.send_email(params.email)) {
-                println("entro !userService")
+                // Roll back in database
                 transactionStatus.setRollbackOnly()
-                errors?.add("Error al enviar el email")
+
+                flash.errorRestorePassword = g.message(code: 'customTasksUser.sendEmail.error', default: 'An internal error has occurred during the sending email. You try it again later.')
+
             } else {
-                //redirect action:'auth', controller:'login' // Redirección login
-                redirect uri: '/'
+                log.debug("CustomTasksUserController:sendEmail():mailSent:${params.email}")
+                flash.successRestorePassword = g.message(code: 'customTasksUser.sendEmail.success', default: 'An email has been sent to restore the password to the following address:<br/>{0}.', args: [params.email])
+
+                redirect uri: '/forgotPassword'
                 return
             }
+        }else{ // Email is not valid
+            log.debug("CustomTasksUserController:sendEmail():invalid/notExists")
 
-        }else{ // Se añade el error encontrado
+            if (!valid_email.valid) { // Invalid
+                log.error("ForgotPassword():email:invalid:${params.email}")
+                flash.errorRestorePassword = g.message(code: 'customTasksUser.sendEmail.invalid', default: '{0} email entered is invalid.', args: [params.email])
 
-            if (!valid_email.valid) { // No es válido
-                errors?.add(!valid_email.valid?"user.email.invalid.label":null)
-            } else { // No existe
-                errors?.add(!valid_email.exist?"user.email.exist.label":null)
+            } else { // Not exist
+                log.error("ForgotPassword():email:doesNotExist:${params.email}")
+                flash.errorRestorePassword = g.message(code: 'customTasksUser.sendEmail.notExist', default: '{0} email entered does not exist.', args: [params.email])
             }
         }
-
-        render view:'/restore/restore_pass', model:[errors:errors] // Renderizar la misma vista para mostrar los errores
+        redirect uri: '/forgotPassword'
     }
 
     /**
-     * Si el token existe, es del tipo correcto y no ha sido usado
-     * muestro la vista de cambio de contraseña sino muestro el error 404
-     * @param token
-     * @return
+     * It checks the token. If this is correct, the view to change the password is displayed.
+     *
+     * @param token Token.
+     * @return View If token is correct. If not error page is displayed.
      */
-    def change_pass(String token) {
-        if (userService.check_token(token)) {
-            render view: '/restore/change_pass'
+    def changePass(String token, Boolean newPasswordAgain) {
+        log.debug("CustomTasksUserController:changePass()")
+
+        if (newPasswordAgain) {
+            render view: '/login/newPassword'
+
         } else {
-            render view: '/error'
-            //response.sendError(404)
+            if (customTasksUserService.check_token(token)) {
+                render view: '/login/newPassword'
+            } else {
+                response.sendError(404)
+            }
         }
     }
 
     /**
-     * Verifico que el token exista y sea del tipo correcto
-     * que no haya sido usado. Si se cumple se actualiza la contraseña
-     * que consta de su validación primero
-     * @return
+     * It checks that token is correct and updates the password if it satisfies the rules.
+     *
+     * @return View Displaying the success or failure of the password update.
      */
     @Transactional(readOnly = false)
-    def update_pass(){
+    def updatePass(){
+        log.debug("CustomTasksUserController:updatePass()")
 
-        def errors = []
-        if(userService.check_token(params.token)){ // Se verifica la integridad del token
+        if(customTasksUserService.check_token(params.token)){ // It checks again the integrity of the token
 
-            def update_user = userService.update_pass(params) // Intento de actualizar el password (validación)
+            def update_user = customTasksUserService.update_pass(params) // Password validation
 
             if(update_user.response){ // Respuesta true
-                //redirect action:'auth', controller:'login'
-                println ("Contraseña modificada correctamente")
+                log.debug("CustomTasksUserController:updatePass():successful")
+
+                flash.newPasswordSuccessful = g.message(code: 'views.login.auth.newPassword.successful', default: 'New password set correctly.')
+
                 redirect uri: '/'
                 return
             }
 
-            if (!update_user.valid) { // Contraseña inválida (no cumple los requisitos)
-                errors?.add(!update_user.valid?"user.password.error":null)
-            } else if (!update_user.match) { // Contraseña diferente (confirmPassword)
-                errors?.add(!update_user.match?"user.password.confirm.error":null)
-            } else { // Contraseña no es diferente a la anterior
-                errors?.add(!update_user.passwordSame?"user.password.same":null)
+            if (!update_user.valid) { // Invalid password
+                log.debug("CustomTasksUserController:updatePass():invalidPassword")
+
+                flash.errorNewPassword = g.message(code: 'customTasksUser.updatePassword.invalidPassword', default: 'The password you entered does not meet the requirements.')
+
+            } else if (!update_user.match) { // Password not equal that passwordConfirm field
+                log.debug("CustomTasksUserController:updatePass():passwordIsDifferent")
+
+                flash.errorNewPassword = g.message(code: 'customTasksUser.updatePassword.differentPassword', default: 'The passwords you entered do not match.')
+
+            } else { // Password is not different than the previous
+                log.debug("CustomTasksUserController:updatePass():passwordIsEqualPrevious")
+
+                flash.errorNewPassword = g.message(code: 'customTasksUser.updatePassword.equalPassword', default: 'The password you entered can not be the same as the current.')
             }
 
-        }else{ // Intento de alterar el token
-            errors.add('user.invalid.token') // Error token inválido
+        }else{ // Token altered
+            log.debug("CustomTasksUserController:updatePass():tokenAltered")
+
+            flash.errorNewPassword = g.message(code: 'customTasksUser.updatePassword.invalidToken', default: 'Invalid security token. Please, you enter again your email to send a new email.')
         }
-        render view: '/restore/change_pass', model:['errors': errors]
+
+        redirect uri: '/newPassword', params: [token: params.token, newPasswordAgain: true]
     }
 
 

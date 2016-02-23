@@ -104,7 +104,6 @@
     <g:javascript src="app.js"/>
 
     <!-- PAGE LEVEL SCRIPTS -->
-    <g:javascript src="authentication/authentication.js"/>
     <g:javascript src="authentication/jquery.validate.min.js"/>
     <g:javascript src="authentication/additional-methods.min.js"/>
     <g:javascript src="authentication/select2.full.min.js"/>

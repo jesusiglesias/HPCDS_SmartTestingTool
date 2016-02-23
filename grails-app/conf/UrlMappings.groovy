@@ -47,6 +47,10 @@ class UrlMappings {
         "/authFail" (controller: 'customTasksUser', action: 'authFail')
         // Switch Admin to User
         "/switchFail" (controller: 'customTasksUser', action: 'switchFail')
+        // Restore password
+        "/forgotPassword" (controller: 'customTasksUser', action: 'restorePassword')
+        // Change password
+        "/newPassword" (controller: 'customTasksUser', action: 'changePass')
         // Reload log config
         "/reloadLogConfig" (controller: 'customTasksUser', action: 'reloadLogConfig')
 

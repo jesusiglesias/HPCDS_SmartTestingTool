@@ -75,6 +75,10 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:2.5.7"
         // Cache
         compile ':cache:1.1.8'
+        // Jasypt encryption
+        compile "org.grails.plugins:jasypt-encryption:1.3.1"
+        // Mail
+        compile "org.grails.plugins:mail:1.0.7"
         // Spring Security Core
         compile "org.grails.plugins:spring-security-core:2.0.0"
         // Scaffolding method

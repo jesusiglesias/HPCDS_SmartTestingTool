@@ -62,6 +62,14 @@
             </div>
         </g:if>
 
+        <!-- New password successful -->
+        <g:if test='${flash.newPasswordSuccessful}'>
+            <div class="alert alert-block alert-success alert-success-custom alert-dismissable alert-restorePassword fade in">
+                <button type="button" class="close" data-dismiss="alert"></button>
+                <p> ${raw(flash.newPasswordSuccessful)} </p>
+            </div>
+        </g:if>
+
         <!-- Login form -->
         <form action='${postUrl}' method='POST' class="login-form" autocomplete="on">
 
@@ -152,6 +160,8 @@
             </g:link>
         </div>
     </g:if>
+
+    <g:javascript src="authentication/authentication.js"/>
 
 </body>
 </html>
