@@ -14,6 +14,7 @@
 <!-- BODY -->
 <body>
 
+    <!-- Variables to use in javascript -->
     <script type="text/javascript">
         var _forgotPassword = '${g.message(code:'views.login.auth.forgotPassword.email.help', default:'Enter a valid email')}'
     </script>

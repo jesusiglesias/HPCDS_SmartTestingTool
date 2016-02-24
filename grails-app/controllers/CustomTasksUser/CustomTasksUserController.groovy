@@ -1,6 +1,6 @@
 package CustomTasksUser
 
-import Security.Token
+import grails.converters.JSON
 import grails.transaction.Transactional
 import grails.util.Environment
 import grails.util.Holders
@@ -77,6 +77,8 @@ class CustomTasksUserController {
         log.debug("CustomTasksUserController:authFail()")
 
         String failMessage = ''
+        String messageType = ''
+        String failDisabledMessage = ''
         String failUserMessage = ''
         String failAuthenticationMessage = ''
 
@@ -86,22 +88,25 @@ class CustomTasksUserController {
             if (exception instanceof AccountExpiredException) {
                 log.error("CustomTasksUserController:authFail():accountExpired:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
-                failMessage = g.message(code: "customTasksUser.login.expired", default: 'Sorry, your user account has expired. Please, you contact with the administrator.')
+                messageType = "accountExpired"
+                failMessage = g.message(code: "customTasksUser.login.expired", default: 'Sorry, your user account has expired. Please, you enter your email to contact with administrator.')
             }
             else if (exception instanceof CredentialsExpiredException) {
                 log.error("CustomTasksUserController:authFail():passwordExpired:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
-                failMessage = g.message(code: "customTasksUser.login.passwordExpired", default: 'Sorry, your password has expired. Please, you contact with the administrator.')
+                messageType = "passwordExpired"
+                failMessage = g.message(code: "customTasksUser.login.passwordExpired", default: 'Sorry, your password has expired. Please, you enter your email to contact with administrator.')
             }
             else if (exception instanceof DisabledException) {
                 log.error("CustomTasksUserController:authFail():accountDisabled:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
-                failMessage = g.message(code: "customTasksUser.login.disabled", default: 'Sorry, your account is disabled. Please, you check your email to activate it.')
+                failDisabledMessage = g.message(code: "customTasksUser.login.disabled", default: 'Sorry, your account is disabled. Please, you check your email to activate it.')
             }
             else if (exception instanceof LockedException) {
                 log.error("CustomTasksUserController:authFail():accountLocked:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
-                failMessage = g.message(code: "customTasksUser.login.locked", default: 'Sorry, your account is locked. Please, you check your email to activate it.')
+                messageType = "accountLocked"
+                failMessage = g.message(code: "customTasksUser.login.locked", default: 'Sorry, your account is locked. Please, you enter your email to contact with administrator.')
             }
             else if (exception instanceof AuthenticationServiceException) {
                 log.error("CustomTasksUserController:authFail():authenticationService")
@@ -115,6 +120,8 @@ class CustomTasksUserController {
         }
 
         flash.errorLogin = failMessage
+        flash.errorMessageType = messageType
+        flash.errorDisabledLogin = failDisabledMessage
         flash.errorLoginUser = failUserMessage
         flash.errorInvalidSessionAuthenticationException = failAuthenticationMessage
         redirect (controller: 'login', action: 'auth')
@@ -166,6 +173,35 @@ class CustomTasksUserController {
             redirect uri: userUrlRedirection
         }
     }
+
+    /*-------------------------------------------------------------------------------------------*
+    *                                    USER ACCOUNT STATE                                      *
+    *-------------------------------------------------------------------------------------------*/
+    /**
+     * It checks the email entered by user and sends to admin an information email.
+     */
+    def statusNotification () {
+        log.debug("CustomTasksUserController:statusNotification():from:${params.email}")
+
+        // Email validation
+        def valid_email = customTasksUserService.validate_email(params.email)
+
+        // Email is valid and exists
+        if(valid_email.valid && valid_email.exist){
+
+            if (!customTasksUserService.send_emailAccountState(params.email, params.type)) { // Error
+                log.debug("CustomTasksUserController:statusNotification():NOTMailSent")
+                render("notSent")
+            } else { // Mail sent
+                log.debug("CustomTasksUserController:statusNotification():mailSent")
+                render("sent")
+            }
+        }else{ // Email is not valid
+            log.debug("CustomTasksUserController:statusNotification():invalid/notExists")
+            render("notSent")
+        }
+    }
+
 
     /*-------------------------------------------------------------------------------------------*
      *                                     RESTORE PASSWORD                                      *

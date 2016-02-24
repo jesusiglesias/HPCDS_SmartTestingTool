@@ -14,20 +14,6 @@
 <!-- BODY -->
 <body>
 
-    <!-- Notifications TODO-->
-    <!-- Error and invalid session notification -->
-  <%--  <g:if test='${flash.errorLoginSession}'>
-        <script>
-            swal({
-                title: 'Error',
-                text: '${flash.errorLoginSession}',
-                type: 'error',
-                timer: 2000,
-                confirmButtonText: 'Cool'
-            });
-        </script>
-    </g:if> --%>
-
     <!-- Authentication -->
     <div class="content">
 
@@ -35,6 +21,88 @@
             <span class="form-title"><g:message code="views.login.auth.form.title" default="Welcome."/></span>
             <span class="form-subtitle"><g:message code="views.login.auth.form.subtitle" default="Please login."/></span>
         </div>
+
+        <!-- Variables to use in script -->
+        <script type="text/javascript">
+            var methodUrl = '${g.createLink(controller: "customTasksUser", action: 'statusNotification')}';
+            var _stateErrorAccount = '${g.message(code:'customTasksUser.login.stateAccount', default:'Error!')}';
+            var inputEmail = '${g.field(type: 'email', id:'emailUser', name:'emailUser', autocomplete:'on')}';
+            var _okButton = '${g.message(code:'customTasksUser.login.stateAccount.ok', default:'OK')}';
+            var _sendButton = '${g.message(code:'customTasksUser.login.stateAccount.send', default:'Send')}';
+            var _cancelButton = '${g.message(code:'customTasksUser.login.stateAccount.cancel', default:'Cancel')}';
+            var _successEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful', default:'Email sent successfully!')}';
+            var _descriptionSuccessEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful.description', default:'Soon you will receive a response from the administrator.')}';
+            var _errorEmail = '${g.message(code:'customTasksUser.login.stateAccount.failure.description', default:'Email with incorrect format, non-existent in the system or a problem has occurred during sending email.')}';
+            var _internalError = '${g.message(code:'customTasksUser.login.stateAccount.failure.interalError', default:'It has not been able to connect to the internal server. Try again later.')}';
+        </script>
+
+        <!-- Account states notification -->
+        <g:if test='${flash.errorLogin}'>
+              <script type="text/javascript">
+                  swal({
+                      title: _stateErrorAccount,
+                      html: '<p>${flash.errorLogin}</p> <br/> <p><input id="emailUser" class="form-control form-control-solid"></p>',
+                      type: 'error',
+                      showCancelButton: true,
+                      cancelButtonText: _cancelButton,
+                      confirmButtonText: _sendButton,
+                      closeOnConfirm: false,
+                      customClass: 'errorSweetAlert'
+                    //  showLoaderOnConfirm: true
+                  },
+                  function() {
+                      $.ajax({
+                          url: methodUrl,
+                          data: { email: $('#emailUser').val(), type: '${flash.errorMessageType}' }
+                      })
+                      .success(function(data) {
+                          if (data == "sent") {
+                              swal({
+                                  title: _successEmail,
+                                  text: _descriptionSuccessEmail,
+                                  type: 'success',
+                                  confirmButtonText: _okButton,
+                                  closeOnConfirm: true,
+                                  customClass: 'successSweetAlert'
+                              })
+                          } else {
+                              swal({
+                                  title: _stateErrorAccount,
+                                  text: _errorEmail,
+                                  type: 'error',
+                                  confirmButtonText: _okButton,
+                                  closeOnConfirm: true,
+                                  customClass: 'errorSweetAlert'
+                              })
+                          }
+                      })
+                      .error(function(data) {
+                          swal({
+                              title: _stateErrorAccount,
+                              text: _internalError,
+                              type: 'error',
+                              confirmButtonText: _okButton,
+                              closeOnConfirm: true,
+                              customClass: 'errorSweetAlert'
+                          })
+                      });
+                  });
+              </script>
+        </g:if>
+
+        <!-- Enabled account notification -->
+        <g:if test='${flash.errorDisabledLogin}'>
+            <script type="text/javascript">
+                swal({
+                    title: _stateErrorAccount,
+                    text: '${flash.errorDisabledLogin}',
+                    type: 'error',
+                    confirmButtonText: _okButton,
+                    closeOnConfirm: true,
+                    customClass: 'errorSweetAlert'
+                });
+            </script>
+        </g:if>
 
         <!-- Not user notification -->
         <g:if test='${flash.errorLoginUser}'>
