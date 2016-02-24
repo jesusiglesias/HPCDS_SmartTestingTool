@@ -2,6 +2,7 @@ package Security
 
 import grails.transaction.Transactional
 import org.apache.commons.validator.routines.EmailValidator
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder
 
@@ -16,6 +17,11 @@ class CustomTasksUserService {
     def mailService
     def tokenService
     def passwordEncoder
+    def grailsApplication
+
+    // It obtains the base URL (domain)
+    @Value('${grails.serverURL}')
+    def baseURL
 
     /*-------------------------------------------------------------------------------------------*
      *                                     RESTORE PASSWORD                                      *
@@ -51,13 +57,15 @@ class CustomTasksUserService {
         // It saves the token
         create_token(token)
 
+        log.error("SERVERURL: " + baseURL)
+
         // Send email
         try {
             mailService.sendMail {
                 to email
-                subject  messageSource.getMessage("resetPassword.email.subject", null, "STT - Reset password", LocaleContextHolder.locale)
-                html (view: '/email/resetPassword',
-                        model: [token: token])
+                subject messageSource.getMessage("resetPassword.email.subject", null, "STT - Reset password", LocaleContextHolder.locale)
+                html(view: '/email/resetPassword',
+                        model: [token: token, baseURL: baseURL])
             }
             return true
         } catch (Exception e) {
@@ -148,7 +156,7 @@ class CustomTasksUserService {
      * It checks that new password is correct and is equals to passwordConfirm field.
      *
      * @param password Password introduced by user.
-     * @param passwordConfirmation  Password to confirm.
+     * @param passwordConfirmation Password to confirm.
      * @return true If the new password is valid.
      */
     def private password_confirm(String password, String passwordConfirmation) {
@@ -171,7 +179,7 @@ class CustomTasksUserService {
 
         def userOldPassword = SecUser.findByEmail(email).getPassword()
 
-        return [same:passwordEncoder.isPasswordValid(userOldPassword, newPassword, null)]
+        return [same: passwordEncoder.isPasswordValid(userOldPassword, newPassword, null)]
     }
 
     /**
@@ -184,5 +192,53 @@ class CustomTasksUserService {
         log.debug("CustomTasksUserService:use_token()")
 
         return tokenService.use_token(token)
+    }
+
+    /*-------------------------------------------------------------------------------------------*
+     *                                     ACCOUNT STATE                                         *
+     *-------------------------------------------------------------------------------------------*/
+
+    /**
+     * It creates a encrypt token with the email, saves the token in database and sends the email.
+     *
+     * @param email Email of the user.
+     * @oaram type Error type.
+     * @return true If the action has success.
+     */
+    def send_emailAccountState(String email, String type) {
+        log.debug("CustomTasksUserService:send_emailAccountState()")
+
+        def subjectStatus
+        def descriptionStatus
+        Object[] args = [email]
+
+        // It obtains the state type
+        switch (type) {
+            case 'accountExpired':
+                subjectStatus = messageSource.getMessage("customTasksUser.login.stateAccount.subject.accountExpired", null, "STT - Notification of user account expired", LocaleContextHolder.locale)
+                descriptionStatus = messageSource.getMessage("customTasksUser.login.stateAccount.description.accountExpired", args, "The user with email: <strong>{0}</strong> attempted to access his account expired and notifies the administrator to check the account status and contact with him.", LocaleContextHolder.locale)
+                break
+            case 'passwordExpired':
+                subjectStatus = messageSource.getMessage("customTasksUser.login.stateAccount.subject.passwordExpired", null, "STT - Notification of password expired", LocaleContextHolder.locale)
+                descriptionStatus = messageSource.getMessage("customTasksUser.login.stateAccount.description.passwordExpired", args, "The user with email: <strong>{0}</strong> attempted to access his account with password expired and notifies the administrator to check the account status and contact with him.", LocaleContextHolder.locale)
+                break
+            case 'accountLocked':
+                subjectStatus = messageSource.getMessage("customTasksUser.login.stateAccount.subject.accountLocked", null, "STT - Notification of user account locked", LocaleContextHolder.locale)
+                descriptionStatus = messageSource.getMessage("customTasksUser.login.stateAccount.description.accountLocked", args, "The user with email: <strong>{0}</strong> attempted to access his account locked and notifies the administrator to check the account status and contact with him.", LocaleContextHolder.locale)
+        }
+
+        // Send email
+        try {
+            mailService.sendMail {
+                to grailsApplication.config.grails.mail.username  // Administrator email. It obtains from configuration (Config.groovy)
+                subject subjectStatus
+                html(view: '/email/emailStatus',
+                        model: [stateAccountMessage: descriptionStatus])
+            }
+            return true
+        } catch (Exception e) {
+            log.error("CustomTasksUserService:send_emailAccountState()" + e)
+            return false
+        }
     }
 }
