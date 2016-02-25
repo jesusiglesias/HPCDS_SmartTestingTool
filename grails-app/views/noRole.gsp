@@ -41,12 +41,15 @@
 	<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css"/>
 	<link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
 	<link rel="stylesheet" href="${resource(dir: 'css/error', file: 'error.css')}" type="text/css"/>
+	<link rel="stylesheet" href="${resource(dir: 'css/notification', file: 'sweetalert2.css')}" type="text/css"/>
 
 	<!-- THEME GLOBAL STYLES -->
 	<link rel="stylesheet" href="${resource(dir: 'css', file: 'components-md.css')}" type="text/css" id="style_components"/>
 
 	<!-- LOAD JS -->
 	<asset:javascript src="application.js"/>
+	<!-- Notification -->
+	<g:javascript src="notification/sweetalert2.min.js"/>
 
 	<!-- HTML5 SHIV, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -57,6 +60,65 @@
 
 <!-- BODY -->
 <body class="error-page">
+
+	<!-- Email notification -->
+	<script type="text/javascript">
+
+		var methodUrl = '${g.createLink(controller: "customTasksUser", action: 'statusNotification')}';
+		var _stateErrorAccount = '${g.message(code:'customTasksUser.login.stateAccount', default:'Error!')}';
+		var inputEmail = '${g.field(type: 'email', id:'emailUser', name:'emailUser', autocomplete:'on')}';
+		var _okButton = '${g.message(code:'customTasksUser.login.stateAccount.ok', default:'OK')}';
+		var _sendButton = '${g.message(code:'customTasksUser.login.stateAccount.send', default:'Send')}';
+		var _cancelButton = '${g.message(code:'customTasksUser.login.stateAccount.cancel', default:'Cancel')}';
+		var _successEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful', default:'Email sent successfully!')}';
+		var _descriptionSuccessEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful.description', default:'Soon you will receive a response from the administrator.')}';
+		var _errorEmail = '${g.message(code:'customTasksUser.login.stateAccount.failure.description', default:'Email with incorrect format, non-existent in the system or a problem has occurred during sending email.')}';
+		var _internalError = '${g.message(code:'customTasksUser.login.stateAccount.failure.interalError', default:'It has not been able to connect to the internal server. Try again later.')}';
+
+		$(document).ready(function () {
+			$('#noRoleEmail-button').click(function (event) {
+
+				console.log("CLick");
+				event.preventDefault();
+
+				$.ajax({
+					url: methodUrl,
+					data: {email: $('#noRoleEmail').val(), type: 'noRole'}
+				})
+				.success(function (data) {
+					if (data == "sent") {
+						swal({
+							title: _successEmail,
+							text: _descriptionSuccessEmail,
+							type: 'success',
+							confirmButtonText: _okButton,
+							closeOnConfirm: true,
+							customClass: 'successSweetAlert'
+						})
+					} else {
+						swal({
+							title: _stateErrorAccount,
+							text: _errorEmail,
+							type: 'error',
+							confirmButtonText: _okButton,
+							closeOnConfirm: true,
+							customClass: 'errorSweetAlert'
+						})
+					}
+				})
+				.error(function (data) {
+					swal({
+						title: _stateErrorAccount,
+						text: _internalError,
+						type: 'error',
+						confirmButtonText: _okButton,
+						closeOnConfirm: true,
+						customClass: 'errorSweetAlert'
+					})
+				});
+			});
+		});
+	</script>
 
 	<!-- Logo -->
 	<div class="logo-error">
@@ -76,6 +138,17 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
+			<div class="input-group noRoleEmail-group">
+				<g:field type="text" class="form-control" name="noRoleEmail"/>
+				<span class="input-group-btn">
+				<g:field type="button" class="btn grey-mint noRoleSend-btn" name="noRoleEmail-button" id="noRoleEmail-button" value="${message(code: "customTasksUser.login.stateAccount.send", default: "Send")}"/>
+			</span>
+			</div>
+		</div>
+	</div>
+
 	<!-- Logout button -->
 	<div class="content-error">
 		<form name="logout" method="POST" action="${createLink(controller:'logout')}">
@@ -85,8 +158,6 @@
 			</button>
 		</form>
 	</div>
-
-	<!-- TODO Add email -->
 
 	<div class="copyright"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias"> Jesús Iglesias García </g:link></div>
 	<div class="logoHP-error-page">

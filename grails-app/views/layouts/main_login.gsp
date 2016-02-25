@@ -41,7 +41,6 @@
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/notification', file: 'sweetalert2.css')}" type="text/css"/>
 
-
     <!-- PAGE LEVEL PLUGINS -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'select2.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'select2-bootstrap.min.css')}" type="text/css"/>

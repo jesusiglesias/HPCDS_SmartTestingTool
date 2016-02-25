@@ -210,6 +210,7 @@ class CustomTasksUserService {
 
         def subjectStatus
         def descriptionStatus
+        def template
         Object[] args = [email]
 
         // It obtains the state type
@@ -217,14 +218,22 @@ class CustomTasksUserService {
             case 'accountExpired':
                 subjectStatus = messageSource.getMessage("customTasksUser.login.stateAccount.subject.accountExpired", null, "STT - Notification of user account expired", LocaleContextHolder.locale)
                 descriptionStatus = messageSource.getMessage("customTasksUser.login.stateAccount.description.accountExpired", args, "The user with email: <strong>{0}</strong> attempted to access his account expired and notifies the administrator to check the account status and contact with him.", LocaleContextHolder.locale)
+                template = '/email/emailStatus'
                 break
             case 'passwordExpired':
                 subjectStatus = messageSource.getMessage("customTasksUser.login.stateAccount.subject.passwordExpired", null, "STT - Notification of password expired", LocaleContextHolder.locale)
                 descriptionStatus = messageSource.getMessage("customTasksUser.login.stateAccount.description.passwordExpired", args, "The user with email: <strong>{0}</strong> attempted to access his account with password expired and notifies the administrator to check the account status and contact with him.", LocaleContextHolder.locale)
+                template = '/email/emailStatus'
                 break
             case 'accountLocked':
                 subjectStatus = messageSource.getMessage("customTasksUser.login.stateAccount.subject.accountLocked", null, "STT - Notification of user account locked", LocaleContextHolder.locale)
                 descriptionStatus = messageSource.getMessage("customTasksUser.login.stateAccount.description.accountLocked", args, "The user with email: <strong>{0}</strong> attempted to access his account locked and notifies the administrator to check the account status and contact with him.", LocaleContextHolder.locale)
+                template = '/email/emailStatus'
+                break
+            case 'noRole':
+                subjectStatus = messageSource.getMessage("customTasksUser.login.stateAccount.subject.noRole", null, "STT - Notification user without role", LocaleContextHolder.locale)
+                descriptionStatus = messageSource.getMessage("customTasksUser.login.stateAccount.description.noRole", args, "The user with email: <strong>{0}</strong> has notified that does not have a role in system and can not access any functionality.", LocaleContextHolder.locale)
+                template = '/email/emailNoRole'
         }
 
         // Send email
@@ -232,7 +241,7 @@ class CustomTasksUserService {
             mailService.sendMail {
                 to grailsApplication.config.grails.mail.username  // Administrator email. It obtains from configuration (Config.groovy)
                 subject subjectStatus
-                html(view: '/email/emailStatus',
+                html(view: template,
                         model: [stateAccountMessage: descriptionStatus])
             }
             return true

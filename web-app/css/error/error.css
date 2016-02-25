@@ -90,7 +90,7 @@
 
 /* Buttons */
 .error-page .btn {
-    padding: 10px 30px !important;
+    padding: 10px 30px;
     font-size: 13px;
 }
 
@@ -137,6 +137,15 @@
 .logoHP-error-page img {
     width: 120px;
     height: 120px;
+}
+
+/* No role page */
+.noRoleSend-btn {
+    padding: 8px 20px !important;
+}
+
+.noRoleEmail-group {
+    margin-top: 30px;
 }
 
 /* Pulse animation - 404 Not Found, 500 Internal Error
