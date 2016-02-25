@@ -129,7 +129,7 @@ class BootStrap {
             def newAdmin = SecUser.findByUsername('admin_stt') ?: new SecUser( // Admin
                     username: 'admin_stt',
                     password: 'sttadminprod',
-                    email: 'admin_stt_prod@stt.com')
+                    email: 'info.smartestingtool@gmail.com')
 
             def newAdminUser = SecUser.findByUsername('admin_switch') ?: new SecUser( // Normal user to switch
                     username: 'admin_switch',

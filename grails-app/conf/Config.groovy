@@ -92,7 +92,7 @@ environments {
         grails.logging.jul.usebridge = false
 
         // TODO Change to own domain
-        grails.serverURL = "http://localhost:8080/${appName}"
+        grails.serverURL = "http://192.168.0.201:8080/${appName}"
     }
 }
 
