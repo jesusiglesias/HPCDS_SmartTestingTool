@@ -32,13 +32,12 @@
     page-break-after: avoid;
   }
   .page-container {
-    margin: 0px !important;
-    padding: 0px !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   .page-content {
-    padding: 0 !important;
     min-height: 300px !important;
-    padding: 0px 20px 20px !important;
+    padding: 0 20px 0 20px !important;
     margin: 0 !important;
   }
 }

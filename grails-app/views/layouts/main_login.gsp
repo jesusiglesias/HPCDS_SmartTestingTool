@@ -99,7 +99,7 @@
     <g:javascript src="jquery.uniform.min.js"/>
     <g:javascript src="custom.js"/>
 
-    <!-- THEME GLOBAL SCRIPT -->
+    <!-- TODO THEME GLOBAL SCRIPT -->
     <g:javascript src="app.js"/>
 
     <!-- PAGE LEVEL SCRIPTS -->
