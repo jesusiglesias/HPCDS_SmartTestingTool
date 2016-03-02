@@ -1563,26 +1563,30 @@ Password Strength(in v1.4)
 .password-strength .progress-bar {
   padding: 2px; }
 
-/***
-jQuery Slimscroll
-***/
+/* TODO jQuery Slimscroll */
 .scroller {
-  padding: 0px;
-  margin: 0px;
-  padding-right: 12px;
-  overflow: hidden; }
+  padding: 0 12px 0 0;
+  margin: 0;
+  overflow: hidden;
+}
 
 .scroller-footer {
-  margin-top: 10px; }
-  .scroller-footer:before,
-  .scroller-footer:after {
-    content: " ";
-    display: table; }
-  .scroller-footer:after {
-    clear: both; }
+  margin-top: 10px;
+}
+
+.scroller-footer:before,
+.scroller-footer:after {
+  content: " ";
+  display: table;
+}
+
+.scroller-footer:after {
+  clear: both;
+}
 
 .portlet-body .slimScrollBar {
-  margin-right: 0px; }
+  margin-right: 0;
+}
 
 /***
 jQuery Sparkline
