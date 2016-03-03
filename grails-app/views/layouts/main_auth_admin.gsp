@@ -61,14 +61,44 @@
 
 
     <!-- THEME LAYOUT STYLES -->
-    <!-- <link href="../assets/global/css/components.css" rel="stylesheet" type="text/css"/>
-         <link href="../assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
-         <link href="../assets/layouts/layout/css/layout.css" rel="stylesheet" type="text/css"/> -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'layout.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'light2.css')}" type="text/css" id="style_color"/>
 
+
+
+
     <!-- LOAD JS -->
     <asset:javascript src="application.js"/>
+
+
+
+    <!-- CORE PLUGINS -->
+    <!-- TODO -->
+    <g:javascript src="bootstrap.min.js"/>
+    <g:javascript src="js.cookie.min.js"/>
+    <g:javascript src="bootstrap-hover-dropdown.min.js"/>
+    <g:javascript src="jquery.slimscroll.min.js"/>
+    <g:javascript src="jquery.blockui.min.js"/>
+    <g:javascript src="jquery.uniform.min.js"/>
+    <g:javascript src="bootstrap-switch.min.js"/>
+    <g:javascript src="custom.js"/>
+
+    <!-- THEME GLOBAL SCRIPTS -->
+    <g:javascript src="app.js"/>
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <g:javascript src="dashboard.min.js"/>
+    <!-- TODO -->
+    <g:javascript src="authentication/jquery.validate.min.js"/>
+    <g:javascript src="authentication/additional-methods.min.js"/>
+    <g:javascript src="authentication/select2.full.min.js"/>
+
+    <!-- THEME LAYOUT SCRIPTS -->
+    <g:javascript src="layout.js"/>
+    <g:javascript src="demo.js"/>
+
+    <%-- TODO
+    <g:javascript src="quick-sidebar.js"/> --%>
 
     <!-- HTML5 SHIV, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -89,16 +119,16 @@
             <div class="page-logo">
                 <!-- Image -->
                 <g:link uri="/">
-                    <asset:image src="Logo/logo.png" alt="HP CDS - Smart Testing Tool" class="logo-default"/>
+                    <asset:image src="logo/logo.png" alt="HP CDS - Smart Testing Tool" class="logo-default"/>
                 </g:link>
                 <!-- Hamburguer -->
                 <div class="menu-toggler sidebar-toggler">
-                    <asset:image src="Hamburguer/toggler_icon.png" alt="Toggler"/>
+                    <asset:image src="hamburguer/toggler_icon.png" alt="Toggler"/>
                 </div>
             </div> <!-- /.Logo -->
             <!-- Responsive hamburguer -->
             <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-                <asset:image src="Hamburguer/toggler_icon.png" alt="Toggler"/>
+                <asset:image src="hamburguer/toggler_icon.png" alt="Toggler"/>
             </a>
 
             <!-- Top navigation menu -->
@@ -171,31 +201,27 @@
 
     <!-- Container -->
     <div class="page-container">
-        <!-- Sidebar -->
+        <!-- Page-sidebar-wrapper -->
         <div class="page-sidebar-wrapper">
-            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-            <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <!-- Page-sidebar -->
             <div class="page-sidebar navbar-collapse collapse">
-                <!-- BEGIN SIDEBAR MENU -->
+                <!-- Page-sidebar-menu  TODO -->
                 <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
                 <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
                 <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
-                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-                <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
-                <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-                <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
-                    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+
+                <ul class="page-sidebar-menu page-header-fixed" data-keep-expanded="true" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                    <!-- TODO DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                     <li class="sidebar-toggler-wrapper hide">
-                        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                        <!-- Sidebar toggler button -->
                         <div class="sidebar-toggler"> </div>
-                        <!-- END SIDEBAR TOGGLER BUTTON -->
                     </li>
                     <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
                     <li class="sidebar-search-wrapper">
-                        <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                        <!-- Search form  TODO -->
                         <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
                         <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-                        <form class="sidebar-search  " action="page_general_search_3.html" method="POST">
+                        <form class="sidebar-search" action="" method="POST">
                             <a href="javascript:;" class="remove">
                                 <i class="icon-close"></i>
                             </a>
@@ -208,17 +234,19 @@
                                 </span>
                             </div>
                         </form>
-                        <!-- END RESPONSIVE QUICK SEARCH FORM -->
-                    </li>
+                    </li> <!-- /.Search form -->
+
+                    <!-- TODO -->
                     <li class="nav-item start">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-home"></i>
                             <span class="title">Dashboard</span>
                             <span class="arrow"></span>
                         </a>
+                        <!-- TODO -->
                         <ul class="sub-menu">
                             <li class="nav-item start">
-                                <a href="index.html" class="nav-link">
+                                <a href="" class="nav-link">
                                     <i class="icon-bar-chart"></i>
                                     <span class="title">Dashboard 1</span>
                                 </a>
@@ -294,14 +322,14 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                            <!-- TODO -->
+                                <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-plus"></i>
                                     <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
-                            <!-- TODO -->
+                                <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
@@ -483,21 +511,56 @@
                     </li>
                     <!-- /.CONFIGURATION -->
 
+                </ul> <!-- /.Page-sidebar-menu -->
+             </div> <!-- Page-sidebar -->
+        </div> <!-- Page-sidebar-wrapper -->
 
-              </ul>
-             </div>
-            <!-- END SIDEBAR MENU -->
-            <!-- END SIDEBAR MENU -->
+        <!-- Page-sidebar-wrapper -->
+        <div class="page-content-wrapper">
+            <!-- Page-content -->
+            <div class="page-content">
+                <!-- Page-bar -->
+                <div class="page-bar">
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <!-- TODO -->
+                            <g:link uri="/"> Home </g:link>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span>Dashboard</span>
+                        </li>
+                    </ul>
+                </div> <!-- /.Page-bar -->
+
+                <!-- Page-title TODO -->
+                <h3 class="page-title"> Dashboard
+                    <small>dashboard & statistics</small>
+                </h3>
+
+
+
+            </div>
         </div>
-        <!-- END SIDEBAR -->
+        <!-- END QUICK SIDEBAR -->
+    </div> <!-- /. Container -->
+
+
+
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="copyright-admin"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias" class="author-link"> Jesús Iglesias García </g:link></div>
+            <div class="logoHP-admin">
+                <g:link uri="https://www.hpcds.com/es/">
+                    <asset:image src="logo/logo_hp.png" alt="HP CDS" width="100px" height="100px"/>
+                </g:link>
+            </div>
+        </div>
     </div>
-    <!-- END SIDEBAR -->
+
 
 <%--<g:layoutBody/>
 --%>
-
-
-
 
     <!-- Back to top -->
     <g:link href="#" class="back-to-top back-to-top-error"><g:message code="views.general.backtotop" default="Top"/></g:link>
@@ -508,30 +571,6 @@
         <script src="../js/respond.min.js"></script>
     <![endif]-->
 
-    <!-- CORE PLUGINS -->
-    <!-- TODO -->
-    <g:javascript src="bootstrap.min.js"/>
-    <g:javascript src="js.cookie.min.js"/>
-    <g:javascript src="bootstrap-hover-dropdown.min.js"/>
-    <g:javascript src="jquery.slimscroll.min.js"/>
-    <g:javascript src="jquery.blockui.min.js"/>
-    <g:javascript src="jquery.uniform.min.js"/>
-    <g:javascript src="bootstrap-switch.min.js"/>
-    <g:javascript src="custom.js"/>
 
-    <!-- THEME GLOBAL SCRIPTS -->
-    <g:javascript src="app.js"/>
-
-    <!-- PAGE LEVEL SCRIPTS -->
-    <g:javascript src="dashboard.min.js"/>
-    <!-- TODO -->
-    <g:javascript src="authentication/jquery.validate.min.js"/>
-    <g:javascript src="authentication/additional-methods.min.js"/>
-    <g:javascript src="authentication/select2.full.min.js"/>
-
-    <!-- THEME LAYOUT SCRIPTS -->
-    <g:javascript src="layout.js"/>
-    <g:javascript src="demo.js"/>
-    <g:javascript src="quick-sidebar.js"/>
 </body>
 </html>

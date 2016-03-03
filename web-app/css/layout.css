@@ -2313,7 +2313,8 @@ body {
     .page-content-wrapper .page-content {
         margin-left: 280px;
         margin-top: 0;
-        min-height: 600px;
+        /* TODO */
+        min-height: 990px;
         padding: 25px 20px 10px 20px;
     }
 
@@ -2363,7 +2364,7 @@ body {
     /* Bg solid content's breadcrumb */
     .page-content-white .page-bar,
     .page-container-bg-solid .page-bar {
-        margin-top: -20px;
+        margin-top: 0;
     }
 
     /* Boxed page container  */
@@ -2421,9 +2422,9 @@ body {
 /* Page footer
 =================================================================== */
 .page-footer {
-    padding: 8px 20px 5px 20px;
-    font-size: 13px;
+    /* TODO padding: 8px 20px 5px 20px;
     height: 33px;
+    font-size: 13px;*/
 }
 
 .page-footer:before,
@@ -2436,12 +2437,14 @@ body {
     clear: both;
 }
 
+/* TODO
 .page-footer .page-footer-inner {
     float: left;
     display: inline-block;
     color: #333333;
-}
+}*/
 
+/* TODO
 .page-footer-fixed.page-footer-fixed-mobile .page-footer {
     position: fixed;
     left: 0;
@@ -2456,7 +2459,7 @@ body {
 
 .page-footer-fixed .page-footer {
     background-color: white;
-}
+}*/
 
 /* Media queries - Page footer
 =================================================================== */
@@ -2530,12 +2533,12 @@ body {
 /* Max-width: 767px */
 @media (max-width: 767px) {
 
-    /* Default footer & boxed footer */
+    /* Default footer & boxed footer TODO
     .page-footer,
     .page-boxed .page-footer {
         padding-left: 10px;
         padding-right: 10px;
-    }
+    }*/
 
     /* Fixed footer */
     .page-footer-fixed .page-footer .container {

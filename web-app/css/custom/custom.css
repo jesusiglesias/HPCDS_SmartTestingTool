@@ -73,6 +73,41 @@ input:-webkit-autofill:active {
     text-transform: uppercase;
 }
 
+/* Footer admin layout*/
+/*  Copyright */
+.copyright-admin {
+    text-align: center;
+    margin: 30px auto 0 0;
+    padding: 0;
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Author's name */
+.copyright-admin a {
+    text-decoration: none;
+    color: #105D41;
+}
+
+.copyright-admin a:active,
+.copyright-admin a:focus,
+.copyright-admin a:hover{
+    color: #5fa159 !important;
+}
+
+/* Logo HP CDS*/
+.logoHP-admin{
+    text-align: center;
+    width: 100%;
+    margin: 25px 0 20px 0;
+}
+
+.logoHP-admin img {
+    width: 100px;
+    height: 100px;
+}
+
 /* Media queries
 ======================================================*/
 /* Landscape phone to portrait tablet */
@@ -82,5 +117,20 @@ input:-webkit-autofill:active {
     .back-to-top {
         height: 40px;
         width: 40px;
+    }
+}
+
+/* Max-width: 480px */
+@media (max-width: 480px) {
+
+    /* Copyright */
+    .copyright-admin {
+        font-size: 13px;
+    }
+
+    /* Logo HP */
+    .logoHP-admin img {
+        width: 95px;
+        height: 95px;
     }
 }
