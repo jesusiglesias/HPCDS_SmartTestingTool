@@ -87,13 +87,13 @@ input:-webkit-autofill:active {
 /* Author's name */
 .copyright-admin a {
     text-decoration: none;
-    color: #105D41;
+    color: #4DB3A2;
 }
 
 .copyright-admin a:active,
 .copyright-admin a:focus,
 .copyright-admin a:hover{
-    color: #5fa159 !important;
+    color: #3D9082 !important;
 }
 
 /* Logo HP CDS*/
@@ -104,8 +104,8 @@ input:-webkit-autofill:active {
 }
 
 .logoHP-admin img {
-    width: 100px;
-    height: 100px;
+    width: 95px;
+    height: 95px;
 }
 
 /* Media queries
@@ -130,7 +130,7 @@ input:-webkit-autofill:active {
 
     /* Logo HP */
     .logoHP-admin img {
-        width: 95px;
-        height: 95px;
+        width: 90px;
+        height: 90px;
     }
 }
