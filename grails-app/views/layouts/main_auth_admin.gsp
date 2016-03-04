@@ -138,7 +138,7 @@
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <!-- TODO Image -->
-                            <asset:image src="avatar3.jpg" class="img-circle" alt="Profile image"/>
+                            <asset:image src="profile/user_profile.png" class="img-circle" alt="Profile image"/>
                             <span class="username username-hide-on-mobile">
                                 <sec:ifLoggedIn>
                                     <sec:username/>
@@ -552,7 +552,7 @@
         <div class="copyright-admin"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias" class="author-link"> Jesús Iglesias García </g:link></div>
             <div class="logoHP-admin">
                 <g:link uri="https://www.hpcds.com/es/">
-                    <asset:image src="logo/logo_hp.png" alt="HP CDS" width="100px" height="100px"/>
+                    <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
                 </g:link>
             </div>
         </div>
