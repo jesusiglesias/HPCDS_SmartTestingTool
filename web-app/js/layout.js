@@ -3,9 +3,9 @@ Core script to handle the entire theme and core functions
 **/
 var Layout = function () {
 
-    var layoutImgPath = 'layouts/layout/img/';
+    var layoutImgPath = '../img/';
 
-    var layoutCssPath = 'layouts/layout/css/';
+    var layoutCssPath = '../css/';
 
     var resBreakpointMd = App.getResponsiveBreakpoint('md');
 
@@ -16,11 +16,13 @@ var Layout = function () {
     var handleSidebarAndContentHeight = function () {
         var content = $('.page-content');
         var sidebar = $('.page-sidebar');
+        var header = $('.page-header');
+        var footer = $('.page-footer');
         var body = $('body');
         var height;
 
         if (body.hasClass("page-footer-fixed") === true && body.hasClass("page-sidebar-fixed") === false) {
-            var available_height = App.getViewPort().height - $('.page-footer').outerHeight() - $('.page-header').outerHeight();
+            var available_height = App.getViewPort().height - footer.outerHeight() - header.outerHeight();
             if (content.height() < available_height) {
                 content.attr('style', 'min-height:' + available_height + 'px');
             }
@@ -28,11 +30,11 @@ var Layout = function () {
             if (body.hasClass('page-sidebar-fixed')) {
                 height = _calculateFixedSidebarViewportHeight();
                 if (body.hasClass('page-footer-fixed') === false) {
-                    height = height - $('.page-footer').outerHeight();
+                    height = height - footer.outerHeight();
                 }
             } else {
-                var headerHeight = $('.page-header').outerHeight();
-                var footerHeight = $('.page-footer').outerHeight();
+                var headerHeight = header.outerHeight();
+                var footerHeight = footer.outerHeight();
 
                 if (App.getViewPort().width < resBreakpointMd) {
                     height = App.getViewPort().height - headerHeight - footerHeight;
@@ -62,7 +64,7 @@ var Layout = function () {
                 // url match condition         
                 if (path.length > 1 && url.substr(1, path.length - 1) == path.substr(1)) {
                     el = $(this);
-                    return; 
+                    /* TODO return;*/
                 }
             });
         }
@@ -115,11 +117,18 @@ var Layout = function () {
 
     // Handle sidebar menu
     var handleSidebarMenu = function () {
+
+        /* TODO */
+        console.log ("HandleSidebarMenu");
+
+
+        var pageSidebarMenu = $('.page-sidebar-menu');
+
         // handle sidebar link click
-        $('.page-sidebar-menu').on('click', 'li > a.nav-toggle, li > a > span.nav-toggle', function (e) {
+        pageSidebarMenu.on('click', 'li > a.nav-toggle, li > a > span.nav-toggle', function (e) {
             var that = $(this).closest('.nav-item').children('.nav-link');
 
-            if (App.getViewPort().width >= resBreakpointMd && !$('.page-sidebar-menu').attr("data-initialized") && $('body').hasClass('page-sidebar-closed') &&  that.parent('li').parent('.page-sidebar-menu').size() === 1) {
+            if (App.getViewPort().width >= resBreakpointMd && !pageSidebarMenu.attr("data-initialized") && $('body').hasClass('page-sidebar-closed') &&  that.parent('li').parent('.page-sidebar-menu').size() === 1) {
                 return;
             }
 
@@ -142,7 +151,7 @@ var Layout = function () {
 
             var parent =that.parent().parent();
             var the = that;
-            var menu = $('.page-sidebar-menu');
+            var menu = pageSidebarMenu;
             var sub = that.next();
 
             var autoScroll = menu.data("auto-scroll");
@@ -474,36 +483,6 @@ var Layout = function () {
         });
     };
 
-    // Handles the go to top button at the footer
-    var handleGoTop = function () {
-        var offset = 300;
-        var duration = 500;
-
-        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {  // ios supported
-            $(window).bind("touchend touchcancel touchleave", function(e){
-               if ($(this).scrollTop() > offset) {
-                    $('.scroll-to-top').fadeIn(duration);
-                } else {
-                    $('.scroll-to-top').fadeOut(duration);
-                }
-            });
-        } else {  // general 
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > offset) {
-                    $('.scroll-to-top').fadeIn(duration);
-                } else {
-                    $('.scroll-to-top').fadeOut(duration);
-                }
-            });
-        }
-        
-        $('.scroll-to-top').click(function(e) {
-            e.preventDefault();
-            $('html, body').animate({scrollTop: 0}, duration);
-            return false;
-        });
-    };
-
     // Hanlde 100% height elements(block, portlet, etc)
     var handle100HeightContent = function () {
 
@@ -582,15 +561,10 @@ var Layout = function () {
             App.addResizeHandler(handle100HeightContent); // reinitialize content height on window resize 
         },
 
-        initFooter: function() {
-            handleGoTop(); //handles scroll to top functionality in the footer
-        },
-
         init: function () {            
             this.initHeader();
             this.initSidebar();
             this.initContent();
-            this.initFooter();
         },
 
         //public function to fix the sidebar and content height accordingly
@@ -606,8 +580,13 @@ var Layout = function () {
             handleFixedSidebar();
         },
 
+        /* TODO
         getLayoutImgPath: function () {
             return App.getAssetsPath() + layoutImgPath;
+        },*/
+
+        getLayoutImgPath: function () {
+            return layoutImgPath;
         },
 
         getLayoutCssPath: function () {
@@ -618,7 +597,11 @@ var Layout = function () {
 }();
 
 if (App.isAngularJsApp() === false) {
-    jQuery(document).ready(function() {    
+    jQuery(document).ready(function() {
+
+        /* TODO */
+        console.log ("HandleSidebarMenu");
+
        Layout.init(); // init metronic core componets
     });
 }

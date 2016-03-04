@@ -19,6 +19,8 @@ var App = function() {
 
     var globalCssPath = 'global/css/';
 
+    var body = $('body');
+
     // theme layout color set
 
     var brandColors = {
@@ -33,7 +35,7 @@ var App = function() {
     // initializes main settings
     var handleInit = function() {
 
-        if ($('body').css('direction') === 'rtl') {
+        if (body.css('direction') === 'rtl') {
             isRTL = true;
         }
 
@@ -90,13 +92,14 @@ var App = function() {
 
     // Handles portlet tools & actions
     var handlePortletTools = function() {
+
         // handle portlet remove
-        $('body').on('click', '.portlet > .portlet-title > .tools > a.remove', function(e) {
+        body.on('click', '.portlet > .portlet-title > .tools > a.remove', function(e) {
             e.preventDefault();
             var portlet = $(this).closest(".portlet");
 
-            if ($('body').hasClass('page-portlet-fullscreen')) {
-                $('body').removeClass('page-portlet-fullscreen');
+            if (body.hasClass('page-portlet-fullscreen')) {
+                body.removeClass('page-portlet-fullscreen');
             }
 
             portlet.find('.portlet-title .fullscreen').tooltip('destroy');
@@ -109,7 +112,7 @@ var App = function() {
         });
 
         // handle portlet fullscreen
-        $('body').on('click', '.portlet > .portlet-title .fullscreen', function(e) {
+        body.on('click', '.portlet > .portlet-title .fullscreen', function(e) {
             e.preventDefault();
             var portlet = $(this).closest(".portlet");
             if (portlet.hasClass('portlet-fullscreen')) {
@@ -125,12 +128,12 @@ var App = function() {
 
                 $(this).addClass('on');
                 portlet.addClass('portlet-fullscreen');
-                $('body').addClass('page-portlet-fullscreen');
+                body.addClass('page-portlet-fullscreen');
                 portlet.children('.portlet-body').css('height', height);
             }
         });
 
-        $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function(e) {
+        body.on('click', '.portlet > .portlet-title > .tools > a.reload', function(e) {
             e.preventDefault();
             var el = $(this).closest(".portlet").children(".portlet-body");
             var url = $(this).attr("data-url");
@@ -183,7 +186,7 @@ var App = function() {
         // load ajax data on page init
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
 
-        $('body').on('click', '.portlet > .portlet-title > .tools > .collapse, .portlet .portlet-title > .tools > .expand', function(e) {
+        body.on('click', '.portlet > .portlet-title > .tools > .collapse, .portlet .portlet-title > .tools > .expand', function(e) {
             e.preventDefault();
             var el = $(this).closest(".portlet").children(".portlet-body");
             if ($(this).hasClass("collapse")) {
@@ -216,7 +219,7 @@ var App = function() {
     var handleMaterialDesign = function() {
 
         // Material design ckeckbox and radio effects
-        $('body').on('click', '.md-checkbox > label, .md-radio > label', function() {
+        body.on('click', '.md-checkbox > label, .md-radio > label', function() {
             var the = $(this);
             // find the first span which is our circle/bubble
             var el = $(this).children('span:first-child');
@@ -234,7 +237,7 @@ var App = function() {
             $("." + el.attr("class") + ":last", the).remove();
         }); 
 
-        if ($('body').hasClass('page-md')) { 
+        if (body.hasClass('page-md')) {
             // Material design click effect
             // credit where credit's due; http://thecodeplayer.com/walkthrough/ripple-click-effect-google-material-design       
             var element, circle, d, x, y;
@@ -271,12 +274,12 @@ var App = function() {
             } else {
                 el.removeClass('edited');
             }
-        } 
+        };
 
-        $('body').on('keydown', '.form-md-floating-label .form-control', function(e) { 
+        body.on('keydown', '.form-md-floating-label .form-control', function(e) {
             handleInput($(this));
         });
-        $('body').on('blur', '.form-md-floating-label .form-control', function(e) { 
+        body.on('blur', '.form-md-floating-label .form-control', function(e) {
             handleInput($(this));
         });        
 
@@ -285,7 +288,7 @@ var App = function() {
                 $(this).addClass('edited');
             }
         });
-    }
+    };
 
     // Handles custom checkboxes & radios using jQuery iCheck plugin
     var handleiCheck = function() {
@@ -357,7 +360,7 @@ var App = function() {
     // Handles Bootstrap Modals.
     var handleModals = function() {        
         // fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class. 
-        $('body').on('hide.bs.modal', function() {
+        body.on('hide.bs.modal', function() {
             if ($('.modal:visible').size() > 1 && $('html').hasClass('modal-open') === false) {
                 $('html').addClass('modal-open');
             } else if ($('.modal:visible').size() <= 1) {
@@ -366,19 +369,19 @@ var App = function() {
         });
 
         // fix page scrollbars issue
-        $('body').on('show.bs.modal', '.modal', function() {
+        body.on('show.bs.modal', '.modal', function() {
             if ($(this).hasClass("modal-scroll")) {
                 $('body').addClass("modal-open-noscroll");
             }
         });
 
         // fix page scrollbars issue
-        $('body').on('hide.bs.modal', '.modal', function() {
+        body.on('hide.bs.modal', '.modal', function() {
             $('body').removeClass("modal-open-noscroll");
         });
 
         // remove ajax content and remove cache on modal closed 
-        $('body').on('hidden.bs.modal', '.modal:not(.modal-cached)', function () {
+        body.on('hidden.bs.modal', '.modal:not(.modal-cached)', function () {
             $(this).removeData('bs.modal');
         });
     };
@@ -416,24 +419,24 @@ var App = function() {
         /*
           Hold dropdown on click  
         */
-        $('body').on('click', '.dropdown-menu.hold-on-click', function(e) {
+        body.on('click', '.dropdown-menu.hold-on-click', function(e) {
             e.stopPropagation();
         });
     };
 
     var handleAlerts = function() {
-        $('body').on('click', '[data-close="alert"]', function(e) {
+        body.on('click', '[data-close="alert"]', function(e) {
             $(this).parent('.alert').hide();
             $(this).closest('.note').hide();
             e.preventDefault();
         });
 
-        $('body').on('click', '[data-close="note"]', function(e) {
+        body.on('click', '[data-close="note"]', function(e) {
             $(this).closest('.note').hide();
             e.preventDefault();
         });
 
-        $('body').on('click', '[data-remove="note"]', function(e) {
+        body.on('click', '[data-remove="note"]', function(e) {
             $(this).closest('.note').remove();
             e.preventDefault();
         });
@@ -666,11 +669,11 @@ var App = function() {
             var pos = (el && el.size() > 0) ? el.offset().top : 0;
 
             if (el) {
-                if ($('body').hasClass('page-header-fixed')) {
+                if (body.hasClass('page-header-fixed')) {
                     pos = pos - $('.page-header').height();
-                } else if ($('body').hasClass('page-header-top-fixed')) {
+                } else if (body.hasClass('page-header-top-fixed')) {
                     pos = pos - $('.page-header-top').height();
-                } else if ($('body').hasClass('page-header-menu-fixed')) {
+                } else if (body.hasClass('page-header-menu-fixed')) {
                     pos = pos - $('.page-header-menu').height();
                 }
                 pos = pos + (offeset ? offeset : -1 * el.height());
@@ -862,7 +865,7 @@ var App = function() {
             }
 
             if (!options.container) {
-                if ($('body').hasClass("page-container-bg-solid") || $('body').hasClass("page-content-white")) {
+                if (body.hasClass("page-container-bg-solid") || body.hasClass("page-content-white")) {
                     $('.page-title').after(html);
                 } else {
                     if ($('.page-bar').size() > 0) {
@@ -1042,4 +1045,7 @@ var App = function() {
 
 jQuery(document).ready(function() {    
    App.init(); // init metronic core componets
+
+
+   console.log("init")
 });
