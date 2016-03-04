@@ -80,11 +80,6 @@ TODO Inbox dropdown
       background-color: #dfe2e9;
 } */
 
-/* TODO Lenguaje
-.page-header.navbar .top-menu .navbar-nav > li.dropdown-language > .dropdown-toggle > .langname {
-      color: #484848;
-}*/
-
 /*
 TODO
 .page-header.navbar .top-menu .navbar-nav > li.dropdown-dark .dropdown-menu {
@@ -119,6 +114,8 @@ TODO
       background: #9a9a9a; }
       */
 
+/* TODO
+
 .page-header.navbar .search-form {
     background: #d9d9d9;
 }
@@ -151,90 +148,86 @@ TODO
 .page-header.navbar .search-form.open {
     background: #eeeeee;
 }
+*/
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active + li > a,
 .page-sidebar .page-sidebar-menu > li.active + li > a {
     border-top-color: transparent;
 }
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active.open + li > a,
 .page-sidebar .page-sidebar-menu > li.active.open + li > a {
     border-top-color: #EEEEEE;
 }
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li:last-child > a,
 .page-sidebar .page-sidebar-menu > li:last-child > a {
     border-bottom: 1px solid transparent !important;
 }
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a > .arrow:before,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a > .arrow.open:before,
+/* Sidebar-menu arrow */
 .page-sidebar .page-sidebar-menu li > a > .arrow:before,
 .page-sidebar .page-sidebar-menu li > a > .arrow.open:before {
-    color: #AAAAAA;
+    color: #4DB3A2;
 }
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li:hover > a > .arrow:before,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li:hover > a > .arrow.open:before,
+/* Sidebar-menu arrow hover */
 .page-sidebar .page-sidebar-menu li:hover > a > .arrow:before,
 .page-sidebar .page-sidebar-menu li:hover > a > .arrow.open:before {
-    color: #AAAAAA;
+    color: #3D9082;
 }
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li.active > a > .arrow:before,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li.active > a > .arrow.open:before,
+/* Sidebar-menu arrow active */
 .page-sidebar .page-sidebar-menu li.active > a > .arrow:before,
 .page-sidebar .page-sidebar-menu li.active > a > .arrow.open:before {
     color: #ffffff;
 }
 
-.page-sidebar-closed .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu:hover .sub-menu,
 .page-sidebar-closed .page-sidebar .page-sidebar-menu:hover .sub-menu {
     background-color: #F6F6F6;
 }
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li > a,
+/* Sidebar-menu subtitle */
 .page-sidebar .page-sidebar-menu .sub-menu > li > a {
     color: #555555;
 }
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li > a > i,
+/* Sidebar-menu icon */
 .page-sidebar .page-sidebar-menu .sub-menu > li > a > i {
-    color: #AAAAAA;
+    color: #608E73;
 }
 
+/* TODO
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li > a > i[class^="icon-"],
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li > a > i[class*="icon-"],
 .page-sidebar .page-sidebar-menu .sub-menu > li > a > i[class^="icon-"],
 .page-sidebar .page-sidebar-menu .sub-menu > li > a > i[class*="icon-"] {
     color: #848484;
 }
+*/
+
+/* TODO
 
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li > a > .arrow:before,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li > a > .arrow.open:before,
 .page-sidebar .page-sidebar-menu .sub-menu > li > a > .arrow:before,
 .page-sidebar .page-sidebar-menu .sub-menu > li > a > .arrow.open:before {
-    color: #AAAAAA;
+    color: #aa1418;
 }
+*/
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li:hover > a,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li.open > a,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li.active > a,
+/* Sidebar-menu subitem hover, open, active */
 .page-sidebar .page-sidebar-menu .sub-menu > li:hover > a,
 .page-sidebar .page-sidebar-menu .sub-menu > li.open > a,
 .page-sidebar .page-sidebar-menu .sub-menu > li.active > a {
-    background: #EFEFEF !important;
+    background: #ededed !important;
 }
 
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li:hover > a > i,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li.open > a > i,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li.active > a > i,
+/* Sidebar-menu subitem icon hover, open, active */
 .page-sidebar .page-sidebar-menu .sub-menu > li:hover > a > i,
 .page-sidebar .page-sidebar-menu .sub-menu > li.open > a > i,
 .page-sidebar .page-sidebar-menu .sub-menu > li.active > a > i {
-    color: #AAAAAA;
+    color: #7caf84;
 }
 
+/* TODO
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li:hover > a > .arrow:before,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li:hover > a > .arrow.open:before,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li.open > a > .arrow:before,
@@ -248,77 +241,7 @@ TODO
 .page-sidebar .page-sidebar-menu .sub-menu > li.active > a > .arrow:before,
 .page-sidebar .page-sidebar-menu .sub-menu > li.active > a > .arrow.open:before {
     color: #AAAAAA;
-}
-
-
-/* TODO
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light {
-     1st level links
-}
-
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li:hover > a,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.open > a,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li:hover > a,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.open > a {
-    background: #e9e9e9;
-}
-
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active > a,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active > a,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a {
-    background: #e4e4e4;
-    border-left: 4px solid #4DB3A2;
-    color: #666666;
-}
-
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active > a:hover,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a:hover,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active > a:hover,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a:hover {
-    border-left: 4px solid #3D9082;
-    background: #e9e9e9;
-}
-
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active > a > i,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a > i,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active > a > i,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a > i {
-    color: #999999;
-}
-
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active > a > .arrow:before,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active > a > .arrow.open:before,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a > .arrow:before,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a > .arrow.open:before,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active > a > .arrow:before,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active > a > .arrow.open:before,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a > .arrow:before,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li.active.open > a > .arrow.open:before {
-    color: #999999;
-}
-
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li .sub-menu,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li .sub-menu {
-    background: #f9f9f9;
-}
-
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li .sub-menu > li:hover > a,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li .sub-menu > li.open > a,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-light > li .sub-menu > li.active > a,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li .sub-menu > li:hover > a,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li .sub-menu > li.open > a,
-.page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li .sub-menu > li.active > a {
-    background: #e9e9e9 !important;
-}
-
-*/
-
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-toggler,
-.page-sidebar .sidebar-toggler {
-    background: url(../img/toggler_icon.png);
-}
+}*/
 
 @media (min-width: 992px) {
     /* 992px */
@@ -327,7 +250,6 @@ TODO
         box-shadow: 5px 5px rgba(239, 239, 239, 0.2);
     }
 
-    .page-sidebar-menu.page-sidebar-menu-hover-submenu > li:hover > .sub-menu.sidebar-toggler-wrapper,
     .page-sidebar-menu.page-sidebar-menu-hover-submenu > li:hover > .sub-menu.sidebar-search-wrapper {
         box-shadow: none;
     }
@@ -336,7 +258,6 @@ TODO
         box-shadow: 5px 5px rgba(239, 239, 239, 0.2);
     }
 
-    .page-sidebar-menu.page-sidebar-menu-closed > li:hover.sidebar-toggler-wrapper,
     .page-sidebar-menu.page-sidebar-menu-closed > li:hover.sidebar-search-wrapper {
         box-shadow: none;
     }
@@ -345,7 +266,6 @@ TODO
         box-shadow: 5px 5px rgba(239, 239, 239, 0.2);
     }
 
-    .page-sidebar-menu.page-sidebar-menu-closed > li:hover > .sub-menu.sidebar-toggler-wrapper,
     .page-sidebar-menu.page-sidebar-menu-closed > li:hover > .sub-menu.sidebar-search-wrapper {
         box-shadow: none;
     }
@@ -371,60 +291,9 @@ TODO
         color: #333;
     }
 
-    /* Boxed Layout */
-    .page-boxed {
-        background-color: #eeeeee !important;
-        /* Page container */
-        /* Page sidebar */
-        /* Page footer */
-    }
-
-    .page-boxed .page-container {
-        background-color: #F6F6F6;
-        border-left: 1px solid #EEEEEE;
-        border-bottom: 1px solid #EEEEEE;
-    }
-
-    .page-boxed.page-sidebar-reversed .page-container {
-        border-left: 0;
-        border-right: 1px solid #EEEEEE;
-    }
-
-    .page-boxed.page-sidebar-fixed .page-container {
-        border-left: 0;
-        border-bottom: 0;
-    }
-
-    .page-boxed.page-sidebar-reversed.page-sidebar-fixed .page-container {
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 0;
-    }
-
-    .page-boxed.page-sidebar-fixed .page-sidebar {
-        border-left: 1px solid #EEEEEE;
-    }
-
-    .page-boxed.page-sidebar-reversed.page-sidebar-fixed .page-sidebar {
-        border-right: 1px solid #EEEEEE;
-        border-left: 0;
-    }
-
-    .page-boxed.page-sidebar-fixed.page-footer-fixed .page-footer {
-        background-color: #eeeeee !important;
-    }
-
-    .page-boxed.page-sidebar-fixed.page-footer-fixed .page-footer .page-footer-inner {
-        color: #333333;
-    }
-
     /* Sidebar Menu Wirh Hoverable Submenu */
     .page-sidebar-menu-hover-submenu li:hover a > .arrow {
         border-right: 8px solid #e7e7e7;
-    }
-
-    .page-sidebar-reversed .page-sidebar-menu-hover-submenu li:hover a > .arrow {
-        border-left: 8px solid #e7e7e7;
     }
 
     .page-sidebar-menu-hover-submenu li:hover > .sub-menu {
@@ -444,10 +313,11 @@ TODO
         border-top: 1px solid #F6F6F6;
     }
 
+    /* TODO
     .page-sidebar .page-sidebar-menu > li:hover > a,
     .page-sidebar .page-sidebar-menu > li.open > a {
         background: #d0d0d0;
-    }
+    } */
 
     .page-sidebar .page-sidebar-menu > li:last-child > a {
         border-bottom: 0 !important;

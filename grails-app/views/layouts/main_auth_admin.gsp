@@ -15,9 +15,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- TODO -->
-    <%--<title><g:message code="layouts.main_auth_admin.head.title" default=""/></title>--%>
-
     <meta name="description" content="Smart Testing Tool is a HP CDS solution for online evaluation of different subjects through testing that
     it intended as a tool for internal qualification of personnel."/>
     <meta name="author" content="Jesús Iglesias García"/>
@@ -59,46 +56,13 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'components-md.css')}" type="text/css" id="style_components"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'plugins-md.css')}" type="text/css"/>
 
-
     <!-- THEME LAYOUT STYLES -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'layout.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'light2.css')}" type="text/css" id="style_color"/>
 
 
-
-
     <!-- LOAD JS -->
     <asset:javascript src="application.js"/>
-
-
-
-    <!-- CORE PLUGINS -->
-    <!-- TODO -->
-    <g:javascript src="bootstrap.min.js"/>
-    <g:javascript src="js.cookie.min.js"/>
-    <g:javascript src="bootstrap-hover-dropdown.min.js"/>
-    <g:javascript src="jquery.slimscroll.min.js"/>
-    <g:javascript src="jquery.blockui.min.js"/>
-    <g:javascript src="jquery.uniform.min.js"/>
-    <g:javascript src="bootstrap-switch.min.js"/>
-    <g:javascript src="custom.js"/>
-
-    <!-- THEME GLOBAL SCRIPTS -->
-    <g:javascript src="app.js"/>
-
-    <!-- PAGE LEVEL SCRIPTS -->
-    <g:javascript src="dashboard.min.js"/>
-    <!-- TODO -->
-    <g:javascript src="authentication/jquery.validate.min.js"/>
-    <g:javascript src="authentication/additional-methods.min.js"/>
-    <g:javascript src="authentication/select2.full.min.js"/>
-
-    <!-- THEME LAYOUT SCRIPTS -->
-    <g:javascript src="layout.js"/>
-    <g:javascript src="demo.js"/>
-
-    <%-- TODO
-    <g:javascript src="quick-sidebar.js"/> --%>
 
     <!-- HTML5 SHIV, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -152,7 +116,7 @@
                             <li>
                                 <!-- TODO perfil -->
                                 <g:link controller="user" action="edit" id="">
-                                    <i class="icon-user"></i> <g:message code="layouts.main_auth_user.head.profile" default="My profile"/>
+                                    <i class="icon-user"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
                                 </g:link>
                             </li>
                             <!-- Switch user -->
@@ -162,7 +126,7 @@
                                         <form action='${request.contextPath}/j_spring_security_switch_user' method='POST'>
                                             <g:hiddenField name="stt_hp_username" value="admin_switch" />
                                             <button class="exit-switch-button">
-                                            <i class="fa fa-exchange"></i> <g:message code="layouts.main_auth_user.head.switchUser" default="Normal user"/>
+                                            <i class="fa fa-exchange"></i> <g:message code="layouts.main_auth_admin.head.switchUser" default="Normal user"/>
                                         </button>
                                         </form>
                                     </sec:ifAllGranted>
@@ -175,7 +139,7 @@
                             <li>
                                 <form name="logout" method="POST" action="${createLink(controller:'logout')}">
                                     <button class="exit-switch-button">
-                                        <i class="icon-logout"></i> <g:message code="layouts.main_auth_user.head.logout" default="Logout"/>
+                                        <i class="icon-logout"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
                                     </button>
                                 </form>
                             </li>
@@ -196,26 +160,15 @@
         </div> <!-- /.Header inner -->
     </div><!-- /.HEADER -->
 
-    <!-- Begin header and content divider -->
-    <div class="clearfix"> </div>
-
     <!-- Container -->
     <div class="page-container">
         <!-- Page-sidebar-wrapper -->
         <div class="page-sidebar-wrapper">
             <!-- Page-sidebar -->
             <div class="page-sidebar navbar-collapse collapse">
-                <!-- Page-sidebar-menu  TODO -->
-                <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
-                <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
-                <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                <!-- Page-sidebar-menu -->
+                <ul class="page-sidebar-menu page-header-fixed" data-keep-expanded="true" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 30px">
 
-                <ul class="page-sidebar-menu page-header-fixed" data-keep-expanded="true" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
-                    <!-- TODO DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-                    <li class="sidebar-toggler-wrapper hide">
-                        <!-- Sidebar toggler button -->
-                        <div class="sidebar-toggler"> </div>
-                    </li>
                     <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
                     <li class="sidebar-search-wrapper">
                         <!-- Search form  TODO -->
@@ -226,7 +179,7 @@
                                 <i class="icon-close"></i>
                             </a>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" class="form-control" placeholder="<g:message code="layouts.main_auth_admin.sidebar.search" default="Search..."/>">
                                 <span class="input-group-btn">
                                     <a href="javascript:;" class="btn submit">
                                         <i class="icon-magnifier"></i>
@@ -236,34 +189,33 @@
                         </form>
                     </li> <!-- /.Search form -->
 
-                    <!-- TODO -->
                     <li class="nav-item start">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-home"></i>
-                            <span class="title">Dashboard</span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.title.dashboard" default="Dashboard"/></span>
                             <span class="arrow"></span>
                         </a>
-                        <!-- TODO -->
                         <ul class="sub-menu">
                             <li class="nav-item start">
-                                <a href="" class="nav-link">
-                                    <i class="icon-bar-chart"></i>
-                                    <span class="title">Dashboard 1</span>
-                                </a>
+                                <!-- TODO -->
+                                <g:link class="nav-link">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.title.dashboard.statistics" default="Statistics"/></span>
+                                </g:link>
                             </li>
                         </ul>
                     </li>
 
                     <!-- USERS -->
                     <li class="heading">
-                        <h3 class="uppercase"><g:message code="layouts.main_auth_user.sidebar.title.users" default="Users"/></h3>
+                        <h3 class="uppercase"><g:message code="layouts.main_auth_admin.sidebar.title.users" default="Users"/></h3>
                     </li>
 
                     <!-- Admin user -->
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-user-secret"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.admin" default="Admin user"/></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.admin" default="Admin user"/></span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
@@ -271,14 +223,14 @@
                                 <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-user-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
                                 <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-list"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
                             </li>
                         </ul>
@@ -288,20 +240,20 @@
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-user"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.normalUser" default="Normal user"/></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.normalUser" default="Normal user"/></span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
                                 <g:link controller="user" action="create" class="nav-link">
                                     <i class="fa fa-user-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
                                 <g:link controller="user" action="index" class="nav-link">
                                     <i class="fa fa-list"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
                             </li>
                         </ul>
@@ -310,14 +262,14 @@
 
                     <!-- GENERAL -->
                     <li class="heading">
-                        <h3 class="uppercase"><g:message code="layouts.main_auth_user.sidebar.title.general" default="General"/></h3>
+                        <h3 class="uppercase"><g:message code="layouts.main_auth_admin.sidebar.title.general" default="General"/></h3>
                     </li>
 
                     <!-- Department -->
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-building"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.department" default="Department"/></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.department" default="Department"/></span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
@@ -325,14 +277,14 @@
                                 <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
                                 <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-list"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
                             </li>
                         </ul>
@@ -342,7 +294,7 @@
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-briefcase"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.topic" default="Topic"/></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.topic" default="Topic"/></span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
@@ -350,14 +302,14 @@
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-list"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
                             </li>
                         </ul>
@@ -367,7 +319,7 @@
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-folder-open"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.catalog" default="Catalog"/></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.catalog" default="Catalog"/></span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
@@ -375,14 +327,14 @@
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-list"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
                             </li>
                         </ul>
@@ -392,7 +344,7 @@
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-question"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.question" default="Question"/></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.question" default="Question"/></span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
@@ -400,39 +352,40 @@
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-list"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
                             </li>
                         </ul>
                     </li>
 
                     <!-- Answer -->
-                    <li class="nav-item">
+                    <li class="nav-item active open">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-pencil"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.answer" default="Answer"/></span>
-                            <span class="arrow"></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.answer" default="Answer"/></span>
+                            <span class="selected"></span>
+                            <span class="arrow open"></span>
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-list"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
                             </li>
                         </ul>
@@ -442,14 +395,14 @@
 
                     <!-- EVALUATION PROCESS -->
                     <li class="heading">
-                        <h3 class="uppercase"><g:message code="layouts.main_auth_user.sidebar.title.evaluationProcess" default="Evaluation process"/></h3>
+                        <h3 class="uppercase"><g:message code="layouts.main_auth_admin.sidebar.title.evaluationProcess" default="Evaluation process"/></h3>
                     </li>
 
                     <!-- Test -->
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-file-text"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.test" default="Test"/></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.test" default="Test"/></span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
@@ -457,14 +410,14 @@
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-list"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
                             </li>
                         </ul>
@@ -474,7 +427,7 @@
                     <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-graduation-cap"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.evaluation" default="Evaluation"/></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.evaluation" default="Evaluation"/></span>
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
@@ -482,14 +435,14 @@
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.new" default="New"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
                             <!-- TODO -->
                                 <g:link class="nav-link">
                                     <i class="fa fa-list"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_user.sidebar.list" default="List"/></span>
+                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
                             </li>
                         </ul>
@@ -498,13 +451,13 @@
 
                    <!-- CONFIGURATION -->
                     <li class="heading">
-                        <h3 class="uppercase"><g:message code="layouts.main_auth_user.sidebar.title.configuration" default="Configurations"/></h3>
+                        <h3 class="uppercase"><g:message code="layouts.main_auth_admin.sidebar.title.configuration" default="Configurations"/></h3>
                     </li>
-                    <li class="nav-item  active open">
+                    <li class="nav-item active open">
                         <!-- TODO -->
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-settings"></i>
-                            <span class="title"><g:message code="layouts.main_auth_user.sidebar.logconfiguration" default="Log configuration"/></span>
+                            <span class="title"><g:message code="layouts.main_auth_admin.sidebar.logConfiguration" default="Log configuration"/></span>
                             <span class="selected"></span>
                             <span class="arrow open"></span>
                         </a>
@@ -515,37 +468,10 @@
              </div> <!-- Page-sidebar -->
         </div> <!-- Page-sidebar-wrapper -->
 
-        <!-- Page-sidebar-wrapper -->
-        <div class="page-content-wrapper">
-            <!-- Page-content -->
-            <div class="page-content">
-                <!-- Page-bar -->
-                <div class="page-bar">
-                    <ul class="page-breadcrumb">
-                        <li>
-                            <!-- TODO -->
-                            <g:link uri="/"> Home </g:link>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                        <li>
-                            <span>Dashboard</span>
-                        </li>
-                    </ul>
-                </div> <!-- /.Page-bar -->
+        <!-- LOAD BODY OTHER VIEWS -->
+        <g:layoutBody/>
 
-                <!-- Page-title TODO -->
-                <h3 class="page-title"> Dashboard
-                    <small>dashboard & statistics</small>
-                </h3>
-
-
-
-            </div>
-        </div>
-        <!-- END QUICK SIDEBAR -->
     </div> <!-- /. Container -->
-
-
 
     <!-- BEGIN FOOTER -->
     <div class="page-footer">
@@ -558,10 +484,6 @@
         </div>
     </div>
 
-
-<%--<g:layoutBody/>
---%>
-
     <!-- Back to top -->
     <g:link href="#" class="back-to-top back-to-top-error"><g:message code="views.general.backtotop" default="Top"/></g:link>
 
@@ -570,6 +492,34 @@
     <!--[if lt IE 9]>
         <script src="../js/respond.min.js"></script>
     <![endif]-->
+
+    <!-- CORE PLUGINS -->
+    <!-- TODO -->
+    <g:javascript src="bootstrap.min.js"/>
+    <g:javascript src="js.cookie.min.js"/>
+    <g:javascript src="bootstrap-hover-dropdown.min.js"/>
+    <g:javascript src="jquery.slimscroll.min.js"/>
+    <g:javascript src="jquery.blockui.min.js"/>
+    <g:javascript src="jquery.uniform.min.js"/>
+    <g:javascript src="bootstrap-switch.min.js"/>
+    <g:javascript src="custom.js"/>
+
+    <!-- THEME GLOBAL SCRIPTS -->
+    <g:javascript src="app.js"/>
+
+    <!-- THEME LAYOUT SCRIPTS -->
+    <g:javascript src="layout.js"/>
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <g:javascript src="dashboard.min.js"/>
+    <!-- TODO -->
+    <g:javascript src="authentication/jquery.validate.min.js"/>
+    <g:javascript src="authentication/additional-methods.min.js"/>
+    <g:javascript src="authentication/select2.full.min.js"/>
+
+    <%-- TODO
+    <g:javascript src="demo.js"/>
+    <g:javascript src="quick-sidebar.js"/> --%>
 
 
 </body>
