@@ -135,7 +135,6 @@ class CustomTasksUserController {
     def switchFail () {
         log.debug("CustomTasksUserController:switchFail()")
 
-        // TODO Add default and change message and authentication exception
         String switchFailMessage = ''
 
         // Switch fail exceptions
@@ -144,30 +143,34 @@ class CustomTasksUserController {
             if (exception instanceof AccountExpiredException) {
                 log.error("CustomTasksUserController:switchFail():accountExpired:admin_switch")
 
-                switchFailMessage = g.message(code: "springSecurity.errors.login.expired")
+                switchFailMessage = g.message(code: "customTasksUser.switchFail.expired", default: 'ERROR! The user account to switch has expired. Please, you check the settings.')
             } else if (exception instanceof CredentialsExpiredException) {
                 log.error("CustomTasksUserController:switchFail():passwordExpired:admin_switch")
 
-                switchFailMessage = g.message(code: "springSecurity.errors.login.passwordExpired")
+                switchFailMessage = g.message(code: "customTasksUser.switchFail.passwordExpired", default: 'ERROR! The user password to switch has expired. Please, you check the settings.')
             } else if (exception instanceof DisabledException) {
                 log.error("CustomTasksUserController:switchFail():disabled:admin_switch")
 
-                switchFailMessage = g.message(code: "springSecurity.errors.login.disabled")
+                switchFailMessage = g.message(code: "customTasksUser.switchFail.disabled", default: 'ERROR! The user account to switch is disabled. Please, you check the settings.')
             } else if (exception instanceof LockedException) {
                 log.error("CustomTasksUserController:switchFail():accountLocked:admin_switch")
 
-                switchFailMessage = g.message(code: "springSecurity.errors.login.locked")
+                switchFailMessage = g.message(code: "customTasksUser.switchFail.locked", default: 'ERROR! The user account to switch is locked. Please, you check the settings.')
+            } else if (exception instanceof AuthenticationServiceException) {
+                log.error("CustomTasksUserController:switchFail():authenticationService")
+
+                switchFailMessage = g.message(code: "customTasksUser.switchFail.authenticationException", default: 'An internal error has occurred during switching.')
             }
         }
 
-        // TODO Add default
-        flash.message = switchFailMessage
+        flash.errorSwitchUser = switchFailMessage
 
         // Redirection to admin url
         if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
             log.debug("CustomTasksUserController:switchFail():adminRole:admin_switch")
             redirect uri: adminUrlRedirection
 
+            /* TODO Añadir en user layout */
         } else if (SpringSecurityUtils.ifAllGranted('ROLE_USER')) {  // Redirection to user url
             log.debug("CustomTasksUserController:switchFail():userRole:admin_switch")
             redirect uri: userUrlRedirection

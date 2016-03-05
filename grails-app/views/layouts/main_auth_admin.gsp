@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-switch.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'placeholder_polyfill.min.css')}" type="text/css"/>
+    <!-- Notification switch user -->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <!-- BEGIN PAGE LEVEL PLUGINS TODO -->
     <!-- <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
@@ -64,6 +66,8 @@
 
     <!-- LOAD JS -->
     <asset:javascript src="application.js"/>
+    <!-- Notification switch user -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <!-- HTML5 SHIV, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -76,6 +80,33 @@
 
 <!-- BODY -->
 <body class="page-header-fixed page-header-fixed-mobile page-sidebar-closed-hide-logo page-content-white page-md">
+
+
+    <!-- Account states notification -->
+    <g:if test='${flash.errorSwitchUser}'>
+        <script type="text/javascript">
+
+            toastr["error"]("${flash.errorSwitchUser}");
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        </script>
+    </g:if>
 
     <!-- HEADER -->
     <div class="page-header navbar navbar-fixed-top" role="navigation">
@@ -521,7 +552,6 @@
     <%-- TODO
     <g:javascript src="demo.js"/>
     <g:javascript src="quick-sidebar.js"/> --%>
-
 
 </body>
 </html>
