@@ -78,7 +78,6 @@
 		$(document).ready(function () {
 			$('#noRoleEmail-button').click(function (event) {
 
-				console.log("CLick");
 				event.preventDefault();
 
 				$.ajax({
@@ -139,12 +138,13 @@
 	</div>
 
 	<div class="row">
-		<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
 			<div class="input-group noRoleEmail-group">
-				<g:field type="text" class="form-control" name="noRoleEmail"/>
+				<g:field type="text" class="form-control user-input" name="noRoleEmail"/>
+				<i class="fa fa-times i-delete i-delete-noRole"></i> <!-- Delete text icon -->
 				<span class="input-group-btn">
-				<g:field type="button" class="btn grey-mint noRoleSend-btn" name="noRoleEmail-button" id="noRoleEmail-button" value="${message(code: "customTasksUser.login.stateAccount.send", default: "Send")}"/>
-			</span>
+					<g:field type="button" class="btn grey-mint noRoleSend-btn" name="noRoleEmail-button" id="noRoleEmail-button" value="${message(code: "customTasksUser.login.stateAccount.send", default: "Send")}"/>
+				</span>
 			</div>
 		</div>
 	</div>
