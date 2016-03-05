@@ -11,6 +11,43 @@ input:-webkit-autofill:active {
     -webkit-text-fill-color: #e5fff3 !important; /* Font color */
 }
 
+/* Input - Icons
+=================================================================== */
+/* Remove IE default icon password */
+.password-input::-ms-clear {
+    display: none;
+    width:0;
+    height:0 !important;
+}
+
+/* Remove IE default X */
+.user-input::-ms-clear {
+    display: none;
+    width:0;
+    height:0 !important;
+}
+
+/* Remove icon in noRole page */
+.i-delete-noRole {
+    position: absolute;
+    top: 10px;
+    right: 100px;
+    z-index: 1999;
+    cursor: pointer;
+    color: #4DB3A2;
+}
+
+.i-delete, .i-show {
+    display: none;
+}
+
+/* Error login alert
+=================================================================== */
+/* Remove blue border */
+.sweet-alert:focus {
+    outline:none;
+}
+
 /* Back to top
 =================================================================== */
 .back-to-top {
