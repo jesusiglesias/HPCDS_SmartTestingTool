@@ -68,7 +68,6 @@ var Login = function() {
         });
 
         $('.forget-form input').keypress(function (e) {
-            console.log("keypress");
 
             if (e.which == 13) {
                 if (forgetForm.validate().form()) {

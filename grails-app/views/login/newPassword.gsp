@@ -35,7 +35,7 @@
                             <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordionNewPassword" href="#collapseNewPassword"> <g:message code="views.login.auth.newPassword.description" default="New password instructions"/> </a>
                         </h4>
                     </div>
-                    <div id="collapseNewPassword" class="panel-collapse in">
+                    <div id="collapseNewPassword" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
                                 <li> <g:message code="views.login.auth.newPassword.longitude" default="It must contain a minimum length of 8 characters."/> </li>
@@ -63,9 +63,10 @@
         <!-- Password field -->
         <div class="form-group form-md-line-input form-md-floating-label has-success">
             <div class="input-icon right">
-                <g:field type="password" class="form-control" id="password" name="password" autocomplete="off"/>
+                <g:field type="password" class="form-control password-input" id="password" name="password" autocomplete="off"/>
                 <label for="password"><g:message code="views.login.auth.newPassword.password" default="New password"/></label>
                 <span class="help-block"><g:message code="views.login.auth.newPassword.password.help" default="Enter a valid password"/></span>
+                <i class="fa fa-eye i-show"></i> <!-- Show password icon -->
                 <i class="fa fa-key"></i>
             </div>
         </div>
@@ -73,9 +74,10 @@
         <!-- Password confirm field -->
         <div class="form-group form-md-line-input form-md-floating-label has-success">
             <div class="input-icon right">
-                <g:field type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" autocomplete="off"/>
+                <g:field type="password" class="form-control password-confirm-input" id="passwordConfirm" name="passwordConfirm" autocomplete="off"/>
                 <label for="passwordConfirm"><g:message code="views.login.auth.newPassword.passwordConfirm" default="Confirm password"/></label>
                 <span class="help-block"><g:message code="views.login.auth.newPassword.passwordConfirm.help" default="Repeat your password"/></span>
+                <i class="fa fa-eye i-show-confirm"></i> <!-- Show password icon -->
                 <i class="fa fa-key"></i>
             </div>
         </div>
@@ -84,7 +86,7 @@
         <g:hiddenField name="token" value="${params.token}"/>
 
         <div class="form-actions">
-            <g:link type="button" uri="/" id="back-btn" class="btn green-dark back-button"><g:message code="views.login.auth.forgotPassword.back" default="Back"/></g:link>
+            <g:link type="button" uri="/" id="back-btn" class="btn green-dark back-button"><g:message code="views.login.auth.newPassword.homepage" default="Homepage"/></g:link>
             <g:submitButton name="${g.message(code:'views.login.auth.newPassword.send', default:'Confirm')}" id="newPassword-button" class="btn green-dark pull-right"/>
         </div>
     </g:form> <!-- /. Forgot password form -->

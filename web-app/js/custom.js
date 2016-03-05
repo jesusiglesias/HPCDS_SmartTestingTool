@@ -40,6 +40,8 @@ $(document).ready(function() {
     var deleteIcon = $('.i-delete');
     var passwordInput = $(".password-input");
     var showIcon = $('.i-show');
+    var passwordConfirmInput = $(".password-confirm-input");
+    var showConfirmIcon = $('.i-show-confirm');
     var isMobile = { /* Mobile device */
         Android: function() {
             return navigator.userAgent.match(/Android/i);
@@ -165,6 +167,89 @@ $(document).ready(function() {
             /* Hold */
             showIcon.mousedown(function() {
                 passwordInput.prop('type', 'field');
+            });
+        }
+    }
+    /**** PASSWORD CONFIRM FIELD ****/
+    /* Show eye icon */
+    passwordConfirmInput.keydown(function(){
+        showConfirmIcon.show();
+        showConfirmIcon.css( {
+            'cursor' : 'pointer',
+            'right' : 50 });
+    });
+
+    /* Hide eye icon when user deletes text with the keyboard */
+    var toggleClassesPassword = function() {
+        if (passwordConfirmInput.val() == '') {
+            showConfirmIcon.hide();
+        }
+    };
+    passwordConfirmInput.on('keyup keydown keypress change paste', function() {
+        toggleClassesPassword(); // Still toggles the classes on any of the above events
+    });
+    toggleClassesPassword(); // and also on document ready
+
+
+    /* Check if it is a mobile device */
+    if( isMobile.any() ) {
+
+        /* Check if it is Internet Explorer - Trident and rv:11 belongs to IE 11 */
+        if ((navigator.userAgent.match(/msie/i)) ||  (navigator.userAgent.match(/Trident/)
+            && navigator.userAgent.match(/rv:11/))) {
+
+            /* Drop */
+            showConfirmIcon.on('touchend click', function(e){
+                e.stopPropagation(); e.preventDefault();
+                passwordConfirmInput.attr('type', 'password');
+            });
+
+            /* Hold */
+            showConfirmIcon.on('touchstart click', function(e){
+                e.stopPropagation(); e.preventDefault();
+                passwordConfirmInput.attr('type', 'field');
+            });
+
+        } else {
+
+            /* Drop */
+            showConfirmIcon.on('touchend click', function(e){
+                e.stopPropagation(); e.preventDefault();
+                passwordConfirmInput.prop('type', 'password');
+            });
+
+            /* Hold */
+            showConfirmIcon.on('touchstart click', function(e){
+                e.stopPropagation(); e.preventDefault();
+                passwordConfirmInput.prop('type', 'field');
+            });
+        }
+    } else {
+
+        /* Check if it is Internet Explorer - Trident and rv:11 belongs to IE 11 */
+        if ((navigator.userAgent.match(/msie/i)) ||  (navigator.userAgent.match(/Trident/)
+            && navigator.userAgent.match(/rv:11/))) {
+
+            /* Drop */
+            showConfirmIcon.mouseup(function() {
+                passwordConfirmInput.attr('type', 'password');
+            });
+
+            /* Hold */
+            showConfirmIcon.mousedown(function() {
+                passwordConfirmInput.attr('type', 'field');
+            });
+
+        } else {
+
+            /* Drop */
+            showConfirmIcon.mouseup(function() {
+                passwordConfirmInput.prop('type', 'password');
+            });
+
+            /* Hold */
+            showConfirmIcon.mousedown(function() {
+                passwordConfirmInput.prop('type', 'field');
             });
         }
     }

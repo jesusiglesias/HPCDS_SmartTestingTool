@@ -14,7 +14,8 @@ input:-webkit-autofill:active {
 /* Input - Icons
 =================================================================== */
 /* Remove IE default icon password */
-.password-input::-ms-clear {
+.password-input::-ms-clear,
+.password-confirm-input::-ms-clear {
     display: none;
     width:0;
     height:0 !important;
@@ -37,7 +38,7 @@ input:-webkit-autofill:active {
     color: #4DB3A2;
 }
 
-.i-delete, .i-show {
+.i-delete, .i-show, .i-show-confirm {
     display: none;
 }
 
@@ -62,8 +63,6 @@ input:-webkit-autofill:active {
     overflow: hidden;
     text-indent: 100%;
     white-space: nowrap;
-    /* TODO
-    background: #32a67b url(../../images/cd-top-arrow.svg) no-repeat center 50%; */
     background: #595a59 url(../../img/cd-top-arrow.svg) no-repeat center 50%;
     visibility: hidden;
     opacity: 0;
