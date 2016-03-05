@@ -169,7 +169,7 @@
                 <!-- Page-sidebar-menu -->
                 <ul class="page-sidebar-menu page-header-fixed" data-keep-expanded="true" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 30px">
 
-                    <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+                    <!-- TODO DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
                     <li class="sidebar-search-wrapper">
                         <!-- Search form  TODO -->
                         <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
@@ -476,14 +476,13 @@
     <!-- BEGIN FOOTER -->
     <div class="page-footer">
         <div class="copyright-admin"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias" class="author-link"> Jesús Iglesias García </g:link></div>
-            <div class="logoHP-admin">
-                <g:link uri="https://www.hpcds.com/es/">
-                    <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
-                </g:link>
-            </div>
+        <div class="logoHP-admin">
+            <g:link uri="https://www.hpcds.com/es/">
+                <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
+            </g:link>
         </div>
     </div>
-
+    
     <!-- Back to top -->
     <g:link href="#" class="back-to-top back-to-top-error"><g:message code="views.general.backtotop" default="Top"/></g:link>
 
