@@ -42,6 +42,7 @@
     <!-- TODO -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-switch.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'placeholder_polyfill.min.css')}" type="text/css"/>
 
     <!-- BEGIN PAGE LEVEL PLUGINS TODO -->
     <!-- <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
@@ -482,7 +483,7 @@
             </g:link>
         </div>
     </div>
-    
+
     <!-- Back to top -->
     <g:link href="#" class="back-to-top back-to-top-error"><g:message code="views.general.backtotop" default="Top"/></g:link>
 
@@ -502,6 +503,7 @@
     <g:javascript src="jquery.uniform.min.js"/>
     <g:javascript src="bootstrap-switch.min.js"/>
     <g:javascript src="custom.js"/>
+    <g:javascript src="placeholder_polyfill.jquery.min.combo.js"/>
 
     <!-- THEME GLOBAL SCRIPTS -->
     <g:javascript src="app.js"/>
