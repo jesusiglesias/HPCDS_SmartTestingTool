@@ -6,7 +6,7 @@
 
     <script type="text/javascript">
 
-        // Variables to use in javascript 
+        // Variables to use in javascript
         var fullscreenTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.fullscreen', default:'Fullscreen!')}';
         var removeTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.remove', default:'Remove')}';
         var collapseTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.collapse', default:'Collapse/Expand')}';
@@ -55,7 +55,7 @@
                     url: logConfigUrl,
                     beforeSend: function(){
                         logConfigButton.attr('disabled', true);
-                        logConfigButton.val('${message(code: "layouts.main_auth_admin.body.content.logConfiguration.portlet.button.updating", default: "Uploading configuration...")}');
+                        logConfigButton.find('span').text('${message(code: "layouts.main_auth_admin.body.content.logConfiguration.portlet.button.updating", default: "Uploading configuration...")}');
                         refreshIcon.removeClass('refresh-icon-stop');
                         refreshIcon.addClass('refresh-icon');
                     },
@@ -120,7 +120,7 @@
                     },
                     complete: function(){
                         logConfigButton.removeAttr('disabled');
-                        logConfigButton.val('${message(code: "layouts.main_auth_admin.body.content.logConfiguration.portlet.button", default: "Upload configuration")}');
+                        logConfigButton.find('span').text('${message(code: "layouts.main_auth_admin.body.content.logConfiguration.portlet.button", default: "Upload configuration")}');
                         refreshIcon.removeClass('refresh-icon');
                         refreshIcon.addClass('refresh-icon-stop');
                     }
@@ -194,7 +194,7 @@
                     <div class="logConfig-button">
                         <button name="log-button" id="log-button" class="btn green-dark btn-block">
                             <i class="fa fa-refresh fa-lg refresh-icon-stop refreshIcon"></i>
-                            <g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.button" default="Upload configuration"/>
+                            <span><g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.button" default="Upload configuration"/></span>
                         </button>
                     </div>
 
