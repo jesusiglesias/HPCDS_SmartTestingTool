@@ -9,8 +9,7 @@
         var fullscreenTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.fullscreen', default:'Fullscreen!')}';
         var removeTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.remove', default:'Remove')}';
         var collapseTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.collapse', default:'Collapse/Expand')}';
-        var logCongifUrl = '${g.createLink(controller: "customTasksBackend", action: 'reloadLogConfigAJAX')}';
-        var request;  // Stores the XMLHTTPRequest object
+        var logConfigUrl = '${g.createLink(controller: "customTasksBackend", action: 'reloadLogConfigAJAX')}';
 
         // Handler tooltips
         jQuery(document).ready(function() {
@@ -48,73 +47,83 @@
             // Call AJAX to upload the log configuration
             $('#log-button').click(function() {
 
-                if (!request) {
+                var logConfigButton = $('#log-button');
+                var refreshIcon = $('.refreshIcon');
 
-                    request = $.ajax({
-                                url: logCongifUrl
-                            })
-                            .success(function (data) {
+                $.ajax({
+                    url: logConfigUrl,
+                    beforeSend: function(){
+                        logConfigButton.attr('disabled', true);
+                        logConfigButton.val('${message(code: "layouts.main_auth_admin.body.content.logConfiguration.portlet.button.updating", default: "Uploading configuration...")}');
+                        refreshIcon.removeClass('refresh-icon-stop');
+                        refreshIcon.addClass('refresh-icon');
+                    },
+                    success: function(data) {
 
-                                // Configuration successfully updated
-                                if (data == "logSuccess") {
+                        // Configuration successfully updated
+                        if (data == "logSuccess") {
 
-                                    if (!$('.alert-log-success').length) {
+                            if (!$('.alert-log-success').length) {
 
-                                        $(".logConfig-portlet").before(
-                                                "<div class='alert alert-success alert-success-custom-backend alert-dismissable alert-log-success fade in'>" +
-                                                "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
-                                                "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.success', default:'New configuration log updated correctly.'))} </span>" +
-                                                "</div>");
+                                $(".logConfig-portlet").before(
+                                        "<div class='alert alert-success alert-success-custom-backend alert-dismissable alert-log-success fade in'>" +
+                                        "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                        "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.success', default:'New configuration log updated correctly.'))} </span>" +
+                                        "</div>");
 
-                                        createAutoClosingAlert('.alert-log-success');
-                                    }
+                                createAutoClosingAlert('.alert-log-success');
+                            }
 
-                                // Configuration without changes
-                                } else if (data == "logNoChanges"){
+                        // Configuration without changes
+                        } else if (data == "logNoChanges"){
 
-                                    if (!$('.alert-log-noChanges').length) {
+                            if (!$('.alert-log-noChanges').length) {
 
-                                        $(".logConfig-portlet").before(
-                                                "<div class='alert alert-info alert-info-custom-backend alert-dismissable alert-log-noChanges fade in'>" +
-                                                "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
-                                                "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.noChanges', default:'Configuration not updated. There are no changes in log file.'))} </span>" +
-                                                "</div>");
+                                $(".logConfig-portlet").before(
+                                        "<div class='alert alert-info alert-info-custom-backend alert-dismissable alert-log-noChanges fade in'>" +
+                                        "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                        "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.noChanges', default:'Configuration not updated. There are no changes in log file.'))} </span>" +
+                                        "</div>");
 
-                                        createAutoClosingAlert('.alert-log-noChanges');
-                                    }
+                                createAutoClosingAlert('.alert-log-noChanges');
+                            }
 
-                                // Error updating
-                                } else if (data = "logError") {
+                            // Error updating
+                        } else if (data = "logError") {
 
-                                    if (!$('.alert-log-error').length) {
+                            if (!$('.alert-log-error').length) {
 
-                                        $(".logConfig-portlet").before(
-                                                "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-error fade in'>" +
-                                                "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
-                                                "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.error', default:'<strong>Error!</strong> Log file not located. Please, you check the instructions.'))} </span>" +
-                                                "</div>");
+                                $(".logConfig-portlet").before(
+                                        "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-error fade in'>" +
+                                        "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                        "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.error', default:'<strong>Error!</strong> Log file not located. Please, you check the instructions.'))} </span>" +
+                                        "</div>");
 
-                                        createAutoClosingAlert('.alert-log-error');
-                                    }
-                                }
-                            })
-                            .error(function (data) {
+                                createAutoClosingAlert('.alert-log-error');
+                            }
+                        }
+                    },
+                    error: function(){
+                      console.log("error");
 
-                                if (!$('.alert-log-internalError').length) {
+                      if (!$('.alert-log-internalError').length) {
 
-                                    $(".logConfig-portlet").before(
-                                            "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-internalError fade in'>" +
-                                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
-                                            "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.internalError', default:'<strong>Error!</strong> An internal error has occurred during updating the configuration.'))} </span>" +
-                                            "</div>");
+                          $(".logConfig-portlet").before(
+                                  "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-internalError fade in'>" +
+                                  "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                  "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.internalError', default:'<strong>Error!</strong> An internal error has occurred during updating the configuration.'))} </span>" +
+                                  "</div>");
 
-                                    createAutoClosingAlert('.alert-log-internalError');
-                                }
-                            })
-                            .complete(function () { // Clear variable after response
-                                request = null;
-                            });
-                }
+                          createAutoClosingAlert('.alert-log-internalError');
+                      }
+                    },
+                    complete: function(){
+                        logConfigButton.removeAttr('disabled');
+                        logConfigButton.val('${message(code: "layouts.main_auth_admin.body.content.logConfiguration.portlet.button", default: "Upload configuration")}');
+                        refreshIcon.removeClass('refresh-icon');
+                        refreshIcon.addClass('refresh-icon-stop');
+                    }
+                });
             });
         });
     </script>
@@ -182,7 +191,10 @@
 
                     <!-- Update button -->
                     <div class="logConfig-button">
-                        <g:field type="button"  name="log-button" id="log-button" class="btn green-dark btn-block" value="${message(code: "layouts.main_auth_admin.body.content.logConfiguration.portlet.button", default: "Upload configuration")}"/>
+                        <button name="log-button" id="log-button" class="btn green-dark btn-block">
+                            <i class="fa fa-refresh fa-lg refresh-icon-stop refreshIcon"></i>
+                            <g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.button" default="Upload configuration"/>
+                        </button>
                     </div>
 
                 </div> <!-- /.Col -->

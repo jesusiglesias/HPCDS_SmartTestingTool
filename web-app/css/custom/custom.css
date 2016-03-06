@@ -82,6 +82,33 @@ input:-webkit-autofill:active {
     color: #FFFFFF !important;
 }
 
+/* Refresh icon animation */
+.refresh-icon-stop {
+    display: none !important;
+}
+
+.refresh-icon {
+    -webkit-animation: spinWebkit .7s infinite linear;
+    -moz-animation: spinMoz .7s infinite linear;
+    -o-animation: spinO .7s infinite linear;
+}
+
+@-webkit-keyframes spinWebkit {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes spinMoz {
+    from { -moz-transform: scale(1) rotate(0deg);}
+    to { -moz-transform: scale(1) rotate(360deg);}
+}
+
+@-o-keyframes spinMoz {
+    from { -o-transform: scale(1) rotate(0deg);}
+    to { -o-transform: scale(1) rotate(360deg);}
+}
+
+
 
 /* Back to top
 =================================================================== */
