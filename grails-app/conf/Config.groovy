@@ -152,7 +152,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/Topic/**':        ['ROLE_ADMIN', 'ROLE_USER'],
     '/Test/**':         ['ROLE_ADMIN', 'ROLE_USER'],
 
-    /* Custom tasks user
+    /* Custom general tasks user
     ======================================================*/
     // LoggedIn
     '/customTasksUser/loggedIn':           ['IS_AUTHENTICATED_REMEMBERED'],
@@ -168,12 +168,19 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/j_spring_security_exit_user':        ["authentication.name == 'admin_switch'"],
     // Restore password
     'customTasksUser/restorePassword':     ['permitAll'],
+    // Password
     'customTasksUser/sendEmail':           ['permitAll'],
     'customTasksUser/changePass':          ['permitAll'],
     'customTasksUser/updatePass':          ['permitAll'],
+    // User account state
+    'customTasksUser/statusNotification':  ['permitAll'],
+    '/customTasksUser/**':                 ['permitAll'],
+
+    /* Custom tasks admin (back-end)
+    ======================================================*/
     // Reload Log config
-    '/customTasksUser/reloadLogConfig':    ['ROLE_ADMIN'],
-    '/customTasksUser/**':                 ['permitAll']
+    '/customTasksBackend/reloadLogConfig':    ['ROLE_ADMIN'],
+    '/customTasksBackend/**':                 ['ROLE_ADMIN']
 ]
 
 // URL of login page (default: "/login/auth")

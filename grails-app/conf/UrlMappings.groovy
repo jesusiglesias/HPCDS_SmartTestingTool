@@ -35,7 +35,7 @@ class UrlMappings {
         ======================================================*/
         "/reauthenticate" (controller: 'login', action: 'full')
 
-        /* Custom tasks user
+        /* Custom general tasks user
         ======================================================*/
         // LoggedIn
         "/login/loggedIn" (controller: 'customTasksUser', action: 'loggedIn')
@@ -51,8 +51,11 @@ class UrlMappings {
         "/forgotPassword" (controller: 'customTasksUser', action: 'restorePassword')
         // Change password
         "/newPassword" (controller: 'customTasksUser', action: 'changePass')
+
+        /* Custom general tasks admin (back-end)
+        ======================================================*/
         // Reload log config
-        "/reloadLogConfig" (controller: 'customTasksUser', action: 'reloadLogConfig')
+        "/reloadLogConfig" (controller: 'customTasksBackend', action: 'reloadLogConfig')
 
         /* Information files
         ======================================================*/
