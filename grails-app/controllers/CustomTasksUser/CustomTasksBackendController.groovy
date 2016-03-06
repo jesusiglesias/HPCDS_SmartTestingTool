@@ -13,10 +13,19 @@ class CustomTasksBackendController {
     private static Map<String, Integer> fileHashMap = [:]
 
     /**
-     * It reloads automatically the changes done in Log4j external file.
+     * It shows the reload log configuration page.
      */
     def reloadLogConfig () {
-        log.debug("CustomTasksUserController:reloadConfig()")
+        log.debug("CustomTasksBackendController:reloadLogConfig()")
+
+        render view: 'reloadLogConfig'
+    }
+
+    /**
+     * It reloads automatically the changes done in Log4j external file by means of AJAX.
+     */
+    def reloadLogConfigAJAX () {
+        log.debug("CustomTasksBackendController:reloadLogConfigAJAX()")
 
         // External files of properties
         ConfigObject config = Holders.config
@@ -36,11 +45,11 @@ class CustomTasksBackendController {
                 text = Holders.applicationContext.getResource(filePath)?.file?.text
             } catch (FileNotFoundException e) {
                 // Ignore the exception if file not found on specified path
-                log.error("CustomTasksUserController:reloadConfig():File not found: ${e.message}")
+                log.error("CustomTasksBackendController:reloadLogConfigAJAX():File not found: ${e.message}")
 
-                // TODO Add default
-                flash.reloadConfig = g.message(code:"customTasksUser.reloadConfig.notFound", default: "")
+                render("logError")
             }
+
             // If file have data
             if (text) {
                 // Calculate hashCode of text
@@ -54,21 +63,16 @@ class CustomTasksBackendController {
 
                     fileHashMap.put(filePath, hashCode)
 
-                    log.debug("CustomTasksUserController:reloadConfig():Configuration updated successfully")
+                    log.debug("CustomTasksBackendController:reloadLogConfigAJAX():success")
 
-                    // TODO Add default
-                    flash.reloadConfig = g.message(code: "customTasksUser.reloadConfig.success", default: "")
+                    render("logSuccess")
 
                 } else {
-                    log.debug("CustomTasksUserController:reloadConfig():No changes")
+                    log.debug("CustomTasksBackendController:reloadLogConfigAJAX():noChanges")
 
-                    // TODO Add default
-                    flash.reloadConfig = g.message(code: "customTasksUser.reloadConfig.noChanges" , default: "")
+                    render("logNoChanges")
                 }
             }
         }
-        // TODO
-        redirect(uri: '/index')
     }
-
 }

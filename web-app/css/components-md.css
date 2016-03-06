@@ -10567,15 +10567,15 @@ Customized Bootstrap Popover
     display: none !important;
 }
 
-/***
-Portlets
-***/
+/* Portlets
+=================================================================== */
+
 /* Full Screen portlet mode */
 .page-portlet-fullscreen {
     overflow: hidden;
 }
 
-/* Basic portlet */
+/* Portlet box */
 .portlet {
     margin-top: 0;
     margin-bottom: 25px;
@@ -10585,6 +10585,12 @@ Portlets
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
     border-radius: 2px;
+}
+
+.portlet:hover,
+.portlet:active,
+.portlet:focus {
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.40);
 }
 
 .portlet.portlet-fullscreen {
@@ -10847,6 +10853,7 @@ Portlets
 
 .portlet > .portlet-body p {
     margin-top: 0;
+    text-align: justify;
 }
 
 .portlet > .portlet-empty {
@@ -10891,7 +10898,7 @@ Portlets
     margin-bottom: 10px;
 }
 
-/* Box portlet */
+/* Box portlet TODO
 .portlet.box {
     padding: 0 !important;
 }
@@ -10939,6 +10946,7 @@ Portlets
     background-color: #fff;
     padding: 15px;
 }
+*/
 
 /* Light Portlet */
 .portlet.light {
@@ -10954,8 +10962,9 @@ Portlets
     border-bottom: 1px solid #eef1f5;
 }
 
+/* Color inverse portlet */
 .portlet.light.bg-inverse {
-    background: #f1f4f7;
+    background: #F6F6F6;
 }
 
 .portlet.light > .portlet-title {
@@ -11101,6 +11110,13 @@ Portlets
     padding-bottom: 25px;
 }
 
+/* Title h4 log confgiration portlet */
+.log-portlet-h4 {
+    margin-bottom: 20px !important;
+}
+
+/* Tab pane TODO
+=================================================================== */
 .tab-pane > p:last-child {
     margin-bottom: 0;
 }

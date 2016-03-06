@@ -485,14 +485,13 @@
                     <li class="heading">
                         <h3 class="uppercase"><g:message code="layouts.main_auth_admin.sidebar.title.configuration" default="Configurations"/></h3>
                     </li>
-                    <li class="nav-item active open">
-                        <!-- TODO -->
-                        <a href="javascript:;" class="nav-link nav-toggle">
+                    <li class="nav-item">
+                        <!-- TODO Nav-toggle -->
+                        <g:link controller="customTasksBackend" action="reloadLogConfig" class="nav-link nav-toggle">
                             <i class="icon-settings"></i>
                             <span class="title"><g:message code="layouts.main_auth_admin.sidebar.logConfiguration" default="Log configuration"/></span>
-                            <span class="selected"></span>
-                            <span class="arrow open"></span>
-                        </a>
+                            <span class="arrow"></span>
+                        </g:link>
                     </li>
                     <!-- /.CONFIGURATION -->
 
@@ -543,7 +542,7 @@
     <g:javascript src="layout.js"/>
 
     <!-- PAGE LEVEL SCRIPTS -->
-    <g:javascript src="dashboard.min.js"/>
+    <%-- <g:javascript src="dashboard.min.js"/> --%>
     <!-- TODO -->
     <g:javascript src="authentication/jquery.validate.min.js"/>
     <g:javascript src="authentication/additional-methods.min.js"/>

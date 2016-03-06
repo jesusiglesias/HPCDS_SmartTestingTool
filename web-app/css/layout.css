@@ -1784,7 +1784,7 @@ body {
     letter-spacing: -1px;
     display: block;
     font-weight: 300;
-    margin: 25px 7px;
+    margin: 48px 7px 48px 7px;
     font-size: 26px;
 }
 
@@ -1998,11 +1998,11 @@ body {
         overflow: hidden;
     }
 
-    .page-content-wrapper .page-content .page-title {
+    .page-title {
         font-size: 22px;
     }
 
-    .page-content-wrapper .page-content .page-title small {
+    .page-title small {
         font-size: 15px;
         padding-top: 3px;
     }
@@ -2020,20 +2020,22 @@ body {
 /* Max-width: 480px */
 @media (max-width: 480px) {
 
-    .page-content-wrapper .page-content .page-title {
+    .page-title {
         font-size: 20px;
+        margin: 14px -2px 25px 6px;
     }
 
     /* Dashboard date range panel */
-    .page-content-wrapper .page-content .page-title small {
+    .page-title small {
         display: block;
         clear: both;
         padding-top: 0;
         font-size: 14px;
     }
 
-    .page-title {
-        margin: -10px -2px 25px 6px;
+    /* Subtitle in log configuration page */
+    .subtitle-logPage {
+        display: inline !important;
     }
 
     .icon-title-admin {
@@ -2049,7 +2051,7 @@ body {
     }
 
     .page-title {
-        margin: -10px -2px 25px -2px;
+        margin: 0 -2px 25px -2px;
     }
 }
 

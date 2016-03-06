@@ -49,6 +49,40 @@ input:-webkit-autofill:active {
     outline:none;
 }
 
+/* Custom tasks admin - General elements
+=================================================================== */
+/* Log configuration */
+.logConfig-button {
+    margin: 70px 0 40px 0;
+}
+
+/* Log configuration - Alerts */
+.alert-log-success,
+.alert-log-noChanges,
+.alert-log-error,
+.alert-log-internalError {
+    margin: 0 0 60px 0;
+}
+
+.alert-danger-custom-backend {
+    background-color: #C16868 !important;
+    border-color: #040202 !important;
+    color: #FFFFFF !important;
+}
+
+.alert-success-custom-backend {
+    background-color: #7AAB78 !important;
+    border-color: #040202 !important;
+    color: #FFFFFF !important;
+}
+
+.alert-info-custom-backend {
+    background-color: #5984C4 !important;
+    border-color: #040202 !important;
+    color: #FFFFFF !important;
+}
+
+
 /* Back to top
 =================================================================== */
 .back-to-top {
@@ -168,5 +202,18 @@ input:-webkit-autofill:active {
     .logoHP-admin img {
         width: 90px;
         height: 90px;
+    }
+
+    /* Log configuration */
+    .logConfig-button {
+        margin: 50px 0 40px 0;
+    }
+
+    /* Log configuration - Alerts */
+    .alert-log-success,
+    .alert-log-noChanges,
+    .alert-log-error,
+    .alert-log-internalError {
+        margin: 0 0 45px 0;
     }
 }

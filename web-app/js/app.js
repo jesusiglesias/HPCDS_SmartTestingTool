@@ -93,7 +93,7 @@ var App = function() {
     // Handles portlet tools & actions
     var handlePortletTools = function() {
 
-        // handle portlet remove
+        // Handle portlet remove
         body.on('click', '.portlet > .portlet-title > .tools > a.remove', function(e) {
             e.preventDefault();
             var portlet = $(this).closest(".portlet");
@@ -111,7 +111,7 @@ var App = function() {
             portlet.remove();
         });
 
-        // handle portlet fullscreen
+        // Handle portlet fullscreen
         body.on('click', '.portlet > .portlet-title .fullscreen', function(e) {
             e.preventDefault();
             var portlet = $(this).closest(".portlet");
@@ -120,6 +120,7 @@ var App = function() {
                 portlet.removeClass('portlet-fullscreen');
                 $('body').removeClass('page-portlet-fullscreen');
                 portlet.children('.portlet-body').css('height', 'auto');
+
             } else {
                 var height = App.getViewPort().height -
                     portlet.children('.portlet-title').outerHeight() -
@@ -133,6 +134,7 @@ var App = function() {
             }
         });
 
+        // TODO
         body.on('click', '.portlet > .portlet-title > .tools > a.reload', function(e) {
             e.preventDefault();
             var el = $(this).closest(".portlet").children(".portlet-body");
@@ -183,7 +185,7 @@ var App = function() {
             }
         });
 
-        // load ajax data on page init
+        // TODO load ajax data on page init
         $('.portlet .portlet-title a.reload[data-load="true"]').click();
 
         body.on('click', '.portlet > .portlet-title > .tools > .collapse, .portlet .portlet-title > .tools > .expand', function(e) {
@@ -387,15 +389,18 @@ var App = function() {
     };
 
     // Handles Bootstrap Tooltips.
+    /* TODO Tooltips
     var handleTooltips = function() {
-        // global tooltips
+
+        // Global tooltips
         $('.tooltips').tooltip();
 
-        // portlet tooltips
+        // Portlet tooltips
         $('.portlet > .portlet-title .fullscreen').tooltip({
             container: 'body',
             title: 'Fullscreen'
         });
+        // TODO
         $('.portlet > .portlet-title > .tools > .reload').tooltip({
             container: 'body',
             title: 'Reload'
@@ -404,6 +409,8 @@ var App = function() {
             container: 'body',
             title: 'Remove'
         });
+
+        // TODO
         $('.portlet > .portlet-title > .tools > .config').tooltip({
             container: 'body',
             title: 'Settings'
@@ -412,7 +419,7 @@ var App = function() {
             container: 'body',
             title: 'Collapse/Expand'
         });
-    };
+    }; */
 
     // Handles Bootstrap Dropdowns
     var handleDropdowns = function() {
@@ -613,7 +620,7 @@ var App = function() {
             handleAlerts(); //handle closabled alerts
             handleDropdowns(); // handle dropdowns
             handleTabs(); // handle tabs
-            handleTooltips(); // handle bootstrap tooltips
+            // TODO Tooltips handleTooltips(); // handle bootstrap tooltips
             handlePopovers(); // handles bootstrap popovers
             handleAccordions(); //handles accordions 
             handleModals(); // handle modals
@@ -638,7 +645,7 @@ var App = function() {
             handleSelect2(); // handle custom Select2 dropdowns
             handleFancybox(); // handle fancy box
             handleDropdowns(); // handle dropdowns
-            handleTooltips(); // handle bootstrap tooltips
+            // TODO Tooltips handleTooltips(); // handle bootstrap tooltips
             handlePopovers(); // handles bootstrap popovers
             handleAccordions(); //handles accordions 
             handleBootstrapConfirmation(); // handle bootstrap confirmations
