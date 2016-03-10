@@ -1,6 +1,8 @@
-/**
-Core script to handle the entire theme and core functions
-**/
+/*-------------------------------------------------------------------------------------------*
+ *                                      CORE JAVASCRIPT                                      *
+ *-------------------------------------------------------------------------------------------*/
+
+/** Core script to handle the entire theme and core functions **/
 var App = function() {
 
     // IE mode
@@ -21,8 +23,7 @@ var App = function() {
 
     var body = $('body');
 
-    // theme layout color set
-
+    // Theme layout color set TODO
     var brandColors = {
         'blue': '#89C4F4',
         'red': '#F3565D',
@@ -32,7 +33,7 @@ var App = function() {
         'yellow': '#F8CB00'
     };
 
-    // initializes main settings
+    // It initializes main settings
     var handleInit = function() {
 
         if (body.css('direction') === 'rtl') {
@@ -44,39 +45,39 @@ var App = function() {
         isIE10 = !!navigator.userAgent.match(/MSIE 10.0/);
 
         if (isIE10) {
-            $('html').addClass('ie10'); // detect IE10 version
+            $('html').addClass('ie10'); // Detect IE10 version
         }
 
         if (isIE10 || isIE9 || isIE8) {
-            $('html').addClass('ie'); // detect IE10 version
+            $('html').addClass('ie'); // Detect IE10 version
         }
     };
 
-    // runs callback functions set by App.addResponsiveHandler().
+    // It runs callback functions set by App.addResponsiveHandler().
     var _runResizeHandlers = function() {
-        // reinitialize other subscribed elements
+        // It reinitialize other subscribed elements
         for (var i = 0; i < resizeHandlers.length; i++) {
             var each = resizeHandlers[i];
             each.call();
         }
     };
 
-    // handle the layout reinitialization on window resize
+    // It handles the layout reinitialization on window resize
     var handleOnResize = function() {
         var resize;
         if (isIE8) {
             var currheight;
             $(window).resize(function() {
                 if (currheight == document.documentElement.clientHeight) {
-                    return; //quite event since only body resized not window.
+                    return; // Quite event since only body resized not window.
                 }
                 if (resize) {
                     clearTimeout(resize);
                 }
                 resize = setTimeout(function() {
                     _runResizeHandlers();
-                }, 50); // wait 50ms until window resize finishes.                
-                currheight = document.documentElement.clientHeight; // store last body client height
+                }, 50); // Wait 50ms until window resize finishes.
+                currheight = document.documentElement.clientHeight; // Store last body client height
             });
         } else {
             $(window).resize(function() {
@@ -85,15 +86,15 @@ var App = function() {
                 }
                 resize = setTimeout(function() {
                     _runResizeHandlers();
-                }, 50); // wait 50ms until window resize finishes.
+                }, 50); // Wait 50ms until window resize finishes.
             });
         }
     };
 
-    // Handles portlet tools & actions
+    // It handles portlet tools & actions
     var handlePortletTools = function() {
 
-        // Handle portlet remove
+        // It handles portlet remove
         body.on('click', '.portlet > .portlet-title > .tools > a.remove', function(e) {
             e.preventDefault();
             var portlet = $(this).closest(".portlet");
@@ -111,7 +112,7 @@ var App = function() {
             portlet.remove();
         });
 
-        // Handle portlet fullscreen
+        // It handles portlet fullscreen
         body.on('click', '.portlet > .portlet-title .fullscreen', function(e) {
             e.preventDefault();
             var portlet = $(this).closest(".portlet");
@@ -154,7 +155,7 @@ var App = function() {
                     success: function(res) {
                         App.unblockUI(el);
                         el.html(res);
-                        App.initAjax() // reinitialize elements & plugins for newly loaded content
+                        App.initAjax(); // Reinitialize elements & plugins for newly loaded content
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         App.unblockUI(el);
@@ -173,7 +174,7 @@ var App = function() {
                     }
                 });
             } else {
-                // for demo purpose
+                // For demo purpose
                 App.blockUI({
                     target: el,
                     animate: true,
@@ -201,7 +202,7 @@ var App = function() {
         });
     };
 
-    // Handles custom checkboxes & radios using jQuery Uniform plugin
+    // It handles custom checkboxes & radios using jQuery Uniform plugin
     var handleUniform = function() {
         if (!$().uniform) {
             return;
@@ -217,31 +218,31 @@ var App = function() {
         }
     };
 
-    // Handlesmaterial design checkboxes
+    // It handles material design checkboxes
     var handleMaterialDesign = function() {
 
         // Material design ckeckbox and radio effects
         body.on('click', '.md-checkbox > label, .md-radio > label', function() {
             var the = $(this);
-            // find the first span which is our circle/bubble
+            // Find the first span which is our circle/bubble
             var el = $(this).children('span:first-child');
               
-            // add the bubble class (we do this so it doesnt show on page load)
+            // Add the bubble class (we do this so it doesnt show on page load)
             el.addClass('inc');
               
-            // clone it
+            // Clone it
             var newone = el.clone(true);  
               
-            // add the cloned version before our original
+            // Add the cloned version before our original
             el.before(newone);  
               
-            // remove the original so that it is ready to run on next click
+            // It removes the original so that it is ready to run on next click
             $("." + el.attr("class") + ":last", the).remove();
         }); 
 
         if (body.hasClass('page-md')) {
+
             // Material design click effect
-            // credit where credit's due; http://thecodeplayer.com/walkthrough/ripple-click-effect-google-material-design       
             var element, circle, d, x, y;
             $('body').on('click', 'a.btn, button.btn, input.btn, label.btn', function(e) { 
                 element = $(this);
@@ -292,7 +293,7 @@ var App = function() {
         });
     };
 
-    // Handles custom checkboxes & radios using jQuery iCheck plugin
+    // It handles custom checkboxes & radios using jQuery iCheck plugin
     var handleiCheck = function() {
         if (!$().iCheck) {
             return;
@@ -317,7 +318,7 @@ var App = function() {
         });
     };
 
-    // Handles Bootstrap switches
+    // It handles Bootstrap switches
     var handleBootstrapSwitch = function() {
         if (!$().bootstrapSwitch) {
             return;
@@ -325,7 +326,7 @@ var App = function() {
         $('.make-switch').bootstrapSwitch();
     };
 
-    // Handles Bootstrap confirmations
+    // It handles Bootstrap confirmations
     var handleBootstrapConfirmation = function() {
         if (!$().confirmation) {
             return;
@@ -333,14 +334,14 @@ var App = function() {
         $('[data-toggle=confirmation]').confirmation({ container: 'body', btnOkClass: 'btn btn-sm btn-success', btnCancelClass: 'btn btn-sm btn-danger'});
     }
     
-    // Handles Bootstrap Accordions.
+    // It handles Bootstrap Accordions.
     var handleAccordions = function() {
         $('body').on('shown.bs.collapse', '.accordion.scrollable', function(e) {
             App.scrollTo($(e.target));
         });
     };
 
-    // Handles Bootstrap Tabs.
+    // It handles Bootstrap Tabs.
     var handleTabs = function() {
         //activate tab if tab id provided in the URL
         if (location.hash) {
@@ -359,9 +360,9 @@ var App = function() {
         }
     };
 
-    // Handles Bootstrap Modals.
+    // It handles Bootstrap Modals.
     var handleModals = function() {        
-        // fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class. 
+        // Fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class.
         body.on('hide.bs.modal', function() {
             if ($('.modal:visible').size() > 1 && $('html').hasClass('modal-open') === false) {
                 $('html').addClass('modal-open');
@@ -370,25 +371,25 @@ var App = function() {
             }
         });
 
-        // fix page scrollbars issue
+        // Fix page scrollbars issue
         body.on('show.bs.modal', '.modal', function() {
             if ($(this).hasClass("modal-scroll")) {
                 $('body').addClass("modal-open-noscroll");
             }
         });
 
-        // fix page scrollbars issue
+        // Fix page scrollbars issue
         body.on('hide.bs.modal', '.modal', function() {
             $('body').removeClass("modal-open-noscroll");
         });
 
-        // remove ajax content and remove cache on modal closed 
+        // Remove ajax content and remove cache on modal closed
         body.on('hidden.bs.modal', '.modal:not(.modal-cached)', function () {
             $(this).removeData('bs.modal');
         });
     };
 
-    // Handles Bootstrap Tooltips.
+    // It handles Bootstrap Tooltips.
     /* TODO Tooltips
     var handleTooltips = function() {
 
@@ -421,7 +422,7 @@ var App = function() {
         });
     }; */
 
-    // Handles Bootstrap Dropdowns
+    // It handles Bootstrap Dropdowns
     var handleDropdowns = function() {
         /*
           Hold dropdown on click  
@@ -449,7 +450,7 @@ var App = function() {
         });
     };
 
-    // Handle Hower Dropdowns
+    // It handles Hover Dropdowns
     var handleDropdownHover = function() {
         $('[data-hover="dropdown"]').not('.hover-initialized').each(function() {
             $(this).dropdownHover();
@@ -457,23 +458,22 @@ var App = function() {
         });
     };
 
-    // Handle textarea autosize 
+    // It handles textarea autosize
     var handleTextareaAutosize = function() {
         if (typeof(autosize) == "function") {
             autosize(document.querySelector('textarea.autosizeme'));
         }
     }
 
-    // Handles Bootstrap Popovers
+    // It handles Bootstrap Popovers
 
-    // last popep popover
+    // Last poped popover
     var lastPopedPopover;
 
     var handlePopovers = function() {
         $('.popovers').popover();
 
-        // close last displayed popover
-
+        // Close last displayed popover
         $(document).on('click.bs.popover.data-api', function(e) {
             if (lastPopedPopover) {
                 lastPopedPopover.popover('hide');
@@ -481,12 +481,12 @@ var App = function() {
         });
     };
 
-    // Handles scrollable contents using jQuery SlimScroll plugin.
+    // It handles scrollable contents using jQuery SlimScroll plugin. TODO
     var handleScrollers = function() {
         App.initSlimScroll('.scroller');
     };
 
-    // Handles Image Preview using jQuery Fancybox plugin
+    // HaIt handlesndles Image Preview using jQuery Fancybox plugin
     var handleFancybox = function() {
         if (!jQuery.fancybox) {
             return;
@@ -507,7 +507,7 @@ var App = function() {
         }
     };
 
-    // Handles counterup plugin wrapper
+    // It handles counterup plugin wrapper
     var handleCounterup = function() {
         if (!$().counterUp) {
             return;
@@ -546,7 +546,7 @@ var App = function() {
         }
     };
 
-    // Handle Select2 Dropdowns
+    // It handles Select2 Dropdowns
     var handleSelect2 = function() {
         if ($().select2) {
             $.fn.select2.defaults.set("theme", "bootstrap");
@@ -558,8 +558,8 @@ var App = function() {
         }
     };
 
-    // handle group element heights
-   var handleHeight = function() {
+    // It handles group element heights
+    var handleHeight = function() {
        $('[data-auto-height]').each(function() {
             var parent = $(this);
             var items = $('[data-height]', parent);
@@ -594,84 +594,81 @@ var App = function() {
                 $(parent.attr('data-related')).css('height', parent.height());
             }
        });       
-    }
-    
-    //* END:CORE HANDLERS *//
+    }; // /.App function()
 
     return {
 
-        //main function to initiate the theme
+        // Main function to initiate the theme
         init: function() {
-            //IMPORTANT!!!: Do not modify the core handlers call order.
 
             //Core handlers
-            handleInit(); // initialize core variables
-            handleOnResize(); // set and handle responsive    
+            handleInit();       // Initialize core variables
+            handleOnResize();   // Set and handle responsive
 
             //UI Component handlers     
-            handleMaterialDesign(); // handle material design       
-            handleUniform(); // hanfle custom radio & checkboxes
-            handleiCheck(); // handles custom icheck radio and checkboxes
-            handleBootstrapSwitch(); // handle bootstrap switch plugin
-            handleScrollers(); // handles slim scrolling contents 
-            handleFancybox(); // handle fancy box
-            handleSelect2(); // handle custom Select2 dropdowns
-            handlePortletTools(); // handles portlet action bar functionality(refresh, configure, toggle, remove)
-            handleAlerts(); //handle closabled alerts
-            handleDropdowns(); // handle dropdowns
-            handleTabs(); // handle tabs
+            handleMaterialDesign();         // It handles material design
+            handleUniform();                // It handles custom radio & checkboxes
+            handleiCheck();                 // It handles custom icheck radio and checkboxes
+            handleBootstrapSwitch();        // It handles bootstrap switch plugin
+            handleScrollers();              // It handles slim scrolling contents
+            handleFancybox();               // It handles fancy box
+            handleSelect2();                // It handles custom Select2 dropdowns
+            handlePortletTools();           // It handles portlet action bar functionality (refresh, configure, toggle, remove)
+            handleAlerts();                 // It handles closabled alerts
+            handleDropdowns();              // It handles dropdowns
+            handleTabs();                   // It handles tabs
             // TODO Tooltips handleTooltips(); // handle bootstrap tooltips
-            handlePopovers(); // handles bootstrap popovers
-            handleAccordions(); //handles accordions 
-            handleModals(); // handle modals
-            handleBootstrapConfirmation(); // handle bootstrap confirmations
-            handleTextareaAutosize(); // handle autosize textareas
-            handleCounterup(); // handle counterup instances
+            handlePopovers();               // It handles bootstrap popovers
+            handleAccordions();             // It handles accordions
+            handleModals();                 // It handles modals
+            handleBootstrapConfirmation();  // It handles bootstrap confirmations
+            handleTextareaAutosize();       // It handles autosize textareas
+            handleCounterup();              // It handles counterup instances
 
             //Handle group element heights
-            this.addResizeHandler(handleHeight); // handle auto calculating height on window resize
+            this.addResizeHandler(handleHeight);    // It handles auto calculating height on window resize
 
             // Hacks
-            handleFixInputPlaceholderForIE(); //IE8 & IE9 input placeholder issue fix
+            handleFixInputPlaceholderForIE();       // IE8 & IE9 input placeholder issue fix
         },
 
         //main function to initiate core javascript after ajax complete
         initAjax: function() {
-            handleUniform(); // handles custom radio & checkboxes     
-            handleiCheck(); // handles custom icheck radio and checkboxes
-            handleBootstrapSwitch(); // handle bootstrap switch plugin
-            handleDropdownHover(); // handles dropdown hover       
-            handleScrollers(); // handles slim scrolling contents 
-            handleSelect2(); // handle custom Select2 dropdowns
-            handleFancybox(); // handle fancy box
-            handleDropdowns(); // handle dropdowns
+            handleUniform();                // It handles custom radio & checkboxes
+            handleiCheck();                 // It handles custom icheck radio and checkboxes
+            handleBootstrapSwitch();        // It handles bootstrap switch plugin
+            handleDropdownHover();          // It handles dropdown hover
+            handleScrollers();              // It handles slim scrolling contents
+            handleSelect2();                // It handles custom Select2 dropdowns
+            handleFancybox();               // It handles fancy box
+            handleDropdowns();              // It handles dropdowns
             // TODO Tooltips handleTooltips(); // handle bootstrap tooltips
-            handlePopovers(); // handles bootstrap popovers
-            handleAccordions(); //handles accordions 
-            handleBootstrapConfirmation(); // handle bootstrap confirmations
+            handlePopovers();               // It handles bootstrap popovers
+            handleAccordions();             // It handles accordions
+            handleBootstrapConfirmation();  // It handles bootstrap confirmations
         },
 
-        //init main components 
+        // Init main components
         initComponents: function() {
             this.initAjax();
         },
 
-        //public function to remember last opened popover that needs to be closed on click
+        // Public function to remember last opened popover that needs to be closed on click
         setLastPopedPopover: function(el) {
             lastPopedPopover = el;
         },
 
-        //public function to add callback a function which will be called on window resize
+        // Public function to add callback a function which will be called on window resize
         addResizeHandler: function(func) {
             resizeHandlers.push(func);
         },
 
-        //public functon to call _runresizeHandlers
+        // Public function to call _runresizeHandlers
         runResizeHandlers: function() {
             _runResizeHandlers();
         },
 
-        // wrApper function to scroll(focus) to an element
+        // Wrapper function to scroll(focus) to an element
         scrollTo: function(el, offeset) {
             var pos = (el && el.size() > 0) ? el.offset().top : 0;
 
@@ -691,6 +688,7 @@ var App = function() {
             }, 'slow');
         },
 
+        // TODO
         initSlimScroll: function(el) {
             $(el).each(function() {
                 if ($(this).attr("data-initialized")) {
@@ -706,7 +704,7 @@ var App = function() {
                 }
 
                 $(this).slimScroll({
-                    allowPageScroll: true, // allow page scroll when the element scroll is ended
+                    allowPageScroll: true, // Allow page scroll when the element scroll is ended
                     size: '7px',
                     color: ($(this).attr("data-handle-color") ? $(this).attr("data-handle-color") : '#bbb'),
                     wrapperClass: ($(this).attr("data-wrapper-class") ? $(this).attr("data-wrapper-class") : 'slimScrollDiv'),
@@ -730,7 +728,7 @@ var App = function() {
 
                     var attrList = {};
 
-                    // store the custom attribures so later we will reassign.
+                    // Store the custom attributes so later we will reassign.
                     if ($(this).attr("data-handle-color")) {
                         attrList["data-handle-color"] = $(this).attr("data-handle-color");
                     }
@@ -754,7 +752,7 @@ var App = function() {
 
                     var the = $(this);
 
-                    // reassign custom attributes
+                    // Reassign custom attributes
                     $.each(attrList, function(key, value) {
                         the.attr(key, value);
                     });
@@ -763,12 +761,12 @@ var App = function() {
             });
         },
 
-        // function to scroll to the top
+        // Function to scroll to the top TODO
         scrollTop: function() {
             App.scrollTo();
         },
 
-        // wrApper function to  block element(indicate loading)
+        // Wrapper function to  block element(indicate loading)
         blockUI: function(options) {
             options = $.extend(true, {}, options);
             var html = '';
@@ -782,7 +780,7 @@ var App = function() {
                 html = '<div class="loading-message ' + (options.boxed ? 'loading-message-boxed' : '') + '"><img src="' + this.getGlobalImgPath() + 'loading-spinner-grey.gif" align=""><span>&nbsp;&nbsp;' + (options.message ? options.message : 'LOADING...') + '</span></div>';
             }
 
-            if (options.target) { // element blocking
+            if (options.target) { // Element blocking
                 var el = $(options.target);
                 if (el.height() <= ($(window).height())) {
                     options.cenrerY = true;
@@ -821,7 +819,7 @@ var App = function() {
             }
         },
 
-        // wrApper function to  un-block element(finish loading)
+        // Wrapper function to  un-block element(finish loading)
         unblockUI: function(target) {
             if (target) {
                 $(target).unblock({
@@ -852,15 +850,15 @@ var App = function() {
         alert: function(options) {
 
             options = $.extend(true, {
-                container: "", // alerts parent container(by default placed after the page breadcrumbs)
-                place: "append", // "append" or "prepend" in container 
-                type: 'success', // alert's type
-                message: "", // alert's message
-                close: true, // make alert closable
-                reset: true, // close all previouse alerts first
-                focus: true, // auto scroll to the alert after shown
-                closeInSeconds: 0, // auto close after defined seconds
-                icon: "" // put icon before the message
+                container: "",      // Alerts parent container(by default placed after the page breadcrumbs)
+                place: "append",    // "append" or "prepend" in container
+                type: 'success',    // Alert's type
+                message: "",        // Alert's message
+                close: true,        // Make alert closable
+                reset: true,        // Close all previouse alerts first
+                focus: true,        // Auto scroll to the alert after shown
+                closeInSeconds: 0,  // Auto close after defined seconds
+                icon: ""            // Put icon before the message
             }, options);
 
             var id = App.getUniqueID("App_alert");
@@ -902,7 +900,7 @@ var App = function() {
             return id;
         },
 
-        // initializes uniform elements
+        // Initializes uniform elements
         initUniform: function(els) {
             if (els) {
                 $(els).each(function() {
@@ -916,17 +914,17 @@ var App = function() {
             }
         },
 
-        //wrApper function to update/sync jquery uniform checkbox & radios
+        // Wrapper function to update/sync jquery uniform checkbox & radios
         updateUniform: function(els) {
             $.uniform.update(els); // update the uniform checkbox & radios UI after the actual input control state changed
         },
 
-        //public function to initialize the fancybox plugin
+        // Public function to initialize the fancybox plugin
         initFancybox: function() {
             handleFancybox();
         },
 
-        //public helper function to get actual input value(used in IE9 and IE8 due to placeholder attribute not supported)
+        // Public helper function to get actual input value(used in IE9 and IE8 due to placeholder attribute not supported)
         getActualVal: function(el) {
             el = $(el);
             if (el.val() === el.attr("placeholder")) {
@@ -935,7 +933,7 @@ var App = function() {
             return el.val();
         },
 
-        //public function to get a paremeter by name from URL
+        // Public function to get a paremeter by name from URL
         getURLParameter: function(paramName) {
             var searchString = window.location.search.substring(1),
                 i, val, params = searchString.split("&");
@@ -949,7 +947,7 @@ var App = function() {
             return null;
         },
 
-        // check for device touch support
+        // Check for device touch support
         isTouchDevice: function() {
             try {
                 document.createEvent("TouchEvent");
@@ -959,7 +957,7 @@ var App = function() {
             }
         },
 
-        // To get the correct viewport width based on  http://andylangton.co.uk/articles/javascript/get-viewport-size-javascript/
+        // To get the correct viewport width
         getViewPort: function() {
             var e = window,
                 a = 'inner';
@@ -978,22 +976,22 @@ var App = function() {
             return 'prefix_' + Math.floor(Math.random() * (new Date()).getTime());
         },
 
-        // check IE8 mode
+        // Check IE8 mode
         isIE8: function() {
             return isIE8;
         },
 
-        // check IE9 mode
+        // Check IE9 mode
         isIE9: function() {
             return isIE9;
         },
 
-        //check RTL mode
+        // Check RTL mode TODO
         isRTL: function() {
             return isRTL;
         },
 
-        // check IE8 mode
+        // Check IE8 mode
         isAngularJsApp: function() {
             return (typeof angular == 'undefined') ? false : true;
         },
@@ -1026,7 +1024,7 @@ var App = function() {
             return assetsPath + globalCssPath;
         },
 
-        // get layout color code by color name
+        // Get layout color code by color name
         getBrandColor: function(name) {
             if (brandColors[name]) {
                 return brandColors[name];
@@ -1038,10 +1036,10 @@ var App = function() {
         getResponsiveBreakpoint: function(size) {
             // bootstrap responsive breakpoints
             var sizes = {
-                'xs' : 480,     // extra small
-                'sm' : 768,     // small
-                'md' : 992,     // medium
-                'lg' : 1200     // large
+                'xs' : 480,     // Extra small
+                'sm' : 768,     // Small
+                'md' : 992,     // Medium
+                'lg' : 1200     // Large
             };
 
             return sizes[size] ? sizes[size] : 0; 
@@ -1051,7 +1049,7 @@ var App = function() {
 }();
 
 jQuery(document).ready(function() {    
-   App.init(); // init metronic core componets
+   App.init(); // Init core components
 
 
    console.log("init")

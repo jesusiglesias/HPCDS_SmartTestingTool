@@ -1,5 +1,5 @@
 /*-------------------------------------------------------------------------------------------*
- *                                      CORE JAVASCRIPT                                      *
+ *                                    LAYOUT JAVASCRIPT                                      *
  *-------------------------------------------------------------------------------------------*/
 
 /** Core script to handle the entire theme and core functions.
@@ -523,7 +523,7 @@ var Layout = function () {
                 }
             }
         });        
-    }; // /.Layout function
+    }; // /.Layout function()
 
     // Main init methods to initialize the layout
     return {
