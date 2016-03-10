@@ -221,17 +221,19 @@
                         </form>
                     </li> <!-- /.Search form -->
 
-                    <li class="nav-item start">
+                    <li class="nav-item start active open">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="icon-home"></i>
                             <span class="title"><g:message code="layouts.main_auth_admin.sidebar.title.dashboard" default="Dashboard"/></span>
-                            <span class="arrow"></span>
+                            <span class="selected"></span>
+                            <span class="arrow open"></span>
                         </a>
                         <ul class="sub-menu">
-                            <li class="nav-item start">
+                            <li class="nav-item start active open">
                                 <g:link controller="customTasksBackend" action="dashboard" class="nav-link">
                                     <i class="fa fa-bar-chart"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.title.dashboard.statistics" default="Statistics"/></span>
+                                    <span class="selected"></span>
                                 </g:link>
                             </li>
                         </ul>
@@ -397,12 +399,12 @@
                     </li>
 
                     <!-- Answer -->
-                    <li class="nav-item active open">
+                    <li class="nav-item">
                         <a href="javascript:;" class="nav-link nav-toggle">
                             <i class="fa fa-pencil"></i>
                             <span class="title"><g:message code="layouts.main_auth_admin.sidebar.answer" default="Answer"/></span>
                             <span class="selected"></span>
-                            <span class="arrow open"></span>
+                            <span class="arrow"></span>
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
