@@ -180,6 +180,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     ======================================================*/
     // Reload Log config
     '/customTasksBackend/reloadLogConfig':    ['ROLE_ADMIN'],
+    '/customTasksBackend/dashboard':          ['ROLE_ADMIN'],
     '/customTasksBackend/**':                 ['ROLE_ADMIN']
 ]
 
@@ -223,6 +224,6 @@ grails.plugin.springsecurity.switchUser.switchFailureUrl = '/switchFail'
 grails.plugin.springsecurity.switchUser.usernameParameter = 'stt_hp_username'
 
 // URL redirection based on role
-springsecurity.urlredirection.admin = '/user'
+springsecurity.urlredirection.admin = '/dashboard'
 springsecurity.urlredirection.user = '/user/create'
 springsecurity.urlredirection.noRole = '/noRole'

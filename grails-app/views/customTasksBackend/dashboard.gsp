@@ -23,9 +23,11 @@
                 </ul>
             </div> <!-- /.Page-bar -->
 
-            <!-- Page-title TODO -->
-            <h3 class="page-title">Dashboard
-                <small>dashboard & statistics</small>
+            <!-- Page-title -->
+            <h3 class="page-title">
+                <g:link controller="customTasksBackend" action="dashboard"><g:message code="layouts.main_auth_admin.body.title.controlPanel" default="Control panel"/></g:link>
+                <i class="icon-arrow-right icon-title-admin"></i>
+                <small class="subtitle-logPage"><g:message code="layouts.main_auth_admin.body.subtitle.controlPanel" default="Statistics"/></small>
             </h3>
 
         </div> <!-- Page-content -->

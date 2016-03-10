@@ -56,6 +56,7 @@ class UrlMappings {
         ======================================================*/
         // Reload log config
         "/reloadLogConfig" (controller: 'customTasksBackend', action: 'reloadLogConfig')
+        "/dashboard" (controller: 'customTasksBackend', action: 'dashboard')
 
         /* Information files
         ======================================================*/

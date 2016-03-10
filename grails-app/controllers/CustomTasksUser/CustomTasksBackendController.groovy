@@ -13,6 +13,15 @@ class CustomTasksBackendController {
     private static Map<String, Integer> fileHashMap = [:]
 
     /**
+     * It shows the main page of the admin user.
+     */
+    def dashboard (){
+        log.debug("CustomTasksBackendController:dashboard()")
+
+        render view: 'dashboard'
+    }
+
+    /**
      * It shows the reload log configuration page.
      */
     def reloadLogConfig () {

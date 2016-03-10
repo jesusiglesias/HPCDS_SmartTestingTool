@@ -229,8 +229,7 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item start">
-                                <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link controller="customTasksBackend" action="dashboard" class="nav-link">
                                     <i class="fa fa-bar-chart"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.title.dashboard.statistics" default="Statistics"/></span>
                                 </g:link>
