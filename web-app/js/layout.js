@@ -1,16 +1,14 @@
-/**
-Core script to handle the entire theme and core functions
-**/
+/*-------------------------------------------------------------------------------------------*
+ *                                      CORE JAVASCRIPT                                      *
+ *-------------------------------------------------------------------------------------------*/
+
+/** Core script to handle the entire theme and core functions.
+ * It handles responsive layout on screen size resize or mobile device rotate. **/
 var Layout = function () {
 
     var layoutImgPath = '../img/';
-
     var layoutCssPath = '../css/';
-
     var resBreakpointMd = App.getResponsiveBreakpoint('md');
-
-    //* BEGIN:CORE HANDLERS *//
-    // this function handles responsive layout on screen size resize or mobile device rotate.
 
     // Set proper height for sidebar and content. The content and sidebar height must be synced always.
     var handleSidebarAndContentHeight = function () {
@@ -80,7 +78,7 @@ var Layout = function () {
         var slideSpeed = parseInt(menu.data("slide-speed"));
         var keepExpand = menu.data("keep-expanded");
 
-        // disable active states
+        // Disable active states
         menu.find('li.active').removeClass('active');
         menu.find('li > a > .selected').remove();
 
@@ -124,7 +122,7 @@ var Layout = function () {
 
         var pageSidebarMenu = $('.page-sidebar-menu');
 
-        // handle sidebar link click
+        // Handle sidebar link click
         pageSidebarMenu.on('click', 'li > a.nav-toggle, li > a > span.nav-toggle', function (e) {
             var that = $(this).closest('.nav-item').children('.nav-link');
 
@@ -201,7 +199,7 @@ var Layout = function () {
             e.preventDefault();
         });
 
-        // handle menu close for angularjs version
+        // Handle menu close for angularjs version
         if (App.isAngularJsApp()) {
             $(".page-sidebar-menu li > a").on("click", function(e) {
                 if (App.getViewPort().width < resBreakpointMd && $(this).next().hasClass('sub-menu') === false) {
@@ -210,7 +208,7 @@ var Layout = function () {
             });
         }
 
-        // handle ajax links within sidebar menu
+        // Handle ajax links within sidebar menu
         $('.page-sidebar').on('click', ' li > a.ajaxify', function (e) {
             e.preventDefault();
             App.scrollTop();
@@ -259,7 +257,7 @@ var Layout = function () {
             });
         });
 
-        // handle ajax link within main content
+        // Handle ajax link within main content
         $('.page-content').on('click', '.ajaxify', function (e) {
             e.preventDefault();
             App.scrollTop();
@@ -292,21 +290,21 @@ var Layout = function () {
             });
         });
 
-        // handle scrolling to top on responsive menu toggler click when header is fixed for mobile view
+        // Handle scrolling to top on responsive menu toggler click when header is fixed for mobile view
         $(document).on('click', '.page-header-fixed-mobile .page-header .responsive-toggler', function(){
             App.scrollTop(); 
         });      
      
-        // handle sidebar hover effect        
+        // Handle sidebar hover effect
         handleFixedSidebarHoverEffect();
 
-        // handle the search bar close
+        // Handle the search bar close
         $('.page-sidebar').on('click', '.sidebar-search .remove', function (e) {
             e.preventDefault();
             $('.sidebar-search').removeClass("open");
         });
 
-        // handle the search query submit on enter press
+        // Handle the search query submit on enter press
         $('.page-sidebar .sidebar-search').on('keypress', 'input.form-control', function (e) {
             if (e.which == 13) {
                 $('.sidebar-search').submit();
@@ -314,7 +312,7 @@ var Layout = function () {
             }
         });
 
-        // handle the search submit(for sidebar search and responsive mode of the header search)
+        // Handle the search submit(for sidebar search and responsive mode of the header search)
         $('.sidebar-search .submit').on('click', function (e) {
             e.preventDefault();
             if ($('body').hasClass("page-sidebar-closed")) {
@@ -331,7 +329,7 @@ var Layout = function () {
             }
         });
 
-        // handle close on body click
+        // Handle close on body click
         if ($('.sidebar-search').size() !== 0) {
             $('.sidebar-search .input-group').on('click', function(e){
                 e.stopPropagation();
@@ -355,7 +353,7 @@ var Layout = function () {
         return sidebarHeight;
     };
 
-    // Handles fixed sidebar
+    // Handle fixed sidebar
     var handleFixedSidebar = function () {
         var menu = $('.page-sidebar-menu');
 
@@ -373,7 +371,7 @@ var Layout = function () {
         }
     };
 
-    // Handles sidebar toggler to close/hide the sidebar.
+    // Handle sidebar toggler to close/hide the sidebar.
     var handleFixedSidebarHoverEffect = function () {
         var body = $('body');
         if (body.hasClass('page-sidebar-fixed')) {
@@ -389,7 +387,7 @@ var Layout = function () {
         }
     };
 
-    // Hanles sidebar toggler
+    // Handle sidebar toggler
     var handleSidebarToggler = function () {
         var body = $('body');
         if ($.cookie && $.cookie('sidebar_closed') === '1' && App.getViewPort().width >= resBreakpointMd) {
@@ -397,7 +395,7 @@ var Layout = function () {
             $('.page-sidebar-menu').addClass('page-sidebar-menu-closed');
         }
 
-        // handle sidebar show/hide
+        // Handle sidebar show/hide
         $('body').on('click', '.sidebar-toggler', function (e) {
             var sidebar = $('.page-sidebar');
             var sidebarMenu = $('.page-sidebar-menu');
@@ -424,9 +422,9 @@ var Layout = function () {
         });
     };
 
-    // Handles the horizontal menu
+    // Handle the horizontal menu
     var handleHorizontalMenu = function () {
-        //handle tab click
+        // Handle tab click
         $('.page-header').on('click', '.hor-menu a[data-toggle="tab"]', function (e) {
             e.preventDefault();
             var nav = $(".hor-menu .nav");
@@ -438,7 +436,7 @@ var Layout = function () {
             new_link.find("a:first").append('<span class="selected"></span>');
         });
 
-        // handle search box expand/collapse        
+        // Handle search box expand/collapse
         $('.page-header').on('click', '.search-form', function (e) {
             $(this).addClass("open");
             $(this).find('.form-control').focus();
@@ -449,7 +447,7 @@ var Layout = function () {
             });
         });
 
-        // handle hor menu search form on enter press
+        // Handle hor menu search form on enter press
         $('.page-header').on('keypress', '.hor-menu .search-form .form-control', function (e) {
             if (e.which == 13) {
                 $(this).closest('.search-form').submit();
@@ -457,14 +455,14 @@ var Layout = function () {
             }
         });
 
-        // handle header search button click
+        // Handle header search button click
         $('.page-header').on('mousedown', '.search-form.open .submit', function (e) {
             e.preventDefault();
             e.stopPropagation();
             $(this).closest('.search-form').submit();
         });
 
-        // handle hover dropdown menu for desktop devices only
+        // Handle hover dropdown menu for desktop devices only
         $('[data-hover="megamenu-dropdown"]').not('.hover-initialized').each(function() {   
             $(this).dropdownHover(); 
             $(this).addClass('hover-initialized'); 
@@ -475,7 +473,7 @@ var Layout = function () {
         });
     };
 
-    // Handles Bootstrap Tabs.
+    // Handle Bootstrap Tabs
     var handleTabs = function () {
         // fix content height on tab click
         $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', function () {
@@ -483,7 +481,7 @@ var Layout = function () {
         });
     };
 
-    // Hanlde 100% height elements(block, portlet, etc)
+    // Handle 100% height elements(block, portlet, etc)
     var handle100HeightContent = function () {
 
         $('.full-height-content').each(function(){
@@ -525,15 +523,13 @@ var Layout = function () {
                 }
             }
         });        
-    };
-    //* END:CORE HANDLERS *//
+    }; // /.Layout function
 
+    // Main init methods to initialize the layout
     return {
-        // Main init methods to initialize the layout
-        //IMPORTANT!!!: Do not modify the core handlers call order.
 
         initHeader: function() {
-            handleHorizontalMenu(); // handles horizontal menu    
+            handleHorizontalMenu(); // It handles horizontal menu
         },
 
         setSidebarMenuActiveLink: function(mode, el) {
@@ -541,24 +537,25 @@ var Layout = function () {
         },
 
         initSidebar: function() {
-            //layout handlers
-            handleFixedSidebar(); // handles fixed sidebar menu
-            handleSidebarMenu(); // handles main menu
-            handleSidebarToggler(); // handles sidebar hide/show
+            // Layout handlers
+            handleFixedSidebar(); // It handles fixed sidebar menu
+            handleSidebarMenu(); // It handles main menu
+            handleSidebarToggler(); // It handles sidebar hide/show
 
-            if (App.isAngularJsApp()) {      
-                handleSidebarMenuActiveLink('match'); // init sidebar active links 
+            // TODO
+            if (App.isAngularJsApp()) {
+                handleSidebarMenuActiveLink('match'); // Init sidebar active links
             }
 
-            App.addResizeHandler(handleFixedSidebar); // reinitialize fixed sidebar on window resize
+            App.addResizeHandler(handleFixedSidebar); // Reinitialize fixed sidebar on window resize
         },
 
         initContent: function() {
-            handle100HeightContent(); // handles 100% height elements(block, portlet, etc)
-            handleTabs(); // handle bootstrah tabs
+            handle100HeightContent(); // It handles 100% height elements (block, portlet, etc.)
+            handleTabs(); // It handles bootstrap tabs
 
-            App.addResizeHandler(handleSidebarAndContentHeight); // recalculate sidebar & content height on window resize
-            App.addResizeHandler(handle100HeightContent); // reinitialize content height on window resize 
+            App.addResizeHandler(handleSidebarAndContentHeight); // Recalculate sidebar & content height on window resize
+            App.addResizeHandler(handle100HeightContent); // Reinitialize content height on window resize
         },
 
         init: function () {            
@@ -567,7 +564,7 @@ var Layout = function () {
             this.initContent();
         },
 
-        //public function to fix the sidebar and content height accordingly
+        // Public function to fix the sidebar and content height accordingly
         fixContentHeight: function () {
             handleSidebarAndContentHeight();
         },
