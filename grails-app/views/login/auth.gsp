@@ -52,38 +52,46 @@
                   function() {
                       $.ajax({
                           url: methodUrl,
-                          data: { email: $('#emailUser').val(), type: '${flash.errorMessageType}' }
-                      })
-                      .success(function(data) {
-                          if (data == "sent") {
-                              swal({
-                                  title: _successEmail,
-                                  text: _descriptionSuccessEmail,
-                                  type: 'success',
-                                  confirmButtonText: _okButton,
-                                  closeOnConfirm: true,
-                                  customClass: 'successSweetAlert'
-                              })
-                          } else {
+                          data: { email: $('#emailUser').val(), type: '${flash.errorMessageType}' },
+                          beforeSend: function(){
+                              swal.disableButtons();
+                              $('.sweet-confirm').text('');
+                          },
+                          success: function(data) {
+                              if (data == "sent") {
+                                  swal({
+                                      title: _successEmail,
+                                      text: _descriptionSuccessEmail,
+                                      type: 'success',
+                                      confirmButtonText: _okButton,
+                                      closeOnConfirm: true,
+                                      customClass: 'successSweetAlert'
+                                  })
+                              } else {
+                                  swal({
+                                      title: _stateErrorAccount,
+                                      text: _errorEmail,
+                                      type: 'error',
+                                      confirmButtonText: _okButton,
+                                      closeOnConfirm: true,
+                                      customClass: 'errorSweetAlert'
+                                  })
+                              }
+                          },
+                          error: function(data) {
                               swal({
                                   title: _stateErrorAccount,
-                                  text: _errorEmail,
+                                  text: _internalError,
                                   type: 'error',
                                   confirmButtonText: _okButton,
                                   closeOnConfirm: true,
                                   customClass: 'errorSweetAlert'
                               })
+                          },
+                          complete: function(){
+                              swal.enableButtons();
+                              $('.sweet-confirm').text(_sendButton);
                           }
-                      })
-                      .error(function(data) {
-                          swal({
-                              title: _stateErrorAccount,
-                              text: _internalError,
-                              type: 'error',
-                              confirmButtonText: _okButton,
-                              closeOnConfirm: true,
-                              customClass: 'errorSweetAlert'
-                          })
                       });
                   });
               </script>
