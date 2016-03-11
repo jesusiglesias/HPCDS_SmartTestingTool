@@ -13,13 +13,13 @@ var App = function() {
 
     var resizeHandlers = [];
 
-    var assetsPath = '../assets/';
+    // var assetsPath = '../assets/';
 
-    var globalImgPath = 'global/img/';
+    var globalImgPath = '../img/';
 
-    var globalPluginsPath = 'global/plugins/';
+    var globalPluginsPath = '../js/';
 
-    var globalCssPath = 'global/css/';
+    var globalCssPath = '../css/';
 
     var body = $('body');
 
@@ -36,9 +36,10 @@ var App = function() {
     // It initializes main settings
     var handleInit = function() {
 
+        /* TODO
         if (body.css('direction') === 'rtl') {
             isRTL = true;
-        }
+        }*/
 
         isIE8 = !!navigator.userAgent.match(/MSIE 8.0/);
         isIE9 = !!navigator.userAgent.match(/MSIE 9.0/);
@@ -987,41 +988,57 @@ var App = function() {
         },
 
         // Check RTL mode TODO
-        isRTL: function() {
+       /* TODO isRTL: function() {
             return isRTL;
-        },
+        }, */
 
         // Check IE8 mode
-        isAngularJsApp: function() {
+        /* TODO isAngularJsApp: function() {
             return (typeof angular == 'undefined') ? false : true;
-        },
+        }, */
 
+            /* TODO
         getAssetsPath: function() {
             return assetsPath;
         },
 
         setAssetsPath: function(path) {
             assetsPath = path;
-        },
+        }, */
 
         setGlobalImgPath: function(path) {
             globalImgPath = path;
         },
 
+            /* TODO
         getGlobalImgPath: function() {
             return assetsPath + globalImgPath;
+        },*/
+
+        getGlobalImgPath: function() {
+            return globalImgPath;
         },
 
         setGlobalPluginsPath: function(path) {
             globalPluginsPath = path;
         },
 
+            /* TODO
         getGlobalPluginsPath: function() {
             return assetsPath + globalPluginsPath;
+        },*/
+
+        getGlobalPluginsPath: function() {
+            return globalPluginsPath;
         },
 
+            /* TODO
         getGlobalCssPath: function() {
             return assetsPath + globalCssPath;
+        },*/
+
+        getGlobalCssPath: function() {
+            return globalCssPath;
         },
 
         // Get layout color code by color name
