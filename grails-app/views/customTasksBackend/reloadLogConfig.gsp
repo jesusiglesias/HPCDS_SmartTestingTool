@@ -50,6 +50,7 @@
 
                 var logConfigButton = $('#log-button');
                 var refreshIcon = $('.refreshIcon');
+                var portlet = $('.logConfig-portlet');
 
                 $.ajax({
                     url: logConfigUrl,
@@ -66,11 +67,19 @@
 
                             if (!$('.alert-log-success').length) {
 
-                                $(".logConfig-portlet").before(
-                                        "<div class='alert alert-success alert-success-custom-backend alert-dismissable alert-log-success fade in'>" +
-                                        "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
-                                        "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.success', default:'New configuration log updated correctly.'))} </span>" +
-                                        "</div>");
+                                if (portlet.length) {
+                                    portlet.before(
+                                            "<div class='alert alert-success alert-success-custom-backend alert-dismissable alert-log-success fade in'>" +
+                                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                            "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.success', default:'New configuration log updated correctly.'))} </span>" +
+                                            "</div>");
+                                } else {
+                                    $(".logConfig-button").before(
+                                            "<div class='alert alert-success alert-success-custom-backend alert-dismissable alert-log-success fade in'>" +
+                                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                            "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.success', default:'New configuration log updated correctly.'))} </span>" +
+                                            "</div>");
+                                }
 
                                 createAutoClosingAlert('.alert-log-success');
                             }
@@ -80,25 +89,41 @@
 
                             if (!$('.alert-log-noChanges').length) {
 
-                                $(".logConfig-portlet").before(
-                                        "<div class='alert alert-info alert-info-custom-backend alert-dismissable alert-log-noChanges fade in'>" +
-                                        "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
-                                        "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.noChanges', default:'Configuration not updated. There are no changes in log file.'))} </span>" +
-                                        "</div>");
+                                if (portlet.length) {
+                                    portlet.before(
+                                            "<div class='alert alert-info alert-info-custom-backend alert-dismissable alert-log-noChanges fade in'>" +
+                                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                            "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.noChanges', default:'Configuration not updated. There are no changes in log file.'))} </span>" +
+                                            "</div>");
+                                } else {
+                                    $(".logConfig-button").before(
+                                            "<div class='alert alert-info alert-info-custom-backend alert-dismissable alert-log-noChanges fade in'>" +
+                                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                            "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.noChanges', default:'Configuration not updated. There are no changes in log file.'))} </span>" +
+                                            "</div>");
+                                }
 
                                 createAutoClosingAlert('.alert-log-noChanges');
                             }
 
-                            // Error updating
+                        // Error updating
                         } else if (data = "logError") {
 
                             if (!$('.alert-log-error').length) {
 
-                                $(".logConfig-portlet").before(
-                                        "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-error fade in'>" +
-                                        "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
-                                        "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.error', default:'<strong>Error!</strong> Log file not located. Please, you check the instructions.'))} </span>" +
-                                        "</div>");
+                                if (portlet.length) {
+                                    portlet.before(
+                                            "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-error fade in'>" +
+                                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                            "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.error', default:'<strong>Error!</strong> Log file not located. Please, you check the instructions.'))} </span>" +
+                                            "</div>");
+                                } else {
+                                    $(".logConfig-button").before(
+                                            "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-error fade in'>" +
+                                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                            "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.error', default:'<strong>Error!</strong> Log file not located. Please, you check the instructions.'))} </span>" +
+                                            "</div>");
+                                }
 
                                 createAutoClosingAlert('.alert-log-error');
                             }
@@ -109,12 +134,20 @@
 
                       if (!$('.alert-log-internalError').length) {
 
-                          $(".logConfig-portlet").before(
-                                  "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-internalError fade in'>" +
-                                  "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
-                                  "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.internalError', default:'<strong>Error!</strong> An internal error has occurred during updating the configuration.'))} </span>" +
-                                  "</div>");
-
+                          if (portlet.length) {
+                              portlet.before(
+                                      "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-internalError fade in'>" +
+                                      "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                      "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.internalError', default:'<strong>Error!</strong> An internal error has occurred during updating the configuration.'))} </span>" +
+                                      "</div>");
+                          } else {
+                              $(".logConfig-button").before(
+                                      "<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-log-internalError fade in'>" +
+                                      "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+                                      "<span> ${raw(g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.alert.internalError', default:'<strong>Error!</strong> An internal error has occurred during updating the configuration.'))} </span>" +
+                                      "</div>");
+                          }
+                          
                           createAutoClosingAlert('.alert-log-internalError');
                       }
                     },
