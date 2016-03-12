@@ -13,6 +13,7 @@ var Login = function() {
         var forgetForm = $(".forget-form");
         var restoreButton = $("#restore-button");
         var emailField = $("#email");
+        var refreshIcon = $('.refreshIcon');
 
         restoreButton.attr('disabled', 'disabled');
 
@@ -64,6 +65,15 @@ var Login = function() {
 
             errorPlacement: function (error, element) {
                 error.insertAfter(element.closest('.form-control'));
+            },
+
+            submitHandler: function (form) {
+                restoreButton.attr('disabled', true);
+                restoreButton.find('span').text(_sending);
+                refreshIcon.removeClass('refresh-icon-stop');
+                refreshIcon.addClass('refresh-icon');
+
+                form.submit(); // Submit the form
             }
         });
 

@@ -16,7 +16,8 @@
 
     <!-- Variables to use in javascript -->
     <script type="text/javascript">
-        var _forgotPassword = '${g.message(code:'views.login.auth.forgotPassword.email.help', default:'Enter a valid email')}'
+        var _forgotPassword = '${g.message(code:'views.login.auth.forgotPassword.email.help', default:'Enter a valid email')}';
+        var _sending = '${g.message(code: "customTasksUser.login.stateAccount.sending", default: "Sending...")}'
     </script>
 
     <!-- Authentication -->
@@ -60,7 +61,10 @@
 
             <div class="form-actions">
                 <g:link type="button" uri="/" id="back-btn" class="btn green-dark back-button"><g:message code="views.login.auth.forgotPassword.back" default="Back"/></g:link>
-                <g:submitButton name="${g.message(code:'views.login.auth.forgotPassword.submit', default:'Submit')}" id="restore-button" class="btn green-dark pull-right"/>
+                <button type="submit" id="restore-button" class="btn green-dark pull-right">
+                    <i class="fa fa-refresh refresh-icon-stop refreshIcon"></i>
+                    <span><g:message code="views.login.auth.forgotPassword.submit" default="Submit"/></span>
+                </button>
             </div>
         </g:form> <!-- /. Forgot password form -->
     </div> <!-- /.Authentication -->
