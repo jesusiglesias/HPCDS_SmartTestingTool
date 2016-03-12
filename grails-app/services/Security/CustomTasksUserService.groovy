@@ -19,10 +19,6 @@ class CustomTasksUserService {
     def passwordEncoder
     def grailsApplication
 
-    // It obtains the base URL (domain)
-    @Value('${grails.serverURL}')
-    def baseURL
-
     /*-------------------------------------------------------------------------------------------*
      *                                     RESTORE PASSWORD                                      *
      *-------------------------------------------------------------------------------------------*/
@@ -63,7 +59,7 @@ class CustomTasksUserService {
                 to email
                 subject messageSource.getMessage("resetPassword.email.subject", null, "STT - Reset password", LocaleContextHolder.locale)
                 html(view: '/email/resetPassword',
-                        model: [token: token, baseURL: baseURL])
+                        model: [token: token])
             }
             return true
         } catch (Exception e) {
