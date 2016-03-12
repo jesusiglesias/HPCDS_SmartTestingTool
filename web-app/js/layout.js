@@ -315,7 +315,7 @@ var Layout = function () {
 
     // Main init methods to initialize the layout
     return {
-        
+
         initSidebar: function() {
             // Layout handlers
             handleFixedSidebar(); // It handles fixed sidebar menu

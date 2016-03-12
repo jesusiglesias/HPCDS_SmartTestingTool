@@ -57,8 +57,6 @@ class CustomTasksUserService {
         // It saves the token
         create_token(token)
 
-        log.error("SERVERURL: " + baseURL)
-
         // Send email
         try {
             mailService.sendMail {
