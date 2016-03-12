@@ -90,7 +90,6 @@
                           },
                           complete: function(){
                               swal.enableButtons();
-                              $('.sweet-confirm').text(_sendButton);
                           }
                       });
                   });
