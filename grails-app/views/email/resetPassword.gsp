@@ -215,7 +215,6 @@
                             <g:link uri="https://www.hpcds.com/es/">
                                 <img src="http://i.imgur.com/Rc60jfx.png" width="100" height="100"/>
                             </g:link>
-
                         </td>
                     </tr>
                 </table> <!-- /. Email Footer -->
