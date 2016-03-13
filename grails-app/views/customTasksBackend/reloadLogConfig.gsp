@@ -185,7 +185,7 @@
             <h3 class="page-title">
                 <g:link controller="customTasksBackend" action="reloadLogConfig"><g:message code="layouts.main_auth_admin.body.title.logConfiguration" default="Configuration"/></g:link>
                 <i class="icon-arrow-right icon-title-admin"></i>
-                <small class="subtitle-logPage"><g:message code="layouts.main_auth_admin.body.subtitle.logConfiguration" default="Reload log"/></small>
+                <small class="subtitle-inlinePage"><g:message code="layouts.main_auth_admin.body.subtitle.logConfiguration" default="Reload log"/></small>
             </h3>
 
             <!-- Contain page -->

@@ -2025,17 +2025,17 @@ body {
         margin: 14px -2px 25px 6px;
     }
 
+    /* Subtitle in log configuration page */
+    .subtitle-inlinePage {
+        display: inline !important;
+    }
+
     /* Dashboard date range panel */
     .page-title small {
         display: block;
         clear: both;
         padding-top: 0;
         font-size: 14px;
-    }
-
-    /* Subtitle in log configuration page */
-    .subtitle-logPage {
-        display: inline !important;
     }
 
     .icon-title-admin {
