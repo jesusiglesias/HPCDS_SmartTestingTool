@@ -146,8 +146,7 @@
                         <ul class="dropdown-menu dropdown-menu-default">
                             <!-- Profile -->
                             <li>
-                                <!-- TODO perfil -->
-                                <g:link controller="user" action="edit" id="">
+                                <g:link controller="secUser" action="edit" id="${sec.loggedInUserInfo(field:"id")}">
                                     <i class="icon-user"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
                                 </g:link>
                             </li>
