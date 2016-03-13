@@ -5,19 +5,30 @@
 <html>
 <!-- HEAD -->
 <head>
-
     <meta name="layout" content="main_login"/>
     <title><g:message code="views.login.auth.forgotPassword.head.title" default="STT | Restore password"/></title>
-
 </head> <!-- /.HEAD -->
 
 <!-- BODY -->
 <body>
 
-    <!-- Variables to use in javascript -->
     <script type="text/javascript">
+
+        // Variables to use in javascript
         var _forgotPassword = '${g.message(code:'views.login.auth.forgotPassword.email.help', default:'Enter a valid email')}';
-        var _sending = '${g.message(code: "customTasksUser.login.stateAccount.sending", default: "Sending...")}'
+        var _sending = '${g.message(code: "customTasksUser.login.stateAccount.sending", default: "Sending...")}';
+
+        // Auto close alert
+        function createAutoClosingAlert(selector) {
+
+            var alert = $(selector);
+
+            window.setTimeout(function () {
+                alert.hide(1000, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
     </script>
 
     <!-- Authentication -->
@@ -38,6 +49,9 @@
                     <button type="button" class="close" data-dismiss="alert"></button>
                     <p> ${raw(flash.successRestorePassword)} </p>
                 </div>
+                <g:javascript>
+                    createAutoClosingAlert('.alert-restorePassword');
+                </g:javascript>
             </g:if>
 
             <!-- Failure alert -->
@@ -47,6 +61,9 @@
                     <h5 class="alert-heading alert-reauthentication">${raw(g.message(code:'views.login.auth.error.title', default:'<strong>Error!</strong>'))} </h5>
                     <p> ${raw(flash.errorRestorePassword)} </p>
                 </div>
+                <g:javascript>
+                    createAutoClosingAlert('.alert-restorePassword');
+                </g:javascript>
             </g:if>
 
             <div class="form-group form-md-line-input form-md-floating-label has-success">

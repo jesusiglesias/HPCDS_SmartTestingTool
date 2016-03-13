@@ -5,9 +5,35 @@
 <html>
 <!-- HEAD -->
 <head>
-
     <meta name="layout" content="main_login"/>
     <title><g:message code="views.login.auth.head.title" default="Smart testing tool"/></title>
+
+    <script type="text/javascript">
+
+        // Variables to use in script
+        var methodUrl = '${g.createLink(controller: "customTasksUser", action: 'statusNotification')}';
+        var _stateErrorAccount = '${g.message(code:'customTasksUser.login.stateAccount', default:'Error!')}';
+        var inputEmail = '${g.field(type: 'email', id:'emailUser', name:'emailUser', autocomplete:'on')}';
+        var _okButton = '${g.message(code:'customTasksUser.login.stateAccount.ok', default:'OK')}';
+        var _sendButton = '${g.message(code:'customTasksUser.login.stateAccount.send', default:'Send')}';
+        var _cancelButton = '${g.message(code:'customTasksUser.login.stateAccount.cancel', default:'Cancel')}';
+        var _successEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful', default:'Email sent successfully!')}';
+        var _descriptionSuccessEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful.description', default:'Soon you will receive a response from the administrator.')}';
+        var _errorEmail = '${g.message(code:'customTasksUser.login.stateAccount.failure.description', default:'Email with incorrect format, non-existent in the system or a problem has occurred during sending email.')}';
+        var _internalError = '${g.message(code:'customTasksUser.login.stateAccount.failure.internalError', default:'It has not been able to connect to the internal server. Try again later.')}';
+
+        // Auto close alert
+        function createAutoClosingAlert(selector) {
+
+            var alert = $(selector);
+
+            window.setTimeout(function () {
+                alert.hide(1000, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+    </script>
 
 </head> <!-- /.HEAD -->
 
@@ -21,20 +47,6 @@
             <span class="form-title"><g:message code="views.login.auth.form.title" default="Welcome."/></span>
             <span class="form-subtitle"><g:message code="views.login.auth.form.subtitle" default="Please login."/></span>
         </div>
-
-        <!-- Variables to use in script -->
-        <script type="text/javascript">
-            var methodUrl = '${g.createLink(controller: "customTasksUser", action: 'statusNotification')}';
-            var _stateErrorAccount = '${g.message(code:'customTasksUser.login.stateAccount', default:'Error!')}';
-            var inputEmail = '${g.field(type: 'email', id:'emailUser', name:'emailUser', autocomplete:'on')}';
-            var _okButton = '${g.message(code:'customTasksUser.login.stateAccount.ok', default:'OK')}';
-            var _sendButton = '${g.message(code:'customTasksUser.login.stateAccount.send', default:'Send')}';
-            var _cancelButton = '${g.message(code:'customTasksUser.login.stateAccount.cancel', default:'Cancel')}';
-            var _successEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful', default:'Email sent successfully!')}';
-            var _descriptionSuccessEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful.description', default:'Soon you will receive a response from the administrator.')}';
-            var _errorEmail = '${g.message(code:'customTasksUser.login.stateAccount.failure.description', default:'Email with incorrect format, non-existent in the system or a problem has occurred during sending email.')}';
-            var _internalError = '${g.message(code:'customTasksUser.login.stateAccount.failure.internalError', default:'It has not been able to connect to the internal server. Try again later.')}';
-        </script>
 
         <!-- Account states notification -->
         <g:if test='${flash.errorLogin}'>
@@ -116,6 +128,9 @@
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                 <span> ${raw(flash.errorLoginUser)} </span>
             </div>
+            <g:javascript>
+                createAutoClosingAlert('.alert-notuser-reauth-invalidsession');
+            </g:javascript>
         </g:if>
 
         <!-- Reauthenticate notification -->
@@ -134,6 +149,9 @@
                 <h5 class="alert-heading alert-reauthentication">${raw(g.message(code:'views.login.auth.error.title', default:'<strong>Error!</strong>'))} </h5>
                 <p> ${flash.errorInvalidSessionAuthenticationException} </p>
             </div>
+            <g:javascript>
+                createAutoClosingAlert('.alert-notuser-reauth-invalidsession');
+            </g:javascript>
         </g:if>
 
         <!-- New password successful -->
@@ -142,6 +160,9 @@
                 <button type="button" class="close" data-dismiss="alert"></button>
                 <p> ${raw(flash.newPasswordSuccessful)} </p>
             </div>
+            <g:javascript>
+                createAutoClosingAlert('.alert-restorePassword');
+            </g:javascript>
         </g:if>
 
         <!-- Login form -->
