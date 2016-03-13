@@ -4,9 +4,7 @@
 
 var Login = function() {
 
-    /**
-     * Restore password form.
-     */
+    /** Restore password form */
     var handleForgetPassword = function () {
 
         // Reset password button activates when user enter the data

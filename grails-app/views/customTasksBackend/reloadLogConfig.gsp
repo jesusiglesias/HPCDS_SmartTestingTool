@@ -6,14 +6,14 @@
 
     <script type="text/javascript">
 
-        // Variables to use in javascript
-        var fullscreenTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.fullscreen', default:'Fullscreen!')}';
-        var removeTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.remove', default:'Remove')}';
-        var collapseTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.collapse', default:'Collapse/Expand')}';
-        var logConfigUrl = '${g.createLink(controller: "customTasksBackend", action: 'reloadLogConfigAJAX')}';
-
         // Handler tooltips
         jQuery(document).ready(function() {
+
+            // Variables to use in javascript
+            var fullscreenTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.fullscreen', default:'Fullscreen!')}';
+            var removeTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.remove', default:'Remove')}';
+            var collapseTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.collapse', default:'Collapse/Expand')}';
+            var logConfigUrl = '${g.createLink(controller: "customTasksBackend", action: 'reloadLogConfigAJAX')}';
 
             // Global tooltips
             $('.tooltips').tooltip();
@@ -34,7 +34,7 @@
             });
 
 
-            // Auto close alert */
+            // Auto close alert
             function createAutoClosingAlert(selector) {
                 var alert = $(selector);
 

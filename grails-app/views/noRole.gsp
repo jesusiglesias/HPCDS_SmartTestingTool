@@ -56,87 +56,84 @@
 		<script src="/js/html5shiv.min.js" type="text/javascript"></script>
     <![endif]-->
 
-</head> <!-- /.HEAD -->
-
-<!-- BODY -->
-<body class="error-page">
-
 	<!-- Email notification by means of AJAX -->
 	<script type="text/javascript">
 
-        // Variables to use in javascript
-        var methodUrl = '${g.createLink(controller: "customTasksUser", action: 'statusNotification')}';
-		var _stateErrorAccount = '${g.message(code:'customTasksUser.login.stateAccount', default:'Error!')}';
-		var inputEmail = '${g.field(type: 'email', id:'emailUser', name:'emailUser', autocomplete:'on')}';
-		var _okButton = '${g.message(code:'customTasksUser.login.stateAccount.ok', default:'OK')}';
-		var _sendButton = '${g.message(code:'customTasksUser.login.stateAccount.send', default:'Send')}';
-		var _cancelButton = '${g.message(code:'customTasksUser.login.stateAccount.cancel', default:'Cancel')}';
-		var _successEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful', default:'Email sent successfully!')}';
-		var _descriptionSuccessEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful.description', default:'Soon you will receive a response from the administrator.')}';
-		var _errorEmail = '${g.message(code:'customTasksUser.login.stateAccount.failure.description', default:'Email with incorrect format, non-existent in the system or a problem has occurred during sending email.')}';
-		var _internalError = '${g.message(code:'customTasksUser.login.stateAccount.failure.internalError', default:'It has not been able to connect to the internal server. Try again later.')}';
+		$(document).ready(function () {
 
-        $(document).ready(function () {
+			// Variables to use in javascript
+			var methodUrl = '${g.createLink(controller: "customTasksUser", action: 'statusNotification')}';
+			var _stateErrorAccount = '${g.message(code:'customTasksUser.login.stateAccount', default:'Error!')}';
+			var _okButton = '${g.message(code:'customTasksUser.login.stateAccount.ok', default:'OK')}';
+			var _successEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful', default:'Email sent successfully!')}';
+			var _descriptionSuccessEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful.description', default:'Soon you will receive a response from the administrator.')}';
+			var _errorEmail = '${g.message(code:'customTasksUser.login.stateAccount.failure.description', default:'Email with incorrect format, non-existent in the system or a problem has occurred during sending email.')}';
+			var _internalError = '${g.message(code:'customTasksUser.login.stateAccount.failure.internalError', default:'It has not been able to connect to the internal server. Try again later.')}';
 
 			$('#noRoleEmail-button').click(function (event) {
 
-                var noRoleSendButton = $('#noRoleEmail-button');
-                var refreshIcon = $('.refreshIcon');
+				var noRoleSendButton = $('#noRoleEmail-button');
+				var refreshIcon = $('.refreshIcon');
 
 				event.preventDefault();
 
 				$.ajax({
 					url: methodUrl,
 					data: {email: $('#noRoleEmail').val(), type: 'noRole'},
-                    beforeSend: function(){
-                        noRoleSendButton.attr('disabled', true);
-                        noRoleSendButton.find('span').text('${message(code: "customTasksUser.login.stateAccount.sending", default: "Sending...")}');
-                        refreshIcon.removeClass('refresh-icon-stop');
-                        refreshIcon.addClass('refresh-icon');
-                        $('.i-delete-noRole').css('right', '155px');
-                    },
-                    success: function (data) {
-                        if (data == "sent") {
-                            swal({
-                                title: _successEmail,
-                                text: _descriptionSuccessEmail,
-                                type: 'success',
-                                confirmButtonText: _okButton,
-                                closeOnConfirm: true,
-                                customClass: 'successSweetAlert'
-                            })
-                        } else {
-                            swal({
-                                title: _stateErrorAccount,
-                                text: _errorEmail,
-                                type: 'error',
-                                confirmButtonText: _okButton,
-                                closeOnConfirm: true,
-                                customClass: 'errorSweetAlert'
-                            })
-                        }
-				    },
-				    error: function () {
-                        swal({
-                            title: _stateErrorAccount,
-                            text: _internalError,
-                            type: 'error',
-                            confirmButtonText: _okButton,
-                            closeOnConfirm: true,
-                            customClass: 'errorSweetAlert'
-                        })
-                    },
-                    complete: function(){
-                        noRoleSendButton.removeAttr('disabled');
-                        noRoleSendButton.find('span').text('${message(code: "customTasksUser.login.stateAccount.send", default: "Send")}');
-                        refreshIcon.removeClass('refresh-icon');
-                        refreshIcon.addClass('refresh-icon-stop');
-                        $('.i-delete-noRole').css('right', '100px');
-                    }
+					beforeSend: function(){
+						noRoleSendButton.attr('disabled', true);
+						noRoleSendButton.find('span').text('${message(code: "customTasksUser.login.stateAccount.sending", default: "Sending...")}');
+						refreshIcon.removeClass('refresh-icon-stop');
+						refreshIcon.addClass('refresh-icon');
+						$('.i-delete-noRole').css('right', '155px');
+					},
+					success: function (data) {
+						if (data == "sent") {
+							swal({
+								title: _successEmail,
+								text: _descriptionSuccessEmail,
+								type: 'success',
+								confirmButtonText: _okButton,
+								closeOnConfirm: true,
+								customClass: 'successSweetAlert'
+							})
+						} else {
+							swal({
+								title: _stateErrorAccount,
+								text: _errorEmail,
+								type: 'error',
+								confirmButtonText: _okButton,
+								closeOnConfirm: true,
+								customClass: 'errorSweetAlert'
+							})
+						}
+					},
+					error: function () {
+						swal({
+							title: _stateErrorAccount,
+							text: _internalError,
+							type: 'error',
+							confirmButtonText: _okButton,
+							closeOnConfirm: true,
+							customClass: 'errorSweetAlert'
+						})
+					},
+					complete: function(){
+						noRoleSendButton.removeAttr('disabled');
+						noRoleSendButton.find('span').text('${message(code: "customTasksUser.login.stateAccount.send", default: "Send")}');
+						refreshIcon.removeClass('refresh-icon');
+						refreshIcon.addClass('refresh-icon-stop');
+						$('.i-delete-noRole').css('right', '100px');
+					}
 				});
 			});
 		});
 	</script>
+
+</head> <!-- /.HEAD -->
+
+<!-- BODY -->
+<body class="error-page">
 
 	<!-- Logo -->
 	<div class="logo-error">
@@ -194,8 +191,8 @@
 	<!-- LOAD JAVASCRIPT -->
 	<!-- Enable responsive CSS code on browsers that don't support it -->
 	<!--[if lt IE 9]>
-				<script src="js/respond.min.js"></script>
-				<![endif]-->
+			<script src="js/respond.min.js"></script>
+	<![endif]-->
 
 	<!-- CORE PLUGINS -->
 	<g:javascript src="bootstrap.min.js"/>
