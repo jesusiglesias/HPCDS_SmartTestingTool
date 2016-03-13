@@ -99,7 +99,7 @@ environments {
 /* Other configurations
  ============================================================================================= */
 // Default value of pagination
-paginate.defaultValue = 10
+paginate.defaultValue = 0
 
 /* Mail configuration
  ============================================================================================= */
@@ -146,8 +146,11 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     // TODO
 	'/index':           ['permitAll'],
 	'/index.gsp':       ['permitAll'],
-        /*****/
 
+    /* Domain
+    ======================================================*/
+    '/SecUser/**':      ['ROLE_ADMIN'],
+        // TODO
     '/User/**':         ['ROLE_ADMIN', 'ROLE_USER'],
     '/Topic/**':        ['ROLE_ADMIN', 'ROLE_USER'],
     '/Test/**':         ['ROLE_ADMIN', 'ROLE_USER'],

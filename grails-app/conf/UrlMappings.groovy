@@ -17,6 +17,12 @@ class UrlMappings {
         // Homepage
         "/"(controller: 'login', action: 'auth')
 
+        // Domain URLS
+        // Admin
+        "/administrator"(controller: 'secUser', action: 'index')
+        "/administrator/create"(controller: 'secUser', action: 'create')
+        "/administrator/edit/$id?(.$format)?"(controller: 'secUser', action: 'edit')
+
         /****************************/
         // TODO
         // Provisional
