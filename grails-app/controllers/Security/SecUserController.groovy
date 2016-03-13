@@ -1,6 +1,5 @@
 package Security
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
@@ -14,8 +13,7 @@ class SecUserController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Default value of pagination
-    // TODO Add dollar symbol
-    @Value('{paginate.defaultValue:10}')
+    @Value('${paginate.defaultValue:10}')
     def defaultPag
 
     /**
@@ -39,29 +37,29 @@ class SecUserController {
     }
 
     /**
-     * It shows the information of a secUserInstance.
+     * It shows the information of a secUser instance.
      *
-     * @param secUserInstance It represents the SecUser to show.
-     * @return secUserInstance Data of the secUserInstance.
+     * @param secUserInstance It represents the secUser to show.
+     * @return secUserInstance Data of the secUser instance.
      */
     def show(SecUser secUserInstance) {
         respond secUserInstance
     }
 
     /**
-     * It creates a new secUserInstance.
+     * It creates a new secUser instance.
      *
-     * @return return If the secUserInstance is null or has errors.
+     * @return return If the secUser instance is null or has errors.
      */
     def create() {
         respond new SecUser(params)
     }
 
     /**
-     * It saves a SecUser in database.
+     * It saves a secUser in database.
      *
-     * @param secUserInstance It represents the SecUser to save.
-     * @return return If the SecUser instance is null or has errors.
+     * @param secUserInstance It represents the secUser to save.
+     * @return return If the secUser instance is null or has errors.
      */
     @Transactional
     def save(SecUser secUserInstance) {
@@ -79,7 +77,7 @@ class SecUserController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'secUser.label', default: 'SecUser'), secUserInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.id])
                 redirect secUserInstance
             }
             '*' { respond secUserInstance, [status: CREATED] }
@@ -87,20 +85,20 @@ class SecUserController {
     }
 
     /**
-     * It edits a existing SecUser with the new values of each field.
+     * It edits a existing secUser with the new values of each field.
      *
-     * @param secUserInstance It represents the SecUser to edit.
-     * @return secUserInstance It represents the secUserInstance.
+     * @param secUserInstance It represents the secUser to edit.
+     * @return secUserInstance It represents the secUser instance.
      */
     def edit(SecUser secUserInstance) {
         respond secUserInstance
     }
 
     /**
-     * It updates a existing SecUser in database.
+     * It updates a existing secUser in database.
      *
-     * @param secUserInstance It represents the SecUser information to update.
-     * @return return If the SecUser instance is null or has errors.
+     * @param secUserInstance It represents the secUser information to update.
+     * @return return If the secUser instance is null or has errors.
      */
     @Transactional
     def update(SecUser secUserInstance) {
@@ -118,7 +116,7 @@ class SecUserController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'SecUser.label', default: 'SecUser'), secUserInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.id])
                 redirect secUserInstance
             }
             '*'{ respond secUserInstance, [status: OK] }
@@ -126,10 +124,10 @@ class SecUserController {
     }
 
     /**
-     * It deletes a existing SecUser in database.
+     * It deletes a existing secUser in database.
      *
-     * @param secUserInstance It represents the SecUser information to delete.
-     * @return return If the secUserInstance is null, the notFound function is called.
+     * @param secUserInstance It represents the secUser information to delete.
+     * @return return If the secUser instance is null, the notFound function is called.
      */
     @Transactional
     def delete(SecUser secUserInstance) {
@@ -143,7 +141,7 @@ class SecUserController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'SecUser.label', default: 'SecUser'), secUserInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -151,12 +149,12 @@ class SecUserController {
     }
 
     /**
-     * Its redirects to not found page if the secUserInstance was not found.
+     * Its redirects to not found page if the secUser instance was not found.
      */
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'secUser.label', default: 'SecUser'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'admin.label', default: 'Administrator'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
