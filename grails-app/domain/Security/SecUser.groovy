@@ -14,6 +14,7 @@ class SecUser implements Serializable {
 
 	transient springSecurityService
 
+	UUID id
 	// Attributes
 	String username
 	String password
@@ -79,6 +80,9 @@ class SecUser implements Serializable {
 
 	// It modifies the name of the password column in database
 	static mapping = {
+		id(generator: "uuid2", type: "uuid-binary", length: 16)
 		password column: '`password`'
+		// TODO
+		tablePerHierarchy(false)
 	}
 }

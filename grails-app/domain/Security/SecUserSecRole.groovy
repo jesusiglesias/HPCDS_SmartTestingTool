@@ -63,7 +63,7 @@ class SecUserSecRole implements Serializable {
 	 * @param secRoleId Id that represents to the SecRole.
      * @return SecUserSecRole Data of the SecUser and SecRole got.
      */
-	static SecUserSecRole get(long secUserId, long secRoleId) {
+	static SecUserSecRole get(UUID secUserId, long secRoleId) {
 		criteriaFor(secUserId, secRoleId).get()
 	}
 
@@ -74,7 +74,7 @@ class SecUserSecRole implements Serializable {
 	 * @param secRoleId Id that represents to the SecRole.
      * @return True If the SecUser and SecRole pair exists.
      */
-	static boolean exists(long secUserId, long secRoleId) {
+	static boolean exists(UUID secUserId, long secRoleId) {
 		criteriaFor(secUserId, secRoleId).count()
 	}
 
@@ -85,7 +85,7 @@ class SecUserSecRole implements Serializable {
 	 * @param secRoleId Id that represents to the SecRole.
      * @return DetachedCriteria Query that can be executed outside the scope of a session.
      */
-	private static DetachedCriteria criteriaFor(long secUserId, long secRoleId) {
+	private static DetachedCriteria criteriaFor(UUID secUserId, long secRoleId) {
 		SecUserSecRole.where {
 			secUser == SecUser.load(secUserId) &&
 			secRole == SecRole.load(secRoleId)

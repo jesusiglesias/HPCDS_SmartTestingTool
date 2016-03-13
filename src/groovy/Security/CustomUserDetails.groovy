@@ -17,7 +17,7 @@ class CustomUserDetails extends GrailsUser {
                              boolean accountNonExpired, boolean credentialsNonExpired,
                              boolean accountNonLocked,
                              Collection<GrantedAuthority> authorities,
-                             long id, String email) {
+                             UUID id, String email) {
 
         // Constructor call
         super(username, password, enabled, accountNonExpired,
