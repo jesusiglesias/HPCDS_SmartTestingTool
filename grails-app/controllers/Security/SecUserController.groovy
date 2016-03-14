@@ -38,8 +38,8 @@ class SecUserController {
 
         // Obtain users with admin role
         def administrators = SecUserSecRole.findAllBySecRole(role).secUser
-        
-        respond administrators, model:[secUserInstanceCount: administrators.size()]
+
+        respond administrators
     }
 
     /**
