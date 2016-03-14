@@ -8,36 +8,6 @@
     <!-- LOAD CSS -->
     <link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.bootstrap.css')}" type="text/css"/>
-
-
-    <style> /* TODO */
-    .pagination a,
-    .pagination .currentStep {
-        color: #666666;
-        display: inline-block;
-        margin: 0 0.1em;
-        padding: 0.25em 0.7em;
-        text-decoration: none;
-        -moz-border-radius: 0.3em;
-        -webkit-border-radius: 0.3em;
-        border-radius: 0.3em;
-    }
-
-    .pagination a:hover, .pagination a:focus,
-    .pagination .currentStep {
-        background-color: #999999;
-        color: #ffffff;
-        outline: none;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-    }
-
-    .no-borderradius .pagination a:hover, .no-borderradius .pagination a:focus,
-    .no-borderradius .pagination .currentStep {
-        background-color: transparent;
-        color: #444444;
-        text-decoration: underline;
-    }
-    </style>
 </head>
 
 <body>
@@ -48,9 +18,29 @@
         var _print = '${g.message(code:'layouts.main_auth_admin.content.print', default:'Print')}';
         var _copy = '${g.message(code: "layouts.main_auth_admin.content.copy", default: "Copy")}';
         var _pdf = '${g.message(code: "layouts.main_auth_admin.content.pdf", default: "PDF")}';
-        var _excel = '${g.message(code: "layouts.main_auth_admin.content.excel", default: "EXCEL")}';
         var _csv = '${g.message(code: "layouts.main_auth_admin.content.csv", default: "CSV")}';
         var _columns = '${g.message(code: "layouts.main_auth_admin.content.columns", default: "Columns")}';
+        var _restore = '${g.message(code: "layouts.main_auth_admin.content.restore", default: "Restore")}';
+        var _adminFile = '${g.message(code: "layouts.main_auth_admin.content.admin.file", default: "STT_Administrators")}';
+        var _adminTableTitle = '${g.message(code: "layouts.main_auth_admin.content.admin.tableTitle", default: "SMART TESTING TOOL - Administrators management")}';
+        var _search = '${g.message(code: "layouts.main_auth_admin.content.search", default: "Search:")}';
+        var _sortAscending = '${g.message(code: "layouts.main_auth_admin.content.sortAscending", default: ": activate to sort column ascending")}';
+        var _sortDescending = '${g.message(code: "layouts.main_auth_admin.content.sortDescending", default: ": activate to sort column descending")}';
+        var _emptyTable = '${g.message(code: "layouts.main_auth_admin.content.emptyTable", default: "No data available in table")}';
+        var _zeroRecords = '${g.message(code: "layouts.main_auth_admin.content.zeroRecords", default: "No matching records found")}';
+        var _processing = '${g.message(code: "layouts.main_auth_admin.content.processing", default: "Processing...")}';
+        var _infoThousands = '${g.message(code: "layouts.main_auth_admin.content.infoThousands", default: ",")}';
+        var _loadingRecords = '${g.message(code: "layouts.main_auth_admin.content.loadingRecords", default: "Loading...")}';
+        var _first = '${g.message(code: "layouts.main_auth_admin.content.pagination.first", default: "First")}';
+        var _last = '${g.message(code: "layouts.main_auth_admin.content.pagination.last", default: "Last")}';
+        var _next = '${g.message(code: "layouts.main_auth_admin.content.pagination.next", default: "Next")}';
+        var _previous = '${g.message(code: "layouts.main_auth_admin.content.pagination.previous", default: "Previous")}';
+        var _lengthMenu = '${g.message(code: "layouts.main_auth_admin.content.lengthMenu", default: "Show _MENU_ entries")}';
+        var _info = '${g.message(code: "layouts.main_auth_admin.content.info", default: "Showing _START_ to _END_ of _TOTAL_ entries")}';
+        var _infoEmpty = '${g.message(code: "layouts.main_auth_admin.content.infoEmpty", default: "No entries found")}';
+        var _infoFiltered = '${g.message(code: "layouts.main_auth_admin.content.infoFiltered", default: "(filtered from _MAX_ total entries)")}';
+        var _all = '${g.message(code: "layouts.main_auth_admin.content.all", default: "All")}';
+
     </script>
 
 	<!-- Page-content-wrapper -->
@@ -77,7 +67,7 @@
 				<small><g:message code="layouts.main_auth_admin.body.subtitle.admin" default="Administrator list"/></small>
 			</h3>
 
-			<!-- Contain page  TODO-->
+			<!-- Contain page -->
             <div id="list-domain">
 
                 <!-- TODO -->
@@ -112,6 +102,8 @@
                                             <td><g:message code="admin.email.label" default="Email"/></td>
                                             <td><g:message code="admin.enabled.label" default="Enabled account"/></td>
                                             <td><g:message code="admin.locked.label" default="Locked account"/></td>
+                                            <td><g:message code="admin.expired.label" default="Expired account"/></td>
+                                            <td><g:message code="admin.passwordExpired.label" default="Expired password"/></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -121,15 +113,17 @@
                                                 <td>${fieldValue(bean: secUserInstance, field: "email")}</td>
                                                 <td><g:formatBoolean boolean="${secUserInstance.enabled}" /></td>
                                                 <td><g:formatBoolean boolean="${secUserInstance.accountLocked}" /></td>
+                                                <td><g:formatBoolean boolean="${secUserInstance.accountExpired}" /></td>
+                                                <td><g:formatBoolean boolean="${secUserInstance.passwordExpired}" /></td>
+
+
+                                                <g:formatBoolean boolean="${true}" true="Yes" false="No"/>
                                             </tr>
                                         </g:each>
                                     </tbody>
                                 </table>
                             </div> <!-- /.Portlet-body -->
                         </div> <!-- /.Portlet -->
-                    <%-- TODO    <div class="pagination">
-                            <g:paginate total="${secUserInstanceCount ?: 0}" />
-                        </div> --%>
 			        </div>
                 </div>
             </div> <!-- /.Content page -->
@@ -138,7 +132,7 @@
 
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="datatable/datatable.js"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/t/dt/pdfmake-0.1.18,dt-1.10.11,af-2.1.1,b-1.1.2,b-colvis-1.1.2,b-flash-1.1.2,b-html5-1.1.2,b-print-1.1.2,cr-1.3.1,fc-3.2.1,fh-3.1.1,kt-2.1.1,r-2.0.2,rr-1.1.1,sc-1.4.1,se-1.1.2/datatables.min.js"></script>
+    <g:javascript src="datatable/datatables.js"/>
     <g:javascript src="datatable/datatables.bootstrap.js"/>
     <g:javascript src="datatable/custom-datatable.js"/>
 

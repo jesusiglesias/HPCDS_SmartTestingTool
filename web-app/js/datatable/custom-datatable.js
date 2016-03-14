@@ -4,38 +4,61 @@
 
 var DatatableList = function () {
 
+    /**
+     *  Table function
+     */
     var initEntityTable = function () {
+
         var table = $('#entity-table');
 
         var oTable = table.dataTable({
 
-            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
-          /*  "language": {
-                "aria": {
-                    "sortAscending": ": activate to sort column ascending",
-                    "sortDescending": ": activate to sort column descending"
-                },
-                "emptyTable": "No data available in table",
-                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                "infoEmpty": "No entries found",
-                "infoFiltered": "(filtered1 from _MAX_ total entries)",
-                "lengthMenu": "_MENU_ entries",
-                "search": "Search:",
-                "zeroRecords": "No matching records found"
-            }, */
-
-            // Or you can use remote translation file
+            // Internationalisation
             "language": {
-                url: '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json'
+                "aria": {
+                    "sortAscending": _sortAscending,
+                    "sortDescending": _sortDescending
+                },
+                "emptyTable": _emptyTable,
+                "info": _info,
+                "infoEmpty": _infoEmpty,
+                "infoFiltered": _infoFiltered,
+                "lengthMenu": _lengthMenu,
+                "search": _search,
+                "zeroRecords": _zeroRecords,
+                "processing": _processing,
+                "infoThousands": _infoThousands,
+                "loadingRecords": _loadingRecords,
+                "paginate": {
+                    "first": _first,
+                    "last": _last,
+                    "next": _next,
+                    "previous": _previous
+                }
             },
+
+            // Row selectable
+            select: false,
+
+            // Visibility of columns
+            "columnDefs": [
+                {
+                    "targets": [4], // Account expired
+                    "visible": false
+                },
+                {
+                    "targets": [5], // Password expired
+                    "visible": false
+                }
+            ],
 
             buttons: [
                 { extend: 'print', className: 'btn dark btn-outline', text: _print },
                 { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf },
-                { extend: 'excel', className: 'btn yellow btn-outline ', text: _excel },
-                { extend: 'csv', className: 'btn blue-steel btn-outline ', text: _csv },
-                { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns}
+                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _adminFile, title: _adminTableTitle },
+                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _adminFile },
+                { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns},
+                { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
             ],
 
             // Setup responsive extension
@@ -47,6 +70,9 @@ var DatatableList = function () {
             // Disable pagination
             //"paging": false,
 
+            // Save the state of search form
+            //"bStateSave" : true,
+
             colReorder: {
                 reorderCallback: function () {
                 }
@@ -57,8 +83,8 @@ var DatatableList = function () {
             ],
             
             "lengthMenu": [
-                [5, 10, 15, 20, -1],
-                [5, 10, 15, 20, "All"] // Change per page values here
+                [5, 10, 20, 50, -1],
+                [5, 10, 20, 50, _all] // Change per page values here
             ],
 
             // Set the initial value
