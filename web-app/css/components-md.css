@@ -10450,9 +10450,8 @@ Notes
     border: 0;
 }
 
-/***
-Customized Bootstrap Pagination
-***/
+/* Customized Bootstrap Pagination
+=================================================================== */
 .pagination {
     margin: 10px 0;
 }
@@ -10467,14 +10466,51 @@ Customized Bootstrap Pagination
 
 .pagination .active > a,
 .pagination .active > a:hover {
-    background: #eee;
+    background: #4DB3A2;
     border-color: #dddddd;
-    color: #333;
+    color: #FFF;
 }
 
-/***
-Customized Bootstrap Panels
-***/
+.pagination>li>a,
+.pagination>li>span {
+    color: #000000 !important;
+    background-color: #EBEBEB !important;
+    border: 0 solid #ddd !important;
+}
+
+.pagination>.disabled>a,
+.pagination>.disabled>a:focus,
+.pagination>.disabled>a:hover,
+.pagination>.disabled>span,
+.pagination>.disabled>span:focus,
+.pagination>.disabled>span:hover{
+    color:#000000 !important;
+    background-color:#EBEBEB !important;
+    border-color:#ddd !important;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover{
+    color:#FFF !important;
+    background-color:#4DB3A2 !important;
+    border-color:#dddddd !important;
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover {
+    color: #4DB3A2 !important;
+    background-color: #fff !important;
+    border-color: #ddd !important;
+}
+
+/* Customized Bootstrap Panels
+=================================================================== */
 .panel-group .panel {
     overflow: visible;
 }
