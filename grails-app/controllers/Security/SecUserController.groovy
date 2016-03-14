@@ -79,7 +79,12 @@ class SecUserController {
             return
         }
 
+        // Save data admin
         secUserInstance.save flush:true
+
+        // Save relation with admin role
+        def adminRole = SecRole.findByAuthority('ROLE_ADMIN')
+        SecUserSecRole.create secUserInstance, adminRole, true
 
         request.withFormat {
             form multipartForm {
