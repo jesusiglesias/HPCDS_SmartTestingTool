@@ -111,13 +111,43 @@
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                                 <td><g:link controller="secUser" action="edit" id="${secUserInstance.id}">${fieldValue(bean: secUserInstance, field: "username")}</g:link></td>
                                                 <td>${fieldValue(bean: secUserInstance, field: "email")}</td>
-                                                <td><g:formatBoolean boolean="${secUserInstance.enabled}" /></td>
-                                                <td><g:formatBoolean boolean="${secUserInstance.accountLocked}" /></td>
-                                                <td><g:formatBoolean boolean="${secUserInstance.accountExpired}" /></td>
-                                                <td><g:formatBoolean boolean="${secUserInstance.passwordExpired}" /></td>
-
-
-                                                <g:formatBoolean boolean="${true}" true="Yes" false="No"/>
+                                                <td>
+                                                    <g:if test="${secUserInstance.enabled}">
+                                                        <span class="label label-sm label-success">
+                                                    </g:if>
+                                                    <g:else>
+                                                        <span class="label label-sm label-info">
+                                                    </g:else>
+                                                    <g:formatBoolean boolean="${secUserInstance.enabled}" true="${g.message(code: "admin.enabled.label.true", default: "Confirmed")}" false="${g.message(code: "admin.enabled.label.false", default: "Pending")}"/>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <g:if test="${secUserInstance.accountLocked}">
+                                                        <span class="label label-sm label-danger">
+                                                    </g:if>
+                                                    <g:else>
+                                                        <span class="label label-sm label-success">
+                                                    </g:else>
+                                                    <g:formatBoolean boolean="${secUserInstance.accountLocked}" true="${g.message(code: "admin.locked.label.true", default: "Locked")}" false="${g.message(code: "admin.expiredLocked.label.false", default: "Active")}"/>
+                                                </td>                                                    </span>
+                                                <td>
+                                                    <g:if test="${secUserInstance.accountExpired}">
+                                                        <span class="label label-sm label-warning">
+                                                    </g:if>
+                                                    <g:else>
+                                                        <span class="label label-sm label-success">
+                                                    </g:else>
+                                                    <g:formatBoolean boolean="${secUserInstance.accountExpired}" true="${g.message(code: "admin.expired.label.true", default: "Expired")}" false="${g.message(code: "admin.expiredLocked.label.false", default: "Active")}"/>
+                                                </td>
+                                                <td>
+                                                    <g:if test="${secUserInstance.passwordExpired}">
+                                                        <span class="label label-sm label-warning">
+                                                    </g:if>
+                                                    <g:else>
+                                                        <span class="label label-sm label-success">
+                                                    </g:else>
+                                                    <g:formatBoolean boolean="${secUserInstance.passwordExpired}" true="${g.message(code: "admin.expired.label.true", default: "Expired")}" false="${g.message(code: "admin.expiredLocked.label.false", default: "Active")}"/>
+                                                </td>
                                             </tr>
                                         </g:each>
                                     </tbody>

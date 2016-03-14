@@ -9730,12 +9730,12 @@ h6 .label {
 }
 
 .label-success {
-    background-color: #36c6d3;
+    background-color: #4DB3A2;
 }
 
 .label-success[href]:hover,
 .label-success[href]:focus {
-    background-color: #27a4b0;
+    background-color: #4DB3A2;
 }
 
 .label-info {
@@ -9748,21 +9748,21 @@ h6 .label {
 }
 
 .label-warning {
-    background-color: #F1C40F;
+    background-color: #D6B42F;
 }
 
 .label-warning[href]:hover,
 .label-warning[href]:focus {
-    background-color: #c29d0b;
+    background-color: #D6B42F;
 }
 
 .label-danger {
-    background-color: #ed6b75;
+    background-color: #C16868;
 }
 
 .label-danger[href]:hover,
 .label-danger[href]:focus {
-    background-color: #e73d4a;
+    background-color: #C16868;
 }
 
 /* Iconic labels */

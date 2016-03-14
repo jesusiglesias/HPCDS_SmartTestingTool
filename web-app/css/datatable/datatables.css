@@ -1133,7 +1133,7 @@ table.dataTable > tbody > tr.child ul li:last-child {
 }
 
 table.dataTable > tbody > tr.child span.dtr-title {
-    display: inline-block;
+    display: block;
     min-width: 75px;
     font-weight: bold;
 }
