@@ -1,5 +1,7 @@
 package User
 
+import Security.SecRole
+import Security.SecUserSecRole
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
@@ -33,7 +35,14 @@ class UserController {
         }
         params.max = Math.min(max, 100)
 
-        respond User.list(params), model:[userInstanceCount: User.count()]
+        // Obtain user role
+        def role = SecRole.findByAuthority("ROLE_USER")
+
+        // Obtain users with admin role
+        def normalUsers = SecUserSecRole.findAllBySecRole(role).secUser
+
+        respond normalUsers
+        //respond User.list(params), model:[userInstanceCount: User.count()]
     }
 
     /**
