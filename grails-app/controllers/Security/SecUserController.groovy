@@ -33,7 +33,13 @@ class SecUserController {
         }
         params.max = Math.min(max, 100)
 
-        respond SecUser.list(params), model:[secUserInstanceCount: SecUser.count()]
+        // Obtain admin role
+        def role = SecRole.findByAuthority("ROLE_ADMIN")
+
+        // Obtain users with admin role
+        def administrators = SecUserSecRole.findAllBySecRole(role).secUser
+        
+        respond administrators, model:[secUserInstanceCount: administrators.size()]
     }
 
     /**
