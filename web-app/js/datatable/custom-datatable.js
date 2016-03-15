@@ -57,9 +57,15 @@ var DatatableList = function () {
                 { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy },
                 { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _adminFile, title: _adminTableTitle },
                 { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _adminFile },
-                { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns},
+                { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
             ],
+
+            // Pagination type
+            "pagingType": "bootstrap_full_number",
+
+            // Disable fixed width and enable fluid table
+            "autoWidth": false,
 
             // Setup responsive extension
             responsive: true,
