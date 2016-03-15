@@ -1313,6 +1313,15 @@ a.dt-button:last-child {
     float: right;
 }
 
+/* Max-width: 768 px */
+@media (max-width: 768px) {
+
+    .dataTables_wrapper .dt-buttons {
+        text-align: center;
+        float: none;
+    }
+}
+
 .portlet.light .dataTables_wrapper .dt-buttons {
     margin-top: -95px;
 }
@@ -1325,7 +1334,7 @@ a.dt-button:last-child {
 @media (max-width: 768px) {
 
     .portlet.light .dataTables_wrapper .dt-buttons {
-        margin: -5px 0 20px 0;
+        margin: -5px 0 15px 0;
     }
 }
 
@@ -1333,7 +1342,7 @@ a.dt-button:last-child {
 @media(max-width: 514px) {
 
     .portlet.light .dataTables_wrapper .dt-buttons {
-        margin: -13px 0 20px 0;
+        margin: -13px 0 15px 0;
     }
 }
 

@@ -21,7 +21,7 @@ $.extend(true, $.fn.dataTable.defaults, {
 /* Default class modification */
 $.extend($.fn.dataTableExt.oStdClasses, {
     "sWrapper": "dataTables_wrapper",
-    "sFilterInput": "form-control input-sm input-small input-inline",
+    "sFilterInput": "form-control input-sm input-medium input-inline",
     "sLengthSelect": "form-control input-sm input-xsmall input-inline"
 });
 

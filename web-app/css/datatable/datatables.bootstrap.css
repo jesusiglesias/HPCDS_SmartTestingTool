@@ -46,6 +46,14 @@ div.dataTables_wrapper div.dataTables_filter input {
     width: auto;
 }
 
+/* Max-width: 374px */
+@media (max-width: 374px) {
+
+    div.dataTables_wrapper div.dataTables_filter input {
+        width: 170px !important;
+    }
+}
+
 div.dataTables_wrapper div.dataTables_info {
     white-space: nowrap;
     padding-top: 16px;
@@ -122,6 +130,7 @@ div.dataTables_scrollFoot table {
 @media screen and (max-width: 767px) {
     div.dataTables_wrapper div.dataTables_length, div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTables_info, div.dataTables_wrapper div.dataTables_paginate {
         text-align: center;
+        float:  none;
     }
 }
 

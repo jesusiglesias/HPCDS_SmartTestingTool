@@ -342,6 +342,14 @@ table.dataTable tbody td.dt-body-nowrap {
     float: left;
 }
 
+/* Max-width: 767px */
+@media (max-width: 767px) {
+
+    .dataTables_wrapper .dataTables_length {
+        margin: 15px 0;
+    }
+}
+
 .dataTables_wrapper .dataTables_filter {
     float: right;
     text-align: right;
@@ -518,7 +526,7 @@ table.dataTable tbody td.dt-body-nowrap {
     }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_length,
     .dataTables_wrapper .dataTables_filter {
         float: none;
@@ -705,8 +713,8 @@ a.dt-button {
     outline: none;
 }
 
-/* Max-width: 515px */
-@media(max-width: 514px) {
+/* Max-width: 543px */
+@media(max-width: 543px) {
 
     button.dt-button,
     div.dt-button,

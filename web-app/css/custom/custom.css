@@ -205,6 +205,13 @@ input:-webkit-autofill:active {
     height: 95px;
 }
 
+/* Datatable
+=================================================================== */
+/* Icon in search box */
+.search-datatable {
+    margin-left: -20px;
+}
+
 /* Media queries
 ======================================================*/
 /* Landscape phone to portrait tablet */
