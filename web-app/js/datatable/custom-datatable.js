@@ -83,8 +83,8 @@ var DatatableList = function () {
             ],
             
             "lengthMenu": [
-                [5, 10, 20, 50, -1],
-                [5, 10, 20, 50, _all] // Change per page values here
+                [5, 10, 20, 50, 100, -1],
+                [5, 10, 20, 50, 100, _all] // Change per page values here
             ],
 
             // Set the initial value

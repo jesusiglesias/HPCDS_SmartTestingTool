@@ -17955,6 +17955,7 @@ Text Stats
 .table-scrollable > .table-bordered > tbody > tr:last-child > td,
 .table-scrollable > .table-bordered > tfoot > tr:last-child > td {
     border-bottom: 0;
+    outline: none;
 }
 
 /* Customized Bootstrap Tables
