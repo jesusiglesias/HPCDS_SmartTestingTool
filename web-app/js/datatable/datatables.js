@@ -84221,10 +84221,10 @@ DataTable.ext.buttons.copyFlash = $.extend( {}, flashButton, {
 		_setText( flash, output ); 
 
 		dt.buttons.info(
-			dt.i18n( 'buttons.copyTitle', 'Copy to clipboard' ),
+			dt.i18n( 'buttons.copyTitle', _clipboard ),
 			dt.i18n( 'buttons.copyInfo', {
-				_: 'Copied %d rows to clipboard',
-				1: 'Copied 1 row to clipboard'
+				_: _rows,
+				1: _row
 			}, data.rows ),
 			3000
 		);
@@ -84879,10 +84879,10 @@ DataTable.ext.buttons.copyHtml5 = {
 				hiddenDiv.remove();
 
 				dt.buttons.info(
-					dt.i18n( 'buttons.copyTitle', 'Copy to clipboard' ),
+					dt.i18n( 'buttons.copyTitle', _clipboard),
 					dt.i18n( 'buttons.copySuccess', {
-							1: "Copied one row to clipboard",
-							_: "Copied %d rows to clipboard"
+							1: _row,
+							_: _rows
 						}, exportData.rows ),
 					2000
 				);
@@ -84899,7 +84899,7 @@ DataTable.ext.buttons.copyHtml5 = {
 			)
 			.append( hiddenDiv );
 
-		dt.buttons.info( dt.i18n( 'buttons.copyTitle', 'Copy to clipboard' ), message, 0 );
+		dt.buttons.info( dt.i18n( 'buttons.copyTitle', _clipboard), message, 0 );
 
 		// Select the text so when the user activates their system clipboard
 		// it will copy that text
