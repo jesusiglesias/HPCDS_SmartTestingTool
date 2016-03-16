@@ -92,7 +92,7 @@
                                     <div class="btn-group">
                                         <g:link uri="/administrator/create" class="btn green-dark">
                                             <i class="fa fa-plus"></i>
-                                            <g:message code="layouts.main_auth_admin.content.newAdmin" default="New admin"/>
+                                            <g:message code="layouts.main_auth_admin.body.content.admin.new" default="New administrator"/>
                                         </g:link>
                                     </div>
                                 </div>
