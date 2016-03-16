@@ -171,7 +171,7 @@
             <!-- Username/email Field -->
             <div class="form-group form-md-line-input form-md-floating-label has-success">
                 <div class="input-icon right">
-                    <g:textField class="form-control user-input" id="username" name='stt_hp_username' value="${session['SPRING_SECURITY_LAST_USERNAME']}" autocomplete="on" />
+                    <g:textField class="form-control user-input autofill-input" id="username" name='stt_hp_username' value="${session['SPRING_SECURITY_LAST_USERNAME']}" autocomplete="on"/>
                     <label for="username"><g:message code="views.login.auth.form.username/email" default="Username/Email"/></label>
                     <span class="help-block"><g:message code="views.login.auth.form.username/email.help" default="Enter a valid username or email"/></span>
                     <i class="fa fa-times i-delete" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
@@ -189,7 +189,7 @@
             <!-- Password Field -->
             <div class="form-group form-md-line-input form-md-floating-label has-success">
                 <div class="input-icon right">
-                    <g:passwordField class="form-control password-input" id="password" name='stt_hp_password' autocomplete="off" />
+                    <g:passwordField class="form-control password-input autofill-input" id="password" name='stt_hp_password' autocomplete="off" />
                     <label for="password"><g:message code="views.login.auth.form.password" default="Password"/></label>
                     <span class="help-block"><g:message code="views.login.auth.form.password.help" default="Enter your password"/></span>
                     <i class="fa fa-eye i-show"></i> <!-- Show password icon -->

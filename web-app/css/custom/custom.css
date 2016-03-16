@@ -2,13 +2,20 @@
 *                                 CUSTOM CSS - GENERAL ELEMENTS                              *
 *-------------------------------------------------------------------------------------------*/
 
-/* Autofill Chrome without style*/
+/* Autofill Chrome without style */
+.autofill-input:-webkit-autofill,
+.autofill-input:-webkit-autofill:hover,
+.autofill-input:-webkit-autofill:focus,
+.autofill-input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s !important; /* Transparent background */
+    -webkit-text-fill-color: #e5fff3 !important; /* Font color */
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s !important; /* Transparent background */
-    -webkit-text-fill-color: #e5fff3 !important; /* Font color */
 }
 
 /* Input - Icons
@@ -49,7 +56,7 @@ input:-webkit-autofill:active {
     outline:none;
 }
 
-/* Custom tasks admin - General elements
+/* General elements
 =================================================================== */
 /* Log configuration */
 .logConfig-button {
@@ -71,7 +78,7 @@ input:-webkit-autofill:active {
 }
 
 .alert-success-custom-backend {
-    background-color: #7AAB78 !important;
+    background-color: #5F9A75 !important;
     border-color: #040202 !important;
     color: #FFFFFF !important;
 }
@@ -108,7 +115,31 @@ input:-webkit-autofill:active {
     to { -o-transform: scale(1) rotate(360deg);}
 }
 
+/* Buttons
+=================================================================== */
+.btn-success {
+    color: #fff;
+    background-color: #5F9A75 !important;
+    border-color: #5F9A75 !important;
+}
 
+.btn-success:hover {
+    color: #fff;
+    background-color: #3D7B57 !important;
+    border-color: #3D7B57 !important;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #C16868 !important;
+    border-color: #C16868 !important;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #9F514F !important;
+    border-color: #9F514F !important;
+}
 
 /* Back to top
 =================================================================== */

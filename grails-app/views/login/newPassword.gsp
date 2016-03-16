@@ -81,7 +81,7 @@
             <!-- Password field -->
             <div class="form-group form-md-line-input form-md-floating-label has-success">
                 <div class="input-icon right">
-                    <g:field type="password" class="form-control password-input" id="password" name="password" autocomplete="off"/>
+                    <g:field type="password" class="form-control password-input autofill-input" id="password" name="password" autocomplete="off"/>
                     <label for="password"><g:message code="views.login.auth.newPassword.password" default="New password"/></label>
                     <span class="help-block"><g:message code="views.login.auth.newPassword.password.help" default="Enter a valid password"/></span>
                     <i class="fa fa-eye i-show"></i> <!-- Show password icon -->
@@ -92,7 +92,7 @@
             <!-- Password confirm field -->
             <div class="form-group form-md-line-input form-md-floating-label has-success">
                 <div class="input-icon right">
-                    <g:field type="password" class="form-control password-confirm-input" id="passwordConfirm" name="passwordConfirm" autocomplete="off"/>
+                    <g:field type="password" class="form-control password-confirm-input autofill-input" id="passwordConfirm" name="passwordConfirm" autocomplete="off"/>
                     <label for="passwordConfirm"><g:message code="views.login.auth.newPassword.passwordConfirm" default="Confirm password"/></label>
                     <span class="help-block"><g:message code="views.login.auth.newPassword.passwordConfirm.help" default="Repeat your password"/></span>
                     <i class="fa fa-eye i-show-confirm"></i> <!-- Show password icon -->
