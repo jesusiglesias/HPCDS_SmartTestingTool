@@ -36,7 +36,7 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.2.3/css/simple-line-icons.css">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'uniform.default.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/notification', file: 'sweetalert2.css')}" type="text/css"/>
@@ -55,7 +55,7 @@
     <!-- LOAD JS -->
     <asset:javascript src="application.js"/>
     <!-- Notification -->
-    <g:javascript src="notification/sweetalert2.min.js"/>
+    <script src="https://cdn.jsdelivr.net/sweetalert2/0.4.3/sweetalert2.min.js" crossorigin="anonymous"></script>
 
     <!-- HTML5 SHIV, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -87,11 +87,11 @@
     <!-- Enable responsive CSS code on browsers that don't support it -->
     <!--[if lt IE 9]>
         <script src="../js/respond.min.js"></script>
-        <![endif]-->
+    <![endif]-->
 
     <!-- CORE PLUGINS -->
     <!-- TODO -->
-    <g:javascript src="bootstrap.min.js"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <g:javascript src="js.cookie.min.js"/>
     <g:javascript src="bootstrap-hover-dropdown.min.js"/>
     <g:javascript src="jquery.slimscroll.min.js"/>
@@ -103,8 +103,8 @@
     <g:javascript src="app.js"/>
 
     <!-- PAGE LEVEL SCRIPTS -->
-    <g:javascript src="authentication/jquery.validate.min.js"/>
-    <g:javascript src="authentication/additional-methods.min.js"/>
+    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
     <g:javascript src="authentication/select2.full.min.js"/>
 
 </body>

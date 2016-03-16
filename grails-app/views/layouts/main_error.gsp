@@ -38,7 +38,7 @@
     <!-- GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/error', file: 'error.css')}" type="text/css"/>
 
@@ -93,11 +93,11 @@
     <!-- LOAD JAVASCRIPT -->
     <!-- Enable responsive CSS code on browsers that don't support it -->
     <!--[if lt IE 9]>
-            <script src="../js/respond.min.js"></script>
-            <![endif]-->
+        <script src="../js/respond.min.js"></script>
+    <![endif]-->
 
     <!-- CORE PLUGINS -->
-    <g:javascript src="bootstrap.min.js"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <g:javascript src="custom.js"/>
 
 </body>
