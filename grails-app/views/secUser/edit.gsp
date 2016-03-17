@@ -55,12 +55,31 @@
                 </g:form>
             </div>
 
-            <!-- Contain page -->
+            <!-- Contain page TODO -->
             <div id="list-domain">
 
+                <!-- Delete button -->
+                <g:form url="[resource:secUserInstance, controller:'secUser', action:'delete']" method="DELETE" class="form-delete">
+                    <div class="btn-group">
+                        <button class="btn green-dark btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="top" data-popout="true" data-singleton="true"
+                                data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
+                                data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
+                                data-btnOkIcon="glyphicon glyphicon-ok" data-btnOkClass="btn btn-sm btn-success"
+                                data-btnCancelIcon="glyphicon glyphicon-remove" data-btnCancelClass="btn btn-sm btn-danger">
+				            <i class="fa fa-trash"></i>
+                            <g:message code="layouts.main_auth_admin.body.content.admin.delete" default="Delete administrator"/>
+                        </button>
+                    </div>
+                </g:form>
+
             </div> <!-- /.Content page -->
-    </div> <!-- /.Page-content -->
+        </div> <!-- /.Page-content -->
     </div> <!-- /. Page-content-wrapper -->
+
+    <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
+    <g:javascript src="confirmation/custom-delete.js"/>
 
 </body>
 </html>

@@ -516,7 +516,7 @@
     <!-- Back to top -->
     <g:link href="#" class="back-to-top back-to-top-error"><g:message code="views.general.backtotop" default="Top"/></g:link>
 
-    <!-- LOAD JAVASCRIPT TODO -->
+    <!-- LOAD JAVASCRIPT -->
     <!-- Enable responsive CSS code on browsers that don't support it -->
     <!--[if lt IE 9]>
         <script src="../js/respond.min.js"></script>

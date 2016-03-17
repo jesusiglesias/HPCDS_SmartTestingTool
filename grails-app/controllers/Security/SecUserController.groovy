@@ -89,7 +89,8 @@ class SecUserController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.id])
-                redirect secUserInstance
+                //redirect secUserInstance
+                redirect view: 'index'
             }
             '*' { respond secUserInstance, [status: CREATED] }
         }
@@ -148,11 +149,16 @@ class SecUserController {
             return
         }
 
-        secUserInstance.delete flush:true
+        // Delete SecUserSecRole relations
+        SecUserSecRole.findAllBySecUser(secUserInstance)*.delete(flush: true, failOnError: true)
 
+        // Delete SecUser
+        secUserInstance.delete(flush:true, failOnError: true)
+
+        // TODO
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }

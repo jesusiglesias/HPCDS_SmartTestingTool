@@ -10545,9 +10545,8 @@ Notes
     background-position: right 12px;
 }
 
-/***
-Accordions
-***/
+/* Accordions
+=================================================================== */
 .panel-heading {
     background: #eee;
 }
@@ -10566,10 +10565,8 @@ Accordions
     border: 0;
 }
 
-/***
-Customized Bootstrap Popover
-***/
-/*rtl:ignore*/
+/* Customized Bootstrap Popover
+=================================================================== */
 .popover {
     padding: 0;
 }
@@ -10578,7 +10575,6 @@ Customized Bootstrap Popover
     margin: 0 !important;
 }
 
-/*rtl:ignore*/
 .popover {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -10596,6 +10592,11 @@ Customized Bootstrap Popover
     text-transform: uppercase;
     padding: 10px 14px 6px 14px;
     border: 0;
+    text-align: center;
+}
+
+.popover-content {
+    display: inline-flex !important;
 }
 
 .popover .arrow,
