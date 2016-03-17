@@ -8,6 +8,18 @@
     <!-- LOAD CSS -->
     <link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.bootstrap.css')}" type="text/css"/>
+
+    <script>
+        // Handler auto close alert
+        function createAutoClosingAlert(selector) {
+            var alert = $(selector);
+            window.setTimeout(function () {
+                alert.slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+    </script>
 </head>
 
 <body>
@@ -45,7 +57,7 @@
         var _clipboard = '${g.message(code: "layouts.main_auth_admin.content.clipboard", default: "Copy to clipboard")}';
         var _rows = '${g.message(code: "layouts.main_auth_admin.content.rows", default: "Copied %d rows to clipboard")}';
         var _row = '${g.message(code: "layouts.main_auth_admin.content.row", default: "Copied 1 row to clipboard")}';
-        
+
     </script>
 
 	<!-- Page-content-wrapper -->
@@ -78,6 +90,29 @@
                 <!-- TODO -->
                 <g:if test="${flash.message}">
                     <div class="message" role="status">${flash.message}</div>
+                </g:if>
+
+                <!-- Alerts -->
+                <g:if test="${flash.secUserMessage}">
+                    <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity fade in'>
+                        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+                        <span role="status"> ${raw(flash.secUserMessage)} </span>
+                    </div>
+
+                    <g:javascript>
+                        createAutoClosingAlert('.alert-entity');
+                    </g:javascript>
+                </g:if>
+
+                <g:if test="${flash.secUserErrorMessage}">
+                    <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity fade in'>
+                        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+                        <span role="status"> ${raw(flash.secUserErrorMessage)} </span>
+                    </div>
+
+                    <g:javascript>
+                        createAutoClosingAlert('.alert-entity');
+                    </g:javascript>
                 </g:if>
 
                 <div class="row">
@@ -169,8 +204,6 @@
 	</div> <!-- /. Page-content-wrapper -->
 
     <!-- LOAD JAVASCRIPT -->
-    <%-- TODO
-    <g:javascript src="datatable/datatable.js"/> --%>
     <g:javascript src="datatable/datatables.js"/>
     <g:javascript src="datatable/datatables.bootstrap.js"/>
     <g:javascript src="datatable/custom-datatable.js"/>

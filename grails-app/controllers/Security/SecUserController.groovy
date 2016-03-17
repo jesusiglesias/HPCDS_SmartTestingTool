@@ -1,5 +1,6 @@
 package Security
 
+import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
@@ -69,6 +70,7 @@ class SecUserController {
      */
     @Transactional
     def save(SecUser secUserInstance) {
+
         if (secUserInstance == null) {
             notFound()
             return
@@ -114,6 +116,7 @@ class SecUserController {
      */
     @Transactional
     def update(SecUser secUserInstance) {
+
         if (secUserInstance == null) {
             notFound()
             return
@@ -149,19 +152,32 @@ class SecUserController {
             return
         }
 
-        // Delete SecUserSecRole relations
-        SecUserSecRole.findAllBySecUser(secUserInstance)*.delete(flush: true, failOnError: true)
+        try {
 
-        // Delete SecUser
-        secUserInstance.delete(flush:true, failOnError: true)
+            // Delete SecUserSecRole relations
+            SecUserSecRole.findAllBySecUser(secUserInstance)*.delete(flush: true, failOnError: true)
 
-        // TODO
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
-                redirect action:"index", method:"GET"
+            // Delete SecUser
+            secUserInstance.delete(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.secUserMessage = message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
             }
-            '*'{ render status: NO_CONTENT }
+        } catch (DataIntegrityViolationException exception) {
+            log.error("SecUserController():delete():DataIntegrityViolationException:Administrator:${secUserInstance.username}:${exception}")
+
+            request.withFormat {
+                form multipartForm {
+                    flash.secUserErrorMessage = message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> did not deleted.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
+            }
+
         }
     }
 
@@ -169,9 +185,11 @@ class SecUserController {
      * Its redirects to not found page if the secUser instance was not found.
      */
     protected void notFound() {
+        log.error("SecUserController():notFound():AdministratorID:${params.id}")
+
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'admin.label', default: 'Administrator'), params.id])
+                flash.secUserErrorMessage = message(code: 'default.not.found.admin.message', default:'It has not been able to locate the administrator with id: <strong>{0}</strong>.', args: [params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

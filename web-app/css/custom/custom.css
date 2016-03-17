@@ -58,6 +58,11 @@ input:-webkit-autofill:active {
 
 /* General elements
 =================================================================== */
+/* Entity message */
+.alert-entity {
+    margin: 0 0 60px 0;
+}
+
 /* Log configuration */
 .logConfig-button {
     margin: 70px 0 40px 0;
@@ -267,6 +272,11 @@ input:-webkit-autofill:active {
     .logoHP-admin img {
         width: 90px;
         height: 90px;
+    }
+
+    /* Entity message */
+    .alert-entity {
+        margin: 0 0 48px 0;
     }
 
     /* Log configuration */
