@@ -78,7 +78,11 @@ table.dataTable thead .sorting_desc_disabled {
 }
 
 table.dataTable tbody tr {
-    background-color: #ffffff;
+    background-color: #ffffff !important;
+}
+
+table.dataTable tbody tr:hover {
+    background-color: #D7E8DF !important;
 }
 
 table.dataTable tbody tr.selected {
