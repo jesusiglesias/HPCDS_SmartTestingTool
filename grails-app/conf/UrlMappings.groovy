@@ -57,6 +57,8 @@ class UrlMappings {
         "/forgotPassword" (controller: 'customTasksUser', action: 'restorePassword')
         // Change password
         "/newPassword" (controller: 'customTasksUser', action: 'changePass')
+        // Register normal user
+        "/register" (controller: 'customTasksUser', action: 'registerAccount')
 
         /* Custom general tasks admin (back-end)
         ======================================================*/

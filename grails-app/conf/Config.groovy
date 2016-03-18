@@ -169,14 +169,16 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksUser/switchFail':         ['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY', "authentication.name == 'admin_switch'"],
     '/j_spring_security_switch_user':      ['ROLE_ADMIN', 'IS_AUTHENTICATED_FULLY'],
     '/j_spring_security_exit_user':        ["authentication.name == 'admin_switch'"],
+    // User account state
+    'customTasksUser/statusNotification':  ['permitAll'],
+    // Register normal user
+    "/customTasksUser/registerAccount":    ['permitAll'],
     // Restore password
     'customTasksUser/restorePassword':     ['permitAll'],
     // Password
     'customTasksUser/sendEmail':           ['permitAll'],
     'customTasksUser/changePass':          ['permitAll'],
     'customTasksUser/updatePass':          ['permitAll'],
-    // User account state
-    'customTasksUser/statusNotification':  ['permitAll'],
     '/customTasksUser/**':                 ['permitAll'],
 
     /* Custom tasks admin (back-end)

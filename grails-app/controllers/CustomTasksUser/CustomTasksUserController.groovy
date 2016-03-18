@@ -199,6 +199,18 @@ class CustomTasksUserController {
     }
 
     /*-------------------------------------------------------------------------------------------*
+    *                                     REGISTER NORMAL USER                                   *
+    *-------------------------------------------------------------------------------------------*/
+    /**
+     * It renders the view to create a new normal account.
+     *
+     * @return register View to introduce the information of the user account.
+     */
+    def registerAccount() {
+        render view: '/login/register'
+    }
+
+    /*-------------------------------------------------------------------------------------------*
      *                                     RESTORE PASSWORD                                      *
     *-------------------------------------------------------------------------------------------*/
     /**

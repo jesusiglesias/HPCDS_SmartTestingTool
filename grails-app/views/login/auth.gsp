@@ -241,9 +241,7 @@
 
             <!-- Create account button -->
             <div class="create-account">
-                <p>
-                    <a href="javascript:;" class="btn grey-steel signup-button" id="register-btn"><g:message code="views.login.auth.form.createAccount" default="Create an account"/></a>
-                </p>
+                <g:link uri="/register" class="btn grey-steel signup-button" id="register-btn"><g:message code="views.login.auth.form.createAccount" default="Create an account"/></g:link>
             </div>
          </g:if>
     </div> <!-- /.Authentication -->
