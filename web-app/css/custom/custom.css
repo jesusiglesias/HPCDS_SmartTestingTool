@@ -248,8 +248,80 @@ input:-webkit-autofill:active {
     margin-left: -20px;
 }
 
+/* SweetAlert
+=================================================================== */
+.sweet-alert {
+    background-color: #fff;
+}
+
+.sweet-alert h2 {
+    color: #ffffff !important;
+}
+
+.sweet-alert p {
+    color: #ECECE9 !important;
+    font-weight: 400 !important;
+}
+
+.errorSweetAlert .icon.error {
+    border-color: #ffffff !important;
+}
+
+.sweet-alert .icon.error .line {
+    background-color: #ffffff !important;
+}
+
+.sweet-alert .icon.success {
+    border-color: #ffffff !important;
+}
+
+.sweet-alert .icon.success::before, .sweet-alert .icon.success::after {
+    background: transparent !important;
+}
+
+.sweet-alert .icon.success .fix {
+    background-color: transparent !important;
+}
+
+.sweet-alert .sweet-image {
+    margin: 20px auto;
+}
+
+.sweet-alert .icon.success .line {
+    background-color: #ffffff !important;
+}
+
+.sweet-alert button {
+    border-right-color: #EBEBEB !important;
+    border-left-color: #EBEBEB !important;
+    background-color: #EBEBEB !important;
+    color: #000000 !important;
+}
+
+.sweet-alert button:hover {
+    background-color: rgb(194, 194, 194) !important;
+}
+
+/* Custom error */
+/* Box */
+.errorSweetAlert {
+    background-color: rgb(186, 99, 99) !important;
+}
+
+/* Custom success */
+/* Box */
+.successSweetAlert {
+    background-color: #4F904D !important;
+}
+
+/* Title */
+.successSweetAlert h2 {
+    font-size: 26px !important;
+}
+
 /* Media queries
-======================================================*/
+=================================================================== */
+
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
 
