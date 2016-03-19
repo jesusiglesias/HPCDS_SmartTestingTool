@@ -81,21 +81,41 @@ class SecUserController {
             return
         }
 
-        // Save data admin
-        secUserInstance.save flush:true
-
-        // Save relation with admin role
-        def adminRole = SecRole.findByAuthority('ROLE_ADMIN')
-        SecUserSecRole.create secUserInstance, adminRole, true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.id])
-                //redirect secUserInstance
-                redirect view: 'index'
-            }
-            '*' { respond secUserInstance, [status: CREATED] }
+        // Check if password and confirm password fields are same
+        if (secUserInstance.password != secUserInstance.confirmPassword) {
+            flash.secUserErrorMessage = g.message(code: 'secUser.save.password.notsame', default: 'Password and confirm password fields must match.')
+            render view: "create", model: [secUserInstance: secUserInstance]
+            return
         }
+
+        try {
+              // Save data admin
+              secUserInstance.save(flush:true, failOnError: true)
+
+              // Save relation with admin role
+              def adminRole = SecRole.findByAuthority('ROLE_ADMIN')
+              SecUserSecRole.create secUserInstance, adminRole, true
+
+              request.withFormat {
+                  form multipartForm {
+                      flash.secUserMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                      redirect view: 'index'
+                  }
+                  '*' { respond secUserInstance, [status: CREATED] }
+              }
+          } catch (Exception exception) {
+              log.error("SecUserController():save():Exception:Administrator:${secUserInstance.username}:${exception}")
+
+              // Roll back in database
+              transactionStatus.setRollbackOnly()
+
+              request.withFormat {
+                  form multipartForm {
+                      flash.secUserErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                      render view: "create", model: [secUserInstance: secUserInstance]
+                  }
+              }
+          }
     }
 
     /**
@@ -131,7 +151,7 @@ class SecUserController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.id])
+                flash.secUserMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
                 redirect secUserInstance
             }
             '*'{ respond secUserInstance, [status: OK] }
@@ -153,7 +173,6 @@ class SecUserController {
         }
 
         try {
-
             // Delete SecUserSecRole relations
             SecUserSecRole.findAllBySecUser(secUserInstance)*.delete(flush: true, failOnError: true)
 
@@ -162,7 +181,7 @@ class SecUserController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.secUserMessage = message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                    flash.secUserMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
@@ -172,7 +191,7 @@ class SecUserController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.secUserErrorMessage = message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> did not deleted.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                    flash.secUserErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
@@ -189,7 +208,7 @@ class SecUserController {
 
         request.withFormat {
             form multipartForm {
-                flash.secUserErrorMessage = message(code: 'default.not.found.admin.message', default:'It has not been able to locate the administrator with id: <strong>{0}</strong>.', args: [params.id])
+                flash.secUserErrorMessage = g.message(code: 'default.not.found.admin.message', default:'It has not been able to locate the administrator with id: <strong>{0}</strong>.', args: [params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

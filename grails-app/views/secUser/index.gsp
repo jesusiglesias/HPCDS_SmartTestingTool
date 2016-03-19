@@ -87,11 +87,6 @@
 			<!-- Contain page -->
             <div id="list-domain">
 
-                <!-- TODO -->
-                <g:if test="${flash.message}">
-                    <div class="message" role="status">${flash.message}</div>
-                </g:if>
-
                 <!-- Alerts -->
                 <g:if test="${flash.secUserMessage}">
                     <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity fade in'>

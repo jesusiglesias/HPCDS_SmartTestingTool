@@ -18,12 +18,16 @@ class SecUser implements Serializable {
 	// Attributes
 	String username
 	String password
+	String confirmPassword // Plain text, not stored
 	// Email field
 	String email
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+
+	// Transient attribute
+	static transients = ['springSecurityService', 'confirmPassword']
 
 	/**
 	 * It establishes the username and password of a user.
@@ -69,13 +73,13 @@ class SecUser implements Serializable {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
 
-	static transients = ['springSecurityService']
-
 	// Restrictions on the attributes of the entity
 	static constraints = {
 		username blank: false, unique: true
-		password blank: false
+		// Validator password
+		password blank: false, matches: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$).{8,}\$"
 		email blank: false, unique: true, email: true
+		confirmPassword bindable: true
 	}
 
 	// It modifies the name of the password column in database

@@ -18,6 +18,17 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s !important; /* Transparent background */
 }
 
+/* Accordion password - Admin management */
+.panel-instruction-create {
+    margin: -15px 0 50px 0 !important;
+}
+
+/* Index and create views */
+#list-domain,
+#create-domain {
+    margin: 0 7px;
+}
+
 /* Input - Icons
 =================================================================== */
 /* Remove IE default icon password */
@@ -61,6 +72,11 @@ input:-webkit-autofill:active {
 /* Entity message */
 .alert-entity {
     margin: 0 0 60px 0;
+}
+
+/* Entity error message */
+.alert-entity-error {
+    margin: 0 0 50px 0;
 }
 
 /* Log configuration */
@@ -330,6 +346,11 @@ input:-webkit-autofill:active {
         height: 40px;
         width: 40px;
     }
+
+    /* Index view */
+    #list-domain {
+        margin: 0 15px 0 7px
+    }
 }
 
 /* Max-width: 480px */
@@ -351,6 +372,11 @@ input:-webkit-autofill:active {
         margin: 0 0 48px 0;
     }
 
+    /* Entity errpr message */
+    .alert-entity-error {
+        margin: 0 0 42px 0;
+    }
+
     /* Log configuration */
     .logConfig-button {
         margin: 50px 0 40px 0;
@@ -362,5 +388,10 @@ input:-webkit-autofill:active {
     .alert-log-error,
     .alert-log-internalError {
         margin: 0 0 45px 0;
+    }
+
+    /* Accordion password - Admin management */
+    .panel-instruction-create {
+        margin: -5px 0 40px 0 !important;
     }
 }

@@ -22,6 +22,8 @@ class UrlMappings {
         "/administrator"(controller: 'secUser', action: 'index')
         "/administrator/create"(controller: 'secUser', action: 'create')
         "/administrator/edit/$id?(.$format)?"(controller: 'secUser', action: 'edit')
+        "/administrator/create-error"(controller: 'secUser', action: 'save')
+        "/administrator/edit-error"(controller: 'secUser', action: 'update')
 
         /****************************/
         // TODO
