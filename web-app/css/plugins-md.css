@@ -1793,7 +1793,6 @@ Google Maps
     background-position: 50% 50%;
     height: 100%;
     display: block;
-    height: 300px;
 }
 
 #gmap_routes_instructions {
@@ -1814,7 +1813,7 @@ Gritter notification modify
 }
 
 .gritter-title {
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     font-weight: 300;
 }
@@ -2132,8 +2131,7 @@ Jstree
 }
 
 .jstree-default.jstree-rtl .jstree-last {
-    background: transparent;
-    background-repeat: no-repeat;
+    background: transparent no-repeat;
 }
 
 .vakata-context,
@@ -2445,9 +2443,8 @@ Morris Charts
     font-family: "Open Sans", sans-serif;
 }
 
-/***
-iCheck
-***/
+/* iCheck
+======================================================*/
 .icheck-list > label {
     display: block;
     margin-bottom: 8px;
@@ -2473,7 +2470,7 @@ iCheck
 div[class*='icheckbox_'],
 div[class*='iradio_'] {
     margin-right: 5px;
-    top: -1px !important;
+    top: 20px !important;
 }
 
 .icheck-colors {

@@ -4,6 +4,8 @@
     <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title.admin" default="STT | Administrator management"/></title>
 
+    <link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
+
     <script>
         // Handler auto close alert
         function createAutoClosingAlert(selector) {
@@ -14,6 +16,34 @@
                 });
             }, 5000);
         }
+
+        jQuery(document).ready(function() {
+
+            var initialized = false;
+            var input = $("#password");
+
+            input.keydown(function () {
+                if (initialized === false) {
+
+                    // Set base options
+                    input.pwstrength({
+                        raisePower: 1.4,
+                        minChar: 8,
+                        verdicts: ["Weak", "Normal", "Medium", "Strong", "Very Strong"],
+                        scores: [17, 26, 40, 50, 60]
+                    });
+
+                    // Add your own rule to calculate the password strength
+                    input.pwstrength("addRule", "demoRule", function (options, word, score) {
+                        return word.match("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$).{8,}\$") && score;
+                    }, 10, true);
+
+                    // Set as initialized
+                    initialized = true;
+                }
+            });
+        });
+
     </script>
 </head>
 <body>
@@ -97,26 +127,29 @@
                 </g:hasErrors>
 
                 <!-- Creation form -->
-                <g:form url="[resource:secUserInstance, action:'save']" >
+                <g:form url="[resource:secUserInstance, action:'save']" autocomplete="on" class="horizontal-form">
                     <fieldset class="form">
                         <g:render template="form"/>
                     </fieldset>
-                    <fieldset class="buttons">
-                        <!-- Cancel button -->
-                        <g:link type="button" uri="/administrator" class="btn green-dark btn-block"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
-                        <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                    </fieldset>
-                </g:form>
 
+
+                    <div class="domain-button-group">
+                        <!-- Cancel button -->
+                        <g:link type="button" uri="/administrator" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
+                        <button type="submit" class="btn green-dark" name="create">
+                            <i class="fa fa-check"></i>
+                            <g:message code="default.button.create.label" default="Create"/>
+                        </button>
+                    </div>
+                </g:form>
             </div> <!-- /.Content page -->
         </div> <!-- /.Page-content -->
     </div> <!-- /. Page-content-wrapper -->
 
+    <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="iCheck/icheck.min.js"/>
+    <g:javascript src="pwstrength-bootstrap.min.js"/>
+    <g:javascript src="components-form-tools.js"/>
+
 </body>
 </html>
-
-
-
-
-
-

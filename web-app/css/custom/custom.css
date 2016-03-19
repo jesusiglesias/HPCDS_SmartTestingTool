@@ -69,6 +69,15 @@ input:-webkit-autofill:active {
 
 /* General elements
 =================================================================== */
+.password-admin {
+    margin-bottom: 10px;
+}
+
+/* Button group in create and edit views */
+.domain-button-group {
+    margin-top: 40px;
+}
+
 /* Entity message */
 .alert-entity {
     margin: 0 0 60px 0;

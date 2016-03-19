@@ -88,6 +88,13 @@ class SecUserController {
             return
         }
 
+
+        log.error(secUserInstance.accountExpired)
+        log.error(secUserInstance.passwordExpired)
+        log.error(secUserInstance.enabled)
+        log.error(secUserInstance.accountLocked)
+
+
         try {
               // Save data admin
               secUserInstance.save(flush:true, failOnError: true)

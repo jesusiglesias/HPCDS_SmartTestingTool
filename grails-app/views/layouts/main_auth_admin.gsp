@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.2.3/css/simple-line-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'uniform.default.min.css')}" type="text/css"/>
+    <%-- TODO <link rel="stylesheet" href="${resource(dir: 'css', file: 'uniform.default.min.css')}" type="text/css"/> --%>
     <!-- TODO -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-switch.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
@@ -528,7 +528,8 @@
     <g:javascript src="bootstrap-hover-dropdown.min.js"/>
     <g:javascript src="jquery.slimscroll.min.js"/>
     <g:javascript src="jquery.blockui.min.js"/>
-    <g:javascript src="jquery.uniform.min.js"/>
+    <%-- TODO
+    <g:javascript src="jquery.uniform.min.js"/> --%>
     <g:javascript src="bootstrap-switch.min.js"/>
     <g:javascript src="custom.js"/>
     <g:javascript src="placeholder_polyfill.jquery.min.combo.js"/>
