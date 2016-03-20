@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
 
     <script>
+
+        // Variables to use in script
+        var _weak = '${g.message(code:'default.password.strength.weak', default:'Weak')}';
+        var _normal = '${g.message(code:'default.password.strength.normal', default:'Normal')}';
+        var _medium = '${g.message(code:'default.password.strength.medium', default:'Medium')}';
+        var _strong = '${g.message(code:'default.password.strength.strong', default:'Strong')}';
+        var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
+        var _checkerUsernameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.username', default:'Type a username and check its availability.')}';
+        var _checkUsernameAvailibility = '${g.createLink(controller: "secUser", action: 'checkUsernameAvailibility')}';
+        var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
+        var _checkEmailAvailibility = '${g.createLink(controller: "secUser", action: 'checkEmailAvailibility')}';
+
         // Handler auto close alert
         function createAutoClosingAlert(selector) {
             var alert = $(selector);
@@ -16,34 +28,6 @@
                 });
             }, 5000);
         }
-
-        jQuery(document).ready(function() {
-
-            var initialized = false;
-            var input = $("#password");
-
-            input.keydown(function () {
-                if (initialized === false) {
-
-                    // Set base options
-                    input.pwstrength({
-                        raisePower: 1.4,
-                        minChar: 8,
-                        verdicts: ["Weak", "Normal", "Medium", "Strong", "Very Strong"],
-                        scores: [17, 26, 40, 50, 60]
-                    });
-
-                    // Add your own rule to calculate the password strength
-                    input.pwstrength("addRule", "demoRule", function (options, word, score) {
-                        return word.match("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$).{8,}\$") && score;
-                    }, 10, true);
-
-                    // Set as initialized
-                    initialized = true;
-                }
-            });
-        });
-
     </script>
 </head>
 <body>
@@ -132,7 +116,6 @@
                         <g:render template="form"/>
                     </fieldset>
 
-
                     <div class="domain-button-group">
                         <!-- Cancel button -->
                         <g:link type="button" uri="/administrator" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
@@ -148,8 +131,7 @@
 
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="iCheck/icheck.min.js"/>
-    <g:javascript src="pwstrength-bootstrap.min.js"/>
-    <g:javascript src="components-form-tools.js"/>
-
+    <g:javascript src="password/custom-password.js"/>
+    <g:javascript src="password/pwstrength-bootstrap.min.js"/>
 </body>
 </html>

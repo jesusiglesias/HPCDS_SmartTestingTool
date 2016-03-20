@@ -1,5 +1,6 @@
 package Security
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -87,13 +88,6 @@ class SecUserController {
             render view: "create", model: [secUserInstance: secUserInstance]
             return
         }
-
-
-        log.error(secUserInstance.accountExpired)
-        log.error(secUserInstance.passwordExpired)
-        log.error(secUserInstance.enabled)
-        log.error(secUserInstance.accountLocked)
-
 
         try {
               // Save data admin
@@ -220,5 +214,47 @@ class SecUserController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    /**
+     * It checks the username availability.
+     */
+    def checkUsernameAvailibility () {
+
+        def responseData
+
+        if (SecUser.countByUsername(params.username)) { // Username found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'secUser.checkUsernameAvailibility.notAvailable', default:'Username is not available. Please choose another one.')
+            ]
+        } else { // Username not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'secUser.checkUsernameAvailibility.available', default:'Username available.')
+            ]
+        }
+        render responseData as JSON
+    }
+
+    /**
+     * It checks the email availability.
+     */
+    def checkEmailAvailibility () {
+
+        def responseData
+
+        if (SecUser.countByEmail(params.email)) { // Email found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'secUser.checkEmailAvailibility.notAvailable', default:'Email is not available. Please choose another one.')
+            ]
+        } else { // Email not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'secUser.checkEmailAvailibility.available', default:'Email available.')
+            ]
+        }
+        render responseData as JSON
     }
 }

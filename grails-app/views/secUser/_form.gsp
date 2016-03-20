@@ -8,16 +8,31 @@
                 <label for="username" class="control-label">
                     <g:message code="admin.username.label" default="Username"/>
                 </label>
-                <g:textField name="username" class="form-control" required="" value="${secUserInstance?.username}"/>
+                <div class="input-group">
+                    <g:textField name="username" class="form-control" required="" value="${secUserInstance?.username}"/>
+                    <span class="input-group-btn">
+                        <a href="javascript:;" class="btn green-dark" id="username-checker">
+                            <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/></a>
+                    </span>
+                </div>
             </div>
+            <div class="help-block username-block"><g:message code="layouts.main_auth_admin.body.content.admin.create.checker.block.info.username" default="Type a username and check its availability."/> </div>
         </div>
+
         <div class="col-md-6">
             <div class="form-group ${hasErrors(bean: secUserInstance, field: 'email', 'error')}  required">
                 <label for="email" class="control-label">
                     <g:message code="admin.email.label" default="Email" />
                 </label>
-                <g:field type="email" name="email" class="form-control" required="" value="${secUserInstance?.email}"/>
+                <div class="input-group">
+                    <g:field type="email" name="email" class="form-control" required="" value="${secUserInstance?.email}"/>
+                    <span class="input-group-btn">
+                        <a href="javascript:;" class="btn green-dark" id="email-checker">
+                            <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/></a>
+                    </span>
+                </div>
             </div>
+            <div class="help-block email-block"><g:message code="layouts.main_auth_admin.body.content.admin.create.checker.block.info.email" default="Type an email and check its availability."/> </div>
         </div>
     </div>
 

@@ -15709,9 +15709,8 @@ Notes
     color: #edebf2;
 }
 
-/***
-Customized Progress Bars
-***/
+/* Customized Progress Bars
+=================================================================== */
 .progress {
     border: 0;
     background-image: none;
@@ -18256,9 +18255,8 @@ Light Table
     background: #f9fafb;
 }
 
-/***
-Customized Bootstrap Tabs
-***/
+/* Customized Bootstrap Tabs
+=================================================================== */
 /* Tabs and pills */
 .nav-tabs,
 .nav-pills {
@@ -18423,9 +18421,8 @@ Customized Bootstrap Tabs
     border-color: transparent #ddd #ddd #ddd !important;
 }
 
-/***
-Custom tabs
-***/
+/* Custom tabs
+=================================================================== */
 /* In BS3.0.0 tabbable class was removed. We had to added it back */
 .tabbable:before,
 .tabbable:after {
@@ -18694,9 +18691,8 @@ Custom tabs
     background: #ffffff;
 }
 
-/***
-Tiles(new in v1.1.1)
-***/
+/* Tiles
+=================================================================== */
 .tiles {
     margin-right: -10px;
 }
@@ -18934,9 +18930,8 @@ Tiles(new in v1.1.1)
     margin-right: 10px;
 }
 
-/***
-Custimized Bootstrap Wells
-***/
+/* Customized Bootstrap Wells TODO
+=================================================================== */
 .well {
     border: 0;
     padding: 20px;
@@ -20045,9 +20040,8 @@ Timeline
     }
 }
 
-/***
-Tasks Widget
-***/
+/* Tasks Widget
+=================================================================== */
 .tasks-widget:after {
     clear: both;
 }

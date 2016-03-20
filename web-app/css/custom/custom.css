@@ -29,6 +29,19 @@ input:-webkit-autofill:active {
     margin: 0 7px;
 }
 
+
+/* Checker availibility
+=================================================================== */
+/* Success */
+.availibility-success {
+    color: #3c763d;
+}
+
+/* Error */
+.availibility-error {
+    color: #A94441;
+}
+
 /* Input - Icons
 =================================================================== */
 /* Remove IE default icon password */
