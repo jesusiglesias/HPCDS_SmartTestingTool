@@ -18982,7 +18982,7 @@ Light Table
 }
 
 .widget-bg-color-white {
-    background: #fff;
+    background: #F6F6F6;
 }
 
 .widget-bg-color-dark {
@@ -19265,7 +19265,7 @@ Light Table
 }
 
 .widget-thumb.bordered {
-    border: 1px solid #e7ecf1;
+    border: 1px solid #E2E2E2;
 }
 
 .widget-thumb .widget-thumb-heading {

@@ -1,5 +1,7 @@
 package CustomTasksUser
 
+import Security.SecRole
+import Security.SecUserSecRole
 import grails.util.Environment
 import grails.util.Holders
 import org.codehaus.groovy.grails.plugins.log4j.Log4jConfig
@@ -18,7 +20,11 @@ class CustomTasksBackendController {
     def dashboard (){
         log.debug("CustomTasksBackendController:dashboard()")
 
-        render view: 'dashboard'
+        // Obtain number of normal users
+        def role = SecRole.findByAuthority("ROLE_USER")
+        def normalUsers = SecUserSecRole.findAllBySecRole(role).secUser
+
+        render view: 'dashboard', model: [normalUsers: normalUsers.size()]
     }
 
     /**

@@ -30,7 +30,68 @@
                 <small class="subtitle-inlinePage"><g:message code="layouts.main_auth_admin.body.subtitle.controlPanel" default="Statistics"/></small>
             </h3>
 
+            <!-- Widget -->
+            <div class="row widget-row">
+                <div class="col-md-3">
+                    <!-- Widget thumb -->
+                    <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.user" default="Normal users"/></h4>
+                    <div class="widget-thumb-wrap">
+                            <i class="widget-thumb-icon bg-green icon-user"></i>
+                            <div class="widget-thumb-body">
+                                <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
+                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="${normalUsers}">${normalUsers}</span>
+                            </div>
+                        </div>
+                    </div> <!-- /.Widget thumb -->
+                </div>
+                <div class="col-md-3">
+                    <!-- Widget thumb -->
+                    <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <h4 class="widget-thumb-heading">Weekly Sales</h4>
+                        <div class="widget-thumb-wrap">
+                            <i class="widget-thumb-icon bg-red icon-layers"></i>
+                            <div class="widget-thumb-body">
+                                <span class="widget-thumb-subtitle">USD</span>
+                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">0</span>
+                            </div>
+                        </div>
+                    </div> <!-- /.Widget thumb -->
+                </div>
+                <div class="col-md-3">
+                    <!-- Widget thumb -->
+                    <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <h4 class="widget-thumb-heading">Biggest Purchase</h4>
+                        <div class="widget-thumb-wrap">
+                            <i class="widget-thumb-icon bg-purple icon-screen-desktop"></i>
+                            <div class="widget-thumb-body">
+                                <span class="widget-thumb-subtitle">USD</span>
+                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">0</span>
+                            </div>
+                        </div>
+                    </div> <!-- /.Widget thumb -->
+                </div>
+                <div class="col-md-3">
+                    <!-- Widget thumb -->
+                    <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <h4 class="widget-thumb-heading">Average Monthly</h4>
+                        <div class="widget-thumb-wrap">
+                            <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
+                            <div class="widget-thumb-body">
+                                <span class="widget-thumb-subtitle">USD</span>
+                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">0</span>
+                            </div>
+                        </div>
+                    </div> <!-- /.Widget thumb -->
+                </div>
+            </div> <!-- /.Widget -->
+
         </div> <!-- Page-content -->
     </div> <!-- /. Page-content-wrapper -->
+
+    <!-- LOAD JAVASCRIPT -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <g:javascript src="counter/jquery.counterup.min.js"/>
+
 </body>
 </html>
