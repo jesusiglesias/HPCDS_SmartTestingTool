@@ -4,11 +4,9 @@
 <head>
     <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title.admin" default="STT | Administrator management"/></title>
-
     <link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
 
     <script>
-
         // Variables to use in script
         var _weak = '${g.message(code:'default.password.strength.weak', default:'Weak')}';
         var _normal = '${g.message(code:'default.password.strength.normal', default:'Normal')}';
@@ -65,14 +63,14 @@
 
                 <!-- Accordion -->
                 <div class="portlet-body">
-                    <div class="panel-group accordion panel-instruction-create" id="accordionNewPassword">
+                    <div class="panel-group accordion panel-instruction-create" id="accordionPassword">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordionNewPassword" href="#collapseNewPassword"> <g:message code="views.login.auth.newPassword.description" default="New password instructions"/> </a>
+                                    <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordionPassword" href="#collapsePassword"> <g:message code="views.login.auth.newPassword.description" default="New password instructions"/> </a>
                                 </h4>
                             </div>
-                            <div id="collapseNewPassword" class="panel-collapse collapse">
+                            <div id="collapsePassword" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <ul>
                                         <li> <g:message code="views.login.auth.newPassword.longitude" default="It must contain a minimum length of 8 characters."/> </li>

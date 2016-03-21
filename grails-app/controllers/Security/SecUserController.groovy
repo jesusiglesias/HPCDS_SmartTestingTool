@@ -45,16 +45,6 @@ class SecUserController {
     }
 
     /**
-     * It shows the information of a secUser instance.
-     *
-     * @param secUserInstance It represents the secUser to show.
-     * @return secUserInstance Data of the secUser instance.
-     */
-    def show(SecUser secUserInstance) {
-        respond secUserInstance
-    }
-
-    /**
      * It creates a new secUser instance.
      *
      * @return return If the secUser instance is null or has errors.
@@ -143,19 +133,100 @@ class SecUserController {
             return
         }
 
-        if (secUserInstance.hasErrors()) {
+
+        if (secUserInstance.password == null) {
+            log.error("enbtro password null")
+
+            secUserInstance.password = "Tr1mpa10"
+            secUserInstance.confirmPassword = "Tr1mpa10"
+        }
+
+        // It checks concurrent updates
+        if (params.version) {
+            log.error("enbtro version")
+            def version = params.version.toLong()
+
+            if (secUserInstance.version > version) {
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                log.error("enbtro version segunda")
+
+                // clear the list of errors
+                secUserInstance.clearErrors()
+                secUserInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [ secUserInstance.username] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+
+                respond secUserInstance.errors, view:'edit'
+                return
+            }
+        }
+
+        // Validate the instance
+        if (!secUserInstance.validate()) {
+            log.error("enbtro validate")
+
+            secUserInstance.errors.allErrors.each {err ->
+                log.error(err)  // Print errors
+            }
             respond secUserInstance.errors, view:'edit'
             return
         }
 
-        secUserInstance.save flush:true
+        // Check if password and confirm password fields are same
+        if (secUserInstance.password != secUserInstance.confirmPassword) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.secUserMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
-                redirect secUserInstance
+            log.error("enbtro contraseñas distintas")
+
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.secUserErrorMessage = g.message(code: 'secUser.save.password.notsame', default: 'Password and confirm password fields must match.')
+            render view: "edit", model: [secUserInstance: secUserInstance]
+            return
+        }
+
+        try {
+
+            if (secUserInstance.password == "Tr1mpa10") {
+                log.error("enbtro password trampa")
+
+                bindData(secUserInstance, params, [include: ['username', 'email', 'accountExpired', 'accountLocked', 'enabled', 'passwordExpired'], exclude: ['password']])
+               // secUserInstance.properties['username', 'email', 'accountExpired', 'accountLocked', 'enabled', 'passwordExpired'] = params
+
+                // Save data admin
+                secUserInstance.save(flush:true, failOnError: true)
+
+
+            } else {
+                // Save data admin
+                secUserInstance.save(flush:true, failOnError: true)
             }
-            '*'{ respond secUserInstance, [status: OK] }
+
+
+
+            log.error("despues de save")
+
+            request.withFormat {
+                form multipartForm {
+                    flash.secUserMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                    redirect view: 'index'
+                }
+                '*' { respond secUserInstance, [status: OK] }
+            }
+        } catch (Exception exception) {
+            log.error("SecUserController():update():Exception:Administrator:${secUserInstance.username}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.secUserErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                    render view: "edit", model: [secUserInstance: secUserInstance]
+                }
+            }
         }
     }
 

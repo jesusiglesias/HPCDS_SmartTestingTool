@@ -1953,7 +1953,7 @@ body {
         margin-top: 0;
         /* TODO */
         min-height: 600px;
-        padding: 25px 20px 10px 20px;
+        padding: 25px 25px 10px 20px;
     }
 
     .page-sidebar-fixed.page-sidebar-hover-on .page-content-wrapper .page-content {
@@ -1984,7 +1984,7 @@ body {
     /* Page content */
     .page-content-wrapper .page-content {
         margin: 0 !important;
-        padding: 0 20px 20px 20px !important;
+        padding: 0 20px 25px 20px !important;
         min-height: 280px;
     }
 }
@@ -1994,7 +1994,7 @@ body {
 
     /* Page content */
     .page-content-wrapper .page-content {
-        padding: 0 10px 10px 20px !important;
+        padding: 0 10px 25px 20px !important;
         overflow: hidden;
     }
 

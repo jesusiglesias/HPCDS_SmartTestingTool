@@ -71,7 +71,7 @@ var DomainAdminValidation = function () {
                 },
 
                 submitHandler: function (form) {
-                    form[0].submit(); // Submit the form
+                    form.submit(); // Submit the form
                 }
             });
     };

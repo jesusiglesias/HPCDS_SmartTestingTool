@@ -25,7 +25,8 @@ input:-webkit-autofill:active {
 
 /* Index and create views */
 #list-domain,
-#create-domain {
+#create-domain,
+#edit-domain {
     margin: 0 7px;
 }
 
@@ -37,6 +38,11 @@ input:-webkit-autofill:active {
 /* Icon offset */
 .icon-offset {
     margin: 11px 125px 4px 10px !important;
+}
+
+/* Position confirmation button */
+#delete-confirm-popover {
+    margin: 0 0 30px 0;
 }
 
 /* Checker availibility
