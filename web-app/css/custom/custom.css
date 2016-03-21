@@ -29,6 +29,15 @@ input:-webkit-autofill:active {
     margin: 0 7px;
 }
 
+/* SecUser views */
+.admin-secondRow {
+    margin: 35px -15px 10px -15px;
+}
+
+/* Icon offset */
+.icon-offset {
+    margin: 11px 125px 4px 10px !important;
+}
 
 /* Checker availibility
 =================================================================== */

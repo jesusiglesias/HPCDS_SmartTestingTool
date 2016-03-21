@@ -32,7 +32,7 @@
 
             <!-- Widget -->
             <div class="row widget-row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <!-- Widget thumb -->
                     <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
                         <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.user" default="Normal users"/></h4>
@@ -45,7 +45,7 @@
                         </div>
                     </div> <!-- /.Widget thumb -->
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <!-- Widget thumb -->
                     <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
                         <h4 class="widget-thumb-heading">Weekly Sales</h4>
@@ -58,7 +58,7 @@
                         </div>
                     </div> <!-- /.Widget thumb -->
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <!-- Widget thumb -->
                     <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
                         <h4 class="widget-thumb-heading">Biggest Purchase</h4>
@@ -67,19 +67,6 @@
                             <div class="widget-thumb-body">
                                 <span class="widget-thumb-subtitle">USD</span>
                                 <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">0</span>
-                            </div>
-                        </div>
-                    </div> <!-- /.Widget thumb -->
-                </div>
-                <div class="col-md-3">
-                    <!-- Widget thumb -->
-                    <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
-                        <h4 class="widget-thumb-heading">Average Monthly</h4>
-                        <div class="widget-thumb-wrap">
-                            <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
-                            <div class="widget-thumb-body">
-                                <span class="widget-thumb-subtitle">USD</span>
-                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">0</span>
                             </div>
                         </div>
                     </div> <!-- /.Widget thumb -->

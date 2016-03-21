@@ -1391,14 +1391,14 @@ hr {
     margin-left: 25px;
 }
 
-/* Code */
+/* Code TODO
 code {
     border: 1px solid #e1e1e1;
     -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
-
+*/
 /* Disabled Navigation Link */
 .disabled-link.disable-target,
 .disabled-link .disable-target {
@@ -1534,7 +1534,7 @@ Utilities
     text-align: right;
 }
 
-/* Margin and padding utilities */
+/* Margin and padding utilities TODO
 .no-space {
     margin: 0 !important;
     padding: 0 !important;
@@ -1595,7 +1595,7 @@ Utilities
 .margin-right-10 {
     margin-right: 10px !important;
 }
-
+*/
 /* IE8 & IE9 mode utilities */
 .visible-ie8 {
     display: none;
@@ -1680,9 +1680,9 @@ Demo Utils
     padding: 20px 0;
 }
 
-/***
+/*** TODO
 Users
-***/
+
 .user-info {
     margin-bottom: 10px !important;
 }
@@ -1699,7 +1699,7 @@ Users
 .user-info .label {
     font-weight: 300;
     font-size: 11px;
-}
+}*/
 
 /***
 Custom vertical inline menu

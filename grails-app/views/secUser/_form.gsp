@@ -3,32 +3,40 @@
 <div class="form-body">
     <!-- Row -->
     <div class="row">
+        <!-- Username -->
         <div class="col-md-6">
-            <div class="form-group ${hasErrors(bean: secUserInstance, field: 'username', 'error')} required">
+            <div class="form-group ${hasErrors(bean: secUserInstance, field: 'username', 'error')}">
                 <label for="username" class="control-label">
                     <g:message code="admin.username.label" default="Username"/>
+                    <span class="required"> * </span>
                 </label>
-                <div class="input-group">
-                    <g:textField name="username" class="form-control" required="" value="${secUserInstance?.username}"/>
+                <div class="input-group input-icon right">
+                    <i class="fa icon-offset"></i>
+                    <g:textField name="username" class="form-control" value="${secUserInstance?.username}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="username-checker">
-                            <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/></a>
+                            <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
+                        </a>
                     </span>
                 </div>
             </div>
             <div class="help-block username-block"><g:message code="layouts.main_auth_admin.body.content.admin.create.checker.block.info.username" default="Type a username and check its availability."/> </div>
         </div>
 
+        <!-- Email -->
         <div class="col-md-6">
-            <div class="form-group ${hasErrors(bean: secUserInstance, field: 'email', 'error')}  required">
+            <div class="form-group ${hasErrors(bean: secUserInstance, field: 'email', 'error')}">
                 <label for="email" class="control-label">
-                    <g:message code="admin.email.label" default="Email" />
+                    <g:message code="admin.email.label" default="Email"/>
+                    <span class="required"> * </span>
                 </label>
-                <div class="input-group">
-                    <g:field type="email" name="email" class="form-control" required="" value="${secUserInstance?.email}"/>
+                <div class="input-group input-icon right">
+                    <i class="fa icon-offset"></i>
+                    <g:field type="email" name="email" class="form-control" value="${secUserInstance?.email}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="email-checker">
-                            <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/></a>
+                            <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
+                        </a>
                     </span>
                 </div>
             </div>
@@ -37,27 +45,39 @@
     </div>
 
     <!-- Row -->
-    <div class="row">
+    <div class="row admin-secondRow">
+        <!-- Password -->
         <div class="col-md-6">
-            <div class="form-group ${hasErrors(bean: secUserInstance, field: 'password', 'error')} required">
+            <div class="form-group ${hasErrors(bean: secUserInstance, field: 'password', 'error')}">
                 <label for="password" class="control-label">
                     <g:message code="admin.password.label" default="Password"/>
+                    <span class="required"> * </span>
                 </label>
-                <g:passwordField name="password" class="form-control password-admin" required=""/>
+                <div class="input-icon right">
+                    <i class="fa"></i>
+                    <g:passwordField name="password" class="form-control password-admin"/>
+                </div>
             </div>
         </div>
+
+        <!-- Confirm password -->
         <div class="col-md-6">
-            <div class="form-group ${hasErrors(bean: secUserInstance, field: 'confirmPassword', 'error')} required">
+            <div class="form-group ${hasErrors(bean: secUserInstance, field: 'confirmPassword', 'error')}">
                 <label for="confirmPassword" class="control-label">
                     <g:message code="admin.confirmPassword.label" default="Confirm password"/>
+                    <span class="required"> * </span>
                 </label>
-                <g:passwordField name="confirmPassword" class="form-control" required=""/>
+                <div class="input-icon right">
+                    <i class="fa"></i>
+                    <g:passwordField name="confirmPassword" class="form-control"/>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Row -->
     <div class="row">
+        <!-- Account expired -->
         <div class="col-md-6">
             <div class="${hasErrors(bean: secUserInstance, field: 'accountExpired', 'error')}">
                 <div class="input-group">
@@ -67,6 +87,7 @@
                 </div>
             </div>
         </div>
+        <!-- Account locked -->
         <div class="col-md-6">
             <div class="${hasErrors(bean: secUserInstance, field: 'accountLocked', 'error')}">
                 <div class="input-group">
@@ -80,6 +101,7 @@
 
     <!-- Row -->
     <div class="row">
+        <!-- Enabled -->
         <div class="col-md-6">
             <div class="${hasErrors(bean: secUserInstance, field: 'enabled', 'error')}">
                 <div class="input-group">
@@ -89,6 +111,7 @@
                 </div>
             </div>
         </div>
+        <!-- Password expired -->
         <div class="col-md-6">
             <div class="${hasErrors(bean: secUserInstance, field: 'passwordExpired', 'error')}">
                 <div class="input-group">

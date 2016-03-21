@@ -1,3 +1,4 @@
+<%@ page import="org.springframework.validation.FieldError" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,9 @@
         var _checkUsernameAvailibility = '${g.createLink(controller: "secUser", action: 'checkUsernameAvailibility')}';
         var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
         var _checkEmailAvailibility = '${g.createLink(controller: "secUser", action: 'checkEmailAvailibility')}';
+        var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
+        var _equalPassword = '${raw(g.message(code:'secUser.save.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
 
         // Handler auto close alert
         function createAutoClosingAlert(selector) {
@@ -101,7 +105,7 @@
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
                         <g:eachError bean="${secUserInstance}" var="error">
-                            <p role="status" <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></p>
+                            <p role="status" <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></p>
                         </g:eachError>
                     </div>
 
@@ -111,7 +115,7 @@
                 </g:hasErrors>
 
                 <!-- Creation form -->
-                <g:form url="[resource:secUserInstance, action:'save']" autocomplete="on" class="horizontal-form">
+                <g:form url="[resource:secUserInstance, action:'save']" autocomplete="on" class="horizontal-form admin-form">
                     <fieldset class="form">
                         <g:render template="form"/>
                     </fieldset>
@@ -133,5 +137,6 @@
     <g:javascript src="iCheck/icheck.min.js"/>
     <g:javascript src="password/custom-password.js"/>
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
+    <g:javascript src="domain-validation/admin-validation.js"/>
 </body>
 </html>
