@@ -305,15 +305,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                                <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link controller="department" action="create" class="nav-link">
                                     <i class="fa fa-plus"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
-                                <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link uri="/department" class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>

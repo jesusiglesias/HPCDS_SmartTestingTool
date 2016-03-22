@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta name="layout" content="main_auth_admin">
-	<title><g:message code="layouts.main_auth_admin.head.title.admin" default="STT | Administrator management"/></title>
+	<title><g:message code="layouts.main_auth_admin.head.title.admin" default="STT | Administrators management"/></title>
 
     <!-- LOAD CSS -->
     <link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.css')}" type="text/css"/>
@@ -79,9 +79,9 @@
 
 			<!-- Page-title -->
 			<h3 class="page-title">
-				<g:link uri="/administrator"><g:message code="layouts.main_auth_admin.body.title.admin" default="Administrator management"/></g:link>
+				<g:link uri="/administrator"><g:message code="layouts.main_auth_admin.body.title.admin" default="Administrators management"/></g:link>
 				<i class="icon-arrow-right icon-title-admin"></i>
-				<small><g:message code="layouts.main_auth_admin.body.subtitle.admin" default="Administrator list"/></small>
+				<small><g:message code="layouts.main_auth_admin.body.subtitle.admin" default="Administrators list"/></small>
 			</h3>
 
 			<!-- Contain page -->
@@ -116,9 +116,6 @@
                         <div class="portlet light bg-inverse bordered">
                             <div class="portlet-title">
                                 <div class="caption font-green-dark">
-                                   <!-- <i class="icon-settings font-green-dark"></i>
-                                    <span class="caption-subject bold uppercase">Buttons</span>
--->
                                     <div class="btn-group">
                                         <g:link uri="/administrator/create" class="btn green-dark">
                                             <i class="fa fa-plus"></i>
@@ -201,7 +198,7 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="datatable/datatables.js"/>
     <g:javascript src="datatable/datatables.bootstrap.js"/>
-    <g:javascript src="datatable/custom-datatable.js"/>
+    <g:javascript src="datatable/customAdmin-datatable.js"/>
 
 </body>
 </html>

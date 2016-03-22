@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main_auth_admin">
-    <title><g:message code="layouts.main_auth_admin.head.title.admin" default="STT | Administrator management"/></title>
+    <title><g:message code="layouts.main_auth_admin.head.title.admin" default="STT | Administrators management"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
 
     <script>
@@ -53,7 +53,7 @@
 
             <!-- Page-title -->
             <h3 class="page-title">
-                <g:link uri="/administrator"><g:message code="layouts.main_auth_admin.body.title.admin" default="Administrator management"/></g:link>
+                <g:link uri="/administrator"><g:message code="layouts.main_auth_admin.body.title.admin" default="Administrators management"/></g:link>
                 <i class="icon-arrow-right icon-title-admin"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.admin.create" default="Create administrator"/></small>
             </h3>

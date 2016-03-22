@@ -1,5 +1,6 @@
 package User
 
+import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
@@ -33,17 +34,7 @@ class DepartmentController {
         }
         params.max = Math.min(max, 100)
 
-        respond Department.list(params), model: [departmentInstanceCount: Department.count()]
-    }
-
-    /**
-     * It shows the information of a department instance.
-     *
-     * @param departmentInstance It represents the department to show.
-     * @return departmentInstance Data of the department instance.
-     */
-    def show(Department departmentInstance) {
-        respond departmentInstance
+        respond Department.list(params)
     }
 
     /**
@@ -63,6 +54,7 @@ class DepartmentController {
      */
     @Transactional
     def save(Department departmentInstance) {
+
         if (departmentInstance == null) {
             notFound()
             return
@@ -73,14 +65,30 @@ class DepartmentController {
             return
         }
 
-        departmentInstance.save flush: true
+        try {
+            // Save department
+            departmentInstance.save(flush: true, failOnError: true)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'department.label', default: 'Department'), departmentInstance.id])
-                redirect departmentInstance
+            request.withFormat {
+                form multipartForm {
+                    flash.departmentMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
+                    redirect view: 'index'
+                }
+                '*' { respond departmentInstance, [status: CREATED] }
             }
-            '*' { respond departmentInstance, [status: CREATED] }
+
+        } catch (Exception exception) {
+            log.error("DepartmentController():save():Exception:Department:${departmentInstance.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.departmentErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
+                    render view: "create", model: [departmentInstance: departmentInstance]
+                }
+            }
         }
     }
 
@@ -102,24 +110,61 @@ class DepartmentController {
      */
     @Transactional
     def update(Department departmentInstance) {
+
         if (departmentInstance == null) {
             notFound()
             return
         }
 
-        if (departmentInstance.hasErrors()) {
-            respond departmentInstance.errors, view: 'edit'
+        // It checks concurrent updates
+        if (params.version) {
+            def version = params.version.toLong()
+
+            if (departmentInstance.version > version) {
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                // clear the list of errors
+                departmentInstance.clearErrors()
+                departmentInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [departmentInstance.name] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+
+                respond departmentInstance.errors, view:'edit'
+                return
+            }
+        }
+
+        // Validate the instance
+        if (!departmentInstance.validate()) {
+            respond departmentInstance.errors, view:'edit'
             return
         }
 
-        departmentInstance.save flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'department.label', default: 'Department'), departmentInstance.id])
-                redirect departmentInstance
+            // Save department
+            departmentInstance.save(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.departmentMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
+                    redirect view: 'index'
+                }
+                '*' { respond departmentInstance, [status: OK] }
             }
-            '*' { respond departmentInstance, [status: OK] }
+
+        } catch (Exception exception) {
+            log.error("DepartmentController():update():Exception:Department:${departmentInstance.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.departmentErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
+                    render view: "edit", model: [departmentInstance: departmentInstance]
+                }
+            }
         }
     }
 
@@ -137,14 +182,28 @@ class DepartmentController {
             return
         }
 
-        departmentInstance.delete flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'department.label', default: 'Department'), departmentInstance.id])
-                redirect action: "index", method: "GET"
+            // Delete department
+            departmentInstance.delete(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.departmentMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
             }
-            '*' { render status: NO_CONTENT }
+        } catch (DataIntegrityViolationException exception) {
+            log.error("DepartmentController():delete():DataIntegrityViolationException:Department:${departmentInstance.name}:${exception}")
+
+            request.withFormat {
+                form multipartForm {
+                    flash.departmentErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
+            }
         }
     }
 
@@ -152,9 +211,11 @@ class DepartmentController {
      * Its redirects to not found page if the department instance was not found.
      */
     protected void notFound() {
+        log.error("DepartmentController():notFound():DepartmentID:${params.id}")
+
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'department.label', default: 'Department'), params.id])
+                flash.departmentErrorMessage = message(code: 'default.not.found.department.message', default:'It has not been able to locate the department with id: <strong>{0}</strong>.', args: [params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }
