@@ -133,17 +133,8 @@ class SecUserController {
             return
         }
 
-
-        if (secUserInstance.password == null) {
-            log.error("enbtro password null")
-
-            secUserInstance.password = "Tr1mpa10"
-            secUserInstance.confirmPassword = "Tr1mpa10"
-        }
-
         // It checks concurrent updates
         if (params.version) {
-            log.error("enbtro version")
             def version = params.version.toLong()
 
             if (secUserInstance.version > version) {
@@ -151,11 +142,9 @@ class SecUserController {
                 // Roll back in database
                 transactionStatus.setRollbackOnly()
 
-                log.error("enbtro version segunda")
-
                 // clear the list of errors
                 secUserInstance.clearErrors()
-                secUserInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [ secUserInstance.username] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+                secUserInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [secUserInstance.username] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
 
                 respond secUserInstance.errors, view:'edit'
                 return
@@ -164,20 +153,12 @@ class SecUserController {
 
         // Validate the instance
         if (!secUserInstance.validate()) {
-            log.error("enbtro validate")
-
-            secUserInstance.errors.allErrors.each {err ->
-                log.error(err)  // Print errors
-            }
             respond secUserInstance.errors, view:'edit'
             return
         }
 
         // Check if password and confirm password fields are same
         if (secUserInstance.password != secUserInstance.confirmPassword) {
-
-            log.error("enbtro contraseñas distintas")
-
 
             // Roll back in database
             transactionStatus.setRollbackOnly()
@@ -189,24 +170,8 @@ class SecUserController {
 
         try {
 
-            if (secUserInstance.password == "Tr1mpa10") {
-                log.error("enbtro password trampa")
-
-                bindData(secUserInstance, params, [include: ['username', 'email', 'accountExpired', 'accountLocked', 'enabled', 'passwordExpired'], exclude: ['password']])
-               // secUserInstance.properties['username', 'email', 'accountExpired', 'accountLocked', 'enabled', 'passwordExpired'] = params
-
-                // Save data admin
-                secUserInstance.save(flush:true, failOnError: true)
-
-
-            } else {
-                // Save data admin
-                secUserInstance.save(flush:true, failOnError: true)
-            }
-
-
-
-            log.error("despues de save")
+            // Save data admin
+            secUserInstance.save(flush:true, failOnError: true)
 
             request.withFormat {
                 form multipartForm {

@@ -153,6 +153,7 @@
     <g:javascript src="iCheck/icheck.min.js"/>
     <g:javascript src="password/custom-password.js"/>
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
+    <g:javascript src="domain-validation/admin-validation.js"/>
 
 </body>
 </html>
