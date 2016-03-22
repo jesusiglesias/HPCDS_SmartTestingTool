@@ -19,10 +19,10 @@ class SecUserController {
     def defaultPag
 
     /**
-     * It lists the main data of all SecUser of the database.
+     * It lists the main data of all administrators of the database.
      *
-     * @param max Maximum number of SecUser to list.
-     * @return SecUser SecUser list with their information and number of SecUser in the database.
+     * @param max Maximum number of administrators to list.
+     * @return SecUser SecUser list with their information and number of administrators in the database.
      */
     def index(Integer max) {
         //params.max = Math.min(max ?: 10, 100)
@@ -54,9 +54,9 @@ class SecUserController {
     }
 
     /**
-     * It saves a secUser in database.
+     * It saves an administrator in database.
      *
-     * @param secUserInstance It represents the secUser to save.
+     * @param secUserInstance It represents the administrator to save.
      * @return return If the secUser instance is null or has errors.
      */
     @Transactional
@@ -110,9 +110,9 @@ class SecUserController {
     }
 
     /**
-     * It edits a existing secUser with the new values of each field.
+     * It edits a existing administrator with the new values of each field.
      *
-     * @param secUserInstance It represents the secUser to edit.
+     * @param secUserInstance It represents the administrator to edit.
      * @return secUserInstance It represents the secUser instance.
      */
     def edit(SecUser secUserInstance) {
@@ -120,9 +120,9 @@ class SecUserController {
     }
 
     /**
-     * It updates a existing secUser in database.
+     * It updates a existing administrator in database.
      *
-     * @param secUserInstance It represents the secUser information to update.
+     * @param secUserInstance It represents the administrator information to update.
      * @return return If the secUser instance is null or has errors.
      */
     @Transactional
@@ -196,9 +196,9 @@ class SecUserController {
     }
 
     /**
-     * It deletes a existing secUser in database.
+     * It deletes a existing administrator in database.
      *
-     * @param secUserInstance It represents the secUser information to delete.
+     * @param secUserInstance It represents the administrator information to delete.
      * @return return If the secUser instance is null, the notFound function is called.
      */
     @Transactional
