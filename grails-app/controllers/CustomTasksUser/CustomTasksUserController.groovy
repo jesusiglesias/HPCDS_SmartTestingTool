@@ -99,7 +99,7 @@ class CustomTasksUserController {
                 log.error("CustomTasksUserController:authFail():accountLocked:UserOrEmailIntroduced:${session['SPRING_SECURITY_LAST_USERNAME']}")
 
                 messageType = "accountLocked"
-                failMessage = g.message(code: "customTasksUser.login.locked", default: 'Sorry, your account is locked. Please, you enter your email to contact with administrator.')
+                failMessage = g.message(code: "customTasksUser.login.locked", default: 'Sorry, your user account has been locked by the administrator or exceed the limit of failed login attempts. Please, you enter your email to contact with administrator.')
             }
             else if (exception instanceof AuthenticationServiceException) {
                 log.error("CustomTasksUserController:authFail():authenticationService")

@@ -116,13 +116,22 @@ grails {
     }
 }
 
-/* Jasypt encryptation
+/* Jasypt encryptation configuration
  ============================================================================================= */
 jasypt {
     algorithm = "PBEWITHSHA256AND256BITAES-CBC-BC"
     providerName = "BC"
     password = "sttHPCDSTfg"
     keyObtentionIterations = 1000
+}
+
+/* Brute-force Defender configuration
+ ============================================================================================= */
+grails.plugin.springsecurity.useSecurityEventListener = true
+
+bruteforcedefender {
+    time = 5 // Minutes maintaining failed attempts allowed
+    allowedNumberOfAttempts = 5 // Number of failed attempts before blocking the user
 }
 
 /* Spring Security Core configuration
