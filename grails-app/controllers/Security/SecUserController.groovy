@@ -74,13 +74,13 @@ class SecUserController {
 
         // Check if password and confirm password fields are same
         if (secUserInstance.password != secUserInstance.confirmPassword) {
-            flash.secUserErrorMessage = g.message(code: 'secUser.save.password.notsame', default: 'Password and confirm password fields must match.')
+            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: 'Password and confirm password fields must match.')
             render view: "create", model: [secUserInstance: secUserInstance]
             return
         }
 
         try {
-              // Save data admin
+              // Save admin data
               secUserInstance.save(flush:true, failOnError: true)
 
               // Save relation with admin role
@@ -163,14 +163,14 @@ class SecUserController {
             // Roll back in database
             transactionStatus.setRollbackOnly()
 
-            flash.secUserErrorMessage = g.message(code: 'secUser.save.password.notsame', default: 'Password and confirm password fields must match.')
+            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: 'Password and confirm password fields must match.')
             render view: "edit", model: [secUserInstance: secUserInstance]
             return
         }
 
         try {
 
-            // Save data admin
+            // Save admin data
             secUserInstance.save(flush:true, failOnError: true)
 
             request.withFormat {
@@ -233,7 +233,6 @@ class SecUserController {
                 }
                 '*' { render status: NO_CONTENT }
             }
-
         }
     }
 

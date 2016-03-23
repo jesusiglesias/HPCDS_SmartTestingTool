@@ -282,7 +282,7 @@
                                 </g:link>
                             </li>
                             <li class="nav-item">
-                                <g:link controller="user" action="index" class="nav-link">
+                                <g:link uri="/user" class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
