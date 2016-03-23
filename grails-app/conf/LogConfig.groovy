@@ -145,6 +145,7 @@ log4j.main = {
         development {
             // Debug type
             debug 'org.hibernate.SQL'
+            debug 'grails.app.services.com.grygoriy.bruteforcedefender'
 
             debug stdout: infoLogged, debugLog: infoLogged, additivity: false
 
