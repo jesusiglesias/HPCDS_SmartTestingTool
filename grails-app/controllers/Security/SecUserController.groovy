@@ -213,7 +213,7 @@ class SecUserController {
             // Delete SecUserSecRole relations
             SecUserSecRole.findAllBySecUser(secUserInstance)*.delete(flush: true, failOnError: true)
 
-            // Delete SecUser
+            // Delete administrator
             secUserInstance.delete(flush:true, failOnError: true)
 
             request.withFormat {

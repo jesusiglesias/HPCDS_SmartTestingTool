@@ -1,11 +1,13 @@
 package Test
 
+import org.springframework.dao.DataIntegrityViolationException
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 
 /**
- * Class that represents to the topic controller.
+ * Class that represents to the Topic controller.
  */
 @Transactional(readOnly = true)
 class TopicController {
@@ -33,17 +35,7 @@ class TopicController {
         }
         params.max = Math.min(max, 100)
 
-        respond Topic.list(params), model:[topicInstanceCount: Topic.count()]
-    }
-
-    /**
-     * It shows the information of a topic instance.
-     *
-     * @param topicInstance It represents the topic to show.
-     * @return topicInstance Data of the topic instance.
-     */
-    def show(Topic topicInstance) {
-        respond topicInstance
+        respond Topic.list(params)
     }
 
     /**
@@ -63,6 +55,7 @@ class TopicController {
      */
     @Transactional
     def save(Topic topicInstance) {
+
         if (topicInstance == null) {
             notFound()
             return
@@ -73,14 +66,29 @@ class TopicController {
             return
         }
 
-        topicInstance.save flush:true
+        try {
+            // Save topic data
+            topicInstance.save(flush:true, failOnError: true)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.id])
-                redirect topicInstance
+            request.withFormat {
+                form multipartForm {
+                    flash.topicMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.name])
+                    redirect view: 'index'
+                }
+                '*' { respond topicInstance, [status: CREATED] }
             }
-            '*' { respond topicInstance, [status: CREATED] }
+        } catch (Exception exception) {
+            log.error("TopicController():save():Exception:Topic:${topicInstance.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.topicErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.name])
+                    render view: "create", model: [topicInstance: topicInstance]
+                }
+            }
         }
     }
 
@@ -102,24 +110,60 @@ class TopicController {
      */
     @Transactional
     def update(Topic topicInstance) {
+
         if (topicInstance == null) {
             notFound()
             return
         }
 
-        if (topicInstance.hasErrors()) {
+        // It checks concurrent updates
+        if (params.version) {
+            def version = params.version.toLong()
+
+            if (topicInstance.version > version) {
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                // clear the list of errors
+                topicInstance.clearErrors()
+                topicInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [topicInstance.name] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+
+                respond topicInstance.errors, view:'edit'
+                return
+            }
+        }
+
+        // Validate the instance
+        if (!topicInstance.validate()) {
             respond topicInstance.errors, view:'edit'
             return
         }
 
-        topicInstance.save flush:true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.id])
-                redirect topicInstance
+            // Save topic data
+            topicInstance.save(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.topicMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.name])
+                    redirect view: 'index'
+                }
+                '*' { respond topicInstance, [status: OK] }
             }
-            '*'{ respond topicInstance, [status: OK] }
+        } catch (Exception exception) {
+            log.error("TopicController():update():Exception:Topic:${topicInstance.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.topicErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.name])
+                    render view: "edit", model: [topicInstance: topicInstance]
+                }
+            }
         }
     }
 
@@ -137,14 +181,27 @@ class TopicController {
             return
         }
 
-        topicInstance.delete flush:true
+        try {
+            // Delete topic
+            topicInstance.delete(flush:true, failOnError: true)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.id])
-                redirect action:"index", method:"GET"
+            request.withFormat {
+                form multipartForm {
+                    flash.topicMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'topic.label', default: 'Topic'), topicInstance.name])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
             }
-            '*'{ render status: NO_CONTENT }
+        } catch (DataIntegrityViolationException exception) {
+            log.error("TopicController():delete():DataIntegrityViolationException:Topic:${topicInstance.name}:${exception}")
+
+            request.withFormat {
+                form multipartForm {
+                    flash.topicErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'admin.label', default: 'Administrator'), topicInstance.name])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
+            }
         }
     }
 
@@ -152,9 +209,11 @@ class TopicController {
      * Its redirects to not found page if the topic instance was not found.
      */
     protected void notFound() {
+        log.error("TopicController():notFound():TopicID:${params.id}")
+
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'topic.label', default: 'Topic'), params.id])
+                flash.topicErrorMessage = g.message(code: 'default.not.found.topic.message', default:'It has not been able to locate the topic with id: <strong>{0}</strong>.', args: [params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

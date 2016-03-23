@@ -328,15 +328,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link controller="topic" action="create" class="nav-link">
                                     <i class="fa fa-plus"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.newFemale" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link uri="/topic" class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
@@ -353,15 +351,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link controller="catalog" action="create" class="nav-link">
                                     <i class="fa fa-plus"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link uri="/catalog" class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
@@ -378,15 +374,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link controller="question" action="create" class="nav-link">
                                     <i class="fa fa-plus"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.newFemale" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link uri="/question" class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
@@ -404,15 +398,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link controller="answer" action="create" class="nav-link">
                                     <i class="fa fa-plus"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.newFemale" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link uri="/answer" class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
@@ -436,15 +428,13 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link controller="test" action="create" class="nav-link">
                                     <i class="fa fa-plus"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                                 </g:link>
                             </li>
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link uri="/test" class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
@@ -468,8 +458,7 @@
                                 </g:link>
                             </li>
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
+                                <g:link uri="/evaluation" class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 </g:link>
