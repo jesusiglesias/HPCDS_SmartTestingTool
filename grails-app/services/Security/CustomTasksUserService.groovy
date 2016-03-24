@@ -55,6 +55,7 @@ class CustomTasksUserService {
         // Send email
         try {
             mailService.sendMail {
+                async true
                 to email
                 subject messageSource.getMessage("resetPassword.email.subject", null, "STT - Reset password", LocaleContextHolder.locale)
                 html(view: '/email/resetPassword',

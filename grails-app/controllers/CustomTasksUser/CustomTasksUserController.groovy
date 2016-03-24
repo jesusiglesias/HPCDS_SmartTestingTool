@@ -247,7 +247,7 @@ class CustomTasksUserController {
 
             } else {
                 log.debug("CustomTasksUserController:sendEmail():mailSent:${params.email}")
-                flash.successRestorePassword = g.message(code: 'customTasksUser.sendEmail.success', default: 'An email has been sent to restore the password to the following address:<br/>{0}.', args: [params.email])
+                flash.successRestorePassword = g.message(code: 'customTasksUser.sendEmail.success', default: 'Notification processed. You will receive an email to reset the password in the indicated address.')
 
                 redirect uri: '/forgotPassword'
                 return
@@ -261,7 +261,9 @@ class CustomTasksUserController {
 
             } else { // Not exist
                 log.error("ForgotPassword():email:doesNotExist:${params.email}")
-                flash.errorRestorePassword = g.message(code: 'customTasksUser.sendEmail.notExist', default: '{0} email entered does not exist.', args: [params.email])
+
+                // It is sent an success email to avoid the user enumeration attack
+                flash.successRestorePassword = g.message(code: 'customTasksUser.sendEmail.success', default: 'Notification processed. You will receive an email to reset the password in the indicated address.')
             }
         }
         redirect uri: '/forgotPassword'
