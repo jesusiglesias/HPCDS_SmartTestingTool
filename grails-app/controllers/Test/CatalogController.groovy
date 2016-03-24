@@ -1,11 +1,12 @@
 package Test
 
+import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 
 /**
- * Class that represents to the catalog controller.
+ * Class that represents to the Catalog controller.
  */
 @Transactional(readOnly = true)
 class CatalogController {
@@ -33,17 +34,7 @@ class CatalogController {
         }
         params.max = Math.min(max, 100)
 
-        respond Catalog.list(params), model: [catalogInstanceCount: Catalog.count()]
-    }
-
-    /**
-     * It shows the information of a catalog instance.
-     *
-     * @param catalogInstance It represents the catalog to show.
-     * @return catalogInstance Data of the catalog instance.
-     */
-    def show(Catalog catalogInstance) {
-        respond catalogInstance
+        respond Catalog.list(params)
     }
 
     /**
@@ -63,6 +54,7 @@ class CatalogController {
      */
     @Transactional
     def save(Catalog catalogInstance) {
+
         if (catalogInstance == null) {
             notFound()
             return
@@ -73,14 +65,29 @@ class CatalogController {
             return
         }
 
-        catalogInstance.save flush: true
+        try {
+            // Save catalog data
+            catalogInstance.save(flush:true, failOnError: true)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'catalog.label', default: 'Catalog'), catalogInstance.id])
-                redirect catalogInstance
+            request.withFormat {
+                form multipartForm {
+                    flash.catalogMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'catalog.label', default: 'Catalog'), catalogInstance.name])
+                    redirect view: 'index'
+                }
+                '*' { respond catalogInstance, [status: CREATED] }
             }
-            '*' { respond catalogInstance, [status: CREATED] }
+        } catch (Exception exception) {
+            log.error("CatalogController():save():Exception:Catalog:${catalogInstance.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.catalogErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'catalog.label', default: 'Catalog'), catalogInstance.name])
+                    render view: "create", model: [catalogInstance: catalogInstance]
+                }
+            }
         }
     }
 
@@ -102,24 +109,60 @@ class CatalogController {
      */
     @Transactional
     def update(Catalog catalogInstance) {
+
         if (catalogInstance == null) {
             notFound()
             return
         }
 
-        if (catalogInstance.hasErrors()) {
-            respond catalogInstance.errors, view: 'edit'
+        // It checks concurrent updates
+        if (params.version) {
+            def version = params.version.toLong()
+
+            if (catalogInstance.version > version) {
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                // clear the list of errors
+                catalogInstance.clearErrors()
+                catalogInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [catalogInstance.name] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+
+                respond catalogInstance.errors, view:'edit'
+                return
+            }
+        }
+
+        // Validate the instance
+        if (!catalogInstance.validate()) {
+            respond catalogInstance.errors, view:'edit'
             return
         }
 
-        catalogInstance.save flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'catalog.label', default: 'Catalog'), catalogInstance.id])
-                redirect catalogInstance
+            // Save catalog data
+            catalogInstance.save(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.catalogMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'catalog.label', default: 'Catalog'), catalogInstance.name])
+                    redirect view: 'index'
+                }
+                '*' { respond catalogInstance, [status: OK] }
             }
-            '*' { respond catalogInstance, [status: OK] }
+        } catch (Exception exception) {
+            log.error("CatalogController():update():Exception:Catalog:${catalogInstance.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.catalogErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'catalog.label', default: 'Catalog'), catalogInstance.name])
+                    render view: "edit", model: [catalogInstance: catalogInstance]
+                }
+            }
         }
     }
 
@@ -137,14 +180,28 @@ class CatalogController {
             return
         }
 
-        catalogInstance.delete flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'catalog.label', default: 'Catalog'), catalogInstance.id])
-                redirect action: "index", method: "GET"
+            // Delete catalog
+            catalogInstance.delete(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.catalogMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'catalog.label', default: 'Catalog'), catalogInstance.name])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
             }
-            '*' { render status: NO_CONTENT }
+        } catch (DataIntegrityViolationException exception) {
+            log.error("CatalogController():delete():DataIntegrityViolationException:Catalog:${catalogInstance.name}:${exception}")
+
+            request.withFormat {
+                form multipartForm {
+                    flash.catalogErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'catalog.label', default: 'Catalog'), catalogInstance.name])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
+            }
         }
     }
 
@@ -152,9 +209,11 @@ class CatalogController {
      * Its redirects to not found page if the catalog instance was not found.
      */
     protected void notFound() {
+        log.error("CatalogController():notFound():CatalogID:${params.id}")
+
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'catalog.label', default: 'Catalog'), params.id])
+                flash.catalogErrorMessage = g.message(code: 'default.not.found.catalog.message', default:'It has not been able to locate the catalog with id: <strong>{0}</strong>.', args: [params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }

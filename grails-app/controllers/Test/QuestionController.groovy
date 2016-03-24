@@ -1,11 +1,12 @@
 package Test
 
+import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 
 /**
- * Class that represents to the question controller.
+ * Class that represents to the Question controller.
  */
 @Transactional(readOnly = true)
 class QuestionController {
@@ -33,17 +34,7 @@ class QuestionController {
         }
         params.max = Math.min(max, 100)
 
-        respond Question.list(params), model: [questionInstanceCount: Question.count()]
-    }
-
-    /**
-     * It shows the information of a question instance.
-     *
-     * @param questionInstance It represents the question to show.
-     * @return questionInstance Data of the question instance.
-     */
-    def show(Question questionInstance) {
-        respond questionInstance
+        respond Question.list(params)
     }
 
     /**
@@ -63,6 +54,7 @@ class QuestionController {
      */
     @Transactional
     def save(Question questionInstance) {
+
         if (questionInstance == null) {
             notFound()
             return
@@ -73,14 +65,29 @@ class QuestionController {
             return
         }
 
-        questionInstance.save flush: true
+        try {
+            // Save question data
+            questionInstance.save(flush:true, failOnError: true)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'question.label', default: 'Question'), questionInstance.id])
-                redirect questionInstance
+            request.withFormat {
+                form multipartForm {
+                    flash.questionMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    redirect view: 'index'
+                }
+                '*' { respond questionInstance, [status: CREATED] }
             }
-            '*' { respond questionInstance, [status: CREATED] }
+        } catch (Exception exception) {
+            log.error("QuestionController():save():Exception:Question:${questionInstance.title}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.questionErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    render view: "create", model: [questionInstance: questionInstance]
+                }
+            }
         }
     }
 
@@ -102,24 +109,60 @@ class QuestionController {
      */
     @Transactional
     def update(Question questionInstance) {
+
         if (questionInstance == null) {
             notFound()
             return
         }
 
-        if (questionInstance.hasErrors()) {
-            respond questionInstance.errors, view: 'edit'
+        // It checks concurrent updates
+        if (params.version) {
+            def version = params.version.toLong()
+
+            if (questionInstance.version > version) {
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                // clear the list of errors
+                questionInstance.clearErrors()
+                questionInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [questionInstance.title] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+
+                respond questionInstance.errors, view:'edit'
+                return
+            }
+        }
+
+        // Validate the instance
+        if (!questionInstance.validate()) {
+            respond questionInstance.errors, view:'edit'
             return
         }
 
-        questionInstance.save flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'question.label', default: 'Question'), questionInstance.id])
-                redirect questionInstance
+            // Save question data
+            questionInstance.save(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.questionMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    redirect view: 'index'
+                }
+                '*' { respond questionInstance, [status: OK] }
             }
-            '*' { respond questionInstance, [status: OK] }
+        } catch (Exception exception) {
+            log.error("QuestionController():update():Exception:Question:${questionInstance.title}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.questionErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    render view: "edit", model: [questionInstance: questionInstance]
+                }
+            }
         }
     }
 
@@ -137,14 +180,28 @@ class QuestionController {
             return
         }
 
-        questionInstance.delete flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'question.label', default: 'Question'), questionInstance.id])
-                redirect action: "index", method: "GET"
+            // Delete question
+            questionInstance.delete(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.questionMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
             }
-            '*' { render status: NO_CONTENT }
+        } catch (DataIntegrityViolationException exception) {
+            log.error("QuestionController():delete():DataIntegrityViolationException:Question:${questionInstance.title}:${exception}")
+
+            request.withFormat {
+                form multipartForm {
+                    flash.questionErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
+            }
         }
     }
 
@@ -152,9 +209,11 @@ class QuestionController {
      * Its redirects to not found page if the question instance was not found.
      */
     protected void notFound() {
+        log.error("QuestionController():notFound():QuestionID:${params.id}")
+
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'question.label', default: 'Question'), params.id])
+                flash.questionErrorMessage = g.message(code: 'default.not.found.question.message', default:'It has not been able to locate the question with id: <strong>{0}</strong>.', args: [params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }

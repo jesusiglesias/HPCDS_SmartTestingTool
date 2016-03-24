@@ -80,33 +80,33 @@ class SecUserController {
         }
 
         try {
-              // Save admin data
-              secUserInstance.save(flush:true, failOnError: true)
+            // Save admin data
+            secUserInstance.save(flush:true, failOnError: true)
 
-              // Save relation with admin role
-              def adminRole = SecRole.findByAuthority('ROLE_ADMIN')
-              SecUserSecRole.create secUserInstance, adminRole, true
+            // Save relation with admin role
+            def adminRole = SecRole.findByAuthority('ROLE_ADMIN')
+            SecUserSecRole.create secUserInstance, adminRole, true
 
-              request.withFormat {
-                  form multipartForm {
-                      flash.secUserMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
-                      redirect view: 'index'
-                  }
-                  '*' { respond secUserInstance, [status: CREATED] }
-              }
-          } catch (Exception exception) {
-              log.error("SecUserController():save():Exception:Administrator:${secUserInstance.username}:${exception}")
+            request.withFormat {
+                form multipartForm {
+                    flash.secUserMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                    redirect view: 'index'
+                }
+                '*' { respond secUserInstance, [status: CREATED] }
+            }
+        } catch (Exception exception) {
+            log.error("SecUserController():save():Exception:Administrator:${secUserInstance.username}:${exception}")
 
-              // Roll back in database
-              transactionStatus.setRollbackOnly()
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
 
-              request.withFormat {
-                  form multipartForm {
-                      flash.secUserErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
-                      render view: "create", model: [secUserInstance: secUserInstance]
-                  }
-              }
-          }
+            request.withFormat {
+                form multipartForm {
+                    flash.secUserErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])
+                    render view: "create", model: [secUserInstance: secUserInstance]
+                }
+            }
+        }
     }
 
     /**
