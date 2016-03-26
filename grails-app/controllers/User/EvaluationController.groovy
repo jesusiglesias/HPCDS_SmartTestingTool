@@ -1,11 +1,12 @@
 package User
 
+import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 
 /**
- * Class that represents to the evaluation controller.
+ * Class that represents to the Evaluation controller.
  */
 @Transactional(readOnly = true)
 class EvaluationController {
@@ -33,11 +34,11 @@ class EvaluationController {
         }
         params.max = Math.min(max, 100)
 
-        respond Evaluation.list(params), model: [evaluationInstanceCount: Evaluation.count()]
+        respond Evaluation.list(params)
     }
 
     /**
-     * It shows the information of a evaluation instance.
+     * It shows the information of a evaluation instance. TODO
      *
      * @param evaluationInstance It represents the evaluation to show.
      * @return evaluationInstance Data of the evaluation instance.
@@ -63,6 +64,7 @@ class EvaluationController {
      */
     @Transactional
     def save(Evaluation evaluationInstance) {
+
         if (evaluationInstance == null) {
             notFound()
             return
@@ -73,14 +75,29 @@ class EvaluationController {
             return
         }
 
-        evaluationInstance.save flush: true
+        try {
+            // Save evaluation data
+            evaluationInstance.save(flush:true, failOnError: true)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'evaluation.label', default: 'Evaluation'), evaluationInstance.id])
-                redirect evaluationInstance
+            request.withFormat {
+                form multipartForm {
+                    flash.evaluationMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'evaluation.label', default: 'Evaluation'), evaluationInstance.id])
+                    redirect view: 'index'
+                }
+                '*' { respond evaluationInstance, [status: CREATED] }
             }
-            '*' { respond evaluationInstance, [status: CREATED] }
+        } catch (Exception exception) {
+            log.error("EvaluationController():save():Exception:Evaluation:${evaluationInstance.id}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.evaluationErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'evaluation.label', default: 'Evaluation'), evaluationInstance.id])
+                    render view: "create", model: [evaluationInstance: evaluationInstance]
+                }
+            }
         }
     }
 
@@ -102,24 +119,60 @@ class EvaluationController {
      */
     @Transactional
     def update(Evaluation evaluationInstance) {
+
         if (evaluationInstance == null) {
             notFound()
             return
         }
 
-        if (evaluationInstance.hasErrors()) {
-            respond evaluationInstance.errors, view: 'edit'
+        // It checks concurrent updates
+        if (params.version) {
+            def version = params.version.toLong()
+
+            if (evaluationInstance.version > version) {
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                // Clear the list of errors
+                evaluationInstance.clearErrors()
+                evaluationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [evaluationInstance.id] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+
+                respond evaluationInstance.errors, view:'edit'
+                return
+            }
+        }
+
+        // Validate the instance
+        if (!evaluationInstance.validate()) {
+            respond evaluationInstance.errors, view:'edit'
             return
         }
 
-        evaluationInstance.save flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'evaluation.label', default: 'Evaluation'), evaluationInstance.id])
-                redirect evaluationInstance
+            // Save evaluation data
+            evaluationInstance.save(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.evaluationMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'evaluation.label', default: 'Evaluation'), evaluationInstance.id])
+                    redirect view: 'index'
+                }
+                '*' { respond evaluationInstance, [status: OK] }
             }
-            '*' { respond evaluationInstance, [status: OK] }
+        } catch (Exception exception) {
+            log.error("EvaluationController():update():Exception:Evaluation:${evaluationInstance.id}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.evaluationErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'evaluation.label', default: 'Evaluation'), evaluationInstance.id])
+                    render view: "edit", model: [evaluationInstance: evaluationInstance]
+                }
+            }
         }
     }
 
@@ -137,24 +190,40 @@ class EvaluationController {
             return
         }
 
-        evaluationInstance.delete flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'evaluation.label', default: 'Evaluation'), evaluationInstance.id])
-                redirect action: "index", method: "GET"
+            // Delete evaluation
+            evaluationInstance.delete(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.evaluationMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'evaluation.label', default: 'Evaluation'), evaluationInstance.id])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
             }
-            '*' { render status: NO_CONTENT }
+        } catch (DataIntegrityViolationException exception) {
+            log.error("EvaluationController():delete():DataIntegrityViolationException:Evaluation:${evaluationInstance.id}:${exception}")
+
+            request.withFormat {
+                form multipartForm {
+                    flash.evaluationErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'evaluation.label', default: 'Evaluation'), evaluationInstance.id])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
+            }
         }
     }
 
     /**
-     * Its redirects to not found page if the evaluation instance was not found.
+     * It renders the not found message if the evaluation instance was not found.
      */
     protected void notFound() {
+        log.error("EvaluationController():notFound():EvaluationID:${params.id}")
+
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'evaluation.label', default: 'Evaluation'), params.id])
+                flash.evaluationErrorMessage = g.message(code: 'default.not.found.evaluation.message', default:'It has not been able to locate the evaluation with id: <strong>{0}</strong>.', args: [params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }

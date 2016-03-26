@@ -142,7 +142,7 @@ class SecUserController {
                 // Roll back in database
                 transactionStatus.setRollbackOnly()
 
-                // clear the list of errors
+                // Clear the list of errors
                 secUserInstance.clearErrors()
                 secUserInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [secUserInstance.username] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
 
@@ -237,7 +237,7 @@ class SecUserController {
     }
 
     /**
-     * Its redirects to not found page if the secUser instance was not found.
+     * It renders the not found message if the secUser instance was not found.
      */
     protected void notFound() {
         log.error("SecUserController():notFound():AdministratorID:${params.id}")

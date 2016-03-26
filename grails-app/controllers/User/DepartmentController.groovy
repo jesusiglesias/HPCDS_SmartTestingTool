@@ -125,7 +125,7 @@ class DepartmentController {
                 // Roll back in database
                 transactionStatus.setRollbackOnly()
 
-                // clear the list of errors
+                // Clear the list of errors
                 departmentInstance.clearErrors()
                 departmentInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [departmentInstance.name] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
 
@@ -208,7 +208,7 @@ class DepartmentController {
     }
 
     /**
-     * Its redirects to not found page if the department instance was not found.
+     * It renders the not found message if the department instance was not found.
      */
     protected void notFound() {
         log.error("DepartmentController():notFound():DepartmentID:${params.id}")

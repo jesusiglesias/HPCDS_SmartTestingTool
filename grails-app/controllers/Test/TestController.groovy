@@ -1,11 +1,12 @@
 package Test
 
+import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 
 /**
- * Class that represents to the test controller.
+ * Class that represents to the Test controller.
  */
 @Transactional(readOnly = true)
 class TestController {
@@ -33,17 +34,7 @@ class TestController {
         }
         params.max = Math.min(max, 100)
 
-        respond Test.list(params), model: [testInstanceCount: Test.count()]
-    }
-
-    /**
-     * It shows the information of a test instance.
-     *
-     * @param testInstance It represents the test to show.
-     * @return testInstance Data of the test instance.
-     */
-    def show(Test testInstance) {
-        respond testInstance
+        respond Test.list(params)
     }
 
     /**
@@ -63,6 +54,7 @@ class TestController {
      */
     @Transactional
     def save(Test testInstance) {
+
         if (testInstance == null) {
             notFound()
             return
@@ -73,14 +65,29 @@ class TestController {
             return
         }
 
-        testInstance.save flush: true
+        try {
+            // Save test data
+            testInstance.save(flush:true, failOnError: true)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'test.label', default: 'Test'), testInstance.id])
-                redirect testInstance
+            request.withFormat {
+                form multipartForm {
+                    flash.testMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'test.label', default: 'Test'), testInstance.name])
+                    redirect view: 'index'
+                }
+                '*' { respond testInstance, [status: CREATED] }
             }
-            '*' { respond testInstance, [status: CREATED] }
+        } catch (Exception exception) {
+            log.error("TestController():save():Exception:Test:${testInstance.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.testErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'test.label', default: 'Test'), testInstance.name])
+                    render view: "create", model: [testInstance: testInstance]
+                }
+            }
         }
     }
 
@@ -102,26 +109,63 @@ class TestController {
      */
     @Transactional
     def update(Test testInstance) {
+
         if (testInstance == null) {
             notFound()
             return
         }
 
-        if (testInstance.hasErrors()) {
-            respond testInstance.errors, view: 'edit'
+        // It checks concurrent updates
+        if (params.version) {
+            def version = params.version.toLong()
+
+            if (testInstance.version > version) {
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                // Clear the list of errors
+                testInstance.clearErrors()
+                testInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [testInstance.name] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+
+                respond testInstance.errors, view:'edit'
+                return
+            }
+        }
+
+        // Validate the instance
+        if (!testInstance.validate()) {
+            respond testInstance.errors, view:'edit'
             return
         }
 
-        testInstance.save flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'test.label', default: 'Test'), testInstance.id])
-                redirect testInstance
+            // Save test data
+            testInstance.save(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.testMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'test.label', default: 'Test'), testInstance.name])
+                    redirect view: 'index'
+                }
+                '*' { respond testInstance, [status: OK] }
             }
-            '*' { respond testInstance, [status: OK] }
+        } catch (Exception exception) {
+            log.error("TestController():update():Exception:Test:${testInstance.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.testErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'test.label', default: 'Test'), testInstance.name])
+                    render view: "edit", model: [testInstance: testInstance]
+                }
+            }
         }
     }
+
 
     /**
      * It deletes a existing test in database.
@@ -137,24 +181,40 @@ class TestController {
             return
         }
 
-        testInstance.delete flush: true
+        try {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'test.label', default: 'Test'), testInstance.id])
-                redirect action: "index", method: "GET"
+            // Delete test
+            testInstance.delete(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.testMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'test.label', default: 'Test'), testInstance.name])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
             }
-            '*' { render status: NO_CONTENT }
+        } catch (DataIntegrityViolationException exception) {
+            log.error("TestController():delete():DataIntegrityViolationException:Test:${testInstance.name}:${exception}")
+
+            request.withFormat {
+                form multipartForm {
+                    flash.testErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'test.label', default: 'Test'), testInstance.name])
+                    redirect action: "index", method: "GET"
+                }
+                '*' { render status: NO_CONTENT }
+            }
         }
     }
 
     /**
-     * Its redirects to not found page if the test instance was not found.
+     * It renders the not found message if the test instance was not found.
      */
     protected void notFound() {
+        log.error("SecUserController():notFound():AdministratorID:${params.id}")
+
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'test.label', default: 'Test'), params.id])
+                flash.testErrorMessage = g.message(code: 'default.not.found.test.message', default:'It has not been able to locate the test with id: <strong>{0}</strong>.', args: [params.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }

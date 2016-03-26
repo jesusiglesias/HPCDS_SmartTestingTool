@@ -157,7 +157,7 @@ class UserController {
                 // Roll back in database
                 transactionStatus.setRollbackOnly()
 
-                // clear the list of errors
+                // Clear the list of errors
                 userInstance.clearErrors()
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [userInstance.username] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
 
@@ -250,7 +250,7 @@ class UserController {
     }
 
     /**
-     * Its redirects to not found page if the user instance was not found.
+     * It renders the not found message if the user instance was not found.
      */
     protected void notFound() {
         log.error("UserController():notFound():NormalUserID:${params.id}")

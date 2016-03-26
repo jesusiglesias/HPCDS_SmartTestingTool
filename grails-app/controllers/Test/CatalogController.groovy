@@ -124,7 +124,7 @@ class CatalogController {
                 // Roll back in database
                 transactionStatus.setRollbackOnly()
 
-                // clear the list of errors
+                // Clear the list of errors
                 catalogInstance.clearErrors()
                 catalogInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [catalogInstance.name] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
 
@@ -206,7 +206,7 @@ class CatalogController {
     }
 
     /**
-     * Its redirects to not found page if the catalog instance was not found.
+     * It renders the not found message if the catalog instance was not found.
      */
     protected void notFound() {
         log.error("CatalogController():notFound():CatalogID:${params.id}")
