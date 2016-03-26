@@ -80,7 +80,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/topic"><g:message code="layouts.main_auth_admin.body.title.topic" default="Topics management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.topic" default="Topics list"/></small>
             </h3>
 
@@ -134,30 +134,18 @@
 
                                         <g:sortableColumn property="name" title="${message(code: 'topic.name.label', default: 'Name')}" />
 
-                                        <g:sortableColumn property="prueba" title="${message(code: 'topic.prueba.label', default: 'Prueba')}" />
-
                                         <g:sortableColumn property="visibility" title="${message(code: 'topic.visibility.label', default: 'Visibility')}" />
-
-                                        <g:sortableColumn property="visibility2" title="${message(code: 'topic.visibility2.label', default: 'Visibility2')}" />
-
-                                        <g:sortableColumn property="visibility3" title="${message(code: 'topic.visibility3.label', default: 'Visibility3')}" />
                                     </tr>
                                     </thead>
                                     <tbody> <!-- TODO -->
                                     <g:each in="${topicInstanceList}" status="i" var="topicInstance">
                                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                                            <td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "description")}</g:link></td>
+                                            <td><g:link action="edit" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "description")}</g:link></td>
 
                                             <td>${fieldValue(bean: topicInstance, field: "name")}</td>
 
-                                            <td>${fieldValue(bean: topicInstance, field: "prueba")}</td>
-
                                             <td><g:formatBoolean boolean="${topicInstance.visibility}" /></td>
-
-                                            <td><g:formatBoolean boolean="${topicInstance.visibility2}" /></td>
-
-                                            <td><g:formatBoolean boolean="${topicInstance.visibility3}" /></td>
 
                                         </tr>
                                     </g:each>
@@ -174,8 +162,7 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="datatable/datatables.js"/>
     <g:javascript src="datatable/datatables.bootstrap.js"/>
-<%-- TODO
-    <g:javascript src="datatable/customAdmin-datatable.js"/>
---%>
+    <g:javascript src="datatable/customTopic-datatable.js"/>
+
 </body>
 </html>

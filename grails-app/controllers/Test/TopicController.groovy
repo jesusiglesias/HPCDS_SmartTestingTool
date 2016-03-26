@@ -1,7 +1,7 @@
 package Test
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
@@ -218,5 +218,26 @@ class TopicController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    /**
+     * It checks the name availability.
+     */
+    def checkNameTopicAvailibility () {
+
+        def responseData
+
+        if (Topic.countByName(params.name)) { // Name found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'department.checkTopicAvailibility.notAvailable', default:'Name of topic is not available. Please, choose another one.')
+            ]
+        } else { // Name not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'department.checkTopicAvailibility.available', default:'Name of topic available.')
+            ]
+        }
+        render responseData as JSON
     }
 }

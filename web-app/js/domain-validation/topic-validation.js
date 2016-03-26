@@ -1,17 +1,17 @@
 /*-------------------------------------------------------------------------------------------*
- *                                 CATALOG VALIDATION JAVASCRIPT                             *
+ *                                   TOPIC VALIDATION JAVASCRIPT                             *
  *-------------------------------------------------------------------------------------------*/
 
-var DomainCatalogValidation = function () {
+var DomainTopicValidation = function () {
 
     /**
-     * Catalog validation
+     * Topic validation
      */
-    var handlerCatalogValidation = function() {
+    var handlerTopicValidation = function() {
 
-        var catalogForm = $('.catalog-form');
+        var topicForm = $('.topic-form');
 
-        catalogForm.validate({
+        topicForm.validate({
                 errorElement: 'span', // Default input error message container
                 errorClass: 'help-block help-block-error', // Default input error message class
                 focusInvalid: false, // Do not focus the last invalid input
@@ -62,9 +62,9 @@ var DomainCatalogValidation = function () {
     var handleNameAvailabilityChecker = function () {
 
         var name = $('#name');
-        var nameBlock = $('.catalog-block');
+        var nameBlock = $('.topic-block');
 
-        $("#nameCatalog-checker").click(function (e) {
+        $("#nameTopic-checker").click(function (e) {
 
             // Empty name
             if (name.val() === "") {
@@ -83,7 +83,7 @@ var DomainCatalogValidation = function () {
             attr("disabled", true).
             addClass("spinner");
 
-            $.post(_checkNameCatalogAvailibility, {
+            $.post(_checkNameTopicAvailibility, {
 
                 // Name value
                 name: name.val()
@@ -116,7 +116,7 @@ var DomainCatalogValidation = function () {
     return {
         // Main function to initiate the module
         init: function () {
-            handlerCatalogValidation();
+            handlerTopicValidation();
             handleNameAvailabilityChecker();
         }
     };
@@ -124,5 +124,5 @@ var DomainCatalogValidation = function () {
 }();
 
 jQuery(document).ready(function() {
-    DomainCatalogValidation.init();
+    DomainTopicValidation.init();
 });

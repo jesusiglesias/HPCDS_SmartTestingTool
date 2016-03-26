@@ -30,6 +30,9 @@ class UrlMappings {
         // Catalog
         "/catalog/create-error"(controller: 'catalog', action: 'save')
         "/catalog/edit-error/$id?(.$format)?"(controller: 'catalog', action: 'update')
+        // Topic
+        "/topic/create-error"(controller: 'topic', action: 'save')
+        "/topic/edit-error/$id?(.$format)?"(controller: 'topic', action: 'update')
 
         /****************************/
         // TODO

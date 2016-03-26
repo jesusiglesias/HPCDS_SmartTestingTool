@@ -5,22 +5,13 @@
 <head>
 	<meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title.topic" default="STT | Topics management"/></title>
-	<link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
 
 	<script>
-		// Variables to use in script TODO
-		var _weak = '${g.message(code:'default.password.strength.weak', default:'Weak')}';
-		var _normal = '${g.message(code:'default.password.strength.normal', default:'Normal')}';
-		var _medium = '${g.message(code:'default.password.strength.medium', default:'Medium')}';
-		var _strong = '${g.message(code:'default.password.strength.strong', default:'Strong')}';
-		var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
-		var _checkerUsernameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.username', default:'Type a username and check its availability.')}';
-		var _checkUsernameAvailibility = '${g.createLink(controller: "secUser", action: 'checkUsernameAvailibility')}';
-		var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
-		var _checkEmailAvailibility = '${g.createLink(controller: "secUser", action: 'checkEmailAvailibility')}';
-		var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
-		var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
-		var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
+		// Variables to use in script
+        var _checkerNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.topic.create.checker.block.info.name', default:'Type a name of topic and check its availability.')}';
+        var _checkNameTopicAvailibility = '${g.createLink(controller: "topic", action: 'checkNameTopicAvailibility')}';
+        var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
 		// Handler auto close alert
 		function createAutoClosingAlert(selector) {
@@ -55,7 +46,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/topic"><g:message code="layouts.main_auth_admin.body.title.topic" default="Topics management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.topic.edit" default="Edit topic"/></small>
             </h3>
 
@@ -91,7 +82,7 @@
                 <!-- Delete button -->
                 <g:form url="[resource:topicInstance, controller:'topic', action:'delete']" method="DELETE" class="form-delete">
                     <div class="btn-group">
-                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="top" data-popout="true" data-singleton="true"
+                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
                                 data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                 data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
@@ -104,7 +95,7 @@
                 </g:form>
 
                 <!-- Edit form -->
-                <g:form url="[resource:topicInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form admin-form">
+                <g:form url="[resource:topicInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form topic-form">
                     <g:hiddenField name="version" value="${topicInstance?.version}" />
                     <fieldset class="form">
                         <g:render template="form"/>
@@ -125,10 +116,7 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
     <g:javascript src="confirmation/custom-delete.js"/>
-    <g:javascript src="iCheck/icheck.min.js"/>
-    <g:javascript src="password/custom-password.js"/>
-    <g:javascript src="password/pwstrength-bootstrap.min.js"/>
-    <g:javascript src="domain-validation/admin-validation.js"/>
+    <g:javascript src="domain-validation/topic-validation.js"/>
 
 </body>
 </html>

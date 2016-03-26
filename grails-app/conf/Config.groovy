@@ -161,6 +161,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/SecUser/**':      ['ROLE_ADMIN'],
     '/Department/**':   ['ROLE_ADMIN'],
     '/Catalog/**':      ['ROLE_ADMIN'],
+    '/Topic/**':        ['ROLE_ADMIN'],
 
         // TODO
     '/User/**':         ['ROLE_ADMIN', 'ROLE_USER'],
