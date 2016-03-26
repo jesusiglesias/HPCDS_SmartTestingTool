@@ -46,8 +46,8 @@ div.dataTables_wrapper div.dataTables_filter input {
     width: auto;
 }
 
-/* Max-width: 374px */
-@media (max-width: 374px) {
+/* Max-width: 388px */
+@media (max-width: 388px) {
 
     div.dataTables_wrapper div.dataTables_filter input {
         width: 170px !important;

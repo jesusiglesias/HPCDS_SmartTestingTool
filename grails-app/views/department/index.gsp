@@ -80,14 +80,14 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/department"><g:message code="layouts.main_auth_admin.body.title.department" default="Departments management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.department" default="Departments list"/></small>
             </h3>
 
             <!-- Contain page -->
             <div id="list-domain">
 
-            <!-- Alerts -->
+                <!-- Alerts -->
                 <g:if test="${flash.departmentMessage}">
                     <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
@@ -136,9 +136,7 @@
                                     <tbody>
                                         <g:each in="${departmentInstanceList}" status="i" var="departmentInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
                                                 <td><g:link controller="department" action="edit" id="${departmentInstance.id}">${fieldValue(bean: departmentInstance, field: "name")}</g:link></td>
-
                                             </tr>
                                         </g:each>
                                     </tbody>

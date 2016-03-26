@@ -80,7 +80,7 @@
 			<!-- Page-title -->
 			<h3 class="page-title">
 				<g:link uri="/administrator"><g:message code="layouts.main_auth_admin.body.title.admin" default="Administrators management"/></g:link>
-				<i class="icon-arrow-right icon-title-admin"></i>
+				<i class="icon-arrow-right icon-title-domain"></i>
 				<small><g:message code="layouts.main_auth_admin.body.subtitle.admin" default="Administrators list"/></small>
 			</h3>
 

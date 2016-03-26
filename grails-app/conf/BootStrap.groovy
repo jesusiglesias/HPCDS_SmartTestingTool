@@ -2,6 +2,7 @@
  *                                         BOOTSTRAP                                         *
  *-------------------------------------------------------------------------------------------*/
 
+import User.Department
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.SecurityFilterPosition
 import grails.util.Environment
@@ -12,9 +13,6 @@ import Security.*
  */
 class BootStrap {
 
-    def authenticationManager
-    def concurrentSessionController
-    def securityContextPersistenceFilter
     def authenticationProcessingFilter
     def concurrentSessionControlStrategy
 
@@ -52,7 +50,7 @@ class BootStrap {
      * Populating the database in development or test environments.
      */
     void createInitialUsersDevTest() {
-        log.debug("BootStrap:init():createInitialUsersDevTest")
+        log.debug("BootStrap:init():createInitialDataDevTest")
 
         // It checks data existence
         if (!SecUser.count() && !SecRole.count()) {
@@ -64,18 +62,79 @@ class BootStrap {
             // Creating new users
             def newAdmin = SecUser.findByUsername('admin_stt') ?: new SecUser( // Admin
                     username: 'admin_stt',
-                    password: 'sttadmintfg',
+                    password: '7g4sOmmm',
                     email: 'info.smartestingtool@gmail.com')
 
             def newAdminUser = SecUser.findByUsername('admin_switch') ?: new SecUser( // Normal user to switch
                     username: 'admin_switch',
-                    password: 'switchadmintfg',
+                    password: '7g4sOmmm',
                     email: 'admin_switch@stt.com')
 
             def newUser = SecUser.findByUsername('user_stt') ?: new SecUser( // Normal user
                     username: 'user_stt',
-                    password: 'sttusertfg',
+                    password: '7g4sOmmm',
                     email: 'user_stt@stt.com')
+
+            def newUser1 = SecUser.findByUsername('user_stt1') ?: new SecUser( // Normal user
+                    username: 'user_stt1',
+                    password: '7g4sOmmm',
+                    email: 'user_stt@stt1.com')
+
+            def newUser2 = SecUser.findByUsername('user_stt2') ?: new SecUser( // Normal user
+                    username: 'user_stt2',
+                    password: '7g4sOmmm',
+                    email: 'user_stt@stt2.com')
+
+            def newUser3 = SecUser.findByUsername('user_stt3') ?: new SecUser( // Normal user
+                    username: 'user_stt3',
+                    password: '7g4sOmmm',
+                    email: 'user_stt@stt3.com')
+
+            def newUser4 = SecUser.findByUsername('user_stt4') ?: new SecUser( // Normal user
+                    username: 'user_stt4',
+                    password: '7g4sOmmm',
+                    email: 'user_stt@stt4.com')
+
+            def newUser5 = SecUser.findByUsername('user_stt5') ?: new SecUser( // Normal user
+                    username: 'user_stt5',
+                    password: '7g4sOmmm',
+                    email: 'user_stt@stt5.com')
+
+            def newUser6 = SecUser.findByUsername('user_stt6') ?: new SecUser( // Normal user
+                    username: 'user_stt6',
+                    password: '7g4sOmmm',
+                    email: 'user_stt@stt6.com')
+
+            def newUser7 = SecUser.findByUsername('user_stt7') ?: new SecUser( // Normal user
+                    username: 'user_stt7',
+                    password: '7g4sOmmm',
+                    email: 'user_stt@stt7.com')
+
+            def newUser8 = SecUser.findByUsername('user_stt8') ?: new SecUser( // Normal user
+                    username: 'user_stt8',
+                    password: '7g4sOmmm',
+                    email: 'user_stt@stt8.com')
+
+            // Creating new department
+            def iDDepartment = Department.findByName('Investigación + Desarrollo') ?: new Department(
+                    name: 'Investigación + Desarrollo'
+            )
+
+            def securityDepartment = Department.findByName('Seguridad') ?: new Department(
+                    name: 'Seguridad'
+            )
+
+            def productDepartment = Department.findByName('Ingeniería de producto') ?: new Department(
+                    name: 'Ingeniería de producto'
+            )
+
+            def rrhhDepartment = Department.findByName('Recursos humanos') ?: new Department(
+                    name: 'Recursos humanos'
+            )
+
+            def supportDepartment = Department.findByName('Soporte técnico') ?: new Department(
+                    name: 'Soporte técnico'
+            )
 
             // Validation of new users
             def validAdmin = newAdmin.validate()
@@ -90,6 +149,14 @@ class BootStrap {
                 // Saving new users
                 newAdmin.save(flush: true, failOnError: true)
                 newUser.save(flush: true, failOnError: true)
+                newUser1.save(flush: true, failOnError: true)
+                newUser2.save(flush: true, failOnError: true)
+                newUser3.save(flush: true, failOnError: true)
+                newUser4.save(flush: true, failOnError: true)
+                newUser5.save(flush: true, failOnError: true)
+                newUser6.save(flush: true, failOnError: true)
+                newUser7.save(flush: true, failOnError: true)
+                newUser8.save(flush: true, failOnError: true)
                 newAdminUser.save(flush: true, failOnError: true)
 
                 // Assign user to role
@@ -103,13 +170,20 @@ class BootStrap {
                     SecUserSecRole.create newUser, userRole, true
                 }
 
-                log.debug("BootStrap:init():Base users have been created")
-                log.info("Special config create for development or test: admin_stt/sttadmintfg, admin_switch/switchadmintfg and user_stt/sttusertfg")
+                // Saving departments
+                iDDepartment.save(flush: true, failOnError: true)
+                securityDepartment.save(flush: true, failOnError: true)
+                productDepartment.save(flush: true, failOnError: true)
+                rrhhDepartment.save(flush: true, failOnError: true)
+                supportDepartment.save(flush: true, failOnError: true)
+
+                log.debug("BootStrap:init():Initial data have been created")
+                log.info("Special config create for development or test - Users: admin_stt/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and user_stt/7g4sOmmm (User)")
             } else {
-                log.error("BootStrap:init():Base users have not been created")
+                log.error("BootStrap:init():Initial data have not been created. You verify that the initial data complies with the rules")
             }
         } else {
-            log.warn("BooStrap:init():Existing user or role data")
+            log.warn("BooStrap:init():Initial data existing")
         }
     }
 
@@ -128,18 +202,18 @@ class BootStrap {
             // Creating new users
             def newAdmin = SecUser.findByUsername('admin_stt') ?: new SecUser( // Admin
                     username: 'admin_stt',
-                    password: 'sttadminprod',
+                    password: '7g4sOmmm',
                     email: 'info.smartestingtool@gmail.com')
 
             def newAdminUser = SecUser.findByUsername('admin_switch') ?: new SecUser( // Normal user to switch
                     username: 'admin_switch',
-                    password: 'switchadminprod',
+                    password: '7g4sOmmm',
                     email: 'admin_switch_prod@stt.com')
 
             //----------TEST TODO
             def newUser = SecUser.findByUsername('user_stt') ?: new SecUser( // Normal user
                     username: 'user_stt',
-                    password: 'sttuserprod',
+                    password: '7g4sOmmm',
                     email: 'user_stt_prod@stt.com')
 
             // Validation of new user
@@ -174,7 +248,8 @@ class BootStrap {
                 }
 
             } else {
-                log.error("BootStrap:init():Admin users have not been created")
+                log.error("BootStrap:init():Admin users have not been created. You verify that the initial data complies with the rules")
+
             }
         } else {
             log.error("BooStrap:init():Existing admin or role data. Initial data were not created")

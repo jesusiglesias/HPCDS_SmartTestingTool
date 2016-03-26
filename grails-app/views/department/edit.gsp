@@ -8,7 +8,10 @@
 
     <script>
         // Variables to use in script
+        var _checkerNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.department.create.checker.block.info.name', default:'Type a name and check its availability.')}';
+        var _checkNameAvailibility = '${g.createLink(controller: "department", action: 'checkNameAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
         // Handler auto close alert
         function createAutoClosingAlert(selector) {
@@ -44,9 +47,8 @@
 
             <!-- Page-title -->
             <h3 class="page-title">
-                <g:link uri="/administrator"><g:message code="layouts.main_auth_admin.body.title.department" default="Departments management"/></g:link>
-                <!-- TODO icon-title -->
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <g:link uri="/department"><g:message code="layouts.main_auth_admin.body.title.department" default="Departments management"/></g:link>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.department.edit" default="Edit department"/></small>
             </h3>
 
@@ -85,7 +87,7 @@
                 <g:form url="[resource: departmentInstance, controller: 'department', action: 'delete']" method="DELETE" class="form-delete">
                     <div class="btn-group">
                         <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation"
-                                data-placement="top" data-popout="true" data-singleton="true"
+                                data-placement="rigth" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
                                 data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                 data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
@@ -98,13 +100,13 @@
                 </g:form>
 
                 <!-- Edit form -->
-                <g:form url="[resource: departmentInstance, action: 'update']" method="PUT" autocomplete="on" class="horizontal-form admin-form">
+                <g:form url="[resource: departmentInstance, action: 'update']" method="PUT" autocomplete="on" class="horizontal-form department-form">
                     <g:hiddenField name="version" value="${departmentInstance?.version}"/>
                     <fieldset class="form">
                         <g:render template="form"/>
                     </fieldset>
 
-                    <div class="domain-button-group">
+                    <div class="domain-button-group-less">
                         <!-- Cancel button -->
                         <g:link type="button" uri="/department" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
                         <button type="submit" class="btn green-dark" name="update">
@@ -117,13 +119,10 @@
         </div> <!-- /.Page-content -->
     </div> <!-- /. Page-content-wrapper -->
 
-    <!-- LOAD JAVASCRIPT TODO -->
+    <!-- LOAD JAVASCRIPT -->
     <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
     <g:javascript src="confirmation/custom-delete.js"/>
-    <g:javascript src="iCheck/icheck.min.js"/>
-    <g:javascript src="password/custom-password.js"/>
-    <g:javascript src="password/pwstrength-bootstrap.min.js"/>
-    <g:javascript src="domain-validation/admin-validation.js"/>
+    <g:javascript src="domain-validation/department-validation.js"/>
 
 </body>
 </html>

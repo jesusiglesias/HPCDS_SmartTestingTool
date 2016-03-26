@@ -261,7 +261,7 @@ class SecUserController {
         if (SecUser.countByUsername(params.username)) { // Username found
             responseData = [
                     'status': "ERROR",
-                    'message': g.message(code: 'secUser.checkUsernameAvailibility.notAvailable', default:'Username is not available. Please choose another one.')
+                    'message': g.message(code: 'secUser.checkUsernameAvailibility.notAvailable', default:'Username is not available. Please, choose another one.')
             ]
         } else { // Username not found
             responseData = [
@@ -282,7 +282,7 @@ class SecUserController {
         if (SecUser.countByEmail(params.email)) { // Email found
             responseData = [
                     'status': "ERROR",
-                    'message': g.message(code: 'secUser.checkEmailAvailibility.notAvailable', default:'Email is not available. Please choose another one.')
+                    'message': g.message(code: 'secUser.checkEmailAvailibility.notAvailable', default:'Email is not available. Please, choose another one.')
             ]
         } else { // Email not found
             responseData = [

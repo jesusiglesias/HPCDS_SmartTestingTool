@@ -1806,7 +1806,7 @@ body {
 }
 
 /* Page title - icon */
-.icon-title-admin {
+.icon-title-domain {
     font-size: 13px;
     margin: 20px 10px;
     font-weight: 800;
@@ -2007,7 +2007,7 @@ body {
         padding-top: 3px;
     }
 
-    .icon-title-admin {
+    .icon-title-domain {
         font-size: 11px;
     }
 
@@ -2038,7 +2038,7 @@ body {
         font-size: 14px;
     }
 
-    .icon-title-admin {
+    .icon-title-domain {
         margin: 20px 10px 15px 10px;
     }
 }

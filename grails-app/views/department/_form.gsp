@@ -1,8 +1,8 @@
 <%@ page import="User.Department" %>
 
 <div class="form-body">
-    <!-- Row TODO -->
-    <div class="row admin-secondRow">
+    <!-- Row -->
+    <div class="row">
         <!-- Name -->
         <div class="col-md-6">
             <div class="form-group ${hasErrors(bean: departmentInstance, field: 'name', 'error')}">
@@ -10,15 +10,20 @@
                     <g:message code="department.name.label" default="Name"/>
                     <span class="required"> * </span>
                 </label>
-                <div class="input-icon right">
-                    <i class="fa"></i>
-                    <!-- TODO -->
-                    <g:textField name="name" maxlength="30" value="${departmentInstance?.name}" class="form-control password-admin"/>
+                <div class="input-group input-icon right">
+                    <i class="fa icon-offset"></i>
+                    <g:textField name="name" maxlength="50" value="${departmentInstance?.name}" class="form-control"/>
+                    <span class="input-group-btn">
+                        <a href="javascript:;" class="btn green-dark" id="nameDepartment-checker">
+                            <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
+                        </a>
+                    </span>
                 </div>
             </div>
+            <div class="help-block department-block"><g:message code="layouts.main_auth_admin.body.content.department.create.checker.block.info.name" default="Type a name and check its availability."/> </div>
         </div>
 
-        <!-- User list -->
+        <!-- User list TODO -->
         <div class="col-md-6">
             <div class="form-group  ${hasErrors(bean: departmentInstance, field: 'users', 'error')}">
                 <label for="users" class="control-label">

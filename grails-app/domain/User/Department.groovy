@@ -14,7 +14,7 @@ class Department {
 
     // Restrictions on the attributes of the entity
     static constraints = {
-        name blank: false, maxSize: 30
+        name blank: false, unique: true, maxSize: 50
     }
 
     // It modifies the id type

@@ -2,12 +2,12 @@
  *                                     DATATABLE JAVASCRIPT                                  *
  *-------------------------------------------------------------------------------------------*/
 
-var DatatableList = function () {
+var DatatableAdminList = function () {
 
     /**
      *  Table function
      */
-    var initEntityTable = function () {
+    var initAdminTable = function () {
 
         var table = $('#entity-table');
 
@@ -109,7 +109,7 @@ var DatatableList = function () {
             if (!jQuery().dataTable) {
                 return;
             }
-            initEntityTable();
+            initAdminTable();
         }
 
     };
@@ -117,5 +117,5 @@ var DatatableList = function () {
 }();
 
 jQuery(document).ready(function() {
-    DatatableList.init();
+    DatatableAdminList.init();
 });

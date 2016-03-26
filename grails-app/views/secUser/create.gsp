@@ -13,7 +13,7 @@
         var _medium = '${g.message(code:'default.password.strength.medium', default:'Medium')}';
         var _strong = '${g.message(code:'default.password.strength.strong', default:'Strong')}';
         var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
-        var _checkerUsernameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.username', default:'Type a username and check its availability.')}';
+        var _checkerUsernameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.username', default:'Type an username and check its availability.')}';
         var _checkUsernameAvailibility = '${g.createLink(controller: "secUser", action: 'checkUsernameAvailibility')}';
         var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
         var _checkEmailAvailibility = '${g.createLink(controller: "secUser", action: 'checkEmailAvailibility')}';
@@ -54,7 +54,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/administrator"><g:message code="layouts.main_auth_admin.body.title.admin" default="Administrators management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.admin.create" default="Create administrator"/></small>
             </h3>
 

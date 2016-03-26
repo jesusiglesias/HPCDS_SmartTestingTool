@@ -106,6 +106,10 @@ input:-webkit-autofill:active {
     margin-top: 40px;
 }
 
+.domain-button-group-less {
+    margin-top: 25px;
+}
+
 /* Entity message */
 .alert-entity {
     margin: 0 0 60px 0;

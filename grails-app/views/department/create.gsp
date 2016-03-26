@@ -7,7 +7,10 @@
 
     <script>
         // Variables to use in script
+        var _checkerNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.department.create.checker.block.info.name', default:'Type a name and check its availability.')}';
+        var _checkNameAvailibility = '${g.createLink(controller: "department", action: 'checkNameAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
         // Handler auto close alert
         function createAutoClosingAlert(selector) {
@@ -44,8 +47,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/department"><g:message code="layouts.main_auth_admin.body.title.department" default="Departments management"/></g:link>
-                <!-- TODO icon-title -->
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.department.create" default="Create department"/></small>
             </h3>
 
@@ -70,8 +72,7 @@
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
                         <g:eachError bean="${departmentInstance}" var="error">
                             <p role="status"
-                               <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message
-                                    error="${error}"/></p>
+                               <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></p>
                         </g:eachError>
                     </div>
 
@@ -80,8 +81,8 @@
                     </g:javascript>
                 </g:hasErrors>
 
-                <!-- Creation form TODO admin-form-->
-                <g:form url="[resource: departmentInstance, action: 'save']" autocomplete="on" class="horizontal-form admin-form">
+                <!-- Creation form -->
+                <g:form url="[resource: departmentInstance, action: 'save']" autocomplete="on" class="horizontal-form department-form">
                     <fieldset class="form">
                         <g:render template="form"/>
                     </fieldset>
@@ -100,10 +101,7 @@
     </div> <!-- /. Page-content-wrapper -->
 
     <!-- LOAD JAVASCRIPT -->
-    <g:javascript src="iCheck/icheck.min.js"/>
-    <g:javascript src="password/custom-password.js"/>
-    <g:javascript src="password/pwstrength-bootstrap.min.js"/>
-    <g:javascript src="domain-validation/admin-validation.js"/>
+    <g:javascript src="domain-validation/department-validation.js"/>
 
 </body>
 </html>

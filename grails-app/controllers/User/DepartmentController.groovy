@@ -1,5 +1,6 @@
 package User
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -220,5 +221,26 @@ class DepartmentController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    /**
+     * It checks the name availability.
+     */
+    def checkNameAvailibility () {
+
+        def responseData
+
+        if (Department.countByName(params.name)) { // Name found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'department.checkDepartmentAvailibility.notAvailable', default:'Department is not available. Please, choose another one.')
+            ]
+        } else { // Name not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'department.checkDepartmentAvailibility.available', default:'Department available.')
+            ]
+        }
+        render responseData as JSON
     }
 }
