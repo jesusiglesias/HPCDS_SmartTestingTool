@@ -8,7 +8,7 @@
 
     <script>
         // Variables to use in script
-        var _checkerNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.department.create.checker.block.info.name', default:'Type a name and check its availability.')}';
+        var _checkerNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.department.create.checker.block.info.name', default:'Type a name of department and check its availability.')}';
         var _checkNameAvailibility = '${g.createLink(controller: "department", action: 'checkNameAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';

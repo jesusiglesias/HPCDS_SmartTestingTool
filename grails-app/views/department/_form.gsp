@@ -20,7 +20,7 @@
                     </span>
                 </div>
             </div>
-            <div class="help-block department-block"><g:message code="layouts.main_auth_admin.body.content.department.create.checker.block.info.name" default="Type a name and check its availability."/> </div>
+            <div class="help-block department-block"><g:message code="layouts.main_auth_admin.body.content.department.create.checker.block.info.name" default="Type a name of department and check its availability."/> </div>
         </div>
 
         <!-- User list TODO -->

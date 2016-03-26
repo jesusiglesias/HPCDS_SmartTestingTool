@@ -233,12 +233,12 @@ class DepartmentController {
         if (Department.countByName(params.name)) { // Name found
             responseData = [
                     'status': "ERROR",
-                    'message': g.message(code: 'department.checkDepartmentAvailibility.notAvailable', default:'Department is not available. Please, choose another one.')
+                    'message': g.message(code: 'department.checkDepartmentAvailibility.notAvailable', default:'Name of department is not available. Please, choose another one.')
             ]
         } else { // Name not found
             responseData = [
                     'status': "OK",
-                    'message':g.message(code: 'department.checkDepartmentAvailibility.available', default:'Department available.')
+                    'message':g.message(code: 'department.checkDepartmentAvailibility.available', default:'Name of department available.')
             ]
         }
         render responseData as JSON
