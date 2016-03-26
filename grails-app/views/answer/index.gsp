@@ -1,9 +1,9 @@
-<%@ page import="Test.Topic" %>
+<%@ page import="Test.Answer" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta name="layout" content="main_auth_admin">
-	<title><g:message code="layouts.main_auth_admin.head.title.topic" default="STT | Topics management"/></title>
+	<title><g:message code="layouts.main_auth_admin.head.title.answer" default="STT | Answers management"/></title>
 
 	<!-- LOAD CSS -->
 	<link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.css')}" type="text/css"/>
@@ -33,8 +33,8 @@
         var _csv = '${g.message(code: "layouts.main_auth_admin.content.csv", default: "CSV")}';
         var _columns = '${g.message(code: "layouts.main_auth_admin.content.columns", default: "Columns")}';
         var _restore = '${g.message(code: "layouts.main_auth_admin.content.restore", default: "Restore")}';
-        var _topicFile = '${g.message(code: "layouts.main_auth_admin.content.topic.file", default: "STT_Topics")}';
-        var _topicTableTitle = '${g.message(code: "layouts.main_auth_admin.content.topic.tableTitle", default: "SMART TESTING TOOL - Topics management")}';
+        var _answerFile = '${g.message(code: "layouts.main_auth_admin.content.answer.file", default: "STT_Answers")}';
+        var _answerTableTitle = '${g.message(code: "layouts.main_auth_admin.content.answer.tableTitle", default: "SMART TESTING TOOL - Answers management")}';
         var _search = '${g.message(code: "layouts.main_auth_admin.content.search", default: "Search:")}';
         var _sortAscending = '${g.message(code: "layouts.main_auth_admin.content.sortAscending", default: ": activate to sort column ascending")}';
         var _sortDescending = '${g.message(code: "layouts.main_auth_admin.content.sortDescending", default: ": activate to sort column descending")}';
@@ -72,26 +72,26 @@
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
-                        <span><g:message code="layouts.main_auth_admin.pageBreadcrumb.subtitle.topic" default="Topic"/></span>
+                        <span><g:message code="layouts.main_auth_admin.pageBreadcrumb.subtitle.answer" default="Answer"/></span>
                     </li>
                 </ul>
             </div> <!-- /.Page-bar -->
 
             <!-- Page-title -->
             <h3 class="page-title">
-                <g:link uri="/topic"><g:message code="layouts.main_auth_admin.body.title.topic" default="Topics management"/></g:link>
+                <g:link uri="/answer"><g:message code="layouts.main_auth_admin.body.title.answer" default="Answers management"/></g:link>
                 <i class="icon-arrow-right icon-title-admin"></i>
-                <small><g:message code="layouts.main_auth_admin.body.subtitle.topic" default="Topics list"/></small>
+                <small><g:message code="layouts.main_auth_admin.body.subtitle.answer" default="Answers list"/></small>
             </h3>
 
             <!-- Contain page -->
             <div id="list-domain">
 
-                <!-- Alerts -->
-                <g:if test="${flash.topicMessage}">
+            <!-- Alerts -->
+                <g:if test="${flash.answerMessage}">
                     <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status"> ${raw(flash.topicMessage)} </span>
+                        <span role="status"> ${raw(flash.answerMessage)} </span>
                     </div>
 
                     <g:javascript>
@@ -99,10 +99,10 @@
                     </g:javascript>
                 </g:if>
 
-                <g:if test="${flash.topicErrorMessage}">
+                <g:if test="${flash.answerErrorMessage}">
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status"> ${raw(flash.topicErrorMessage)} </span>
+                        <span role="status"> ${raw(flash.answerErrorMessage)} </span>
                     </div>
 
                     <g:javascript>
@@ -117,9 +117,9 @@
                             <div class="portlet-title">
                                 <div class="caption font-green-dark">
                                     <div class="btn-group">
-                                        <g:link uri="/topic/create" class="btn green-dark">
+                                        <g:link uri="/answer/create" class="btn green-dark">
                                             <i class="fa fa-plus"></i>
-                                            <g:message code="layouts.main_auth_admin.body.content.topic.new" default="New topic"/>
+                                            <g:message code="layouts.main_auth_admin.body.content.answer.new" default="New answer"/>
                                         </g:link>
                                     </div>
                                 </div>
@@ -129,38 +129,27 @@
                             <div class="portlet-body">
                                 <table class="table table-striped table-bordered table-hover" id="entity-table">
                                     <thead>
-                                    <tr> <!-- TODO -->
-                                        <g:sortableColumn property="description" title="${message(code: 'topic.description.label', default: 'Description')}" />
+                                    <tr>
+                                        <g:sortableColumn property="correct" title="${message(code: 'answer.correct.label', default: 'Correct')}" />
 
-                                        <g:sortableColumn property="name" title="${message(code: 'topic.name.label', default: 'Name')}" />
+                                        <g:sortableColumn property="description" title="${message(code: 'answer.description.label', default: 'Description')}" />
 
-                                        <g:sortableColumn property="prueba" title="${message(code: 'topic.prueba.label', default: 'Prueba')}" />
+                                        <g:sortableColumn property="score" title="${message(code: 'answer.score.label', default: 'Score')}" />
 
-                                        <g:sortableColumn property="visibility" title="${message(code: 'topic.visibility.label', default: 'Visibility')}" />
-
-                                        <g:sortableColumn property="visibility2" title="${message(code: 'topic.visibility2.label', default: 'Visibility2')}" />
-
-                                        <g:sortableColumn property="visibility3" title="${message(code: 'topic.visibility3.label', default: 'Visibility3')}" />
                                     </tr>
                                     </thead>
-                                    <tbody> <!-- TODO -->
-                                    <g:each in="${topicInstanceList}" status="i" var="topicInstance">
-                                        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                    <tbody>
+                                        <g:each in="${answerInstanceList}" status="i" var="answerInstance">
+                                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                                            <td><g:link action="show" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "description")}</g:link></td>
+                                                <td><g:link action="show" id="${answerInstance.id}">${fieldValue(bean: answerInstance, field: "correct")}</g:link></td>
 
-                                            <td>${fieldValue(bean: topicInstance, field: "name")}</td>
+                                                <td>${fieldValue(bean: answerInstance, field: "description")}</td>
 
-                                            <td>${fieldValue(bean: topicInstance, field: "prueba")}</td>
+                                                <td>${fieldValue(bean: answerInstance, field: "score")}</td>
 
-                                            <td><g:formatBoolean boolean="${topicInstance.visibility}" /></td>
-
-                                            <td><g:formatBoolean boolean="${topicInstance.visibility2}" /></td>
-
-                                            <td><g:formatBoolean boolean="${topicInstance.visibility3}" /></td>
-
-                                        </tr>
-                                    </g:each>
+                                            </tr>
+                                        </g:each>
                                     </tbody>
                                 </table>
                             </div> <!-- /.Portlet-body -->
@@ -174,7 +163,7 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="datatable/datatables.js"/>
     <g:javascript src="datatable/datatables.bootstrap.js"/>
-<%-- TODO
+    <%-- TODO
     <g:javascript src="datatable/customAdmin-datatable.js"/>
 --%>
 </body>

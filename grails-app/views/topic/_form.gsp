@@ -19,7 +19,7 @@
 	<g:textField name="name" required="" value="${topicInstance?.name}"/>
 
 </div>
-
+<%-- TODO
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'prueba', 'error')} required">
 	<label for="prueba">
 		<g:message code="topic.prueba.label" default="Prueba" />
@@ -27,7 +27,7 @@
 	</label>
 	<g:textField name="prueba" required="" value="${topicInstance?.prueba}"/>
 
-</div>
+</div> --%>
 
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'visibility', 'error')} ">
 	<label for="visibility">
@@ -38,6 +38,7 @@
 
 </div>
 
+<%-- TODO
 <div class="fieldcontain ${hasErrors(bean: topicInstance, field: 'visibility2', 'error')} ">
 	<label for="visibility2">
 		<g:message code="topic.visibility2.label" default="Visibility2" />
@@ -55,4 +56,4 @@
 	<g:checkBox name="visibility3" value="${topicInstance?.visibility3}" />
 
 </div>
-
+--%>
