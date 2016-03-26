@@ -1,5 +1,6 @@
 package Test
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -218,5 +219,26 @@ class CatalogController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    /**
+     * It checks the name availability.
+     */
+    def checkNameCatalogAvailibility () {
+
+        def responseData
+
+        if (Catalog.countByName(params.name)) { // Name found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'catalog.checkCatalogAvailibility.notAvailable', default:'Name of catalog is not available. Please, choose another one.')
+            ]
+        } else { // Name not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'catalog.checkCatalogAvailibility.available', default:'Name of catalog available.')
+            ]
+        }
+        render responseData as JSON
     }
 }

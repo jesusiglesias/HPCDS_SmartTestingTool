@@ -80,7 +80,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/catalog"><g:message code="layouts.main_auth_admin.body.title.catalog" default="Catalogs management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.catalog" default="Catalogs list"/></small>
             </h3>
 
@@ -137,7 +137,7 @@
                                         <g:each in="${catalogInstanceList}" status="i" var="catalogInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                                                <td><g:link action="show" id="${catalogInstance.id}">${fieldValue(bean: catalogInstance, field: "name")}</g:link></td>
+                                                <td><g:link action="edit" id="${catalogInstance.id}">${fieldValue(bean: catalogInstance, field: "name")}</g:link></td>
 
                                             </tr>
                                         </g:each>
@@ -154,8 +154,7 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="datatable/datatables.js"/>
     <g:javascript src="datatable/datatables.bootstrap.js"/>
-    <%-- TODO
-    <g:javascript src="datatable/customAdmin-datatable.js"/>
-    --%>
+    <g:javascript src="datatable/customCatalog-datatable.js"/>
+
 </body>
 </html>

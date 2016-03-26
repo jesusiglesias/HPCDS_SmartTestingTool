@@ -2,6 +2,8 @@
  *                                         BOOTSTRAP                                         *
  *-------------------------------------------------------------------------------------------*/
 
+
+import Test.Catalog
 import User.Department
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.SecurityFilterPosition
@@ -115,7 +117,7 @@ class BootStrap {
                     password: '7g4sOmmm',
                     email: 'user_stt@stt8.com')
 
-            // Creating new department
+            // Creating new departments
             def iDDepartment = Department.findByName('Investigación + Desarrollo') ?: new Department(
                     name: 'Investigación + Desarrollo'
             )
@@ -134,6 +136,15 @@ class BootStrap {
 
             def supportDepartment = Department.findByName('Soporte técnico') ?: new Department(
                     name: 'Soporte técnico'
+            )
+
+            // Creating new catalogs
+            def iDcatalog = Catalog.findByName('Catálogo I+D') ?: new Catalog(
+                    name: 'Catálogo I+D'
+            )
+
+            def securityCatalog = Catalog.findByName('Seguridad inicial') ?: new Catalog(
+                    name: 'Seguridad inicial'
             )
 
             // Validation of new users
@@ -176,6 +187,10 @@ class BootStrap {
                 productDepartment.save(flush: true, failOnError: true)
                 rrhhDepartment.save(flush: true, failOnError: true)
                 supportDepartment.save(flush: true, failOnError: true)
+
+                // Saving catalogs
+                iDcatalog.save(flush: true, failOnError: true)
+                securityCatalog.save(flush: true, failOnError: true)
 
                 log.debug("BootStrap:init():Initial data have been created")
                 log.info("Special config create for development or test - Users: admin_stt/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and user_stt/7g4sOmmm (User)")

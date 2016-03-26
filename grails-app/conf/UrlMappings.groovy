@@ -27,6 +27,9 @@ class UrlMappings {
         // Department
         "/department/create-error"(controller: 'department', action: 'save')
         "/department/edit-error/$id?(.$format)?"(controller: 'department', action: 'update')
+        // Catalog
+        "/catalog/create-error"(controller: 'catalog', action: 'save')
+        "/catalog/edit-error/$id?(.$format)?"(controller: 'catalog', action: 'update')
 
         /****************************/
         // TODO
