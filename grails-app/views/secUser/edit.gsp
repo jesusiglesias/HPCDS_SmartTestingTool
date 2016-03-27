@@ -6,6 +6,7 @@
     <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title.admin" default="STT | Administrators management"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/fileInput', file: 'bootstrap-fileinput.css')}" type="text/css"/>
 
     <script>
         // Variables to use in script
@@ -129,12 +130,12 @@
                 </g:form>
 
                 <!-- Edit form -->
-                <g:form url="[resource:secUserInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form admin-form">
+                <g:form url="[resource:secUserInstance, action:'update']" enctype="multipart/form-data" autocomplete="on" class="horizontal-form admin-form">
                     <g:hiddenField name="version" value="${secUserInstance?.version}" />
                     <fieldset class="form">
                         <g:render template="form"/>
                     </fieldset>
-                    <div class="domain-button-group">
+                    <div class="domain-button-group-less">
                         <!-- Cancel button -->
                         <g:link type="button" uri="/administrator" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
                         <button type="submit" class="btn green-dark" name="update">
@@ -154,6 +155,7 @@
     <g:javascript src="password/custom-password.js"/>
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
     <g:javascript src="domain-validation/admin-validation.js"/>
+    <g:javascript src="fileInput/bootstrap-fileinput.js"/>
 
 </body>
 </html>

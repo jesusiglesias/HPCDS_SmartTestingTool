@@ -159,13 +159,12 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     /* Domain
     ======================================================*/
     '/SecUser/**':      ['ROLE_ADMIN'],
+    '/User/**':         ['ROLE_ADMIN'],
     '/Department/**':   ['ROLE_ADMIN'],
     '/Catalog/**':      ['ROLE_ADMIN'],
     '/Topic/**':        ['ROLE_ADMIN'],
 
-        // TODO
-    '/User/**':         ['ROLE_ADMIN', 'ROLE_USER'],
-    '/Topic/**':        ['ROLE_ADMIN', 'ROLE_USER'],
+    // TODO
     '/Test/**':         ['ROLE_ADMIN', 'ROLE_USER'],
 
     /* Custom general tasks user
@@ -197,9 +196,11 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     /* Custom tasks admin (back-end)
     ======================================================*/
     // Reload Log config
-    '/customTasksBackend/reloadLogConfig':    ['ROLE_ADMIN'],
-    '/customTasksBackend/dashboard':          ['ROLE_ADMIN'],
-    '/customTasksBackend/**':                 ['ROLE_ADMIN']
+    '/customTasksBackend/reloadLogConfig':     ['ROLE_ADMIN'],
+    '/customTasksBackend/reloadLogConfigAJAX': ['ROLE_ADMIN'],
+    '/customTasksBackend/dashboard':           ['ROLE_ADMIN'],
+    '/customTasksBackend/profileImage':        ['ROLE_ADMIN', 'ROLE_USER'],
+    '/customTasksBackend/**':                  ['ROLE_ADMIN']
 ]
 
 // URL of login page (default: "/login/auth")

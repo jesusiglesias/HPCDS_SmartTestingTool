@@ -43,11 +43,11 @@ var DatatableAdminList = function () {
             // Visibility of columns
             "columnDefs": [
                 {
-                    "targets": [4], // Account expired
+                    "targets": [5], // Account expired
                     "visible": false
                 },
                 {
-                    "targets": [5], // Password expired
+                    "targets": [6], // Password expired
                     "visible": false
                 }
             ],
@@ -85,7 +85,7 @@ var DatatableAdminList = function () {
             },
 
             "order": [
-                [0, 'asc']
+                [1, 'asc']
             ],
             
             "lengthMenu": [

@@ -25,6 +25,8 @@ class SecUser implements Serializable {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	byte[] avatar
+	String avatarType
 
 	// Transient attribute
 	static transients = ['springSecurityService', 'confirmPassword']
@@ -80,6 +82,8 @@ class SecUser implements Serializable {
 		password blank: false, matches: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$).{8,}\$"
 		email blank: false, unique: true, email: true
 		confirmPassword bindable: true
+		avatar nullable:true, maxSize: 1048576 /* 1MB */
+		avatarType nullable:true, inList: ['image/png', 'image/jpeg', 'image/gif']
 	}
 
 	// It modifies the name of the password column in database

@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Value
 @Transactional(readOnly = true)
 class SecUserController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
+
+    // Mime-types allowed in image
+    private static final contentsType = ['image/png', 'image/jpeg', 'image/gif']
 
     // Default value of pagination
     @Value('${paginate.defaultValue:10}')
@@ -67,6 +70,9 @@ class SecUserController {
             return
         }
 
+        // Get the avatar file from the multi-part request
+        def filename = request.getFile('avatar')
+
         if (secUserInstance.hasErrors()) {
             respond secUserInstance.errors, view:'create'
             return
@@ -79,7 +85,26 @@ class SecUserController {
             return
         }
 
+        // It checks that mime-types is correct: ['image/png', 'image/jpeg', 'image/gif']
+        if (!filename.empty && !contentsType.contains(filename.getContentType())) {
+            flash.secUserErrorMessage = g.message(code: 'default.validation.mimeType.image', default: 'The profile image must be of type: <strong>.png</strong>, <strong>.jpeg</strong> or <strong>.gif</strong>.')
+            render  view: "create", model: [secUserInstance: secUserInstance]
+            return
+        }
+
         try {
+
+            // Save the image and mime type
+            if (!filename.empty) {
+                log.debug("SecUserController():save():ImageProfileUploaded:${filename.name}")
+
+                secUserInstance.avatar = filename.bytes
+                secUserInstance.avatarType = filename.contentType
+            } else {
+                secUserInstance.avatar = null
+                secUserInstance.avatarType = null
+            }
+
             // Save admin data
             secUserInstance.save(flush:true, failOnError: true)
 
@@ -151,6 +176,9 @@ class SecUserController {
             }
         }
 
+        // Get the avatar file from the multi-part request
+        def filename = request.getFile('avatar')
+
         // Validate the instance
         if (!secUserInstance.validate()) {
             respond secUserInstance.errors, view:'edit'
@@ -168,9 +196,54 @@ class SecUserController {
             return
         }
 
+        // It checks that mime-types is correct: ['image/png', 'image/jpeg', 'image/gif']
+        if (!filename.empty && !contentsType.contains(filename.getContentType())) {
+            flash.secUserErrorMessage = g.message(code: 'default.validation.mimeType.image', default: 'The profile image must be of type: <strong>.png</strong>, <strong>.jpeg</strong> or <strong>.gif</strong>.')
+            render  view: "create", model: [secUserInstance: secUserInstance]
+            return
+        }
+
         try {
 
-            // Save admin data
+            // Update the image and mime type
+            if (!filename.empty) {
+                log.debug("SecUserController():update():ImageProfileUploaded:${filename.name}")
+
+                secUserInstance.avatar = filename.bytes
+                secUserInstance.avatarType = filename.contentType
+
+            } else {
+                log.debug("vacio")
+
+                //def selectedUser = SecUser.get(params.id)
+
+                //bindData(selectedUser, secUserInstance, [exclude: ['avatar', 'avatarType']])
+
+
+                /*def newUserInstance = new SecUser()
+                def selectedUser = SecUser.get(params.id)
+
+                newUserInstance.avatar = secUserInstance.avatar
+                newUserInstance.avatarType = secUserInstance.avatarType
+                newUserInstance.save()
+
+
+                log.debug(selectedUser.username)
+                log.debug(selectedUser.avatar)
+                log.debug(selectedUser.avatarType)*/
+
+                //secUserInstance.avatar = selectedUser.avatar
+                //secUserInstance.avatarType = selectedUser.avatarType
+
+                log.debug(secUserInstance.avatar)
+                log.debug(secUserInstance.avatarType)
+                //secUserInstance.avatar = filename.bytes
+                //secUserInstance.avatarType = filename.contentType
+
+                //secUserInstance.save(avatar: filename.bytes, avatarType: selectedUser.avatarType)
+            }
+
+            // Update admin data
             secUserInstance.save(flush:true, failOnError: true)
 
             request.withFormat {
@@ -180,6 +253,7 @@ class SecUserController {
                 }
                 '*' { respond secUserInstance, [status: OK] }
             }
+
         } catch (Exception exception) {
             log.error("SecUserController():update():Exception:Administrator:${secUserInstance.username}:${exception}")
 

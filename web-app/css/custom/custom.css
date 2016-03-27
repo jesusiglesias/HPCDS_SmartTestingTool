@@ -35,6 +35,10 @@ input:-webkit-autofill:active {
     margin: 35px -15px 10px -15px;
 }
 
+.profileImage-row {
+    margin: 35px -15px 0 -15px;
+}
+
 /* Icon offset */
 .icon-offset {
     margin: 11px 125px 4px 10px !important;
@@ -43,6 +47,18 @@ input:-webkit-autofill:active {
 /* Position confirmation button */
 #delete-confirm-popover {
     margin: 0 0 30px 0;
+}
+
+/* Profile image */
+.profileImage-view {
+    float: left;
+    height: 38px;
+    display: inline-block;
+}
+
+/* Image profile - Note */
+.profileImage-note {
+    margin-top: 20px;
 }
 
 /* Checker availibility
@@ -434,5 +450,16 @@ input:-webkit-autofill:active {
     /* Accordion password - Admin management */
     .panel-instruction-create {
         margin: -5px 0 40px 0 !important;
+    }
+}
+
+/* Max-width: 341px */
+@media(max-width: 340px) {
+
+    /* Profile image */
+    .profileImage-view {
+        float: left;
+        height: 35px;
+        display: inline-block;
     }
 }

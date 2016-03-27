@@ -130,6 +130,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="entity-table">
                                     <thead>
                                         <tr>
+                                            <td><g:message code="admin.avatar.label" default="Profile image"/></td>
                                             <td><g:message code="admin.username.label" default="Username"/></td>
                                             <td><g:message code="admin.email.label" default="Email"/></td>
                                             <td><g:message code="admin.enabled.label" default="Enabled account"/></td>
@@ -141,6 +142,14 @@
                                     <tbody>
                                         <g:each in="${secUserInstanceList}" status="i" var="secUserInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                                <td>
+                                                    <g:if test="${secUserInstance.avatar}">
+                                                        <img class="img-circle profileImage-view" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id:secUserInstance.ident())}" />
+                                                    </g:if>
+                                                    <g:else>
+                                                        <img class="img-circle profileImage-view" alt="Profile image" src="${resource(dir: 'img/profile', file: 'user_profile.png')}"/>
+                                                    </g:else>
+                                                </td>
                                                 <td><g:link controller="secUser" action="edit" id="${secUserInstance.id}">${fieldValue(bean: secUserInstance, field: "username")}</g:link></td>
                                                 <td>${fieldValue(bean: secUserInstance, field: "email")}</td>
                                                 <td>

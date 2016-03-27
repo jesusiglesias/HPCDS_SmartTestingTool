@@ -1,7 +1,6 @@
 <!-------------------------------------------------------------------------------------------*
  *                                        ADMIN MAIN                                         *
  *------------------------------------------------------------------------------------------->
-
 <!DOCTYPE html>
   <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
   <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -134,8 +133,8 @@
                     <!-- User dropdown -->
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <!-- TODO Image -->
-                            <asset:image src="profile/user_profile.png" class="img-circle" alt="Profile image"/>
+                            <!-- Profile image -->
+                            <img class="img-circle" alt="Profile image" src="${createLink(controller:'customTasksBackend', action:'profileImage')}"/>
                             <span class="username username-hide-on-mobile">
                                 <sec:ifLoggedIn>
                                     <sec:username/>

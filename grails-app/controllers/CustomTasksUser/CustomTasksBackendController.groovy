@@ -1,15 +1,21 @@
 package CustomTasksUser
 
 import Security.SecRole
+import Security.SecUser
 import Security.SecUserSecRole
 import grails.util.Environment
 import grails.util.Holders
+import org.codehaus.groovy.grails.core.io.ResourceLocator
+import org.springframework.core.io.Resource
 import org.codehaus.groovy.grails.plugins.log4j.Log4jConfig
 
 /**
  * It contains the habitual custom tasks of the admin (back-end).
  */
 class CustomTasksBackendController {
+
+    def springSecurityService
+    ResourceLocator grailsResourceLocator
 
     // Store the hash of external config files
     private static Map<String, Integer> fileHashMap = [:]
@@ -25,6 +31,44 @@ class CustomTasksBackendController {
         def normalUsers = SecUserSecRole.findAllBySecRole(role).secUser
 
         render view: 'dashboard', model: [normalUsers: normalUsers.size()]
+    }
+
+    /**
+     * It obtains the profile image.
+     *
+     * @return out Profile image of the user.
+     */
+    def profileImage() {
+        log.debug("CustomTasksBackendController:profileImage()")
+
+        def currentUser
+
+        if (params.id) { // Index view
+            currentUser = SecUser.get(params.id)
+
+        } else { // Menu
+            currentUser = SecUser.get(springSecurityService.currentUser.id)
+        }
+
+        if (!currentUser || !currentUser.avatar || !currentUser.avatarType) {
+
+            final Resource image = grailsResourceLocator.findResourceForURI('/img/profile/user_profile.png')
+
+            def file = new File(image.getURL().getFile())
+            def img = file.bytes
+            response.contentType = 'image/png'
+            response.contentLength = file.size()
+            response.outputStream << img
+            response.outputStream.flush()
+
+        } else {
+
+            response.contentType = currentUser.avatarType
+            response.contentLength = currentUser.avatar.size()
+            OutputStream out = response.outputStream
+            out.write(currentUser.avatar)
+            out.close()
+        }
     }
 
     /**
