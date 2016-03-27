@@ -184,7 +184,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link controller="customTasksBackend" action="reloadLogConfig"><g:message code="layouts.main_auth_admin.body.title.logConfiguration" default="Configuration"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small class="subtitle-inlinePage"><g:message code="layouts.main_auth_admin.body.subtitle.logConfiguration" default="Reload log"/></small>
             </h3>
 
