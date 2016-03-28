@@ -11,7 +11,7 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 
 // Name war creation task
-grails.project.war.file = "target/${appName}-${grails.util.Environment.current.name}##${appVersion}.war"
+grails.project.war.file = "target/${appName}.war"
 
 grails.project.fork = [
     // Configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
