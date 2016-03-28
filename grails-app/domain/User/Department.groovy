@@ -16,12 +16,12 @@ class Department {
     static hasMany = [users:User]
 
     // It obtains the number of users that contains the department
-    Integer getBookCount () {
+    Integer getUsersCount () {
         users?.size () ?: 0
     }
 
     void beforeUpdate () {
-        userCount = getBookCount ()
+        userCount = getUsersCount ()
     }
 
     // Restrictions on the attributes of the entity
