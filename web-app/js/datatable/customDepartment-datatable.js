@@ -41,10 +41,10 @@ var DatatableDepartmentList = function () {
             select: false,
 
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline', text: _print },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _departmentFile, title: _departmentTableTitle },
-                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _departmentFile },
+                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0,1]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0,1]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _departmentFile, title: _departmentTableTitle, exportOptions: {columns: [0,1]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _departmentFile, exportOptions: {columns: [0,1]} },
                 { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
             ],

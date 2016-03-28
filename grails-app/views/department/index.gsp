@@ -131,12 +131,16 @@
                                     <thead>
                                         <tr>
                                             <td><g:message code="department.name.label" default="Name"/></td>
+                                            <td><g:message code="department.userCount.label" default="Number of users"/></td>
+                                            <td><g:message code="layouts.main_auth_admin.body.content.department.users.display" default="Show users"/></td>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <g:each in="${departmentInstanceList}" status="i" var="departmentInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                                 <td><g:link controller="department" action="edit" id="${departmentInstance.id}">${fieldValue(bean: departmentInstance, field: "name")}</g:link></td>
+                                                <td>${fieldValue(bean: departmentInstance, field: "userCount")}</td>
+                                                <td><g:link uri="/user" params="[departmentSearch: departmentInstance.name]"><g:message code="department.users.label" default="Users"/></g:link></td>
                                             </tr>
                                         </g:each>
                                     </tbody>
