@@ -40,11 +40,19 @@ var DatatableTopicList = function () {
             // Row selectable
             select: false,
 
+            // Visibility of columns
+            "columnDefs": [
+                {
+                    "targets": [1], // Description
+                    "visible": false
+                }
+            ],
+
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline', text: _print },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _topicFile, title: _topicTableTitle },
-                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _topicFile },
+                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _topicFile, title: _topicTableTitle, exportOptions: {columns: [0, 2, 3]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _topicFile, exportOptions: {columns: [0, 1, 2, 3]} },
                 { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
             ],

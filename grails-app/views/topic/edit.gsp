@@ -3,27 +3,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="layout" content="main_auth_admin">
+    <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title.topic" default="STT | Topics management"/></title>
+    <link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
 
-	<script>
-		// Variables to use in script
+    <script>
+        // Variables to use in script
         var _checkerNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.topic.create.checker.block.info.name', default:'Type a name of topic and check its availability.')}';
         var _checkNameTopicAvailibility = '${g.createLink(controller: "topic", action: 'checkNameTopicAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
-		// Handler auto close alert
-		function createAutoClosingAlert(selector) {
-			var alert = $(selector);
-			window.setTimeout(function () {
-				alert.slideUp(1000, function () {
-					$(this).remove();
-				});
-			}, 5000);
-		}
-	</script>
+        // Handler auto close alert
+        function createAutoClosingAlert(selector) {
+            var alert = $(selector);
+            window.setTimeout(function () {
+                alert.slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+    </script>
 </head>
+
 <body>
 
     <!-- Page-content-wrapper -->
@@ -57,7 +59,7 @@
                 <g:if test="${flash.topicErrorMessage}">
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status"> ${raw(flash.topicErrorMessage)} </span>
+                        <span role="status">${raw(flash.topicErrorMessage)}</span>
                     </div>
 
                     <g:javascript>
@@ -70,7 +72,9 @@
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
                         <g:eachError bean="${topicInstance}" var="error">
-                            <p role="status" <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></p>
+                            <p role="status"
+                               <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message
+                                    error="${error}"/></p>
                         </g:eachError>
                     </div>
 
@@ -80,9 +84,11 @@
                 </g:hasErrors>
 
                 <!-- Delete button -->
-                <g:form url="[resource:topicInstance, controller:'topic', action:'delete']" method="DELETE" class="form-delete">
+                <g:form url="[resource: topicInstance, controller: 'topic', action: 'delete']" method="DELETE"
+                        class="form-delete">
                     <div class="btn-group">
-                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
+                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation"
+                                data-placement="rigth" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
                                 data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                 data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
@@ -95,11 +101,13 @@
                 </g:form>
 
                 <!-- Edit form -->
-                <g:form url="[resource:topicInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form topic-form">
-                    <g:hiddenField name="version" value="${topicInstance?.version}" />
+                <g:form url="[resource: topicInstance, action: 'update']" method="PUT" autocomplete="on"
+                        class="horizontal-form topic-form">
+                    <g:hiddenField name="version" value="${topicInstance?.version}"/>
                     <fieldset class="form">
                         <g:render template="form"/>
                     </fieldset>
+
                     <div class="domain-button-group">
                         <!-- Cancel button -->
                         <g:link type="button" uri="/topic" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
@@ -116,6 +124,9 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
     <g:javascript src="confirmation/custom-delete.js"/>
+    <g:javascript src="iCheck/icheck.min.js"/>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
+    <g:javascript src="autosize/autosize.min.js"/>
     <g:javascript src="domain-validation/topic-validation.js"/>
 
 </body>

@@ -20,12 +20,18 @@ var DomainTopicValidation = function () {
                     name: {
                         required: true,
                         maxlength: 50
+                    },
+                    description: {
+                        maxlength: 500
                     }
                 },
 
                 messages: {
                     name: {
                         required: _requiredField,
+                        maxlength: _maxlengthField
+                    },
+                    description: {
                         maxlength: _maxlengthField
                     }
                 },
@@ -59,10 +65,10 @@ var DomainTopicValidation = function () {
     /**
      * It checks the name availability
      */
-    var handleNameAvailabilityChecker = function () {
+    var handlerNameAvailabilityChecker = function () {
 
         var name = $('#name');
-        var nameBlock = $('.topic-block');
+        var nameTopicBlock = $('.nameTopic-block');
 
         $("#nameTopic-checker").click(function (e) {
 
@@ -70,8 +76,8 @@ var DomainTopicValidation = function () {
             if (name.val() === "") {
                 name.closest('.form-group').removeClass('has-success').addClass('has-error');
 
-                nameBlock.html(_checkerNameBlockInfo);
-                nameBlock.addClass('availibility-error');
+                nameTopicBlock.html(_checkerNameBlockInfo);
+                nameTopicBlock.addClass('availibility-error');
                 return;
             }
 
@@ -98,26 +104,49 @@ var DomainTopicValidation = function () {
                 if (res.status == 'OK') {
                     name.closest('.form-group').removeClass('has-error').addClass('has-success');
 
-                    nameBlock.html(res.message);
-                    nameBlock.removeClass('availibility-error');
-                    nameBlock.addClass('availibility-success');
+                    nameTopicBlock.html(res.message);
+                    nameTopicBlock.removeClass('availibility-error');
+                    nameTopicBlock.addClass('availibility-success');
 
                 } else {
                     name.closest('.form-group').removeClass('has-success').addClass('has-error');
 
-                    nameBlock.html(res.message);
-                    nameBlock.addClass('availibility-error');
+                    nameTopicBlock.html(res.message);
+                    nameTopicBlock.addClass('availibility-error');
                 }
             }, 'json');
 
         });
     };
 
+    /**
+     * It handles the max length of the fields
+     */
+    var handlerMaxlength = function() {
+
+            /* Name field */
+            $('#name').maxlength({
+                limitReachedClass: "label label-danger",
+                threshold: 20,
+                placement: 'top',
+                validate: true
+            });
+
+            /* Description field */
+            $('#description').maxlength({
+                limitReachedClass: "label label-danger",
+                alwaysShow: true,
+                placement: 'top-right-inside',
+                validate: true
+            });
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
             handlerTopicValidation();
-            handleNameAvailabilityChecker();
+            handlerNameAvailabilityChecker();
+            handlerMaxlength();
         }
     };
 

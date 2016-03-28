@@ -17,7 +17,8 @@ class UrlMappings {
         // Homepage
         "/"(controller: 'login', action: 'auth')
 
-        // Domain URLS
+        /* Domain URLS
+        ======================================================*/
         // Admin
         "/administrator"(controller: 'secUser', action: 'index')
         "/administrator/create"(controller: 'secUser', action: 'create')
@@ -26,19 +27,18 @@ class UrlMappings {
         "/administrator/edit-error/$id?(.$format)?"(controller: 'secUser', action: 'update')
         "/administrator/edit/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'editProfileImage')
         "/administrator/edit-error/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'updateProfileImage')
-
         // User
         "/user/create-error"(controller: 'user', action: 'save')
         "/user/edit-error/$id?(.$format)?"(controller: 'user', action: 'update')
         // Department
         "/department/create-error"(controller: 'department', action: 'save')
         "/department/edit-error/$id?(.$format)?"(controller: 'department', action: 'update')
-        // Catalog
-        "/catalog/create-error"(controller: 'catalog', action: 'save')
-        "/catalog/edit-error/$id?(.$format)?"(controller: 'catalog', action: 'update')
         // Topic
         "/topic/create-error"(controller: 'topic', action: 'save')
         "/topic/edit-error/$id?(.$format)?"(controller: 'topic', action: 'update')
+        // Catalog
+        "/catalog/create-error"(controller: 'catalog', action: 'save')
+        "/catalog/edit-error/$id?(.$format)?"(controller: 'catalog', action: 'update')
 
         /****************************/
         // TODO

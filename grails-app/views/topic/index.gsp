@@ -2,24 +2,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="layout" content="main_auth_admin">
-	<title><g:message code="layouts.main_auth_admin.head.title.topic" default="STT | Topics management"/></title>
+    <meta name="layout" content="main_auth_admin">
+    <title><g:message code="layouts.main_auth_admin.head.title.topic" default="STT | Topics management"/></title>
 
-	<!-- LOAD CSS -->
-	<link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.css')}" type="text/css"/>
-	<link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.bootstrap.css')}" type="text/css"/>
+    <!-- LOAD CSS -->
+    <link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.bootstrap.css')}" type="text/css"/>
 
-	<script>
-		// Handler auto close alert
-		function createAutoClosingAlert(selector) {
-			var alert = $(selector);
-			window.setTimeout(function () {
-				alert.slideUp(1000, function () {
-					$(this).remove();
-				});
-			}, 5000);
-		}
-	</script>
+    <script>
+        // Handler auto close alert
+        function createAutoClosingAlert(selector) {
+            var alert = $(selector);
+            window.setTimeout(function () {
+                alert.slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+    </script>
 </head>
 
 <body>
@@ -91,7 +91,7 @@
                 <g:if test="${flash.topicMessage}">
                     <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status"> ${raw(flash.topicMessage)} </span>
+                        <span role="status">${raw(flash.topicMessage)}</span>
                     </div>
 
                     <g:javascript>
@@ -102,7 +102,7 @@
                 <g:if test="${flash.topicErrorMessage}">
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status"> ${raw(flash.topicErrorMessage)} </span>
+                        <span role="status">${raw(flash.topicErrorMessage)}</span>
                     </div>
 
                     <g:javascript>
@@ -123,30 +123,37 @@
                                         </g:link>
                                     </div>
                                 </div>
-                                <div class="tools"> </div>
+                                <div class="tools"></div>
                             </div>
 
                             <div class="portlet-body">
                                 <table class="table table-striped table-bordered table-hover" id="entity-table">
                                     <thead>
-                                    <tr> <!-- TODO -->
-                                        <g:sortableColumn property="description" title="${message(code: 'topic.description.label', default: 'Description')}" />
-
-                                        <g:sortableColumn property="name" title="${message(code: 'topic.name.label', default: 'Name')}" />
-
-                                        <g:sortableColumn property="visibility" title="${message(code: 'topic.visibility.label', default: 'Visibility')}" />
+                                    <tr>
+                                        <td><g:message code="topic.name.label" default="Name"/></td>
+                                        <td><g:message code="topic.description.label" default="Description"/></td>
+                                        <td><g:message code="topic.visibility.label" default="Visibility"/></td>
+                                        <td><g:message code="topic.testCount.label" default="Number of test"/></td>
+                                        <td><g:message code="layouts.main_auth_admin.body.content.topic.test.display" default="Show test"/></td>
                                     </tr>
                                     </thead>
-                                    <tbody> <!-- TODO -->
+                                    <tbody>
                                     <g:each in="${topicInstanceList}" status="i" var="topicInstance">
                                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-                                            <td><g:link action="edit" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "description")}</g:link></td>
-
-                                            <td>${fieldValue(bean: topicInstance, field: "name")}</td>
-
-                                            <td><g:formatBoolean boolean="${topicInstance.visibility}" /></td>
-
+                                            <td><g:link controller="topic" action="edit" id="${topicInstance.id}">${fieldValue(bean: topicInstance, field: "name")}</g:link></td>
+                                            <td>${fieldValue(bean: topicInstance, field: "description")}</td>
+                                            <td>
+                                                <g:if test="${topicInstance.visibility}">
+                                                    <span class="label label-sm label-success">
+                                                </g:if>
+                                                <g:else>
+                                                    <span class="label label-sm label-danger">
+                                                </g:else>
+                                                <g:formatBoolean boolean="${topicInstance.visibility}" true="${g.message(code: "topic.visibility.label.true", default: "Visible")}" false="${g.message(code: "topic.visibility.label.false", default: "Not visible")}"/>
+                                                    </span>
+                                            </td>
+                                            <td>${fieldValue(bean: topicInstance, field: "testCount")}</td>
+                                            <td><g:link uri="/test" params="[topicSearch: topicInstance.name]"><g:message code="topic.tests.label" default="Test"/></g:link></td>
                                         </tr>
                                     </g:each>
                                     </tbody>
@@ -163,6 +170,11 @@
     <g:javascript src="datatable/datatables.js"/>
     <g:javascript src="datatable/datatables.bootstrap.js"/>
     <g:javascript src="datatable/customTopic-datatable.js"/>
-
 </body>
 </html>
+
+
+
+
+
+
