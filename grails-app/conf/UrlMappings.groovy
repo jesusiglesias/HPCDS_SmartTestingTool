@@ -21,9 +21,12 @@ class UrlMappings {
         // Admin
         "/administrator"(controller: 'secUser', action: 'index')
         "/administrator/create"(controller: 'secUser', action: 'create')
-        "/administrator/edit/$id?(.$format)?"(controller: 'secUser', action: 'edit')
         "/administrator/create-error"(controller: 'secUser', action: 'save')
+        "/administrator/edit/$id?(.$format)?"(controller: 'secUser', action: 'edit')
         "/administrator/edit-error/$id?(.$format)?"(controller: 'secUser', action: 'update')
+        "/administrator/edit/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'editProfileImage')
+        "/administrator/edit-error/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'updateProfileImage')
+
         // User
         "/user/create-error"(controller: 'user', action: 'save')
         "/user/edit-error/$id?(.$format)?"(controller: 'user', action: 'update')

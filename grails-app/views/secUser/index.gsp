@@ -144,10 +144,14 @@
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                                 <td>
                                                     <g:if test="${secUserInstance.avatar}">
-                                                        <img class="img-circle profileImage-view" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id:secUserInstance.ident())}" />
+                                                        <g:link controller="secUser" action="editProfileImage" id="${secUserInstance.id}">
+                                                            <img class="img-circle profileImage-view" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id:secUserInstance.ident())}" />
+                                                        </g:link>
                                                     </g:if>
                                                     <g:else>
-                                                        <img class="img-circle profileImage-view" alt="Profile image" src="${resource(dir: 'img/profile', file: 'user_profile.png')}"/>
+                                                        <g:link controller="secUser" action="editProfileImage" id="${secUserInstance.id}">
+                                                            <img class="img-circle profileImage-view" alt="Profile image" src="${resource(dir: 'img/profile', file: 'user_profile.png')}"/>
+                                                        </g:link>
                                                     </g:else>
                                                 </td>
                                                 <td><g:link controller="secUser" action="edit" id="${secUserInstance.id}">${fieldValue(bean: secUserInstance, field: "username")}</g:link></td>
