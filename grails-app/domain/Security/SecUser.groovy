@@ -28,7 +28,7 @@ class SecUser implements Serializable {
 	byte[] avatar
 	String avatarType
 
-	// Transient attribute
+	// Transient attributes
 	static transients = ['springSecurityService', 'confirmPassword']
 
 	/**
