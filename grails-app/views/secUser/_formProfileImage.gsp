@@ -2,7 +2,7 @@
 
 <div class="form-body">
     <!-- Row -->
-    <div class="row profileImage-row">
+    <div class="row profileImageEdit-row">
         <!-- Image profile -->
         <div class="form-group">
             <div class="col-sm-12">

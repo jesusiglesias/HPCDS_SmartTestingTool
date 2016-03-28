@@ -36,6 +36,10 @@ input:-webkit-autofill:active {
 }
 
 .profileImage-row {
+    margin: 35px -15px 0 -15px;
+}
+
+.profileImageEdit-row {
     margin: -25px -15px 0 -15px;
 }
 
