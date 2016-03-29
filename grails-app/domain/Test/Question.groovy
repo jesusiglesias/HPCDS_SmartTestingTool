@@ -12,6 +12,10 @@ class Question {
     DifficultyLevel difficultyLevel
     String title
 
+    // Relations
+    static hasMany = [catalogs:Catalog, answers:Answer]
+    static belongsTo = Catalog
+
     // Restrictions on the attributes of the entity
     static constraints = {
     }

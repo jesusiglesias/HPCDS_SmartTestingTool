@@ -10,6 +10,10 @@ class Answer {
     String description
     Integer score
 
+    // Relations
+    static hasMany = [questions:Question]
+    static belongsTo = Question
+
     // Restrictions on the attributes of the entity
     static constraints = {
     }

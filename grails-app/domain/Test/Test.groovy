@@ -18,6 +18,9 @@ class Test {
     String name
     Integer numberOfQuestions
 
+    // Relations
+    static belongsTo = [topic:Topic, catalog:Catalog]
+
     // Restrictions on the attributes of the entity
     static constraints = {
     }
