@@ -23,7 +23,7 @@
 		</div>
 
 		<!-- Description -->
-		<div class="col-md-6">
+		<div class="col-md-6 space-betweenCol">
 			<div class="form-group ${hasErrors(bean: topicInstance, field: 'description', 'error')}">
 				<label for="description" class="control-label">
 					<g:message code="topic.description.label" default="Description"/>
@@ -37,7 +37,7 @@
 	</div>
 
 	<!-- Row -->
-	<div class="row">
+	<div class="row space-secondRow">
 		<!-- Visibility -->
 		<div class="col-sm-6">
 			<div class="${hasErrors(bean: topicInstance, field: 'visibility', 'error')}">

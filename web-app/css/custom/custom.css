@@ -30,17 +30,21 @@ input:-webkit-autofill:active {
     margin: 0 7px;
 }
 
-/* SecUser views */
-.admin-secondRow {
+/* Row with more space */
+.space-firstRow {
+    margin: -25px -15px 0 -15px;
+}
+
+.space-firstRowEdit {
+    margin-top: 25px;
+}
+
+.space-secondRow {
     margin: 35px -15px 10px -15px;
 }
 
-.profileImage-row {
+.space-imageRow {
     margin: 35px -15px 0 -15px;
-}
-
-.profileImageEdit-row {
-    margin: -25px -15px 0 -15px;
 }
 
 /* Icon offset */
@@ -48,9 +52,9 @@ input:-webkit-autofill:active {
     margin: 11px 125px 4px 10px !important;
 }
 
-/* Position confirmation button */
+/* Position confirmation delete button */
 #delete-confirm-popover {
-    margin: 0 0 30px 0;
+    margin: 0 0 50px 0;
 }
 
 /* Profile image */
@@ -123,7 +127,7 @@ input:-webkit-autofill:active {
 
 /* Button group in create and edit views */
 .domain-button-group {
-    margin-top: 40px;
+    margin-top: 45px;
 }
 
 .domain-button-group-less {
@@ -399,6 +403,18 @@ input:-webkit-autofill:active {
 /* Media queries
 =================================================================== */
 
+/* Max-width: 991px */
+@media (max-width: 991px) {
+
+    .space-secondRow {
+        margin: 20px -15px 0 -15px;
+    }
+
+    .space-betweenCol {
+        margin-top: 20px;
+    }
+}
+
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
 
@@ -411,6 +427,10 @@ input:-webkit-autofill:active {
     /* Index view */
     #list-domain {
         margin: 0 15px 0 7px
+    }
+
+    .domain-button-group-less {
+        margin-top: 20px;
     }
 }
 
@@ -426,6 +446,11 @@ input:-webkit-autofill:active {
     .logoHP-admin img {
         width: 90px;
         height: 90px;
+    }
+
+    /* Position confirmation delete button */
+    #delete-confirm-popover {
+        margin: 0 0 35px 0;
     }
 
     /* Entity message */
@@ -466,4 +491,30 @@ input:-webkit-autofill:active {
         height: 35px;
         display: inline-block;
     }
+
+    /* Accordion password - Admin management */
+    .panel-instruction-create {
+        margin: 30px 0 30px 0 !important;
+    }
+}
+
+/* Max-width: 333px */
+@media (max-width: 333px) {
+
+    #list-domain,
+    #create-domain,
+    #edit-domain {
+        margin: 0 7px 0 0;
+    }
+
+}
+
+/* Max-width: 320px */
+@media (max-width: 320px) {
+
+    /* Position confirmation delete button */
+    #delete-confirm-popover {
+        margin: 10px 0 35px 0;
+    }
+
 }

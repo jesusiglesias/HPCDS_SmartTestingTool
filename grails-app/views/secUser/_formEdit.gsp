@@ -24,7 +24,7 @@
         </div>
 
         <!-- Email -->
-        <div class="col-md-6">
+        <div class="col-md-6 space-betweenCol">
             <div class="form-group ${hasErrors(bean: secUserInstance, field: 'email', 'error')}">
                 <label for="email" class="control-label">
                     <g:message code="admin.email.label" default="Email"/>
@@ -45,7 +45,7 @@
     </div>
 
     <!-- Row -->
-    <div class="row admin-secondRow">
+    <div class="row space-secondRow">
         <!-- Password -->
         <div class="col-md-6">
             <div class="form-group ${hasErrors(bean: secUserInstance, field: 'password', 'error')}">
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Confirm password -->
-        <div class="col-md-6">
+        <div class="col-md-6 space-betweenCol">
             <div class="form-group ${hasErrors(bean: secUserInstance, field: 'confirmPassword', 'error')}">
                 <label for="confirmPassword" class="control-label">
                     <g:message code="admin.confirmPassword.label" default="Confirm password"/>

@@ -106,7 +106,7 @@
                         <g:render template="form"/>
                     </fieldset>
 
-                    <div class="domain-button-group-less">
+                    <div class="domain-button-group">
                         <!-- Cancel button -->
                         <g:link type="button" uri="/department" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
                         <button type="submit" class="btn green-dark" name="update">
@@ -122,6 +122,7 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
     <g:javascript src="confirmation/custom-delete.js"/>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="domain-validation/department-validation.js"/>
 
 </body>

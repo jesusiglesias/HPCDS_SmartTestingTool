@@ -113,11 +113,26 @@ var DomainDepartmentValidation = function () {
         });
     };
 
+    /**
+     * It handles the max length of the fields
+     */
+    var handlerMaxlength = function() {
+
+        /* Name field */
+        $('#name').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 20,
+            placement: 'top',
+            validate: true
+        });
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
             handlerDepartmentValidation();
             handleNameAvailabilityChecker();
+            handlerMaxlength();
         }
     };
 

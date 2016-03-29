@@ -101,6 +101,7 @@
     </div> <!-- /. Page-content-wrapper -->
 
     <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="domain-validation/department-validation.js"/>
 
 </body>
