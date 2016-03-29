@@ -47,6 +47,10 @@ input:-webkit-autofill:active {
     margin: 35px -15px 0 -15px;
 }
 
+.space-checkboxCol {
+    margin-top: 10px;
+}
+
 /* Icon offset */
 .icon-offset {
     margin: 11px 125px 4px 10px !important;

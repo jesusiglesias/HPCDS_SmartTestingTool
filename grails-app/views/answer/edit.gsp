@@ -8,8 +8,9 @@
 	<link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
 
 	<script>
-		// Variables to use in script TODO
+		// Variables to use in script
 		var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+		var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
 		// Handler auto close alert
 		function createAutoClosingAlert(selector) {
@@ -44,7 +45,7 @@
 			<!-- Page-title -->
 			<h3 class="page-title">
                 <g:link uri="/answer"><g:message code="layouts.main_auth_admin.body.title.answer" default="Answers management"/></g:link>
-				<i class="icon-arrow-right icon-title-admin"></i>
+				<i class="icon-arrow-right icon-title-domain"></i>
 				<small><g:message code="layouts.main_auth_admin.body.subtitle.answer.edit" default="Edit answer"/></small>
 			</h3>
 
@@ -93,7 +94,7 @@
 				</g:form>
 
 				<!-- Edit form -->
-				<g:form url="[resource:answerInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form admin-form">
+				<g:form url="[resource:answerInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form answer-form">
 					<g:hiddenField name="version" value="${answerInstance?.version}" />
 					<fieldset class="form">
 						<g:render template="form"/>
@@ -111,13 +112,13 @@
 		</div> <!-- /.Page-content -->
 	</div> <!-- /. Page-content-wrapper -->
 
-	<!-- LOAD JAVASCRIPT TODO -->
+	<!-- LOAD JAVASCRIPT -->
 	<g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
 	<g:javascript src="confirmation/custom-delete.js"/>
 	<g:javascript src="iCheck/icheck.min.js"/>
-	<g:javascript src="password/custom-password.js"/>
-	<g:javascript src="password/pwstrength-bootstrap.min.js"/>
-	<g:javascript src="domain-validation/admin-validation.js"/>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
+    <g:javascript src="autosize/autosize.min.js"/>
+    <g:javascript src="domain-validation/answer-validation.js"/>
 
 </body>
 </html>

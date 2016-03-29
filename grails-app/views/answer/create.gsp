@@ -9,8 +9,9 @@
 	<script>
 		// Variables to use in script
 		var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
-		// Handler auto close alert
+        // Handler auto close alert
 		function createAutoClosingAlert(selector) {
 			var alert = $(selector);
 			window.setTimeout(function () {
@@ -43,7 +44,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/answer"><g:message code="layouts.main_auth_admin.body.title.answer" default="Answers management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.answer.create" default="Create answer"/></small>
             </h3>
 
@@ -77,7 +78,7 @@
                 </g:hasErrors>
 
                 <!-- Creation form -->
-                <g:form url="[resource:answerInstance, action:'save']" autocomplete="on" class="horizontal-form admin-form">
+                <g:form url="[resource:answerInstance, action:'save']" autocomplete="on" class="horizontal-form answer-form">
                     <fieldset class="form">
                         <g:render template="form"/>
                     </fieldset>
@@ -97,10 +98,8 @@
 
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="iCheck/icheck.min.js"/>
-    <g:javascript src="password/custom-password.js"/>
-    <g:javascript src="password/pwstrength-bootstrap.min.js"/>
-    <%-- TODO
-    <g:javascript src="domain-validation/admin-validation.js"/>
-    --%>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
+    <g:javascript src="autosize/autosize.min.js"/>
+    <g:javascript src="domain-validation/answer-validation.js"/>
 </body>
 </html>
