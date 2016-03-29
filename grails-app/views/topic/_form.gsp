@@ -56,7 +56,8 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:select name="tests" from="${Test.Test.list()}" multiple="multiple" optionKey="id" size="5" value="${topicInstance?.tests*.id}" class="many-to-many"/>
+					<!-- TODO Form-control -->
+                    <g:select name="tests" from="${Test.Test.list()}" multiple="multiple" optionKey="id" size="5" value="${topicInstance?.tests*.id}" class="many-to-many form-control"/>
                 </div>
             </div>
 		</div>

@@ -2,27 +2,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="layout" content="main_auth_admin">
+    <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title.catalog" default="STT | Catalogs management"/></title>
 
-	<script>
-		// Variables to use in script
+    <script>
+        // Variables to use in script
         var _checkerNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.catalog.create.checker.block.info.name', default:'Type a name of catalog and check its availability.')}';
         var _checkNameCatalogAvailibility = '${g.createLink(controller: "catalog", action: 'checkNameCatalogAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
-		// Handler auto close alert
-		function createAutoClosingAlert(selector) {
-			var alert = $(selector);
-			window.setTimeout(function () {
-				alert.slideUp(1000, function () {
-					$(this).remove();
-				});
-			}, 5000);
-		}
-	</script>
+        // Handler auto close alert
+        function createAutoClosingAlert(selector) {
+            var alert = $(selector);
+            window.setTimeout(function () {
+                alert.slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+    </script>
 </head>
+
 <body>
 
     <!-- Page-content-wrapper -->
@@ -55,7 +56,7 @@
                 <g:if test="${flash.catalogErrorMessage}">
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status"> ${raw(flash.catalogErrorMessage)} </span>
+                        <span role="status">${raw(flash.catalogErrorMessage)}</span>
                     </div>
 
                     <g:javascript>
@@ -68,7 +69,9 @@
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
                         <g:eachError bean="${catalogInstance}" var="error">
-                            <p role="status" <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></p>
+                            <p role="status"
+                               <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message
+                                    error="${error}"/></p>
                         </g:eachError>
                     </div>
 
@@ -78,12 +81,12 @@
                 </g:hasErrors>
 
                 <!-- Creation form -->
-                <g:form url="[resource:catalogInstance, action:'save']" autocomplete="on" class="horizontal-form catalog-form">
+                <g:form url="[resource: catalogInstance, action: 'save']" autocomplete="on" class="horizontal-form catalog-form">
                     <fieldset class="form">
                         <g:render template="form"/>
                     </fieldset>
 
-                    <div class="domain-button-group">
+                    <div class="domain-button-group-less">
                         <!-- Cancel button -->
                         <g:link type="button" uri="/catalog" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
                         <button type="submit" class="btn green-dark" name="create">
@@ -97,6 +100,7 @@
     </div> <!-- /. Page-content-wrapper -->
 
     <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="domain-validation/catalog-validation.js"/>
 
 </body>

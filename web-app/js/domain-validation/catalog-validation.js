@@ -12,54 +12,54 @@ var DomainCatalogValidation = function () {
         var catalogForm = $('.catalog-form');
 
         catalogForm.validate({
-                errorElement: 'span', // Default input error message container
-                errorClass: 'help-block help-block-error', // Default input error message class
-                focusInvalid: false, // Do not focus the last invalid input
-                ignore: "",  // Validate all fields including form hidden input
-                rules: {
-                    name: {
-                        required: true,
-                        maxlength: 50
-                    }
-                },
-
-                messages: {
-                    name: {
-                        required: _requiredField,
-                        maxlength: _maxlengthField
-                    }
-                },
-
-                // Render error placement for each input type
-                errorPlacement: function (error, element) {
-                    var icon = $(element).parent('.input-icon').children('i');
-                    icon.removeClass('fa-check').addClass("fa-warning");  
-                    icon.attr("data-original-title", error.text()).tooltip({'container': 'body'});
-                },
-
-                // Set error class to the control group
-                highlight: function (element) {
-                    $(element)
-                        .closest('.form-group').removeClass("has-success").addClass('has-error');
-                },
-
-                // Set success class to the control group
-                success: function (label, element) {
-                    var icon = $(element).parent('.input-icon').children('i');
-                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                    icon.removeClass("fa-warning").addClass("fa-check");
-                },
-
-                submitHandler: function (form) {
-                    form.submit(); // Submit the form
+            errorElement: 'span', // Default input error message container
+            errorClass: 'help-block help-block-error', // Default input error message class
+            focusInvalid: false, // Do not focus the last invalid input
+            ignore: "",  // Validate all fields including form hidden input
+            rules: {
+                name: {
+                    required: true,
+                    maxlength: 100
                 }
-            });
+            },
+
+            messages: {
+                name: {
+                    required: _requiredField,
+                    maxlength: _maxlengthField
+                }
+            },
+
+            // Render error placement for each input type
+            errorPlacement: function (error, element) {
+                var icon = $(element).parent('.input-icon').children('i');
+                icon.removeClass('fa-check').addClass("fa-warning");
+                icon.attr("data-original-title", error.text()).tooltip({'container': 'body'});
+            },
+
+            // Set error class to the control group
+            highlight: function (element) {
+                $(element)
+                    .closest('.form-group').removeClass("has-success").addClass('has-error');
+            },
+
+            // Set success class to the control group
+            success: function (label, element) {
+                var icon = $(element).parent('.input-icon').children('i');
+                $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                icon.removeClass("fa-warning").addClass("fa-check");
+            },
+
+            submitHandler: function (form) {
+                form.submit(); // Submit the form
+            }
+        });
     };
 
     /**
      * It checks the name availability
      */
-    var handleNameAvailabilityChecker = function () {
+    var handlerNameAvailabilityChecker = function () {
 
         var name = $('#name');
         var nameBlock = $('.catalog-block');
@@ -109,7 +109,20 @@ var DomainCatalogValidation = function () {
                     nameBlock.addClass('availibility-error');
                 }
             }, 'json');
+        });
+    };
 
+    /**
+     * It handles the max length of the fields
+     */
+    var handlerMaxlength = function() {
+
+        /* Name field */
+        $('#name').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 40,
+            placement: 'top',
+            validate: true
         });
     };
 
@@ -117,7 +130,8 @@ var DomainCatalogValidation = function () {
         // Main function to initiate the module
         init: function () {
             handlerCatalogValidation();
-            handleNameAvailabilityChecker();
+            handlerNameAvailabilityChecker();
+            handlerMaxlength();
         }
     };
 
