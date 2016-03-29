@@ -19,7 +19,7 @@
 					</span>
 				</div>
 			</div>
-			<div class="help-block nameTopic-block"><g:message code="layouts.main_auth_admin.body.content.department.create.checker.block.info.name" default="Type a name of department and check its availability."/> </div>
+			<div class="help-block nameTopic-block"><g:message code="layouts.main_auth_admin.body.content.topic.create.checker.block.info.name" default="Type a name of topic and check its availability."/> </div>
 		</div>
 
 		<!-- Description -->
