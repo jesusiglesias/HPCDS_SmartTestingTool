@@ -7,16 +7,36 @@ import Enumerations.DifficultyLevel
  */
 class Question {
 
+    UUID id
     // Attributes
     String description
     DifficultyLevel difficultyLevel
     String title
+    Integer answerCount = 0
+
+    static transients = ['answerCount']
 
     // Relations
     static hasMany = [catalogs:Catalog, answers:Answer]
     static belongsTo = Catalog
 
+    // It obtains the number of answers that contains the question
+    Integer getAnswersCount () {
+        answers?.size () ?: 0
+    }
+
+    void beforeUpdate () {
+        answerCount = getAnswersCount ()
+    }
+
     // Restrictions on the attributes of the entity
     static constraints = {
+        title blank: false, unique: true, maxSize: 50
+        description blank: false, maxSize: 500
+    }
+
+    // It modifies the id type
+    static mapping = {
+        id(generator: "uuid2", type: "uuid-binary", length: 16)
     }
 }
