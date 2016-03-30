@@ -17,22 +17,34 @@ var DomainAnswerValidation = function () {
                 focusInvalid: false, // Do not focus the last invalid input
                 ignore: "",  // Validate all fields including form hidden input
                 rules: {
+                    titleAnswerKey: {
+                        required: true,
+                        maxlength: 50
+                    },
                     description: {
                         required: true,
-                        maxlength: 300
+                        maxlength: 400
                     },
                     score: {
-                        required: true
+                        required: true,
+                        min: 0,
+                        max: 5
                     }
                 },
 
                 messages: {
+                    titleAnswerKey: {
+                        required: _requiredField,
+                        maxlength: _maxlengthField
+                    },
                     description: {
                         required: _requiredField,
                         maxlength: _maxlengthField
                     },
                     score: {
-                        required: _requiredField
+                        required: _requiredField,
+                        min: _minField,
+                        max: _maxField
                     }
                 },
 
@@ -63,9 +75,74 @@ var DomainAnswerValidation = function () {
     };
 
     /**
+     * It checks the answer key availability
+     */
+    var handlerAnswerKeyAvailabilityChecker = function () {
+
+        var answerKey = $('#titleAnswerKey');
+        var keyAnswerBlock = $('.keyAnswer-block');
+
+        $("#keyAnswer-checker").click(function (e) {
+
+            // Empty key
+            if (answerKey.val() === "") {
+                answerKey.closest('.form-group').removeClass('has-success').addClass('has-error');
+
+                keyAnswerBlock.html(_checkerAnswerKeyBlockInfo);
+                keyAnswerBlock.addClass('availibility-error');
+                return;
+            }
+
+            var btn = $(this);
+
+            btn.attr('disabled', true);
+
+            answerKey.attr("readonly", true).
+            attr("disabled", true).
+            addClass("spinner");
+
+            $.post(_checkKeyAnswerAvailibility, {
+
+                // Key value
+                answerKey: answerKey.val()
+
+            }, function (res) {
+                btn.attr('disabled', false);
+
+                answerKey.attr("readonly", false).
+                attr("disabled", false).
+                removeClass("spinner");
+
+                if (res.status == 'OK') {
+                    answerKey.closest('.form-group').removeClass('has-error').addClass('has-success');
+
+                    keyAnswerBlock.html(res.message);
+                    keyAnswerBlock.removeClass('availibility-error');
+                    keyAnswerBlock.addClass('availibility-success');
+
+                } else {
+                    answerKey.closest('.form-group').removeClass('has-success').addClass('has-error');
+
+                    keyAnswerBlock.html(res.message);
+                    keyAnswerBlock.addClass('availibility-error');
+                }
+            }, 'json');
+
+        });
+    };
+
+    /**
      * It handles the max length of the fields
      */
     var handlerMaxlength = function() {
+
+            /* Answer key field */
+            $('#titleAnswerKey').maxlength({
+                limitReachedClass: "label label-danger",
+                threshold: 20,
+                placement: 'top',
+                validate: true
+            });
 
             /* Description field */
             $('#description').maxlength({
@@ -80,6 +157,7 @@ var DomainAnswerValidation = function () {
         // Main function to initiate the module
         init: function () {
             handlerAnswerValidation();
+            handlerAnswerKeyAvailabilityChecker();
             handlerMaxlength();
         }
     };

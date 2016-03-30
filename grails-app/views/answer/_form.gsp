@@ -1,50 +1,103 @@
 <%@ page import="Test.Answer" %>
-<div class="form-body">
-	<!-- Row -->
-	<div class="row">
-		<!-- Description -->
-		<div class="col-md-12">
-			<div class="form-group ${hasErrors(bean: answerInstance, field: 'description', 'error')}">
-				<label for="description" class="control-label">
-					<g:message code="answer.description.label" default="Description"/>
-					<span class="required">*</span>
-				</label>
+<div class="form-body form-subtitle">
+    <!-- Row -->
+    <div class="row">
+        <!-- Answer key -->
+        <div class="col-md-6">
+            <div class="form-group group-subtitle ${hasErrors(bean: answerInstance, field: 'titleAnswerKey', 'error')}">
+                <label for="titleAnswerKey" class="control-label">
+                    <h5 class="sbold">
+                        <g:message code="answer.titleAnswerKey.label" default="Key"/>
+                        <span class="required">*</span>
+                    </h5>
+                    <h5 class="thin"> Identificación interna. No será mostrada al usuario normal. </h5>
+                </label>
 
-				<div class="input-icon right">
-					<i class="fa"></i>
-					<g:textArea name="description" class="form-control autosizeme" rows="1" maxlength="300" value="${answerInstance?.description}"/>
-				</div>
-			</div>
-		</div>
-	</div> <!-- /.Row -->
-
-	<!-- Row -->
-	<div class="row space-secondRow">
-		<!-- Score -->
-		<div class="col-md-6">
-			<div class="form-group ${hasErrors(bean: answerInstance, field: 'score', 'error')}">
-				<label for="score" class="control-label">
-					<g:message code="answer.score.label" default="Score"/>
-					<span class="required"> * </span>
-				</label>
-				<div class="input-icon right">
-					<i class="fa"></i>
-                    <g:field name="score" type="number" class="form-control" value="${answerInstance.score}"/>
+                <div class="input-group input-icon right">
+                    <i class="fa icon-offset"></i>
+                    <g:textField name="titleAnswerKey" class="form-control" maxlength="50" value="${answerInstance?.titleAnswerKey}"/>
+                    <span class="input-group-btn">
+                        <a href="javascript:;" class="btn green-dark" id="keyAnswer-checker">
+                            <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
+                        </a>
+                    </span>
                 </div>
-			</div>
-		</div>
+            </div>
+            <div class="help-block keyAnswer-block">
+                <h5>
+                    <g:message code="layouts.main_auth_admin.body.content.answer.create.checker.block.info.key" default="Type a key of answer and check its availability."/>
+                </h5>
+            </div>
+        </div>
 
-		<!-- Correct -->
-		<div class="col-md-6 space-checkboxCol">
+        <!-- Description -->
+        <div class="col-md-6 space-betweenCol">
+            <div class="form-group ${hasErrors(bean: answerInstance, field: 'description', 'error')}">
+                <label for="description" class="control-label">
+                    <h5 class="sbold">
+                        <g:message code="answer.description.label" default="Description"/>
+                        <span class="required">*</span>
+                    </h5>
+                </label>
+
+                <div class="input-icon right">
+                    <i class="fa"></i>
+                    <g:textArea name="description" class="form-control autosizeme" cols="40" rows="1" maxlength="400" value="${answerInstance?.description}"/>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.Row -->
+
+    <!-- Row -->
+    <div class="row space-secondRow">
+        <!-- Correct -->
+        <div class="col-md-6">
             <div class="${hasErrors(bean: answerInstance, field: 'correct', 'error')}">
-                <div class="input-group">
+                <label for="correct" class="control-label">
+                    <h5 class="sbold">
+                        <g:message code="layouts.main_auth_admin.body.content.answer.correctAnswer.label" default="Indicate whether the answer is correct"/>
+                    </h5>
+                </label>
+                <div class="input-group inputGroup-checkBox">
                     <div class="icheck-list">
-                        <g:checkBox name="correct" value="${answerInstance?.correct}" class="icheck" data-checkbox="icheckbox_line-green" data-label="${g.message(code:'answer.correct.label', default:'Solution')}"/>
+                        <g:checkBox name="correct" value="${answerInstance?.correct}" class="icheck" data-checkbox="icheckbox_line-green" data-label="${g.message(code: 'answer.correct.label', default: 'Correct')}"/>
                     </div>
                 </div>
             </div>
-
-         <!-- TODO Falta la relación. Generar el form de nuevo --!>
         </div>
-	</div>
+
+        <!-- Score -->
+        <div class="col-md-6 space-betweenCol">
+            <div class="form-group ${hasErrors(bean: answerInstance, field: 'score', 'error')}">
+                <label for="score" class="control-label">
+                    <h5 class="sbold">
+                        <g:message code="answer.score.label" default="Score"/>
+                        <span class="required">*</span>
+                    </h5>
+                </label>
+
+                <div class="input-icon right">
+                    <i class="fa"></i>
+
+                    <select class="bs-select form-control input-small" data-style="purple">
+                        <option>Mustard</option>
+                        <option>Ketchup</option>
+                        <option>Relish</option>
+                    </select>
+
+                    <g:field name="score" type="number" class="form-control" value="${answerInstance.score}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TODO Relation -->
+    <div class="fieldcontain ${hasErrors(bean: answerInstance, field: 'questionsAnswer', 'error')} ">
+        <label for="questionsAnswer">
+            <h5 class="sbold">
+                <g:message code="answer.questionsAnswer.label" default="Questions Answer"/>
+            </h5>
+        </label>
+    </div>
+
 </div> <!-- /.Form-body -->

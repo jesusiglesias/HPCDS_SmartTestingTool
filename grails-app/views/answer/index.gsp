@@ -123,7 +123,6 @@
                                         </g:link>
                                     </div>
                                 </div>
-
                                 <div class="tools"></div>
                             </div>
 
@@ -131,9 +130,10 @@
                                 <table class="table table-striped table-bordered table-hover" id="entity-table">
                                     <thead>
                                         <tr>
+                                            <td><g:message code="answer.titleAnswerKey.label" default="Key"/></td>
                                             <td><g:message code="answer.description.label" default="Description"/></td>
                                             <td><g:message code="answer.score.label" default="Score"/></td>
-                                            <td><g:message code="answer.correct.label" default="Correct"/></td>
+                                            <td><g:message code="answer.correctType.label" default="Answer type"/></td>
                                             <td><g:message code="answer.questionAnswerCount.label" default="Number of questions"/></td>
                                             <td><g:message code="layouts.main_auth_admin.body.content.answer.questionsAnswer.display" default="Show questions"/></td>
                                         </tr>
@@ -141,7 +141,8 @@
                                     <tbody>
                                         <g:each in="${answerInstanceList}" status="i" var="answerInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                                <td><g:link controller="answer" action="edit" id="${answerInstance.id}">${fieldValue(bean: answerInstance, field: "description")}</g:link></td>
+                                                <td><g:link controller="answer" action="edit" id="${answerInstance.id}">${fieldValue(bean: answerInstance, field: "titleAnswerKey")}</g:link></td>
+                                                <td>${fieldValue(bean: answerInstance, field: "description")}</td>
                                                 <td>${fieldValue(bean: answerInstance, field: "score")}</td>
                                                 <td>
                                                     <g:if test="${answerInstance.correct}">
@@ -150,12 +151,11 @@
                                                     <g:else>
                                                         <span class="label label-sm label-danger">
                                                     </g:else>
-                                                    <!-- TODO -->
                                                     <g:formatBoolean boolean="${answerInstance.correct}" true="${g.message(code: "answer.correct.label.true", default: "Correct")}" false="${g.message(code: "answer.correct.label.false", default: "Incorrect")}"/>
-                                                        </span>
+                                                </span>
                                                 </td>
                                                 <td>${fieldValue(bean: answerInstance, field: "questionAnswerCount")}</td>
-                                                <td><g:link uri="/question" params="[questionSearch: answerInstance.description]"><g:message code="answer.questionsAnswer.label" default="Questions"/></g:link></td>
+                                                <td><g:link uri="/question" params="[questionSearch: answerInstance.titleAnswerKey]"><g:message code="answer.questionsAnswer.label" default="Questions"/></g:link></td>
                                             </tr>
                                         </g:each>
                                     </tbody>

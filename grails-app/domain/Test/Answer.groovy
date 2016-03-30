@@ -9,8 +9,9 @@ class Answer {
     // Attributes
     boolean correct
     String description
-    Integer score
     Integer questionAnswerCount = 0
+    Integer score
+    String titleAnswerKey
 
     static transients = ['questionAnswerCount']
 
@@ -29,8 +30,9 @@ class Answer {
 
     // Restrictions on the attributes of the entity
     static constraints = {
-        description blank: false, maxSize: 300
-        score blank: false // TODO
+        description blank: false, maxSize: 400
+        score blank: false, min: 0, max: 5
+        titleAnswerKey blank: false, unique: true, maxSize: 50
     }
 
     // It modifies the id type

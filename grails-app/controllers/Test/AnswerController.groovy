@@ -1,5 +1,6 @@
 package Test
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -71,20 +72,20 @@ class AnswerController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.answerMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.id])
+                    flash.answerMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
                     redirect view: 'index'
                 }
                 '*' { respond answerInstance, [status: CREATED] }
             }
         } catch (Exception exception) {
-            log.error("AnswerController():save():Exception:Answer:${answerInstance.id}:${exception}")
+            log.error("AnswerController():save():Exception:Answer:${answerInstance.titleAnswerKey}:${exception}")
 
             // Roll back in database
             transactionStatus.setRollbackOnly()
 
             request.withFormat {
                 form multipartForm {
-                    flash.answerErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.id])
+                    flash.answerErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
                     render view: "create", model: [answerInstance: answerInstance]
                 }
             }
@@ -126,7 +127,7 @@ class AnswerController {
 
                 // Clear the list of errors
                 answerInstance.clearErrors()
-                answerInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [answerInstance.id] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+                answerInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [answerInstance.titleAnswerKey] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
 
                 respond answerInstance.errors, view:'edit'
                 return
@@ -146,20 +147,20 @@ class AnswerController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.answerMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.id])
+                    flash.answerMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
                     redirect view: 'index'
                 }
                 '*' { respond answerInstance, [status: OK] }
             }
         } catch (Exception exception) {
-            log.error("AnswerController():update():Exception:Answer:${answerInstance.id}:${exception}")
+            log.error("AnswerController():update():Exception:Answer:${answerInstance.titleAnswerKey}:${exception}")
 
             // Roll back in database
             transactionStatus.setRollbackOnly()
 
             request.withFormat {
                 form multipartForm {
-                    flash.answerErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.id])
+                    flash.answerErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
                     render view: "edit", model: [answerInstance: answerInstance]
                 }
             }
@@ -187,17 +188,17 @@ class AnswerController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.answerMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.id])
+                    flash.answerMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
             }
         } catch (DataIntegrityViolationException exception) {
-            log.error("AnswerController():delete():DataIntegrityViolationException:Answer:${answerInstance.id}:${exception}")
+            log.error("AnswerController():delete():DataIntegrityViolationException:Answer:${answerInstance.titleAnswerKey}:${exception}")
 
             request.withFormat {
                 form multipartForm {
-                    flash.answerErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.id])
+                    flash.answerErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
@@ -219,4 +220,26 @@ class AnswerController {
             '*' { render status: NOT_FOUND }
         }
     }
+
+    /**
+     * It checks the answer key availability.
+     */
+    def checkKeyAnswerAvailibility () {
+
+        def responseData
+
+        if (Answer.countByTitleAnswerKey(params.answerKey)) { // Key found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'answer.checkKeyAvailibility.notAvailable', default:'Key of answerr is not available. Please, choose another one.')
+            ]
+        } else { // Key not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'answer.checkKeyAvailibility.available', default:'Key of answer available.')
+            ]
+        }
+        render responseData as JSON
+    }
 }
+

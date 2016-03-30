@@ -40,11 +40,14 @@ var DatatableAnswerList = function () {
             // Row selectable
             select: false,
 
+            // Auto width
+            "autoWidth": true,
+
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3]} },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3]} },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _answerFile, title: _answerTableTitle, exportOptions: {columns: [0, 1, 2, 3]} },
-                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _answerFile, exportOptions: {columns: [0, 1, 2, 3]} },
+                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _answerFile, title: _answerTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _answerFile, exportOptions: {columns: [0, 1, 2, 3, 4]} },
                 { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
             ],
@@ -52,8 +55,6 @@ var DatatableAnswerList = function () {
             // Pagination type
             "pagingType": "bootstrap_full_number",
 
-            // Disable fixed width and enable fluid table
-            "autoWidth": false,
 
             // Setup responsive extension
             responsive: true,
@@ -82,7 +83,7 @@ var DatatableAnswerList = function () {
             ],
 
             // Set the initial value
-            "pageLength": 50,
+            "pageLength": 20,
 
             // Horizontal scrollable datatable
             "dom": "<'row' <'col-md-12'B>><'row'<'col-sm-6 col-xs-12'l><'col-sm-6 col-xs-12'f>r><'table-scrollable't><'row'<'col-sm-5 col-xs-12'i><'col-sm-7 col-xs-12'p>>"
