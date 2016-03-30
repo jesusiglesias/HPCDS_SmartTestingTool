@@ -40,7 +40,7 @@ input:-webkit-autofill:active {
 }
 
 .space-secondRow {
-    margin: 35px -15px 10px -15px;
+    margin: 30px -15px 10px -15px;
 }
 
 .space-imageRow {
@@ -51,7 +51,19 @@ input:-webkit-autofill:active {
     margin-top: 10px;
 }
 
-/* Icon offset */
+.inputGroup-checkBox {
+    top: -15px;
+}
+
+.form-subtitle{
+    margin-top: 25px;
+}
+
+.group-subtitle {
+    margin-top: -25px;
+}
+
+    /* Icon offset */
 .icon-offset {
     margin: 11px 125px 4px 10px !important;
 }
@@ -441,6 +453,14 @@ input:-webkit-autofill:active {
 /* Max-width: 480px */
 @media (max-width: 480px) {
 
+    .form-subtitle{
+        margin-top: 10px;
+    }
+
+    .group-subtitle {
+        margin-top: -15px;
+    }
+
     /* Copyright */
     .copyright-admin {
         font-size: 13px;
@@ -454,7 +474,7 @@ input:-webkit-autofill:active {
 
     /* Position confirmation delete button */
     #delete-confirm-popover {
-        margin: 0 0 35px 0;
+        margin: 5px 0 35px 0;
     }
 
     /* Entity message */
@@ -509,6 +529,14 @@ input:-webkit-autofill:active {
     #create-domain,
     #edit-domain {
         margin: 0 7px 0 0;
+    }
+
+    .form-subtitle{
+        margin-top: 0;
+    }
+
+    .group-subtitle {
+        margin-top: 0;
     }
 
 }

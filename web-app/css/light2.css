@@ -192,6 +192,7 @@ TODO
 /* Sidebar-menu icon */
 .page-sidebar .page-sidebar-menu .sub-menu > li > a > i {
     color: #608E73;
+    margin-right: 5px;
 }
 
 /* TODO
@@ -369,12 +370,6 @@ TODO
     background: #54dac7;
 }
 
-/* Page sidebar */
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu,
-.page-sidebar .page-sidebar-menu {
-    /* Sidebar search */
-}
-
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a,
 .page-sidebar .page-sidebar-menu li > a {
     font-weight: normal;
@@ -382,10 +377,11 @@ TODO
 
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li .sub-menu li > a,
 .page-sidebar .page-sidebar-menu li .sub-menu li > a {
-    font-weight: normal;
+    font-weight: 400;
 }
 
 @media (max-width: 991px) {
+
     /* 991px */
     .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a,
     .page-sidebar .page-sidebar-menu > li > a {

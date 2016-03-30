@@ -11,7 +11,7 @@ class Question {
     // Attributes
     String description
     DifficultyLevel difficultyLevel
-    String title
+    String titleQuestionKey
     Integer answerCount = 0
 
     static transients = ['answerCount']
@@ -31,8 +31,8 @@ class Question {
 
     // Restrictions on the attributes of the entity
     static constraints = {
-        title blank: false, unique: true, maxSize: 50
-        description blank: false, maxSize: 500
+        titleQuestionKey blank: false, unique: true, maxSize: 50
+        description blank: false, maxSize: 800
     }
 
     // It modifies the id type

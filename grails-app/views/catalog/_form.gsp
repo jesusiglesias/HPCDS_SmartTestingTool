@@ -6,8 +6,10 @@
         <div class="col-md-12">
             <div class="form-group ${hasErrors(bean: catalogInstance, field: 'name', 'error')}">
                 <label for="name" class="control-label">
-                    <g:message code="catalog.name.label" default="Name"/>
-                    <span class="required">*</span>
+                    <h5 class="sbold">
+                        <g:message code="catalog.name.label" default="Name"/>
+                        <span class="required">*</span>
+                    </h5>
                 </label>
 
                 <div class="input-group input-icon right">
@@ -22,7 +24,9 @@
             </div>
 
             <div class="help-block catalog-block">
-                <g:message code="layouts.main_auth_admin.body.content.catalog.create.checker.block.info.name" default="Type a name of catalog and check its availability."/>
+                <h5>
+                    <g:message code="layouts.main_auth_admin.body.content.catalog.create.checker.block.info.name" default="Type a name of catalog and check its availability."/>
+                </h5>
             </div>
         </div>
     </div> <!-- /.Row -->
@@ -33,9 +37,11 @@
         <div class="col-md-6">
             <div class="form-group ${hasErrors(bean: catalogInstance, field: 'questions', 'error')}">
                 <label for="questions" class="control-label">
-                    <g:message code="catalog.questions.label" default="Questions"/>
-                    <!-- TODO -->
-                    <span class="required"> * </span>
+                    <h5 class="sbold">
+                        <g:message code="catalog.questions.label" default="Questions"/>
+                        <!-- TODO -->
+                        <span class="required">*</span>
+                    </h5>
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
@@ -49,7 +55,9 @@
         <div class="col-md-6 space-betweenCol">
             <div class="form-group ${hasErrors(bean: catalogInstance, field: 'testCatalogs', 'error')}">
                 <label for="tests" class="control-label">
-                    <g:message code="catalog.testCatalogs.label" default="Test"/>
+                    <h5 class="sbold">
+                        <g:message code="catalog.testCatalogs.label" default="Test"/>
+                    </h5>
                 </label>
 
                 <ul class="one-to-many">
