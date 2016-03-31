@@ -10,7 +10,7 @@
                         <g:message code="answer.titleAnswerKey.label" default="Key"/>
                         <span class="required">*</span>
                     </h5>
-                    <h5 class="thin"> Identificación interna. No será mostrada al usuario normal. </h5>
+                    <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.answer.titleAnswerKey.info.label" default="Internal ID. It is not shown to the normal user."/></h5>
                 </label>
 
                 <div class="input-group input-icon right">
@@ -74,30 +74,21 @@
                         <g:message code="answer.score.label" default="Score"/>
                         <span class="required">*</span>
                     </h5>
+                    <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.answer.score.select.info.label" default="Active only when the answer is correct."/></h5>
                 </label>
-
-                <div class="input-icon right">
-                    <i class="fa"></i>
-
-                    <select class="bs-select form-control input-small" data-style="purple">
-                        <option>Mustard</option>
-                        <option>Ketchup</option>
-                        <option>Relish</option>
-                    </select>
-
-                    <g:field name="score" type="number" class="form-control" value="${answerInstance.score}"/>
-                </div>
+                <g:select name="score" from="${1..5}" value="${answerInstance?.score}" disabled="${!answerInstance?.correct}" noSelection="${['': "${g.message(code: 'layouts.main_auth_admin.body.content.answer.score.select.label', default: 'Select a score')}"]}"
+                          class="bs-select form-control select-score" data-style="btn-success" keys=""/>
             </div>
         </div>
     </div>
 
-    <!-- TODO Relation -->
-    <div class="fieldcontain ${hasErrors(bean: answerInstance, field: 'questionsAnswer', 'error')} ">
-        <label for="questionsAnswer">
-            <h5 class="sbold">
-                <g:message code="answer.questionsAnswer.label" default="Questions Answer"/>
-            </h5>
-        </label>
-    </div>
+        <!-- TODO Relation -->
+        <div class="fieldcontain ${hasErrors(bean: answerInstance, field: 'questionsAnswer', 'error')} ">
+            <label for="questionsAnswer">
+                <h5 class="sbold">
+                    <g:message code="answer.questionsAnswer.label" default="Questions Answer"/>
+                </h5>
+            </label>
+        </div>
 
 </div> <!-- /.Form-body -->

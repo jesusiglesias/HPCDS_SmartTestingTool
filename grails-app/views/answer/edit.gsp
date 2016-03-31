@@ -6,6 +6,7 @@
 	<meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title.answer" default="STT | Answers management"/></title>
 	<link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
+	<link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
 
 	<script>
 		// Variables to use in script
@@ -85,7 +86,7 @@
 				<!-- Delete button -->
 				<g:form url="[resource:answerInstance, controller:'answer', action:'delete']" method="DELETE" class="form-delete">
 					<div class="btn-group">
-						<button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="top" data-popout="true" data-singleton="true"
+						<button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
 								data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
 								data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
 								data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
@@ -120,6 +121,7 @@
 	<g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
 	<g:javascript src="confirmation/custom-delete.js"/>
 	<g:javascript src="iCheck/icheck.min.js"/>
+    <g:javascript src="select/bootstrap-select.min.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="autosize/autosize.min.js"/>
     <g:javascript src="domain-validation/answer-validation.js"/>

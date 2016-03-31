@@ -61,6 +61,12 @@ class AnswerController {
             return
         }
 
+        // If answer is incorrect, the score is 0
+        if (!answerInstance.correct) {
+            answerInstance.score = 0;
+            answerInstance.save()
+        }
+
         if (answerInstance.hasErrors()) {
             respond answerInstance.errors, view: 'create'
             return
@@ -114,6 +120,12 @@ class AnswerController {
         if (answerInstance == null) {
             notFound()
             return
+        }
+
+        // If answer is incorrect, the score is 0
+        if (!answerInstance.correct) {
+            answerInstance.score = 0;
+            answerInstance.save()
         }
 
         // It checks concurrent updates

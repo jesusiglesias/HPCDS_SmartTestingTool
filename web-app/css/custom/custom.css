@@ -63,7 +63,7 @@ input:-webkit-autofill:active {
     margin-top: -25px;
 }
 
-    /* Icon offset */
+/* Icon offset */
 .icon-offset {
     margin: 11px 125px 4px 10px !important;
 }
@@ -279,8 +279,6 @@ input:-webkit-autofill:active {
     opacity: .5;
 }
 .back-to-top:hover {
-    /* TODO
-    background-color: #337059; */
     background-color: #343434;
     opacity: 1;
 }

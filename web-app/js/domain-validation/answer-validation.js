@@ -153,15 +153,51 @@ var DomainAnswerValidation = function () {
             });
     };
 
+    /**
+     * It handles the select
+     */
+    var handlerBootstrapSelect = function() {
+
+        $('.bs-select').selectpicker({
+            iconBase: 'fa',
+            tickIcon: 'fa-check'
+        });
+    };
+
+    /**
+     * It handles the state of select depending on checkbox
+     */
+    var handlerStateSelect = function() {
+
+        var checkboxCorrect = $('#correct');
+        var selectScore = $('.select-score');
+
+        // Checkbox checked
+        checkboxCorrect.on('ifChecked', function(){
+            selectScore.removeAttr("disabled", false);
+            selectScore.find("div").removeClass("disabled");
+            selectScore.find("button").removeClass("disabled");
+
+        });
+
+        // Checkbox unchecked
+        checkboxCorrect.on('ifUnchecked', function(){
+            selectScore.attr("disabled", true);
+            selectScore.find("div").addClass("disabled");
+            selectScore.find("button").addClass("disabled");
+        });
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
             handlerAnswerValidation();
             handlerAnswerKeyAvailabilityChecker();
             handlerMaxlength();
+            handlerBootstrapSelect();
+            handlerStateSelect();
         }
     };
-
 }();
 
 jQuery(document).ready(function() {
