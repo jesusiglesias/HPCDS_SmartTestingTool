@@ -91,7 +91,7 @@
                 <g:if test="${flash.answerMessage}">
                     <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status">${raw(flash.answerMessage)}</span>
+                        <span class="xthin" role="status">${raw(flash.answerMessage)}</span>
                     </div>
 
                     <g:javascript>
@@ -102,7 +102,7 @@
                 <g:if test="${flash.answerErrorMessage}">
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status">${raw(flash.answerErrorMessage)}</span>
+                        <span class="xthin" role="status">${raw(flash.answerErrorMessage)}</span>
                     </div>
 
                     <g:javascript>

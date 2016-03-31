@@ -58,7 +58,7 @@
                 <g:if test="${flash.topicErrorMessage}">
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status">${raw(flash.topicErrorMessage)}</span>
+                        <span class="xthin" role="status">${raw(flash.topicErrorMessage)}</span>
                     </div>
 
                     <g:javascript>
@@ -71,7 +71,7 @@
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
                         <g:eachError bean="${topicInstance}" var="error">
-                            <p role="status"
+                            <p role="status" class="xthin"
                                <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/>
                             </p>
                         </g:eachError>
