@@ -9,15 +9,16 @@ class Question {
 
     UUID id
     // Attributes
+    Integer answerCount = 0
+    Integer catalogCount = 0
     String description
     DifficultyLevel difficultyLevel
     String titleQuestionKey
-    Integer answerCount = 0
 
-    static transients = ['answerCount']
+    static transients = ['answerCount', 'catalogCount']
 
     // Relations
-    static hasMany = [catalogs:Catalog, answers:Answer]
+    static hasMany = [answers:Answer, catalogs:Catalog]
     static belongsTo = Catalog
 
     // It obtains the number of answers that contains the question
@@ -25,14 +26,21 @@ class Question {
         answers?.size () ?: 0
     }
 
+    // It obtains the number of catalogs that contains the question
+    Integer getCatalogsCount () {
+        catalogs?.size () ?: 0
+    }
+
     void beforeUpdate () {
         answerCount = getAnswersCount ()
+        catalogCount = getCatalogsCount ()
     }
 
     // Restrictions on the attributes of the entity
     static constraints = {
-        titleQuestionKey blank: false, unique: true, maxSize: 50
         description blank: false, maxSize: 800
+        difficultyLevel blank: false, inList: [DifficultyLevel.EASY, DifficultyLevel.MEDIUM, DifficultyLevel.DIFFICULT]
+        titleQuestionKey blank: false, unique: true, maxSize: 50
     }
 
     // It modifies the id type

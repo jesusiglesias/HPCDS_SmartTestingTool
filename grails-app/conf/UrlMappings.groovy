@@ -7,8 +7,8 @@
  */
 class UrlMappings {
 
-	static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
+    static mappings = {
+        "/$controller/$action?/$id?(.$format)?" {
             constraints {
                 // apply constraints here
             }
@@ -39,8 +39,14 @@ class UrlMappings {
         // Catalog
         "/catalog/create-error"(controller: 'catalog', action: 'save')
         "/catalog/edit-error/$id?(.$format)?"(controller: 'catalog', action: 'update')
+        // Question
+        "/question/create-error"(controller: 'question', action: 'save')
+        "/question/edit-error/$id?(.$format)?"(controller: 'question', action: 'update')
+        // Answer
+        "/answer/create-error"(controller: 'answer', action: 'save')
+        "/answer/edit-error/$id?(.$format)?"(controller: 'answer', action: 'update')
 
-        /****************************/
+        /** **************************/
         // TODO
         // Provisional
         "/index"(view: 'index')
@@ -56,38 +62,38 @@ class UrlMappings {
 
         /* Login controller
         ======================================================*/
-        "/reauthenticate" (controller: 'login', action: 'full')
+        "/reauthenticate"(controller: 'login', action: 'full')
 
         /* Custom general tasks user
         ======================================================*/
         // LoggedIn
-        "/login/loggedIn" (controller: 'customTasksUser', action: 'loggedIn')
+        "/login/loggedIn"(controller: 'customTasksUser', action: 'loggedIn')
         // Error: no role
-        "/noRole" (view: 'noRole')
+        "/noRole"(view: 'noRole')
         // Concurrent sessions
-        "/concurrentSession" (controller: 'customTasksUser', action: 'invalidSession')
+        "/concurrentSession"(controller: 'customTasksUser', action: 'invalidSession')
         // Fail authentication
-        "/authFail" (controller: 'customTasksUser', action: 'authFail')
+        "/authFail"(controller: 'customTasksUser', action: 'authFail')
         // Switch Admin to User
-        "/switchFail" (controller: 'customTasksUser', action: 'switchFail')
+        "/switchFail"(controller: 'customTasksUser', action: 'switchFail')
         // Restore password
-        "/forgotPassword" (controller: 'customTasksUser', action: 'restorePassword')
+        "/forgotPassword"(controller: 'customTasksUser', action: 'restorePassword')
         // Change password
-        "/newPassword" (controller: 'customTasksUser', action: 'changePass')
+        "/newPassword"(controller: 'customTasksUser', action: 'changePass')
         // Register normal user
-        "/register" (controller: 'customTasksUser', action: 'registerAccount')
+        "/register"(controller: 'customTasksUser', action: 'registerAccount')
 
         /* Custom general tasks admin (back-end)
         ======================================================*/
         // Reload log config
-        "/reloadLogConfig" (controller: 'customTasksBackend', action: 'reloadLogConfig')
-        "/dashboard" (controller: 'customTasksBackend', action: 'dashboard')
+        "/reloadLogConfig"(controller: 'customTasksBackend', action: 'reloadLogConfig')
+        "/dashboard"(controller: 'customTasksBackend', action: 'dashboard')
 
         /* Information files
         ======================================================*/
         // Humans.txt
-        "/humans.txt" (view: "extraInformation/humans")
+        "/humans.txt"(view: "extraInformation/humans")
         // Robots.txt
-        "/robots.txt" (view: "extraInformation/robots")
-	}
+        "/robots.txt"(view: "extraInformation/robots")
+    }
 }

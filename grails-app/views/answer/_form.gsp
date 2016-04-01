@@ -77,7 +77,7 @@
                     <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.answer.score.select.info.label" default="Active only when the answer is correct."/></h5>
                 </label>
                 <g:select name="score" from="${1..5}" value="${answerInstance?.score}" disabled="${!answerInstance?.correct}" noSelection="${['': "${g.message(code: 'layouts.main_auth_admin.body.content.answer.score.select.label', default: 'Select a score')}"]}"
-                          class="bs-select form-control select-score" data-style="btn-success" keys=""/>
+                          class="bs-select form-control select-score" data-style="btn-success"/>
             </div>
         </div>
     </div>

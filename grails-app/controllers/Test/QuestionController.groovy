@@ -1,5 +1,6 @@
 package Test
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -71,20 +72,20 @@ class QuestionController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.questionMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    flash.questionMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'question.label', default: 'Question'), questionInstance.titleQuestionKey])
                     redirect view: 'index'
                 }
                 '*' { respond questionInstance, [status: CREATED] }
             }
         } catch (Exception exception) {
-            log.error("QuestionController():save():Exception:Question:${questionInstance.title}:${exception}")
+            log.error("QuestionController():save():Exception:Question:${questionInstance.titleQuestionKey}:${exception}")
 
             // Roll back in database
             transactionStatus.setRollbackOnly()
 
             request.withFormat {
                 form multipartForm {
-                    flash.questionErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    flash.questionErrorMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'question.label', default: 'Question'), questionInstance.titleQuestionKey])
                     render view: "create", model: [questionInstance: questionInstance]
                 }
             }
@@ -126,7 +127,7 @@ class QuestionController {
 
                 // Clear the list of errors
                 questionInstance.clearErrors()
-                questionInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [questionInstance.title] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
+                questionInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [questionInstance.titleQuestionKey] as Object[], "Another user has updated the <strong>{0}</strong> instance while you were editing.")
 
                 respond questionInstance.errors, view:'edit'
                 return
@@ -146,20 +147,20 @@ class QuestionController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.questionMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    flash.questionMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'question.label', default: 'Question'), questionInstance.titleQuestionKey])
                     redirect view: 'index'
                 }
                 '*' { respond questionInstance, [status: OK] }
             }
         } catch (Exception exception) {
-            log.error("QuestionController():update():Exception:Question:${questionInstance.title}:${exception}")
+            log.error("QuestionController():update():Exception:Question:${questionInstance.titleQuestionKey}:${exception}")
 
             // Roll back in database
             transactionStatus.setRollbackOnly()
 
             request.withFormat {
                 form multipartForm {
-                    flash.questionErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    flash.questionErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'question.label', default: 'Question'), questionInstance.titleQuestionKey])
                     render view: "edit", model: [questionInstance: questionInstance]
                 }
             }
@@ -187,17 +188,17 @@ class QuestionController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.questionMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    flash.questionMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'question.label', default: 'Question'), questionInstance.titleQuestionKey])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
             }
         } catch (DataIntegrityViolationException exception) {
-            log.error("QuestionController():delete():DataIntegrityViolationException:Question:${questionInstance.title}:${exception}")
+            log.error("QuestionController():delete():DataIntegrityViolationException:Question:${questionInstance.titleQuestionKey}:${exception}")
 
             request.withFormat {
                 form multipartForm {
-                    flash.questionErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'question.label', default: 'Question'), questionInstance.title])
+                    flash.questionErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'question.label', default: 'Question'), questionInstance.titleQuestionKey])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
@@ -218,5 +219,26 @@ class QuestionController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    /**
+     * It checks the question key availability.
+     */
+    def checkKeyQuestionAvailibility () {
+
+        def responseData
+
+        if (Question.countBytitleQuestionKey(params.questionKey)) { // Key found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'question.checkKeyAvailibility.notAvailable', default:'Key of question is not available. Please, choose another one.')
+            ]
+        } else { // Key not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'question.checkKeyAvailibility.available', default:'Key of question available.')
+            ]
+        }
+        render responseData as JSON
     }
 }

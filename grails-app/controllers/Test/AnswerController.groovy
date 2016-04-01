@@ -243,7 +243,7 @@ class AnswerController {
         if (Answer.countByTitleAnswerKey(params.answerKey)) { // Key found
             responseData = [
                     'status': "ERROR",
-                    'message': g.message(code: 'answer.checkKeyAvailibility.notAvailable', default:'Key of answerr is not available. Please, choose another one.')
+                    'message': g.message(code: 'answer.checkKeyAvailibility.notAvailable', default:'Key of answer is not available. Please, choose another one.')
             ]
         } else { // Key not found
             responseData = [
