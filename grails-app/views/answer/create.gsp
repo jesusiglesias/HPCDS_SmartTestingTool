@@ -15,6 +15,8 @@
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
         var _minField = '${g.message(code:'default.validation.min', default:'Please, enter a value greater or equal to {0}.')}';
         var _maxField = '${g.message(code:'default.validation.max', default:'Please, enter a value less than or equal to {0}.')}';
+        var _point = '${g.message(code:'layouts.main_auth_admin.body.content.answer.subtext.point', default:'point')}';
+        var _points = '${g.message(code:'layouts.main_auth_admin.body.content.answer.subtext.points', default:'points')}';
 
         // Handler auto close alert
         function createAutoClosingAlert(selector) {

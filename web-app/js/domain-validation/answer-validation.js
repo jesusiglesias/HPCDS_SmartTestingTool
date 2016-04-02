@@ -82,7 +82,7 @@ var DomainAnswerValidation = function () {
         var answerKey = $('#titleAnswerKey');
         var keyAnswerBlock = $('.keyAnswer-block');
 
-        $("#keyAnswer-checker").click(function (e) {
+        $("#keyAnswer-checker").click(function () {
 
             // Empty key
             if (answerKey.val() === "") {
@@ -157,6 +157,13 @@ var DomainAnswerValidation = function () {
      * It handles the select
      */
     var handlerBootstrapSelect = function() {
+
+        // It adds the subtext
+        $(".select-score option[value=\"1\"]").attr("data-subtext", _point);
+        $(".select-score option[value=\"2\"]").attr("data-subtext", _points);
+        $(".select-score option[value=\"3\"]").attr("data-subtext", _points);
+        $(".select-score option[value=\"4\"]").attr("data-subtext", _points);
+        $(".select-score option[value=\"5\"]").attr("data-subtext", _points);
 
         $('.bs-select').selectpicker({
             iconBase: 'fa',
