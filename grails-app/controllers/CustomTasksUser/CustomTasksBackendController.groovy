@@ -3,6 +3,8 @@ package CustomTasksUser
 import Security.SecRole
 import Security.SecUser
 import Security.SecUserSecRole
+import Test.Test
+import User.Evaluation
 import grails.util.Environment
 import grails.util.Holders
 import org.codehaus.groovy.grails.core.io.ResourceLocator
@@ -26,11 +28,17 @@ class CustomTasksBackendController {
     def dashboard (){
         log.debug("CustomTasksBackendController:dashboard()")
 
-        // Obtain number of normal users
+        // Obtaining number of normal users
         def role = SecRole.findByAuthority("ROLE_USER")
         def normalUsers = SecUserSecRole.findAllBySecRole(role).secUser
 
-        render view: 'dashboard', model: [normalUsers: normalUsers.size()]
+        // Obtaining number of test in system
+        def test = Test.findAll().size()
+
+        // Obtaining number of test in system
+        def evaluations = Evaluation.findAll().size()
+
+        render view: 'dashboard', model: [normalUsers: normalUsers.size(), test: test, evaluations: evaluations]
     }
 
     /**

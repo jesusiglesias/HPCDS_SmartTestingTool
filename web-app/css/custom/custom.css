@@ -548,6 +548,10 @@ input:-webkit-autofill:active {
     .space-betweenCol {
         margin-top: 20px;
     }
+
+    .widget-thumb {
+        margin: 0 0 15px 0;
+    }
 }
 
 /* Landscape phone to portrait tablet */

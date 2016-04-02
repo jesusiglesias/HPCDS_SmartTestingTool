@@ -37,7 +37,7 @@
                     <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
                         <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.user" default="Normal users"/></h4>
                     <div class="widget-thumb-wrap">
-                            <i class="widget-thumb-icon bg-green icon-user"></i>
+                            <i class="widget-thumb-icon bg-green-dark icon-user"></i>
                             <div class="widget-thumb-body">
                                 <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
                                 <span class="widget-thumb-body-stat" data-counter="counterup" data-value="${normalUsers}">${normalUsers}</span>
@@ -48,12 +48,12 @@
                 <div class="col-md-4">
                     <!-- Widget thumb -->
                     <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
-                        <h4 class="widget-thumb-heading">Weekly Sales</h4>
+                        <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.test" default="Active test"/></h4>
                         <div class="widget-thumb-wrap">
-                            <i class="widget-thumb-icon bg-red icon-layers"></i>
+                            <i class="widget-thumb-icon bg-red icon-note"></i>
                             <div class="widget-thumb-body">
-                                <span class="widget-thumb-subtitle">USD</span>
-                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">0</span>
+                                <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
+                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="${test}">${test}</span>
                             </div>
                         </div>
                     </div> <!-- /.Widget thumb -->
@@ -61,12 +61,12 @@
                 <div class="col-md-4">
                     <!-- Widget thumb -->
                     <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
-                        <h4 class="widget-thumb-heading">Biggest Purchase</h4>
+                        <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.evaluation" default="Qualified evaluations"/></h4>
                         <div class="widget-thumb-wrap">
-                            <i class="widget-thumb-icon bg-purple icon-screen-desktop"></i>
+                            <i class="widget-thumb-icon bg-yellow-saffron icon-star"></i>
                             <div class="widget-thumb-body">
-                                <span class="widget-thumb-subtitle">USD</span>
-                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">0</span>
+                                <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
+                                <span class="widget-thumb-body-stat" data-counter="counterup" data-value="${evaluations}">${evaluations}</span>
                             </div>
                         </div>
                     </div> <!-- /.Widget thumb -->
