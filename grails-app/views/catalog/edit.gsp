@@ -5,6 +5,9 @@
 <head>
     <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title.catalog" default="STT | Catalogs management"/></title>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'multi-select.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'select2.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'select2-bootstrap.min.css')}" type="text/css"/>
 
     <script>
         // Variables to use in script
@@ -12,6 +15,9 @@
         var _checkNameCatalogAvailibility = '${g.createLink(controller: "catalog", action: 'checkNameCatalogAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
+        var _search = '${g.message(code: "layouts.main_auth_admin.content.search", default: "Search:")}';
+        var _selectable = '${g.message(code:'default.multiselect.selectable.question', default:'Selectable questions')}';
+        var _selection = '${g.message(code:'default.multiselect.selection.question', default:'Selection questions')}';
 
         // Handler auto close alert
         function createAutoClosingAlert(selector) {
@@ -102,7 +108,7 @@
                 <g:form url="[resource: catalogInstance, action: 'update']" method="PUT" autocomplete="on" class="horizontal-form catalog-form">
                     <g:hiddenField name="version" value="${catalogInstance?.version}"/>
                     <fieldset class="form">
-                        <g:render template="form"/>
+                        <g:render template="formEdit"/>
                     </fieldset>
 
                     <div class="domain-button-group-less">
@@ -122,6 +128,9 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
     <g:javascript src="confirmation/custom-delete.js"/>
+    <g:javascript src="select/jquery.multi-select.js"/>
+    <g:javascript src="select/select2.full.min.js"/>
+    <g:javascript src="select/select2_i18n/es.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="domain-validation/catalog-validation.js"/>
 

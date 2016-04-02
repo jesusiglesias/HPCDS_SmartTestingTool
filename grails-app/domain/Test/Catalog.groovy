@@ -11,14 +11,12 @@ class Catalog {
     Integer testCatalogCount = 0
     Integer questionCount = 0
 
-    static transients = ['testCatalogCount', 'questionCount']
-
     // Relations
     static hasMany = [testCatalogs:Test, questions:Question]
 
     // It obtains the number of test that contains the catalog
     Integer getTestsCatalogCount () {
-        testCatalogs?.size () ?: 0
+        testCatalogs?.size() ?: 0
     }
 
     // It obtains the number of questions that contains the catalog
@@ -26,9 +24,13 @@ class Catalog {
         questions?.size () ?: 0
     }
 
-    void beforeUpdate () {
-        testCatalogCount = getTestsCatalogCount ()
-        questionCount = getQuestionsCount ()
+    def beforeInsert() {
+        this.beforeUpdate()
+    }
+
+    def beforeUpdate () {
+        testCatalogCount = getTestsCatalogCount()
+        questionCount = getQuestionsCount()
     }
 
     // Restrictions on the attributes of the entity

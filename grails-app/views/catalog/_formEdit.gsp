@@ -42,14 +42,13 @@
                     </h5>
                     <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.catalog.multiselect.description" default="Select the questions that constitute the catalog."/></h5>
                 </label>
-                <g:select name="questions" from="${Question.list()}" multiple="multiple" optionKey="id" optionValue="titleQuestionKey" size="10" value="${catalogInstance?.questions*.id}" class="many-to-many multi-select"/>
-                <div class="text-center">
-                    <a href='#' id='select-all' class="buttons-select btn btn-outline blue-madison">
-                        <g:message code="default.multiselect.select.all" default="Select all"/>
-                    </a>
-                    <a href='#' id='deselect-all' class="buttons-select btn btn-outline blue-madison">
-                        <g:message code="default.multiselect.deselect.all" default="Deselect all"/>
-                    </a>
+                <div class="input-group select2-bootstrap-append">
+                    <g:select name="questions" id="multi-append" from="${Question.list()}" multiple="" optionKey="id" optionValue="titleQuestionKey" size="10" value="${catalogInstance?.questions*.id}" class="many-to-many form-control select2"/>
+                    <span class="input-group-btn">
+                        <button class="btn blue-madison btn-multiSearch" type="button" data-select2-open="multi-append">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>

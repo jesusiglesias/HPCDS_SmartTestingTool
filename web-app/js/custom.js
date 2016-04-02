@@ -262,11 +262,21 @@ var CustomScript = function () {
         }
     };
 
+    /**
+     * It handles datatable
+     */
+    var handlerDatatable = function() {
+        $('.dataTables_filter').find('input').addClass('form-shadow');
+        $('.dataTables_filter').find('input').after('<i class="fa fa-search search-datatable"></i>');
+        $('.dataTables_length').find('select').addClass('form-shadow');
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
             scrollBackTop();
             handlerInput();
+            handlerDatatable();
         }
     };
 }();
