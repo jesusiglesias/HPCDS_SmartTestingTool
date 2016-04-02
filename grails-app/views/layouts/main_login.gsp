@@ -41,10 +41,6 @@
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/0.4.3/sweetalert2.css">
 
-    <!-- PAGE LEVEL PLUGINS -->
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'select2.min.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'select2-bootstrap.min.css')}" type="text/css"/>
-
     <!-- THEME GLOBAL STYLES -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'components-md.css')}" type="text/css" id="style_components"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'plugins-md.css')}" type="text/css"/>
@@ -105,7 +101,6 @@
     <!-- PAGE LEVEL SCRIPTS -->
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
-    <g:javascript src="authentication/select2.full.min.js"/>
 
 </body>
 </html>

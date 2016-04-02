@@ -39,7 +39,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
     <%-- TODO <link rel="stylesheet" href="${resource(dir: 'css', file: 'uniform.default.min.css')}" type="text/css"/> --%>
     <!-- TODO -->
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-switch.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'placeholder_polyfill.min.css')}" type="text/css"/>
     <!-- Notification switch user -->
@@ -61,7 +60,6 @@
     <!-- THEME LAYOUT STYLES -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'layout.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'light2.css')}" type="text/css" id="style_color"/>
-
 
     <!-- LOAD JS -->
     <asset:javascript src="application.js"/>
@@ -516,7 +514,6 @@
     <g:javascript src="jquery.blockui.min.js"/>
     <%-- TODO
     <g:javascript src="jquery.uniform.min.js"/> --%>
-    <g:javascript src="bootstrap-switch.min.js"/>
     <g:javascript src="custom.js"/>
     <g:javascript src="placeholder_polyfill.jquery.min.combo.js"/>
 
@@ -531,8 +528,6 @@
     <!-- TODO -->
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
-
-    <g:javascript src="authentication/select2.full.min.js"/>
 
     <%-- TODO
     <g:javascript src="demo.js"/>
