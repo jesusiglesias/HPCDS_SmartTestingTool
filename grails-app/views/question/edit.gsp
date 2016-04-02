@@ -5,7 +5,10 @@
 <head>
 	<meta name="layout" content="main_auth_admin">
 	<title><g:message code="layouts.main_auth_admin.head.title.question" default="STT | Questions management"/></title>
-	<link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'multi-select.css')}" type="text/css"/>
+	<link rel="stylesheet" href="${resource(dir: 'css/select', file: 'select2.min.css')}" type="text/css"/>
+	<link rel="stylesheet" href="${resource(dir: 'css/select', file: 'select2-bootstrap.min.css')}" type="text/css"/>
 
 	<script>
 		// Variables to use in script
@@ -99,7 +102,7 @@
 				<g:form url="[resource:questionInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form question-form">
 					<g:hiddenField name="version" value="${questionInstance?.version}" />
 					<fieldset class="form">
-						<g:render template="form"/>
+						<g:render template="formEdit"/>
 					</fieldset>
 					<div class="domain-button-group">
 						<!-- Cancel button -->
@@ -118,9 +121,12 @@
 	<g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
 	<g:javascript src="confirmation/custom-delete.js"/>
     <g:javascript src="select/bootstrap-select.min.js"/>
+    <g:javascript src="select/jquery.multi-select.js"/>
+    <g:javascript src="select/select2.full.min.js"/>
+    <g:javascript src="select/select2_i18n/es.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="autosize/autosize.min.js"/>
-    <g:javascript src="domain-validation/question-validation.js"/>
+    <g:javascript src="domain-validation/questionSelectEdit-validation.js"/>
 
 </body>
 </html>

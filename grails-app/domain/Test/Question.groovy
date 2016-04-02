@@ -15,8 +15,6 @@ class Question {
     DifficultyLevel difficultyLevel
     String titleQuestionKey
 
-    static transients = ['answerCount', 'catalogCount']
-
     // Relations
     static hasMany = [answers:Answer, catalogs:Catalog]
     static belongsTo = Catalog
@@ -29,6 +27,10 @@ class Question {
     // It obtains the number of catalogs that contains the question
     Integer getCatalogsCount () {
         catalogs?.size () ?: 0
+    }
+
+    def beforeInsert() {
+        this.beforeUpdate()
     }
 
     void beforeUpdate () {

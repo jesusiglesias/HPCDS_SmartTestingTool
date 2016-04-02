@@ -1,13 +1,13 @@
 /*-------------------------------------------------------------------------------------------*
- *                                 CATALOG VALIDATION JAVASCRIPT                             *
+ *                                CATALOG EDIT VALIDATION JAVASCRIPT                         *
  *-------------------------------------------------------------------------------------------*/
 
-var DomainCatalogValidation = function () {
+var DomainCatalogEditValidation = function () {
 
     /**
      * Catalog validation
      */
-    var handlerCatalogValidation = function() {
+    var handlerCatalogCreateValidation = function() {
 
         var catalogForm = $('.catalog-form');
 
@@ -127,82 +127,35 @@ var DomainCatalogValidation = function () {
     };
 
     /**
-     * It handles the multi select in create view
+     * It handles the multi select in edit view
      */
-    var handlerBootstrapMultiSelect = function() {
+    var handlerBootstrapMultiSelectEdit = function() {
 
-        var questionsSelect = $('#questions');
+        $.fn.select2.defaults.set("theme", "bootstrap");
 
-        questionsSelect.multiSelect({
-            /* Headers */
-            selectableHeader: "" +
-            "<div class='custom-header'>" +_selectable + "</div>" +
-            "<h5 class='sbold'>" + _search + "</h5>" +
-            "<input type='text' class='search-input form-control form-shadow' autocomplete='off'>",
-
-            selectionHeader: "" +
-            "<div class='custom-header'>" +_selection + "</div>" +
-            "<h5 class='sbold'>" + _search + "</h5>" +
-            "<input type='text' class='search-input form-control form-shadow' autocomplete='off'>",
-
-            afterInit: function(ms){
-                var that = this,
-                    $selectableSearch = that.$selectableUl.prev(),
-                    $selectionSearch = that.$selectionUl.prev(),
-                    selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
-                    selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
-
-                that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
-                    .on('keydown', function(e){
-                        if (e.which === 40){
-                            that.$selectableUl.focus();
-                            return false;
-                        }
-                    });
-
-                that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
-                    .on('keydown', function(e){
-                        if (e.which == 40){
-                            that.$selectionUl.focus();
-                            return false;
-                        }
-                    });
-            },
-            afterSelect: function(){
-                this.qs1.cache();
-                this.qs2.cache();
-            },
-            afterDeselect: function(){
-                this.qs1.cache();
-                this.qs2.cache();
-            }
+        $(".select2, .select2-multiple").select2({
+            language: "es",
+            width: null,
+            allowClear: true
         });
 
-        // Select all items
-        $('#select-all').click(function(){
-            questionsSelect.multiSelect('select_all');
-            return false;
-        });
-
-        // Deselect all items
-        $('#deselect-all').click(function(){
-            questionsSelect.multiSelect('deselect_all');
-            return false;
+        $("button[data-select2-open]").click(function() {
+            $("#" + $(this).data("select2-open")).select2("open");
         });
     };
 
     return {
         // Main function to initiate the module
         init: function () {
-            handlerCatalogValidation();
+            handlerCatalogCreateValidation();
             handlerNameAvailabilityChecker();
             handlerMaxlength();
-            handlerBootstrapMultiSelect();
+            handlerBootstrapMultiSelectEdit();
         }
     };
 
 }();
 
 jQuery(document).ready(function() {
-    DomainCatalogValidation.init();
+    DomainCatalogEditValidation.init();
 });

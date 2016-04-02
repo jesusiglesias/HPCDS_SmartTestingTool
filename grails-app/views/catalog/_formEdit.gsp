@@ -43,7 +43,7 @@
                     <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.catalog.multiselect.description" default="Select the questions that constitute the catalog."/></h5>
                 </label>
                 <div class="input-group select2-bootstrap-append">
-                    <g:select name="questions" id="multi-append" from="${Question.list()}" multiple="" optionKey="id" optionValue="titleQuestionKey" size="10" value="${catalogInstance?.questions*.id}" class="many-to-many form-control select2"/>
+                    <g:select name="questions" id="multi-append" from="${Question.list()}" multiple="multiple" optionKey="id" optionValue="titleQuestionKey" size="10" value="${catalogInstance?.questions*.id}" class="many-to-many form-control select2"/>
                     <span class="input-group-btn">
                         <button class="btn blue-madison btn-multiSearch" type="button" data-select2-open="multi-append">
                             <span class="glyphicon glyphicon-search"></span>

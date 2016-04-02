@@ -1,13 +1,13 @@
 /*-------------------------------------------------------------------------------------------*
- *                                QUESTION VALIDATION JAVASCRIPT                             *
+ *                              QUESTION EDIT VALIDATION JAVASCRIPT                          *
  *-------------------------------------------------------------------------------------------*/
 
-var DomainQuestionValidation = function () {
+var DomainQuestionEditValidation = function () {
 
     /**
      * Question validation
      */
-    var handlerQuestionValidation = function () {
+    var handlerQuestionEditValidation = function () {
 
         var questionForm = $('.question-form');
 
@@ -157,82 +157,35 @@ var DomainQuestionValidation = function () {
     };
 
     /**
-     * It handles the multi select in create view
+     * It handles the multi select in edit view
      */
-    var handlerBootstrapMultiSelect = function() {
+    var handlerBootstrapMultiSelectEdit = function() {
 
-        var answersSelect = $('#answers');
+        $.fn.select2.defaults.set("theme", "bootstrap");
 
-        answersSelect.multiSelect({
-            /* Headers */
-            selectableHeader: "" +
-            "<div class='custom-header'>" + _selectableAnswers + "</div>" +
-            "<h5 class='sbold'>" + _search + "</h5>" +
-            "<input type='text' class='search-input form-control form-shadow' autocomplete='off'>",
-
-            selectionHeader: "" +
-            "<div class='custom-header'>" + _selectionAnswers + "</div>" +
-            "<h5 class='sbold'>" + _search + "</h5>" +
-            "<input type='text' class='search-input form-control form-shadow' autocomplete='off'>",
-
-            afterInit: function(ms){
-                var that = this,
-                    $selectableSearch = that.$selectableUl.prev(),
-                    $selectionSearch = that.$selectionUl.prev(),
-                    selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
-                    selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
-
-                that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
-                    .on('keydown', function(e){
-                        if (e.which === 40){
-                            that.$selectableUl.focus();
-                            return false;
-                        }
-                    });
-
-                that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
-                    .on('keydown', function(e){
-                        if (e.which == 40){
-                            that.$selectionUl.focus();
-                            return false;
-                        }
-                    });
-            },
-            afterSelect: function(){
-                this.qs1.cache();
-                this.qs2.cache();
-            },
-            afterDeselect: function(){
-                this.qs1.cache();
-                this.qs2.cache();
-            }
+        $(".select2, .select2-multiple").select2({
+            language: "es",
+            width: null,
+            allowClear: true
         });
 
-        // Select all items
-        $('#select-all').click(function(){
-            answersSelect.multiSelect('select_all');
-            return false;
-        });
-
-        // Deselect all items
-        $('#deselect-all').click(function(){
-            answersSelect.multiSelect('deselect_all');
-            return false;
+        $("button[data-select2-open]").click(function() {
+            $("#" + $(this).data("select2-open")).select2("open");
         });
     };
 
     return {
         // Main function to initiate the module
         init: function () {
-            handlerQuestionValidation();
+            handlerQuestionEditValidation();
             handlerAnswerKeyAvailabilityChecker();
             handlerMaxlength();
             handlerBootstrapSelect();
-            handlerBootstrapMultiSelect();
+            handlerBootstrapMultiSelectEdit();
         }
     };
 }();
 
 jQuery(document).ready(function () {
-    DomainQuestionValidation.init();
+    DomainQuestionEditValidation.init();
 });

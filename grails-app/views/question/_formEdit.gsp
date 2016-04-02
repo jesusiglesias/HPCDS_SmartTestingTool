@@ -84,14 +84,13 @@
                     </h5>
                     <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.question.multiselect.description" default="Select the answers that constitute the question."/></h5>
                 </label>
-                <g:select name="answers" from="${Answer.list()}" multiple="multiple" optionKey="id" optionValue="titleAnswerKey" size="10" value="${questionInstance?.answers*.id}" class="many-to-many multi-select"/>
-                <div class="text-center">
-                    <a href='#' id='select-all' class="buttons-select btn btn-outline blue-madison">
-                        <g:message code="default.multiselect.select.all" default="Select all"/>
-                    </a>
-                    <a href='#' id='deselect-all' class="buttons-select btn btn-outline blue-madison">
-                        <g:message code="default.multiselect.deselect.all" default="Deselect all"/>
-                    </a>
+                <div class="input-group select2-bootstrap-append">
+                    <g:select name="answers" id="multi-append"  from="${Answer.list()}" multiple="multiple" optionKey="id" optionValue="titleAnswerKey" size="10" value="${questionInstance?.answers*.id}" class="many-to-many form-control select2"/>
+                    <span class="input-group-btn">
+                        <button class="btn blue-madison btn-multiSearch" type="button" data-select2-open="multi-append">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@
 	<meta name="layout" content="main_auth_admin">
 	<title><g:message code="layouts.main_auth_admin.head.title.question" default="STT | Questions management"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'multi-select.css')}" type="text/css"/>
 
 	<script>
         // Variables to use in script
@@ -12,6 +13,9 @@
         var _checkKeyQuestionAvailibility = '${g.createLink(controller: "question", action: 'checkKeyQuestionAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
+        var _search = '${g.message(code: "layouts.main_auth_admin.content.search", default: "Search:")}';
+        var _selectableAnswers = '${g.message(code:'default.multiselect.selectable.answer', default:'Selectable answers')}';
+        var _selectionAnswers = '${g.message(code:'default.multiselect.selection.answer', default:'Selection answers')}';
 
 		// Handler auto close alert
 		function createAutoClosingAlert(selector) {
@@ -98,7 +102,9 @@
     </div> <!-- /. Page-content-wrapper -->
 
     <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="select/jquery.quicksearch.js"/>
     <g:javascript src="select/bootstrap-select.min.js"/>
+    <g:javascript src="select/jquery.multi-select.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="autosize/autosize.min.js"/>
     <g:javascript src="domain-validation/question-validation.js"/>

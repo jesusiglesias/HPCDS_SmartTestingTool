@@ -15,9 +15,6 @@
         var _checkNameCatalogAvailibility = '${g.createLink(controller: "catalog", action: 'checkNameCatalogAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
-        var _search = '${g.message(code: "layouts.main_auth_admin.content.search", default: "Search:")}';
-        var _selectable = '${g.message(code:'default.multiselect.selectable.question', default:'Selectable questions')}';
-        var _selection = '${g.message(code:'default.multiselect.selection.question', default:'Selection questions')}';
 
         // Handler auto close alert
         function createAutoClosingAlert(selector) {
@@ -132,7 +129,7 @@
     <g:javascript src="select/select2.full.min.js"/>
     <g:javascript src="select/select2_i18n/es.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
-    <g:javascript src="domain-validation/catalog-validation.js"/>
+    <g:javascript src="domain-validation/catalogSelectEdit-validation.js"/>
 
 </body>
 </html>
