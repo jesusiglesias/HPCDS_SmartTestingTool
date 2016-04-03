@@ -13,7 +13,7 @@
 				</label>
 				<div class="input-group input-icon right">
 					<i class="fa icon-offset"></i>
-                    <g:textField name="name" class="form-control" maxlength="50" value="${topicInstance?.name}"/>
+                    <g:textField name="name" class="form-control form-shadow" maxlength="50" value="${topicInstance?.name}"/>
 					<span class="input-group-btn">
 						<a href="javascript:;" class="btn green-dark" id="nameTopic-checker">
 							<i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
@@ -38,7 +38,7 @@
 				</label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textArea name="description" class="form-control autosizeme" cols="40" rows="1" maxlength="500" value="${topicInstance?.description}"/>
+                    <g:textArea name="description" class="form-control autosizeme form-shadow" cols="40" rows="1" maxlength="500" value="${topicInstance?.description}"/>
                 </div>
 			</div>
 		</div>
@@ -73,7 +73,7 @@
                 <div class="input-icon right">
                     <i class="fa"></i>
 					<!-- TODO Form-control -->
-                    <g:select name="tests" from="${Test.Test.list()}" multiple="multiple" optionKey="id" size="5" value="${topicInstance?.tests*.id}" class="many-to-many form-control"/>
+                    <g:select name="tests" from="${Test.Test.list()}" multiple="multiple" optionKey="id" size="5" value="${topicInstance?.tests*.id}" class="many-to-many form-control form-shadow"/>
                 </div>
             </div>
 		</div>

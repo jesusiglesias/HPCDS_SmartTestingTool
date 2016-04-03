@@ -14,7 +14,7 @@
                 </label>
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:textField name="name" maxlength="50" value="${departmentInstance?.name}" class="form-control"/>
+                    <g:textField name="name" maxlength="50" value="${departmentInstance?.name}" class="form-control form-shadow"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="nameDepartment-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>

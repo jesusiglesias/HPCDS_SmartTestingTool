@@ -15,7 +15,7 @@
 
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:textField name="titleAnswerKey" class="form-control" maxlength="50" value="${answerInstance?.titleAnswerKey}"/>
+                    <g:textField name="titleAnswerKey" class="form-control form-shadow" maxlength="50" value="${answerInstance?.titleAnswerKey}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="keyAnswer-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
@@ -42,7 +42,7 @@
 
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textArea name="description" class="form-control autosizeme" cols="40" rows="1" maxlength="400" value="${answerInstance?.description}"/>
+                    <g:textArea name="description" class="form-control autosizeme form-shadow" cols="40" rows="1" maxlength="400" value="${answerInstance?.description}"/>
                 </div>
             </div>
         </div>
