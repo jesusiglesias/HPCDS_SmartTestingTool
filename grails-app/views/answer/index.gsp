@@ -141,8 +141,8 @@
                                     <tbody>
                                         <g:each in="${answerInstanceList}" status="i" var="answerInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                                <td><g:link controller="answer" action="edit" id="${answerInstance.id}">${fieldValue(bean: answerInstance, field: "titleAnswerKey")}</g:link></td>
-                                                <td>${fieldValue(bean: answerInstance, field: "description")}</td>
+                                                <td><g:link controller="answer" action="edit" id="${answerInstance.id}" class="break-word">${fieldValue(bean: answerInstance, field: "titleAnswerKey")}</g:link></td>
+                                                <td class="break-word">${fieldValue(bean: answerInstance, field: "description")}</td>
                                                 <td>${fieldValue(bean: answerInstance, field: "score")}</td>
                                                 <td>
                                                     <g:if test="${answerInstance.correct}">

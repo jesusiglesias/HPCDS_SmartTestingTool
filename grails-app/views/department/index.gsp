@@ -138,7 +138,7 @@
                                     <tbody>
                                         <g:each in="${departmentInstanceList}" status="i" var="departmentInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                                <td><g:link controller="department" action="edit" id="${departmentInstance.id}">${fieldValue(bean: departmentInstance, field: "name")}</g:link></td>
+                                                <td><g:link controller="department" action="edit" id="${departmentInstance.id}" class="break-word">${fieldValue(bean: departmentInstance, field: "name")}</g:link></td>
                                                 <td>${fieldValue(bean: departmentInstance, field: "userCount")}</td>
                                                 <td><g:link uri="/user" params="[departmentSearch: departmentInstance.name]"><g:message code="department.users.label" default="Users"/></g:link></td>
                                             </tr>
