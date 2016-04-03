@@ -6,7 +6,7 @@
         <!-- Image profile -->
         <div class="form-group">
             <div class="col-sm-12">
-                <legend class="control-label"><h4><g:message code="default.imageProfile.title" default="Profile image"/></h4></legend>
+                <legend class="control-label legend-profileImage"><h4 class="title-profileImage"><g:message code="default.imageProfile.title" default="Profile image"/></h4></legend>
                 <div class="fileinput fileinput-new" data-provides="fileinput">
                     <div class="fileinput-new thumbnail" data-trigger="fileinput" style="max-width: 160px; max-height: 200px;">
                         <g:if test="${secUserInstance.avatar}">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="clearfix profileImage-note">
                     <span class="label label-warning"><g:message code="default.imageProfile.note" default="NOTE!"/></span>
-                    <p>
+                    <p class="text-justify">
                         ${raw(g.message(code:"default.imageProfile.note.description", default:"For best results, your profile image should have a width-to-height ratio of 4:5. For example, if your image is 80 pixels wide, it should be 100 pixels high.<br/><strong>Maximum image size allowed: 1 MB.</strong>"))}
                     </p>
                 </div>

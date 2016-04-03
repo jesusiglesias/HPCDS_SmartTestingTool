@@ -78,10 +78,10 @@ class SecUser implements Serializable {
 
 	// Restrictions on the attributes of the entity
 	static constraints = {
-		username blank: false, unique: true
+		username blank: false, unique: true, maxSize: 30
 		// Validator password
 		password blank: false, matches: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$).{8,}\$"
-		email blank: false, unique: true, email: true
+		email blank: false, unique: true, email: true, maxSize: 60
 		confirmPassword bindable: true
 		avatar nullable:true, maxSize: 1048576 /* 1MB */
 		avatarType nullable:true, inList: ['image/png', 'image/jpeg', 'image/gif']

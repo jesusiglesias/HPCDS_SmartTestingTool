@@ -29,8 +29,8 @@ class CustomTasksBackendController {
         log.debug("CustomTasksBackendController:dashboard()")
 
         // Obtaining number of normal users
-        def role = SecRole.findByAuthority("ROLE_USER")
-        def normalUsers = SecUserSecRole.findAllBySecRole(role).secUser
+        def roleUser = SecRole.findByAuthority("ROLE_USER")
+        def normalUsers = SecUserSecRole.findAllBySecRole(roleUser).secUser
 
         // Obtaining number of test in system
         def test = Test.findAll().size()

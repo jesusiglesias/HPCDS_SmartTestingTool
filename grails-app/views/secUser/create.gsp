@@ -21,6 +21,7 @@
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
         var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
         // Handler auto close alert
         function createAutoClosingAlert(selector) {
@@ -136,6 +137,7 @@
     <g:javascript src="iCheck/icheck.min.js"/>
     <g:javascript src="password/custom-password.js"/>
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="domain-validation/admin-validation.js"/>
     <g:javascript src="fileInput/bootstrap-fileinput.js"/>
 

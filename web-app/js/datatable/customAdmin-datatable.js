@@ -40,6 +40,9 @@ var DatatableAdminList = function () {
             // Row selectable
             select: false,
 
+            // Disable fixed width and enable fluid table
+            "autoWidth": true,
+
             // Visibility of columns
             "columnDefs": [
                 {
@@ -63,9 +66,6 @@ var DatatableAdminList = function () {
 
             // Pagination type
             "pagingType": "bootstrap_full_number",
-
-            // Disable fixed width and enable fluid table
-            "autoWidth": false,
 
             // Setup responsive extension
             responsive: true,

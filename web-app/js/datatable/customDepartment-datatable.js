@@ -40,6 +40,9 @@ var DatatableDepartmentList = function () {
             // Row selectable
             select: false,
 
+            // Auto width
+            "autoWidth": true,
+
             buttons: [
                 { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1]} },
                 { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1]} },
@@ -51,9 +54,6 @@ var DatatableDepartmentList = function () {
 
             // Pagination type
             "pagingType": "bootstrap_full_number",
-
-            // Disable fixed width and enable fluid table
-            "autoWidth": false,
 
             // Setup responsive extension
             responsive: true,

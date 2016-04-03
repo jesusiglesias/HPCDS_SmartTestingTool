@@ -154,8 +154,8 @@
                                                         </g:link>
                                                     </g:else>
                                                 </td>
-                                                <td><g:link controller="secUser" action="edit" id="${secUserInstance.id}">${fieldValue(bean: secUserInstance, field: "username")}</g:link></td>
-                                                <td>${fieldValue(bean: secUserInstance, field: "email")}</td>
+                                                <td><g:link controller="secUser" action="edit" id="${secUserInstance.id}" class="break-word">${fieldValue(bean: secUserInstance, field: "username")}</g:link></td>
+                                                <td class="break-word">${fieldValue(bean: secUserInstance, field: "email")}</td>
                                                 <td>
                                                     <g:if test="${secUserInstance.enabled}">
                                                         <span class="label label-sm label-success">
