@@ -25,6 +25,7 @@ input:-webkit-autofill:active {
 
 /* Index and create views */
 #list-domain,
+#list-panel,
 #create-domain,
 #edit-domain {
     margin: 0 7px;
@@ -45,6 +46,10 @@ input:-webkit-autofill:active {
 
 .space-imageRow {
     margin: 35px -15px 0 -15px;
+}
+
+.panel-row {
+    margin-top: 40px;
 }
 
 .space-checkboxCol {
@@ -364,6 +369,118 @@ input:-webkit-autofill:active {
     border-color: #9F514F !important;
 }
 
+/* Dashboard
+=================================================================== */
+.page-md .widget-bg-color-white:hover,
+.page-md .widget-bg-color-white:active,
+.page-md .widget-bg-color-white:focus {
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.40);
+}
+
+.portlet-users {
+    margin-top: 40px !important;
+}
+
+.portlet-users .portlet {
+    height: 523px;
+ }
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-info:after{
+    clear:both;
+}
+
+.mt-comments .mt-comment{
+    padding: 10px;
+    margin: 0 0 10px;
+}
+
+.mt-comments .mt-comment .mt-comment-img{
+    width: 40px;
+    float: left;
+}
+
+/* Recent users image */
+.recentUser-image {
+    float: left;
+    height: 47px;
+    display: inline-block;
+}
+
+.mt-comments .mt-comment .mt-comment-body{
+    padding: 0 0 2px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-info:after,
+.mt-comments .mt-comment .mt-comment-body .mt-comment-info:before{
+    content: " ";
+    display: table;
+}
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-info .mt-comment-author{
+    display: inline-block;
+    float: left;
+    margin: -3px 0 10px;
+    color: #65A0D0;
+    font-weight: 600;
+    font-variant: small-caps;
+    font-size: 17px;
+    word-break: break-all;
+}
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-info .mt-comment-date{
+    display: inline-block;
+    float: right;
+    margin: 0;
+    color: #B2AFAF;
+}
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-text{
+    color: #6D6D6D;
+    font-weight: 300;
+    word-break: break-all;
+}
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-details{
+    margin: 15px 0 0;
+}
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-status{
+    float: left;
+}
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions{
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions > li {
+    float: left;
+    padding: 0 5px;
+    margin: 0;
+}
+
+.mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions > li > a {
+    text-transform: uppercase;
+    color: #999;
+}
+.mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions > li > a:hover{
+    color: #666;
+    text-decoration: none;
+}
+
+.mt-comments .mt-comment:hover{
+    background: #D8ECDD;
+}
+
+.mt-comments .mt-comment:hover .mt-comment-body .mt-comment-details .mt-comment-actions{
+    display: inline-block;
+}
+
 /* Back to top
 =================================================================== */
 .back-to-top {
@@ -550,8 +667,13 @@ input:-webkit-autofill:active {
     }
 
     .widget-thumb {
-        margin: 0 0 15px 0;
+        margin: 0 0 30px 0;
     }
+
+    .portlet-users {
+        margin-top: 0 !important;
+    }
+
 }
 
 /* Landscape phone to portrait tablet */
@@ -564,7 +686,8 @@ input:-webkit-autofill:active {
     }
 
     /* Index view */
-    #list-domain {
+    #list-domain,
+    #list-panel {
         margin: 0 15px 0 7px
     }
 
@@ -627,6 +750,10 @@ input:-webkit-autofill:active {
     .panel-instruction-create {
         margin: -5px 0 40px 0 !important;
     }
+
+    .panel-row {
+        margin-top: -12px;
+    }
 }
 
 /* Max-width: 341px */
@@ -649,6 +776,7 @@ input:-webkit-autofill:active {
 @media (max-width: 333px) {
 
     #list-domain,
+    #list-panel,
     #create-domain,
     #edit-domain {
         margin: 0 7px 0 0;
@@ -660,6 +788,10 @@ input:-webkit-autofill:active {
 
     .group-subtitle {
         margin-top: 0;
+    }
+
+    .panel-row {
+        margin-top: -8px;
     }
 
 }

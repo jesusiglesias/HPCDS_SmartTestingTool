@@ -189,50 +189,53 @@
             </h3>
 
             <!-- Contain page -->
-            <div class="row">
-                <div class="col-md-12 col-lg-10 col-lg-offset-1">
+            <div id="list-panel">
 
-                    <!-- Alerts -->
+                <div class="row panel-row">
+                    <div class="col-md-12 col-lg-10 col-lg-offset-1">
 
-                    <!-- Portlet -->
-                    <div class="portlet light bg-inverse logConfig-portlet">
-                        <div class="portlet-title">
-                            <div class="caption font-green-dark">
-                                <i class="icon-speech font-green-dark"></i>
-                                <span class="caption-subject bold uppercase"><g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.subject" default="Important information"/></span>
+                        <!-- Alerts -->
+
+                        <!-- Portlet -->
+                        <div class="portlet light bg-inverse logConfig-portlet">
+                            <div class="portlet-title">
+                                <div class="caption font-green-dark">
+                                    <i class="icon-speech font-green-dark"></i>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.subject" default="Important information"/></span>
+                                </div>
+                                <div class="tools">
+                                    <a href="" class="collapse"> </a>
+                                    <a href="" class="fullscreen"> </a>
+                                    <a href="" class="remove"> </a>
+                                </div>
                             </div>
-                            <div class="tools">
-                                <a href="" class="collapse"> </a>
-                                <a href="" class="fullscreen"> </a>
-                                <a href="" class="remove"> </a>
+
+                            <div class="portlet-body">
+                                <div class="scroller" style="height:250px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                    <h4 class="log-portlet-h4 bold"><g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.title" default="Log configuration"/></h4>
+                                    <p>
+                                        ${raw(g.message(code: 'layouts.main_auth_admin.body.content.logConfiguration.portlet.description', default: '<i>Log</i> refers to events happening in the system. Thanks to this feature you can update the log configuration without rebooting the system so just click on the button below. ' +
+                                                'The system automatically performs other operations and you will be notified by an alert the final status of the operation.'))}
+                                    </p>
+                                    <p>
+                                        ${raw(g.message(code: 'layouts.main_auth_admin.body.content.logConfiguration.portlet.subdescription', default: 'Log configuration file is located in <strong>external-config</strong> directory of the classpath with name: <strong>LogConfig.groovy</strong>. ' +
+                                                'For example, in a Tomcat application container, the path is the following: <strong>/tomcatPath/web-apps/projectName/WEB-INF/classes/external-config/</strong>.'))}
+                                    </p>
+                                </div>
                             </div>
+                        </div> <!-- /. Portlet -->
+
+                        <!-- Update button -->
+                        <div class="logConfig-button">
+                            <button name="log-button" id="log-button" class="btn green-dark btn-block">
+                                <i class="fa fa-refresh fa-lg refresh-icon-stop refreshIcon"></i>
+                                <span><g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.button" default="Upload configuration"/></span>
+                            </button>
                         </div>
 
-                        <div class="portlet-body">
-                            <div class="scroller" style="height:250px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
-                                <h4 class="log-portlet-h4 bold"><g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.title" default="Log configuration"/></h4>
-                                <p>
-                                    ${raw(g.message(code: 'layouts.main_auth_admin.body.content.logConfiguration.portlet.description', default: '<i>Log</i> refers to events happening in the system. Thanks to this feature you can update the log configuration without rebooting the system so just click on the button below. ' +
-                                            'The system automatically performs other operations and you will be notified by an alert the final status of the operation.'))}
-                                </p>
-                                <p>
-                                    ${raw(g.message(code: 'layouts.main_auth_admin.body.content.logConfiguration.portlet.subdescription', default: 'Log configuration file is located in <strong>external-config</strong> directory of the classpath with name: <strong>LogConfig.groovy</strong>. ' +
-                                            'For example, in a Tomcat application container, the path is the following: <strong>/tomcatPath/web-apps/projectName/WEB-INF/classes/external-config/</strong>.'))}
-                                </p>
-                            </div>
-                        </div>
-                    </div> <!-- /. Portlet -->
-
-                    <!-- Update button -->
-                    <div class="logConfig-button">
-                        <button name="log-button" id="log-button" class="btn green-dark btn-block">
-                            <i class="fa fa-refresh fa-lg refresh-icon-stop refreshIcon"></i>
-                            <span><g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.button" default="Upload configuration"/></span>
-                        </button>
-                    </div>
-
-                </div> <!-- /.Col -->
-            </div> <!-- /.Row -->
+                    </div> <!-- /.Col -->
+                </div> <!-- /.Row -->
+            </div>
         </div> <!-- Page-content -->
     </div> <!-- /. Page-content-wrapper -->
 </body>

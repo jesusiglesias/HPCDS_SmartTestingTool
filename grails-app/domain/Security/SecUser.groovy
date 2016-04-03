@@ -15,6 +15,7 @@ class SecUser implements Serializable {
 	transient springSecurityService
 
 	UUID id
+	Date dateCreated
 	// Attributes
 	String username
 	String password

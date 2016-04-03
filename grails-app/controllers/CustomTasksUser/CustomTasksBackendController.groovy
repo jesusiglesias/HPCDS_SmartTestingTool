@@ -38,7 +38,10 @@ class CustomTasksBackendController {
         // Obtaining number of test in system
         def evaluations = Evaluation.findAll().size()
 
-        render view: 'dashboard', model: [normalUsers: normalUsers.size(), test: test, evaluations: evaluations]
+        // Obtaining the lastest 10 registered users
+        def lastUsers = SecUser.listOrderByDateCreated(max: 10, order: 'desc')
+
+        render view: 'dashboard', model: [normalUsers: normalUsers.size(), test: test, evaluations: evaluations, lastUsers: lastUsers]
     }
 
     /**
