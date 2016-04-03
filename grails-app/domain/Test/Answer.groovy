@@ -13,8 +13,6 @@ class Answer {
     Integer score
     String titleAnswerKey
 
-    static transients = ['questionAnswerCount']
-
     // Relations
     static hasMany = [questionsAnswer:Question]
     static belongsTo = Question
@@ -22,6 +20,10 @@ class Answer {
     // It obtains the number of questions that contains the answer
     Integer getQuestionsAnswerCount () {
         questionsAnswer?.size () ?: 0
+    }
+
+    def beforeInsert() {
+        this.beforeUpdate()
     }
 
     void beforeUpdate () {

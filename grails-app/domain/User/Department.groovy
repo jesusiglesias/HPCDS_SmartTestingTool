@@ -10,14 +10,16 @@ class Department {
     String name
     Integer userCount = 0
 
-    static transients = ['userCount']
-
     // Relation
     static hasMany = [users:User]
 
     // It obtains the number of users that contains the department
     Integer getUsersCount () {
         users?.size () ?: 0
+    }
+
+    def beforeInsert() {
+        this.beforeUpdate()
     }
 
     void beforeUpdate () {
