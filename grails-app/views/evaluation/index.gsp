@@ -34,7 +34,7 @@
         var _columns = '${g.message(code: "layouts.main_auth_admin.content.columns", default: "Columns")}';
         var _restore = '${g.message(code: "layouts.main_auth_admin.content.restore", default: "Restore")}';
         var _evaluationFile = '${g.message(code: "layouts.main_auth_admin.content.evaluation.file", default: "STT_Evaluations")}';
-        var _evaluationTitle = '${g.message(code: "layouts.main_auth_admin.content.evaluation.tableTitle", default: "SMART TESTING TOOL - Evaluations management")}';
+        var _evaluationTableTitle = '${g.message(code: "layouts.main_auth_admin.content.evaluation.tableTitle", default: "SMART TESTING TOOL - Evaluations management")}';
         var _search = '${g.message(code: "layouts.main_auth_admin.content.search", default: "Search:")}';
         var _sortAscending = '${g.message(code: "layouts.main_auth_admin.content.sortAscending", default: ": activate to sort column ascending")}';
         var _sortDescending = '${g.message(code: "layouts.main_auth_admin.content.sortDescending", default: ": activate to sort column descending")}';

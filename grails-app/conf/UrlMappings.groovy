@@ -45,6 +45,9 @@ class UrlMappings {
         // Answer
         "/answer/create-error"(controller: 'answer', action: 'save')
         "/answer/edit-error/$id?(.$format)?"(controller: 'answer', action: 'update')
+        // Test
+        "/test/create-error"(controller: 'test', action: 'save')
+        "/test/edit-error/$id?(.$format)?"(controller: 'test', action: 'update')
 
         /** **************************/
         // TODO

@@ -2,12 +2,12 @@
  *                                     DATATABLE JAVASCRIPT                                  *
  *-------------------------------------------------------------------------------------------*/
 
-var DatatableAnswerList = function () {
+var DatatableTestList = function () {
 
     /**
      *  Table function
      */
-    var initAnswerTable = function () {
+    var initTestTable = function () {
 
         var table = $('#entity-table');
 
@@ -44,10 +44,11 @@ var DatatableAnswerList = function () {
             "autoWidth": true,
 
             buttons: [
+                // TODO
                 { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4]} },
                 { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4]} },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _answerFile, title: _answerTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4]} },
-                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _answerFile, exportOptions: {columns: [0, 1, 2, 3, 4]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _testFile, title: _testTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _testFile, exportOptions: {columns: [0, 1, 2, 3, 4]} },
                 { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
             ],
@@ -81,7 +82,7 @@ var DatatableAnswerList = function () {
                 [5, 10, 20, 50, 100, _all] // Change per page values here
             ],
 
-            // Set the initial value
+            // Set the initial value TODO
             "pageLength": 20,
 
             // Horizontal scrollable datatable
@@ -97,7 +98,7 @@ var DatatableAnswerList = function () {
             if (!jQuery().dataTable) {
                 return;
             }
-            initAnswerTable();
+            initTestTable();
         }
 
     };
@@ -105,5 +106,5 @@ var DatatableAnswerList = function () {
 }();
 
 jQuery(document).ready(function() {
-    DatatableAnswerList.init();
+    DatatableTestList.init();
 });

@@ -90,7 +90,7 @@ var DatatableTopicList = function () {
             ],
 
             // Set the initial value
-            "pageLength": 50,
+            "pageLength": 20,
 
             // Horizontal scrollable datatable
             "dom": "<'row' <'col-md-12'B>><'row'<'col-sm-6 col-xs-12'l><'col-sm-6 col-xs-12'f>r><'table-scrollable't><'row'<'col-sm-5 col-xs-12'i><'col-sm-7 col-xs-12'p>>"
