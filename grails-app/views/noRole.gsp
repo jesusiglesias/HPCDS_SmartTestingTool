@@ -21,6 +21,8 @@
     it intended as a tool for internal qualification of personnel."/>
 	<meta name="author" content="Jesús Iglesias García"/>
 	<meta name="keywords" content="HP CDS, Smart Testing Tool, online test, evaluation test, english testing tool, test online, evaluacion online, Jesus Iglesias, TFG, Universidad de Valladolid, UVa"/>
+	<meta name="dcterms.rightsHolder" content="Jesús Iglesias García">
+	<meta name="dcterms.dateCopyrighted" content="2016">
 
 	<!-- Disallow robots -->
 	<meta name="robots" content="noindex, nofollow">
