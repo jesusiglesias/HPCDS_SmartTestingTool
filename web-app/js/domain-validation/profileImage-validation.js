@@ -5,7 +5,7 @@
 var DomainProfileImageValidation = function () {
 
     /**
-     * Admin validation
+     * Profile image validation
      */
     var handlerProfileImageValidation = function() {
 

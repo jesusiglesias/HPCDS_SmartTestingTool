@@ -30,6 +30,8 @@ class UrlMappings {
         // User
         "/user/create-error"(controller: 'user', action: 'save')
         "/user/edit-error/$id?(.$format)?"(controller: 'user', action: 'update')
+        "/user/edit/profileImage/$id?(.$format)?"(controller: 'user', action: 'editProfileImage')
+        "/user/edit-error/profileImage/$id?(.$format)?"(controller: 'user', action: 'updateProfileImage')
         // Department
         "/department/create-error"(controller: 'department', action: 'save')
         "/department/edit-error/$id?(.$format)?"(controller: 'department', action: 'update')

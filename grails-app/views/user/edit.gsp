@@ -4,23 +4,25 @@
 <html>
 <head>
 	<meta name="layout" content="main_auth_admin">
-    <title><g:message code="layouts.main_auth_admin.head.title.user" default="STT | Users management"/></title>
-    <link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
+	<title><g:message code="layouts.main_auth_admin.head.title.user" default="STT | Users management"/></title>
+	<link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
 
 	<script>
-		// Variables to use in script TODO
-		var _weak = '${g.message(code:'default.password.strength.weak', default:'Weak')}';
-		var _normal = '${g.message(code:'default.password.strength.normal', default:'Normal')}';
-		var _medium = '${g.message(code:'default.password.strength.medium', default:'Medium')}';
-		var _strong = '${g.message(code:'default.password.strength.strong', default:'Strong')}';
-		var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
-		var _checkerUsernameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.username', default:'Type a username and check its availability.')}';
-		var _checkUsernameAvailibility = '${g.createLink(controller: "secUser", action: 'checkUsernameAvailibility')}';
-		var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
-		var _checkEmailAvailibility = '${g.createLink(controller: "secUser", action: 'checkEmailAvailibility')}';
-		var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
-		var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
-		var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
+
+        // Variables to use in script
+        var _weak = '${g.message(code:'default.password.strength.weak', default:'Weak')}';
+        var _normal = '${g.message(code:'default.password.strength.normal', default:'Normal')}';
+        var _medium = '${g.message(code:'default.password.strength.medium', default:'Medium')}';
+        var _strong = '${g.message(code:'default.password.strength.strong', default:'Strong')}';
+        var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
+        var _checkerUsernameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.username', default:'Type a username and check its availability.')}';
+        var _checkUsernameAvailibility = '${g.createLink(controller: "secUser", action: 'checkUsernameAvailibility')}';
+        var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
+        var _checkEmailAvailibility = '${g.createLink(controller: "secUser", action: 'checkEmailAvailibility')}';
+        var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
+        var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
 		// Handler auto close alert
 		function createAutoClosingAlert(selector) {
@@ -55,7 +57,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/user"><g:message code="layouts.main_auth_admin.body.title.user" default="Users management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.user.edit" default="Edit user"/></small>
             </h3>
 
@@ -91,7 +93,7 @@
                 <g:if test="${flash.userErrorMessage}">
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status"> ${raw(flash.userErrorMessage)} </span>
+                        <span class="xthin" role="status"> ${raw(flash.userErrorMessage)} </span>
                     </div>
 
                     <g:javascript>
@@ -104,7 +106,7 @@
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
                         <g:eachError bean="${userInstance}" var="error">
-                            <p role="status" <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></p>
+                            <p role="status" class="xthin" <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></p>
                         </g:eachError>
                     </div>
 
@@ -116,7 +118,7 @@
                 <!-- Delete button -->
                 <g:form url="[resource:userInstance, controller:'user', action:'delete']" method="DELETE" class="form-delete">
                     <div class="btn-group">
-                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="top" data-popout="true" data-singleton="true"
+                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
                                 data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                 data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
@@ -128,11 +130,11 @@
                     </div>
                 </g:form>
 
-            <!-- Edit form -->
-                <g:form url="[resource:userInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form admin-form">
+                <!-- Edit form -->
+                <g:form url="[resource:userInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form user-form">
                     <g:hiddenField name="version" value="${userInstance?.version}" />
                     <fieldset class="form">
-                        <g:render template="form"/>
+                        <g:render template="formEdit"/>
                     </fieldset>
                     <div class="domain-button-group">
                         <!-- Cancel button -->
@@ -147,13 +149,12 @@
         </div> <!-- /.Page-content -->
     </div> <!-- /. Page-content-wrapper -->
 
-    <!-- LOAD JAVASCRIPT TODO -->
+    <!-- LOAD JAVASCRIPT -->
     <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
     <g:javascript src="confirmation/custom-delete.js"/>
     <g:javascript src="iCheck/icheck.min.js"/>
-    <g:javascript src="password/custom-password.js"/>
-    <g:javascript src="password/pwstrength-bootstrap.min.js"/>
-    <g:javascript src="domain-validation/admin-validation.js"/>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
+    <g:javascript src="domain-validation/user-validation.js"/>
 
 </body>
 </html>

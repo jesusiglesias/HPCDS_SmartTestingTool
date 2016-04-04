@@ -1,4 +1,4 @@
-<%@ page import="Security.SecUser" %>
+<%@ page import="User.User" %>
 
 <div class="form-body">
     <!-- Row -->
@@ -9,8 +9,8 @@
                 <legend class="control-label legend-profileImage"><h4 class="title-profileImage size-legend"><g:message code="default.imageProfile.title" default="Profile image"/></h4></legend>
                 <div class="fileinput fileinput-new" data-provides="fileinput">
                     <div class="fileinput-new thumbnail" data-trigger="fileinput" style="max-width: 160px; max-height: 200px;">
-                        <g:if test="${secUserInstance.avatar}">
-                            <img name="avatar" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id:secUserInstance.ident())}" />
+                        <g:if test="${userInstance.avatar}">
+                            <img name="avatar" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id:userInstance.ident())}" />
                         </g:if>
                         <g:else>
                             <img name="avatar" alt="Profile image" src="${resource(dir: 'img/profile', file: 'user_profile.png')}"/>

@@ -1,29 +1,40 @@
 <%@ page import="User.User" %>
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="layout" content="main_auth_admin">
-    <title><g:message code="layouts.main_auth_admin.head.title.user" default="STT | Users management"/></title>
+	<meta name="layout" content="main_auth_admin">
+	<title><g:message code="layouts.main_auth_admin.head.title.user" default="STT | Users management"/></title>
 
-    <!-- LOAD CSS -->
-    <link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.bootstrap.css')}" type="text/css"/>
+	<!-- LOAD CSS -->
+	<link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.css')}" type="text/css"/>
+	<link rel="stylesheet" href="${resource(dir: 'css/datatable', file: 'datatables.bootstrap.css')}" type="text/css"/>
 
-    <script>
-        // Handler auto close alert
-        function createAutoClosingAlert(selector) {
-            var alert = $(selector);
-            window.setTimeout(function () {
-                alert.slideUp(1000, function () {
-                    $(this).remove();
-                });
-            }, 5000);
-        }
-    </script>
+	<script>
+		// Handler auto close alert
+		function createAutoClosingAlert(selector) {
+			var alert = $(selector);
+			window.setTimeout(function () {
+				alert.slideUp(1000, function () {
+					$(this).remove();
+				});
+			}, 5000);
+		}
+	</script>
 </head>
 
 <body>
+
+    <!-- Search request from department TODO -->
+    <g:if test="${params.departmentSearch}">
+        <script type="text/javascript">
+            var _textSearch = '${params.departmentSearch}'
+        </script>
+    </g:if>
+    <g:else>
+        <script type="text/javascript">
+            var _textSearch = ''
+        </script>
+    </g:else>
 
     <script type="text/javascript">
 
@@ -81,7 +92,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/user"><g:message code="layouts.main_auth_admin.body.title.user" default="Users management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.user" default="Users list"/></small>
             </h3>
 
@@ -92,7 +103,7 @@
                 <g:if test="${flash.userMessage}">
                     <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status"> ${raw(flash.userMessage)} </span>
+                        <span class="xthin" role="status"> ${raw(flash.userMessage)} </span>
                     </div>
 
                     <g:javascript>
@@ -103,14 +114,13 @@
                 <g:if test="${flash.userErrorMessage}">
                     <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span role="status"> ${raw(flash.userErrorMessage)} </span>
+                        <span class="xthin" role="status"> ${raw(flash.userErrorMessage)} </span>
                     </div>
 
                     <g:javascript>
                         createAutoClosingAlert('.alert-entity');
                     </g:javascript>
                 </g:if>
-
 
                 <div class="row">
                     <div class="col-md-12">
@@ -183,7 +193,46 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="datatable/datatables.js"/>
     <g:javascript src="datatable/datatables.bootstrap.js"/>
-    <%-- TODO<g:javascript src="datatable/customAdmin-datatable.js"/> --%>
+    <g:javascript src="datatable/customUser-datatable.js"/>
 
 </body>
 </html>
+
+
+
+<%--
+
+	<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
+
+						<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
+
+						<g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}" />
+
+						<g:sortableColumn property="avatar" title="${message(code: 'user.avatar.label', default: 'Avatar')}" />
+
+						<g:sortableColumn property="avatarType" title="${message(code: 'user.avatarType.label', default: 'Avatar Type')}" />
+
+						<g:sortableColumn property="address" title="${message(code: 'user.address.label', default: 'Address')}" />
+
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${userInstanceList}" status="i" var="userInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
+						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
+
+						<td>${fieldValue(bean: userInstance, field: "password")}</td>
+
+						<td>${fieldValue(bean: userInstance, field: "email")}</td>
+
+						<td>${fieldValue(bean: userInstance, field: "avatar")}</td>
+
+						<td>${fieldValue(bean: userInstance, field: "avatarType")}</td>
+
+						<td>${fieldValue(bean: userInstance, field: "address")}</td>
+
+					</tr>
+				</g:each>
+
+--%>

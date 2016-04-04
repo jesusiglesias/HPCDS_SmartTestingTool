@@ -68,6 +68,10 @@ input:-webkit-autofill:active {
     margin-top: -25px;
 }
 
+.size-legend {
+    font-size: 22px !important;
+}
+
 .break-word {
     word-break: break-all;
 }
@@ -466,10 +470,10 @@ input:-webkit-autofill:active {
 
 .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-status{
     float: left;
+    margin-top: 17px;
 }
 
 .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions{
-    display: none;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -484,10 +488,10 @@ input:-webkit-autofill:active {
 
 .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions > li > a {
     text-transform: uppercase;
-    color: #999;
+    color: #ffffff;
 }
 .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions > li > a:hover{
-    color: #666;
+    color: #e8e8e8;
     text-decoration: none;
 }
 

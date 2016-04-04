@@ -163,7 +163,7 @@
                                                     <g:else>
                                                         <span class="label label-sm label-info">
                                                     </g:else>
-                                                    <g:formatBoolean boolean="${secUserInstance.enabled}" true="${g.message(code: "admin.enabled.label.true", default: "Confirmed")}" false="${g.message(code: "admin.enabled.label.false", default: "Pending")}"/>
+                                                    <g:formatBoolean boolean="${secUserInstance.enabled}" true="${g.message(code: "default.enabled.label.true", default: "Confirmed")}" false="${g.message(code: "default.enabled.label.false", default: "Pending")}"/>
                                                         </span>
                                                 </td>
                                                 <td>
@@ -173,7 +173,7 @@
                                                     <g:else>
                                                         <span class="label label-sm label-success">
                                                     </g:else>
-                                                    <g:formatBoolean boolean="${secUserInstance.accountLocked}" true="${g.message(code: "admin.locked.label.true", default: "Locked")}" false="${g.message(code: "admin.expiredLocked.label.false", default: "Active")}"/>
+                                                    <g:formatBoolean boolean="${secUserInstance.accountLocked}" true="${g.message(code: "default.locked.label.true", default: "Locked")}" false="${g.message(code: "default.expiredLocked.label.false", default: "Active")}"/>
                                                         </span>
                                                 </td>
                                                 <td>
@@ -183,7 +183,7 @@
                                                     <g:else>
                                                         <span class="label label-sm label-success">
                                                     </g:else>
-                                                    <g:formatBoolean boolean="${secUserInstance.accountExpired}" true="${g.message(code: "admin.expired.label.true", default: "Expired")}" false="${g.message(code: "admin.expiredLocked.label.false", default: "Active")}"/>
+                                                    <g:formatBoolean boolean="${secUserInstance.accountExpired}" true="${g.message(code: "default.expired.label.true", default: "Expired")}" false="${g.message(code: "default.expiredLocked.label.false", default: "Active")}"/>
                                                         </span>
                                                 </td>
                                                 <td>
@@ -193,7 +193,7 @@
                                                     <g:else>
                                                         <span class="label label-sm label-success">
                                                     </g:else>
-                                                    <g:formatBoolean boolean="${secUserInstance.passwordExpired}" true="${g.message(code: "admin.expired.label.true", default: "Expired")}" false="${g.message(code: "admin.expiredLocked.label.false", default: "Active")}"/>
+                                                    <g:formatBoolean boolean="${secUserInstance.passwordExpired}" true="${g.message(code: "default.expired.label.true", default: "Expired")}" false="${g.message(code: "default.expiredLocked.label.false", default: "Active")}"/>
                                                         </span>
                                                 </td>
                                             </tr>
