@@ -2,8 +2,7 @@ package User
 
 import Enumerations.Sex
 import Security.SecUser
-import java.text.ParsePosition
-import java.text.SimpleDateFormat
+import org.grails.databinding.BindingFormat
 
 /**
  * It represents the general user information.
@@ -13,6 +12,7 @@ class User extends SecUser {
     UUID id
     // Attributes
     String address
+    @BindingFormat('dd-MM-yyyy')
     Date birthDate
     String city
     String country
@@ -32,25 +32,25 @@ class User extends SecUser {
     }
 
     def beforeInsert() {
+        encodePassword()
+
         this.beforeUpdate()
     }
 
     def beforeUpdate () {
         evaluationCount = getEvaluationsCount ()
+
+        if (isDirty('password')) {
+            encodePassword()
+        }
     }
 
     // Restrictions on the attributes of the entity
     static constraints = {
         address nullable: true, blank: false, maxSize: 70
-        birthDate blank:false, max: new Date(),
-                validator: { v ->
-                    def dateFormat = new SimpleDateFormat('dd-MMM-yyyy')
-                    dateFormat.lenient = false
-                    // Parse will return null if date was unparseable
-                    return dateFormat.parse(v as String, new ParsePosition(0)) ? true : false
-                }
-        city nullable: true, blank: false, maxSize: 100
-        country nullable: true, blank: false, maxSize: 100
+        birthDate blank:false, max: new Date()
+        city nullable: true, blank: false, maxSize: 70
+        country nullable: true, blank: false, maxSize: 70
         name blank: false, maxSize: 25
         phone nullable: true, blank: false, maxSize: 20
         sex blank: false, inList: [Sex.FEMALE, Sex.MALE]

@@ -6,6 +6,9 @@
 	<title><g:message code="layouts.main_auth_admin.head.title.user" default="STT | Users management"/></title>
 	<link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/fileInput', file: 'bootstrap-fileinput.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'multi-select.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/date', file: 'bootstrap-datepicker3.min.css')}" type="text/css"/>
 
 	<script>
 		// Variables to use in script
@@ -138,6 +141,11 @@
     <g:javascript src="password/custom-password.js"/>
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
+    <g:javascript src="select/bootstrap-select.min.js"/>
+    <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
+    <g:javascript src="date/bootstrap-datepicker.min.js"/>
+    <g:javascript src="date/bootstrap-datepicker.es.min.js"/>
+    <g:javascript src="select/jquery.multi-select.js"/>
     <g:javascript src="domain-validation/user-validation.js"/>
     <g:javascript src="fileInput/bootstrap-fileinput.js"/>
 

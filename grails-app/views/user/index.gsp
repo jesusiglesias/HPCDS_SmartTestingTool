@@ -142,44 +142,100 @@
                                 <table class="table table-striped table-bordered table-hover" id="entity-table">
                                     <thead>
                                     <tr>
-
-                                        <g:sortableColumn property="username"
-                                                          title="${message(code: 'user.username.label', default: 'Username')}"/>
-
-                                        <g:sortableColumn property="password"
-                                                          title="${message(code: 'user.password.label', default: 'Password')}"/>
-
-                                        <g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}"/>
-
-                                        <g:sortableColumn property="accountExpired"
-                                                          title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}"/>
-
-                                        <g:sortableColumn property="accountLocked"
-                                                          title="${message(code: 'user.accountLocked.label', default: 'Account Locked')}"/>
-
-                                        <g:sortableColumn property="address"
-                                                          title="${message(code: 'user.address.label', default: 'Address')}"/>
-
+                                        <td><g:message code="user.avatar.label" default="Profile image"/></td>
+                                        <td><g:message code="user.username.label" default="Username"/></td>
+                                        <td><g:message code="user.email.label" default="Email"/></td>
+                                        <td><g:message code="user.enabled.label" default="Enabled account"/></td>
+                                        <td><g:message code="user.accountLocked.label" default="Locked account"/></td>
+                                        <td><g:message code="user.accountExpired.label" default="Expired account"/></td>
+                                        <td><g:message code="user.passwordExpired.label" default="Expired password"/></td>
+                                        <td><g:message code="user.name.label" default="Name"/></td>
+                                        <td><g:message code="user.surname.label" default="Surname"/></td>
+                                        <td><g:message code="user.birthDate.label" default="Birthdate"/></td>
+                                        <td><g:message code="user.address.label" default="Address"/></td>
+                                        <td><g:message code="user.city.label" default="City"/></td>
+                                        <td><g:message code="user.country.label" default="Country"/></td>
+                                        <td><g:message code="user.phone.label" default="Phone"/></td>
+                                        <td><g:message code="user.sex.label" default="Sex"/></td>
+                                        <td><g:message code="user.evaluationCount.label" default="Number of evaluations"/></td>
+                                        <td><g:message code="layouts.main_auth_admin.body.content.user.evaluation.display" default="Show evaluations"/></td>
+                                        <td><g:message code="user.department.label" default="Department"/></td>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <g:each in="${userInstanceList}" status="i" var="userInstance">
-                                        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-                                            <td><g:link action="edit" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
-
-                                            <td>${fieldValue(bean: userInstance, field: "password")}</td>
-
-                                            <td>${fieldValue(bean: userInstance, field: "email")}</td>
-
-                                            <td><g:formatBoolean boolean="${userInstance.accountExpired}"/></td>
-
-                                            <td><g:formatBoolean boolean="${userInstance.accountLocked}"/></td>
-
-                                            <td>${fieldValue(bean: userInstance, field: "address")}</td>
-
-                                        </tr>
-                                    </g:each>
+                                        <g:each in="${userInstanceList}" status="i" var="userInstance">
+                                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                                <td>
+                                                    <g:if test="${userInstance.avatar}">
+                                                        <g:link controller="user" action="editProfileImage" id="${userInstance.id}">
+                                                            <img class="img-circle profileImage-view" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id:userInstance.ident())}" />
+                                                        </g:link>
+                                                    </g:if>
+                                                    <g:else>
+                                                        <g:link controller="user" action="editProfileImage" id="${userInstance.id}">
+                                                            <img class="img-circle profileImage-view" alt="Profile image" src="${resource(dir: 'img/profile', file: 'user_profile.png')}"/>
+                                                        </g:link>
+                                                    </g:else>
+                                                </td>
+                                                <td><g:link controller="user" action="edit" id="${userInstance.id}" class="break-word">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
+                                                <td class="break-word">${fieldValue(bean: userInstance, field: "email")}</td>
+                                                <td>
+                                                    <g:if test="${userInstance.enabled}">
+                                                        <span class="label label-sm label-success">
+                                                    </g:if>
+                                                    <g:else>
+                                                        <span class="label label-sm label-info">
+                                                    </g:else>
+                                                    <g:formatBoolean boolean="${userInstance.enabled}" true="${g.message(code: "default.enabled.label.true", default: "Confirmed")}" false="${g.message(code: "default.enabled.label.false", default: "Pending")}"/>
+                                                </span>
+                                                </td>
+                                                <td>
+                                                    <g:if test="${userInstance.accountLocked}">
+                                                        <span class="label label-sm label-danger">
+                                                    </g:if>
+                                                    <g:else>
+                                                        <span class="label label-sm label-success">
+                                                    </g:else>
+                                                    <g:formatBoolean boolean="${userInstance.accountLocked}" true="${g.message(code: "default.locked.label.true", default: "Locked")}" false="${g.message(code: "default.expiredLocked.label.false", default: "Active")}"/>
+                                                </span>
+                                                </td>
+                                                <td>
+                                                    <g:if test="${userInstance.accountExpired}">
+                                                        <span class="label label-sm label-warning">
+                                                    </g:if>
+                                                    <g:else>
+                                                        <span class="label label-sm label-success">
+                                                    </g:else>
+                                                    <g:formatBoolean boolean="${userInstance.accountExpired}" true="${g.message(code: "default.expired.label.true", default: "Expired")}" false="${g.message(code: "default.expiredLocked.label.false", default: "Active")}"/>
+                                                </span>
+                                                </td>
+                                                <td>
+                                                    <g:if test="${userInstance.passwordExpired}">
+                                                        <span class="label label-sm label-warning">
+                                                    </g:if>
+                                                    <g:else>
+                                                        <span class="label label-sm label-success">
+                                                    </g:else>
+                                                    <g:formatBoolean boolean="${userInstance.passwordExpired}" true="${g.message(code: "default.expired.label.true", default: "Expired")}" false="${g.message(code: "default.expiredLocked.label.false", default: "Active")}"/>
+                                                </span>
+                                                </td>
+                                                <td>${fieldValue(bean: userInstance, field: "name")}</td>
+                                                <td>${fieldValue(bean: userInstance, field: "surname")}</td>
+                                                <td><g:formatDate formatName="custom.date.birthdate.format" date="${userInstance?.birthDate}"/></td>
+                                                <td>${fieldValue(bean: userInstance, field: "address")}</td>
+                                                <td>${fieldValue(bean: userInstance, field: "city")}</td>
+                                                <td>${fieldValue(bean: userInstance, field: "country")}</td>
+                                                <td>${fieldValue(bean: userInstance, field: "phone")}</td>
+                                                <td>${message(code:'enumerations.sex.'+fieldValue(bean: userInstance, field: "sex"))}</td>
+                                                <td>${fieldValue(bean: userInstance, field: "evaluationCount")}</td>
+                                                <td><g:link uri="/evaluation" params="[userSearch: userInstance.username]"><g:message code="user.evaluations.label" default="Evaluations"/></g:link></td>
+                                                <td>
+                                                    <span class="label label-sm label-default">
+                                                        ${fieldValue(bean: userInstance, field: "department.name")}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </g:each>
                                     </tbody>
                                 </table>
                             </div> <!-- /.Portlet-body -->
@@ -197,42 +253,3 @@
 
 </body>
 </html>
-
-
-
-<%--
-
-	<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
-
-						<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
-
-						<g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}" />
-
-						<g:sortableColumn property="avatar" title="${message(code: 'user.avatar.label', default: 'Avatar')}" />
-
-						<g:sortableColumn property="avatarType" title="${message(code: 'user.avatarType.label', default: 'Avatar Type')}" />
-
-						<g:sortableColumn property="address" title="${message(code: 'user.address.label', default: 'Address')}" />
-
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${userInstanceList}" status="i" var="userInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
-
-						<td>${fieldValue(bean: userInstance, field: "password")}</td>
-
-						<td>${fieldValue(bean: userInstance, field: "email")}</td>
-
-						<td>${fieldValue(bean: userInstance, field: "avatar")}</td>
-
-						<td>${fieldValue(bean: userInstance, field: "avatarType")}</td>
-
-						<td>${fieldValue(bean: userInstance, field: "address")}</td>
-
-					</tr>
-				</g:each>
-
---%>

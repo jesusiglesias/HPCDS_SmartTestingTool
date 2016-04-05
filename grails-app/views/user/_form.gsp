@@ -4,7 +4,6 @@
     <!-- Row -->
     <div class="row">
         <div class="col-xs-12">
-            <!-- TODO CSS -->
             <legend class="control-label legend-profileImage"><h4 class="title-profileImage size-legend"><g:message code="default.accountInformation.title" default="User account"/></h4></legend>
         </div>
         <!-- Username -->
@@ -73,7 +72,6 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <%-- TODO pattern="${userInstance.constraints.password.matches}"--%>
                     <g:passwordField name="password" class="form-control password-admin form-shadow"/>
                 </div>
             </div>
@@ -167,7 +165,6 @@
     <!-- Row -->
     <div class="row space-secondRow">
         <div class="col-xs-12">
-            <!-- TODO CSS -->
             <legend class="control-label legend-profileImage"><h4 class="title-profileImage size-legend"><g:message code="default.privateInformation.title" default="Personal information"/></h4></legend>
         </div>
         <!-- Name -->
@@ -214,11 +211,25 @@
                         <span class="required"> * </span>
                     </h5>
                 </label>
-                <div class="input-icon right">
+                <div class="input-icon rigth">
                     <i class="fa"></i>
-                    <!-- TODO class -->
-                    <g:datePicker name="birthDate" precision="day"  value="${userInstance?.birthDate}" class="form-control form-shadow"/>
-                </div>
+                    <g:datePicker name="birthDate" precision="day" value="${userInstance.birthDate}"/>
+                    <%-- <input type="date" id="birthDate" value="${formatDate(format:'dd-MM-yyyy',date: userInstance?.birthDate)}" class="form-control form-shadow"> --%>
+                      <%-- TODO <div class="input-group date date-picker" data-date-format="dd-MM-yyyy" data-date-end-date="+0d">
+                          <input type="text" id="birthDate" value="${formatDate(format:'dd-MM-yyyy',date: userInstance?.birthDate)}" class="form-control form-shadow"/>
+                          <span class="input-group-btn">
+                              <button class="btn default" type="button">
+                                  <i class="fa fa-calendar"></i>
+                              </button>
+                          </span>
+                      </div>
+                      <span class="help-block">
+                          <h5>
+                              <g:message code="custom.date.picker.description" default="Select a date"/>
+                          </h5>
+                      </span>
+                      --%>
+                  </div>
             </div>
         </div>
 
@@ -250,7 +261,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textField name="city" maxlength="100" value="${userInstance?.city}" class="form-control form-shadow"/>
+                    <g:textField name="city" maxlength="70" value="${userInstance?.city}" class="form-control form-shadow"/>
                 </div>
             </div>
         </div>
@@ -265,7 +276,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textField name="country" maxlength="100" value="${userInstance?.country}" class="form-control form-shadow"/>
+                    <g:textField name="country" maxlength="70" value="${userInstance?.country}" class="form-control form-shadow"/>
                 </div>
             </div>
         </div>
@@ -316,7 +327,7 @@
                 <label for="department" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.department.label" default="Department"/>
-                        <span class="required-indicator"> * </span>
+                        <span class="required"> * </span>
                     </h5>
                     <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.user.department.select.description" default="Select the department to which the user belongs."/></h5>
                 </label>
@@ -326,19 +337,11 @@
                           optionKey="id"
                           optionValue="name"
                           noSelection="${['': "${g.message(code: 'layouts.main_auth_admin.body.content.user.department.select', default: 'Select a department')}"]}"
-                          class="form-control" data-style="btn-success" />
+                          class="bs-select form-control" data-style="btn-success"
+                          data-live-search="true"/>
             </div>
         </div>
     </div>
-
-    <%-- TODO
-    <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'evaluations', 'error')} ">
-      <label for="evaluations">
-          <g:message code="user.evaluations.label" default="Evaluations" />
-
-      </label>
-      <g:select name="evaluations" from="${User.Evaluation.list()}" multiple="multiple" optionKey="id" size="5" value="${userInstance?.evaluations*.id}" class="many-to-many"/>
-    </div> --%>
 
     <!-- Row -->
     <div class="row space-imageRow">

@@ -32,6 +32,35 @@ var DomainUserValidation = function () {
                     confirmPassword: {
                         required: true,
                         equalTo: "#password"
+                    },
+                    name: {
+                        required: true,
+                        maxlength: 25
+                    },
+                    surname: {
+                        required: true,
+                        maxlength: 40
+                    },
+                    birthDate: {
+                        required: true
+                    },
+                    address: {
+                        maxlength: 70
+                    },
+                    city: {
+                        maxlength: 70
+                    },
+                    country: {
+                        maxlength: 70
+                    },
+                    phone: {
+                        maxlength: 20
+                    },
+                    sex: {
+                        required: true
+                    },
+                    department: {
+                        required: true
                     }
                 },
 
@@ -51,6 +80,35 @@ var DomainUserValidation = function () {
                     confirmPassword: {
                         required: _requiredField,
                         equalTo: _equalPassword
+                    },
+                    name: {
+                        required: _requiredField,
+                        maxlength: _maxlengthField
+                    },
+                    surname: {
+                        required: _requiredField,
+                        maxlength: _maxlengthField
+                    },
+                    birthDate: {
+                        required: _requiredField
+                    },
+                    address: {
+                        maxlength: _maxlengthField
+                    },
+                    city: {
+                        maxlength: _maxlengthField
+                    },
+                    country: {
+                        maxlength: _maxlengthField
+                    },
+                    phone: {
+                        maxlength: _maxlengthField
+                    },
+                    sex: {
+                        required: _requiredField
+                    },
+                    department: {
+                        required: _requiredField
                     }
                 },
 
@@ -214,6 +272,88 @@ var DomainUserValidation = function () {
             placement: 'top',
             validate: true
         });
+
+        /* Email field */
+        $('#email').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 20,
+            placement: 'top',
+            validate: true
+        });
+
+        /* Name field */
+        $('#name').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 8,
+            placement: 'top',
+            validate: true
+        });
+
+        /* Surname field */
+        $('#surname').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 15,
+            placement: 'top',
+            validate: true
+        });
+
+        /* Address field */
+        $('#address').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 30,
+            placement: 'top',
+            validate: true
+        });
+
+        /* City field */
+        $('#city').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 30,
+            placement: 'top',
+            validate: true
+        });
+
+        /* Country field */
+        $('#country').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 30,
+            placement: 'top',
+            validate: true
+        });
+
+        /* Phone field */
+        $('#phone').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 5,
+            placement: 'top',
+            validate: true
+        });
+    };
+
+    /**
+     * It handles the select
+     */
+    var handlerBootstrapSelect = function () {
+
+        $('.bs-select').selectpicker({
+            iconBase: 'fa',
+            tickIcon: 'fa-check'
+        });
+    };
+
+    /**
+     * It handles the date picker TODO
+     */
+    var handlerDatePickers = function () {
+
+        if (jQuery().datepicker) {
+            $('.date-picker').datepicker({
+                orientation: "left",
+                autoclose: true,
+                clearBtn: true,
+                language: 'es',
+            });
+        }
     };
 
     return {
@@ -223,6 +363,8 @@ var DomainUserValidation = function () {
             handleUsernameAvailabilityChecker();
             handleEmailAvailabilityChecker();
             handlerMaxlength();
+            handlerBootstrapSelect();
+            handlerDatePickers();
         }
     };
 

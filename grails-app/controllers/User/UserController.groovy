@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Value
 class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", updateProfileImage: 'POST', delete: "DELETE"]
-    // TODO
-    //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Mime-types allowed in image
     private static final contentsType = ['image/png', 'image/jpeg', 'image/gif']
@@ -41,13 +39,7 @@ class UserController {
         }
         params.max = Math.min(max, 100)
 
-        // Obtain user role
-        def normalRole = SecRole.findByAuthority("ROLE_USER")
-
-        // Obtain users with normal role
-        def normalUsers = SecUserSecRole.findAllBySecRole(normalRole).secUser
-
-        respond normalUsers
+        respond User.list(params)
     }
 
     /**
@@ -68,10 +60,20 @@ class UserController {
     @Transactional
     def save(User userInstance) {
 
+        // TODO
+        log.error("User:" + userInstance.birthDate)
+
+       /* def birthDateFormat = Date.parse("yyyy-MM-dd HH:mm", userInstance.birthDate as String)
+        userInstance.birthDate = birthDateFormat
+        userInstance.save()*/
+
         if (userInstance == null) {
             notFound()
             return
         }
+
+        // Get the avatar file from the multi-part request
+        def filename = request.getFile('avatar')
 
         if (userInstance.hasErrors()) {
             respond userInstance.errors, view: 'create'
@@ -85,7 +87,26 @@ class UserController {
             return
         }
 
+        // It checks that mime-types is correct: ['image/png', 'image/jpeg', 'image/gif']
+        if (!filename.empty && !contentsType.contains(filename.getContentType())) {
+            flash.userErrorMessage = g.message(code: 'default.validation.mimeType.image', default: 'The profile image must be of type: <strong>.png</strong>, <strong>.jpeg</strong> or <strong>.gif</strong>.')
+            render  view: "create", model: [userInstance: userInstance]
+            return
+        }
+
         try {
+
+            // Save the image and mime type
+            if (!filename.empty) {
+                log.debug("SecUserController():save():ImageProfileUploaded:${filename.name}")
+
+                userInstance.avatar = filename.bytes
+                userInstance.avatarType = filename.contentType
+            } else {
+                userInstance.avatar = null
+                userInstance.avatarType = null
+            }
+
             // Save user data
             userInstance.save(flush: true, failOnError: true)
 
@@ -162,17 +183,6 @@ class UserController {
         // Validate the instance
         if (!userInstance.validate()) {
             respond userInstance.errors, view:'edit'
-            return
-        }
-
-        // Check if password and confirm password fields are same
-        if (userInstance.password != userInstance.confirmPassword) {
-
-            // Roll back in database
-            transactionStatus.setRollbackOnly()
-
-            flash.userErrorMessage = g.message(code: 'default.password.notsame', default: 'Password and confirm password fields must match.')
-            render view: "edit", model: [userInstance: userInstance]
             return
         }
 

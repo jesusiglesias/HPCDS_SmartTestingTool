@@ -44,16 +44,48 @@ var DatatableUserList = function () {
             "autoWidth": true,
 
             // Visibility of columns TODO
-            /*"columnDefs": [
+            "columnDefs": [
                 {
-                    "targets": [4], // Account expired
+                    "targets": [5], // Expired expired
                     "visible": false
                 },
                 {
-                    "targets": [5], // Password expired
+                    "targets": [6], // Expired password
+                    "visible": false
+                },
+                {
+                    "targets": [7], // Name
+                    "visible": false
+                },
+                {
+                    "targets": [8], // Surname
+                    "visible": false
+                },
+                {
+                    "targets": [9], // Birthdate
+                    "visible": false
+                },
+                {
+                    "targets": [10], // Address
+                    "visible": false
+                },
+                {
+                    "targets": [11], // City
+                    "visible": false
+                },
+                {
+                    "targets": [12], // Country
+                    "visible": false
+                },
+                {
+                    "targets": [13], // Phone
+                    "visible": false
+                },
+                {
+                    "targets": [14], // Sex
                     "visible": false
                 }
-            ], */
+            ],
 
             buttons: [
                 { extend: 'print', className: 'btn dark btn-outline', text: _print },
