@@ -199,25 +199,20 @@
             <div class="page-sidebar navbar-collapse collapse">
                 <!-- Page-sidebar-menu -->
                 <ul class="page-sidebar-menu page-header-fixed" data-keep-expanded="true" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 30px">
-
-                    <!-- TODO DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
                     <li class="sidebar-search-wrapper">
-                        <!-- Search form  TODO -->
-                        <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
-                        <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-                        <form class="sidebar-search" action="" method="POST">
+                        <g:form class="sidebar-search" controller="user" action="index">
                             <a href="javascript:;" class="remove">
                                 <i class="icon-close"></i>
                             </a>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="<g:message code="layouts.main_auth_admin.sidebar.search" default="Search..."/>">
+                                <g:textField name="quickSearch" class="form-control" placeholder="${message(code:'layouts.main_auth_admin.sidebar.search', default:'Search...')}"/>
                                 <span class="input-group-btn">
                                     <a href="javascript:;" class="btn submit">
                                         <i class="icon-magnifier"></i>
                                     </a>
                                 </span>
                             </div>
-                        </form>
+                        </g:form>
                     </li> <!-- /.Search form -->
 
                     <li class="nav-item start active open">

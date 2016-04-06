@@ -149,12 +149,11 @@
                                                         <g:else>
                                                             <span class="mt-comment-status label label-sm label-info circle">
                                                         </g:else>
-                                                                <g:formatBoolean boolean="${user?.enabled}" true="${g.message(code: "admin.enabled.label.true", default: "Confirmed")}" false="${g.message(code: "admin.enabled.label.false", default: "Pending")}"/>
+                                                                <g:formatBoolean boolean="${user?.enabled}" true="${g.message(code: "default.enabled.label.true", default: "Confirmed")}" false="${g.message(code: "default.enabled.label.false", default: "Pending")}"/>
                                                             </span>
                                                         <ul class="mt-comment-actions">
-                                                            <!-- TODO -->
                                                             <li>
-                                                                <a href="#">View</a>
+                                                                <g:link controller="user" action="edit" id="${user?.id}" class="btn grey-gallery"><g:message code="default.button.edit.label" default="Edit"/></g:link>
                                                             </li>
                                                         </ul>
                                                     </div>
