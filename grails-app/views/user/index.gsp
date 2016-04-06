@@ -24,12 +24,17 @@
 
 <body>
 
-    <!-- Search request from department TODO -->
+    <!-- Search request from department -->
     <g:if test="${params.departmentSearch}">
         <script type="text/javascript">
             var _textSearch = '${params.departmentSearch}'
         </script>
     </g:if>
+    <g:elseif test="${params.quickSearch}">
+        <script type="text/javascript">
+            var _textSearch = '${params.quickSearch}'
+        </script>
+    </g:elseif>
     <g:else>
         <script type="text/javascript">
             var _textSearch = ''
@@ -219,13 +224,13 @@
                                                     <g:formatBoolean boolean="${userInstance.passwordExpired}" true="${g.message(code: "default.expired.label.true", default: "Expired")}" false="${g.message(code: "default.expiredLocked.label.false", default: "Active")}"/>
                                                 </span>
                                                 </td>
-                                                <td>${fieldValue(bean: userInstance, field: "name")}</td>
-                                                <td>${fieldValue(bean: userInstance, field: "surname")}</td>
+                                                <td class="break-word">${fieldValue(bean: userInstance, field: "name")}</td>
+                                                <td class="break-word">${fieldValue(bean: userInstance, field: "surname")}</td>
                                                 <td><g:formatDate formatName="custom.date.birthdate.format" date="${userInstance?.birthDate}"/></td>
-                                                <td>${fieldValue(bean: userInstance, field: "address")}</td>
-                                                <td>${fieldValue(bean: userInstance, field: "city")}</td>
-                                                <td>${fieldValue(bean: userInstance, field: "country")}</td>
-                                                <td>${fieldValue(bean: userInstance, field: "phone")}</td>
+                                                <td class="break-word">${fieldValue(bean: userInstance, field: "address")}</td>
+                                                <td class="break-word">${fieldValue(bean: userInstance, field: "city")}</td>
+                                                <td class="break-word">${fieldValue(bean: userInstance, field: "country")}</td>
+                                                <td class="break-word">${fieldValue(bean: userInstance, field: "phone")}</td>
                                                 <td>${message(code:'enumerations.sex.'+fieldValue(bean: userInstance, field: "sex"))}</td>
                                                 <td>${fieldValue(bean: userInstance, field: "evaluationCount")}</td>
                                                 <td><g:link uri="/evaluation" params="[userSearch: userInstance.username]"><g:message code="user.evaluations.label" default="Evaluations"/></g:link></td>

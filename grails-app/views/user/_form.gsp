@@ -211,24 +211,20 @@
                         <span class="required"> * </span>
                     </h5>
                 </label>
-                <div class="input-icon rigth">
-                    <i class="fa"></i>
-                    <g:datePicker name="birthDate" precision="day" value="${userInstance.birthDate}"/>
-                    <%-- <input type="date" id="birthDate" value="${formatDate(format:'dd-MM-yyyy',date: userInstance?.birthDate)}" class="form-control form-shadow"> --%>
-                      <%-- TODO <div class="input-group date date-picker" data-date-format="dd-MM-yyyy" data-date-end-date="+0d">
-                          <input type="text" id="birthDate" value="${formatDate(format:'dd-MM-yyyy',date: userInstance?.birthDate)}" class="form-control form-shadow"/>
-                          <span class="input-group-btn">
-                              <button class="btn default" type="button">
-                                  <i class="fa fa-calendar"></i>
-                              </button>
-                          </span>
-                      </div>
-                      <span class="help-block">
-                          <h5>
-                              <g:message code="custom.date.picker.description" default="Select a date"/>
-                          </h5>
-                      </span>
-                      --%>
+                <div class="input-icon">
+                    <div class="input-group date date-picker" data-date-format="dd-mm-yyyy" data-date-end-date="+0d">
+                        <input type="text" name="birthDate" id="birthDate" value="${formatDate(format:'dd-MM-yyyy', date: userInstance?.birthDate)}" class="form-control form-shadow"/>
+                        <span class="input-group-btn">
+                            <button class="btn default" type="button">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <span class="help-block">
+                        <h5>
+                            <g:message code="custom.date.picker.description" default="Select a date"/>
+                        </h5>
+                    </span>
                   </div>
             </div>
         </div>

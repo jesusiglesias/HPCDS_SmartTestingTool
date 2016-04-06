@@ -342,6 +342,9 @@ class SecUserController {
         } catch (DataIntegrityViolationException exception) {
             log.error("SecUserController():delete():DataIntegrityViolationException:Administrator:${secUserInstance.username}:${exception}")
 
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             request.withFormat {
                 form multipartForm {
                     flash.secUserErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'admin.label', default: 'Administrator'), secUserInstance.username])

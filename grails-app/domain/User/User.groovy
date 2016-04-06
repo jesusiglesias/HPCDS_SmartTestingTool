@@ -12,7 +12,6 @@ class User extends SecUser {
     UUID id
     // Attributes
     String address
-    @BindingFormat('dd-MM-yyyy')
     Date birthDate
     String city
     String country

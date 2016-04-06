@@ -878,22 +878,12 @@ fieldset[disabled] .form-group.form-md-line-input .form-control {
     filter: alpha(opacity=70);
 }
 
-/*
-.has-error .md-checkbox label,
-.has-error.md-checkbox label {
-  color: #fbe1e3;
-}
-
-.has-error .md-checkbox label > .box,
-.has-error.md-checkbox label > .box {
-  border-color: #e73d4a;
-}
-
 .has-error .md-checkbox label > .check,
 .has-error.md-checkbox label > .check {
-  border-color: #e73d4a;
+  border-color: #d05454;
 }
 
+/*
 .has-success .md-checkbox label,
 .has-success.md-checkbox label {
   color: #abe7ed;

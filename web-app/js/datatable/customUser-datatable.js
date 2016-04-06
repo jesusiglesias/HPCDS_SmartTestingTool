@@ -43,10 +43,10 @@ var DatatableUserList = function () {
             // Auto width
             "autoWidth": true,
 
-            // Visibility of columns TODO
+            // Visibility of columns
             "columnDefs": [
                 {
-                    "targets": [5], // Expired expired
+                    "targets": [5], // Expired account
                     "visible": false
                 },
                 {
@@ -88,10 +88,10 @@ var DatatableUserList = function () {
             ],
 
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline', text: _print },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _userFile, title: _userTableTitle },
-                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _userFile },
+                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [1, 2, 7, 8, 9, 14, 15, 17]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _userFile, title: _userTableTitle, exportOptions: {columns: [1, 2, 7, 8, 9, 14, 15, 17]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _userFile, exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]} },
                 { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
             ],
@@ -131,6 +131,10 @@ var DatatableUserList = function () {
             // Horizontal scrollable datatable
             "dom": "<'row' <'col-md-12'B>><'row'<'col-sm-6 col-xs-12'l><'col-sm-6 col-xs-12'f>r><'table-scrollable't><'row'<'col-sm-5 col-xs-12'i><'col-sm-7 col-xs-12'p>>"
         });
+        
+        var searchTable = table.DataTable();
+        searchTable.search(_textSearch).draw();
+
     };
 
     return {

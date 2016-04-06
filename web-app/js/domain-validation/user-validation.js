@@ -273,14 +273,6 @@ var DomainUserValidation = function () {
             validate: true
         });
 
-        /* Email field */
-        $('#email').maxlength({
-            limitReachedClass: "label label-danger",
-            threshold: 20,
-            placement: 'top',
-            validate: true
-        });
-
         /* Name field */
         $('#name').maxlength({
             limitReachedClass: "label label-danger",
@@ -342,7 +334,7 @@ var DomainUserValidation = function () {
     };
 
     /**
-     * It handles the date picker TODO
+     * It handles the date picker
      */
     var handlerDatePickers = function () {
 
@@ -352,6 +344,7 @@ var DomainUserValidation = function () {
                 autoclose: true,
                 clearBtn: true,
                 language: 'es',
+                format: 'dd-mm-yyyy'
             });
         }
     };
