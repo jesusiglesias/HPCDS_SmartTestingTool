@@ -97,6 +97,15 @@
                             <g:message code="layouts.main_auth_admin.body.content.department.delete" default="Delete department"/>
                         </button>
                     </div>
+                    <div class="has-error md-checkbox check-delete">
+                        <input type="checkbox" name='delete_department' id='delete_department' class="md-check"/>
+                        <label for="delete_department" class="sbold">
+                            <span></span>
+                            <span class="check"></span>
+                            <span class="box"></span>
+                            <g:message code="layouts.main_auth_admin.body.content.department.delete.users" default="Enable to remove the users associated to the department"/>
+                        </label>
+                    </div>
                 </g:form>
 
                 <!-- Edit form -->

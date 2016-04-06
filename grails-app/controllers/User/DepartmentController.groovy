@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value
 @Transactional(readOnly = true)
 class DepartmentController {
 
+    def CustomDeleteService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Default value of pagination
@@ -185,6 +187,11 @@ class DepartmentController {
 
         try {
 
+            // Delete users if checkbox is true
+            if (params.delete_department) {
+                customDeleteService.customDeleteDepartment(departmentInstance)
+            }
+
             // Delete department
             departmentInstance.delete(flush:true, failOnError: true)
 
@@ -198,9 +205,12 @@ class DepartmentController {
         } catch (DataIntegrityViolationException exception) {
             log.error("DepartmentController():delete():DataIntegrityViolationException:Department:${departmentInstance.name}:${exception}")
 
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             request.withFormat {
                 form multipartForm {
-                    flash.departmentErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
+                    flash.departmentErrorMessage = g.message(code: 'default.not.deleted.message.department', default: 'ERROR! {0} <strong>{1}</strong> was not deleted. First, you must delete the users associated with the department.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }

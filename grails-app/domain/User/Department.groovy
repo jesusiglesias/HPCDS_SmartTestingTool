@@ -18,10 +18,6 @@ class Department {
         users?.size () ?: 0
     }
 
-    def beforeInsert() {
-        this.beforeUpdate()
-    }
-
     void beforeUpdate () {
         userCount = getUsersCount ()
     }

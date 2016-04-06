@@ -28,26 +28,5 @@
                 </h5>
             </div>
         </div>
-
-        <!-- User list TODO -->
-        <div class="col-md-6">
-            <div class="form-group  ${hasErrors(bean: departmentInstance, field: 'users', 'error')}">
-                <label for="users" class="control-label">
-                    <h5 class="sbold">
-                        <g:message code="department.users.label" default="Users"/>
-                        <span class="required">*</span>
-                    </h5>
-                </label>
-                <ul class="one-to-many">
-                    <g:each in="${departmentInstance?.users ?}" var="u">
-                        <li><g:link controller="user" action="show" id="${u.id}">${u?.encodeAsHTML()}</g:link></li>
-                    </g:each>
-                    <li class="add">
-                        <g:link controller="user" action="create"
-                                params="['department.id': departmentInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'user.label', default: 'User')])}</g:link>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div> <!-- /.Row -->
 </div> <!-- /.Form-body -->
