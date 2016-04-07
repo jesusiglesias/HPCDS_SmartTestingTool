@@ -2,13 +2,15 @@
  *                                         BOOTSTRAP                                         *
  *-------------------------------------------------------------------------------------------*/
 
-import Test.Catalog
-import Test.Topic
-import User.Department
+import Enumerations.DifficultyLevel
+import Enumerations.Sex
+import Security.*
+import Test.*
+import User.*
 import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.SecurityFilterPosition
 import grails.util.Environment
-import Security.*
+import java.text.SimpleDateFormat
 
 /**
  * Configuration during application startup and destruction.
@@ -17,6 +19,7 @@ class BootStrap {
 
     def authenticationProcessingFilter
     def concurrentSessionControlStrategy
+    def CustomCountService
 
     /**
      * Initial operations when application start.
@@ -57,97 +60,72 @@ class BootStrap {
         // It checks data existence
         if (!SecUser.count() && !SecRole.count()) {
 
-            // Creating roles
+            /*-------------------------------------------------------------------------------------------*
+             *                                        ADMIN AND ROLE                                         *
+             *-------------------------------------------------------------------------------------------*/
+
+            // Role
             def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN')
             def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER')
 
-            // Creating new users
+            // Administrator
             def newAdmin = SecUser.findByUsername('admin_stt') ?: new SecUser( // Admin
                     username: 'admin_stt',
                     password: '7g4sOmmm',
                     email: 'info.smartestingtool@gmail.com')
 
-            def newAdminUser = SecUser.findByUsername('admin_switch') ?: new SecUser( // Normal user to switch
-                    username: 'admin_switch',
-                    password: '7g4sOmmm',
-                    email: 'admin_switch@stt.com')
+            /*-------------------------------------------------------------------------------------------*
+             *                                        DEPARTMENT                                         *
+             *-------------------------------------------------------------------------------------------*/
 
-            def newUser = SecUser.findByUsername('user_stt') ?: new SecUser( // Normal user
-                    username: 'user_stt',
-                    password: '7g4sOmmm',
-                    email: 'user_stt@stt.com')
+            def anotherDepartment = Department.findByName('Otro') ?: new Department(
+                    name: 'Otro'
+            )
 
-            def newUser1 = SecUser.findByUsername('user_stt1') ?: new SecUser( // Normal user
-                    username: 'user_stt1',
-                    password: '7g4sOmmm',
-                    email: 'user_stt@stt1.com')
-
-            def newUser2 = SecUser.findByUsername('user_stt2') ?: new SecUser( // Normal user
-                    username: 'user_stt2',
-                    password: '7g4sOmmm',
-                    email: 'user_stt@stt2.com')
-
-            def newUser3 = SecUser.findByUsername('user_stt3') ?: new SecUser( // Normal user
-                    username: 'user_stt3',
-                    password: '7g4sOmmm',
-                    email: 'user_stt@stt3.com')
-
-            def newUser4 = SecUser.findByUsername('user_stt4') ?: new SecUser( // Normal user
-                    username: 'user_stt4',
-                    password: '7g4sOmmm',
-                    email: 'user_stt@stt4.com')
-
-            def newUser5 = SecUser.findByUsername('user_stt5') ?: new SecUser( // Normal user
-                    username: 'user_stt5',
-                    password: '7g4sOmmm',
-                    email: 'user_stt@stt5.com')
-
-            def newUser6 = SecUser.findByUsername('user_stt6') ?: new SecUser( // Normal user
-                    username: 'user_stt6',
-                    password: '7g4sOmmm',
-                    email: 'user_stt@stt6.com')
-
-            def newUser7 = SecUser.findByUsername('user_stt7') ?: new SecUser( // Normal user
-                    username: 'user_stt7',
-                    password: '7g4sOmmm',
-                    email: 'user_stt@stt7.com')
-
-            def newUser8 = SecUser.findByUsername('user_stt8') ?: new SecUser( // Normal user
-                    username: 'user_stt8',
-                    password: '7g4sOmmm',
-                    email: 'user_stt@stt8.com')
-
-            // Creating new departments
-            def iDDepartment = Department.findByName('Investigación + Desarrollo') ?: new Department(
+            def idDepartment = Department.findByName('Investigación + Desarrollo') ?: new Department(
                     name: 'Investigación + Desarrollo'
-            )
-
-            def securityDepartment = Department.findByName('Seguridad') ?: new Department(
-                    name: 'Seguridad'
-            )
-
-            def productDepartment = Department.findByName('Ingeniería de producto') ?: new Department(
-                    name: 'Ingeniería de producto'
             )
 
             def rrhhDepartment = Department.findByName('Recursos humanos') ?: new Department(
                     name: 'Recursos humanos'
             )
 
+            def securityDepartment = Department.findByName('Seguridad') ?: new Department(
+                    name: 'Seguridad'
+            )
+
             def supportDepartment = Department.findByName('Soporte técnico') ?: new Department(
                     name: 'Soporte técnico'
             )
 
-            // Creating new catalogs
-            def iDcatalog = Catalog.findByName('Catálogo I+D') ?: new Catalog(
-                    name: 'Catálogo I+D'
-            )
+            /*-------------------------------------------------------------------------------------------*
+             *                                          USER                                             *
+             *-------------------------------------------------------------------------------------------*/
 
-            def securityCatalog = Catalog.findByName('Seguridad inicial') ?: new Catalog(
-                    name: 'Seguridad inicial'
-            )
+            def newUserSwitch = User.findByUsername('admin_switch') ?: new User( // Normal user to switch
+                    username: 'admin_switch',
+                    password: '7g4sOmmm',
+                    email: 'admin_switch@stt.com',
+                    name:   'Usuario',
+                    surname: 'Conmutar',
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1991'),
+                    sex: Sex.MALE,
+                    department: idDepartment )
 
-            // Creating new topics
+            def newUser = User.findByUsername('user_stt') ?: new User( // Normal user
+                    username: 'user_stt',
+                    password: '7g4sOmmm',
+                    email: 'user_stt@stt.com',
+                    name: 'Usuario STT',
+                    surname: 'Apellido STT',
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('22-04-1994'),
+                    sex: Sex.MALE,
+                    department: idDepartment)
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                          TOPIC                                            *
+             *-------------------------------------------------------------------------------------------*/
+
             def englishTopic = Topic.findByName('Inglés') ?: new Topic(
                     name: 'Inglés',
                     description: 'Descripción 1'
@@ -158,54 +136,151 @@ class BootStrap {
                     description: 'Descripción 2'
             )
 
-            // Validation of new users
-            def validAdmin = newAdmin.validate()
-            def validAdminUser = newAdminUser.validate()
-            def validUser = newUser.validate()
+            /*-------------------------------------------------------------------------------------------*
+             *                                          CATALOG                                          *
+             *-------------------------------------------------------------------------------------------*/
 
-            if (validAdmin & validUser & validAdminUser) {
+            def iDcatalog = Catalog.findByName('Catálogo I+D') ?: new Catalog(
+                    name: 'Catálogo I+D'
+            )
+
+            def securityCatalog = Catalog.findByName('Seguridad inicial') ?: new Catalog(
+                    name: 'Seguridad inicial'
+            )
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                         ANSWER                                            *
+             *-------------------------------------------------------------------------------------------*/
+
+            def re1_1Answer = Answer.findByTitleAnswerKey('RE1-1') ?: new Answer(
+                    titleAnswerKey: 'RE1-1',
+                    description: 'Degradar el servicio mediante etiquetas iframe.',
+                    correct: true,
+                    score: 1
+            )
+
+            def re2_1Answer = Answer.findByTitleAnswerKey('RE2-1') ?: new Answer(
+                    titleAnswerKey: 'RE2-1',
+                    description: 'Bloquear el sistema del usuario.',
+                    correct: false,
+                    score: 0
+            )
+
+            def re3_1Answer = Answer.findByTitleAnswerKey('RE3-1') ?: new Answer(
+                    titleAnswerKey: 'RE3-1',
+                    description: 'Obtener información del usuario',
+                    correct: false,
+                    score: 0
+            )
+
+            def re1_2Answer = Answer.findByTitleAnswerKey('RE1-2') ?: new Answer(
+                    titleAnswerKey: 'RE1-2',
+                    description: 'Heartbleed',
+                    correct: true,
+                    score: 2
+            )
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                        QUESTION                                           *
+             *-------------------------------------------------------------------------------------------*/
+
+            def se1Question = Question.findByTitleQuestionKey('SE-1') ?: new Question(
+                    titleQuestionKey: 'SE-1',
+                    description: '¿Cuál es la finalidad del ataque -Clickjacking-?',
+                    difficultyLevel: DifficultyLevel.MEDIUM,
+                    answers: [re1_1Answer, re2_1Answer, re3_1Answer]
+            )
+
+            def se2Question = Question.findByTitleQuestionKey('SE-2') ?: new Question(
+                    titleQuestionKey: 'SE-2',
+                    description: '¿Cuál es la vulnerabilidad más peligrosa del protocolo TLS?',
+                    difficultyLevel: DifficultyLevel.DIFFICULT,
+                    answers: [re1_2Answer]
+            )
+
+            def se3Question = Question.findByTitleQuestionKey('SE-3') ?: new Question(
+                    titleQuestionKey: 'SE-3',
+                    description: '¿Qué es un ataque de fuerza bruta?',
+                    difficultyLevel: DifficultyLevel.EASY,
+            )
+
+            // Validation of admin
+            def validAdmin = newAdmin.validate()
+            // Validation of user
+            def validUserSwitch = newUserSwitch.validate()
+            def validUser = newUser.validate()
+            // Validation of department
+            def validAnother = anotherDepartment.validate()
+            def validID = idDepartment.validate()
+            def validRRHH = rrhhDepartment.validate()
+            def validSecurity = securityDepartment.validate()
+            def validSupport = supportDepartment.validate()
+            // Validation of topic
+            // Validation of catalog
+            // Validation of question
+            def validSe1 = se1Question.validate()
+            def validSe2 = se2Question.validate()
+            def validSe3 = se3Question.validate()
+            // Validation of answer
+            def validR1_se1 = re1_1Answer.validate()
+            def validR2_se1 = re2_1Answer.validate()
+            def validR3_se1 = re3_1Answer.validate()
+            def validR1_se2 = re1_2Answer.validate()
+
+            if (validAdmin & validUserSwitch & validUser & validAnother & validID & validRRHH & validSecurity & validSupport &
+                    validSe1 & validSe2 & validSe3 & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2) {
+
                 // Saving roles
                 adminRole.save(flush: true, failOnError: true)
                 userRole.save(flush: true, failOnError: true)
 
+                // Saving departments
+                idDepartment.save(flush: true, failOnError: true)
+                securityDepartment.save(flush: true, failOnError: true)
+                anotherDepartment.save(flush: true, failOnError: true)
+                rrhhDepartment.save(flush: true, failOnError: true)
+                supportDepartment.save(flush: true, failOnError: true)
+
                 // Saving new users
                 newAdmin.save(flush: true, failOnError: true)
+                newUserSwitch.save(flush: true, failOnError: true)
                 newUser.save(flush: true, failOnError: true)
-                newUser1.save(flush: true, failOnError: true)
-                newUser2.save(flush: true, failOnError: true)
-                newUser3.save(flush: true, failOnError: true)
-                newUser4.save(flush: true, failOnError: true)
-                newUser5.save(flush: true, failOnError: true)
-                newUser6.save(flush: true, failOnError: true)
-                newUser7.save(flush: true, failOnError: true)
-                newUser8.save(flush: true, failOnError: true)
-                newAdminUser.save(flush: true, failOnError: true)
 
                 // Assign user to role
                 if (!newAdmin.authorities.contains(adminRole)) { // Admin
                     SecUserSecRole.create newAdmin, adminRole, true
                 }
-                if (!newAdminUser.authorities.contains(userRole)) { // Normal user to switch
-                    SecUserSecRole.create newAdminUser, userRole, true
+                if (!newUserSwitch.authorities.contains(userRole)) { // Normal user to switch
+                    SecUserSecRole.create newUserSwitch, userRole, true
                 }
                 if (!newUser.authorities.contains(userRole)) { // Normal user
                     SecUserSecRole.create newUser, userRole, true
                 }
 
-                // Saving departments
-                iDDepartment.save(flush: true, failOnError: true)
-                securityDepartment.save(flush: true, failOnError: true)
-                productDepartment.save(flush: true, failOnError: true)
-                rrhhDepartment.save(flush: true, failOnError: true)
-                supportDepartment.save(flush: true, failOnError: true)
+                // Saving topics
+                arquitecturaComputadoresTopic.save(flush: true, failOnError: true)
+                englishTopic.save(flush: true, failOnError: true)
 
                 // Saving catalogs
                 iDcatalog.save(flush: true, failOnError: true)
                 securityCatalog.save(flush: true, failOnError: true)
 
-                // Saving topics
-                arquitecturaComputadoresTopic.save(flush: true, failOnError: true)
-                englishTopic.save(flush: true, failOnError: true)
+                // Saving answers
+                re1_1Answer.save(flush: true, failOnError: true)
+                re2_1Answer.save(flush: true, failOnError: true)
+                re3_1Answer.save(flush: true, failOnError: true)
+                re1_2Answer.save(flush: true, failOnError: true)
+
+                // Saving questions
+                se1Question.save(flush: true, failOnError: true)
+                se2Question.save(flush: true, failOnError: true)
+                se3Question.save(flush: true, failOnError: true)
+
+                // New session to update the number of users of each department
+                User.withNewSession {
+                    customCountService.customUserCount(newUserSwitch)
+                    customCountService.customUserCount(newUser)
+                }
 
                 log.debug("BootStrap:init():Initial data have been created")
                 log.info("Special config create for development or test - Users: admin_stt/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and user_stt/7g4sOmmm (User)")
