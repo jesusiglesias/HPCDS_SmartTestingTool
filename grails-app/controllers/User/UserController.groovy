@@ -3,6 +3,7 @@ package User
 import Security.SecRole
 import Security.SecUserSecRole
 import org.springframework.dao.DataIntegrityViolationException
+import java.text.SimpleDateFormat
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value
  */
 @Transactional(readOnly = true)
 class UserController {
+
+    def CustomCountService
 
     static allowedMethods = [save: "POST", update: "PUT", updateProfileImage: 'POST', delete: "DELETE"]
 
@@ -60,12 +63,9 @@ class UserController {
     @Transactional
     def save(User userInstance) {
 
-        // TODO
-        log.error("User:" + userInstance.birthDate)
-
-       /* def birthDateFormat = Date.parse("yyyy-MM-dd HH:mm", userInstance.birthDate as String)
+        // Parse birthDate from textField
+        def birthDateFormat = new SimpleDateFormat('dd-MM-yyyy').parse(params.birthDate)
         userInstance.birthDate = birthDateFormat
-        userInstance.save()*/
 
         if (userInstance == null) {
             notFound()
@@ -116,6 +116,9 @@ class UserController {
             // Save relation with normal user role
             SecUserSecRole.create userInstance, normalRole, true
 
+            // It calls to the service that calculate the number of users of the department
+            customCountService.customUserCount(userInstance)
+
             request.withFormat {
                 form multipartForm {
                     flash.userMessage = g.message(code: 'default.created.message', default: '{0} <strong>{1}</strong> created successful.', args: [message(code: 'user.label', default: 'User'), userInstance.username])
@@ -157,6 +160,10 @@ class UserController {
     @Transactional
     def update(User userInstance) {
 
+        // Parse birthDate from textField
+        def birthDateFormat = new SimpleDateFormat( 'dd-MM-yyyy' ).parse params.birthDate
+        userInstance.birthDate = birthDateFormat
+
         if (userInstance == null) {
             notFound()
             return
@@ -190,6 +197,12 @@ class UserController {
 
             // Save user data
             userInstance.save(flush:true, failOnError: true)
+
+            // It calls to the service that calculate the number of users of the department
+            customCountService.customUserCountUpdated(userInstance)
+
+            // It calls to the service that calculate the number of users of the old department
+            customCountService.customUserCountUpdatedBefore(userInstance.departmentId, params.oldDepartment)
 
             request.withFormat {
                 form multipartForm {
@@ -322,12 +335,12 @@ class UserController {
             // Delete SecUserSecRole relations
             SecUserSecRole.findAllBySecUser(userInstance)*.delete(flush: true, failOnError: true)
 
-            // Delete normal user
-            userInstance.delete(flush: true, failOnError: true)
+            // It calls to the service that calculate the number of users of the department
+            customCountService.customUserCountDeleted(userInstance)
 
             request.withFormat {
                 form multipartForm {
-                    flash.userMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'admin.label', default: 'Administrator'), userInstance.username])
+                    flash.userMessage = g.message(code: 'default.deleted.message', default: '{0} <strong>{1}</strong> deleted successful.', args: [message(code: 'user.label', default: 'User'), userInstance.username])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
@@ -337,7 +350,7 @@ class UserController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.userErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'admin.label', default: 'Administrator'), userInstance.username])
+                    flash.userErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'user.label', default: 'User'), userInstance.username])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
