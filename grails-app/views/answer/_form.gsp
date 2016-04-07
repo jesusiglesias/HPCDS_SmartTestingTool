@@ -81,14 +81,4 @@
             </div>
         </div>
     </div>
-
-        <!-- TODO Relation -->
-        <div class="fieldcontain ${hasErrors(bean: answerInstance, field: 'questionsAnswer', 'error')} ">
-            <label for="questionsAnswer">
-                <h5 class="sbold">
-                    <g:message code="answer.questionsAnswer.label" default="Questions Answer"/>
-                </h5>
-            </label>
-        </div>
-
 </div> <!-- /.Form-body -->

@@ -235,9 +235,11 @@
                                                 <td>${fieldValue(bean: userInstance, field: "evaluationCount")}</td>
                                                 <td><g:link uri="/evaluation" params="[userSearch: userInstance.username]"><g:message code="user.evaluations.label" default="Evaluations"/></g:link></td>
                                                 <td>
-                                                    <span class="label label-sm label-default">
-                                                        ${fieldValue(bean: userInstance, field: "department.name")}
-                                                    </span>
+                                                    <g:link controller="department" action="edit" id="${userInstance.department.id}" class="show-entity-link">
+                                                        <span class="label label-sm label-default show-entity">
+                                                            ${fieldValue(bean: userInstance, field: "department.name")}
+                                                        </span>
+                                                    </g:link>
                                                 </td>
                                             </tr>
                                         </g:each>

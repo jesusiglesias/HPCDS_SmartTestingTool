@@ -159,7 +159,7 @@
                                                     ${message(code:'enumerations.difficultyLevel.'+fieldValue(bean: questionInstance, field: "difficultyLevel"))}
                                                     </span>
                                                 </td>
-                                                <td>${fieldValue(bean: questionInstance, field: "answerCount")}</td>
+                                                <td>${questionInstance.answers?.size()}</td>
                                                 <td><g:link uri="/answer" params="[answerSearch: questionInstance.titleQuestionKey]"><g:message code="question.answers.label" default="Answers"/></g:link></td>
                                                 <td>${fieldValue(bean: questionInstance, field: "catalogCount")}</td>
                                                 <td><g:link uri="/catalog" params="[catalogSearch: questionInstance.titleQuestionKey]"><g:message code="question.catalogs.label" default="Catalogs"/></g:link></td>

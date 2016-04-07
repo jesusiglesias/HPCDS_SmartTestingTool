@@ -24,6 +24,18 @@
 
 <body>
 
+    <!-- Search request from question -->
+    <g:if test="${params.answerSearch}">
+        <script type="text/javascript">
+            var _textAnswerSearch = '${params.answerSearch}'
+        </script>
+    </g:if>
+    <g:else>
+        <script type="text/javascript">
+            var _textAnswerSearch = ''
+        </script>
+    </g:else>
+
     <script type="text/javascript">
 
         // Variables to use in javascript
@@ -153,9 +165,16 @@
                                                     </g:else>
                                                     <g:formatBoolean boolean="${answerInstance.correct}" true="${g.message(code: "answer.correct.label.true", default: "Correct")}" false="${g.message(code: "answer.correct.label.false", default: "Incorrect")}"/>
                                                 </span>
+                                                <td>${answerInstance.questionsAnswer?.size()}</td>
+                                                <td>
+                                                    <g:each in="${answerInstance?.questionsAnswer?}" var="question">
+                                                        <g:link controller="question" action="edit" id="${question.id}" class="show-entity-link">
+                                                            <span class="label label-sm label-default show-entity">
+                                                            ${question.titleQuestionKey?.encodeAsHTML()}
+                                                            </span>
+                                                        </g:link>
+                                                    </g:each>
                                                 </td>
-                                                <td>${fieldValue(bean: answerInstance, field: "questionAnswerCount")}</td>
-                                                <td><g:link uri="/question" params="[questionSearch: answerInstance.titleAnswerKey]"><g:message code="answer.questionsAnswer.label" default="Questions"/></g:link></td>
                                             </tr>
                                         </g:each>
                                     </tbody>

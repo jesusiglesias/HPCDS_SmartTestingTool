@@ -9,7 +9,6 @@ class Question {
 
     UUID id
     // Attributes
-    Integer answerCount = 0
     Integer catalogCount = 0
     String description
     DifficultyLevel difficultyLevel
@@ -18,11 +17,6 @@ class Question {
     // Relations
     static hasMany = [answers:Answer, catalogs:Catalog]
     static belongsTo = Catalog
-
-    // It obtains the number of answers that contains the question
-    Integer getAnswersCount () {
-        answers?.size () ?: 0
-    }
 
     // It obtains the number of catalogs that contains the question
     Integer getCatalogsCount () {
@@ -34,7 +28,6 @@ class Question {
     }
 
     void beforeUpdate () {
-        answerCount = getAnswersCount ()
         catalogCount = getCatalogsCount ()
     }
 
