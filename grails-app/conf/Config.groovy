@@ -101,6 +101,11 @@ environments {
 // Default value of pagination
 paginate.defaultValue = 0
 
+// Date formats
+grails.databinding.dateFormats = [
+        'dd-MM-yyyy', 'yyyy-MM-dd', 'yyyy-MM-dd HH:mm:ss.S'
+]
+
 /* Mail configuration
  ============================================================================================= */
 grails {

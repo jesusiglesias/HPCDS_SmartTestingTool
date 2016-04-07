@@ -117,7 +117,7 @@ var DatatableUserList = function () {
             },
 
             "order": [
-                [0, 'asc']
+                [1, 'asc']
             ],
             
             "lengthMenu": [
