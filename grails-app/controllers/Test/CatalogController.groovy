@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value
 @Transactional(readOnly = true)
 class CatalogController {
 
+    def CustomDeleteService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Default value of pagination
@@ -183,6 +185,11 @@ class CatalogController {
 
         try {
 
+            // Delete the content associated (questions and answers) if checkbox is true
+            if (params.delete_catalog) {
+                customDeleteService.customDeleteCatalog(catalogInstance)
+            }
+
             // Delete catalog
             catalogInstance.delete(flush:true, failOnError: true)
 
@@ -195,6 +202,9 @@ class CatalogController {
             }
         } catch (DataIntegrityViolationException exception) {
             log.error("CatalogController():delete():DataIntegrityViolationException:Catalog:${catalogInstance.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
 
             request.withFormat {
                 form multipartForm {

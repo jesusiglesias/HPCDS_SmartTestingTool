@@ -12,7 +12,7 @@ var DatatableQuestionList = function () {
         var table = $('#entity-table');
 
         var oTable = table.dataTable({
-
+            
             // Internationalisation
             "language": {
                 "aria": {
@@ -44,10 +44,10 @@ var DatatableQuestionList = function () {
             "autoWidth": true,
 
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3, 5]} },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 5]} },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _questionFile, title: _questionTableTitle, exportOptions: {columns: [0, 1, 2, 3, 5]} },
-                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _questionFile, exportOptions: {columns: [0, 1, 2, 3, 5]} },
+                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3, 5, 6]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 5, 6]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _questionFile, title: _questionTableTitle, exportOptions: {columns: [0, 1, 2, 3, 5, 6]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _questionFile, exportOptions: {columns: [0, 1, 2, 3, 5, 6]} },
                 { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
             ],
@@ -88,6 +88,10 @@ var DatatableQuestionList = function () {
             // Horizontal scrollable datatable
             "dom": "<'row' <'col-md-12'B>><'row'<'col-sm-6 col-xs-12'l><'col-sm-6 col-xs-12'f>r><'table-scrollable't><'row'<'col-sm-5 col-xs-12'i><'col-sm-7 col-xs-12'p>>"
         });
+
+        // Search of answers
+        var searchTable = table.DataTable()
+        searchTable.search(_textQuestionSearch).draw();
     };
 
     return {

@@ -23,6 +23,18 @@
 </head>
 <body>
 
+    <!-- Search request from catalog -->
+    <g:if test="${params.questionSearch}">
+        <script type="text/javascript">
+            var _textQuestionSearch = '${params.questionSearch}'
+        </script>
+    </g:if>
+    <g:else>
+        <script type="text/javascript">
+            var _textQuestionSearch = ''
+        </script>
+    </g:else>
+
     <script type="text/javascript">
 
         // Variables to use in javascript
@@ -161,8 +173,16 @@
                                                 </td>
                                                 <td>${questionInstance.answers?.size()}</td>
                                                 <td><g:link uri="/answer" params="[answerSearch: questionInstance.titleQuestionKey]"><g:message code="question.answers.label" default="Answers"/></g:link></td>
-                                                <td>${fieldValue(bean: questionInstance, field: "catalogCount")}</td>
-                                                <td><g:link uri="/catalog" params="[catalogSearch: questionInstance.titleQuestionKey]"><g:message code="question.catalogs.label" default="Catalogs"/></g:link></td>
+                                                <td>${questionInstance.catalogs?.size()}</td>
+                                                <td>
+                                                    <g:each in="${questionInstance?.catalogs?}" var="catalog">
+                                                        <g:link controller="catalog" action="edit" id="${catalog.id}" class="show-entity-link">
+                                                            <span class="label label-sm label-default show-entity">
+                                                                ${catalog.name?.encodeAsHTML()}
+                                                            </span>
+                                                        </g:link>
+                                                    </g:each>
+                                                </td>
                                             </tr>
                                         </g:each>
                                     </tbody>

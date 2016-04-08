@@ -174,6 +174,26 @@ var DomainQuestionEditValidation = function () {
         });
     };
 
+    /**
+     * It handles the checkbox to delete the question
+     */
+    var handlerCheckboxDeleted = function() {
+
+        var checkboxDelete = $("#delete_question");
+        var checkboxDeleteAnswer = $("#delete_question_answer");
+
+        checkboxDeleteAnswer.change(function() {
+
+            if (checkboxDeleteAnswer.is(':checked')) {
+
+                checkboxDelete.attr( "disabled" ,"true" );
+
+            } else {
+                checkboxDelete.removeAttr("disabled", false);
+            }
+        });
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
@@ -182,6 +202,7 @@ var DomainQuestionEditValidation = function () {
             handlerMaxlength();
             handlerBootstrapSelect();
             handlerBootstrapMultiSelectEdit();
+            handlerCheckboxDeleted();
         }
     };
 }();

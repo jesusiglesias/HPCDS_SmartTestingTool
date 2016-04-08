@@ -105,7 +105,7 @@
 							<span></span>
 							<span class="check"></span>
 							<span class="box"></span>
-							<g:message code="layouts.main_auth_admin.body.content.answer.delete.relation" default="Enable to remove the answer even if it is associated with a question or several questions"/>
+							<g:message code="layouts.main_auth_admin.body.content.answer.delete.relation" default="Enable to remove the answer even if it is associated with one or more questions."/>
 						</label>
 					</div>
 				</g:form>

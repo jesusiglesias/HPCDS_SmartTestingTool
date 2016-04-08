@@ -96,13 +96,22 @@
 							<g:message code="layouts.main_auth_admin.body.content.question.delete" default="Delete question"/>
 						</button>
 					</div>
-					<div class="has-error md-checkbox check-delete">
+					<div class="has-error md-checkbox check-delete-more">
 						<input type="checkbox" name='delete_question' id='delete_question' class="md-check"/>
 						<label for="delete_question" class="sbold">
 							<span></span>
 							<span class="check"></span>
 							<span class="box"></span>
-							<g:message code="layouts.main_auth_admin.body.content.question.delete.relation" default="Enable to remove the answers associated to the question"/>
+							<g:message code="layouts.main_auth_admin.body.content.question.delete.relation" default="Enable to remove the answer even if it is associated with one or more catalogs."/>
+						</label>
+					</div>
+					<div class="has-error md-checkbox check-delete-more">
+						<input type="checkbox" name='delete_question_answer' id='delete_question_answer' class="md-check"/>
+						<label for="delete_question_answer" class="sbold">
+							<span></span>
+							<span class="check"></span>
+							<span class="box"></span>
+							<g:message code="layouts.main_auth_admin.body.content.question.delete.relation.answer" default="Enable to remove the answers associated to the question."/>
 						</label>
 					</div>
 				</g:form>

@@ -9,7 +9,6 @@ class Question {
 
     UUID id
     // Attributes
-    Integer catalogCount = 0
     String description
     DifficultyLevel difficultyLevel
     String titleQuestionKey
@@ -17,19 +16,6 @@ class Question {
     // Relations
     static hasMany = [answers:Answer, catalogs:Catalog]
     static belongsTo = Catalog
-
-    // It obtains the number of catalogs that contains the question
-    Integer getCatalogsCount () {
-        catalogs?.size () ?: 0
-    }
-
-    def beforeInsert() {
-        this.beforeUpdate()
-    }
-
-    void beforeUpdate () {
-        catalogCount = getCatalogsCount ()
-    }
 
     // Restrictions on the attributes of the entity
     static constraints = {

@@ -103,7 +103,7 @@
                             <span></span>
                             <span class="check"></span>
                             <span class="box"></span>
-                            <g:message code="layouts.main_auth_admin.body.content.department.delete.users" default="Enable to remove the users associated to the department"/>
+                            <g:message code="layouts.main_auth_admin.body.content.department.delete.users" default="Enable to remove the users associated to the department."/>
                         </label>
                     </div>
                 </g:form>

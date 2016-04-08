@@ -353,6 +353,9 @@ class UserController {
         } catch (DataIntegrityViolationException exception) {
             log.error("UserController():delete():DataIntegrityViolationException:NormalUser:${userInstance.username}:${exception}")
 
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             request.withFormat {
                 form multipartForm {
                     flash.userErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'user.label', default: 'User'), userInstance.username])

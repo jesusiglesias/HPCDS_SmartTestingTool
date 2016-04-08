@@ -19,7 +19,7 @@ var DomainCatalogValidation = function () {
             rules: {
                 name: {
                     required: true,
-                    maxlength: 100
+                    maxlength: 60
                 }
             },
 
@@ -120,7 +120,7 @@ var DomainCatalogValidation = function () {
         /* Name field */
         $('#name').maxlength({
             limitReachedClass: "label label-danger",
-            threshold: 40,
+            threshold: 30,
             placement: 'top',
             validate: true
         });

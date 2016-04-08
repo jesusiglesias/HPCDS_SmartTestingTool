@@ -141,7 +141,7 @@
                                         <g:each in="${catalogInstanceList}" status="i" var="catalogInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                                 <td><g:link controller="catalog" action="edit" id="${catalogInstance.id}" class="break-word">${fieldValue(bean: catalogInstance, field: "name")}</g:link></td>
-                                                <td>${fieldValue(bean: catalogInstance, field: "questionCount")}</td>
+                                                <td>${catalogInstance.questions?.size()}</td>
                                                 <td><g:link uri="/question" params="[questionSearch: catalogInstance.name]"><g:message code="catalog.questions.label" default="Questions"/></g:link></td>
                                                 <td>${fieldValue(bean: catalogInstance, field: "testCatalogCount")}</td>
                                                 <td><g:link uri="/test" params="[testSearch: catalogInstance.name]"><g:message code="catalog.testCatalogs.label" default="Test"/></g:link></td>

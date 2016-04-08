@@ -9,7 +9,6 @@ class Catalog {
     // Attributes
     String name
     Integer testCatalogCount = 0
-    Integer questionCount = 0
 
     // Relations
     static hasMany = [testCatalogs:Test, questions:Question]
@@ -19,23 +18,17 @@ class Catalog {
         testCatalogs?.size() ?: 0
     }
 
-    // It obtains the number of questions that contains the catalog
-    Integer getQuestionsCount () {
-        questions?.size () ?: 0
-    }
-
     def beforeInsert() {
         this.beforeUpdate()
     }
 
     def beforeUpdate () {
         testCatalogCount = getTestsCatalogCount()
-        questionCount = getQuestionsCount()
     }
 
     // Restrictions on the attributes of the entity
     static constraints = {
-        name blank: false, unique: true, maxSize: 100
+        name blank: false, unique: true, maxSize: 60
     }
 
     // It modifies the id type

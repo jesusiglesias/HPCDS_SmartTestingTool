@@ -99,6 +99,15 @@
                             <g:message code="layouts.main_auth_admin.body.content.catalog.delete" default="Delete catalog"/>
                         </button>
                     </div>
+                    <div class="has-error md-checkbox check-delete">
+                        <input type="checkbox" name='delete_catalog' id='delete_catalog' class="md-check"/>
+                        <label for="delete_catalog" class="sbold">
+                            <span></span>
+                            <span class="check"></span>
+                            <span class="box"></span>
+                            <g:message code="layouts.main_auth_admin.body.content.catalog.delete.relation" default="lEnable to remove the content associated (questions and answers)."/>
+                        </label>
+                    </div>
                 </g:form>
 
                 <!-- Edit form -->
