@@ -19,7 +19,7 @@ var DomainQuestionEditValidation = function () {
             rules: {
                 titleQuestionKey: {
                     required: true,
-                    maxlength: 50
+                    maxlength: 25
                 },
                 description: {
                     required: true,
@@ -131,7 +131,7 @@ var DomainQuestionEditValidation = function () {
         /* Question key field */
         $('#titleQuestionKey').maxlength({
             limitReachedClass: "label label-danger",
-            threshold: 20,
+            threshold: 10,
             placement: 'top',
             validate: true
         });

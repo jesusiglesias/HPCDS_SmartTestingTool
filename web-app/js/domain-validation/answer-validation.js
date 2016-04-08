@@ -19,7 +19,7 @@ var DomainAnswerValidation = function () {
                 rules: {
                     titleAnswerKey: {
                         required: true,
-                        maxlength: 50
+                        maxlength: 25
                     },
                     description: {
                         required: true,
@@ -139,7 +139,7 @@ var DomainAnswerValidation = function () {
             /* Answer key field */
             $('#titleAnswerKey').maxlength({
                 limitReachedClass: "label label-danger",
-                threshold: 20,
+                threshold: 10,
                 placement: 'top',
                 validate: true
             });

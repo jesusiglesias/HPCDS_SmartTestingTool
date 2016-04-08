@@ -20,7 +20,7 @@ class Answer {
     static constraints = {
         description blank: false, maxSize: 400
         score blank: false, min: 0, max: 5
-        titleAnswerKey blank: false, unique: true, maxSize: 50
+        titleAnswerKey blank: false, unique: true, maxSize: 25
     }
 
     // It modifies the id type

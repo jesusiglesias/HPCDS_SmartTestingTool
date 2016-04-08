@@ -35,7 +35,7 @@ class Question {
     static constraints = {
         description blank: false, maxSize: 800
         difficultyLevel blank: false, inList: [DifficultyLevel.EASY, DifficultyLevel.MEDIUM, DifficultyLevel.DIFFICULT]
-        titleQuestionKey blank: false, unique: true, maxSize: 50
+        titleQuestionKey blank: false, unique: true, maxSize: 25
     }
 
     // It modifies the id type
