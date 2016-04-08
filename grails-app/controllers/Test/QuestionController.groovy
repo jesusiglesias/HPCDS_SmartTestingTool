@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value
 @Transactional(readOnly = true)
 class QuestionController {
 
+    def CustomDeleteService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Default value of pagination
@@ -183,6 +185,11 @@ class QuestionController {
 
         try {
 
+            // Delete question or questions if checkbox is true
+            if (params.delete_question) {
+                customDeleteService.customDeleteQuestion(questionInstance)
+            }
+
             // Delete question
             questionInstance.delete(flush:true, failOnError: true)
 
@@ -195,6 +202,9 @@ class QuestionController {
             }
         } catch (DataIntegrityViolationException exception) {
             log.error("QuestionController():delete():DataIntegrityViolationException:Question:${questionInstance.titleQuestionKey}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
 
             request.withFormat {
                 form multipartForm {

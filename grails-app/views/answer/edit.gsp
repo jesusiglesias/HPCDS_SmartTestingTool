@@ -99,6 +99,15 @@
 							<g:message code="layouts.main_auth_admin.body.content.answer.delete" default="Delete answer"/>
 						</button>
 					</div>
+					<div class="has-error md-checkbox check-delete">
+						<input type="checkbox" name='delete_answer' id='delete_answer' class="md-check"/>
+						<label for="delete_answer" class="sbold">
+							<span></span>
+							<span class="check"></span>
+							<span class="box"></span>
+							<g:message code="layouts.main_auth_admin.body.content.answer.delete.relation" default="Enable to remove the answer even if it is associated with a question or several questions"/>
+						</label>
+					</div>
 				</g:form>
 
 				<!-- Edit form -->

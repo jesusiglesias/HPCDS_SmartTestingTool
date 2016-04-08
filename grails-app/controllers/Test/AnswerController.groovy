@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Value
 @Transactional(readOnly = true)
 class AnswerController {
 
+    def CustomDeleteService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     // Default value of pagination
@@ -195,6 +197,11 @@ class AnswerController {
 
         try {
 
+            // Delete question or questions if checkbox is true
+            if (params.delete_answer) {
+                customDeleteService.customDeleteAnswer(answerInstance)
+            }
+
             // Delete answer
             answerInstance.delete(flush:true, failOnError: true)
 
@@ -208,9 +215,12 @@ class AnswerController {
         } catch (DataIntegrityViolationException exception) {
             log.error("AnswerController():delete():DataIntegrityViolationException:Answer:${answerInstance.titleAnswerKey}:${exception}")
 
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             request.withFormat {
                 form multipartForm {
-                    flash.answerErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
+                    flash.answerErrorMessage = g.message(code: 'default.not.deleted.message.answer', default: 'ERROR! {0} <strong>{1}</strong> was not deleted. First, you must delete the question or questions associated with the answer.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
