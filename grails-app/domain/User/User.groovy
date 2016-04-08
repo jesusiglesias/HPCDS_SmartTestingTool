@@ -31,17 +31,11 @@ class User extends SecUser {
     }
 
     def beforeInsert() {
-        encodePassword()
-
         this.beforeUpdate()
     }
 
     def beforeUpdate () {
         evaluationCount = getEvaluationsCount ()
-
-        if (isDirty('password')) {
-            encodePassword()
-        }
     }
 
     // Restrictions on the attributes of the entity

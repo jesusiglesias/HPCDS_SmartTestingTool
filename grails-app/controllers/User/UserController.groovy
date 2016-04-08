@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value
 class UserController {
 
     def CustomCountService
+    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", updateProfileImage: 'POST', delete: "DELETE"]
 
@@ -106,6 +107,10 @@ class UserController {
                 userInstance.avatar = null
                 userInstance.avatarType = null
             }
+
+
+            // Encoding password
+            userInstance.password = springSecurityService.encodePassword(userInstance.password)
 
             // Save user data
             userInstance.save(flush: true, failOnError: true)
