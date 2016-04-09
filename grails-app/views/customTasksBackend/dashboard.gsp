@@ -154,7 +154,7 @@
                                                             </span>
                                                         <ul class="mt-comment-actions">
                                                             <li>
-                                                                <g:link controller="user" action="edit" id="${user?.id}" class="btn grey-gallery"><g:message code="default.button.edit.label" default="Edit"/></g:link>
+                                                                <g:link controller="user" action="edit" id="${user?.id}" class="btn blue-soft"><g:message code="default.button.edit.label" default="Edit"/></g:link>
                                                             </li>
                                                         </ul>
                                                     </div>
