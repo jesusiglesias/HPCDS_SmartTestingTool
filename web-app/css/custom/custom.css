@@ -307,7 +307,8 @@ input:-webkit-autofill:active {
     color: #4DB3A2;
 }
 
-.i-delete-backend {
+.i-delete-backend,
+.i-delete-username-backend {
     display: none;
     position: absolute !important;
     right: 170px !important;
@@ -318,7 +319,8 @@ input:-webkit-autofill:active {
     color: #AAAAAA !important;
 }
 
-.i-delete-without-backend {
+.i-delete-without-backend,
+.i-delete-without-name-backend {
     display: none;
     position: absolute !important;
     right: 50px !important;
@@ -795,6 +797,10 @@ input:-webkit-autofill:active {
         top: 76px;
     }
 
+    .i-delete-username-backend,
+    .i-delete-without-name-backend {
+        top: 126px;
+    }
 }
 
 /* Landscape phone to portrait tablet */

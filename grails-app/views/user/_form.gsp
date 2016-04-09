@@ -24,7 +24,7 @@
                         </a>
                     </span>
                 </div>
-                <i class="fa fa-times i-delete-backend i-delete-user-username"></i> <!-- Delete text icon -->
+                <i class="fa fa-times i-delete-username-backend i-delete-user-username"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block username-block">
                 <h5>
@@ -184,7 +184,7 @@
                     <i class="fa"></i>
                     <g:textField name="name" maxlength="25" value="${userInstance?.name}" class="form-control form-shadow name-user backend-input"/>
                 </div>
-                <i class="fa fa-times i-delete-without-backend i-delete-user-name"></i> <!-- Delete text icon -->
+                <i class="fa fa-times i-delete-without-name-backend i-delete-user-name"></i> <!-- Delete text icon -->
             </div>
         </div>
 
