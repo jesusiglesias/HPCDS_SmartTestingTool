@@ -774,6 +774,15 @@ input:-webkit-autofill:active {
 /* Media queries
 =================================================================== */
 
+/* Max-width: 1136px */
+@media (max-width: 1136px) {
+
+    .check-delete {
+        display: block;
+        margin-left: 0;
+    }
+}
+
 /* Max-width: 991px */
 @media (max-width: 991px) {
 
@@ -823,14 +832,6 @@ input:-webkit-autofill:active {
     }
 }
 
-/* Max-width: 713px */
-@media (max-width: 713px) {
-
-    .check-delete {
-        display: block;
-        margin-left: 0;
-    }
-}
 /* Max-width: 480px */
 @media (max-width: 480px) {
 
