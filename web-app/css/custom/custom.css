@@ -147,6 +147,10 @@ input:-webkit-autofill:active {
     text-decoration: none;
 }
 
+.home-icon {
+    color: #757575 !important;
+}
+
 /* Multi-select - Create view
 =================================================================== */
 .ms-container {

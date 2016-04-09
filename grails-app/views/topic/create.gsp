@@ -35,6 +35,7 @@
             <div class="page-bar">
                 <ul class="page-breadcrumb">
                     <li>
+                        <i class="fa fa-home home-icon"></i>
                         <g:link uri="/"><g:message code="layouts.main_auth_admin.pageBreadcrumb.title" default="Homepage"/></g:link>
                         <i class="fa fa-circle"></i>
                     </li>
