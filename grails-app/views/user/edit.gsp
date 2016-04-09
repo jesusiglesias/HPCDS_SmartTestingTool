@@ -137,7 +137,6 @@
                 <!-- Edit form -->
                 <g:form url="[resource:userInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form user-form">
                     <g:hiddenField name="version" value="${userInstance?.version}" />
-                    <g:hiddenField name="oldDepartment" value="${userInstance?.department.name}" />
                     <fieldset class="form">
                         <g:render template="formEdit"/>
                     </fieldset>

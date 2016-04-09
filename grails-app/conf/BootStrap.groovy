@@ -19,7 +19,6 @@ class BootStrap {
 
     def authenticationProcessingFilter
     def concurrentSessionControlStrategy
-    def CustomCountService
     def springSecurityService
 
     /**
@@ -276,12 +275,6 @@ class BootStrap {
                 se1Question.save(flush: true, failOnError: true)
                 se2Question.save(flush: true, failOnError: true)
                 se3Question.save(flush: true, failOnError: true)
-
-                // New session to update the number of users of each department
-                User.withNewSession {
-                    customCountService.customUserCount(newUserSwitch)
-                    customCountService.customUserCount(newUser)
-                }
 
                 log.debug("BootStrap:init():Initial data have been created")
                 log.info("Special config create for development or test - Users: admin_stt/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and user_stt/7g4sOmmm (User)")

@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value
 @Transactional(readOnly = true)
 class UserController {
 
-    def CustomCountService
     def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", updateProfileImage: 'POST', delete: "DELETE"]
@@ -108,7 +107,6 @@ class UserController {
                 userInstance.avatarType = null
             }
 
-
             // Encoding password
             userInstance.password = springSecurityService.encodePassword(userInstance.password)
 
@@ -120,9 +118,6 @@ class UserController {
 
             // Save relation with normal user role
             SecUserSecRole.create userInstance, normalRole, true
-
-            // It calls to the service that calculate the number of users of the department
-            customCountService.customUserCount(userInstance)
 
             request.withFormat {
                 form multipartForm {
@@ -202,12 +197,6 @@ class UserController {
 
             // Save user data
             userInstance.save(flush:true, failOnError: true)
-
-            // It calls to the service that calculate the number of users of the department
-            customCountService.customUserCountUpdated(userInstance)
-
-            // It calls to the service that calculate the number of users of the old department
-            customCountService.customUserCountUpdatedBefore(userInstance.departmentId, params.oldDepartment)
 
             request.withFormat {
                 form multipartForm {
@@ -340,8 +329,8 @@ class UserController {
             // Delete SecUserSecRole relations
             SecUserSecRole.findAllBySecUser(userInstance)*.delete(flush: true, failOnError: true)
 
-            // It calls to the service that calculate the number of users of the department
-            customCountService.customUserCountDeleted(userInstance)
+            // Delete user
+            userInstance.delete(flush: true, failOnError: true)
 
             request.withFormat {
                 form multipartForm {

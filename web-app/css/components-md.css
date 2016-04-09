@@ -762,8 +762,6 @@ fieldset[disabled] .form-group.form-md-line-input .form-control {
 ======================================================*/
 .md-checkbox {
     position: relative;
-    /* handling click events */
-    /* when checkbox is checked */
 }
 
 /*

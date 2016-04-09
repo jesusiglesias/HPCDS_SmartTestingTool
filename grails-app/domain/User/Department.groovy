@@ -8,19 +8,9 @@ class Department {
     UUID id
     // Attributes
     String name
-    Integer userCount = 0
 
     // Relation
     static hasMany = [users:User]
-
-    // It obtains the number of users that contains the department
-    Integer getUsersCount () {
-        users?.size () ?: 0
-    }
-
-    void beforeUpdate () {
-        userCount = getUsersCount ()
-    }
 
     // Restrictions on the attributes of the entity
     static constraints = {

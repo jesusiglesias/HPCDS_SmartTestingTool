@@ -185,7 +185,6 @@ var DomainQuestionEditValidation = function () {
         checkboxDeleteAnswer.change(function() {
 
             if (checkboxDeleteAnswer.is(':checked')) {
-
                 checkboxDelete.attr( "disabled" ,"true" );
 
             } else {
