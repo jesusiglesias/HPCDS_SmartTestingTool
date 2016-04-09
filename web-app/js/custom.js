@@ -287,6 +287,37 @@ var CustomScript = function () {
         });
     };
 
+    /**
+     * Handler icons in input fields of secUser
+     */
+    var handlerIconQuickSearch = function() {
+
+        var quickSearchInput = $('.quickSearch-input');
+        var iconQuickSearch = $('.i-delete-quickSearch');
+
+        // Show delete icon
+        quickSearchInput.keydown(function () {
+            iconQuickSearch.show();
+        });
+
+        // Delete text and hide delete icon
+        iconQuickSearch.click(function () {
+            quickSearchInput.val('').focus();
+            iconQuickSearch.hide();
+        });
+
+        // Hide delete icon when user deletes text with the keyboard
+        var toggleClasses = function () {
+            if (quickSearchInput.val() == '') {
+                iconQuickSearch.hide();
+            }
+        };
+        quickSearchInput.on('keyup keydown keypress change paste', function () {
+            toggleClasses(); // Still toggles the classes on any of the above events
+        });
+        toggleClasses(); // And also on document ready
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
@@ -294,6 +325,7 @@ var CustomScript = function () {
             handlerInput();
             handlerDatatable();
             handlerDisallowSpaces();
+            handlerIconQuickSearch();
         }
     };
 }();
