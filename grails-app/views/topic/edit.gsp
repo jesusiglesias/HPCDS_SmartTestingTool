@@ -128,6 +128,7 @@
     <g:javascript src="iCheck/icheck.min.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="autosize/autosize.min.js"/>
+    <g:javascript src="customIcons/topic-handler.js"/>
     <g:javascript src="domain-validation/topic-validation.js"/>
 
 </body>

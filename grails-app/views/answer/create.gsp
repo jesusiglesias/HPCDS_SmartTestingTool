@@ -116,6 +116,7 @@
     <g:javascript src="select/jquery.multi-select.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="autosize/autosize.min.js"/>
+    <g:javascript src="customIcons/answer-handler.js"/>
     <g:javascript src="domain-validation/answer-validation.js"/>
 
 </body>

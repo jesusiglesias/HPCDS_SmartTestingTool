@@ -139,6 +139,7 @@
     <g:javascript src="select/select2.full.min.js"/>
     <g:javascript src="select/select2_i18n/es.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
+    <g:javascript src="customIcons/catalog-handler.js"/>
     <g:javascript src="domain-validation/catalogSelectEdit-validation.js"/>
 
 </body>

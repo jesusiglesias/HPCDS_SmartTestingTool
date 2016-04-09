@@ -145,6 +145,7 @@
     <g:javascript src="select/select2_i18n/es.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="autosize/autosize.min.js"/>
+	<g:javascript src="customIcons/question-handler.js"/>
     <g:javascript src="domain-validation/questionSelectEdit-validation.js"/>
 
 </body>

@@ -9,7 +9,6 @@ var iconSecUserHandler = function () {
      */
     var handlerIconSecUser = function() {
 
-        // Secuser
         var secUserUsername = $('.username-admin');
         var iconSecUserUsername = $('.i-delete-admin-username');
         var secUserEmail = $('.email-admin');
@@ -55,15 +54,15 @@ var iconSecUserHandler = function () {
         });
 
         // Hide delete icon when user deletes text with the keyboard
-        var toggleClasses = function() {
+        var toggleClassesUsername = function() {
             if (secUserUsername.val() == '') {
                 iconSecUserUsername.hide();
             }
         };
         secUserUsername.on('keyup keydown keypress change paste', function() {
-            toggleClasses(); // Still toggles the classes on any of the above events
+            toggleClassesUsername(); // Still toggles the classes on any of the above events
         });
-        toggleClasses(); // And also on document ready
+        toggleClassesUsername(); // And also on document ready
 
         /**
          * Email
@@ -80,17 +79,16 @@ var iconSecUserHandler = function () {
         });
 
         // Hide delete icon when user deletes text with the keyboard
-        var toggleClasses = function() {
+        var toggleClassesEmail = function() {
             if (secUserEmail.val() == '') {
                 iconSecUserEmail.hide();
             }
         };
 
         secUserEmail.on('keyup keydown keypress change paste', function() {
-            toggleClasses(); // Still toggles the classes on any of the above events
+            toggleClassesEmail(); // Still toggles the classes on any of the above events
         });
-        toggleClasses(); // And also on document ready
-
+        toggleClassesEmail(); // And also on document ready
 
         /**
          * Password
@@ -180,6 +178,7 @@ var iconSecUserHandler = function () {
                 });
             }
         }
+
         /**
          * Confirm password
          */

@@ -14,13 +14,14 @@
 
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:textField name="name" maxlength="60" value="${catalogInstance?.name}" class="form-control form-shadow"/>
+                    <g:textField name="name" maxlength="60" value="${catalogInstance?.name}" class="form-control form-shadow name-catalog backend-input"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="nameCatalog-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
                         </a>
                     </span>
                 </div>
+                <i class="fa fa-times i-delete-backend i-delete-catalog-name"></i> <!-- Delete text icon -->
             </div>
 
             <div class="help-block catalog-block">

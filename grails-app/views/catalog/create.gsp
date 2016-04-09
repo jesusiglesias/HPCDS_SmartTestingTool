@@ -110,6 +110,7 @@
     <g:javascript src="select/jquery.quicksearch.js"/>
     <g:javascript src="select/bootstrap-select.min.js"/>
     <g:javascript src="select/jquery.multi-select.js"/>
+    <g:javascript src="customIcons/catalog-handler.js"/>
     <g:javascript src="domain-validation/catalog-validation.js"/>
 
 </body>

@@ -4,7 +4,7 @@
     <!-- Row -->
     <div class="row">
         <!-- Name -->
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="form-group ${hasErrors(bean: departmentInstance, field: 'name', 'error')}">
                 <label for="name" class="control-label">
                     <h5 class="sbold">
@@ -14,13 +14,14 @@
                 </label>
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:textField name="name" maxlength="50" value="${departmentInstance?.name}" class="form-control form-shadow"/>
+                    <g:textField name="name" maxlength="50" value="${departmentInstance?.name}" class="form-control form-shadow name-department backend-input"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="nameDepartment-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
                         </a>
                     </span>
                 </div>
+                <i class="fa fa-times i-delete-backend i-delete-department-name"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block department-block">
                 <h5>

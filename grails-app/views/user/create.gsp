@@ -147,6 +147,7 @@
     <g:javascript src="date/bootstrap-datepicker.min.js"/>
     <g:javascript src="date/bootstrap-datepicker.es.min.js"/>
     <g:javascript src="select/jquery.multi-select.js"/>
+    <g:javascript src="customIcons/user-handler.js"/>
     <g:javascript src="domain-validation/user-validation.js"/>
     <g:javascript src="fileInput/bootstrap-fileinput.js"/>
 

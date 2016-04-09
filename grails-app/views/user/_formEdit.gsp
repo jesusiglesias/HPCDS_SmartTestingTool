@@ -17,13 +17,14 @@
                 </label>
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:textField name="username" maxlength="30" class="form-control form-shadow emptySpaces" value="${userInstance?.username}"/>
+                    <g:textField name="username" maxlength="30" class="form-control form-shadow emptySpaces username-user backend-input" value="${userInstance?.username}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="username-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
                         </a>
                     </span>
                 </div>
+                <i class="fa fa-times i-delete-backend i-delete-user-username"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block username-block">
                 <h5>
@@ -43,13 +44,14 @@
                 </label>
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:field type="email" name="email" maxlength="60" class="form-control form-shadow emptySpaces" value="${userInstance?.email}"/>
+                    <g:field type="email" name="email" maxlength="60" class="form-control form-shadow emptySpaces email-user backend-input" value="${userInstance?.email}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="email-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
                         </a>
                     </span>
                 </div>
+                <i class="fa fa-times i-delete-backend i-delete-user-email"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block email-block">
                 <h5>
@@ -143,8 +145,9 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textField name="name" maxlength="25" value="${userInstance?.name}" class="form-control form-shadow"/>
+                    <g:textField name="name" maxlength="25" value="${userInstance?.name}" class="form-control form-shadow name-user backend-input"/>
                 </div>
+                <i class="fa fa-times i-delete-without-backend i-delete-user-name"></i> <!-- Delete text icon -->
             </div>
         </div>
 
@@ -159,8 +162,9 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textField name="surname" maxlength="40" value="${userInstance?.surname}" class="form-control form-shadow"/>
+                    <g:textField name="surname" maxlength="40" value="${userInstance?.surname}" class="form-control form-shadow surname-user backend-input"/>
                 </div>
+                <i class="fa fa-times i-delete-without-backend i-delete-user-surname"></i> <!-- Delete text icon -->
             </div>
         </div>
     </div>
@@ -209,8 +213,9 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textField name="address" maxlength="70" value="${userInstance?.address}" class="form-control form-shadow"/>
+                    <g:textField name="address" maxlength="70" value="${userInstance?.address}" class="form-control form-shadow address-user backend-input"/>
                 </div>
+                <i class="fa fa-times i-delete-without-backend i-delete-user-address"></i> <!-- Delete text icon -->
             </div>
         </div>
     </div>
@@ -227,8 +232,9 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textField name="city" maxlength="70" value="${userInstance?.city}" class="form-control form-shadow"/>
+                    <g:textField name="city" maxlength="70" value="${userInstance?.city}" class="form-control form-shadow city-user backend-input"/>
                 </div>
+                <i class="fa fa-times i-delete-without-backend i-delete-user-city"></i> <!-- Delete text icon -->
             </div>
         </div>
 
@@ -242,8 +248,9 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textField name="country" maxlength="70" value="${userInstance?.country}" class="form-control form-shadow"/>
+                    <g:textField name="country" maxlength="70" value="${userInstance?.country}" class="form-control form-shadow country-user backend-input"/>
                 </div>
+                <i class="fa fa-times i-delete-without-backend i-delete-user-country"></i> <!-- Delete text icon -->
             </div>
         </div>
     </div>
@@ -260,8 +267,9 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textField name="phone" maxlength="20" value="${userInstance?.phone}" class="form-control form-shadow"/>
+                    <g:textField name="phone" maxlength="20" value="${userInstance?.phone}" class="form-control form-shadow phone-user backend-input"/>
                 </div>
+                <i class="fa fa-times i-delete-without-backend i-delete-user-phone"></i> <!-- Delete text icon -->
             </div>
         </div>
 

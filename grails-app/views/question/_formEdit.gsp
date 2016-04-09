@@ -17,13 +17,14 @@
 
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:textField name="titleQuestionKey" class="form-control form-shadow" maxlength="25" value="${questionInstance?.titleQuestionKey}"/>
+                    <g:textField name="titleQuestionKey" class="form-control form-shadow key-question backend-input" maxlength="25" value="${questionInstance?.titleQuestionKey}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="keyQuestion-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
                         </a>
                     </span>
                 </div>
+                <i class="fa fa-times i-delete-reformat-backend i-delete-question-key"></i> <!-- Delete text icon -->
             </div>
 
             <div class="help-block keyQuestion-block">
@@ -45,8 +46,9 @@
 
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textArea name="description" class="form-control autosizeme form-shadow" cols="40" rows="1" maxlength="800" value="${questionInstance?.description}"/>
+                    <g:textArea name="description" class="form-control autosizeme form-shadow description-question backend-input" cols="40" rows="1" maxlength="800" value="${questionInstance?.description}"/>
                 </div>
+                <i class="fa fa-times i-delete-textArea-backend i-delete-question-description"></i> <!-- Delete text icon -->
             </div>
         </div>
     </div> <!-- /.Row -->

@@ -310,9 +310,42 @@ input:-webkit-autofill:active {
 .i-delete-backend {
     display: none;
     position: absolute !important;
-    right: 175px !important;
+    right: 170px !important;
     cursor: pointer;
     top: 51px;
+    z-index: 1999;
+    font-size: 15px;
+    color: #AAAAAA !important;
+}
+
+.i-delete-without-backend {
+    display: none;
+    position: absolute !important;
+    right: 50px !important;
+    cursor: pointer;
+    top: 52px;
+    z-index: 1999;
+    font-size: 15px;
+    color: #AAAAAA !important;
+}
+
+.i-delete-reformat-backend {
+    display: none;
+    position: absolute !important;
+    right: 170px !important;
+    cursor: pointer;
+    top: 51px;
+    z-index: 1999;
+    font-size: 15px;
+    color: #AAAAAA !important;
+}
+
+.i-delete-textArea-backend {
+    display: none;
+    position: absolute !important;
+    right: 48px !important;
+    cursor: pointer;
+    top: 52px;
     z-index: 1999;
     font-size: 15px;
     color: #AAAAAA !important;
@@ -756,6 +789,10 @@ input:-webkit-autofill:active {
 
     .portlet-users {
         margin-top: 0 !important;
+    }
+
+    .i-delete-reformat-backend {
+        top: 76px;
     }
 
 }

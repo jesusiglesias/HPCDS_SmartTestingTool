@@ -133,6 +133,7 @@
     <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
     <g:javascript src="confirmation/custom-delete.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
+    <g:javascript src="customIcons/department-handler.js"/>
     <g:javascript src="domain-validation/department-validation.js"/>
 
 </body>
