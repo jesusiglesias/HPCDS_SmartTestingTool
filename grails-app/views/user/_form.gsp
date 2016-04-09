@@ -17,7 +17,7 @@
                 </label>
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:textField name="username" maxlength="30" class="form-control form-shadow" value="${userInstance?.username}"/>
+                    <g:textField name="username" maxlength="30" class="form-control form-shadow emptySpaces" value="${userInstance?.username}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="username-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
@@ -43,7 +43,7 @@
                 </label>
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:field type="email" name="email" maxlength="60" class="form-control form-shadow" value="${userInstance?.email}"/>
+                    <g:field type="email" name="email" maxlength="60" class="form-control form-shadow emptySpaces" value="${userInstance?.email}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="email-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
@@ -72,7 +72,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="password" class="form-control password-admin form-shadow"/>
+                    <g:passwordField name="password" class="form-control password-admin form-shadow emptySpaces"/>
                 </div>
             </div>
         </div>
@@ -88,7 +88,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="confirmPassword" class="form-control form-shadow"/>
+                    <g:passwordField name="confirmPassword" class="form-control form-shadow emptySpaces"/>
                 </div>
             </div>
         </div>

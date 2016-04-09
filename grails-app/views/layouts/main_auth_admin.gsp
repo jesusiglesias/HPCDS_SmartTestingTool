@@ -204,7 +204,9 @@
                                 <i class="icon-close"></i>
                             </a>
                             <div class="input-group">
-                                <g:textField name="quickSearch" class="form-control" placeholder="${message(code:'layouts.main_auth_admin.sidebar.search', default:'Search...')}"/>
+                                <!-- ie8, ie9 does not support html5 placeholder, so it just shows field title for that-->
+                                <label class="control-label visible-ie8 visible-ie9" for="quickSearch"><g:message code="layouts.main_auth_admin.sidebar.search" default="Search..."/></label>
+                                <g:textField name="quickSearch" class="form-control placeholder-no-fix" placeholder="${message(code:'layouts.main_auth_admin.sidebar.search', default:'Search...')}" autocomplete="on"/>
                                 <span class="input-group-btn">
                                     <a href="javascript:;" class="btn submit">
                                         <i class="icon-magnifier"></i>

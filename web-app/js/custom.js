@@ -271,12 +271,29 @@ var CustomScript = function () {
         $('.dataTables_length').find('select').addClass('form-shadow');
     };
 
+    /**
+     * It disallows the empty spaces
+     */
+    var handlerDisallowSpaces = function() {
+        
+        $(".emptySpaces").on({
+            keydown: function(e) {
+                if (e.which === 32)
+                    return false;
+            },
+            change: function() {
+                this.value = this.value.replace(/\s/g, "");
+            }
+        });
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
             scrollBackTop();
             handlerInput();
             handlerDatatable();
+            handlerDisallowSpaces();
         }
     };
 }();

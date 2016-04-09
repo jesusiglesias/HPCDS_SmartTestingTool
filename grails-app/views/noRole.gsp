@@ -158,7 +158,7 @@
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
 			<div class="input-group noRoleEmail-group">
-				<g:field type="text" class="form-control user-input" name="noRoleEmail"/>
+				<g:field type="text" class="form-control user-input emptySpaces" name="noRoleEmail"/>
 				<i class="fa fa-times i-delete i-delete-noRole"></i> <!-- Delete text icon -->
 				<span class="input-group-btn">
 					<button name="noRoleEmail-button" id="noRoleEmail-button" class="btn grey-mint noRoleSend-btn">

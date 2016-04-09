@@ -171,7 +171,7 @@
             <!-- Username/email Field -->
             <div class="form-group form-md-line-input form-md-floating-label has-success">
                 <div class="input-icon right">
-                    <g:textField class="form-control user-input autofill-input" id="username" name='stt_hp_username' value="${session['SPRING_SECURITY_LAST_USERNAME']}" autocomplete="on"/>
+                    <g:textField class="form-control user-input autofill-input emptySpaces" id="username" name='stt_hp_username' value="${session['SPRING_SECURITY_LAST_USERNAME']}" autocomplete="on"/>
                     <label for="username"><g:message code="views.login.auth.form.username/email" default="Username/Email"/></label>
                     <span class="help-block"><g:message code="views.login.auth.form.username/email.help" default="Enter a valid username or email"/></span>
                     <i class="fa fa-times i-delete" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
@@ -179,31 +179,16 @@
                 </div>
             </div>
 
-            <%-- TODO
-            <!-- ie8, ie9 does not support html5 placeholder, so it just shows field title for that-->
-                <label class="control-label visible-ie8 visible-ie9" for="username"><g:message code="views.login.auth.form.username/email" default="Username/Email"/></label>
-                <g:field type="text" class="form-control form-control-solid placeholder-no-fix" id="username" name='stt_hp_username' placeholder='${message(code:"views.login.auth.form.username/email", default:"Username or email")}'
-                         value="${session['SPRING_SECURITY_LAST_USERNAME']}" autocomplete="off"/>
-            </div>--%>
-
             <!-- Password Field -->
             <div class="form-group form-md-line-input form-md-floating-label has-success">
                 <div class="input-icon right">
-                    <g:passwordField class="form-control password-input autofill-input" id="password" name='stt_hp_password' autocomplete="off" />
+                    <g:passwordField class="form-control password-input autofill-input emptySpaces" id="password" name='stt_hp_password' autocomplete="off" />
                     <label for="password"><g:message code="views.login.auth.form.password" default="Password"/></label>
                     <span class="help-block"><g:message code="views.login.auth.form.password.help" default="Enter your password"/></span>
                     <i class="fa fa-eye i-show"></i> <!-- Show password icon -->
                     <i class="fa fa-key"></i>
                 </div>
             </div>
-
-            <%--
-            <div class="form-group">
-                <!-- TODO -->
-                <label class="control-label visible-ie8 visible-ie9" for="password"><g:message code="views.login.auth.form.password" default="Password"/></label>
-                <g:field type="password" class="form-control form-control-solid placeholder-no-fix" id="password" name='stt_hp_password' placeholder='${message(code:"views.login.auth.form.password", default:"Password")}'
-                          autocomplete="off"/>
-            </div>--%>
 
             <!-- Remember me and password -->
             <div class="form-actions action-remember-password">
