@@ -156,6 +156,7 @@
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="password/custom-password.js"/>
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
+    <g:javascript src="customIcons/secUser-handler.js"/>
     <g:javascript src="domain-validation/admin-validation.js"/>
 
 </body>

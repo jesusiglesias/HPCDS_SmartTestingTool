@@ -14,13 +14,14 @@
                 </label>
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:textField name="username" maxlength="30" class="form-control form-shadow emptySpaces" value="${secUserInstance?.username}"/>
+                    <g:textField name="username" maxlength="30" class="form-control form-shadow emptySpaces username-admin backend-input" value="${secUserInstance?.username}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="username-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
                         </a>
                     </span>
                 </div>
+                <i class="fa fa-times i-delete-backend i-delete-admin-username"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block username-block">
                 <h5>
@@ -40,13 +41,14 @@
                 </label>
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:field type="email" name="email" maxlength="60" class="form-control form-shadow emptySpaces" value="${secUserInstance?.email}"/>
+                    <g:field type="email" name="email" maxlength="60" class="form-control form-shadow emptySpaces email-admin backend-input" value="${secUserInstance?.email}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="email-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
                         </a>
                     </span>
                 </div>
+                <i class="fa fa-times i-delete-backend i-delete-admin-email"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block email-block">
                 <h5>
@@ -69,8 +71,9 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="password" class="form-control password-admin form-shadow emptySpaces"/>
+                    <g:passwordField name="password" class="form-control password-admin form-shadow emptySpaces password-admin backendPassword-input"/>
                 </div>
+                <i class="fa fa-eye i-show-admin-password"></i> <!-- Show password icon -->
             </div>
         </div>
 
@@ -85,8 +88,9 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="confirmPassword" class="form-control form-shadow emptySpaces"/>
+                    <g:passwordField name="confirmPassword" class="form-control form-shadow emptySpaces passwordConfirm-admin backendPassword-input"/>
                 </div>
+                <i class="fa fa-eye i-show-admin-confirmPassword"></i> <!-- Show password icon -->
             </div>
         </div>
     </div>
