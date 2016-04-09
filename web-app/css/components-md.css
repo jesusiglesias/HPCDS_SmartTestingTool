@@ -8636,8 +8636,6 @@ Input icons
 .input-group .input-icon > .form-control {
     -webkit-border-radius: 2px 0 0 2px;
     -moz-border-radius: 2px 0 0 2px;
-    -ms-border-radius: 2px 0 0 2px;
-    -o-border-radius: 2px 0 0 2px;
     border-radius: 2px 0 0 2px;
 }
 
@@ -8657,9 +8655,10 @@ Input icons
 }
 
 .has-success .input-icon > i {
-    color: #36c6d3;
+    color: #4DB3A2;
 }
 
+/* TODO */
 .has-warning .input-icon > i {
     color: #F1C40F;
 }
@@ -8669,7 +8668,7 @@ Input icons
 }
 
 .has-error .input-icon > i {
-    color: #ed6b75;
+    color: #D05454;
 }
 
 .input-icon.right {
@@ -8851,7 +8850,7 @@ h6 .label {
 }
 
 /***
-Customized List Group
+Customized List Group TODO
 ***/
 /* Contextual variants */
 .list-group > li:first-child {
@@ -9131,7 +9130,7 @@ UI Loading
 }
 
 /***
-Metro icons
+Metro icons TODO
 ***/
 [class^="m-icon-"] {
     display: inline-block;

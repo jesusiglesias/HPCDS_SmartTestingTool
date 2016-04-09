@@ -142,8 +142,7 @@
                             </span>
                             <i class="fa fa-angle-down"></i>
                         </a>
-                        <!-- TODO menu-default -->
-                        <ul class="dropdown-menu dropdown-menu-default">
+                        <ul class="dropdown-menu">
                             <!-- Profile -->
                             <li>
                                 <g:link controller="secUser" action="edit" id="${sec.loggedInUserInfo(field:"id")}">
@@ -170,7 +169,7 @@
                             <li>
                                 <form name="logout" method="POST" action="${createLink(controller:'logout')}">
                                     <button class="exit-switch-button">
-                                        <i class="icon-logout"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
+                                        <i class="fa fa-sign-out"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
                                     </button>
                                 </form>
                             </li>
