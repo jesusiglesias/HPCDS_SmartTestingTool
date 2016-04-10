@@ -3,39 +3,25 @@
 <head>
     <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title" default="STT | Administration panel"/></title>
-
-    <script type="text/javascript">
-
-        // Handler tooltips
-        jQuery(document).ready(function() {
-
-            // Variables to use in javascript
-            var fullscreenTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.fullscreen', default:'Fullscreen!')}';
-            var removeTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.remove', default:'Remove')}';
-            var collapseTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.collapse', default:'Collapse/Expand')}';
-
-            // Global tooltips
-            $('.tooltips').tooltip();
-
-            // Portlet tooltips
-            $('.portlet > .portlet-title .fullscreen').tooltip({
-                container: 'body',
-                title: fullscreenTooltip
-            });
-
-            $('.portlet > .portlet-title > .tools > .remove').tooltip({
-                container: 'body',
-                title: removeTooltip
-            });
-            $('.portlet > .portlet-title > .tools > .collapse, .portlet > .portlet-title > .tools > .expand').tooltip({
-                container: 'body',
-                title: collapseTooltip
-            });
-        });
-    </script>
 </head>
 
 <body>
+
+    <script type="text/javascript">
+
+        // Variables to use in javascript
+        var fullscreenTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.fullscreen', default:'Fullscreen!')}';
+        var removeTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.remove', default:'Remove')}';
+        var collapseTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.collapse', default:'Collapse/Expand')}';
+        var reloadTooltip = '${g.message(code:'default.button.reload.tooltip', default:'Reload')}';
+        var reloadAjaxError = '${g.message(code:'default.ajax.error', default:'Error on reloading the content. Please, you try again later.')}';
+        var reloadUsersURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadUsers')}';
+        var reloadTestURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadTest')}';
+        var reloadEvaluationsURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadEvaluations')}';
+        var reloadLastUsers = '${g.createLink(controller: "customTasksBackend", action: 'reloadLastUsers')}';
+
+    </script>
+
     <!-- Page-content-wrapper -->
     <div class="page-content-wrapper">
         <!-- Page-content -->
@@ -68,39 +54,42 @@
                 <div class="row panel-row">
                     <div class="col-md-4">
                         <!-- Widget thumb -->
-                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-users">
                             <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.user" default="Normal users"/></h4>
+                            <i class="fa fa-refresh iconReload reloadUsers"></i>
                         <div class="widget-thumb-wrap">
                                 <i class="widget-thumb-icon bg-green-dark icon-user"></i>
                                 <div class="widget-thumb-body">
                                     <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
-                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="${normalUsers}">${normalUsers}</span>
+                                    <span class="widget-thumb-body-stat counterUsers" data-counter="counterup" data-value="${normalUsers}">${normalUsers}</span>
                                 </div>
                             </div>
                         </div> <!-- /.Widget thumb -->
                     </div>
                     <div class="col-md-4">
                         <!-- Widget thumb -->
-                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-test">
                             <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.test" default="Active test"/></h4>
+                            <i class="fa fa-refresh iconReload reloadTest"></i>
                             <div class="widget-thumb-wrap">
                                 <i class="widget-thumb-icon bg-red icon-note"></i>
                                 <div class="widget-thumb-body">
                                     <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
-                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="${test}">${test}</span>
+                                    <span class="widget-thumb-body-stat counterTest" data-counter="counterup" data-value="${test}">${test}</span>
                                 </div>
                             </div>
                         </div> <!-- /.Widget thumb -->
                     </div>
                     <div class="col-md-4">
                         <!-- Widget thumb -->
-                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-evaluations">
                             <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.evaluation" default="Qualified evaluations"/></h4>
+                            <i class="fa fa-refresh iconReload reloadEvaluations"></i>
                             <div class="widget-thumb-wrap">
                                 <i class="widget-thumb-icon bg-yellow-saffron icon-star"></i>
                                 <div class="widget-thumb-body">
                                     <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
-                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="${evaluations}">${evaluations}</span>
+                                    <span class="widget-thumb-body-stat counterEvaluations" data-counter="counterup" data-value="${evaluations}">${evaluations}</span>
                                 </div>
                             </div>
                         </div> <!-- /.Widget thumb -->
@@ -118,6 +107,8 @@
                                     <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.recentUsers" default="Recent users"/></span>
                                 </div>
                                 <div class="tools">
+                                   <%-- TODO <i class="fa fa-refresh reloadLastUsers" onclick="${remoteFunction(controller: 'customTasksBackend', action: 'reloadLastUsers', update:'content-users')}"></i> --%>
+                                    <i class="fa fa-refresh reloadLastUsers"></i>
                                     <a href="" class="collapse"> </a>
                                     <a href="" class="fullscreen"> </a>
                                     <a href="" class="remove"> </a>
@@ -140,7 +131,7 @@
                                                 <div class="mt-comment-body">
                                                     <div class="mt-comment-info">
                                                         <span class="mt-comment-author">${user?.username}</span>
-                                                        <span class="mt-comment-date"><g:formatDate formatName="custom.date.format" date="${user?.dateCreated}"/></span>
+                                                        <span class="mt-comment-date"><g:formatDate formatName="custom.date.format" date="${user?.dateCreated}" class="format-date"/></span>
                                                     </div>
                                                     <div class="mt-comment-text">${user?.email}</div>
                                                     <div class="mt-comment-details">
@@ -150,8 +141,8 @@
                                                         <g:else>
                                                             <span class="mt-comment-status label label-sm label-info circle">
                                                         </g:else>
-                                                                <g:formatBoolean boolean="${user?.enabled}" true="${g.message(code: "default.enabled.label.true", default: "Confirmed")}" false="${g.message(code: "default.enabled.label.false", default: "Pending")}"/>
-                                                            </span>
+                                                        <g:formatBoolean boolean="${user?.enabled}" true="${g.message(code: "default.enabled.label.true", default: "Confirmed")}" false="${g.message(code: "default.enabled.label.false", default: "Pending")}"/>
+                                                    </span>
                                                         <ul class="mt-comment-actions">
                                                             <li>
                                                                 <g:link controller="user" action="edit" id="${user?.id}" class="btn blue-soft"><g:message code="default.button.edit.label" default="Edit"/></g:link>
@@ -172,8 +163,9 @@
     </div> <!-- /. Page-content-wrapper -->
 
     <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="custom/dashboard.js"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <g:javascript src="counter/jquery.counterup.min.js"/>
-
+    <g:javascript src="overlay/loadingoverlay.min.js"/>
 </body>
 </html>

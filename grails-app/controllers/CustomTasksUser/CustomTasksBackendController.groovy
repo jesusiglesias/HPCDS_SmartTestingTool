@@ -5,6 +5,7 @@ import Security.SecUser
 import Security.SecUserSecRole
 import Test.Test
 import User.Evaluation
+import grails.converters.JSON
 import grails.util.Environment
 import grails.util.Holders
 import org.codehaus.groovy.grails.core.io.ResourceLocator
@@ -42,6 +43,57 @@ class CustomTasksBackendController {
         def lastUsers = SecUser.executeQuery("from SecUser where id in (select secUser.id from SecUserSecRole where secRole.id = :roleId) order by dateCreated desc", [roleId: roleUser.id], [max: 10])
 
         render view: 'dashboard', model: [normalUsers: normalUsers.size(), test: test, evaluations: evaluations, lastUsers: lastUsers]
+    }
+
+    /**
+     * It obtains the number of users from the AJAX call.
+     */
+    def reloadUsers (){
+        log.debug("CustomTasksBackendController:reloadUsers()")
+
+        // Obtaining number of normal users
+        def roleUser = SecRole.findByAuthority("ROLE_USER")
+        def normalUsers = SecUserSecRole.findAllBySecRole(roleUser).secUser
+
+        render normalUsers.size()
+    }
+
+    /**
+     * It obtains the number of test from the AJAX call.
+     */
+    def reloadTest (){
+        log.debug("CustomTasksBackendController:reloadTest()")
+
+        // Obtaining number of test in system
+        def test = Test.findAll().size()
+
+        render test
+    }
+
+    /**
+     * It obtains the number of evaluations from the AJAX call.
+     */
+    def reloadEvaluations (){
+        log.debug("CustomTasksBackendController:reloadEvaluations()")
+
+        // Obtaining number of test in system
+        def evaluations = Evaluation.findAll().size()
+
+        render evaluations
+    }
+
+    /**
+     * It obtains the lastest 10 registered users from the AJAX call.
+     */
+    def reloadLastUsers (){
+        log.debug("CustomTasksBackendController:reloadLastUsers()")
+
+        def roleUser = SecRole.findByAuthority("ROLE_USER")
+
+        // Obtaining the lastest 10 registered users
+        def lastUsers = SecUser.executeQuery("from SecUser where id in (select secUser.id from SecUserSecRole where secRole.id = :roleId) order by dateCreated desc", [roleId: roleUser.id], [max: 10])
+
+        render lastUsers as JSON
     }
 
     /**
