@@ -100,7 +100,7 @@
 
     <!-- CORE PLUGINS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <g:javascript src="custom.js"/>
+    <g:javascript src="custom/custom.js"/>
 
 </body>
 </html>

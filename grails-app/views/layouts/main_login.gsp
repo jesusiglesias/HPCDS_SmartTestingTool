@@ -95,7 +95,7 @@
     <g:javascript src="jquery.slimscroll.min.js"/>
     <g:javascript src="jquery.blockui.min.js"/>
     <g:javascript src="jquery.uniform.min.js"/>
-    <g:javascript src="custom.js"/>
+    <g:javascript src="custom/custom.js"/>
 
     <!-- TODO THEME GLOBAL SCRIPT -->
     <g:javascript src="app.js"/>

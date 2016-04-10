@@ -513,7 +513,7 @@
     <g:javascript src="jquery.blockui.min.js"/>
     <%-- TODO
     <g:javascript src="jquery.uniform.min.js"/> --%>
-    <g:javascript src="custom.js"/>
+    <g:javascript src="custom/custom.js"/>
     <g:javascript src="placeholder_polyfill.jquery.min.combo.js"/>
 
     <!-- THEME GLOBAL SCRIPTS -->
