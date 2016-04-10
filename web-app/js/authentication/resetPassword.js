@@ -35,7 +35,7 @@ var Login = function() {
         forgetForm.validate({
             errorElement: 'span', // Default input error message container
             errorClass: 'help-block', // Default input error message class
-            focusInvalid: false, // Do not focus the last invalid input
+            focusInvalid: true, // Do not focus the last invalid input
             ignore: "",
             rules: {
                 email: {

@@ -79,7 +79,7 @@
                 </g:hasErrors>
 
                 <!-- Edit form -->
-                <g:form url="[resource:secUserInstance, action:'updateProfileImage']" enctype="multipart/form-data" autocomplete="on" class="horizontal-form profileImage-form">
+                <g:form url="[resource:secUserInstance, action:'updateProfileImage']" enctype="multipart/form-data" class="horizontal-form profileImage-form">
                     <g:hiddenField name="version" value="${secUserInstance?.version}" />
                     <fieldset class="form">
                         <g:render template="formProfileImage"/>

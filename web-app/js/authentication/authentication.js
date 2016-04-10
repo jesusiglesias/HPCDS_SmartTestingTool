@@ -36,6 +36,22 @@ var Login = function() {
         });
     };
 
+    /**
+     * It handles the overlay in log in action.
+     */
+    var handlerOverlay = function() {
+
+        var loginButton =  $("#login-button");
+
+        loginButton.click(function() {
+            $.LoadingOverlay("show", {
+                color       : "rgba(255, 255, 255, 0.2)",
+                image       : "",
+                fontawesome : "fa fa-spinner fa-spin"
+            });
+        });
+    };
+
     var handleRegister = function() {
 
         function format(state) {
@@ -163,6 +179,7 @@ var Login = function() {
         init: function() {
 
             handleLogin();
+            handlerOverlay();
             handleRegister();
         }
     };

@@ -176,7 +176,7 @@
 
 /* New password form */
 .newPassword-form {
-  margin-bottom: 25px !important;
+  margin-bottom: 50px !important;
 }
 
 /* Position of title and subtitle */
@@ -238,6 +238,11 @@
 /* Forgot password alert */
 .alert-restorePassword {
   margin: 50px 0 -20px 0;
+}
+
+/* New password successful index */
+.alert-restorePasswordSuccessful {
+  margin: 30px 0 0 0;
 }
 
 /* New password alert */

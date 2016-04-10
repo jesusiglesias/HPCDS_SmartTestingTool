@@ -34,7 +34,7 @@
     <!-- Authentication -->
     <div class="content">
         <!-- Forgot password form -->
-        <g:form class="forget-form" controller="customTasksUser" action="sendEmail" method="post" autocomplete="on">
+        <g:form class="forget-form" controller="customTasksUser" action="sendEmail" method="post" autocomplete="off">
 
             <div class="form-title">
                 <span class="form-title"><g:message code="views.login.auth.forgotPassword.title" default="Forgot password?"/></span>
@@ -68,7 +68,7 @@
 
             <div class="form-group form-md-line-input form-md-floating-label has-success">
                 <div class="input-icon right">
-                    <g:field type="email" class="form-control user-input autofill-input emptySpaces" id="email" name="email" autocomplete="on"/>
+                    <g:field type="email" class="form-control user-input autofill-input emptySpaces" id="email" name="email" autocomplete="off"/>
                     <label for="email"><g:message code="views.login.auth.forgotPassword.email" default="Email"/></label>
                     <span class="help-block"><g:message code="views.login.auth.forgotPassword.email.help" default="Enter a valid email"/></span>
                     <i class="fa fa-times i-delete" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->

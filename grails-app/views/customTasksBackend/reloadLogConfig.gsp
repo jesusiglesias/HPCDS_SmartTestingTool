@@ -152,10 +152,13 @@
                       }
                     },
                     complete: function(){
-                        logConfigButton.removeAttr('disabled');
-                        logConfigButton.find('span').text('${message(code: "layouts.main_auth_admin.body.content.logConfiguration.portlet.button", default: "Upload configuration")}');
-                        refreshIcon.removeClass('refresh-icon');
-                        refreshIcon.addClass('refresh-icon-stop');
+
+                        setTimeout(function(){
+                            logConfigButton.removeAttr('disabled');
+                            logConfigButton.find('span').text('${message(code: "layouts.main_auth_admin.body.content.logConfiguration.portlet.button", default: "Upload configuration")}');
+                            refreshIcon.removeClass('refresh-icon');
+                            refreshIcon.addClass('refresh-icon-stop');
+                        }, 500);
                     }
                 });
             });

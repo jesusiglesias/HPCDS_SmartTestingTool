@@ -156,12 +156,12 @@
 
         <!-- New password successful -->
         <g:if test='${flash.newPasswordSuccessful}'>
-            <div class="alert alert-block alert-success alert-success-custom alert-dismissable alert-restorePassword fade in">
+            <div class="alert alert-block alert-success alert-success-custom alert-dismissable alert-restorePasswordSuccessful fade in">
                 <button type="button" class="close" data-dismiss="alert"></button>
                 <p> ${raw(flash.newPasswordSuccessful)} </p>
             </div>
             <g:javascript>
-                createAutoClosingAlert('.alert-restorePassword');
+                createAutoClosingAlert('.alert-restorePasswordSuccessful');
             </g:javascript>
         </g:if>
 
@@ -242,6 +242,7 @@
     </g:if>
 
     <g:javascript src="authentication/authentication.js"/>
+    <g:javascript src="overlay/loadingoverlay.min.js"/>
 
 </body>
 </html>

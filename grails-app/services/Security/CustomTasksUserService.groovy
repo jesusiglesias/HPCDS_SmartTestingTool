@@ -233,6 +233,7 @@ class CustomTasksUserService {
         // Send email
         try {
             mailService.sendMail {
+                async true
                 to grailsApplication.config.grails.mail.username  // Administrator email. It obtains from configuration (Config.groovy)
                 subject subjectStatus
                 html(view: template,

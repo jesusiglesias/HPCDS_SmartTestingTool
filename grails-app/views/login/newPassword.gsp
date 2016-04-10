@@ -10,6 +10,10 @@
 
     <script type="text/javascript">
 
+        // Variables to use in script
+        var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
+
         // Auto close alert
         function createAutoClosingAlert(selector) {
 
@@ -90,13 +94,13 @@
             </div>
 
             <!-- Password confirm field -->
-            <div class="form-group form-md-line-input form-md-floating-label has-success">
+            <div class="form-group form-md-line-input form-md-floating-label has-success form-confirmPassword">
                 <div class="input-icon right">
                     <g:field type="password" class="form-control password-confirm-input autofill-input emptySpaces" id="passwordConfirm" name="passwordConfirm" autocomplete="off"/>
                     <label for="passwordConfirm"><g:message code="views.login.auth.newPassword.passwordConfirm" default="Confirm password"/></label>
                     <span class="help-block"><g:message code="views.login.auth.newPassword.passwordConfirm.help" default="Repeat your password"/></span>
                     <i class="fa fa-eye i-show-confirm"></i> <!-- Show password icon -->
-                    <i class="fa fa-key"></i>
+                    <i class="fa fa-key i-checkPassword"></i>
                 </div>
             </div>
 
