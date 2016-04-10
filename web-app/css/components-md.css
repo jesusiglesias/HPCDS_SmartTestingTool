@@ -168,8 +168,6 @@ body {
     border-bottom: 1px solid rgba(198, 240, 213, 0.66);
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
     border-radius: 0;
     color: #e5fff3;
     box-shadow: none;
@@ -1763,8 +1761,6 @@ Custom vertical inline menu
 .ver-inline-menu {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
 }
 
@@ -1904,8 +1900,6 @@ General User Record Listing
     margin-right: 10px;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
-    -ms-border-radius: 100%;
-    -o-border-radius: 100%;
     border-radius: 100%;
 }
 
@@ -2135,8 +2129,6 @@ Glyphicons Demo
 .alert {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
     border-width: 0;
 }
@@ -6875,8 +6867,6 @@ fieldset[disabled] .btn.yellow-mint:not(.btn-outline).active {
     transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
     border-width: 0 !important;
     overflow: hidden;
@@ -7098,8 +7088,6 @@ Customized Bootstrap Close Icon
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
 }
 
@@ -7573,8 +7561,6 @@ Form Layouts
 .portlet .form .form-actions {
     -webkit-border-radius: 0 0 2px 2px;
     -moz-border-radius: 0 0 2px 2px;
-    -ms-border-radius: 0 0 2px 2px;
-    -o-border-radius: 0 0 2px 2px;
     border-radius: 0 0 2px 2px;
 }
 
@@ -8684,8 +8670,6 @@ Input icons
 .input-group .input-icon.right > .form-control {
     -webkit-border-radius: 0 2px 2px 0;
     -moz-border-radius: 0 2px 2px 0;
-    -ms-border-radius: 0 2px 2px 0;
-    -o-border-radius: 0 2px 2px 0;
     border-radius: 0 2px 2px 0;
 }
 
@@ -9023,8 +9007,6 @@ UI Loading
     background-color: #eee;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
     -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
@@ -9039,8 +9021,6 @@ UI Loading
 .page-loading {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
     position: fixed;
     top: 50%;
@@ -9310,8 +9290,6 @@ body[ng-controller] .modal {
 .modal .modal-content {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
     border: 0;
 }
@@ -9338,8 +9316,6 @@ Notes
     border-left: 5px solid #eee;
     -webkit-border-radius: 0 2px 2px 0;
     -moz-border-radius: 0 2px 2px 0;
-    -ms-border-radius: 0 2px 2px 0;
-    -o-border-radius: 0 2px 2px 0;
     border-radius: 0 2px 2px 0;
 }
 
@@ -9463,8 +9439,6 @@ Notes
 .note {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
     border: 0;
 }
@@ -9597,8 +9571,6 @@ Notes
 .popover {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
     border: 0;
     background: #fff;
@@ -9638,8 +9610,6 @@ Notes
     padding: 0;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
 }
 
@@ -9679,8 +9649,6 @@ Notes
     min-height: 41px;
     -webkit-border-radius: 2px 2px 0 0;
     -moz-border-radius: 2px 2px 0 0;
-    -ms-border-radius: 2px 2px 0 0;
-    -o-border-radius: 2px 2px 0 0;
     border-radius: 2px 2px 0 0;
 }
 
@@ -9896,8 +9864,6 @@ Notes
     clear: both;
     -webkit-border-radius: 0 0 2px 2px;
     -moz-border-radius: 0 0 2px 2px;
-    -ms-border-radius: 0 0 2px 2px;
-    -o-border-radius: 0 0 2px 2px;
     border-radius: 0 0 2px 2px;
 }
 
@@ -9915,7 +9881,6 @@ Notes
 }
 
 /* Portlet background colors */
-/* Side bordered portlet */
 .portlet.bordered > .portlet-title {
     border-bottom: 0;
 }
@@ -10038,7 +10003,7 @@ Notes
 }
 
 .portlet.light > .portlet-title > .caption > .caption-subject {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .portlet.light > .portlet-title > .caption > i {
@@ -14336,8 +14301,6 @@ Notes
     overflow: hidden;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
     box-shadow: 0 2px 3px 2px rgba(0, 0, 0, 0.03);
 }
@@ -16094,8 +16057,6 @@ Dashboard Stats 2
 .dashboard-stat2 {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
     background: #fff;
     padding: 15px 15px 30px 15px;
@@ -16551,8 +16512,6 @@ Light Table
     height: 30px;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
-    -ms-border-radius: 100%;
-    -o-border-radius: 100%;
     border-radius: 100%;
 }
 
@@ -16576,8 +16535,6 @@ Light Table
     font-size: 14px;
     -webkit-border-radius: 2px 2px 0 0;
     -moz-border-radius: 2px 2px 0 0;
-    -ms-border-radius: 2px 2px 0 0;
-    -o-border-radius: 2px 2px 0 0;
     border-radius: 2px 2px 0 0;
 }
 
@@ -16638,8 +16595,6 @@ Light Table
 .tabs-left.nav-tabs > li > a:focus {
     -webkit-border-radius: 2px 0 0 2px;
     -moz-border-radius: 2px 0 0 2px;
-    -ms-border-radius: 2px 0 0 2px;
-    -o-border-radius: 2px 0 0 2px;
     border-radius: 2px 0 0 2px;
     border-color: #eeeeee #dddddd #eeeeee #eeeeee;
 }
@@ -16648,8 +16603,6 @@ Light Table
 .tabs-left.nav-tabs > li.active > a:hover > li.active > a:focus {
     -webkit-border-radius: 2px 0 0 2px;
     -moz-border-radius: 2px 0 0 2px;
-    -ms-border-radius: 2px 0 0 2px;
-    -o-border-radius: 2px 0 0 2px;
     border-radius: 2px 0 0 2px;
     border-color: #ddd transparent #ddd #ddd;
     *border-right-color: #ffffff;
@@ -16669,8 +16622,6 @@ Light Table
 .tabs-right.nav-tabs > li > a:focus {
     -webkit-border-radius: 0 2px 2px 0;
     -moz-border-radius: 0 2px 2px 0;
-    -ms-border-radius: 0 2px 2px 0;
-    -o-border-radius: 0 2px 2px 0;
     border-radius: 0 2px 2px 0;
     border-color: #eeeeee #eeeeee #eeeeee #dddddd;
 }
@@ -16679,8 +16630,6 @@ Light Table
 .tabs-right.nav-tabs > li.active > a:hover > li.active > a:focus {
     -webkit-border-radius: 0 2px 2px 0;
     -moz-border-radius: 0 2px 2px 0;
-    -ms-border-radius: 0 2px 2px 0;
-    -o-border-radius: 0 2px 2px 0;
     border-radius: 0 2px 2px 0;
     border-color: #ddd #ddd #ddd transparent;
     *border-left-color: #ffffff;
@@ -16714,8 +16663,6 @@ Light Table
 .tabs-below > .nav-tabs > li > a .dropdown-menu {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
 }
 
@@ -16723,8 +16670,6 @@ Light Table
 .tabs-below > .nav-tabs .active a:hover .active a:focus {
     -webkit-border-radius: 0 0 2px 2px;
     -moz-border-radius: 0 0 2px 2px;
-    -ms-border-radius: 0 0 2px 2px;
-    -o-border-radius: 0 0 2px 2px;
     border-radius: 0 0 2px 2px;
     border-color: transparent #ddd #ddd #ddd !important;
 }
@@ -16746,11 +16691,6 @@ Light Table
     margin-bottom: 15px;
     padding: 0;
     overflow: hidden;
-    /* justified tabs */
-    /* boxless tabs */
-    /* below justified tabs */
-    /* full width tabs */
-    /* below tabs */
 }
 
 .tabbable-custom > .nav-tabs {
@@ -16767,8 +16707,6 @@ Light Table
     margin-right: 0;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
     border-radius: 0;
 }
 
@@ -16788,16 +16726,12 @@ Light Table
     font-weight: 400;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
     border-radius: 0;
 }
 
 .tabbable-custom > .nav-tabs > li.active > a:hover {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
     border-radius: 0;
     border-top: none;
     background: #fff;
@@ -16810,8 +16744,6 @@ Light Table
     padding: 10px;
     -webkit-border-radius: 0 0 2px 2px;
     -moz-border-radius: 0 0 2px 2px;
-    -ms-border-radius: 0 0 2px 2px;
-    -o-border-radius: 0 0 2px 2px;
     border-radius: 0 0 2px 2px;
 }
 
@@ -16831,8 +16763,6 @@ Light Table
     margin-bottom: -2px;
     -webkit-border-radius: 2px 2px 0 0;
     -moz-border-radius: 2px 2px 0 0;
-    -ms-border-radius: 2px 2px 0 0;
-    -o-border-radius: 2px 2px 0 0;
     border-radius: 2px 2px 0 0;
 }
 
@@ -17248,8 +17178,6 @@ Light Table
 .well {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
 }
 
@@ -18212,8 +18140,6 @@ Timeline
     background-color: #f5f6fa;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
     border-radius: 2px;
 }
 

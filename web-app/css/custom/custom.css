@@ -493,11 +493,13 @@ input:-webkit-autofill:active {
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.40);
 }
 
-.portlet-users {
+.portlet-users,
+.portlet-graphUD {
     margin-top: 40px !important;
 }
 
-.portlet-users .portlet {
+.portlet-users .portlet,
+.portlet-graphUD .portlet {
     height: 523px;
  }
 
@@ -548,7 +550,7 @@ input:-webkit-autofill:active {
 .mt-comments .mt-comment .mt-comment-body .mt-comment-info .mt-comment-date{
     display: inline-block;
     float: right;
-    margin: 0;
+    margin: 0 0 4px 0;
     color: #7B7B7B;
     font-size: 12px;
     text-transform: uppercase;
@@ -588,6 +590,7 @@ input:-webkit-autofill:active {
     text-transform: uppercase;
     color: #ffffff;
 }
+
 .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions > li > a:hover{
     color: #e8e8e8;
     text-decoration: none;
@@ -608,7 +611,7 @@ input:-webkit-autofill:active {
     cursor: pointer;
 }
 
-.reloadLastUsers {
+.reloadGraph {
     float: left;
     margin: 2px 5px 0 0;
     cursor: pointer;
@@ -616,7 +619,7 @@ input:-webkit-autofill:active {
 }
 
 .iconReload:hover,
-.reloadLastUsers:hover {
+.reloadGraph:hover {
     color: #468250;
 }
 
@@ -818,7 +821,8 @@ input:-webkit-autofill:active {
         margin: 0 0 30px 0;
     }
 
-    .portlet-users {
+    .portlet-users,
+    .portlet-graphUD {
         margin-top: 0 !important;
     }
 
@@ -914,9 +918,49 @@ input:-webkit-autofill:active {
     .panel-row {
         margin-top: -12px;
     }
+
+    .portlet-graphUD {
+        height: 400px;
+    }
+
+    .portlet-graphUD .portlet-body {
+        height: 335px;
+    }
+
+    .portlet-graphUD .portlet-body .scroller {
+        height: 315px !important;
+    }
 }
 
-/* Max-width: 341px */
+/* Max-width: 400px */
+@media (max-width: 400px) {
+
+    .portlet-graphUD {
+        height: 390px;
+    }
+
+    .portlet-graphUD .portlet-body {
+        height: 285px;
+    }
+
+    .portlet-graphUD .portlet-body .scroller {
+        height: 275px !important;
+    }
+}
+
+/* Max-width: 344px */
+@media(max-width: 342px) {
+
+    .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions{
+        float: left;
+    }
+
+    .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions > li > a {
+        margin-top: 10px;
+    }
+}
+
+/* Max-width: 340px */
 @media(max-width: 340px) {
 
     /* Profile image */
@@ -924,6 +968,14 @@ input:-webkit-autofill:active {
         float: left;
         height: 35px;
         display: inline-block;
+    }
+
+    .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions{
+        float: left;
+    }
+
+    .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions > li > a {
+        margin-top: 10px;
     }
 }
 
@@ -948,7 +1000,6 @@ input:-webkit-autofill:active {
     .panel-row {
         margin-top: -8px;
     }
-
 }
 
 /* Max-width: 320px */
@@ -959,4 +1010,11 @@ input:-webkit-autofill:active {
         margin: 10px 0 50px 0;
     }
 
+    .portlet-graphUD .portlet-body {
+        height: 265px;
+    }
+
+    .portlet-graphUD .portlet-body .scroller {
+        height: 265px !important;
+    }
 }

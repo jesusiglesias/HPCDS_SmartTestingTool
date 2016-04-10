@@ -3,6 +3,122 @@
 <head>
     <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title" default="STT | Administration panel"/></title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <script>
+
+        // Load the Visualization API and the piechart package.
+        google.load('visualization', '1.1', {'packages': ['corechart']});
+
+        var dataJSON;
+
+        // Auto close alert
+        function createAutoClosingAlert(selector) {
+            var messageAlert = $(selector);
+
+            window.setTimeout(function() {
+                messageAlert.slideUp(1000, function(){
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+
+        // It draws the chart pie when the window resizes
+        function drawChartResize() {
+
+            // Create the data table out of JSON data loaded from server
+            var dataUDResize = new google.visualization.DataTable(dataJSON);
+
+            var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
+            var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+
+            var options = {
+                fontName: "Open Sans",
+                chartArea: {width: '75%', height: '75%'},
+                legend: "none",
+                is3D: true,
+                height: chartHeight,
+                width: chartWidth,
+                backgroundColor: {fill: "transparent"}
+            };
+
+            // Instantiate and draw the chart, passing in some options
+            var chartUDResize = new google.visualization.PieChart(document.getElementById('chart_UD'));
+            chartUDResize.draw(dataUDResize, options);
+        }
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawChart);
+
+        // It draws the chart pie
+        function drawChart() {
+
+            var contentChartUD = $('.portlet-graphUD');
+
+            $.ajax({
+                url: "${createLink(controller:'customTasksBackend', action:'userEachDepartment')}",
+                dataType: "json",
+                beforeSend: function () {
+
+                    contentChartUD.LoadingOverlay("show", {
+                        image: "",
+                        fontawesome: "fa fa-spinner fa-spin"
+                    });
+                },
+                success: function (jsonData) {
+
+                    dataJSON = jsonData;
+
+                    // Create the data table out of JSON data loaded from server
+                    var dataUD = new google.visualization.DataTable(jsonData);
+
+                    var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
+                    var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+
+                    var options = {
+                        fontName: "Open Sans",
+                        chartArea: {width: '75%', height: '75%'},
+                        legend: "none",
+                        is3D: true,
+                        height: chartHeight,
+                        width: chartWidth,
+                        backgroundColor: {fill: "transparent"}
+                    };
+
+                    // Instantiate and draw the chart, passing in some options
+                    var chartUD = new google.visualization.PieChart(document.getElementById('chart_UD'));
+                    chartUD.draw(dataUD, options);
+                },
+                error: function () {
+
+                    var listMessageUD = $('.list-messageUD');
+
+                    // Avoid duplicates
+                    if (listMessageUD.length) {
+                        listMessageUD.remove();
+                    }
+
+                    // Message
+                    $('#chart_UD').prepend("<ul class='list-group list-messageUD'><li class='list-group-item bg-red-intense bg-font-red-intense' style='margin-right: -12px'>" + reloadAjaxError + "</li></ul>");
+
+                    createAutoClosingAlert('.list-messageUD');
+                },
+                complete: function () {
+                    setTimeout(function () {
+                        contentChartUD.LoadingOverlay("hide");
+                    }, 500);
+                }
+            });
+        }
+
+        jQuery(document).ready(function() {
+
+            // Resizing the chart pie UD
+            $(window).resize(function(){
+                drawChartResize();
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -18,6 +134,7 @@
         var reloadUsersURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadUsers')}';
         var reloadTestURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadTest')}';
         var reloadEvaluationsURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadEvaluations')}';
+        // TODO
         var reloadLastUsers = '${g.createLink(controller: "customTasksBackend", action: 'reloadLastUsers')}';
 
     </script>
@@ -96,8 +213,10 @@
                     </div>
                 </div> <!-- /.Widget -->
 
-                <!-- Last users registered -->
+                <!-- Graphs -->
                 <div class="row">
+
+                    <!-- Last 10 users registered -->
                     <div class="col-md-6">
                         <!-- Portlet -->
                         <div class="portlet light bg-inverse portlet-users">
@@ -108,9 +227,8 @@
                                 </div>
                                 <div class="tools">
                                    <%-- TODO <i class="fa fa-refresh reloadLastUsers" onclick="${remoteFunction(controller: 'customTasksBackend', action: 'reloadLastUsers', update:'content-users')}"></i> --%>
-                                    <i class="fa fa-refresh reloadLastUsers"></i>
+                                    <i class="fa fa-refresh reloadGraph reloadLastUsers"></i>
                                     <a href="" class="collapse"> </a>
-                                    <a href="" class="fullscreen"> </a>
                                     <a href="" class="remove"> </a>
                                 </div>
                             </div>
@@ -157,7 +275,30 @@
                             </div>
                         </div> <!-- /.Portlet -->
                     </div>
-                </div> <!-- /.Last user registered -->
+
+                    <!-- Users in each department -->
+                    <div class="col-md-6">
+                        <!-- Portlet -->
+                        <div class="portlet light bg-inverse portlet-graphUD">
+                            <div class="portlet-title">
+                                <div class="caption font-green-dark">
+                                    <i class="fa fa-pie-chart font-green-dark"></i>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.users.departments" default="Users in each department"/></span>
+                                </div>
+                                <div class="tools">
+                                    <i class="fa fa-refresh reloadGraph reloadUsersDepartment" onclick="drawChart()"></i>
+                                    <a href="" class="collapse"> </a>
+                                    <a href="" class="remove"> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="scroller" style="height:505px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                    <div id="chart_UD" style="width:100%; height:100%"></div>
+                                </div>
+                            </div>
+                        </div> <!-- /.Portlet -->
+                    </div>
+                </div> <!-- /.Graphs -->
             </div>
         </div> <!-- Page-content -->
     </div> <!-- /. Page-content-wrapper -->
@@ -167,5 +308,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <g:javascript src="counter/jquery.counterup.min.js"/>
     <g:javascript src="overlay/loadingoverlay.min.js"/>
+
 </body>
 </html>

@@ -4,6 +4,7 @@ import Security.SecRole
 import Security.SecUser
 import Security.SecUserSecRole
 import Test.Test
+import User.Department
 import User.Evaluation
 import grails.converters.JSON
 import grails.util.Environment
@@ -26,7 +27,7 @@ class CustomTasksBackendController {
     /**
      * It shows the main page of the admin user.
      */
-    def dashboard (){
+    def dashboard() {
         log.debug("CustomTasksBackendController:dashboard()")
 
         // Obtaining number of normal users
@@ -48,7 +49,7 @@ class CustomTasksBackendController {
     /**
      * It obtains the number of users from the AJAX call.
      */
-    def reloadUsers (){
+    def reloadUsers() {
         log.debug("CustomTasksBackendController:reloadUsers()")
 
         // Obtaining number of normal users
@@ -61,7 +62,7 @@ class CustomTasksBackendController {
     /**
      * It obtains the number of test from the AJAX call.
      */
-    def reloadTest (){
+    def reloadTest() {
         log.debug("CustomTasksBackendController:reloadTest()")
 
         // Obtaining number of test in system
@@ -73,7 +74,7 @@ class CustomTasksBackendController {
     /**
      * It obtains the number of evaluations from the AJAX call.
      */
-    def reloadEvaluations (){
+    def reloadEvaluations() {
         log.debug("CustomTasksBackendController:reloadEvaluations()")
 
         // Obtaining number of test in system
@@ -83,9 +84,9 @@ class CustomTasksBackendController {
     }
 
     /**
-     * It obtains the lastest 10 registered users from the AJAX call.
+     * It obtains the lastest 10 registered users from the AJAX call. TODO
      */
-    def reloadLastUsers (){
+    def reloadLastUsers() {
         log.debug("CustomTasksBackendController:reloadLastUsers()")
 
         def roleUser = SecRole.findByAuthority("ROLE_USER")
@@ -94,6 +95,36 @@ class CustomTasksBackendController {
         def lastUsers = SecUser.executeQuery("from SecUser where id in (select secUser.id from SecUserSecRole where secRole.id = :roleId) order by dateCreated desc", [roleId: roleUser.id], [max: 10])
 
         render lastUsers as JSON
+    }
+
+    /**
+     * It obtains the number of users in each department.
+     */
+    def userEachDepartment() {
+        log.debug("CustomTasksBackendController:userEachDepartment()")
+
+        // Obtaining all departments
+        def departments = Department.list()
+
+        // Columnes
+        def cols = [
+                [label: g.message(code: "user.label", default: 'User'), type:"string"],
+                [label: g.message(code: 'department.label', default: 'Department'), type:"number"]
+        ]
+
+        // Rows
+        def rows = []
+        def addRow = { name, value ->
+            rows << [c: [[v: name], [v: value]]]
+        }
+
+        departments.each { department ->
+            addRow(department.name, department.users.size())
+        }
+
+        def UDData = [cols: cols, rows: rows]
+
+        render UDData as JSON
     }
 
     /**
@@ -137,7 +168,7 @@ class CustomTasksBackendController {
     /**
      * It shows the reload log configuration page.
      */
-    def reloadLogConfig () {
+    def reloadLogConfig() {
         log.debug("CustomTasksBackendController:reloadLogConfig()")
 
         render view: 'reloadLogConfig'
@@ -146,7 +177,7 @@ class CustomTasksBackendController {
     /**
      * It reloads automatically the changes done in Log4j external file by means of AJAX.
      */
-    def reloadLogConfigAJAX () {
+    def reloadLogConfigAJAX() {
         log.debug("CustomTasksBackendController:reloadLogConfigAJAX()")
 
         // External files of properties
