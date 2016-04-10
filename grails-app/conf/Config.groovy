@@ -202,10 +202,16 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     /* Custom tasks admin (back-end)
     ======================================================*/
     // Reload Log config
+    '/customTasksBackend/dashboard':           ['ROLE_ADMIN'],
+    '/customTasksBackend/reloadUsers':         ['ROLE_ADMIN'],
+    '/customTasksBackend/reloadTest':          ['ROLE_ADMIN'],
+    '/customTasksBackend/reloadEvaluations':   ['ROLE_ADMIN'],
+        // TODO
+    '/customTasksBackend/reloadLastUsers':     ['ROLE_ADMIN'],
+        // TODO
+    '/customTasksBackend/profileImage':        ['ROLE_ADMIN', 'ROLE_USER'],
     '/customTasksBackend/reloadLogConfig':     ['ROLE_ADMIN'],
     '/customTasksBackend/reloadLogConfigAJAX': ['ROLE_ADMIN'],
-    '/customTasksBackend/dashboard':           ['ROLE_ADMIN'],
-    '/customTasksBackend/profileImage':        ['ROLE_ADMIN', 'ROLE_USER'],
     '/customTasksBackend/**':                  ['ROLE_ADMIN']
 ]
 
