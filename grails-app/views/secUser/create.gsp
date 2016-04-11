@@ -21,6 +21,7 @@
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
         var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
+        var _equalPasswordUsername = '${raw(g.message(code:'default.password.username', default:'<strong>Password</strong> field must not be equal to username.'))}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
         // Handler auto close alert
@@ -82,6 +83,7 @@
                                         <li> <g:message code="views.login.auth.newPassword.uppercase" default="It must contain at least one uppercase letter."/> </li>
                                         <li> <g:message code="views.login.auth.newPassword.whitespace" default="It must not contain whitespaces."/> </li>
                                         <li> <g:message code="views.login.auth.newPassword.character" default="It can contain special characters."/> </li>
+                                        <li> <g:message code="views.login.auth.newPassword.username" default="It must not be equal to username."/> </li>
                                     </ul>
                                 </div>
                             </div>

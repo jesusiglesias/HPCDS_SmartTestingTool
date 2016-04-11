@@ -62,6 +62,7 @@
                                     <li> <g:message code="views.login.auth.newPassword.uppercase" default="It must contain at least one uppercase letter."/> </li>
                                     <li> <g:message code="views.login.auth.newPassword.whitespace" default="It must not contain whitespaces."/> </li>
                                     <li> <g:message code="views.login.auth.newPassword.character" default="It can contain special characters."/> </li>
+                                    <li> <g:message code="views.login.auth.newPassword.username" default="It must not be equal to username."/> </li>
                                 </ul>
                             </div>
                         </div>

@@ -80,7 +80,14 @@ class SecUserController {
 
         // Check if password and confirm password fields are same
         if (secUserInstance.password != secUserInstance.confirmPassword) {
-            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: 'Password and confirm password fields must match.')
+            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
+            render view: "create", model: [secUserInstance: secUserInstance]
+            return
+        }
+
+        // Check if password and username are same
+        if (secUserInstance.password.toLowerCase() == secUserInstance.username.toLowerCase()) {
+            flash.secUserErrorMessage = g.message(code: 'default.password.username', default: '<strong>Password</strong> field must not be equal to username.')
             render view: "create", model: [secUserInstance: secUserInstance]
             return
         }
@@ -188,7 +195,18 @@ class SecUserController {
             // Roll back in database
             transactionStatus.setRollbackOnly()
 
-            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: 'Password and confirm password fields must match.')
+            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
+            render view: "edit", model: [secUserInstance: secUserInstance]
+            return
+        }
+
+        // Check if password and username are same
+        if (secUserInstance.password.toLowerCase() == secUserInstance.username.toLowerCase()) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.secUserErrorMessage = g.message(code: 'default.password.username', default: '<strong>Password</strong> field must not be equal to username.')
             render view: "edit", model: [secUserInstance: secUserInstance]
             return
         }

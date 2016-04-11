@@ -85,7 +85,9 @@ class CustomTasksUserService {
 
             def passwordSame = password_same(email, params.password) // It checks if password is equal to the current
 
-            if (!passwordSame.same) { // New password different
+            def passwordSameUsername = password_notUsername(email, params.password) // It checks if password if equal to username
+
+            if (!passwordSame.same && !passwordSameUsername.sameUsername) { // New password different
 
                 log.debug("CustomTasksUserService:update_pass():passwordDifferent")
 
@@ -96,8 +98,16 @@ class CustomTasksUserService {
 
                 return valid << [response: user.save(flush: true, failOnError: true)]
 
-            } else { // Password equal
-                return passwordSame << [response: false, valid: true, match: true]
+            } else {
+
+                if (passwordSame.same) {
+                    // Password equal
+                    return passwordSame << [response: false, valid: true, match: true, passwordSame: false]
+
+                } else if (passwordSameUsername.sameUsername) {
+                    // Password equal to username
+                    return passwordSameUsername << [response: false, valid: true, match: true, passwordSame: true]
+                }
             }
         } else {
             return valid << [response: false] // False y error que se encontró
@@ -174,6 +184,21 @@ class CustomTasksUserService {
         def userOldPassword = SecUser.findByEmail(email).getPassword()
 
         return [same: passwordEncoder.isPasswordValid(userOldPassword, newPassword, null)]
+    }
+
+    /**
+     * It checks if the password introduced is equal to the username.
+     *
+     * @param email Email of the user.
+     * @param password Password introduced.
+     * @return true If the password introduced is equal tu username.
+     */
+    def private password_notUsername(String email, String newPassword) {
+        log.debug("CustomTasksUserService:password_notUsername()")
+
+        def userOldPassword = SecUser.findByEmail(email).getUsername()
+
+        return [sameUsername: newPassword.toLowerCase().equals(userOldPassword.toLowerCase())]
     }
 
     /**

@@ -322,10 +322,15 @@ class CustomTasksUserController {
 
                 flash.errorNewPassword = g.message(code: 'customTasksUser.updatePassword.differentPassword', default: 'The passwords you entered do not match.')
 
-            } else { // Password is not different than the previous
+            } else if (!update_user.passwordSame) { // Password is not different than the previous
                 log.debug("CustomTasksUserController:updatePass():passwordIsEqualPrevious")
 
                 flash.errorNewPassword = g.message(code: 'customTasksUser.updatePassword.equalPassword', default: 'The password you entered can not be the same as the current.')
+
+            } else { // Password is equal to username
+                log.debug("CustomTasksUserController:updatePass():passwordIsEqualToUsername")
+
+                flash.errorNewPassword = g.message(code: 'default.password.username', default: '<strong>Password</strong> field must not be equal to username.')
             }
 
         }else{ // Token altered

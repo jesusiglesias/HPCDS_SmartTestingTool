@@ -11,6 +11,10 @@ var DomainUserValidation = function () {
 
         var userForm = $('.user-form');
 
+        jQuery.validator.addMethod("notEqualToUsername", function(value, element, param) {
+            return this.optional(element) || value.toLowerCase() != $(param).val().toLowerCase();
+        }, _equalPasswordUsername);
+
         userForm.validate({
                 errorElement: 'span', // Default input error message container
                 errorClass: 'help-block help-block-error', // Default input error message class
@@ -27,7 +31,8 @@ var DomainUserValidation = function () {
                         maxlength: 60
                     },
                     password: {
-                        required: true
+                        required: true,
+                        notEqualToUsername:'#username'
                     },
                     confirmPassword: {
                         required: true,
@@ -75,7 +80,8 @@ var DomainUserValidation = function () {
                         maxlength: _maxlengthField
                     },
                     password: {
-                        required: _requiredField
+                        required: _requiredField,
+                        notEqualToUsername: _equalPasswordUsername
                     },
                     confirmPassword: {
                         required: _requiredField,

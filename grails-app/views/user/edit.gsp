@@ -26,6 +26,7 @@
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
         var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
+        var _equalPasswordUsername = '${raw(g.message(code:'default.password.username', default:'<strong>Password</strong> field must not be equal to username.'))}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
 		// Handler auto close alert
@@ -68,31 +69,6 @@
 
             <!-- Contain page -->
             <div id="edit-domain">
-
-                <!-- Accordion -->
-                <div class="portlet-body">
-                    <div class="panel-group accordion panel-instruction-create" id="accordionPassword">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordionPassword" href="#collapsePassword"> <g:message code="views.login.auth.newPassword.description" default="New password instructions"/> </a>
-                                </h4>
-                            </div>
-                            <div id="collapsePassword" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <ul>
-                                        <li> <g:message code="views.login.auth.newPassword.longitude" default="It must contain a minimum length of 8 characters."/> </li>
-                                        <li> <g:message code="views.login.auth.newPassword.number" default="It must contain at least one number."/> </li>
-                                        <li> <g:message code="views.login.auth.newPassword.lowercase" default="It must contain at least one lowercase letter."/> </li>
-                                        <li> <g:message code="views.login.auth.newPassword.uppercase" default="It must contain at least one uppercase letter."/> </li>
-                                        <li> <g:message code="views.login.auth.newPassword.whitespace" default="It must not contain whitespaces."/> </li>
-                                        <li> <g:message code="views.login.auth.newPassword.character" default="It can contain special characters."/> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Alerts -->
                 <g:if test="${flash.userErrorMessage}">

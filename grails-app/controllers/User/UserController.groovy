@@ -82,7 +82,14 @@ class UserController {
 
         // Check if password and confirm password fields are same
         if (userInstance.password != userInstance.confirmPassword) {
-            flash.userErrorMessage = g.message(code: 'default.password.notsame', default: 'Password and confirm password fields must match.')
+            flash.userErrorMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
+            render view: "create", model: [userInstance: userInstance]
+            return
+        }
+
+        // Check if password and username are same
+        if (userInstance.password.toLowerCase() == userInstance.username.toLowerCase()) {
+            flash.userErrorMessage = g.message(code: 'default.password.username', default: '<strong>Password</strong> field must not be equal to username.')
             render view: "create", model: [userInstance: userInstance]
             return
         }
