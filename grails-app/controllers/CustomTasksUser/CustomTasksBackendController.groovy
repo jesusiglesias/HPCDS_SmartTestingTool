@@ -84,7 +84,7 @@ class CustomTasksBackendController {
     }
 
     /**
-     * It obtains the lastest 10 registered users from the AJAX call. TODO
+     * It obtains the lastest 10 registered users from the AJAX call.
      */
     def reloadLastUsers() {
         log.debug("CustomTasksBackendController:reloadLastUsers()")
@@ -94,7 +94,7 @@ class CustomTasksBackendController {
         // Obtaining the lastest 10 registered users
         def lastUsers = SecUser.executeQuery("from SecUser where id in (select secUser.id from SecUserSecRole where secRole.id = :roleId) order by dateCreated desc", [roleId: roleUser.id], [max: 10])
 
-        render lastUsers as JSON
+        render(template:'lastUsers', model: [lastUsers: lastUsers])
     }
 
     /**

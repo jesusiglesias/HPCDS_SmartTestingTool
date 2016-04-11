@@ -206,7 +206,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksBackend/reloadUsers':         ['ROLE_ADMIN'],
     '/customTasksBackend/reloadTest':          ['ROLE_ADMIN'],
     '/customTasksBackend/reloadEvaluations':   ['ROLE_ADMIN'],
-        // TODO
     '/customTasksBackend/reloadLastUsers':     ['ROLE_ADMIN'],
     '/customTasksBackend/userEachDepartment':  ['ROLE_ADMIN'],
         // TODO

@@ -134,8 +134,6 @@
         var reloadUsersURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadUsers')}';
         var reloadTestURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadTest')}';
         var reloadEvaluationsURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadEvaluations')}';
-        // TODO
-        var reloadLastUsers = '${g.createLink(controller: "customTasksBackend", action: 'reloadLastUsers')}';
 
     </script>
 
@@ -226,7 +224,6 @@
                                     <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.recentUsers" default="Recent users"/></span>
                                 </div>
                                 <div class="tools">
-                                   <%-- TODO <i class="fa fa-refresh reloadLastUsers" onclick="${remoteFunction(controller: 'customTasksBackend', action: 'reloadLastUsers', update:'content-users')}"></i> --%>
                                     <i class="fa fa-refresh reloadGraph reloadLastUsers"></i>
                                     <a href="" class="collapse"> </a>
                                     <a href="" class="remove"> </a>
@@ -234,43 +231,9 @@
                             </div>
                             <div class="portlet-body">
                                 <div class="scroller" style="height:505px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
-                                    <!-- User registered: 10 -->
-                                    <g:each in="${lastUsers}" var="user">
-                                        <div class="mt-comments">
-                                            <div class="mt-comment">
-                                                <div class="mt-comment-img">
-                                                    <g:if test="${user?.avatar}">
-                                                        <img class="img-circle recentUser-image" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id: user?.id)}" />
-                                                    </g:if>
-                                                    <g:else>
-                                                        <img class="img-circle recentUser-image" alt="Profile image" src="${resource(dir: 'img/profile', file: 'user_profile.png')}"/>
-                                                    </g:else>
-                                                </div>
-                                                <div class="mt-comment-body">
-                                                    <div class="mt-comment-info">
-                                                        <span class="mt-comment-author">${user?.username}</span>
-                                                        <span class="mt-comment-date"><g:formatDate formatName="custom.date.format" date="${user?.dateCreated}" class="format-date"/></span>
-                                                    </div>
-                                                    <div class="mt-comment-text">${user?.email}</div>
-                                                    <div class="mt-comment-details">
-                                                        <g:if test="${user?.enabled}">
-                                                            <span class="mt-comment-status label label-sm label-success circle">
-                                                        </g:if>
-                                                        <g:else>
-                                                            <span class="mt-comment-status label label-sm label-info circle">
-                                                        </g:else>
-                                                        <g:formatBoolean boolean="${user?.enabled}" true="${g.message(code: "default.enabled.label.true", default: "Confirmed")}" false="${g.message(code: "default.enabled.label.false", default: "Pending")}"/>
-                                                    </span>
-                                                        <ul class="mt-comment-actions">
-                                                            <li>
-                                                                <g:link controller="user" action="edit" id="${user?.id}" class="btn blue-soft"><g:message code="default.button.edit.label" default="Edit"/></g:link>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </g:each>
+                                    <div class="content-lastUsers">
+                                        <g:render template="lastUsers"  model="['lastUsers':lastUsers]"/>
+                                    </div>
                                 </div>
                             </div>
                         </div> <!-- /.Portlet -->

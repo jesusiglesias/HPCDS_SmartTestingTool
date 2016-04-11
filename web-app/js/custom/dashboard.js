@@ -194,99 +194,28 @@ var CustomDashboardScript = function () {
                 }
             });
         });
+
+        // Call AJAX to upload the last 10 registered users
+        $('.reloadLastUsers').click(function () {
+
+            var portletUsers = $('.portlet-users');
+
+            // Overlay active
+            portletUsers.LoadingOverlay("show", {
+                image: "",
+                fontawesome: "fa fa-spinner fa-spin"
+            });
+
+            // AJAX call
+            $(".content-lastUsers").load("customTasksBackend/reloadLastUsers", function() {
+
+                // Stop overlay
+                setTimeout(function () {
+                    portletUsers.LoadingOverlay("hide");
+                }, 500);
+            });
+        });
     };
-
-    // Call AJAX to upload the last 10 registered users
-    /*    $('.reloadLastUsers').click(function() {
-
-         var loopUsers = $('.loop-users');
-         var portletUsers = $('.portlet-users');
-
-         $.ajax({
-         url: reloadLastUsers,
-         beforeSend: function(){
-
-         portletUsers.LoadingOverlay("show", {
-         image       : "",
-         fontawesome : "fa fa-spinner fa-spin"
-         });
-         },
-         success: function(data) {
-
-         $.each(data, function(index, val) {
-
-         jQuery('.loop-users').text(data);
-
-
-         console.log(data[index]);
-         console.log(val.username);
-         console.log(val.dateCreated);
-         console.log(val.email);
-         console.log(val.enabled);
-         console.log(val.avatar);
-         console.log(val.id);
-
-         });
-
-
-         //    var result = $('<div/>').append(data).find('.loop-users').html();
-         //    $('.loop-users').html(result);
-
-         //  var tbody = $('#availUsers tbody');
-         /*  var contentUsers = $('.content-users');
-
-         $.each(data, function(index, val) {
-
-         //contentUsers.append(content);
-
-         console.log(data[index]);
-         console.log(val.username);
-         console.log(val.dateCreated);
-         console.log(val.email);
-         console.log(val.enabled);
-         console.log(val.avatar);
-         console.log(val.id);
-
-         loopUsers.attr('user', data[index]);
-
-         });
-
-
-
-         //var nameTd = $('<td>'+val.name+'</td>');
-         //tbody.append(nameTd);
-         // create and append other tds
-
-         // loopUsers.attr('in', data);
-         },
-         error: function(){
-         toastr["error"](reloadAjaxError);
-
-         toastr.options = {
-         "closeButton": true,
-         "debug": false,
-         "newestOnTop": false,
-         "progressBar": true,
-         "positionClass": "toast-top-right",
-         "preventDuplicates": false,
-         "onclick": null,
-         "showDuration": "300",
-         "hideDuration": "1000",
-         "timeOut": "5000",
-         "extendedTimeOut": "1000",
-         "showEasing": "swing",
-         "hideEasing": "linear",
-         "showMethod": "fadeIn",
-         "hideMethod": "fadeOut"
-         }
-         },
-         complete: function(){
-         setTimeout(function(){
-         portletUsers.LoadingOverlay("hide");
-         }, 500);
-         }
-         });
-         });*/
 
 return {
     // Main function to initiate the module
