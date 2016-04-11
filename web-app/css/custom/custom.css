@@ -794,6 +794,45 @@ input:-webkit-autofill:active {
     font-size: 26px !important;
 }
 
+/* Cookie policy
+=================================================================== */
+
+#cookie-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right:0;
+    width: 100%;
+    z-index: 999999;
+    display: block;
+    padding: 10px 0 40px 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color:#fff;
+    margin: 0 0 0 0 !important;
+}
+
+#cookie-message {
+    margin: auto;
+    position: relative;
+    top: 0;
+    height: 58px;
+    width: 100%;
+    text-align:center;
+    padding: 0 !important;
+    float: none !important;
+}
+
+#cookie-message p {
+    font-size: 13px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+#cookie-message p a {
+    margin-right: 5px;
+    text-decoration: none;
+}
+
 /* Media queries
 =================================================================== */
 
@@ -833,6 +872,14 @@ input:-webkit-autofill:active {
     .i-delete-username-backend,
     .i-delete-without-name-backend {
         top: 126px;
+    }
+}
+
+/* Max-width: 797px */
+@media (max-width: 797px) {
+
+    #cookie-container {
+        padding: 5px 0 55px 0;
     }
 }
 
@@ -929,6 +976,14 @@ input:-webkit-autofill:active {
 
     .portlet-graphUD .portlet-body .scroller {
         height: 315px !important;
+    }
+}
+
+/* Max-width: 442px */
+@media (max-width: 442px) {
+
+    #cookie-container {
+        padding: 5px 0 77px 0;
     }
 }
 

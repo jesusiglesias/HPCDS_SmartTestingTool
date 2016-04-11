@@ -39,7 +39,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.2.3/css/simple-line-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'uniform.default.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/0.4.3/sweetalert2.css">
 
@@ -88,16 +87,10 @@
     <![endif]-->
 
     <!-- CORE PLUGINS -->
-    <!-- TODO -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <g:javascript src="js.cookie.min.js"/>
-    <g:javascript src="bootstrap-hover-dropdown.min.js"/>
-    <g:javascript src="jquery.slimscroll.min.js"/>
-    <g:javascript src="jquery.blockui.min.js"/>
-    <g:javascript src="jquery.uniform.min.js"/>
+    <g:javascript src="slimScroll/jquery.slimscroll.min.js"/>
     <g:javascript src="custom/custom.js"/>
 
-    <!-- TODO THEME GLOBAL SCRIPT -->
     <g:javascript src="app.js"/>
 
     <!-- PAGE LEVEL SCRIPTS -->

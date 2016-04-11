@@ -50,6 +50,7 @@
 
 	<!-- LOAD JS -->
 	<asset:javascript src="application.js"/>
+
 	<!-- Notification -->
 	<script src="https://cdn.jsdelivr.net/sweetalert2/0.4.3/sweetalert2.min.js" crossorigin="anonymous"></script>
 

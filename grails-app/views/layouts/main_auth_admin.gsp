@@ -31,31 +31,17 @@
     <!-- HUMANS.TXT -->
     <link type="text/plain" rel="author" href="${createLink(uri: '/humans.txt')}"/>
 
-    <!-- LOAD CSS TODO -->
-   <%-- <asset:stylesheet src="application.css"/> --%>
-
     <!-- GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.2.3/css/simple-line-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
-    <%-- TODO <link rel="stylesheet" href="${resource(dir: 'css', file: 'uniform.default.min.css')}" type="text/css"/> --%>
-    <!-- TODO -->
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'placeholder_polyfill.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/placeholder', file: 'placeholder_polyfill.min.css')}" type="text/css"/>
     <!-- Notification switch user -->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
-    <!-- BEGIN PAGE LEVEL PLUGINS TODO -->
-    <!-- <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
-         <link href="../assets/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
-         <link href="../assets/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
-         <link href="../assets/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" />
-         <link href="../assets/global/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>-->
-    <!-- END PAGE LEVEL PLUGINS -->
-
     <!-- THEME GLOBAL STYLES -->
-    <!-- <link href="../../assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/> -->
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'components-md.css')}" type="text/css" id="style_components"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'plugins-md.css')}" type="text/css"/>
 
@@ -65,9 +51,13 @@
 
     <!-- LOAD JS -->
     <asset:javascript src="application.js"/>
+
     <!-- Notification switch user -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <!-- Cookie message -->
+    <g:javascript src="cookies/cookies.js"/>
 
     <!-- HTML5 SHIV, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -76,6 +66,7 @@
 
     <!-- LOAD HEADER OTHER VIEWS -->
     <g:layoutHead/>
+
 </head> <!-- /.HEAD -->
 
 <!-- BODY -->
@@ -496,6 +487,21 @@
         </div>
     </div>
 
+    <!-- Cookie block -->
+    <div id="cookie-container" class="row">
+        <div id="cookie-message" class="col-xs-12">
+            <p>
+                <g:message code="layouts.main_auth_user.body.content.cookie.message" default="This site uses cookies for the correct user navigation. If you continue browsing, it considers that you accept its use."/>
+            </p>
+            <div>
+                <g:link controller="customTasksBackend" action="dashboard" class="btn white btn-sm"><g:message code="layouts.main_auth_user.body.content.cookie.information" default="More information"/></g:link>
+                <a onclick="acceptCookies();" style="cursor:pointer;" class="btn white btn-sm">
+                    <g:message code="layouts.main_auth_user.body.content.cookie.close" default="Close"/>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Back to top -->
     <g:link href="#" class="back-to-top back-to-top-error"><g:message code="views.general.backtotop" default="Top"/></g:link>
 
@@ -506,15 +512,10 @@
     <![endif]-->
 
     <!-- CORE PLUGINS -->
-    <!-- TODO -->
-    <g:javascript src="js.cookie.min.js"/>
-    <g:javascript src="bootstrap-hover-dropdown.min.js"/>
-    <g:javascript src="jquery.slimscroll.min.js"/>
-    <g:javascript src="jquery.blockui.min.js"/>
-    <%-- TODO
-    <g:javascript src="jquery.uniform.min.js"/> --%>
+    <g:javascript src="dropdown/bootstrap-hover-dropdown.min.js"/>
+    <g:javascript src="slimScroll/jquery.slimscroll.min.js"/>
     <g:javascript src="custom/custom.js"/>
-    <g:javascript src="placeholder_polyfill.jquery.min.combo.js"/>
+    <g:javascript src="placeholder/placeholder_polyfill.jquery.min.combo.js"/>
 
     <!-- THEME GLOBAL SCRIPTS -->
     <g:javascript src="app.js"/>
@@ -523,14 +524,8 @@
     <g:javascript src="layout.js"/>
 
     <!-- PAGE LEVEL SCRIPTS -->
-    <%-- <g:javascript src="dashboard.min.js"/> --%>
-    <!-- TODO -->
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
-
-    <%-- TODO
-    <g:javascript src="demo.js"/>
-    <g:javascript src="quick-sidebar.js"/> --%>
 
 </body>
 </html>
