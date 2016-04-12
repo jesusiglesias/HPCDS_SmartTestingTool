@@ -157,10 +157,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/login/full':      ['IS_AUTHENTICATED_REMEMBERED'],
     '/login/**':        ['permitAll'],
 
-    // TODO
-	'/index':           ['permitAll'],
-	'/index.gsp':       ['permitAll'],
-
     /* Domain
     ======================================================*/
     '/SecUser/**':      ['ROLE_ADMIN'],

@@ -51,12 +51,8 @@ class UrlMappings {
         "/test/create-error"(controller: 'test', action: 'save')
         "/test/edit-error/$id?(.$format)?"(controller: 'test', action: 'update')
 
-        /** **************************/
-        // TODO
-        // Provisional
-        "/index"(view: 'index')
-
-        // Errors
+        /* Errors
+        ======================================================*/
         "400"(view: '/error/badRequest')
         "401"(view: '/error/unauthorized')
         "403"(view: '/login/denied')
