@@ -187,6 +187,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     'customTasksUser/statusNotification':  ['permitAll'],
     // Register normal user
     "/customTasksUser/registerAccount":    ['permitAll'],
+    "/customTasksUser/saveUserRegistered": ['permitAll'],
+    "/customTasksUser/enabledAccount":     ['permitAll'],
     // Restore password
     'customTasksUser/restorePassword':     ['permitAll'],
     // Password
@@ -252,5 +254,5 @@ grails.plugin.springsecurity.switchUser.usernameParameter = 'stt_hp_username'
 
 // URL redirection based on role
 springsecurity.urlredirection.admin = '/dashboard'
-springsecurity.urlredirection.user = '/user/create'
+springsecurity.urlredirection.user = '/register'
 springsecurity.urlredirection.noRole = '/noRole'

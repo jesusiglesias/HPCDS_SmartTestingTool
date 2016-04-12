@@ -176,7 +176,7 @@
                             <tr>
                                 <td style="padding: 30px; text-align: center; font-family: roboto, sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
                                     <h3> <g:message code="activateAccount.email.body.title" default="Welcome to the online evaluation system!"/> </h3>
-                                    <p> <g:message code="activateAccount.email.body.messageOne" default="You recently created a new user account. To access the full functionality, you must confirm your account via the button below."/> </p>
+                                    <p> <g:message code="activateAccount.email.body.messageOne" default="You recently created a new user account. To finish the registration, you must confirm your user account."/> </p>
                                 </td>
                             </tr>
                         </table>
@@ -192,7 +192,7 @@
                                     <table cellspacing="0" cellpadding="0" border="0" align="center" style="Margin: auto">
                                         <tr>
                                             <td style="border-radius: 3px; background: #4DB3A2; text-align: center;" class="button-td">
-                                                <a  style="background: #4DB3A2; border: 15px solid #4DB3A2; padding: 0 10px;color: #ffffff; font-family: roboto, sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
+                                                <a href="${createLink(uri: '/enabledAccount', params: [token:token], absolute: true)}" style="background: #4DB3A2; border: 15px solid #4DB3A2; padding: 0 10px;color: #ffffff; font-family: roboto, sans-serif; font-size: 13px; line-height: 1.1; text-align: center; text-decoration: none; display: block; border-radius: 3px; font-weight: bold;" class="button-a">
                                                     <g:message code="activateAccount.email.body.messageTwo" default="CONFIRM ACCOUNT"/>
                                                 </a>
                                             </td>
@@ -205,7 +205,7 @@
                 </tr>
             </table> <!-- /. Email body -->
 
-        <!-- Email Footer -->
+            <!-- Email Footer -->
             <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;">
                 <tr>
                     <td style="padding: 40px 10px;width: 100%;font-size: 12px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; text-align: center; color: #888888;">
@@ -218,11 +218,11 @@
                 </tr>
             </table> <!-- /. Email Footer -->
 
-        <!--[if (gte mso 9)|(IE)]>
+            <!--[if (gte mso 9)|(IE)]>
                 </td>
                 </tr>
                 </table>
-                <![endif]-->
+            <![endif]-->
         </div>
     </center>
 </td></tr></table>

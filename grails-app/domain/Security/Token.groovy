@@ -12,7 +12,7 @@ class Token {
 
     // Restrictions on the attributes of the entity
     static constraints = {
-        tokenType inList: ['restore','other']
+        tokenType inList: ['restore', 'newAccount']
         tokenStatus defaultValue:false
     }
 }

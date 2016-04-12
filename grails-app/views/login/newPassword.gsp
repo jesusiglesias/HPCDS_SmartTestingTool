@@ -73,7 +73,7 @@
             <!-- Failure alert -->
             <g:if test='${flash.errorNewPassword}'>
                 <div class="alert alert-block alert-danger alert-danger-custom alert-dismissable alert-newPassword fade in">
-                    <button type="button" class="close" data-dismiss="alert"></button>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden='true'></button>
                     <h5 class="alert-heading alert-reauthentication">${raw(g.message(code:'views.login.auth.error.title', default:'<strong>Error!</strong>'))} </h5>
                     <p> ${raw(flash.errorNewPassword)} </p>
                 </div>

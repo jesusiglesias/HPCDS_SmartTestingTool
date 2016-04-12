@@ -1,19 +1,27 @@
 package CustomTasksUser
 
+import User.User
+import Security.SecRole
+import Security.SecUserSecRole
+import java.text.SimpleDateFormat
 import grails.transaction.Transactional
-import grails.plugin.springsecurity.SpringSecurityUtils
 import org.springframework.beans.factory.annotation.Value
+import grails.plugin.springsecurity.SpringSecurityUtils
 import org.springframework.security.authentication.AccountExpiredException
 import org.springframework.security.authentication.AuthenticationServiceException
 import org.springframework.security.authentication.CredentialsExpiredException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.LockedException
 import org.springframework.security.web.WebAttributes
+import static org.springframework.http.HttpStatus.CREATED
+import static org.springframework.http.HttpStatus.NOT_FOUND
 
 /**
  * It contains the habitual custom general tasks of the user.
  */
 class CustomTasksUserController {
+
+    static allowedMethods = [saveUserRegistered: "POST"]
 
     def springSecurityService
     def customTasksUserService
@@ -207,7 +215,130 @@ class CustomTasksUserController {
      * @return register View to introduce the information of the user account.
      */
     def registerAccount() {
-        render view: '/login/register'
+        respond new User(params), view: '/login/register'
+    }
+
+    /**
+     * It saves a new normal user in database.
+     *
+     * @param userRegisterInstance It represents the normal user to save.
+     * @return return If the user instance is null or has errors.
+     */
+    @Transactional
+    def saveUserRegistered(User userRegisterInstance) {
+
+        if (params.birthDate != "") {
+
+            // Parse birthDate from textField
+            def birthDateFormat = new SimpleDateFormat('dd-MM-yyyy').parse(params.birthDate)
+            userRegisterInstance.birthDate = birthDateFormat
+        }
+
+        // Disabled the account
+        userRegisterInstance.enabled = false
+
+        // Instance null
+        if (userRegisterInstance == null) {
+
+            request.withFormat {
+                form multipartForm {
+                    flash.errorRegisterMessage = g.message(code: 'customTasksUser.saveUserRegistered.not.found.user', default:'It has not been able to locate the user.')
+                    redirect action: "registerAccount", method: "GET"
+                }
+                '*'{ render status: NOT_FOUND }
+            }
+            return
+        }
+
+        // Validate the instance
+        if (userRegisterInstance.hasErrors()) {
+            respond userRegisterInstance.errors, view: '/login/register', model: [userRegisterInstance: userRegisterInstance]
+            return
+        }
+
+        // Check if password and confirm password fields are same
+        if (userRegisterInstance.password != userRegisterInstance.confirmPassword) {
+            flash.errorRegisterMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
+            render view: "/login/register", model: [userRegisterInstance: userRegisterInstance]
+            return
+        }
+
+        // Check if password and username are same
+        if (userRegisterInstance.password.toLowerCase() == userRegisterInstance.username.toLowerCase()) {
+            flash.errorRegisterMessage = g.message(code: 'default.password.username', default: '<strong>Password</strong> field must not be equal to username.')
+            render view: "/login/register", model: [userRegisterInstance: userRegisterInstance]
+            return
+        }
+
+        try {
+
+            // Encoding password
+            userRegisterInstance.password = springSecurityService.encodePassword(userRegisterInstance.password)
+
+            // Save user data
+            userRegisterInstance.save(flush: true, failOnError: true)
+
+            // Obtain user role
+            def normalRole = SecRole.findByAuthority("ROLE_USER")
+
+            // Save relation with normal user role
+            SecUserSecRole.create userRegisterInstance, normalRole, true
+
+            // Send mail to enable the user account
+            if (!customTasksUserService.send_emailNewUser(userRegisterInstance.email)) {
+                log.debug("CustomTasksUserController:sendEmail():NOTMailSent:Username:${userRegisterInstance.username}")
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                flash.errorRegisterMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'user.label', default: 'User'), userRegisterInstance.username])
+
+                render view: "/login/register", model: [userRegisterInstance: userRegisterInstance]
+                return
+            }
+
+            request.withFormat {
+                form multipartForm {
+                    flash.userRegisterMessage = g.message(code: 'customTasksUser.saveUserRegistered.user.successful', default: 'An email has been sent to the address entered to activate the user account.')
+                    redirect uri: '/'
+                }
+                '*' { respond userRegisterInstance, [status: CREATED] }
+            }
+        } catch (Exception exception) {
+            log.error("CustomTasksUserController():saveUserRegistered():Exception:NormalUser:${userRegisterInstance.username}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.errorRegisterMessage = g.message(code: 'default.not.created.message', default: 'ERROR! {0} <strong>{1}</strong> was not created.', args: [message(code: 'user.label', default: 'User'), userRegisterInstance.username])
+                    render view: "/login/register", model: [userRegisterInstance: userRegisterInstance]
+                }
+            }
+        }
+    }
+
+    /**
+     * It checks the token. If this is correct, it enabled the account user.
+     *
+     * @param token Token.
+     * @return View If token is correct. If not error page is displayed.
+     */
+    def enabledAccount(String token) {
+        log.debug("CustomTasksUserController:enabledAccount()")
+
+        if (customTasksUserService.check_token(token, 'newAccount')) {
+
+            // It enables the account
+            customTasksUserService.update_account(token)
+
+            flash.userEnabledMessage = g.message(code: 'customTasksUser.saveUserRegistered.user.confirmed.successful', default: 'Congratulations, you have completed the registration. Now, you can enjoy of the platform.')
+            redirect uri: '/'
+
+        } else {
+            response.sendError(404)
+        }
     }
 
     /*-------------------------------------------------------------------------------------------*
@@ -282,7 +413,7 @@ class CustomTasksUserController {
             render view: '/login/newPassword'
 
         } else {
-            if (customTasksUserService.check_token(token)) {
+            if (customTasksUserService.check_token(token, 'restore')) {
                 render view: '/login/newPassword'
             } else {
                 response.sendError(404)
@@ -299,11 +430,11 @@ class CustomTasksUserController {
     def updatePass(){
         log.debug("CustomTasksUserController:updatePass()")
 
-        if(customTasksUserService.check_token(params.token)){ // It checks again the integrity of the token
+        if(customTasksUserService.check_token(params.token, 'restore')){ // It checks again the integrity of the token
 
             def update_user = customTasksUserService.update_pass(params) // Password validation
 
-            if(update_user.response){ // Respuesta true
+            if(update_user.response){ // Response is true
                 log.debug("CustomTasksUserController:updatePass():successful")
 
                 flash.newPasswordSuccessful = g.message(code: 'views.login.auth.newPassword.successful', default: 'New password set correctly.')

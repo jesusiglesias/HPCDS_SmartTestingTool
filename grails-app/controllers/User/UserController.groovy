@@ -63,9 +63,12 @@ class UserController {
     @Transactional
     def save(User userInstance) {
 
-        // Parse birthDate from textField
-        def birthDateFormat = new SimpleDateFormat('dd-MM-yyyy').parse(params.birthDate)
-        userInstance.birthDate = birthDateFormat
+        if (params.birthDate != "") {
+
+            // Parse birthDate from textField
+            def birthDateFormat = new SimpleDateFormat('dd-MM-yyyy').parse(params.birthDate)
+            userInstance.birthDate = birthDateFormat
+        }
 
         if (userInstance == null) {
             notFound()
@@ -167,9 +170,12 @@ class UserController {
     @Transactional
     def update(User userInstance) {
 
-        // Parse birthDate from textField
-        def birthDateFormat = new SimpleDateFormat( 'dd-MM-yyyy' ).parse params.birthDate
-        userInstance.birthDate = birthDateFormat
+        if (params.birthDate != "") {
+
+            // Parse birthDate from textField
+            def birthDateFormat = new SimpleDateFormat('dd-MM-yyyy').parse(params.birthDate)
+            userInstance.birthDate = birthDateFormat
+        }
 
         if (userInstance == null) {
             notFound()

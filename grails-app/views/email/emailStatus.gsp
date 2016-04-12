@@ -184,7 +184,7 @@
                 </tr>
             </table> <!-- /. Email body -->
 
-        <!-- Email Footer -->
+            <!-- Email Footer -->
             <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;">
                 <tr>
                     <td style="padding: 40px 10px;width: 100%;font-size: 12px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; text-align: center; color: #888888;">
@@ -197,11 +197,11 @@
                 </tr>
             </table> <!-- /. Email Footer -->
 
-        <!--[if (gte mso 9)|(IE)]>
+            <!--[if (gte mso 9)|(IE)]>
                 </td>
                 </tr>
                 </table>
-                <![endif]-->
+             <![endif]-->
         </div>
     </center>
 </td></tr></table>

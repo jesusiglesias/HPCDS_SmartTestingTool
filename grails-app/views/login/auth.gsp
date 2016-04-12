@@ -21,6 +21,8 @@
         var _descriptionSuccessEmail = '${g.message(code:'customTasksUser.login.stateAccount.successful.description', default:'Soon you will receive a response from the administrator.')}';
         var _errorEmail = '${g.message(code:'customTasksUser.login.stateAccount.failure.description', default:'Email with incorrect format, non-existent in the system or a problem has occurred during sending email.')}';
         var _internalError = '${g.message(code:'customTasksUser.login.stateAccount.failure.internalError', default:'It has not been able to connect to the internal server. Try again later.')}';
+        var _enabledAccount = '${g.message(code:'views.login.auth.register.alert.title', default:'You must complete the registration!')}';
+        var _confirmedAccount = '${g.message(code:'views.login.auth.register.completed.alert.title', default:'User account confirmed!')}';
 
         // Auto close alert
         function createAutoClosingAlert(selector) {
@@ -136,7 +138,7 @@
         <!-- Reauthenticate notification -->
         <g:if test='${flash.reauthenticate}'>
             <div class="alert alert-block alert-warning alert-warning-custom alert-dismissable alert-notuser-reauth-invalidsession fade in">
-                <button type="button" class="close" data-dismiss="alert"></button>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden='true'></button>
                 <h5 class="alert-heading alert-reauthentication">${raw(g.message(code:'views.login.auth.warning.title', default:'<strong>Warning!</strong>'))} </h5>
                 <p> ${flash.reauthenticate} </p>
             </div>
@@ -145,7 +147,7 @@
         <!-- Invalid session notification, authentication service exception -->
         <g:if test='${flash.errorInvalidSessionAuthenticationException}'>
             <div class="alert alert-block alert-danger alert-danger-custom alert-dismissable alert-notuser-reauth-invalidsession fade in">
-                <button type="button" class="close" data-dismiss="alert"></button>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden='true'></button>
                 <h5 class="alert-heading alert-reauthentication">${raw(g.message(code:'views.login.auth.error.title', default:'<strong>Error!</strong>'))} </h5>
                 <p> ${flash.errorInvalidSessionAuthenticationException} </p>
             </div>
@@ -157,12 +159,40 @@
         <!-- New password successful -->
         <g:if test='${flash.newPasswordSuccessful}'>
             <div class="alert alert-block alert-success alert-success-custom alert-dismissable alert-restorePasswordSuccessful fade in">
-                <button type="button" class="close" data-dismiss="alert"></button>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden='true'></button>
                 <p> ${raw(flash.newPasswordSuccessful)} </p>
             </div>
             <g:javascript>
                 createAutoClosingAlert('.alert-restorePasswordSuccessful');
             </g:javascript>
+        </g:if>
+
+        <!-- New user registered successful -->
+        <g:if test='${flash.userRegisterMessage}'>
+            <script type="text/javascript">
+                swal({
+                    title: _enabledAccount,
+                    text: '${flash.userRegisterMessage}',
+                    type: 'success',
+                    confirmButtonText: _okButton,
+                    closeOnConfirm: true,
+                    customClass: 'successSweetAlert'
+                });
+            </script>
+        </g:if>
+
+        <!-- User account enabled successful -->
+        <g:if test='${flash.userEnabledMessage}'>
+            <script type="text/javascript">
+                swal({
+                    title: _confirmedAccount,
+                    text: '${flash.userEnabledMessage}',
+                    type: 'success',
+                    confirmButtonText: _okButton,
+                    closeOnConfirm: true,
+                    customClass: 'successSweetAlert'
+                });
+            </script>
         </g:if>
 
         <!-- Login form -->

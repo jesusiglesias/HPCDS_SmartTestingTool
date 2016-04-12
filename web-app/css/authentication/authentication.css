@@ -199,35 +199,58 @@
   margin-top: 50px;
 }
 
-/* Register form TODO
+/* Register form
 ======================================================*/
-.login .content .register-form {
-  display: none;
+.content-register {
+  width: auto !important;
+  margin: 60px 10% 60px 10% !important;
 }
 
-.login .content .register-form .form-actions {
-  border: 0;
-  margin-bottom: 0;
-  padding-bottom: 0;
+.register-contentTitle {
+  margin-bottom: 50px !important;
+  text-align: center;
 }
 
-.login .content .hint {
-  color: #b7d1e2;
-  padding: 0;
-  font-size: 14px;
-  margin: 15px 0 7px 0;
+.title-register {
+  font-size: 22px !important;
 }
 
-.login .content select.form-control {
-  padding-left: 9px;
-  padding-right: 9px;
+.subtitle-register {
+  padding-left: 0 !important;
+  font-size: 19px !important;
 }
 
-
-.login .content .form-actions .checkbox {
-  margin-top: 8px;
-  display: inline-block;
+.legend-register {
+  margin-bottom: 30px;
 }
+
+.title-legend-register {
+  font-weight: 600;
+  font-variant: small-caps;
+  font-size: 22px;
+  text-align: center;
+}
+
+.content-register-btn {
+  margin-top: 40px;
+}
+
+.content-register-btn .btn {
+  padding: 10px 100px 10px 100px !important;
+}
+
+.alert-register-error {
+  margin: 0 0 45px 0;
+}
+
+/*
+.login .content .form-control {
+  background-color: #8CC5AC;
+  border: 1px solid #56b580;
+  height: 43px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}*/
 
 /* Notifications
 ======================================================*/
@@ -241,7 +264,8 @@
 }
 
 /* New password successful index */
-.alert-restorePasswordSuccessful {
+.alert-restorePasswordSuccessful,
+.alert-newUserRegistered {
   margin: 30px 0 0 0;
 }
 
@@ -276,6 +300,23 @@
 
 /* Media queries
 ======================================================*/
+
+/* Max-width: 991px */
+@media (max-width: 991px) {
+
+  .content-register {
+    margin: 60px 7% 60px 7% !important;
+  }
+}
+
+/* MAx-width: 767px */
+@media (max-width: 767px) {
+
+  .content-register-btn .btn {
+    padding: 10px 60px !important;
+  }
+}
+
 /* Landscape phones and down */
 @media (max-width: 480px) {
 
@@ -306,9 +347,24 @@
     font-size: 14px;
   }
 
-  /* TODO */
-  .login .content h3 {
-    font-size: 22px;
+  .content-register {
+    margin: 60px 6% 60px 6% !important;
+  }
+
+  .legend-register {
+    margin-bottom: 25px;
+  }
+
+  .content-register-btn .btn {
+    padding: 10px 30px !important;
+  }
+
+  .register-contentTitle {
+    margin-bottom: 30px !important;
+  }
+
+  .alert-register-error {
+    margin: 0 0 22px 0;
   }
 
   .login .checkbox {
@@ -316,45 +372,24 @@
   }
 }
 
+/* Max-width: 375px */
 @media (max-width: 375px) {
 
   /* Form box */
   .login .content {
     width: 280px;
   }
+
+  .content-register {
+    margin: 60px 4% 60px 4% !important;
+  }
+
+  .title-register,
+  .title-legend-register {
+    font-size: 20px !important;
+  }
+
+  .subtitle-register {
+    font-size: 17px !important;
+  }
 }
-
-
-/*
-.login .content .form-control {
-  background-color: #8CC5AC;
-  border: 1px solid #56b580;
-  height: 43px;
-  color: #FFFFFF;
-  margin-bottom: 20px;
-} */
-
-/* Fields box */
-/*
-.login .content .form-control:focus,
-.login .content .form-control:active {
-    border: 1px solid #2d684d;
-} */
-
-/* Placeholder color */
-/*
-.login .content .form-control::-moz-placeholder {  Firefox 19+
-  color: #e7ffe9;
-}
-
-.login .content .form-control:-moz-placeholder {  Firefox 4-18
-  color: #e7ffe9;
-}
-
-.login .content .form-control:-ms-input-placeholder {  IE
-  color: #e7ffe9;
-}
-
-.login .content .form-control::-webkit-input-placeholder {  Webkit
-  color: #e7ffe9;
-} */

@@ -1,5 +1,6 @@
 package Security
 
+import User.User
 import grails.transaction.Transactional
 import org.apache.commons.validator.routines.EmailValidator
 import org.springframework.context.MessageSource;
@@ -17,6 +18,57 @@ class CustomTasksUserService {
     def tokenService
     def passwordEncoder
     def grailsApplication
+
+    /*-------------------------------------------------------------------------------------------*
+     *                                     REGISTER USER ACCOUNT                                 *
+     *-------------------------------------------------------------------------------------------*/
+    /**
+     * It creates a encrypt token with the email, saves the token in database and sends the email.
+     *
+     * @param email Email of the user.
+     * @return true If the action is success.
+     */
+    def send_emailNewUser(String email) {
+        log.debug("CustomTasksUserService:send_emailNewUser()")
+
+        // Encrypt
+        def token = encrypt_email(email)
+
+        // It saves the token
+        create_token(token, 'newAccount')
+
+        // Send email
+        try {
+            mailService.sendMail {
+                async true
+                to email
+                subject messageSource.getMessage("activateAccount.email.subject", null, "STT - Confirmation of the user account", LocaleContextHolder.locale)
+                html(view: '/email/activateAccount', model: [token: token])
+            }
+            return true
+        } catch (Exception e) {
+            log.error("CustomTasksUserService:send_emailNewUser()" + e)
+            return false
+        }
+    }
+
+    /**
+     * It updates the user account.
+     *
+     * @param token Token of the user.
+     * @return true If the action is successful.
+     */
+    def update_account(token) {
+        log.debug("CustomTasksUserService:update_account()")
+
+        def email = decrypt_email(token) // It decrypts email
+
+        use_token(token)// Status token to true
+
+        def user = User.get(User.findByEmail(email).id) // It obtains the user through its email
+
+        user.enabled = true // It enables the account
+    }
 
     /*-------------------------------------------------------------------------------------------*
      *                                     RESTORE PASSWORD                                      *
@@ -50,7 +102,7 @@ class CustomTasksUserService {
         def token = encrypt_email(email)
 
         // It saves the token
-        create_token(token)
+        create_token(token, 'restore')
 
         // Send email
         try {
@@ -119,10 +171,10 @@ class CustomTasksUserService {
      *
      * @params token Token of the user.
      */
-    def check_token(String token) {
+    def check_token(String token, String type) {
         log.debug("CustomTasksUserService:check_token()")
 
-        return tokenService.check_token(token, 'restore')
+        return tokenService.check_token(token, type)
     }
 
     /**
@@ -130,10 +182,10 @@ class CustomTasksUserService {
      *
      * @params token Token of the user.
      */
-    def private create_token(String token) {
+    def private create_token(String token, String type) {
         log.debug("CustomTasksUserService:create_token()")
 
-        return tokenService.save(new Token(token: token, tokenType: 'restore', tokenStatus: false))
+        return tokenService.save(new Token(token: token, tokenType: type, tokenStatus: false))
     }
 
     /**
