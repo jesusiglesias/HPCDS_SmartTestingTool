@@ -189,6 +189,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     "/customTasksUser/registerAccount":    ['permitAll'],
     "/customTasksUser/saveUserRegistered": ['permitAll'],
     "/customTasksUser/enabledAccount":     ['permitAll'],
+    "/customTasksUser/checkUsernameRegisteredAvailibility":     ['permitAll'],
+    "/customTasksUser/checkEmailRegisteredAvailibility":        ['permitAll'],
     // Restore password
     'customTasksUser/restorePassword':     ['permitAll'],
     // Password

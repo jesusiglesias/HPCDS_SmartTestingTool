@@ -21,7 +21,12 @@ var CustomPassword = function () {
                     minChar: 8,
                     scores: [17, 26, 40, 50, 60],
                     ui: {
-                        verdicts: [_weak, _normal, _medium, _strong, _veryStrong]
+                        verdicts: [_weak, _normal, _medium, _strong, _veryStrong],
+                        container: "#container-password",
+                        viewports: {
+                            progress: ".pwstrength-viewport-progress",
+                            verdict: ".pwstrength-viewport-verdict"
+                        }
                     },
                     rules: {
                         activated: {

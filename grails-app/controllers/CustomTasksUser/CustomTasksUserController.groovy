@@ -1,8 +1,11 @@
 package CustomTasksUser
 
+import Security.SecUser
 import User.User
 import Security.SecRole
 import Security.SecUserSecRole
+import grails.converters.JSON
+
 import java.text.SimpleDateFormat
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
@@ -339,6 +342,48 @@ class CustomTasksUserController {
         } else {
             response.sendError(404)
         }
+    }
+
+    /**
+     * It checks the username availability.
+     */
+    def checkUsernameRegisteredAvailibility () {
+
+        def responseData
+
+        if (SecUser.countByUsername(params.username)) { // Username found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'secUser.checkUsernameAvailibility.notAvailable', default:'Username is not available. Please, choose another one.')
+            ]
+        } else { // Username not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'secUser.checkUsernameAvailibility.available', default:'Username available.')
+            ]
+        }
+        render responseData as JSON
+    }
+
+    /**
+     * It checks the email availability.
+     */
+    def checkEmailRegisteredAvailibility () {
+
+        def responseData
+
+        if (SecUser.countByEmail(params.email)) { // Email found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'secUser.checkEmailAvailibility.notAvailable', default:'Email is not available. Please, choose another one.')
+            ]
+        } else { // Email not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'secUser.checkEmailAvailibility.available', default:'Email available.')
+            ]
+        }
+        render responseData as JSON
     }
 
     /*-------------------------------------------------------------------------------------------*

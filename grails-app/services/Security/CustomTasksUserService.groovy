@@ -63,7 +63,7 @@ class CustomTasksUserService {
 
         def email = decrypt_email(token) // It decrypts email
 
-        use_token(token)// Status token to true
+        use_token(token) // Status token to true
 
         def user = User.get(User.findByEmail(email).id) // It obtains the user through its email
 

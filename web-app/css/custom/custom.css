@@ -18,6 +18,11 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s !important; /* Transparent background */
 }
 
+/* Error class */
+.has-error-default {
+    color: #a94442 !important;
+}
+
 /* Accordion password - Admin management */
 .panel-instruction-create {
     margin: 35px 0 50px 0 !important;
@@ -46,6 +51,35 @@ input:-webkit-autofill:active {
 
 .space-imageRow {
     margin: 35px -15px 0 -15px;
+}
+
+.space-register-legend {
+    margin-bottom: -9px;
+}
+
+.space-register-username {
+    margin-bottom: 10px;
+}
+
+.space-register-password {
+    margin-top: -20px;
+}
+
+.space-register-legendPersonal {
+    margin-top: 5px;
+}
+
+.space-register-cityRow {
+    margin-top: 10px;
+}
+
+.space-register-birthDateRow,
+.space-register-phoneRow {
+    margin-top: 28px;
+}
+
+.space-register-departmentRow {
+    margin: 50px -15px 10px -15px;
 }
 
 .panel-row {
@@ -283,7 +317,9 @@ input:-webkit-autofill:active {
 /* Remove IE default icon password */
 .password-input::-ms-clear,
 .password-confirm-input::-ms-clear,
-.backendPassword-input::-ms-clear {
+.backendPassword-input::-ms-clear,
+.password-input-register::-ms-clear,
+.password-confirm-input-register::-ms-clear {
     display: none;
     width:0;
     height:0 !important;
@@ -291,7 +327,8 @@ input:-webkit-autofill:active {
 
 /* Remove IE default X */
 .user-input::-ms-clear,
-.backend-input::-ms-clear {
+.backend-input::-ms-clear,
+.register-input::-ms-clear {
     display: none;
     width:0;
     height:0 !important;
@@ -366,7 +403,17 @@ input:-webkit-autofill:active {
 
 .i-delete, .i-show, .i-show-confirm,
 .i-show-admin-password,
-.i-show-admin-confirmPassword {
+.i-show-admin-confirmPassword,
+.i-show-register-password,
+.i-show-register-confirmPassword,
+.i-delete-register-username,
+.i-delete-register-email,
+.i-delete-register-name,
+.i-delete-register-surname,
+.i-delete-register-address,
+.i-delete-register-city,
+.i-delete-register-country,
+.i-delete-register-phone {
     display: none;
 }
 
@@ -871,6 +918,19 @@ input:-webkit-autofill:active {
     .i-delete-username-backend,
     .i-delete-without-name-backend {
         top: 126px;
+    }
+
+    .space-username {
+        margin-top: 50px;
+    }
+
+    .space-register-cityRow,
+    .space-register-phoneRow {
+        margin-top: -5px;
+    }
+
+    .col-register {
+        top: 22px !important;
     }
 }
 

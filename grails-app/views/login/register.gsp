@@ -9,8 +9,27 @@
 <head>
     <meta name="layout" content="main_login"/>
     <title><g:message code="views.login.auth.register.head.title" default="STT | User registration"/></title>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'multi-select.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/date', file: 'bootstrap-datepicker3.min.css')}" type="text/css"/>
 
     <script type="text/javascript">
+
+        // Variables to use in script
+        var _weak = '${g.message(code:'default.password.strength.weak', default:'Weak')}';
+        var _normal = '${g.message(code:'default.password.strength.normal', default:'Normal')}';
+        var _medium = '${g.message(code:'default.password.strength.medium', default:'Medium')}';
+        var _strong = '${g.message(code:'default.password.strength.strong', default:'Strong')}';
+        var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
+        var _checkerUsernameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.username', default:'Type a username and check its availability.')}';
+        var _checkUsernameAvailibility = '${g.createLink(controller: "customTasksUser", action: 'checkUsernameRegisteredAvailibility')}';
+        var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
+        var _checkEmailAvailibility = '${g.createLink(controller: "customTasksUser", action: 'checkEmailRegisteredAvailibility')}';
+        var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
+        var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
+        var _equalPasswordUsername = '${raw(g.message(code:'default.password.username', default:'<strong>Password</strong> field must not be equal to username.'))}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
         // Auto close alert
         function createAutoClosingAlert(selector) {
@@ -48,7 +67,6 @@
                 </div>
 
                 <g:javascript>
-                    createAutoClosingAlert('.alert-register');
                 </g:javascript>
             </g:if>
 
@@ -67,7 +85,7 @@
 
             <!-- Creation form -->
             <g:form controller="customTasksUser" action="saveUserRegistered" autocomplete="on" class="horizontal-form register-form">
-                <fieldset class="form">
+                <fieldset class="form form-responsive">
                     <g:render template="/login/formRegister"/>
                 </fieldset>
 
@@ -77,6 +95,17 @@
                 </div>
             </g:form> <!-- /. Register form -->
     </div> <!-- /.Register -->
+
+    <!-- LOAD JAVASCRIPT  -->
+    <g:javascript src="password/custom-passwordRegister.js"/>
+    <g:javascript src="password/pwstrength-bootstrap.min.js"/>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
+    <g:javascript src="select/bootstrap-select.min.js"/>
+    <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
+    <g:javascript src="date/bootstrap-datepicker.min.js"/>
+    <g:javascript src="date/bootstrap-datepicker.es.min.js"/>
+    <g:javascript src="select/jquery.multi-select.js"/>
+    <g:javascript src="authentication/registerAccount.js"/>
 
 </body>
 </html>

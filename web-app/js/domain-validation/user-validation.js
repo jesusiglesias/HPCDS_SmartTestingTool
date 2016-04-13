@@ -230,7 +230,7 @@ var DomainUserValidation = function () {
 
             $.post(_checkEmailAvailibility, {
 
-                // Username value
+                // Email value
                 email: email.val()
 
             }, function (res) {

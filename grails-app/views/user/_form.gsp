@@ -219,7 +219,7 @@
                 </label>
                 <div class="input-icon">
                     <div class="input-group date date-picker" data-date-format="dd-mm-yyyy" data-date-end-date="+0d">
-                        <input type="text" name="birthDate" id="birthDate" value="${formatDate(format:'dd-MM-yyyy', date: userInstance?.birthDate)}" class="form-control form-shadow"/>
+                        <input type="text" name="birthDate" id="birthDate" value="${formatDate(format:'dd-MM-yyyy', date: userInstance?.birthDate)}" class="form-control form-shadow" autocomplete="off"/>
                         <span class="input-group-btn">
                             <button class="btn default" type="button">
                                 <i class="fa fa-calendar"></i>
@@ -228,7 +228,7 @@
                     </div>
                     <span class="help-block">
                         <h5>
-                            <g:message code="custom.date.picker.description" default="Select a date"/>
+                            <g:message code="custom.date.picker.description" default="Select a date."/>
                         </h5>
                     </span>
                   </div>

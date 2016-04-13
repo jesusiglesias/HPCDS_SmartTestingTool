@@ -220,8 +220,11 @@
   font-size: 19px !important;
 }
 
-.legend-register {
-  margin-bottom: 30px;
+.legend-register,
+.legend-register-account {
+  margin: 60px 0 30px 0;
+  border-bottom: 3px solid #F5F1E2;
+  height: 34px;
 }
 
 .title-legend-register {
@@ -229,6 +232,8 @@
   font-variant: small-caps;
   font-size: 22px;
   text-align: center;
+  margin-top: -1px;
+  color: black;
 }
 
 .content-register-btn {
@@ -240,17 +245,39 @@
 }
 
 .alert-register-error {
-  margin: 0 0 45px 0;
+  margin: 60px 0 -60px 0;
 }
 
-/*
-.login .content .form-control {
-  background-color: #8CC5AC;
-  border: 1px solid #56b580;
-  height: 43px;
-  color: #FFFFFF;
-  margin-bottom: 20px;
-}*/
+.pwstrength-viewport-progress {
+  margin-top: 35px;
+}
+
+.pwstrength-viewport-verdict {
+  margin-top: 10px;
+}
+
+.pwstrength-viewport-verdict > span {
+  color: black;
+  font-weight: 600;
+}
+
+.birthDate-input-register {
+  background-color: #F5F1E2;
+  border: 0;
+  height: 38px;
+}
+
+.col-register {
+  top: 10px
+}
+
+.h5-register {
+  color: #105D41;
+}
+
+.form-responsive {
+  margin-top: 70px;
+}
 
 /* Notifications
 ======================================================*/
@@ -307,6 +334,26 @@
   .content-register {
     margin: 60px 7% 60px 7% !important;
   }
+
+  .legend-register {
+    margin: 50px 0 0 0;
+  }
+
+  .legend-register-account {
+    margin: -10px 0 0 0;
+  }
+
+  .space-register-nameRow {
+    margin-top: 110px !important;
+  }
+
+  .space-register-birthDateRow {
+    margin-top: 10px;
+  }
+
+  .alert-register-error {
+    margin: 60px 0 80px 0;
+  }
 }
 
 /* MAx-width: 767px */
@@ -351,7 +398,8 @@
     margin: 60px 6% 60px 6% !important;
   }
 
-  .legend-register {
+  .legend-register,
+  .legend-register-account {
     margin-bottom: 25px;
   }
 
@@ -364,7 +412,7 @@
   }
 
   .alert-register-error {
-    margin: 0 0 22px 0;
+    margin: 45px 0 -5px 0;
   }
 
   .login .checkbox {
