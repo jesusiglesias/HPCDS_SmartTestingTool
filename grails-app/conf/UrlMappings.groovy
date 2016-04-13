@@ -93,6 +93,12 @@ class UrlMappings {
         "/reloadLogConfig"(controller: 'customTasksBackend', action: 'reloadLogConfig')
         "/dashboard"(controller: 'customTasksBackend', action: 'dashboard')
 
+        /* Custom general tasks normal user (front-end)
+        ======================================================*/
+        "/contact"(view: "customTasksFrontEnd/Contact")
+        "/cookiePolicy"(view: "customTasksFrontEnd/CookiePolicy")
+        "/FAQ"(view: "customTasksFrontEnd/FAQ")
+
         /* Information files
         ======================================================*/
         // Humans.txt
