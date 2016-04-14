@@ -140,6 +140,7 @@
 	<g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
 	<g:javascript src="confirmation/custom-delete.js"/>
     <g:javascript src="select/bootstrap-select.min.js"/>
+	<g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
     <g:javascript src="select/jquery.multi-select.js"/>
     <g:javascript src="select/select2.full.min.js"/>
     <g:javascript src="select/select2_i18n/es.js"/>

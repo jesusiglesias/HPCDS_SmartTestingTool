@@ -56,7 +56,7 @@
     <!-- Row -->
     <div class="row space-secondRow">
         <!-- Difficulty level -->
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="form-group ${hasErrors(bean: questionInstance, field: 'difficultyLevel', 'error')}">
                 <label for="difficultyLevel" class="control-label">
                     <h5 class="sbold">

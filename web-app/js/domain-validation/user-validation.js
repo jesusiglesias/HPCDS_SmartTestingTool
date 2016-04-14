@@ -346,7 +346,7 @@ var DomainUserValidation = function () {
 
         if (jQuery().datepicker) {
             $('.date-picker').datepicker({
-                orientation: "left",
+                orientation: "auto",
                 autoclose: true,
                 clearBtn: true,
                 language: 'es',

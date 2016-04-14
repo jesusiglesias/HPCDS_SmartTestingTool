@@ -82,6 +82,10 @@ input:-webkit-autofill:active {
     margin: 50px -15px 10px -15px;
 }
 
+.space-maxAttemtps {
+    margin-top: 25px;
+}
+
 .panel-row {
     margin-top: 40px;
 }
@@ -374,6 +378,28 @@ input:-webkit-autofill:active {
     right: 170px !important;
     cursor: pointer;
     top: 51px;
+    z-index: 1999;
+    font-size: 15px;
+    color: #AAAAAA !important;
+}
+
+.i-delete-testNumberquestions-backend {
+    display: none;
+    position: absolute !important;
+    right: 75px !important;
+    cursor: pointer;
+    top: 51px;
+    z-index: 1999;
+    font-size: 15px;
+    color: #AAAAAA !important;
+}
+
+.i-delete-testLockTime-backend {
+    display: none;
+    position: absolute !important;
+    right: 75px !important;
+    cursor: pointer;
+    top: 77px;
     z-index: 1999;
     font-size: 15px;
     color: #AAAAAA !important;

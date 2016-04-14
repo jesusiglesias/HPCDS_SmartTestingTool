@@ -17,24 +17,44 @@ var DomainTestValidation = function () {
                 focusInvalid: false, // Do not focus the last invalid input
                 ignore: "",  // Validate all fields including form hidden input
                 rules: {
-                    // TODO
-                    titleAnswerKey: {
+                    name: {
                         required: true,
-                        maxlength: 50
+                        maxlength: 60
                     },
                     description: {
                         required: true,
-                        maxlength: 400
+                        maxlength: 800
                     },
-                    score: {
+                    initDate: {
+                        required: true
+                    },
+                    endDate: {
+                        required: true
+                    },
+                    lockTime: {
+                        required: true
+                    },
+                    maxAttempts: {
                         required: true,
                         min: 0,
                         max: 5
+                    },
+                    numberOfQuestions: {
+                        required: true
+                    },
+                    active: {
+                        required: true
+                    },
+                    topic: {
+                        required: true
+                    },
+                    catalog: {
+                        required: true
                     }
                 },
 
                 messages: {
-                    titleAnswerKey: {
+                    name: {
                         required: _requiredField,
                         maxlength: _maxlengthField
                     },
@@ -42,10 +62,31 @@ var DomainTestValidation = function () {
                         required: _requiredField,
                         maxlength: _maxlengthField
                     },
-                    score: {
+                    initDate: {
+                        required: _requiredField
+                    },
+                    endDate: {
+                        required: _requiredField
+                    },
+                    lockTime: {
+                        required: _requiredField
+                    },
+                    maxAttempts: {
                         required: _requiredField,
                         min: _minField,
                         max: _maxField
+                    },
+                    numberOfQuestions: {
+                        required: _requiredField
+                    },
+                    active: {
+                        required: _requiredField
+                    },
+                    topic: {
+                        required: _requiredField
+                    },
+                    catalog: {
+                        required: _requiredField
                     }
                 },
 
@@ -72,15 +113,15 @@ var DomainTestValidation = function () {
                 submitHandler: function (form) {
                     form.submit(); // Submit the form
                 }
-            });
+        });
     };
 
     /**
-     * It checks the test name availability TODO
+     * It checks the test name availability
      */
-    var handlertestNameAvailabilityChecker = function () {
+    var handlerTestNameAvailabilityChecker = function () {
 
-        var nameTest = $('#name');
+        var nameTest = $('.name-test');
         var nameTestBlock = $('.nameTest-block');
 
         $("#nameTest-checker").click(function () {
@@ -89,7 +130,7 @@ var DomainTestValidation = function () {
             if (nameTest.val() === "") {
                 nameTest.closest('.form-group').removeClass('has-success').addClass('has-error');
 
-                nameTestBlock.html(_checkerNameTestBlockInfo);
+                nameTestBlock.html(_checkerTestNameBlockInfo);
                 nameTestBlock.addClass('availibility-error');
                 return;
             }
@@ -102,10 +143,10 @@ var DomainTestValidation = function () {
             attr("disabled", true).
             addClass("spinner");
 
-            $.post(_checkNameTestAvailibility, {
+            $.post(_checkTestNameAvailibility, {
 
-                // Name value TODO
-                answerKey: nameTest.val()
+                // Name value
+                testName: nameTest.val()
 
             }, function (res) {
                 btn.attr('disabled', false);
@@ -133,20 +174,20 @@ var DomainTestValidation = function () {
     };
 
     /**
-     * It handles the max length of the fields TODO
+     * It handles the max length of the fields
      */
     var handlerMaxlength = function() {
 
-            /* field */
-            $('#').maxlength({
+            /* Name field */
+            $('.name-test').maxlength({
                 limitReachedClass: "label label-danger",
                 threshold: 20,
                 placement: 'top',
                 validate: true
             });
 
-            /* field */
-            $('#').maxlength({
+            /* Description field */
+            $('.description-test').maxlength({
                 limitReachedClass: "label label-danger",
                 alwaysShow: true,
                 placement: 'top-right-inside',
@@ -154,12 +195,49 @@ var DomainTestValidation = function () {
             });
     };
 
+    /**
+     * It handles the select
+     */
+    var handlerBootstrapSelect = function () {
+
+        // It adds the subtext
+        $(".select-maxAttemtps option[value=\"0\"]").attr("data-subtext", _attempts);
+        $(".select-maxAttemtps option[value=\"1\"]").attr("data-subtext", _attempt);
+        $(".select-maxAttemtps option[value=\"2\"]").attr("data-subtext", _attempts);
+        $(".select-maxAttemtps option[value=\"3\"]").attr("data-subtext", _attempts);
+        $(".select-maxAttemtps option[value=\"4\"]").attr("data-subtext", _attempts);
+        $(".select-maxAttemtps option[value=\"5\"]").attr("data-subtext", _attempts);
+
+        $('.bs-select').selectpicker({
+            iconBase: 'fa',
+            tickIcon: 'fa-check'
+        });
+    };
+
+    /**
+     * It handles the date picker
+     */
+    var handlerDatePickers = function () {
+
+        if (jQuery().datepicker) {
+            $('.date-picker').datepicker({
+                orientation: "auto",
+                autoclose: true,
+                clearBtn: true,
+                language: 'es',
+                format: 'dd-mm-yyyy'
+            });
+        }
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
             handlerTestValidation();
-            handlertestNameAvailabilityChecker();
+            handlerTestNameAvailabilityChecker();
             handlerMaxlength();
+            handlerBootstrapSelect();
+            handlerDatePickers();
         }
     };
 }();

@@ -1,6 +1,10 @@
 package Test
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
+
+import java.text.SimpleDateFormat
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
@@ -38,9 +42,9 @@ class TestController {
     }
 
     /**
-     * It creates a new test instance.
+     * It creates a new testInstance.
      *
-     * @return return If the test instance is null or has errors.
+     * @return return If the testInstance is null or has errors.
      */
     def create() {
         respond new Test(params)
@@ -55,8 +59,26 @@ class TestController {
     @Transactional
     def save(Test testInstance) {
 
+        if (params.initDate != "" && params.endDate != "") {
+
+            // Parse initDate from textField
+            def initDateFormat = new SimpleDateFormat('dd-MM-yyyy').parse(params.initDate)
+            testInstance.initDate = initDateFormat
+
+            // Parse endDate from textField
+            def endDateFormat = new SimpleDateFormat('dd-MM-yyyy').parse(params.endDate)
+            testInstance.endDate = endDateFormat
+        }
+
         if (testInstance == null) {
             notFound()
+            return
+        }
+
+        // It checks if catalog is null
+        if (testInstance.catalog == null) {
+            flash.testErrorMessage = g.message(code: 'layouts.main_auth_admin.body.content.test.catalog.null', default: '<strong>Catalog</strong> field cannot be null.')
+            render view: "create", model: [testInstance: testInstance]
             return
         }
 
@@ -110,6 +132,17 @@ class TestController {
     @Transactional
     def update(Test testInstance) {
 
+        if (params.initDate != "" && params.endDate != "") {
+
+            // Parse initDate from textField
+            def initDateFormat = new SimpleDateFormat('dd-MM-yyyy').parse(params.initDate)
+            testInstance.initDate = initDateFormat
+
+            // Parse endDate from textField
+            def endDateFormat = new SimpleDateFormat('dd-MM-yyyy').parse(params.endDate)
+            testInstance.endDate = endDateFormat
+        }
+
         if (testInstance == null) {
             notFound()
             return
@@ -131,6 +164,16 @@ class TestController {
                 respond testInstance.errors, view:'edit'
                 return
             }
+        }
+
+        // It checks if catalog is null
+        if (testInstance.catalog == null) {
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.testErrorMessage = g.message(code: 'layouts.main_auth_admin.body.content.test.catalog.null', default: '<strong>Catalog</strong> field cannot be null.')
+            render view: "create", model: [testInstance: testInstance]
+            return
         }
 
         // Validate the instance
@@ -166,9 +209,8 @@ class TestController {
         }
     }
 
-
     /**
-     * It deletes a existing test in database.
+     * It deletes a existing test in database. TODO
      *
      * @param testInstance It represents the test information to delete.
      * @return return If the test instance is null, the notFound function is called.
@@ -210,7 +252,7 @@ class TestController {
      * It renders the not found message if the test instance was not found.
      */
     protected void notFound() {
-        log.error("SecUserController():notFound():AdministratorID:${params.id}")
+        log.error("TestController():notFound():TestID:${params.id}")
 
         request.withFormat {
             form multipartForm {
@@ -219,5 +261,26 @@ class TestController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+
+    /**
+     * It checks the name availability.
+     */
+    def checkNameTestAvailibility () {
+
+        def responseData
+
+        if (Test.countByName(params.testName)) { // Name found
+            responseData = [
+                    'status': "ERROR",
+                    'message': g.message(code: 'test.checkNameAvailibility.notAvailable', default:'Name of test is not available. Please, choose another one.')
+            ]
+        } else { // Name not found
+            responseData = [
+                    'status': "OK",
+                    'message':g.message(code: 'test.checkNameAvailibility.available', default:'Name of test available..')
+            ]
+        }
+        render responseData as JSON
     }
 }

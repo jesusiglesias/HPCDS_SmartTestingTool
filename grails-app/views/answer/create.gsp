@@ -113,6 +113,7 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="iCheck/icheck.min.js"/>
     <g:javascript src="select/bootstrap-select.min.js"/>
+    <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
     <g:javascript src="select/jquery.multi-select.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="autosize/autosize.min.js"/>

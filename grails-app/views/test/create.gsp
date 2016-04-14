@@ -3,14 +3,23 @@
 <html>
 <head>
 	<meta name="layout" content="main_auth_admin">
-    <title><g:message code="layouts.main_auth_admin.head.title.test" default="STT | Test management"/></title>
+	<title><g:message code="layouts.main_auth_admin.head.title.test" default="STT | Test management"/></title>
 	<link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/date', file: 'bootstrap-datepicker3.min.css')}" type="text/css"/>
 
-	<script>
+    <script>
 		// Variables to use in script
-		var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _checkerTestNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.test.name.checker.block.info', default:'Type a name of test and check its availability.')}';
+        var _checkTestNameAvailibility = '${g.createLink(controller: "test", action: 'checkNameTestAvailibility')}';
+		var _attempt = '${g.message(code:'layouts.main_auth_admin.body.content.test.subtext.attempt', default:'attempt')}';
+		var _attempts = '${g.message(code:'layouts.main_auth_admin.body.content.test.subtext.attempts', default:'attempts')}';
+		var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
+        var _minField = '${g.message(code:'default.validation.min', default:'Please, enter a value greater or equal to {0}.')}';
+        var _maxField = '${g.message(code:'default.validation.max', default:'Please, enter a value less than or equal to {0}.')}';
 
-		// Handler auto close alert
+        // Handler auto close alert
 		function createAutoClosingAlert(selector) {
 			var alert = $(selector);
 			window.setTimeout(function () {
@@ -44,7 +53,7 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/test"><g:message code="layouts.main_auth_admin.body.title.test" default="Test management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.test.create" default="Create test"/></small>
             </h3>
 
@@ -78,7 +87,7 @@
                 </g:hasErrors>
 
                 <!-- Creation form -->
-                <g:form url="[resource:testInstance, action:'save']" autocomplete="on" class="horizontal-form admin-form">
+                <g:form url="[resource:testInstance, action:'save']" autocomplete="on" class="horizontal-form test-form">
                     <fieldset class="form">
                         <g:render template="form"/>
                     </fieldset>
@@ -98,10 +107,14 @@
 
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="iCheck/icheck.min.js"/>
-    <g:javascript src="password/custom-password.js"/>
-    <g:javascript src="password/pwstrength-bootstrap.min.js"/>
-<%-- TODO
-    <g:javascript src="domain-validation/admin-validation.js"/>
---%>
+    <g:javascript src="select/bootstrap-select.min.js"/>
+    <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
+    <g:javascript src="date/bootstrap-datepicker.min.js"/>
+    <g:javascript src="date/bootstrap-datepicker.es.min.js"/>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
+    <g:javascript src="autosize/autosize.min.js"/>
+    <g:javascript src="customIcons/test-handler.js"/>
+    <g:javascript src="domain-validation/test-validation.js"/>
+
 </body>
 </html>
