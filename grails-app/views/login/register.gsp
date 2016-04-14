@@ -89,6 +89,8 @@
                     <g:render template="/login/formRegister"/>
                 </fieldset>
 
+                <p class="text-agreement"><g:message code="views.login.body.auth.register.agreement" default="By registering, you agree to our terms of service and privacy policy."/></p>
+
                 <div class="form-actions content-register-btn">
                     <g:link type="button" uri="/" id="back-btn" class="btn green-dark back-button"><g:message code="views.login.auth.newPassword.homepage" default="Homepage"/></g:link>
                     <g:submitButton name="${g.message(code:'views.login.auth.form.createAccount', default:'Sign up')}" id="register-button" class="btn green-dark pull-right"/>
