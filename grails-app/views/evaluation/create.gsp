@@ -8,7 +8,7 @@
 
 	<script>
 		// Variables to use in script TODO
-		var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+		var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
 
 		// Handler auto close alert
 		function createAutoClosingAlert(selector) {

@@ -14,7 +14,7 @@
 		// Variables to use in script
 		var _checkerQuestionKeyBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.question.create.checker.block.info.key', default:'Type a key of question and check its availability.')}';
 		var _checkKeyQuestionAvailibility = '${g.createLink(controller: "question", action: 'checkKeyQuestionAvailibility')}';
-		var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+		var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
 		var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
 
 		// Handler auto close alert

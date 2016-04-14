@@ -10,7 +10,6 @@
     <meta name="layout" content="main_login"/>
     <title><g:message code="views.login.auth.register.head.title" default="STT | User registration"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'multi-select.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/date', file: 'bootstrap-datepicker3.min.css')}" type="text/css"/>
 
     <script type="text/javascript">
@@ -106,7 +105,6 @@
     <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
     <g:javascript src="date/bootstrap-datepicker.min.js"/>
     <g:javascript src="date/bootstrap-datepicker.es.min.js"/>
-    <g:javascript src="select/jquery.multi-select.js"/>
     <g:javascript src="authentication/registerAccount.js"/>
 
 </body>

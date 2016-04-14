@@ -21,7 +21,7 @@
 		var _checkUsernameAvailibility = '${g.createLink(controller: "secUser", action: 'checkUsernameAvailibility')}';
 		var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
 		var _checkEmailAvailibility = '${g.createLink(controller: "secUser", action: 'checkEmailAvailibility')}';
-		var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+		var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
 		var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
 		var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
         var _equalPasswordUsername = '${raw(g.message(code:'default.password.username', default:'<strong>Password</strong> field must not be equal to username.'))}';

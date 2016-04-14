@@ -12,7 +12,7 @@
         // Variables to use in script
         var _checkerAnswerKeyBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.answer.create.checker.block.info.key', default:'Type a key of answer and check its availability.')}';
         var _checkKeyAnswerAvailibility = '${g.createLink(controller: "answer", action: 'checkKeyAnswerAvailibility')}';
-        var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
         var _minField = '${g.message(code:'default.validation.min', default:'Please, enter a value greater or equal to {0}.')}';
         var _maxField = '${g.message(code:'default.validation.max', default:'Please, enter a value less than or equal to {0}.')}';

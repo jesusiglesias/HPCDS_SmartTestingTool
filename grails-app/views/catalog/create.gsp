@@ -11,7 +11,7 @@
         // Variables to use in script
         var _checkerNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.catalog.create.checker.block.info.name', default:'Type a name of catalog and check its availability.')}';
         var _checkNameCatalogAvailibility = '${g.createLink(controller: "catalog", action: 'checkNameCatalogAvailibility')}';
-        var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
+        var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
         var _search = '${g.message(code: "layouts.main_auth_admin.content.search", default: "Search:")}';
         var _selectable = '${g.message(code:'default.multiselect.selectable.question', default:'Selectable questions')}';
