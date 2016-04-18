@@ -189,6 +189,10 @@ input:-webkit-autofill:active {
     color: #757575 !important;
 }
 
+.show-title {
+    border-bottom: 1px solid #99BD97;
+}
+
 /* Multi-select - Create view
 =================================================================== */
 .ms-container {

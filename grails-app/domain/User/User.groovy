@@ -15,7 +15,6 @@ class User extends SecUser {
     Date birthDate
     String city
     String country
-    Integer evaluationCount = 0
     String name
     String phone
     Sex sex
@@ -24,19 +23,6 @@ class User extends SecUser {
     // Relations
     static belongsTo = [department:Department]
     static hasMany = [evaluations:Evaluation]
-
-    // It obtains the number of evaluations that has the user
-    Integer getEvaluationsCount () {
-        evaluations?.size () ?: 0
-    }
-
-    def beforeInsert() {
-        this.beforeUpdate()
-    }
-
-    def beforeUpdate () {
-        evaluationCount = getEvaluationsCount ()
-    }
 
     // Restrictions on the attributes of the entity
     static constraints = {

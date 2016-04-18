@@ -438,13 +438,6 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="nav-item">
-                            <!-- TODO -->
-                                <g:link class="nav-link">
-                                    <i class="fa fa-plus"></i>
-                                    <span class="title"><g:message code="layouts.main_auth_admin.sidebar.newFemale" default="New"/></span>
-                                </g:link>
-                            </li>
-                            <li class="nav-item">
                                 <g:link uri="/evaluation" class="nav-link">
                                     <i class="fa fa-list"></i>
                                     <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>

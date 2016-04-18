@@ -30,7 +30,7 @@
             var _textSearch = '${params.departmentSearch}'
         </script>
     </g:if>
-    <g:elseif test="${params.quickSearch}">
+    <g:elseif test="${params.quickSearch}"> <!-- Search request from quick search -->
         <script type="text/javascript">
             var _textSearch = '${params.quickSearch}'
         </script>
@@ -233,8 +233,8 @@
                                                 <td class="break-word">${fieldValue(bean: userInstance, field: "country")}</td>
                                                 <td class="break-word">${fieldValue(bean: userInstance, field: "phone")}</td>
                                                 <td>${message(code:'enumerations.sex.'+fieldValue(bean: userInstance, field: "sex"))}</td>
-                                                <td>${fieldValue(bean: userInstance, field: "evaluationCount")}</td>
-                                                <td><g:link uri="/evaluation" params="[userSearch: userInstance.username]"><g:message code="user.evaluations.label" default="Evaluations"/></g:link></td>
+                                                <td>${userInstance.evaluations?.size()}</td>
+                                                <td><g:link uri="/evaluation" params="[userEvalSearch: userInstance.username]"><g:message code="user.evaluations.label" default="Evaluations"/></g:link></td>
                                                 <td>
                                                     <g:link controller="department" action="edit" id="${userInstance.department.id}" class="show-entity-link">
                                                         <span class="label label-sm label-default show-entity">

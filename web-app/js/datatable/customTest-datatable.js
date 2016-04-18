@@ -43,6 +43,22 @@ var DatatableTestList = function () {
             // Auto width
             "autoWidth": true,
 
+            // Visibility of columns
+            "columnDefs": [
+                {
+                    "targets": [6], // Lock time
+                    "visible": false
+                },
+                {
+                    "targets": [7], // Maximum attempts
+                    "visible": false
+                },
+                {
+                    "targets": [8], // Evaluations
+                    "visible": false
+                }
+            ],
+
             buttons: [
                 { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7]} },
                 { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7]} },

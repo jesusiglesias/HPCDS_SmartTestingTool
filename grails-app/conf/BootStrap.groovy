@@ -110,7 +110,8 @@ class BootStrap {
                     surname: 'Conmutar',
                     birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1991'),
                     sex: Sex.MALE,
-                    department: idDepartment )
+                    department: idDepartment
+            )
 
             def newUser = User.findByUsername('user_stt') ?: new User( // Normal user
                     username: 'user_stt',
@@ -120,7 +121,20 @@ class BootStrap {
                     surname: 'Apellido STT',
                     birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('22-04-1994'),
                     sex: Sex.MALE,
-                    department: idDepartment)
+                    department: idDepartment
+            )
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                          CATALOG                                          *
+             *-------------------------------------------------------------------------------------------*/
+
+            def iDcatalog = Catalog.findByName('Catálogo I+D') ?: new Catalog(
+                    name: 'Catálogo I+D'
+            )
+
+            def securityCatalog = Catalog.findByName('Seguridad inicial') ?: new Catalog(
+                    name: 'Seguridad inicial'
+            )
 
             /*-------------------------------------------------------------------------------------------*
              *                                          TOPIC                                            *
@@ -137,15 +151,32 @@ class BootStrap {
             )
 
             /*-------------------------------------------------------------------------------------------*
-             *                                          CATALOG                                          *
+             *                                          TEST                                             *
              *-------------------------------------------------------------------------------------------*/
 
-            def iDcatalog = Catalog.findByName('Catálogo I+D') ?: new Catalog(
-                    name: 'Catálogo I+D'
+            def englishTest = Test.findByName('Test de inglés') ?: new Test(
+                    name: 'Test de inglés',
+                    description: 'Descripción del test de inglés....',
+                    initDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
+                    endDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-06-2016'),
+                    lockTime: 0,
+                    maxAttempts: 1,
+                    numberOfQuestions: 0,
+                    topic: englishTopic,
+                    catalog: iDcatalog
             )
 
-            def securityCatalog = Catalog.findByName('Seguridad inicial') ?: new Catalog(
-                    name: 'Seguridad inicial'
+            /*-------------------------------------------------------------------------------------------*
+             *                                       EVALUATION                                          *
+             *-------------------------------------------------------------------------------------------*/
+
+            def EvalUserSTT1 = Evaluation.findByUsernameEvalAndTestName('user_stt', 'Test de inglés') ?: new Evaluation(
+                    usernameEval: 'user_stt',
+                    testName: 'Test de inglés',
+                    attemptNumber: 1,
+                    testScore: 8,
+                    user: newUser,
+                    test: englishTest
             )
 
             /*-------------------------------------------------------------------------------------------*
@@ -206,29 +237,33 @@ class BootStrap {
 
             // Validation of admin
             def validAdmin = newAdmin.validate()
-            // Validation of user
-            def validUserSwitch = newUserSwitch.validate()
-            def validUser = newUser.validate()
             // Validation of department
             def validAnother = anotherDepartment.validate()
             def validID = idDepartment.validate()
             def validRRHH = rrhhDepartment.validate()
             def validSecurity = securityDepartment.validate()
             def validSupport = supportDepartment.validate()
-            // Validation of topic
+            // Validation of user
+            def validUserSwitch = newUserSwitch.validate()
+            def validUser = newUser.validate()
             // Validation of catalog
-            // Validation of question
-            def validSe1 = se1Question.validate()
-            def validSe2 = se2Question.validate()
-            def validSe3 = se3Question.validate()
+            // Validation of topic
+            // Validation of test
+            def validEnglishTest = englishTest.validate()
+            // Validation of evaluation
+            def validEvalUserSTT1 = EvalUserSTT1.validate()
             // Validation of answer
             def validR1_se1 = re1_1Answer.validate()
             def validR2_se1 = re2_1Answer.validate()
             def validR3_se1 = re3_1Answer.validate()
             def validR1_se2 = re1_2Answer.validate()
+            // Validation of question
+            def validSe1 = se1Question.validate()
+            def validSe2 = se2Question.validate()
+            def validSe3 = se3Question.validate()
 
-            if (validAdmin & validUserSwitch & validUser & validAnother & validID & validRRHH & validSecurity & validSupport &
-                    validSe1 & validSe2 & validSe3 & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2) {
+            if (validAdmin & validUserSwitch & validUser & validAnother & validID & validRRHH & validSecurity & validSupport & validEnglishTest &
+                    validEvalUserSTT1 & validSe1 & validSe2 & validSe3 & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2) {
 
                 // Saving roles
                 adminRole.save(flush: true, failOnError: true)
@@ -257,13 +292,13 @@ class BootStrap {
                     SecUserSecRole.create newUser, userRole, true
                 }
 
-                // Saving topics
-                arquitecturaComputadoresTopic.save(flush: true, failOnError: true)
-                englishTopic.save(flush: true, failOnError: true)
-
                 // Saving catalogs
                 iDcatalog.save(flush: true, failOnError: true)
                 securityCatalog.save(flush: true, failOnError: true)
+
+                // Saving topics
+                arquitecturaComputadoresTopic.save(flush: true, failOnError: true)
+                englishTopic.save(flush: true, failOnError: true)
 
                 // Saving answers
                 re1_1Answer.save(flush: true, failOnError: true)
@@ -275,6 +310,15 @@ class BootStrap {
                 se1Question.save(flush: true, failOnError: true)
                 se2Question.save(flush: true, failOnError: true)
                 se3Question.save(flush: true, failOnError: true)
+
+                // Saving test
+                englishTest.save(flush: true, failOnError: true)
+
+                // Saving evaluations
+                EvalUserSTT1.save(flush: true, failOnError: true)
+
+
+
 
                 log.debug("BootStrap:init():Initial data have been created")
                 log.info("Special config create for development or test - Users: admin_stt/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and user_stt/7g4sOmmm (User)")

@@ -24,6 +24,23 @@
 
 <body>
 
+    <!-- Search request from user -->
+    <g:if test="${params.userEvalSearch}">
+        <script type="text/javascript">
+            var _textSearch = '${params.userEvalSearch}'
+        </script>
+    </g:if>
+    <g:elseif test="${params.testEvalSearch}"> <!-- Search request from test -->
+        <script type="text/javascript">
+            var _textSearch = '${params.testEvalSearch}'
+        </script>
+    </g:elseif>
+    <g:else>
+        <script type="text/javascript">
+            var _textSearch = ''
+        </script>
+    </g:else>
+
     <script type="text/javascript">
 
         // Variables to use in javascript
@@ -81,14 +98,14 @@
             <!-- Page-title -->
             <h3 class="page-title">
                 <g:link uri="/evaluation"><g:message code="layouts.main_auth_admin.body.title.evaluation" default="Evaluations management"/></g:link>
-                <i class="icon-arrow-right icon-title-admin"></i>
+                <i class="icon-arrow-right icon-title-domain"></i>
                 <small><g:message code="layouts.main_auth_admin.body.subtitle.evaluation" default="Evaluations list"/></small>
             </h3>
 
             <!-- Contain page -->
             <div id="list-domain">
 
-            <!-- Alerts -->
+                <!-- Alerts -->
                 <g:if test="${flash.evaluationMessage}">
                     <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity fade in'>
                         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
@@ -116,34 +133,42 @@
                         <!-- Portlet -->
                         <div class="portlet light bg-inverse bordered">
                             <div class="portlet-title">
-                                <div class="caption font-green-dark">
-                                    <%-- TODO Nuevo <div class="btn-group">
-                                        <g:link uri="/administrator/create" class="btn green-dark">
-                                            <i class="fa fa-plus"></i>
-                                            <g:message code="layouts.main_auth_admin.body.content.admin.new" default="New administrator"/>
-                                        </g:link>
-                                    </div>
-                                    --%>
-                                </div>
                                 <div class="tools"> </div>
                             </div>
 
                             <div class="portlet-body">
                                 <table class="table table-striped table-bordered table-hover" id="entity-table">
                                     <thead>
-                                        <tr>
-                                            <g:sortableColumn property="attemptNumber" title="${message(code: 'evaluation.attemptNumber.label', default: 'Attempt Number')}" />
-                                            <g:sortableColumn property="testScore" title="${message(code: 'evaluation.testScore.label', default: 'Test Score')}" />
-                                        </tr>
+                                    <tr>
+                                        <td><g:message code="evaluation.usernameEval.label" default="User"/></td>
+                                        <td><g:message code="evaluation.testName.label" default="Test"/></td>
+                                        <td><g:message code="evaluation.testScore.label" default="Final score"/></td>
+                                        <td><g:message code="evaluation.attemptNumber.label" default="Number of attempt"/></td>
+                                    </tr>
                                     </thead>
                                     <tbody>
                                         <g:each in="${evaluationInstanceList}" status="i" var="evaluationInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-                                                <td><g:link action="show" id="${evaluationInstance.id}">${fieldValue(bean: evaluationInstance, field: "attemptNumber")}</g:link></td>
-
-                                                <td>${fieldValue(bean: evaluationInstance, field: "testScore")}</td>
-
+                                                <td><g:link controller="evaluation" action="show" id="${evaluationInstance.id}" class="break-word">${fieldValue(bean: evaluationInstance, field: "usernameEval")}</g:link></td>
+                                                <td class="break-word">${fieldValue(bean: evaluationInstance, field: "testName")}</td>
+                                                <td>
+                                                    <g:if test="${evaluationInstance.testScore >= 7}">
+                                                        <span class="label label-sm label-success">
+                                                    </g:if>
+                                                    <g:elseif test="${evaluationInstance.testScore >= 5 && evaluationInstance.testScore < 7}">
+                                                        <span class="label label-sm label-warning">
+                                                    </g:elseif>
+                                                    <g:elseif test="${evaluationInstance.testScore < 5}">
+                                                        <span class="label label-sm label-danger">
+                                                    </g:elseif>
+                                                        ${fieldValue(bean: evaluationInstance, field: "testScore")}
+                                                        </span>
+                                                </td>
+                                                <td>
+                                                    <span class="label label-sm label-default show-entity">
+                                                        ${fieldValue(bean: evaluationInstance, field: "attemptNumber")}
+                                                    </span>
+                                                </td>
                                             </tr>
                                         </g:each>
                                     </tbody>
@@ -159,8 +184,7 @@
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="datatable/datatables.js"/>
     <g:javascript src="datatable/datatables.bootstrap.js"/>
-<%-- TODO
-    <g:javascript src="datatable/customAdmin-datatable.js"/> --%>
+    <g:javascript src="datatable/customEvaluation-datatable.js"/>
 
 </body>
 </html>
