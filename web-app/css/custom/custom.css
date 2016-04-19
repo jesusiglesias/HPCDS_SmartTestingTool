@@ -121,18 +121,23 @@ input:-webkit-autofill:active {
 
 /* Position confirmation delete button */
 #delete-confirm-popover {
-    margin: 0 0 50px 0;
+    margin: 0 0 15px 0;
 }
 
 .check-delete {
     display: inline-block;
-    top: -22px;
+    top: -6px;
     margin-left: 20px;
 }
 
 .check-delete-more {
     top: -22px;
     margin: 5px 0 10px 0;
+}
+
+.delete-text {
+    font-weight: 600;
+    color: #D05454;
 }
 
 /* Profile image */
@@ -918,6 +923,7 @@ input:-webkit-autofill:active {
     .check-delete {
         display: block;
         margin-left: 0;
+        top: 9px;
     }
 }
 
@@ -1016,7 +1022,7 @@ input:-webkit-autofill:active {
 
     /* Position confirmation delete button */
     #delete-confirm-popover {
-        margin: 5px 0 50px 0;
+        margin: 5px 0 30px 0;
     }
 
     /* Entity message */
@@ -1151,7 +1157,7 @@ input:-webkit-autofill:active {
 
     /* Position confirmation delete button */
     #delete-confirm-popover {
-        margin: 10px 0 50px 0;
+        margin: 10px 0 30px 0;
     }
 
     .portlet-graphUD .portlet-body {

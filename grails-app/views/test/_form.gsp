@@ -186,7 +186,7 @@
 						<g:message code="test.topic.label" default="Topic"/>
 						<span class="required"> * </span>
 					</h5>
-					<h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.test.catalog.select" default="Select the topic to which the test belongs."/></h5>
+					<h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.test.topic.select" default="Select the topic to which the test belongs."/></h5>
 				</label>
 				<g:select name="topic"
 						  from="${Topic.list()}"
@@ -223,15 +223,3 @@
 </div>
 
 
-<%-- TODO
-
-<div class="fieldcontain ${hasErrors(bean: testInstance, field: 'evaluationsTest', 'error')} ">
-	<label for="evaluationsTest">
-		<g:message code="test.evaluationsTest.label" default="Evaluations Test" />
-		
-	</label>
-	<g:select name="evaluationsTest" from="${User.Evaluation.list()}" multiple="multiple" optionKey="id" size="5" value="${testInstance?.evaluationsTest*.id}" class="many-to-many"/>
-
-</div>
-
---%>

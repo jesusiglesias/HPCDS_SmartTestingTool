@@ -434,8 +434,16 @@
                                                 <g:formatBoolean boolean="${topicInstance.visibility}" true="${g.message(code: "topic.visibility.label.true", default: "Visible")}" false="${g.message(code: "topic.visibility.label.false", default: "Not visible")}"/>
                                                     </span>
                                             </td>
-                                            <td>${fieldValue(bean: topicInstance, field: "testCount")}</td>
-                                            <td><g:link uri="/test" params="[topicSearch: topicInstance.name]"><g:message code="topic.tests.label" default="Test"/></g:link></td>
+                                            <td>${topicInstance.tests?.size()}</td>
+                                            <td>
+                                                <g:each in="${topicInstance?.tests?}" var="test">
+                                                    <g:link controller="test" action="edit" id="${test.id}" class="show-entity-link">
+                                                        <span class="label label-sm label-default show-entity">
+                                                            ${test.name?.encodeAsHTML()}
+                                                        </span>
+                                                    </g:link>
+                                                </g:each>
+                                            </td>
                                         </tr>
                                     </g:each>
                                     </tbody>

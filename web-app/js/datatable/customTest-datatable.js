@@ -54,16 +54,28 @@ var DatatableTestList = function () {
                     "visible": false
                 },
                 {
-                    "targets": [8], // Evaluations
+                    "targets": [8], // Number of evaluations
+                    "visible": false
+                },
+                {
+                    "targets": [9], // Evaluations
+                    "visible": false
+                },
+                {
+                    "targets": [10], // Topic
+                    "visible": false
+                },
+                {
+                    "targets": [11], // Catalog
                     "visible": false
                 }
             ],
 
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7]} },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7]} },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _testFile, title: _testTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7]} },
-                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _testFile, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7]} },
+                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _testFile, title: _testTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _testFile, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]} },
                 { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
             ],

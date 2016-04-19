@@ -387,9 +387,12 @@
                             <span></span>
                             <span class="check"></span>
                             <span class="box"></span>
-                            <g:message code="layouts.main_auth_admin.body.content.catalog.delete.relation" default="lEnable to remove the content associated (questions and answers)."/>
+                            <g:message code="layouts.main_auth_admin.body.content.catalog.delete.relation" default="Enable to remove the content associated (questions and answers)."/>
                         </label>
                     </div>
+                    <p class="delete-text">
+                        <g:message code="default.delete.relation.catalog.test.message" default="Important! Remember that deleting a catalog, all associated test are eliminated."/>
+                    </p>
                 </g:form>
 
                 <!-- Edit form -->

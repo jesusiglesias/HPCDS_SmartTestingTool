@@ -380,6 +380,18 @@
                             <g:message code="layouts.main_auth_admin.body.content.topic.delete" default="Delete topic"/>
                         </button>
                     </div>
+                    <div class="has-error md-checkbox check-delete">
+                        <input type="checkbox" name='delete_topic' id='delete_topic' class="md-check"/>
+                        <label for="delete_topic" class="sbold">
+                            <span></span>
+                            <span class="check"></span>
+                            <span class="box"></span>
+                            <g:message code="layouts.main_auth_admin.body.content.topic.delete.relation" default="Enable to remove the content associated (test, catalogs, questions and answers)."/>
+                        </label>
+                    </div>
+                    <p class="delete-text">
+                        <g:message code="default.delete.relation.topic.test.message" default="Important! Remember that deleting a topic, all associated test are eliminated."/>
+                    </p>
                 </g:form>
 
                 <!-- Edit form -->

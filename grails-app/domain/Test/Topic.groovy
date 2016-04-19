@@ -10,24 +10,10 @@ class Topic {
     String description
     String name
     boolean visibility = true
-    Integer testCount = 0
 
     // Relation
     static hasMany = [tests:Test]
-
-    // It obtains the number of test that contains the topic
-    Integer getTestsCount () {
-        tests?.size () ?: 0
-    }
-
-    def beforeInsert() {
-        this.beforeUpdate()
-    }
-
-    void beforeUpdate () {
-        testCount = getTestsCount ()
-    }
-
+    
     // Restrictions on the attributes of the entity
     static constraints = {
         description blank: false, nullable: true, maxSize: 500

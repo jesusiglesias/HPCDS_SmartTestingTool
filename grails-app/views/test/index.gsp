@@ -446,7 +446,10 @@
 										<td><g:message code="test.endDate.label" default="End date"/></td>
 										<td><g:message code="test.lockTime.label" default="Maximum time"/></td>
 										<td><g:message code="test.maxAttempts.label" default="Maximum number of attempts"/></td>
+										<td><g:message code="test.evaluationsTestCount.label" default="Number of evaluations"/></td>
 										<td><g:message code="layouts.main_auth_admin.body.content.test.evaluation.display" default="Show evaluations"/></td>
+										<td><g:message code="test.topic.label" default="Topic"/></td>
+										<td><g:message code="test.catalog.label" default="Catalog"/></td>
 									</tr>
 									</thead>
 									<tbody>
@@ -470,7 +473,22 @@
 												<td><g:formatDate formatName="custom.date.birthdate.format" date="${testInstance?.endDate}"/></td>
 												<td>${fieldValue(bean: testInstance, field: "lockTime")}</td>
 												<td>${fieldValue(bean: testInstance, field: "maxAttempts")}</td>
+												<td>${testInstance.evaluationsTest?.size()}</td>
 												<td><g:link uri="/evaluation" params="[testEvalSearch: testInstance.name]"><g:message code="test.evaluationsTest.label" default="Evaluations"/></g:link></td>
+												<td>
+													<g:link controller="topic" action="edit" id="${testInstance.topic.id}" class="show-entity-link">
+														<span class="label label-sm label-default show-entity">
+															${fieldValue(bean: testInstance, field: "topic.name")}
+														</span>
+													</g:link>
+												</td>
+												<td>
+													<g:link controller="catalog" action="edit" id="${testInstance.catalog.id}" class="show-entity-link">
+														<span class="label label-sm label-default show-entity">
+															${fieldValue(bean: testInstance, field: "catalog.name")}
+														</span>
+													</g:link>
+												</td>
 											</tr>
 										</g:each>
 									</tbody>

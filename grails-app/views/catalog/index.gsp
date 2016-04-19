@@ -425,8 +425,16 @@
                                                 <td><g:link controller="catalog" action="edit" id="${catalogInstance.id}" class="break-word">${fieldValue(bean: catalogInstance, field: "name")}</g:link></td>
                                                 <td>${catalogInstance.questions?.size()}</td>
                                                 <td><g:link uri="/question" params="[questionSearch: catalogInstance.name]"><g:message code="catalog.questions.label" default="Questions"/></g:link></td>
-                                                <td>${fieldValue(bean: catalogInstance, field: "testCatalogCount")}</td>
-                                                <td><g:link uri="/test" params="[testSearch: catalogInstance.name]"><g:message code="catalog.testCatalogs.label" default="Test"/></g:link></td>
+                                                <td>${catalogInstance.testCatalogs?.size()}</td>
+                                                <td>
+                                                    <g:each in="${catalogInstance?.testCatalogs?}" var="testCatalog">
+                                                        <g:link controller="test" action="edit" id="${testCatalog.id}" class="show-entity-link">
+                                                            <span class="label label-sm label-default show-entity">
+                                                                ${testCatalog.name?.encodeAsHTML()}
+                                                            </span>
+                                                        </g:link>
+                                                    </g:each>
+                                                </td>
                                             </tr>
                                         </g:each>
                                     </tbody>

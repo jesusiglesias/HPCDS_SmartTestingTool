@@ -64,20 +64,5 @@
 				</div>
 			</div>
 		</div>
-		<!-- Tests TODO -->
-		<div class="col-sm-6">
-            <div class="form-group ${hasErrors(bean: topicInstance, field: 'tests', 'error')}">
-                <label for="tests" class="control-label">
-                    <h5 class="sbold">
-                        <g:message code="topic.tests.label" default="Test"/>
-                    </h5>
-                </label>
-                <div class="input-icon right">
-                    <i class="fa"></i>
-					<!-- TODO Form-control -->
-                    <g:select name="tests" from="${Test.Test.list()}" multiple="multiple" optionKey="id" size="5" value="${topicInstance?.tests*.id}" class="many-to-many form-control form-shadow"/>
-                </div>
-            </div>
-		</div>
 	</div>
 </div>

@@ -4,6 +4,7 @@ import Security.SecUserSecRole
 import Test.Answer
 import Test.Catalog
 import Test.Question
+import Test.Test
 import User.User
 import grails.transaction.Transactional
 
@@ -111,6 +112,49 @@ class CustomDeleteService {
 
             // It deletes the question
             question.delete(flush: true, failOnError: true)
+        }
+    }
+
+    /**
+     * It deletes the content associated to the topic.
+     *
+     * @param topicInstance It represents to the topic.
+     * @return true If the action was completed successful.
+     */
+    def customDeleteTopic (topicInstance) {
+        log.debug("CustomDeleteService:customDeleteTopic()")
+
+        // It searches each relation with tests
+        def tests = [] + topicInstance.tests ?: []
+
+        tests.each { Test test ->
+
+            // It searches each relation of the test with catalog
+            def catalogInstance = test.catalog
+
+            // It searches each relation with question
+            def questions = [] + catalogInstance.questions ?: []
+
+            questions.each { Question question ->
+
+                question.removeFromCatalogs(catalogInstance)
+
+                // It searches each relation of the answer with question
+                def answers = [] + question.answers ?: []
+
+                answers.each { Answer answer ->
+                    answer.removeFromQuestionsAnswer(question)
+                    // It deletes the answer
+                    answer.delete(flush: true, failOnError: true)
+                }
+
+                // It deletes the question
+                question.delete(flush: true, failOnError: true)
+            }
+
+            topicInstance.delete(flush:true, failOnError: true)
+            catalogInstance.removeFromTestCatalogs(test)
+            catalogInstance.delete(flush: true, failOnError: true)
         }
     }
 }
