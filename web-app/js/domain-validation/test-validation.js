@@ -36,7 +36,7 @@ var DomainTestValidation = function () {
                     },
                     maxAttempts: {
                         required: true,
-                        min: 0,
+                        min: 1,
                         max: 5
                     },
                     numberOfQuestions: {

@@ -170,7 +170,7 @@
 						<span class="required"> * </span>
 					</h5>
 				</label>
-				<g:select name="maxAttempts" from="${0..5}" value="${testInstance?.maxAttempts}" noSelection="${['': "${g.message(code: 'layouts.main_auth_admin.body.content.test.maxAttempts.noSelect', default: 'Select the number of attempts allowed')}"]}"
+				<g:select name="maxAttempts" from="${1..5}" value="${testInstance?.maxAttempts}" noSelection="${['': "${g.message(code: 'layouts.main_auth_admin.body.content.test.maxAttempts.noSelect', default: 'Select the number of attempts allowed')}"]}"
 							  class="bs-select form-control select-maxAttemtps form-shadow backend-input" data-style="btn-success"/>
 			</div>
 		</div>

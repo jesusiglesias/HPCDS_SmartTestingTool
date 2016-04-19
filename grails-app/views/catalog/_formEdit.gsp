@@ -53,25 +53,5 @@
                 </div>
             </div>
         </div>
-
-        <!-- Test TODO -->
-        <div class="col-md-6 space-betweenCol">
-            <div class="form-group ${hasErrors(bean: catalogInstance, field: 'testCatalogs', 'error')}">
-                <label for="tests" class="control-label">
-                    <h5 class="sbold">
-                        <g:message code="catalog.testCatalogs.label" default="Test"/>
-                    </h5>
-                </label>
-
-                <ul class="one-to-many">
-                    <g:each in="${catalogInstance?.testCatalogs ?}" var="t">
-                        <li><g:link controller="test" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></li>
-                    </g:each>
-                    <li class="add">
-                        <g:link controller="test" action="create" params="['catalog.id': catalogInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'test.label', default: 'Test')])}</g:link>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div>
 </div> <!-- /.Form-body -->

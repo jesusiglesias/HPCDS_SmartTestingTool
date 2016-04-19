@@ -96,13 +96,5 @@
                 </div>
             </div>
         </div>
-
-        <!-- TODO  -->
-        <div class="fieldcontain ${hasErrors(bean: questionInstance, field: 'catalogs', 'error')} ">
-            <label for="catalogs">
-                <g:message code="question.catalogs.label" default="Catalogs"/>
-
-            </label>
-        </div>
     </div>
 </div> <!-- /.Form-body -->

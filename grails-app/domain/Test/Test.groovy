@@ -14,7 +14,7 @@ class Test {
     Date endDate
     Date initDate
     Integer lockTime = 0
-    Integer maxAttempts
+    Integer maxAttempts = 1
     String name
     Integer numberOfQuestions
 
@@ -27,11 +27,11 @@ class Test {
         active blank: false
         description blank: false, maxSize: 800
         endDate blank: false, validator: { val, obj ->
-                if (!val?.after(obj.initDate)) return ['endDateFail']
+                if (val?.compareTo(obj.initDate) < 0) return ['endDateFail']
             }
-        initDate blank: false, min: new Date()
+        initDate blank: false, min: new Date().clearTime()
         lockTime blank:false
-        maxAttempts blank:false, min: 0, max: 5
+        maxAttempts blank:false, min: 1, max: 5
         name blank: false, unique: true, maxSize: 60
         numberOfQuestions blank: false, validator: { val, obj ->
             if (val > obj.catalog.questions.size()) return ['numberOfQuestionsFail']

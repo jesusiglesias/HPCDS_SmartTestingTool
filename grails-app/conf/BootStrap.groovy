@@ -154,7 +154,7 @@ class BootStrap {
              *                                          TEST                                             *
              *-------------------------------------------------------------------------------------------*/
 
-            def englishTest = Test.findByName('Test de inglés') ?: new Test(
+        /*    def englishTest = Test.findByName('Test de inglés') ?: new Test(
                     name: 'Test de inglés',
                     description: 'Descripción del test de inglés....',
                     initDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
@@ -162,22 +162,18 @@ class BootStrap {
                     lockTime: 0,
                     maxAttempts: 1,
                     numberOfQuestions: 0,
-                    topic: englishTopic,
-                    catalog: iDcatalog
-            )
+            ) */
 
             /*-------------------------------------------------------------------------------------------*
              *                                       EVALUATION                                          *
              *-------------------------------------------------------------------------------------------*/
 
-            def EvalUserSTT1 = Evaluation.findByUsernameEvalAndTestName('user_stt', 'Test de inglés') ?: new Evaluation(
+         /*   def evalUserSTT1 = Evaluation.findByUsernameEvalAndTestName('user_stt', 'Test de inglés') ?: new Evaluation(
                     usernameEval: 'user_stt',
                     testName: 'Test de inglés',
                     attemptNumber: 1,
                     testScore: 8,
-                    user: newUser,
-                    test: englishTest
-            )
+            )*/
 
             /*-------------------------------------------------------------------------------------------*
              *                                         ANSWER                                            *
@@ -249,9 +245,9 @@ class BootStrap {
             // Validation of catalog
             // Validation of topic
             // Validation of test
-            def validEnglishTest = englishTest.validate()
+            //def validEnglishTest = englishTest.validate()
             // Validation of evaluation
-            def validEvalUserSTT1 = EvalUserSTT1.validate()
+            //def validEvalUserSTT1 = evalUserSTT1.validate()
             // Validation of answer
             def validR1_se1 = re1_1Answer.validate()
             def validR2_se1 = re2_1Answer.validate()
@@ -262,8 +258,8 @@ class BootStrap {
             def validSe2 = se2Question.validate()
             def validSe3 = se3Question.validate()
 
-            if (validAdmin & validUserSwitch & validUser & validAnother & validID & validRRHH & validSecurity & validSupport & validEnglishTest &
-                    validEvalUserSTT1 & validSe1 & validSe2 & validSe3 & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2) {
+            if (validAdmin & validUserSwitch & validUser & validAnother & validID & validRRHH & validSecurity & validSupport
+                    & validSe1 & validSe2 & validSe3 & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2) {
 
                 // Saving roles
                 adminRole.save(flush: true, failOnError: true)
@@ -312,10 +308,10 @@ class BootStrap {
                 se3Question.save(flush: true, failOnError: true)
 
                 // Saving test
-                englishTest.save(flush: true, failOnError: true)
+              //  englishTest.save(flush: true, failOnError: true)
 
                 // Saving evaluations
-                EvalUserSTT1.save(flush: true, failOnError: true)
+              //  evalUserSTT1.save(flush: true, failOnError: true)
 
 
 
