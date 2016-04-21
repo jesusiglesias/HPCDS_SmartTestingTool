@@ -120,13 +120,24 @@ input:-webkit-autofill:active {
 }
 
 /* Position confirmation delete button */
-#delete-confirm-popover {
+#delete-confirm-popover-custom {
     margin: 0 0 15px 0;
+}
+
+/* Position confirmation delete button */
+#delete-confirm-popover {
+    margin: 0 0 50px 0;
+}
+
+.check-delete-custom {
+    display: inline-block;
+    top: -6px;
+    margin-left: 20px;
 }
 
 .check-delete {
     display: inline-block;
-    top: -6px;
+    top: -22px;
     margin-left: 20px;
 }
 
@@ -920,10 +931,15 @@ input:-webkit-autofill:active {
 /* Max-width: 1136px */
 @media (max-width: 1136px) {
 
-    .check-delete {
+    .check-delete-custom {
         display: block;
         margin-left: 0;
         top: 9px;
+    }
+
+    .check-delete {
+        display: block;
+        margin-left: 0;
     }
 }
 
@@ -1021,8 +1037,13 @@ input:-webkit-autofill:active {
     }
 
     /* Position confirmation delete button */
-    #delete-confirm-popover {
+    #delete-confirm-popover-custom {
         margin: 5px 0 30px 0;
+    }
+
+    /* Position confirmation delete button */
+    #delete-confirm-popover {
+        margin: 5px 0 50px 0;
     }
 
     /* Entity message */
@@ -1156,8 +1177,13 @@ input:-webkit-autofill:active {
 @media (max-width: 320px) {
 
     /* Position confirmation delete button */
-    #delete-confirm-popover {
+    #delete-confirm-popover-custom {
         margin: 10px 0 30px 0;
+    }
+
+    /* Position confirmation delete button */
+    #delete-confirm-popover {
+        margin: 10px 0 50px 0;
     }
 
     .portlet-graphUD .portlet-body {

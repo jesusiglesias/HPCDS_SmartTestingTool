@@ -210,7 +210,7 @@ class TestController {
     }
 
     /**
-     * It deletes a existing test in database. TODO
+     * It deletes a existing test in database.
      *
      * @param testInstance It represents the test information to delete.
      * @return return If the test instance is null, the notFound function is called.

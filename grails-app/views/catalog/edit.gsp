@@ -370,7 +370,7 @@
                 <!-- Delete button -->
                 <g:form url="[resource: catalogInstance, controller: 'catalog', action: 'delete']" method="DELETE" class="form-delete">
                     <div class="btn-group">
-                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation"
+                        <button class="btn red-soft btn-block" id="delete-confirm-popover-custom" data-toggle="confirmation"
                                 data-placement="rigth" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
                                 data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
@@ -381,7 +381,7 @@
                             <g:message code="layouts.main_auth_admin.body.content.catalog.delete" default="Delete catalog"/>
                         </button>
                     </div>
-                    <div class="has-error md-checkbox check-delete">
+                    <div class="has-error md-checkbox check-delete-custom">
                         <input type="checkbox" name='delete_catalog' id='delete_catalog' class="md-check"/>
                         <label for="delete_catalog" class="sbold">
                             <span></span>
