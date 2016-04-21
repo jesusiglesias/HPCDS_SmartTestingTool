@@ -2,9 +2,7 @@ package Test
 
 import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
-
 import java.text.SimpleDateFormat
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value

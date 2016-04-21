@@ -377,7 +377,7 @@
 
                 <!-- Delete button -->
                 <g:form url="[resource:userInstance, controller:'user', action:'delete']" method="DELETE" class="form-delete">
-                    <div class="btn-group">
+                    <div class="btn-group delete-confirm-popover-custom">
                         <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
                                 data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
@@ -388,6 +388,9 @@
                             <g:message code="layouts.main_auth_admin.body.content.user.delete" default="Delete user"/>
                         </button>
                     </div>
+                    <p class="delete-text">
+                        <g:message code="default.delete.relation.user.evaluation.message" default="Important! Remember that deleting an user, all associated evaluations are eliminated."/>
+                    </p>
                 </g:form>
 
                 <!-- Edit form -->

@@ -365,7 +365,7 @@
 
                 <!-- Delete button -->
                 <g:form url="[resource: departmentInstance, controller: 'department', action: 'delete']" method="DELETE" class="form-delete">
-                    <div class="btn-group">
+                    <div class="btn-group delete-confirm-popover">
                         <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation"
                                 data-placement="rigth" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
@@ -383,7 +383,7 @@
                             <span></span>
                             <span class="check"></span>
                             <span class="box"></span>
-                            <g:message code="layouts.main_auth_admin.body.content.department.delete.users" default="Enable to remove the users associated to the department."/>
+                            <g:message code="layouts.main_auth_admin.body.content.department.delete.users" default="Enable to remove the users associated to the department and their evaluations."/>
                         </label>
                     </div>
                 </g:form>

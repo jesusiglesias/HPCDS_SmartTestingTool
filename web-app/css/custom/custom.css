@@ -120,12 +120,12 @@ input:-webkit-autofill:active {
 }
 
 /* Position confirmation delete button */
-#delete-confirm-popover-custom {
-    margin: 0 0 15px 0;
+.delete-confirm-popover-custom {
+    margin: 0 0 15px 0 !important;
 }
 
 /* Position confirmation delete button */
-#delete-confirm-popover {
+.delete-confirm-popover {
     margin: 0 0 50px 0;
 }
 
@@ -1037,12 +1037,12 @@ input:-webkit-autofill:active {
     }
 
     /* Position confirmation delete button */
-    #delete-confirm-popover-custom {
+    .delete-confirm-popover-custom {
         margin: 5px 0 30px 0;
     }
 
     /* Position confirmation delete button */
-    #delete-confirm-popover {
+    .delete-confirm-popover {
         margin: 5px 0 50px 0;
     }
 
@@ -1177,12 +1177,12 @@ input:-webkit-autofill:active {
 @media (max-width: 320px) {
 
     /* Position confirmation delete button */
-    #delete-confirm-popover-custom {
+    .delete-confirm-popover-custom {
         margin: 10px 0 30px 0;
     }
 
     /* Position confirmation delete button */
-    #delete-confirm-popover {
+    .delete-confirm-popover {
         margin: 10px 0 50px 0;
     }
 

@@ -369,8 +369,8 @@
 
                 <!-- Delete button -->
                 <g:form url="[resource: catalogInstance, controller: 'catalog', action: 'delete']" method="DELETE" class="form-delete">
-                    <div class="btn-group">
-                        <button class="btn red-soft btn-block" id="delete-confirm-popover-custom" data-toggle="confirmation"
+                    <div class="btn-group delete-confirm-popover-custom">
+                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation"
                                 data-placement="rigth" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
                                 data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"

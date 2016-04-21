@@ -4,11 +4,11 @@
 	<div class="row">
 		<!-- Username -->
 		<div class="col-md-6">
-			<g:if test="${evaluationInstance?.usernameEval}">
+			<g:if test="${evaluationInstance?.user}">
 				<h5 class="sbold show-title">
 					<g:message code="evaluation.show.username" default="Username"/>
 				</h5>
-				<g:fieldValue bean="${evaluationInstance}" field="usernameEval"/>
+				<g:fieldValue bean="${evaluationInstance}" field="user.username"/>
 			</g:if>
 		</div>
 

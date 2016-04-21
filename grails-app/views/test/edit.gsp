@@ -371,7 +371,7 @@
 
                 <!-- Delete button -->
                 <g:form url="[resource: testInstance, controller: 'test', action: 'delete']" method="DELETE" class="form-delete">
-                    <div class="btn-group">
+                    <div class="btn-group delete-confirm-popover">
                         <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation"
                                 data-placement="rigth" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
@@ -407,6 +407,8 @@
     </div> <!-- /. Page-content-wrapper -->
 
     <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
+    <g:javascript src="confirmation/custom-delete.js"/>
     <g:javascript src="iCheck/icheck.min.js"/>
     <g:javascript src="select/bootstrap-select.min.js"/>
     <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
