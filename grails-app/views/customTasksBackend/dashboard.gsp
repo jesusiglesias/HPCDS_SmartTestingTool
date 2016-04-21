@@ -49,8 +49,9 @@
 
         // Set a callback to run when the Google Visualization API is loaded.
         google.setOnLoadCallback(drawChart);
+        google.setOnLoadCallback(drawChartAVScoreSex);
 
-        // It draws the chart pie
+        // It draws the chart pie (user in each department)
         function drawChart() {
 
             var contentChartUD = $('.portlet-graphUD');
@@ -106,6 +107,67 @@
                 complete: function () {
                     setTimeout(function () {
                         contentChartUD.LoadingOverlay("hide");
+                    }, 500);
+                }
+            });
+        }
+
+        // It draws the column chart with the average scores according to sex
+        function drawChartAVScoreSex () {
+
+            var contentChartAVS = $('.portlet-avScoreSex');
+
+            $.ajax({
+                url: "${createLink(controller:'customTasksBackend', action:'averageScoreSex')}",
+                dataType: "json",
+                beforeSend: function () {
+
+                    contentChartAVS.LoadingOverlay("show", {
+                        image: "",
+                        fontawesome: "fa fa-spinner fa-spin"
+                    });
+                },
+                success: function (jsonData) {
+
+                    dataJSON = jsonData;
+
+                    // Create the data table out of JSON data loaded from server
+                    var dataAVS = new google.visualization.DataTable(jsonData);
+
+                    var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
+                    var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+
+                    var options = {
+                        fontName: "Open Sans",
+                        chartArea: {width: '75%', height: '75%'},
+                        legend: "none",
+                        is3D: true,
+                        height: chartHeight,
+                        width: chartWidth,
+                        backgroundColor: {fill: "transparent"}
+                    };
+
+                    // Instantiate and draw the chart, passing in some options
+                    var chartAVS = new google.visualization.ColumnChart(document.getElementById('chart_AVS'));
+                    chartAVS.draw(dataAVS, options);
+                },
+                error: function () {
+
+                    var listMessageAVS = $('.list-messageAVS');
+
+                    // Avoid duplicates
+                    if (listMessageAVS.length) {
+                        listMessageAVS.remove();
+                    }
+
+                    // Message
+                    $('#chart_AVS').prepend("<ul class='list-group list-messageUD'><li class='list-group-item bg-red-intense bg-font-red-intense' style='margin-right: -12px'>" + reloadAjaxError + "</li></ul>");
+
+                    createAutoClosingAlert('.list-messageUD');
+                },
+                complete: function () {
+                    setTimeout(function () {
+                        contentChartAVS.LoadingOverlay("hide");
                     }, 500);
                 }
             });
@@ -541,6 +603,54 @@
                         </div> <!-- /.Portlet -->
                     </div>
                 </div> <!-- /.Graphs -->
+
+                <div class="row">
+                    <!-- Range of scores -->
+                    <div class="col-md-6">
+                        <!-- Portlet -->
+                        <div class="portlet light bg-inverse portlet-rangeScores">
+                            <div class="portlet-title">
+                                <div class="caption font-green-dark">
+                                    <i class="fa fa-bar-chart font-green-dark"></i>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.users.xx" default="Rango de calificaciones"/></span>
+                                </div>
+                                <div class="tools">
+                                    <i class="fa fa-refresh reloadGraph reloadRangeScores" onclick="drawChartRangeScores()"></i>
+                                    <a href="" class="collapse"> </a>
+                                    <a href="" class="remove"> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="scroller" style="height:505px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                    <div id="chart_RS" style="width:100%; height:100%"></div>
+                                </div>
+                            </div>
+                        </div> <!-- /.Portlet -->
+                    </div>
+
+                    <!-- Average scores according to sex -->
+                    <div class="col-md-6">
+                        <!-- Portlet -->
+                        <div class="portlet light bg-inverse portlet-avScoreSex">
+                            <div class="portlet-title">
+                                <div class="caption font-green-dark">
+                                    <i class="fa fa-bar-chart font-green-dark"></i>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.users.xx" default="Calificación media por sexo"/></span>
+                                </div>
+                                <div class="tools">
+                                    <i class="fa fa-refresh reloadGraph reloadAVScoreSex" onclick="drawChartAVScoreSex()"></i>
+                                    <a href="" class="collapse"> </a>
+                                    <a href="" class="remove"> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="scroller" style="height:505px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                    <div id="chart_AVS" style="width:100%; height:100%"></div>
+                                </div>
+                            </div>
+                        </div> <!-- /.Portlet -->
+                    </div>
+                </div>
             </div>
         </div> <!-- Page-content -->
     </div> <!-- /. Page-content-wrapper -->

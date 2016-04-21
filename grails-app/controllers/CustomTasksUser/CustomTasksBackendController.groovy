@@ -6,6 +6,7 @@ import Security.SecUserSecRole
 import Test.Test
 import User.Department
 import User.Evaluation
+import User.User
 import grails.converters.JSON
 import grails.util.Environment
 import grails.util.Holders
@@ -106,7 +107,7 @@ class CustomTasksBackendController {
         // Obtaining all departments
         def departments = Department.list()
 
-        // Columnes
+        // Columns
         def cols = [
                 [label: g.message(code: "user.label", default: 'User'), type:"string"],
                 [label: g.message(code: 'department.label', default: 'Department'), type:"number"]
@@ -125,6 +126,44 @@ class CustomTasksBackendController {
         def UDData = [cols: cols, rows: rows]
 
         render UDData as JSON
+    }
+
+    /**
+     * It obtains the average scores group by sex.
+     */
+    def averageScoreSex() {
+        log.debug("CustomTasksBackendController:averageScoreSex()")
+
+        // Obtaining all evaluations
+        List<Evaluation> evaluationList = Evaluation.list()
+
+        def AVSData = User.list()
+                .groupBy { it.sex }
+                .collect { evaluationList.findWhere { x -> x.id == it.value.a } }
+                .collect { it.testScore }
+                .collect { it.sum()/it.size() }
+
+        log.error(AVSData)
+
+        // Columns
+        /*def cols = [
+                [label: g.message(code: "user.label", default: 'User'), type:"string"],
+                [label: g.message(code: 'department.label', default: 'Department'), type:"number"]
+        ]*/
+
+        // Rows
+        //def rows = []
+        /*def addRow = { name, value ->
+            rows << [c: [[v: name], [v: value]]]
+        }*/
+
+        /*departments.each { department ->
+            addRow(department.name, department.users.size())
+        }*/
+
+        //def AVSData = [cols: cols, rows: rows]
+
+        //render AVSData as JSON
     }
 
     /**
