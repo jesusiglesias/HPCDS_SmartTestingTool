@@ -109,7 +109,7 @@ class BootStrap {
                     name:   'Usuario',
                     surname: 'Conmutar',
                     birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1991'),
-                    sex: Sex.MALE,
+                    sex: Sex.FEMALE,
                     department: idDepartment
             )
 
@@ -123,57 +123,6 @@ class BootStrap {
                     sex: Sex.MALE,
                     department: idDepartment
             )
-
-            /*-------------------------------------------------------------------------------------------*
-             *                                          CATALOG                                          *
-             *-------------------------------------------------------------------------------------------*/
-
-            def iDcatalog = Catalog.findByName('Catálogo I+D') ?: new Catalog(
-                    name: 'Catálogo I+D'
-            )
-
-            def securityCatalog = Catalog.findByName('Seguridad inicial') ?: new Catalog(
-                    name: 'Seguridad inicial'
-            )
-
-            /*-------------------------------------------------------------------------------------------*
-             *                                          TOPIC                                            *
-             *-------------------------------------------------------------------------------------------*/
-
-            def englishTopic = Topic.findByName('Inglés') ?: new Topic(
-                    name: 'Inglés',
-                    description: 'Descripción 1'
-            )
-
-            def arquitecturaComputadoresTopic = Topic.findByName('Arquitectura de computadores') ?: new Topic(
-                    name: 'Arquitectura de computadores',
-                    description: 'Descripción 2'
-            )
-
-            /*-------------------------------------------------------------------------------------------*
-             *                                          TEST                                             *
-             *-------------------------------------------------------------------------------------------*/
-
-        /*    def englishTest = Test.findByName('Test de inglés') ?: new Test(
-                    name: 'Test de inglés',
-                    description: 'Descripción del test de inglés....',
-                    initDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
-                    endDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-06-2016'),
-                    lockTime: 0,
-                    maxAttempts: 1,
-                    numberOfQuestions: 0,
-            ) */
-
-            /*-------------------------------------------------------------------------------------------*
-             *                                       EVALUATION                                          *
-             *-------------------------------------------------------------------------------------------*/
-
-         /*   def evalUserSTT1 = Evaluation.findByUsernameEvalAndTestName('user_stt', 'Test de inglés') ?: new Evaluation(
-                    usernameEval: 'user_stt',
-                    testName: 'Test de inglés',
-                    attemptNumber: 1,
-                    testScore: 8,
-            )*/
 
             /*-------------------------------------------------------------------------------------------*
              *                                         ANSWER                                            *
@@ -231,6 +180,85 @@ class BootStrap {
                     difficultyLevel: DifficultyLevel.EASY,
             )
 
+            /*-------------------------------------------------------------------------------------------*
+             *                                          CATALOG                                          *
+             *-------------------------------------------------------------------------------------------*/
+
+            def englishCatalog = Catalog.findByName('Catálogo inglés') ?: new Catalog(
+                    name: 'Catálogo inglés',
+                    questions: []
+            )
+
+            def securityCatalog = Catalog.findByName('Catálogo seguridad') ?: new Catalog(
+                    name: 'Seguridad inicial',
+                    questions: [se1Question, se2Question, se3Question]
+            )
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                          TOPIC                                            *
+             *-------------------------------------------------------------------------------------------*/
+
+            def languageTopic = Topic.findByName('Idiomas') ?: new Topic(
+                    name: 'Idiomas',
+                    description: 'Comprende test relacionados con competencias de idiomas.',
+                    visibility: false
+            )
+
+            def securityTopic = Topic.findByName('Seguridad') ?: new Topic(
+                    name: 'Seguridad',
+                    description: 'Comprende todos aquellos test relacionados con la evaluación de las capacidades y conocimientos en seguridad del desarrollo de aplicaciones web.',
+                    visibility: true
+            )
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                           TEST                                            *
+             *-------------------------------------------------------------------------------------------*/
+            def securityITest = Test.findByName('Seguridad I') ?: new Test(
+                    name: 'Seguridad I',
+                    description: 'Test de un solo intento correspondiente a la evaluación de los conceptos de seguridad. Está comprendido de x preguntas...',
+                    active: true,
+                    numberOfQuestions: 3,
+                    initDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
+                    endDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
+                    lockTime: 0,
+                    maxAttempts: 1,
+                    topic: securityTopic,
+                    catalog: securityCatalog
+            )
+
+            def englishTest = Test.findByName('Inglés básico') ?: new Test(
+                    name: 'Inglés básico',
+                    description: 'Test de inglés básico...',
+                    active: false,
+                    numberOfQuestions: 0,
+                    initDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
+                    endDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
+                    lockTime: 0,
+                    maxAttempts: 1,
+                    topic: languageTopic,
+                    catalog: englishCatalog
+            )
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                       EVALUATION                                          *
+             *-------------------------------------------------------------------------------------------*/
+
+            def evalUserSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    testScore: 8,
+                    user: newUser,
+                    test: securityITest
+            )
+
+            def evalUserSwitchSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    testScore: 4,
+                    user: newUserSwitch,
+                    test: securityITest
+            )
+
             // Validation of admin
             def validAdmin = newAdmin.validate()
             // Validation of department
@@ -242,12 +270,6 @@ class BootStrap {
             // Validation of user
             def validUserSwitch = newUserSwitch.validate()
             def validUser = newUser.validate()
-            // Validation of catalog
-            // Validation of topic
-            // Validation of test
-            //def validEnglishTest = englishTest.validate()
-            // Validation of evaluation
-            //def validEvalUserSTT1 = evalUserSTT1.validate()
             // Validation of answer
             def validR1_se1 = re1_1Answer.validate()
             def validR2_se1 = re2_1Answer.validate()
@@ -257,13 +279,30 @@ class BootStrap {
             def validSe1 = se1Question.validate()
             def validSe2 = se2Question.validate()
             def validSe3 = se3Question.validate()
+            // Validation of catalog
+            def validEnglishCatalog = englishCatalog.validate()
+            def validSecurityCatalog = securityCatalog.validate()
+            // Validation of topic
+            def validLanguageTopic = languageTopic.validate()
+            def validSecurityTopic = securityTopic.validate()
+            // Validation of test
+            def validSecurityITest = securityITest.validate()
+            def validEnglishTest = englishTest.validate()
+            // Validation of evaluation
+            def validEvalUserSTT1 = evalUserSTT1.validate()
+            def validEvalUserSwitchSTT1 = evalUserSwitchSTT1.validate()
 
-            if (validAdmin & validUserSwitch & validUser & validAnother & validID & validRRHH & validSecurity & validSupport
-                    & validSe1 & validSe2 & validSe3 & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2) {
+            if (validAdmin & validAnother & validID & validRRHH & validSecurity & validSupport & validUserSwitch & validUser
+                    & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2 & validSe1 & validSe2 & validSe3 & validEnglishCatalog
+                    & validSecurityCatalog & validLanguageTopic & validSecurityTopic & validSecurityITest & validEnglishTest &
+                    validEvalUserSTT1 & validEvalUserSwitchSTT1) {
 
                 // Saving roles
                 adminRole.save(flush: true, failOnError: true)
                 userRole.save(flush: true, failOnError: true)
+
+                // Saving new admin
+                newAdmin.save(flush: true, failOnError: true)
 
                 // Saving departments
                 idDepartment.save(flush: true, failOnError: true)
@@ -273,7 +312,6 @@ class BootStrap {
                 supportDepartment.save(flush: true, failOnError: true)
 
                 // Saving new users
-                newAdmin.save(flush: true, failOnError: true)
                 newUserSwitch.save(flush: true, failOnError: true)
                 newUser.save(flush: true, failOnError: true)
 
@@ -288,14 +326,6 @@ class BootStrap {
                     SecUserSecRole.create newUser, userRole, true
                 }
 
-                // Saving catalogs
-                iDcatalog.save(flush: true, failOnError: true)
-                securityCatalog.save(flush: true, failOnError: true)
-
-                // Saving topics
-                arquitecturaComputadoresTopic.save(flush: true, failOnError: true)
-                englishTopic.save(flush: true, failOnError: true)
-
                 // Saving answers
                 re1_1Answer.save(flush: true, failOnError: true)
                 re2_1Answer.save(flush: true, failOnError: true)
@@ -307,14 +337,21 @@ class BootStrap {
                 se2Question.save(flush: true, failOnError: true)
                 se3Question.save(flush: true, failOnError: true)
 
+                // Saving catalogs
+                englishCatalog.save(flush: true, failOnError: true)
+                securityCatalog.save(flush: true, failOnError: true)
+
+                // Saving topics
+                languageTopic.save(flush: true, failOnError: true)
+                securityTopic.save(flush: true, failOnError: true)
+
                 // Saving test
-              //  englishTest.save(flush: true, failOnError: true)
+                securityITest.save(flush: true, failOnError: true)
+                englishTest.save(flush: true, failOnError: true)
 
                 // Saving evaluations
-              //  evalUserSTT1.save(flush: true, failOnError: true)
-
-
-
+                evalUserSTT1.save(flush: true, failOnError: true)
+                evalUserSwitchSTT1.save(flush: true, failOnError: true)
 
                 log.debug("BootStrap:init():Initial data have been created")
                 log.info("Special config create for development or test - Users: admin_stt/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and user_stt/7g4sOmmm (User)")
