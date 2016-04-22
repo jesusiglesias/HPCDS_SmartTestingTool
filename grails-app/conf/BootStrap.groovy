@@ -246,7 +246,7 @@ class BootStrap {
             def evalUserSTT1 = new Evaluation(
                     testName: 'Seguridad I',
                     attemptNumber: 1,
-                    testScore: 8,
+                    testScore: 7.55,
                     user: newUser,
                     test: securityITest
             )
