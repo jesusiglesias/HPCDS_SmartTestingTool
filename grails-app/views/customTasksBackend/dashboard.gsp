@@ -4,13 +4,21 @@
     <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title" default="STT | Administration panel"/></title>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script>
 
-        // Load the Visualization API and the piechart package.
-        google.load('visualization', '1.1', {'packages': ['corechart']});
+        var _SRTitle = '${g.message(code: "layouts.main_auth_admin.body.portlet.range.scores.title", default: "Score")}';
+        var _SRSubtitle = '${g.message(code: "layouts.main_auth_admin.body.portlet.range.scores.subtitle", default: "Total of scores")}';
+        var _SRSuspense = '${g.message(code: "layouts.main_auth_admin.body.portlet.range.scores.suspense", default: "Score: < 5")}';
+        var _SRApproved = '${g.message(code: "layouts.main_auth_admin.body.portlet.range.scores.approved", default: "Score: >= 5 y <7")}';
+        var _SRRemarkable = '${g.message(code: "layouts.main_auth_admin.body.portlet.range.scores.remarkable", default: "Score: >= 7 y < 9")}';
+        var _SROutstanding = '${g.message(code: "layouts.main_auth_admin.body.portlet.range.scores.outstanding", default: "Score: >= 9")}';
 
-        var dataJSON;
+        // Load the Visualization API and the piechart package.
+        google.charts.load("current", {packages:['corechart']});
+
+        var dataJSONUD, dataJSONSR;
 
         // Auto close alert
         function createAutoClosingAlert(selector) {
@@ -27,7 +35,7 @@
         function drawChartResize() {
 
             // Create the data table out of JSON data loaded from server
-            var dataUDResize = new google.visualization.DataTable(dataJSON);
+            var dataUDResize = new google.visualization.DataTable(dataJSONUD);
 
             var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
             var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
@@ -47,9 +55,43 @@
             chartUDResize.draw(dataUDResize, options);
         }
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.setOnLoadCallback(drawChart);
-        google.setOnLoadCallback(drawChartAVScoreSex);
+        // It draws the chart pie when the window resizes
+        function drawChartResizeSR() {
+
+            // Create the data table out of JSON data loaded from server
+            var dataSRResize = google.visualization.arrayToDataTable([
+                [_SRTitle, _SRSubtitle, { role: "style" } ],
+                [_SRSuspense, dataJSONSR.suspense, "#C16868"],
+                [_SRApproved, dataJSONSR.approved, "#D6B42F"],
+                [_SRRemarkable, dataJSONSR.remarkable, "#4DB3A2"],
+                [_SROutstanding, dataJSONSR.outstanding, "#0E5E3C"]
+            ]);
+
+            var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
+            var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+
+            var view = new google.visualization.DataView(dataSRResize);
+            view.setColumns([0, 1,
+                { calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation" },
+                2]);
+
+
+            var options = {
+                fontName: "Open Sans",
+                chartArea: {width: '75%', height: '75%'},
+                legend: "none",
+                height: chartHeight,
+                width: chartWidth,
+                backgroundColor: {fill: "transparent"}
+            };
+
+            // Instantiate and draw the chart, passing in some options
+            var chartSRResize =  new google.visualization.ColumnChart(document.getElementById('chart_SR'));
+            chartSRResize.draw(view, options);
+        }
 
         // It draws the chart pie (user in each department)
         function drawChart() {
@@ -66,12 +108,13 @@
                         fontawesome: "fa fa-spinner fa-spin"
                     });
                 },
-                success: function (jsonData) {
+                success: function (jsonDataUD) {
 
-                    dataJSON = jsonData;
+                    // It uses to resize
+                    dataJSONUD = jsonDataUD
 
                     // Create the data table out of JSON data loaded from server
-                    var dataUD = new google.visualization.DataTable(jsonData);
+                    var dataUD = new google.visualization.DataTable(jsonDataUD);
 
                     var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
                     var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
@@ -112,72 +155,96 @@
             });
         }
 
-        // It draws the column chart with the average scores according to sex
-        function drawChartAVScoreSex () {
+        // It draws the column chart (scores by rank)
+        function drawChartScoresRank() {
 
-            var contentChartAVS = $('.portlet-avScoreSex');
+            var contentChartSR = $('.portlet-scoresRank');
 
             $.ajax({
-                url: "${createLink(controller:'customTasksBackend', action:'averageScoreSex')}",
+                url: "${createLink(controller:'customTasksBackend', action:'scoresRank')}",
                 dataType: "json",
                 beforeSend: function () {
 
-                    contentChartAVS.LoadingOverlay("show", {
+                    contentChartSR.LoadingOverlay("show", {
                         image: "",
                         fontawesome: "fa fa-spinner fa-spin"
                     });
                 },
-                success: function (jsonData) {
+                success: function (jsonDataSR) {
 
-                    dataJSON = jsonData;
-
+                    // It uses to resize
+                    dataJSONSR = jsonDataSR;
+                    
                     // Create the data table out of JSON data loaded from server
-                    var dataAVS = new google.visualization.DataTable(jsonData);
+                    var dataSR = google.visualization.arrayToDataTable([
+                        [_SRTitle, _SRSubtitle, { role: "style" } ],
+                        [_SRSuspense, jsonDataSR.suspense, "#C16868"],
+                        [_SRApproved, jsonDataSR.approved, "#D6B42F"],
+                        [_SRRemarkable, jsonDataSR.remarkable, "#4DB3A2"],
+                        [_SROutstanding, jsonDataSR.outstanding, "#0E5E3C"]
+                    ]);
 
                     var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
                     var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+
+                    var view = new google.visualization.DataView(dataSR);
+                    view.setColumns([0, 1,
+                        { calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation" },
+                        2]);
+
 
                     var options = {
                         fontName: "Open Sans",
                         chartArea: {width: '75%', height: '75%'},
                         legend: "none",
-                        is3D: true,
                         height: chartHeight,
                         width: chartWidth,
                         backgroundColor: {fill: "transparent"}
                     };
 
                     // Instantiate and draw the chart, passing in some options
-                    var chartAVS = new google.visualization.ColumnChart(document.getElementById('chart_AVS'));
-                    chartAVS.draw(dataAVS, options);
+                    var chartSR =  new google.visualization.ColumnChart(document.getElementById('chart_SR'));
+                    chartSR.draw(view, options);
                 },
                 error: function () {
 
-                    var listMessageAVS = $('.list-messageAVS');
+                    var listMessageSR = $('.list-messageSR');
 
                     // Avoid duplicates
-                    if (listMessageAVS.length) {
-                        listMessageAVS.remove();
+                    if (listMessageSR.length) {
+                        listMessageSR.remove();
                     }
 
                     // Message
-                    $('#chart_AVS').prepend("<ul class='list-group list-messageUD'><li class='list-group-item bg-red-intense bg-font-red-intense' style='margin-right: -12px'>" + reloadAjaxError + "</li></ul>");
+                    $('#chart_SR').prepend("<ul class='list-group list-messageSR'><li class='list-group-item bg-red-intense bg-font-red-intense' style='margin-right: -12px'>" + reloadAjaxError + "</li></ul>");
 
-                    createAutoClosingAlert('.list-messageUD');
+                    createAutoClosingAlert('.list-messageSR');
                 },
                 complete: function () {
                     setTimeout(function () {
-                        contentChartAVS.LoadingOverlay("hide");
+                        contentChartSR.LoadingOverlay("hide");
                     }, 500);
                 }
             });
         }
+
+        function drawVisualization() {
+            drawChart();
+            drawChartScoresRank();
+        }
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawVisualization);
 
         jQuery(document).ready(function() {
 
             // Resizing the chart pie UD
             $(window).resize(function(){
                 drawChartResize();
+                drawChartResizeSR();
             });
         });
     </script>
@@ -608,21 +675,21 @@
                     <!-- Range of scores -->
                     <div class="col-md-6">
                         <!-- Portlet -->
-                        <div class="portlet light bg-inverse portlet-rangeScores">
+                        <div class="portlet light bg-inverse portlet-scoresRank">
                             <div class="portlet-title">
                                 <div class="caption font-green-dark">
                                     <i class="fa fa-bar-chart font-green-dark"></i>
-                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.users.xx" default="Rango de calificaciones"/></span>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.range.scores" default="Scores by rank"/></span>
                                 </div>
                                 <div class="tools">
-                                    <i class="fa fa-refresh reloadGraph reloadRangeScores" onclick="drawChartRangeScores()"></i>
+                                    <i class="fa fa-refresh reloadGraph reloadScoresRank" onclick="drawChartScoresRank()"></i>
                                     <a href="" class="collapse"> </a>
                                     <a href="" class="remove"> </a>
                                 </div>
                             </div>
                             <div class="portlet-body">
                                 <div class="scroller" style="height:505px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
-                                    <div id="chart_RS" style="width:100%; height:100%"></div>
+                                    <div id="chart_SR" style="width:100%; height:100%"></div>
                                 </div>
                             </div>
                         </div> <!-- /.Portlet -->

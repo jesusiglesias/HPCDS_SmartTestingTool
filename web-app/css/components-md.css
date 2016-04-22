@@ -8715,6 +8715,15 @@ h6 .label {
     background-color: #4DB3A2;
 }
 
+.label-outstanding {
+    background-color: #0E5E3C;
+}
+
+.label-outstanding[href]:hover,
+.label-outstanding[href]:focus {
+    background-color: #0E5E3C;
+}
+
 .label-info {
     background-color: #659be0;
 }

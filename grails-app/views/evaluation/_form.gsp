@@ -31,9 +31,12 @@
 				<h5 class="sbold show-title">
 					<g:message code="evaluation.show.score" default="Final score of 10" />
 				</h5>
-				<g:if test="${evaluationInstance.testScore >= 7}">
-					<span class="label label-sm label-success">
+				<g:if test="${evaluationInstance.testScore >= 9}">
+					<span class="label label-sm label-outstanding">
 				</g:if>
+				<g:elseif test="${evaluationInstance.testScore >= 7 && evaluationInstance.testScore < 9}">
+					<span class="label label-sm label-success">
+				</g:elseif>
 				<g:elseif test="${evaluationInstance.testScore >= 5 && evaluationInstance.testScore < 7}">
 					<span class="label label-sm label-warning">
 				</g:elseif>
@@ -41,7 +44,7 @@
 					<span class="label label-sm label-danger">
 				</g:elseif>
 				${fieldValue(bean: evaluationInstance, field: "testScore")}
-					</span>
+				</span>
 			</g:if>
 		</div>
 

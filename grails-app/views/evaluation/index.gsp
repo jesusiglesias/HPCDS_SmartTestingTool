@@ -433,9 +433,12 @@
                                                 <td><g:link controller="evaluation" action="show" id="${evaluationInstance.id}" class="break-word">${fieldValue(bean: evaluationInstance, field: "user.username")}</g:link></td>
                                                 <td class="break-word">${fieldValue(bean: evaluationInstance, field: "testName")}</td>
                                                 <td>
-                                                    <g:if test="${evaluationInstance.testScore >= 7}">
-                                                        <span class="label label-sm label-success">
+                                                    <g:if test="${evaluationInstance.testScore >= 9}">
+                                                        <span class="label label-sm label-outstanding">
                                                     </g:if>
+                                                    <g:elseif test="${evaluationInstance.testScore >= 7 && evaluationInstance.testScore < 9}">
+                                                        <span class="label label-sm label-success">
+                                                    </g:elseif>
                                                     <g:elseif test="${evaluationInstance.testScore >= 5 && evaluationInstance.testScore < 7}">
                                                         <span class="label label-sm label-warning">
                                                     </g:elseif>

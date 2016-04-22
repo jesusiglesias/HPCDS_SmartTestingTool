@@ -6,7 +6,6 @@ import Security.SecUserSecRole
 import Test.Test
 import User.Department
 import User.Evaluation
-import User.User
 import grails.converters.JSON
 import grails.util.Environment
 import grails.util.Holders
@@ -129,17 +128,40 @@ class CustomTasksBackendController {
     }
 
     /**
+     * It obtains the number of users in each rank of score.
+     */
+    def scoresRank() {
+        log.debug("CustomTasksBackendController:scoresRank()")
+
+        // Obtaining all scores
+        def suspense = Evaluation.findAllByTestScoreLessThan(5).size()
+        def approved = Evaluation.findAllByTestScoreGreaterThanEqualsAndTestScoreLessThan(5,7).size()
+        def remarkable = Evaluation.findAllByTestScoreGreaterThanEqualsAndTestScoreLessThan(7, 9).size()
+        def outstanding = Evaluation.findAllByTestScoreGreaterThanEquals(9).size()
+
+        def dataSR = [
+                'suspense': suspense,
+                'approved': approved,
+                'remarkable': remarkable,
+                'outstanding': outstanding
+        ]
+
+        render dataSR as JSON
+    }
+
+    /**
      * It obtains the average scores group by sex.
      */
-    def averageScoreSex() {
+    /*def averageScoreSex() {
         log.debug("CustomTasksBackendController:averageScoreSex()")
 
         // Obtaining all evaluations
         List<Evaluation> evaluationList = Evaluation.list()
 
+        log.error(evaluationList)
         def AVSData = User.list()
                 .groupBy { it.sex }
-                .collect { evaluationList.findWhere { x -> x.id == it.value.a } }
+                .collect { evaluationList.find { x -> x.id == it.value.evaluations } }
                 .collect { it.testScore }
                 .collect { it.sum()/it.size() }
 
@@ -155,16 +177,16 @@ class CustomTasksBackendController {
         //def rows = []
         /*def addRow = { name, value ->
             rows << [c: [[v: name], [v: value]]]
-        }*/
+        }
 
         /*departments.each { department ->
             addRow(department.name, department.users.size())
-        }*/
+        }
 
         //def AVSData = [cols: cols, rows: rows]
 
         //render AVSData as JSON
-    }
+    }*/
 
     /**
      * It obtains the profile image.

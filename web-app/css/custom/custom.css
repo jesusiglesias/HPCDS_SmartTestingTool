@@ -588,11 +588,12 @@ input:-webkit-autofill:active {
 
 .portlet-users,
 .portlet-graphUD {
-    margin-top: 40px !important;
+    margin: 40px 0 45px 0 !important;
 }
 
 .portlet-users .portlet,
-.portlet-graphUD .portlet {
+.portlet-graphUD .portlet,
+.portlet-scoresRank .portlet {
     height: 523px;
  }
 
@@ -960,7 +961,11 @@ input:-webkit-autofill:active {
 
     .portlet-users,
     .portlet-graphUD {
-        margin-top: 0 !important;
+        margin-top: 5px !important;
+    }
+
+    .portlet-scoresRank {
+        margin-bottom: 45px !important;
     }
 
     .i-delete-reformat-backend {
@@ -1082,15 +1087,18 @@ input:-webkit-autofill:active {
         margin-top: -12px;
     }
 
-    .portlet-graphUD {
+    .portlet-graphUD,
+    .portlet-scoresRank {
         height: 400px;
     }
 
-    .portlet-graphUD .portlet-body {
+    .portlet-graphUD .portlet-body,
+    .portlet-scoresRank .portlet-body {
         height: 335px;
     }
 
-    .portlet-graphUD .portlet-body .scroller {
+    .portlet-graphUD .portlet-body .scroller,
+    .portlet-scoresRank .portlet-body .scroller {
         height: 315px !important;
     }
 }
@@ -1106,15 +1114,18 @@ input:-webkit-autofill:active {
 /* Max-width: 400px */
 @media (max-width: 400px) {
 
-    .portlet-graphUD {
+    .portlet-graphUD,
+    .portlet-scoresRank {
         height: 390px;
     }
 
-    .portlet-graphUD .portlet-body {
+    .portlet-graphUD .portlet-body,
+    .portlet-scoresRank .portlet-body {
         height: 285px;
     }
 
-    .portlet-graphUD .portlet-body .scroller {
+    .portlet-graphUD .portlet-body .scroller,
+    .portlet-scoresRank .portlet-body .scroller {
         height: 275px !important;
     }
 }
@@ -1186,11 +1197,13 @@ input:-webkit-autofill:active {
         margin: 10px 0 50px 0;
     }
 
-    .portlet-graphUD .portlet-body {
+    .portlet-graphUD .portlet-body,
+    .portlet-scoresRank .portlet-body {
         height: 265px;
     }
 
-    .portlet-graphUD .portlet-body .scroller {
+    .portlet-graphUD .portlet-body .scroller,
+    .portlet-scoresRank .portlet-body .scroller {
         height: 265px !important;
     }
 }
