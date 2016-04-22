@@ -14,11 +14,14 @@
         var _SRApproved = '${g.message(code: "layouts.main_auth_admin.body.portlet.range.scores.approved", default: "Score: >= 5 y <7")}';
         var _SRRemarkable = '${g.message(code: "layouts.main_auth_admin.body.portlet.range.scores.remarkable", default: "Score: >= 7 y < 9")}';
         var _SROutstanding = '${g.message(code: "layouts.main_auth_admin.body.portlet.range.scores.outstanding", default: "Score: >= 9")}';
+        var _AVSTitle = '${g.message(code: "layouts.main_auth_admin.body.portlet.score.sex.average", default: "Average score")}';
+        var _AVSMale = '${g.message(code: "layouts.main_auth_admin.body.portlet.score.sex.male", default: "Male sex")}';
+        var _AVSFemale = '${g.message(code: "layouts.main_auth_admin.body.portlet.score.sex.female", default: "Female sex")}';
 
         // Load the Visualization API and the piechart package.
         google.charts.load("current", {packages:['corechart']});
 
-        var dataJSONUD, dataJSONSR;
+        var dataJSONUD, dataJSONSR, dataJSONAVS;
 
         // Auto close alert
         function createAutoClosingAlert(selector) {
@@ -30,6 +33,15 @@
                 });
             }, 5000);
         }
+
+        function drawVisualization() {
+            drawChart();
+            drawChartScoresRank();
+            drawChartAVScoreSex();
+        }
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawVisualization);
 
         // It draws the chart pie when the window resizes
         function drawChartResize() {
@@ -70,14 +82,13 @@
             var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
             var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
 
-            var view = new google.visualization.DataView(dataSRResize);
-            view.setColumns([0, 1,
+            var viewSRResize = new google.visualization.DataView(dataSRResize);
+            viewSRResize.setColumns([0, 1,
                 { calc: "stringify",
                     sourceColumn: 1,
                     type: "string",
                     role: "annotation" },
                 2]);
-
 
             var options = {
                 fontName: "Open Sans",
@@ -90,7 +101,48 @@
 
             // Instantiate and draw the chart, passing in some options
             var chartSRResize =  new google.visualization.ColumnChart(document.getElementById('chart_SR'));
-            chartSRResize.draw(view, options);
+            chartSRResize.draw(viewSRResize, options);
+        }
+
+        // It draws the chart pie when the window resizes
+        function drawChartResizeAVS() {
+
+            // Create the data table out of JSON data loaded from server
+            var dataAVSResize = google.visualization.arrayToDataTable([
+                [_AVSTitle, _AVSTitle, { role: "style" } ],
+                [_AVSMale, dataJSONAVS.averageMale, "#245B9C"],
+                [_AVSFemale, dataJSONAVS.averageFemale, "#915B98"]
+            ]);
+
+            var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
+            var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+
+            var viewAVSResize = new google.visualization.DataView(dataAVSResize);
+            viewAVSResize.setColumns([0, 1,
+                { calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation" },
+                2]);
+
+            var options = {
+                fontName: "Open Sans",
+                chartArea: {width: '75%', height: '75%'},
+                legend: "none",
+                height: chartHeight,
+                width: chartWidth,
+                backgroundColor: {fill: "transparent"},
+                vAxis: {
+                    minValue: 0,
+                    maxValue: 10,
+                    gridlines:{count:6},
+                    format:'0'
+                }
+            };
+
+            // Instantiate and draw the chart, passing in some options
+            var chartAVSResize =  new google.visualization.ColumnChart(document.getElementById('chart_AVS'));
+            chartAVSResize.draw(viewAVSResize, options);
         }
 
         // It draws the chart pie (user in each department)
@@ -111,7 +163,7 @@
                 success: function (jsonDataUD) {
 
                     // It uses to resize
-                    dataJSONUD = jsonDataUD
+                    dataJSONUD = jsonDataUD;
 
                     // Create the data table out of JSON data loaded from server
                     var dataUD = new google.visualization.DataTable(jsonDataUD);
@@ -187,14 +239,13 @@
                     var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
                     var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
 
-                    var view = new google.visualization.DataView(dataSR);
-                    view.setColumns([0, 1,
+                    var viewSR = new google.visualization.DataView(dataSR);
+                    viewSR.setColumns([0, 1,
                         { calc: "stringify",
                             sourceColumn: 1,
                             type: "string",
                             role: "annotation" },
                         2]);
-
 
                     var options = {
                         fontName: "Open Sans",
@@ -202,12 +253,15 @@
                         legend: "none",
                         height: chartHeight,
                         width: chartWidth,
-                        backgroundColor: {fill: "transparent"}
+                        backgroundColor: {fill: "transparent"},
+                        vAxis: {
+                            logScale: true, scaleType:"mirrorLog"
+                        }
                     };
 
                     // Instantiate and draw the chart, passing in some options
                     var chartSR =  new google.visualization.ColumnChart(document.getElementById('chart_SR'));
-                    chartSR.draw(view, options);
+                    chartSR.draw(viewSR, options);
                 },
                 error: function () {
 
@@ -231,13 +285,84 @@
             });
         }
 
-        function drawVisualization() {
-            drawChart();
-            drawChartScoresRank();
-        }
+        // It draws the column chart (average score by sex)
+        function drawChartAVScoreSex() {
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.setOnLoadCallback(drawVisualization);
+            var contentChartAVS = $('.portlet-scoreSex');
+
+            $.ajax({
+                url: "${createLink(controller:'customTasksBackend', action:'averageScoreSex')}",
+                dataType: "json",
+                beforeSend: function () {
+
+                    contentChartAVS.LoadingOverlay("show", {
+                        image: "",
+                        fontawesome: "fa fa-spinner fa-spin"
+                    });
+                },
+                success: function (jsonDataAVS) {
+
+                    // It uses to resize
+                    dataJSONAVS = jsonDataAVS;
+
+                    // Create the data table out of JSON data loaded from server
+                    var dataAVS = google.visualization.arrayToDataTable([
+                        [_AVSTitle, _AVSTitle, { role: "style" } ],
+                        [_AVSMale, jsonDataAVS.averageMale, "#245B9C"],
+                        [_AVSFemale, jsonDataAVS.averageFemale, "#915B98"]
+                    ]);
+
+                    var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
+                    var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+
+                    var viewAVS = new google.visualization.DataView(dataAVS);
+                    viewAVS.setColumns([0, 1,
+                        { calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation" },
+                        2]);
+
+                    var options = {
+                        fontName: "Open Sans",
+                        chartArea: {width: '75%', height: '75%'},
+                        legend: "none",
+                        height: chartHeight,
+                        width: chartWidth,
+                        backgroundColor: {fill: "transparent"},
+                        vAxis: {
+                            minValue: 0,
+                            maxValue: 10,
+                            gridlines:{count:6},
+                            format:'0'
+                        }
+                    };
+
+                    // Instantiate and draw the chart, passing in some options
+                    var chartAVS =  new google.visualization.ColumnChart(document.getElementById('chart_AVS'));
+                    chartAVS.draw(viewAVS, options);
+                },
+                error: function () {
+
+                    var listMessageAVS = $('.list-messageAVS');
+
+                    // Avoid duplicates
+                    if (listMessageAVS.length) {
+                        listMessageAVS.remove();
+                    }
+
+                    // Message
+                    $('#chart_AVS').prepend("<ul class='list-group list-messageAVS'><li class='list-group-item bg-red-intense bg-font-red-intense' style='margin-right: -12px'>" + reloadAjaxError + "</li></ul>");
+
+                    createAutoClosingAlert('.list-messageAVS');
+                },
+                complete: function () {
+                    setTimeout(function () {
+                        contentChartAVS.LoadingOverlay("hide");
+                    }, 500);
+                }
+            });
+        }
 
         jQuery(document).ready(function() {
 
@@ -245,6 +370,7 @@
             $(window).resize(function(){
                 drawChartResize();
                 drawChartResizeSR();
+                drawChartResizeAVS();
             });
         });
     </script>
@@ -698,11 +824,11 @@
                     <!-- Average scores according to sex -->
                     <div class="col-md-6">
                         <!-- Portlet -->
-                        <div class="portlet light bg-inverse portlet-avScoreSex">
+                        <div class="portlet light bg-inverse portlet-scoreSex">
                             <div class="portlet-title">
                                 <div class="caption font-green-dark">
                                     <i class="fa fa-bar-chart font-green-dark"></i>
-                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.users.xx" default="Calificación media por sexo"/></span>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.score.sex" default="Average score by sex"/></span>
                                 </div>
                                 <div class="tools">
                                     <i class="fa fa-refresh reloadGraph reloadAVScoreSex" onclick="drawChartAVScoreSex()"></i>

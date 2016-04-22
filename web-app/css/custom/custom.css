@@ -593,7 +593,8 @@ input:-webkit-autofill:active {
 
 .portlet-users .portlet,
 .portlet-graphUD .portlet,
-.portlet-scoresRank .portlet {
+.portlet-scoresRank .portlet,
+.portlet-scoreSex .portlet {
     height: 523px;
  }
 
@@ -1088,17 +1089,20 @@ input:-webkit-autofill:active {
     }
 
     .portlet-graphUD,
-    .portlet-scoresRank {
+    .portlet-scoresRank,
+    .portlet-scoreSex {
         height: 400px;
     }
 
     .portlet-graphUD .portlet-body,
-    .portlet-scoresRank .portlet-body {
+    .portlet-scoresRank .portlet-body,
+    .portlet-scoreSex .portlet-body {
         height: 335px;
     }
 
     .portlet-graphUD .portlet-body .scroller,
-    .portlet-scoresRank .portlet-body .scroller {
+    .portlet-scoresRank .portlet-body .scroller,
+    .portlet-scoreSex .portlet-body .scroller {
         height: 315px !important;
     }
 }
@@ -1115,17 +1119,20 @@ input:-webkit-autofill:active {
 @media (max-width: 400px) {
 
     .portlet-graphUD,
-    .portlet-scoresRank {
+    .portlet-scoresRank,
+    .portlet-scoreSex {
         height: 390px;
     }
 
     .portlet-graphUD .portlet-body,
-    .portlet-scoresRank .portlet-body {
+    .portlet-scoresRank .portlet-body,
+    .portlet-scoreSex .portlet-body {
         height: 285px;
     }
 
     .portlet-graphUD .portlet-body .scroller,
-    .portlet-scoresRank .portlet-body .scroller {
+    .portlet-scoresRank .portlet-body .scroller,
+    .portlet-scoreSex .portlet-body .scroller {
         height: 275px !important;
     }
 }
@@ -1198,12 +1205,14 @@ input:-webkit-autofill:active {
     }
 
     .portlet-graphUD .portlet-body,
-    .portlet-scoresRank .portlet-body {
+    .portlet-scoresRank .portlet-body,
+    .portlet-scoreSex .portlet-body {
         height: 265px;
     }
 
     .portlet-graphUD .portlet-body .scroller,
-    .portlet-scoresRank .portlet-body .scroller {
+    .portlet-scoresRank .portlet-body .scroller,
+    .portlet-scoreSex .portlet-body .scroller {
         height: 265px !important;
     }
 }

@@ -1,11 +1,13 @@
 package CustomTasksUser
 
+import Enumerations.Sex
 import Security.SecRole
 import Security.SecUser
 import Security.SecUserSecRole
 import Test.Test
 import User.Department
 import User.Evaluation
+import User.User
 import grails.converters.JSON
 import grails.util.Environment
 import grails.util.Holders
@@ -124,6 +126,9 @@ class CustomTasksBackendController {
 
         def UDData = [cols: cols, rows: rows]
 
+        // Avoid undefined function (Google chart)
+        sleep(100)
+
         render UDData as JSON
     }
 
@@ -146,47 +151,55 @@ class CustomTasksBackendController {
                 'outstanding': outstanding
         ]
 
+        // Avoid undefined function (Google chart)
+        sleep(100)
+
         render dataSR as JSON
     }
 
     /**
      * It obtains the average scores group by sex.
      */
-    /*def averageScoreSex() {
+    def averageScoreSex() {
         log.debug("CustomTasksBackendController:averageScoreSex()")
 
-        // Obtaining all evaluations
-        List<Evaluation> evaluationList = Evaluation.list()
+        // Obtaining all male evaluations
+        def criteriaMale = Evaluation.createCriteria()
 
-        log.error(evaluationList)
-        def AVSData = User.list()
-                .groupBy { it.sex }
-                .collect { evaluationList.find { x -> x.id == it.value.evaluations } }
-                .collect { it.testScore }
-                .collect { it.sum()/it.size() }
-
-        log.error(AVSData)
-
-        // Columns
-        /*def cols = [
-                [label: g.message(code: "user.label", default: 'User'), type:"string"],
-                [label: g.message(code: 'department.label', default: 'Department'), type:"number"]
-        ]*/
-
-        // Rows
-        //def rows = []
-        /*def addRow = { name, value ->
-            rows << [c: [[v: name], [v: value]]]
+        def averageMale = criteriaMale.list {
+            user {
+                eq 'sex', Sex.MALE
+            }
+            projections {
+                avg('testScore')
+            }
         }
 
-        /*departments.each { department ->
-            addRow(department.name, department.users.size())
+        // Obtaining all female evaluations
+        def criteriaFemale = Evaluation.createCriteria()
+
+        def averageFemale = criteriaFemale.list {
+            user {
+                eq 'sex', Sex.FEMALE
+            }
+            projections {
+                avg('testScore')
+            }
         }
 
-        //def AVSData = [cols: cols, rows: rows]
+        def numberAverageMale = averageMale.getAt(0)
+        def numberAverageFemale = averageFemale.getAt(0)
 
-        //render AVSData as JSON
-    }*/
+        def dataAVS = [
+                'averageMale': numberAverageMale,
+                'averageFemale': numberAverageFemale
+        ]
+
+        // Avoid undefined function (Google chart)
+        sleep(100)
+
+        render dataAVS as JSON
+    }
 
     /**
      * It obtains the profile image.
