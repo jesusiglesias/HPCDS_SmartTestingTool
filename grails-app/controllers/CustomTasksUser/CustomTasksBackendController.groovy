@@ -179,6 +179,8 @@ class CustomTasksBackendController {
     def averageScoreSex() {
         log.debug("CustomTasksBackendController:averageScoreSex()")
 
+        def resultAVSMale, resultAVSFemale
+
         // Obtaining all male evaluations - Asynchronous/Multi-thread
         DetachedCriteria detachedMale = Evaluation.where {
             user.sex == Sex.MALE
@@ -201,9 +203,21 @@ class CustomTasksBackendController {
         def numberAverageMale = promiseMale.get()
         def numberAverageFemale = promiseFemale.get()
 
+        if (numberAverageMale.getAt(0) == null ) {
+            resultAVSMale = 0
+        } else {
+            resultAVSMale = numberAverageMale.getAt(0)
+        }
+
+        if (numberAverageFemale.getAt(0) == null ) {
+            resultAVSFemale = 0
+        } else {
+            resultAVSFemale = numberAverageFemale.getAt(0)
+        }
+
         def dataAVS = [
-                'averageMale': numberAverageMale.getAt(0),
-                'averageFemale': numberAverageFemale.getAt(0)
+                'averageMale': resultAVSMale,
+                'averageFemale': resultAVSFemale
         ]
 
         // Avoid undefined function (Google chart)
