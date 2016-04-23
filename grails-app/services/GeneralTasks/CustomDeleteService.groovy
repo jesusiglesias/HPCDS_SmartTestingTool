@@ -1,5 +1,6 @@
 package GeneralTasks
 
+import Security.SecUser
 import Security.SecUserSecRole
 import Test.Answer
 import Test.Catalog
@@ -27,7 +28,9 @@ class CustomDeleteService {
         def userDeleted = User.findAllByDepartment(departmentInstance)
 
         // Delete SecUserSecRole relations
-        SecUserSecRole.findAllBySecUser(userDeleted)*.delete(flush: true, failOnError: true)
+        userDeleted.each { SecUser user ->
+            SecUserSecRole.findAllBySecUser(user)*.delete(flush: true, failOnError: true)
+        }
     }
 
     /**
