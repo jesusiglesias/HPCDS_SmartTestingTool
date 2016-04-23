@@ -211,6 +211,24 @@ class BootStrap {
             )
 
             /*-------------------------------------------------------------------------------------------*
+             *                                       EVALUATION                                          *
+             *-------------------------------------------------------------------------------------------*/
+
+            def evalUserSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    testScore: 7.55,
+                    user: newUser,
+            )
+
+            def evalUserSwitchSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    testScore: 7.23,
+                    user: newUserSwitch,
+            )
+
+            /*-------------------------------------------------------------------------------------------*
              *                                           TEST                                            *
              *-------------------------------------------------------------------------------------------*/
             def securityITest = Test.findByName('Seguridad I') ?: new Test(
@@ -222,8 +240,9 @@ class BootStrap {
                     endDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
                     lockTime: 0,
                     maxAttempts: 1,
+                    evaluationsTest: [evalUserSTT1, evalUserSwitchSTT1],
                     topic: securityTopic,
-                    catalog: securityCatalog
+                    catalog: securityCatalog,
             )
 
             def englishTest = Test.findByName('Inglés básico') ?: new Test(
@@ -237,26 +256,6 @@ class BootStrap {
                     maxAttempts: 1,
                     topic: languageTopic,
                     catalog: englishCatalog
-            )
-
-            /*-------------------------------------------------------------------------------------------*
-             *                                       EVALUATION                                          *
-             *-------------------------------------------------------------------------------------------*/
-
-            def evalUserSTT1 = new Evaluation(
-                    testName: 'Seguridad I',
-                    attemptNumber: 1,
-                    testScore: 7.55,
-                    user: newUser,
-                    test: securityITest
-            )
-
-            def evalUserSwitchSTT1 = new Evaluation(
-                    testName: 'Seguridad I',
-                    attemptNumber: 1,
-                    testScore: 7.23,
-                    user: newUserSwitch,
-                    test: securityITest
             )
 
             // Validation of admin
@@ -294,8 +293,8 @@ class BootStrap {
 
             if (validAdmin & validAnother & validID & validRRHH & validSecurity & validSupport & validUserSwitch & validUser
                     & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2 & validSe1 & validSe2 & validSe3 & validEnglishCatalog
-                    & validSecurityCatalog & validLanguageTopic & validSecurityTopic & validSecurityITest & validEnglishTest &
-                    validEvalUserSTT1 & validEvalUserSwitchSTT1) {
+                    & validSecurityCatalog & validLanguageTopic & validSecurityTopic & validEvalUserSTT1 & validEvalUserSwitchSTT1 &
+                    validSecurityITest & validEnglishTest) {
 
                 // Saving roles
                 adminRole.save(flush: true, failOnError: true)
@@ -345,13 +344,13 @@ class BootStrap {
                 languageTopic.save(flush: true, failOnError: true)
                 securityTopic.save(flush: true, failOnError: true)
 
-                // Saving test
-                securityITest.save(flush: true, failOnError: true)
-                englishTest.save(flush: true, failOnError: true)
-
                 // Saving evaluations
                 evalUserSTT1.save(flush: true, failOnError: true)
                 evalUserSwitchSTT1.save(flush: true, failOnError: true)
+
+                // Saving test
+                securityITest.save(flush: true, failOnError: true)
+                englishTest.save(flush: true, failOnError: true)
 
                 log.debug("BootStrap:init():Initial data have been created")
                 log.info("Special config create for development or test - Users: admin_stt/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and user_stt/7g4sOmmm (User)")

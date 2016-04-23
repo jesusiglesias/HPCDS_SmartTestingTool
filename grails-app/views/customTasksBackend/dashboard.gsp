@@ -1,8 +1,12 @@
+<%@ page import="Test.Test" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main_auth_admin">
     <title><g:message code="layouts.main_auth_admin.head.title" default="STT | Administration panel"/></title>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
+
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -17,11 +21,21 @@
         var _AVSTitle = '${g.message(code: "layouts.main_auth_admin.body.portlet.score.sex.average", default: "Average score")}';
         var _AVSMale = '${g.message(code: "layouts.main_auth_admin.body.portlet.score.sex.male", default: "Male sex")}';
         var _AVSFemale = '${g.message(code: "layouts.main_auth_admin.body.portlet.score.sex.female", default: "Female sex")}';
+        var _TSZero = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.zero", default: "Score [0-1)")}';
+        var _TSOne = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.one", default: "Score [1-2)")}';
+        var _TSTwo = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.two", default: "Score [2-3)")}';
+        var _TSThree = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.three", default: "Score [3-4)")}';
+        var _TSFour = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.four", default: "Score [4-5)")}';
+        var _TSFive = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.five", default: "Score [5-6)")}';
+        var _TSSix = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.six", default: "Score [6-7)")}';
+        var _TSSeven = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.seven", default: "Score [7-8)")}';
+        var _TSEight = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.eight", default: "Score [8-9)")}';
+        var _TSNine = '${g.message(code: "layouts.main_auth_admin.body.portlet.scores.test.score.nine", default: "Score [9-10]")}';
 
         // Load the Visualization API and the piechart package.
         google.charts.load("current", {packages:['corechart']});
 
-        var dataJSONUD, dataJSONSR, dataJSONAVS;
+        var dataJSONUD, dataJSONSR, dataJSONAVS, dataJSONTS;
 
         // Auto close alert
         function createAutoClosingAlert(selector) {
@@ -143,6 +157,55 @@
             // Instantiate and draw the chart, passing in some options
             var chartAVSResize =  new google.visualization.ColumnChart(document.getElementById('chart_AVS'));
             chartAVSResize.draw(viewAVSResize, options);
+        }
+
+        // It draws the chart pie when the window resizes
+        function drawChartResizeTS() {
+
+            // Create the data table out of JSON data loaded from server
+            var dataResizeTS = google.visualization.arrayToDataTable([
+                [_SRTitle, _SRSubtitle, { role: "style" } ],
+                [_TSZero, dataJSONTS.zero, "#4DB3A2"],
+                [_TSOne, dataJSONTS.one, "#4DB3A2"],
+                [_TSTwo, dataJSONTS.two, "#4DB3A2"],
+                [_TSThree, dataJSONTS.three, "#4DB3A2"],
+                [_TSFour, dataJSONTS.four, "#4DB3A2"],
+                [_TSFive, dataJSONTS.five, "#4DB3A2"],
+                [_TSSix, dataJSONTS.six, "#4DB3A2"],
+                [_TSSeven, dataJSONTS.seven, "#4DB3A2"],
+                [_TSEight, dataJSONTS.eight, "#4DB3A2"],
+                [_TSNine, dataJSONTS.nine, "#4DB3A2"]
+            ]);
+
+            var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
+            var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+
+            var viewTSResize = new google.visualization.DataView(dataResizeTS);
+            viewTSResize.setColumns([0, 1,
+                { calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation" },
+                2]);
+
+            var options = {
+                fontName: "Open Sans",
+                chartArea: {width: '90%', height: '75%'},
+                legend: "none",
+                height: chartHeight,
+                width: chartWidth,
+                backgroundColor: {fill: "transparent"},
+                vAxis: {
+                    minValue: 0,
+                    maxValue: 10,
+                    gridlines:{count:6},
+                    format:'0'
+                }
+            };
+
+            // Instantiate and draw the chart, passing in some options
+            var chartTSResize =  new google.visualization.ColumnChart(document.getElementById('chart_TS'));
+            chartTSResize.draw(viewTSResize, options);
         }
 
         // It draws the chart pie (user in each department)
@@ -364,6 +427,94 @@
             });
         }
 
+        // It draws the column chart (score by test)
+        function drawChartTScore(testID) {
+
+            var contentChartTS = $('.portlet-scoresTest');
+
+            $.ajax({
+                url: "${createLink(controller:'customTasksBackend', action:'scoresTest')}",
+                data: { test: testID },
+                dataType: "json",
+                beforeSend: function () {
+
+                    contentChartTS.LoadingOverlay("show", {
+                        image: "",
+                        fontawesome: "fa fa-spinner fa-spin"
+                    });
+                },
+                success: function (jsonDataTS) {
+
+                    // It uses to resize
+                    dataJSONTS = jsonDataTS;
+
+                    // Create the data table out of JSON data loaded from server
+                    var dataTS = google.visualization.arrayToDataTable([
+                        [_SRTitle, _SRSubtitle, { role: "style" } ],
+                        [_TSZero, jsonDataTS.zero, "#4DB3A2"],
+                        [_TSOne, jsonDataTS.one, "#4DB3A2"],
+                        [_TSTwo, jsonDataTS.two, "#4DB3A2"],
+                        [_TSThree, jsonDataTS.three, "#4DB3A2"],
+                        [_TSFour, jsonDataTS.four, "#4DB3A2"],
+                        [_TSFive, jsonDataTS.five, "#4DB3A2"],
+                        [_TSSix, jsonDataTS.six, "#4DB3A2"],
+                        [_TSSeven, jsonDataTS.seven, "#4DB3A2"],
+                        [_TSEight, jsonDataTS.eight, "#4DB3A2"],
+                        [_TSNine, jsonDataTS.nine, "#4DB3A2"]
+                    ]);
+
+                    var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
+                    var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+
+                    var viewTS = new google.visualization.DataView(dataTS);
+                    viewTS.setColumns([0, 1,
+                        { calc: "stringify",
+                            sourceColumn: 1,
+                            type: "string",
+                            role: "annotation" },
+                        2]);
+
+                    var options = {
+                        fontName: "Open Sans",
+                        chartArea: {width: '90%', height: '75%'},
+                        legend: "none",
+                        height: chartHeight,
+                        width: chartWidth,
+                        backgroundColor: {fill: "transparent"},
+                        vAxis: {
+                            minValue: 0,
+                            maxValue: 10,
+                            gridlines:{count:6},
+                            format:'0'
+                        }
+                    };
+
+                    // Instantiate and draw the chart, passing in some options
+                    var chartTS =  new google.visualization.ColumnChart(document.getElementById('chart_TS'));
+                    chartTS.draw(viewTS, options);
+                },
+                error: function () {
+
+                    var listMessageTS = $('.list-messageTS');
+
+                    // Avoid duplicates
+                    if (listMessageTS.length) {
+                        listMessageTS.remove();
+                    }
+
+                    // Message
+                    $('#chart_TS').prepend("<ul class='list-group list-messageAVS'><li class='list-group-item bg-red-intense bg-font-red-intense' style='margin: 20px -12px 0 0'>" + reloadAjaxError + "</li></ul>");
+
+                    createAutoClosingAlert('.list-messageTS');
+                },
+                complete: function () {
+                    setTimeout(function () {
+                        contentChartTS.LoadingOverlay("hide");
+                    }, 500);
+                }
+            });
+        }
+
         jQuery(document).ready(function() {
 
             // Resizing the chart pie UD
@@ -371,6 +522,7 @@
                 drawChartResize();
                 drawChartResizeSR();
                 drawChartResizeAVS();
+                drawChartResizeTS();
             });
         });
     </script>
@@ -724,7 +876,7 @@
                                 <i class="widget-thumb-icon bg-red icon-note"></i>
                                 <div class="widget-thumb-body">
                                     <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
-                                    <span class="widget-thumb-body-stat counterTest" data-counter="counterup" data-value="${test}">${test}</span>
+                                    <span class="widget-thumb-body-stat counterTest" data-counter="counterup" data-value="${numberTest}">${numberTest}</span>
                                 </div>
                             </div>
                         </div> <!-- /.Widget thumb -->
@@ -844,11 +996,46 @@
                         </div> <!-- /.Portlet -->
                     </div>
                 </div>
+
+                <div class="row">
+                    <!-- Scores in each test -->
+                    <div class="col-md-12">
+                        <!-- Portlet -->
+                        <div class="portlet light bg-inverse portlet-scoresTest">
+                            <div class="portlet-title">
+                                <div class="caption font-green-dark">
+                                    <i class="fa fa-bar-chart font-green-dark"></i>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.scores.test.title" default="Score by test"/></span>
+                                </div>
+                                <div class="tools">
+                                    <i class="fa fa-refresh reloadGraph reloadScoresTest" onclick="drawChartTScore($('#test').val())"></i>
+                                    <a href="" class="collapse"> </a>
+                                    <a href="" class="remove"> </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <g:select name="test"
+                                          from="${Test.list()}"
+                                          optionKey="name"
+                                          optionValue="name"
+                                          noSelection="${['': "${g.message(code: 'layouts.main_auth_admin.body.portlet.scores.test.select', default: 'Select a test')}"]}"
+                                          class="bs-select form-control" data-style="blue-soft"
+                                          data-live-search="true"
+                                          onchange="drawChartTScore(this.value)"/>
+                                <div class="scroller" style="height:505px;" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                    <div id="chart_TS" style="width:100%; height:100%"></div>
+                                </div>
+                            </div>
+                        </div> <!-- /.Portlet -->
+                    </div>
+                </div>
             </div>
         </div> <!-- Page-content -->
     </div> <!-- /. Page-content-wrapper -->
 
     <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="select/bootstrap-select.min.js"/>
+    <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
     <g:javascript src="custom/dashboard.js"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <g:javascript src="counter/jquery.counterup.min.js"/>

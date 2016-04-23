@@ -40,19 +40,19 @@ class CustomTasksBackendController {
         // Obtaining number of test in system - Asynchronous/Multi-thread
         def testPromise = Test.async.findAll()
 
-        // Obtaining number of test in system - Asynchronous/Multi-thread
+        // Obtaining number of evaluations in system - Asynchronous/Multi-thread
         def evaluationsPromise = Evaluation.async.findAll()
 
         // Wait all promise
         def results = waitAll(testPromise, evaluationsPromise)
 
-        def test = results[0].size()
+        def numberTest = results[0].size()
         def evaluations = results[1].size()
 
         // Obtaining the lastest 10 registered users
         def lastUsers = SecUser.executeQuery("from SecUser where id in (select secUser.id from SecUserSecRole where secRole.id = :roleId) order by dateCreated desc", [roleId: roleUser.id], [max: 10])
 
-        render view: 'dashboard', model: [normalUsers: normalUsers.async.size(), test: test, evaluations: evaluations, lastUsers: lastUsers]
+        render view: 'dashboard', model: [normalUsers: normalUsers.async.size(), numberTest: numberTest, evaluations: evaluations, lastUsers: lastUsers]
     }
 
     /**
@@ -224,6 +224,181 @@ class CustomTasksBackendController {
         sleep(100)
 
         render dataAVS as JSON
+    }
+
+    /**
+     * It obtains the number of evaluations of each test.
+     */
+    def scoresTest() {
+        log.debug("CustomTasksBackendController:scoresTest()")
+
+        // Obtaining number of scores of test - [0-1)
+        DetachedCriteria detachedZero = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 0 as Float)
+                    lt("testScore", 1 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseZero = detachedZero.async.list()
+        // It obtains result of promise
+        def zero = promiseZero.get().size()
+
+        // Obtaining number of scores of test - [1-2)
+        DetachedCriteria detachedOne = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 1 as Float)
+                    lt("testScore", 2 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseOne = detachedOne.async.list()
+        // It obtains result of promise
+        def one = promiseOne.get().size()
+
+        // Obtaining number of scores of test - [2-3)
+        DetachedCriteria detachedTwo = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 2 as Float)
+                    lt("testScore", 3 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseTwo = detachedTwo.async.list()
+        // It obtains result of promise
+        def two = promiseTwo.get().size()
+
+        // Obtaining number of scores of test - [3-4)
+        DetachedCriteria detachedThree = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 3 as Float)
+                    lt("testScore", 4 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseThree = detachedThree.async.list()
+        // It obtains result of promise
+        def three = promiseThree.get().size()
+
+        // Obtaining number of scores of test - [4-5)
+        DetachedCriteria detachedFour = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 4 as Float)
+                    lt("testScore", 5 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseFour = detachedFour.async.list()
+        // It obtains result of promise
+        def four = promiseFour.get().size()
+
+        // Obtaining number of scores of test - [5-6)
+        DetachedCriteria detachedFive = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 5 as Float)
+                    lt("testScore", 6 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseFive = detachedFive.async.list()
+        // It obtains result of promise
+        def five = promiseFive.get().size()
+
+        // Obtaining number of scores of test - [6-7)
+        DetachedCriteria detachedSix = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 6 as Float)
+                    lt("testScore", 7 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseSix = detachedSix.async.list()
+        // It obtains result of promise
+        def six = promiseSix.get().size()
+
+        // Obtaining number of scores of test - [7-8)
+        DetachedCriteria detachedSeven = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 7 as Float)
+                    lt("testScore", 8 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseSeven = detachedSeven.async.list()
+        // It obtains result of promise
+        def seven = promiseSeven.get().size()
+
+        // Obtaining number of scores of test - [8-9)
+        DetachedCriteria detachedEight = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 8 as Float)
+                    lt("testScore", 9 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseEight = detachedEight.async.list()
+        // It obtains result of promise
+        def eight = promiseEight.get().size()
+
+        // Obtaining number of scores of test - [9-10]
+        DetachedCriteria detachedNine = Test.where {
+            name == params.test
+            evaluationsTest {
+                and {
+                    ge("testScore", 9 as Float)
+                    le("testScore", 10 as Float)
+                }
+            }
+        } as DetachedCriteria
+
+        def promiseNine = detachedNine.async.list()
+        // It obtains result of promise
+        def nine = promiseNine.get().size()
+
+        def dataTS = [
+                'zero':  zero,
+                'one':   one,
+                'two':   two,
+                'three': three,
+                'four':  four,
+                'five':  five,
+                'six':   six,
+                'seven': seven,
+                'eight': eight,
+                'nine':  nine,
+        ]
+
+        // Avoid undefined function (Google chart)
+        sleep(100)
+
+        render dataTS as JSON
     }
 
     /**

@@ -591,12 +591,22 @@ input:-webkit-autofill:active {
     margin: 40px 0 45px 0 !important;
 }
 
+.portlet-scoreSex,
+.portlet-scoresRank {
+    margin: 0 0 45px 0 !important;
+}
+
 .portlet-users .portlet,
 .portlet-graphUD .portlet,
 .portlet-scoresRank .portlet,
-.portlet-scoreSex .portlet {
+.portlet-scoreSex .portlet,
+.portlet-scoresTest .portlet {
     height: 523px;
  }
+
+.portlet-scoresTest .portlet-body {
+    margin-top: 20px !important;
+}
 
 .mt-comments .mt-comment .mt-comment-body .mt-comment-info:after{
     clear:both;
@@ -716,6 +726,10 @@ input:-webkit-autofill:active {
 .iconReload:hover,
 .reloadGraph:hover {
     color: #468250;
+}
+
+.slimScrollDiv {
+    margin-top: 20px;
 }
 
 /* Back to top
@@ -1090,19 +1104,22 @@ input:-webkit-autofill:active {
 
     .portlet-graphUD,
     .portlet-scoresRank,
-    .portlet-scoreSex {
+    .portlet-scoreSex,
+    .portlet-scoresTest {
         height: 400px;
     }
 
     .portlet-graphUD .portlet-body,
     .portlet-scoresRank .portlet-body,
-    .portlet-scoreSex .portlet-body {
+    .portlet-scoreSex .portlet-body,
+    .portlet-scoresTest .portlet-body {
         height: 335px;
     }
 
     .portlet-graphUD .portlet-body .scroller,
     .portlet-scoresRank .portlet-body .scroller,
-    .portlet-scoreSex .portlet-body .scroller {
+    .portlet-scoreSex .portlet-body .scroller,
+    .portlet-scoresTest .portlet-body .scroller {
         height: 315px !important;
     }
 }
@@ -1120,19 +1137,22 @@ input:-webkit-autofill:active {
 
     .portlet-graphUD,
     .portlet-scoresRank,
-    .portlet-scoreSex {
+    .portlet-scoreSex,
+    .portlet-scoresTest {
         height: 390px;
     }
 
     .portlet-graphUD .portlet-body,
     .portlet-scoresRank .portlet-body,
-    .portlet-scoreSex .portlet-body {
+    .portlet-scoreSex .portlet-body,
+    .portlet-scoresTest .portlet-body {
         height: 285px;
     }
 
     .portlet-graphUD .portlet-body .scroller,
     .portlet-scoresRank .portlet-body .scroller,
-    .portlet-scoreSex .portlet-body .scroller {
+    .portlet-scoreSex .portlet-body .scroller,
+    .portlet-scoresTest .portlet-body .scroller {
         height: 275px !important;
     }
 }
@@ -1206,13 +1226,15 @@ input:-webkit-autofill:active {
 
     .portlet-graphUD .portlet-body,
     .portlet-scoresRank .portlet-body,
-    .portlet-scoreSex .portlet-body {
+    .portlet-scoreSex .portlet-body,
+    .portlet-scoresTest .portlet-body {
         height: 265px;
     }
 
     .portlet-graphUD .portlet-body .scroller,
     .portlet-scoresRank .portlet-body .scroller,
-    .portlet-scoreSex .portlet-body .scroller {
+    .portlet-scoreSex .portlet-body .scroller,
+    .portlet-scoresTest .portlet-body .scroller {
         height: 265px !important;
     }
 }

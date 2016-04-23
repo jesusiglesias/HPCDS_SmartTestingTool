@@ -217,11 +217,23 @@ var CustomDashboardScript = function () {
         });
     };
 
+    /**
+     * It handles the select
+     */
+    var handlerBootstrapSelect = function () {
+
+        $('.bs-select').selectpicker({
+            iconBase: 'fa',
+            tickIcon: 'fa-check'
+        });
+    };
+
 return {
     // Main function to initiate the module
     init: function () {
         handlerTooltip();
         handlerAJAXCallDashboard();
+        handlerBootstrapSelect();
     }
 };
 }();
