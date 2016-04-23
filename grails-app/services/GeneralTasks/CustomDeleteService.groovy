@@ -7,6 +7,7 @@ import Test.Catalog
 import Test.Question
 import Test.Test
 import User.User
+import static grails.async.Promises.*
 import grails.transaction.Transactional
 
 /**
@@ -24,13 +25,21 @@ class CustomDeleteService {
     def customDeleteDepartment (departmentInstance) {
         log.debug("CustomDeleteService:customDeleteDepartment()")
 
+        List queriesDepartmentToExecute = []
+
         // It searches all users
         def userDeleted = User.findAllByDepartment(departmentInstance)
 
-        // Delete SecUserSecRole relations
+        // Delete SecUserSecRole relations - Asynchronous/Multi-thread
         userDeleted.each { SecUser user ->
-            SecUserSecRole.findAllBySecUser(user)*.delete(flush: true, failOnError: true)
+            def userTask = SecUserSecRole.async.task {
+                withTransaction {
+                    SecUserSecRole.findAllBySecUser(user)*.delete(flush: true, failOnError: true)
+                }
+            }
+            queriesDepartmentToExecute << userTask
         }
+        waitAll(queriesDepartmentToExecute)
     }
 
     /**
@@ -42,11 +51,19 @@ class CustomDeleteService {
     def customDeleteAnswer (answerInstance) {
         log.debug("CustomDeleteService:customDeleteAnswer()")
 
+        List queriesAnswerToExecute = []
+
         // Remove each relation of the answer with the question
         def questions = [] + answerInstance.questionsAnswer ?: []
+
+        // Delete relations - Asynchronous/Multi-thread
         questions.each { Question question ->
-            question.removeFromAnswers(answerInstance)
+            def questionTask = tasks {
+                question.removeFromAnswers(answerInstance)
+            }
+            queriesAnswerToExecute << questionTask
         }
+        waitAll(queriesAnswerToExecute)
     }
 
     /**
@@ -58,11 +75,19 @@ class CustomDeleteService {
     def customDeleteQuestion (questionInstance) {
         log.debug("CustomDeleteService:customDeleteQuestion()")
 
+        List queriesQuestionToExecute = []
+
         // Remove each relation of the question with the catalog
         def catalogs = [] + questionInstance.catalogs ?: []
+
+        // Delete relations - Asynchronous/Multi-thread
         catalogs.each { Catalog catalog ->
-            catalog.removeFromQuestions(questionInstance)
+            def catalogTask = tasks {
+                catalog.removeFromQuestions(questionInstance)
+            }
+            queriesQuestionToExecute << catalogTask
         }
+        waitAll(queriesQuestionToExecute)
     }
 
     /**
@@ -74,15 +99,35 @@ class CustomDeleteService {
     def customDeleteQuestionAnswer (questionInstance) {
         log.debug("CustomDeleteService:customDeleteQuestionAnswer()")
 
+        List queriesCatalogToExecute = []
+        List queriesQuestionAnswerToExecute = []
+
         // Remove each relation of the question with the catalog
         def catalogs = [] + questionInstance.catalogs ?: []
+
+        // Delete relations - Asynchronous/Multi-thread
         catalogs.each { Catalog catalog ->
-            catalog.removeFromQuestions(questionInstance)
+            def catalogTask = tasks {
+                catalog.removeFromQuestions(questionInstance)
+            }
+            queriesCatalogToExecute << catalogTask
         }
+        waitAll(queriesCatalogToExecute)
+
         // Remove each relation of the answer with the question
         def answers = [] + questionInstance.answers ?: []
+
+        // Delete relations - Asynchronous/Multi-thread
         answers.each { Answer answer ->
-            answer.removeFromQuestionsAnswer(questionInstance)
+            def answerQuestionTask = tasks {
+                answer.removeFromQuestionsAnswer(questionInstance)
+            }
+            queriesQuestionAnswerToExecute << answerQuestionTask
+        }
+        waitAll(queriesQuestionAnswerToExecute)
+
+        // Delete answer
+        answers.each { Answer answer ->
             // It deletes the answer
             answer.delete(flush: true, failOnError: true)
         }
@@ -100,6 +145,7 @@ class CustomDeleteService {
         // It searches each relation with question
         def questions = [] + catalogInstance.questions ?: []
 
+        // Delete relations
         questions.each { Question question ->
 
             question.removeFromCatalogs(catalogInstance)
@@ -109,10 +155,10 @@ class CustomDeleteService {
 
             answers.each { Answer answer ->
                 answer.removeFromQuestionsAnswer(question)
+
                 // It deletes the answer
                 answer.delete(flush: true, failOnError: true)
             }
-
             // It deletes the question
             question.delete(flush: true, failOnError: true)
         }
@@ -130,6 +176,7 @@ class CustomDeleteService {
         // It searches each relation with tests
         def tests = [] + topicInstance.tests ?: []
 
+        // Delete relations
         tests.each { Test test ->
 
             // It searches each relation of the test with catalog
