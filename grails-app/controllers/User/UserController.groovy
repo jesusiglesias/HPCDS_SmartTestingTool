@@ -5,6 +5,7 @@ import Security.SecUserSecRole
 import org.springframework.dao.DataIntegrityViolationException
 import java.text.SimpleDateFormat
 import static org.springframework.http.HttpStatus.*
+import static grails.async.Promises.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 
@@ -123,11 +124,13 @@ class UserController {
             // Save user data
             userInstance.save(flush: true, failOnError: true)
 
-            // Obtain user role
-            def normalRole = SecRole.findByAuthority("ROLE_USER")
+            // Obtain user role - Asynchronous/Multi-thread
+            def normalRole = SecRole.async.findByAuthority("ROLE_USER")
+
+            def resultRole = waitAll(normalRole)
 
             // Save relation with normal user role
-            SecUserSecRole.create userInstance, normalRole, true
+            SecUserSecRole.create userInstance, resultRole.getAt(0), true
 
             request.withFormat {
                 form multipartForm {

@@ -3,6 +3,7 @@ package Security
 import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
+import static grails.async.Promises.*
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 
@@ -115,9 +116,13 @@ class SecUserController {
             // Save admin data
             secUserInstance.save(flush:true, failOnError: true)
 
-            // Save relation with admin role
-            def adminRole = SecRole.findByAuthority('ROLE_ADMIN')
-            SecUserSecRole.create secUserInstance, adminRole, true
+            // Save relation with admin role - Asynchronous/Multi-thread
+            def adminRole = SecRole.async.findByAuthority('ROLE_ADMIN')
+
+            def resultRole = waitAll(adminRole)
+
+            // Save relation with normal user role
+            SecUserSecRole.create secUserInstance, resultRole.getAt(0), true
 
             request.withFormat {
                 form multipartForm {
