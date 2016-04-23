@@ -19,37 +19,53 @@ class UrlMappings {
 
         /* Domain URLS
         ======================================================*/
-        // Admin
-        "/administrator"(controller: 'secUser', action: 'index')
-        "/administrator/create"(controller: 'secUser', action: 'create')
-        "/administrator/create-error"(controller: 'secUser', action: 'save')
-        "/administrator/edit/$id?(.$format)?"(controller: 'secUser', action: 'edit')
-        "/administrator/edit-error/$id?(.$format)?"(controller: 'secUser', action: 'update')
-        "/administrator/edit/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'editProfileImage')
-        "/administrator/edit-error/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'updateProfileImage')
-        // User
-        "/user/create-error"(controller: 'user', action: 'save')
-        "/user/edit-error/$id?(.$format)?"(controller: 'user', action: 'update')
-        "/user/edit/profileImage/$id?(.$format)?"(controller: 'user', action: 'editProfileImage')
-        "/user/edit-error/profileImage/$id?(.$format)?"(controller: 'user', action: 'updateProfileImage')
-        // Department
-        "/department/create-error"(controller: 'department', action: 'save')
-        "/department/edit-error/$id?(.$format)?"(controller: 'department', action: 'update')
-        // Topic
-        "/topic/create-error"(controller: 'topic', action: 'save')
-        "/topic/edit-error/$id?(.$format)?"(controller: 'topic', action: 'update')
-        // Catalog
-        "/catalog/create-error"(controller: 'catalog', action: 'save')
-        "/catalog/edit-error/$id?(.$format)?"(controller: 'catalog', action: 'update')
-        // Question
-        "/question/create-error"(controller: 'question', action: 'save')
-        "/question/edit-error/$id?(.$format)?"(controller: 'question', action: 'update')
-        // Answer
-        "/answer/create-error"(controller: 'answer', action: 'save')
-        "/answer/edit-error/$id?(.$format)?"(controller: 'answer', action: 'update')
-        // Test
-        "/test/create-error"(controller: 'test', action: 'save')
-        "/test/edit-error/$id?(.$format)?"(controller: 'test', action: 'update')
+        // Admin - Grouping URLs
+        group("/administrator") {
+            "/"(controller: 'secUser', action: 'index')
+            "/create"(controller: 'secUser', action: 'create')
+            "/create-error"(controller: 'secUser', action: 'save')
+            "/edit/$id?(.$format)?"(controller: 'secUser', action: 'edit')
+            "/edit-error/$id?(.$format)?"(controller: 'secUser', action: 'update')
+            "/edit/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'editProfileImage')
+            "/edit-error/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'updateProfileImage')
+        }
+        // User - Grouping URLs
+        group("/user") {
+            "/create-error"(controller: 'user', action: 'save')
+            "/edit-error/$id?(.$format)?"(controller: 'user', action: 'update')
+            "/edit/profileImage/$id?(.$format)?"(controller: 'user', action: 'editProfileImage')
+            "/edit-error/profileImage/$id?(.$format)?"(controller: 'user', action: 'updateProfileImage')
+        }
+        // Department - Grouping URLs
+        group("/department") {
+            "/create-error"(controller: 'department', action: 'save')
+            "/edit-error/$id?(.$format)?"(controller: 'department', action: 'update')
+        }
+        // Topic - Grouping URLs
+        group("/topic") {
+            "/create-error"(controller: 'topic', action: 'save')
+            "/edit-error/$id?(.$format)?"(controller: 'topic', action: 'update')
+        }
+        // Catalog - Grouping URLs
+        group("/catalog") {
+            "/create-error"(controller: 'catalog', action: 'save')
+            "/edit-error/$id?(.$format)?"(controller: 'catalog', action: 'update')
+        }
+        // Question - Grouping URLs
+        group("/question") {
+            "/create-error"(controller: 'question', action: 'save')
+            "/edit-error/$id?(.$format)?"(controller: 'question', action: 'update')
+        }
+        // Answer - Grouping URLs
+        group("/answer") {
+            "/create-error"(controller: 'answer', action: 'save')
+            "/edit-error/$id?(.$format)?"(controller: 'answer', action: 'update')
+        }
+        // Test - Grouping URLs
+        group("/test") {
+            "/create-error"(controller: 'test', action: 'save')
+            "/edit-error/$id?(.$format)?"(controller: 'test', action: 'update')
+        }
 
         /* Errors
         ======================================================*/

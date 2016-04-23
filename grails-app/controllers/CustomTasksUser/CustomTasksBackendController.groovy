@@ -7,7 +7,6 @@ import Security.SecUserSecRole
 import Test.Test
 import User.Department
 import User.Evaluation
-import User.User
 import grails.converters.JSON
 import grails.util.Environment
 import grails.util.Holders
