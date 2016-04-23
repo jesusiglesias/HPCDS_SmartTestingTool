@@ -8,11 +8,13 @@ import Test.Test
 import User.Department
 import User.Evaluation
 import grails.converters.JSON
+import grails.gorm.DetachedCriteria
 import grails.util.Environment
 import grails.util.Holders
 import org.codehaus.groovy.grails.core.io.ResourceLocator
 import org.springframework.core.io.Resource
 import org.codehaus.groovy.grails.plugins.log4j.Log4jConfig
+import static grails.async.Promises.*
 
 /**
  * It contains the habitual custom tasks of the admin (back-end).
@@ -35,16 +37,22 @@ class CustomTasksBackendController {
         def roleUser = SecRole.findByAuthority("ROLE_USER")
         def normalUsers = SecUserSecRole.findAllBySecRole(roleUser).secUser
 
-        // Obtaining number of test in system
-        def test = Test.findAll().size()
+        // Obtaining number of test in system - Asynchronous/Multi-thread
+        def testPromise = Test.async.findAll()
 
-        // Obtaining number of test in system
-        def evaluations = Evaluation.findAll().size()
-        
+        // Obtaining number of test in system - Asynchronous/Multi-thread
+        def evaluationsPromise = Evaluation.async.findAll()
+
+        // Wait all promise
+        def results = waitAll(testPromise, evaluationsPromise)
+
+        def test = results[0].size()
+        def evaluations = results[1].size()
+
         // Obtaining the lastest 10 registered users
         def lastUsers = SecUser.executeQuery("from SecUser where id in (select secUser.id from SecUserSecRole where secRole.id = :roleId) order by dateCreated desc", [roleId: roleUser.id], [max: 10])
 
-        render view: 'dashboard', model: [normalUsers: normalUsers.size(), test: test, evaluations: evaluations, lastUsers: lastUsers]
+        render view: 'dashboard', model: [normalUsers: normalUsers.async.size(), test: test, evaluations: evaluations, lastUsers: lastUsers]
     }
 
     /**
@@ -119,6 +127,7 @@ class CustomTasksBackendController {
             rows << [c: [[v: name], [v: value]]]
         }
 
+        // Add departments
         departments.each { department ->
             addRow(department.name, department.users.size())
         }
@@ -137,11 +146,19 @@ class CustomTasksBackendController {
     def scoresRank() {
         log.debug("CustomTasksBackendController:scoresRank()")
 
-        // Obtaining all scores
-        def suspense = Evaluation.findAllByTestScoreLessThan(5).size()
-        def approved = Evaluation.findAllByTestScoreGreaterThanEqualsAndTestScoreLessThan(5,7).size()
-        def remarkable = Evaluation.findAllByTestScoreGreaterThanEqualsAndTestScoreLessThan(7, 9).size()
-        def outstanding = Evaluation.findAllByTestScoreGreaterThanEquals(9).size()
+        // Obtaining all scores - Asynchronous/Multi-thread
+        def suspensePromise = Evaluation.async.findAllByTestScoreLessThan(5)
+        def approvedPromise = Evaluation.async.findAllByTestScoreGreaterThanEqualsAndTestScoreLessThan(5,7)
+        def remarkablePromise = Evaluation.async.findAllByTestScoreGreaterThanEqualsAndTestScoreLessThan(7, 9)
+        def outstandingPromise = Evaluation.async.findAllByTestScoreGreaterThanEquals(9)
+
+        // Wait all promise
+        def results = waitAll(suspensePromise, approvedPromise, remarkablePromise, outstandingPromise)
+
+        def suspense = results[0].size()
+        def approved = results[1].size()
+        def remarkable = results[2].size()
+        def outstanding = results[3].size()
 
         def dataSR = [
                 'suspense': suspense,
@@ -162,36 +179,31 @@ class CustomTasksBackendController {
     def averageScoreSex() {
         log.debug("CustomTasksBackendController:averageScoreSex()")
 
-        // Obtaining all male evaluations
-        def criteriaMale = Evaluation.createCriteria()
+        // Obtaining all male evaluations - Asynchronous/Multi-thread
+        DetachedCriteria detachedMale = Evaluation.where {
+            user.sex == Sex.MALE
+        }.projections {
+            avg('testScore')
+        } as DetachedCriteria
 
-        def averageMale = criteriaMale.list {
-            user {
-                eq 'sex', Sex.MALE
-            }
-            projections {
-                avg('testScore')
-            }
-        }
+        def promiseMale = detachedMale.async.list()
 
-        // Obtaining all female evaluations
-        def criteriaFemale = Evaluation.createCriteria()
+        // Obtaining all female evaluations - Asynchronous/Multi-thread
+        DetachedCriteria detachedFemale = Evaluation.where {
+            user.sex == Sex.FEMALE
+        }.projections {
+            avg('testScore')
+        } as DetachedCriteria
 
-        def averageFemale = criteriaFemale.list {
-            user {
-                eq 'sex', Sex.FEMALE
-            }
-            projections {
-                avg('testScore')
-            }
-        }
+        def promiseFemale = detachedFemale.async.list()
 
-        def numberAverageMale = averageMale.getAt(0)
-        def numberAverageFemale = averageFemale.getAt(0)
+        // It obtains result of promise
+        def numberAverageMale = promiseMale.get()
+        def numberAverageFemale = promiseFemale.get()
 
         def dataAVS = [
-                'averageMale': numberAverageMale,
-                'averageFemale': numberAverageFemale
+                'averageMale': numberAverageMale.getAt(0),
+                'averageFemale': numberAverageFemale.getAt(0)
         ]
 
         // Avoid undefined function (Google chart)

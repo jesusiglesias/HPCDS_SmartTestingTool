@@ -111,7 +111,7 @@
             var dataAVSResize = google.visualization.arrayToDataTable([
                 [_AVSTitle, _AVSTitle, { role: "style" } ],
                 [_AVSMale, dataJSONAVS.averageMale, "#245B9C"],
-                [_AVSFemale, dataJSONAVS.averageFemale, "#915B98"]
+                [_AVSFemale, dataJSONAVS.averageFemale, "#B161B1"]
             ]);
 
             var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
@@ -309,7 +309,7 @@
                     var dataAVS = google.visualization.arrayToDataTable([
                         [_AVSTitle, _AVSTitle, { role: "style" } ],
                         [_AVSMale, jsonDataAVS.averageMale, "#245B9C"],
-                        [_AVSFemale, jsonDataAVS.averageFemale, "#915B98"]
+                        [_AVSFemale, jsonDataAVS.averageFemale, "#B161B1"]
                     ]);
 
                     var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
