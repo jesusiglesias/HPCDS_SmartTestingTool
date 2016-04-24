@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value
 @Transactional(readOnly = true)
 class SecUserController {
 
-    static allowedMethods = [save: "POST", update: "PUT", updateProfileImage: 'POST', delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", updateProfileImage: 'POST', delete: "DELETE", uploadFileAdmin: "POST"]
 
     // Mime-types allowed in image
     private static final contentsType = ['image/png', 'image/jpeg', 'image/gif']
