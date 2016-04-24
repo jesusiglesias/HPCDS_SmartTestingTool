@@ -10,7 +10,7 @@
         <div class="col-md-6 space-username">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'username', 'error')}">
                 <div class="input-icon right">
-                    <g:textField name='username' maxlength="30" class="form-control register-input username-input-register emptySpaces autofill-input"/>
+                    <g:textField name='username' maxlength="30" class="form-control register-input username-input-register emptySpaces autofill-input" autocomplete="off"/>
                     <label for="username" class="control-label control-labelError"><g:message code="user.username.label" default="Username"/><span class="required"> * </span></label>
                     <span class="help-block username-register-block"></span>
                     <i class="fa fa-times i-delete-register-username" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
@@ -23,7 +23,7 @@
         <div class="col-md-6">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'email', 'error')}">
                 <div class="input-icon right">
-                    <g:field type="email" name="email" maxlength="60" class="form-control register-input email-input-register emptySpaces autofill-input" value="${userRegisterInstance?.email}"/>
+                    <g:field type="email" name="email" maxlength="60" class="form-control register-input email-input-register emptySpaces autofill-input" value="${userRegisterInstance?.email}" autocomplete="off"/>
                     <label for="email" class="control-label control-labelError"><g:message code="user.email.label" default="Email"/><span class="required"> * </span></label>
                     <span class="help-block email-register-block"></span>
                     <i class="fa fa-times i-delete-register-email" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
@@ -48,8 +48,10 @@
                     <i class="fa fa-key"></i>
                 </div>
             </div>
-            <div class='pwstrength-viewport-progress'></div>
-            <div class='pwstrength-viewport-verdict'></div>
+            <div id="container-password">
+                <div class='pwstrength-viewport-progress'></div>
+                <div class='pwstrength-viewport-verdict'></div>
+            </div>
         </div>
 
         <!-- Confirm password -->
@@ -75,7 +77,7 @@
         <div class="col-md-6 space-register-nameRow">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'name', 'error')}">
                 <div class="input-icon right">
-                    <g:textField name="name" maxlength="25" value="${userRegisterInstance?.name}" class="form-control register-input name-input-register autofill-input"/>
+                    <g:textField name="name" maxlength="25" value="${userRegisterInstance?.name}" class="form-control register-input name-input-register autofill-input" autocomplete="off"/>
                     <label for="name" class="control-label control-labelError"><g:message code="user.name.label" default="Name"/><span class="required"> * </span></label>
                     <span class="help-block"></span>
                     <i class="fa fa-times i-delete-register-name" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
@@ -88,7 +90,7 @@
         <div class="col-md-6 space-betweenCol">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'surname', 'error')}">
                 <div class="input-icon right">
-                    <g:textField name="surname" maxlength="40" value="${userRegisterInstance?.surname}" class="form-control register-input surname-input-register autofill-input"/>
+                    <g:textField name="surname" maxlength="40" value="${userRegisterInstance?.surname}" class="form-control register-input surname-input-register autofill-input" autocomplete="off"/>
                     <label for="surname" class="control-label control-labelError"><g:message code="user.surname.label" default="Surname"/><span class="required"> * </span></label>
                     <span class="help-block"></span>
                     <i class="fa fa-times i-delete-register-surname" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
@@ -131,7 +133,7 @@
         <div class="col-md-6 space-betweenCol">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'address', 'error')}">
                 <div class="input-icon right">
-                    <g:textField name="address" maxlength="70" value="${userRegisterInstance?.address}" class="form-control register-input address-input-register autofill-input"/>
+                    <g:textField name="address" maxlength="70" value="${userRegisterInstance?.address}" class="form-control register-input address-input-register autofill-input" autocomplete="off"/>
                     <label for="address" class="control-label"><g:message code="user.address.label" default="Address"/></label>
                     <span class="help-block"></span>
                     <i class="fa fa-times i-delete-register-address" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
@@ -147,7 +149,7 @@
         <div class="col-md-6">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'city', 'error')}">
                 <div class="input-icon right">
-                    <g:textField name="city" maxlength="70" value="${userRegisterInstance?.city}" class="form-control register-input city-input-register autofill-input"/>
+                    <g:textField name="city" maxlength="70" value="${userRegisterInstance?.city}" class="form-control register-input city-input-register autofill-input" autocomplete="off"/>
                     <label for="city" class="control-label"><g:message code="user.city.label" default="City"/></label>
                     <span class="help-block"></span>
                     <i class="fa fa-times i-delete-register-city" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
@@ -160,7 +162,7 @@
         <div class="col-md-6 space-betweenCol">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'country', 'error')}">
                 <div class="input-icon right">
-                    <g:textField name="country" maxlength="70" value="${userRegisterInstance?.country}" class="form-control register-input country-input-register autofill-input"/>
+                    <g:textField name="country" maxlength="70" value="${userRegisterInstance?.country}" class="form-control register-input country-input-register autofill-input" autocomplete="off"/>
                     <label for="country" class="control-label"><g:message code="user.country.label" default="Country"/></label>
                     <span class="help-block"></span>
                     <i class="fa fa-times i-delete-register-country" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
@@ -176,7 +178,7 @@
         <div class="col-md-6">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'phone', 'error')}">
                 <div class="input-icon right">
-                    <g:textField name="phone" maxlength="20" value="${userRegisterInstance?.phone}" class="form-control register-input phone-input-register autofill-input"/>
+                    <g:textField name="phone" maxlength="20" value="${userRegisterInstance?.phone}" class="form-control register-input phone-input-register autofill-input" autocomplete="off"/>
                     <label for="phone" class="control-label"><g:message code="user.phone.label" default="Phone"/></label>
                     <span class="help-block"></span>
                     <i class="fa fa-times i-delete-register-phone" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->

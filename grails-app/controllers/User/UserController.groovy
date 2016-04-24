@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Value
 @Transactional(readOnly = true)
 class UserController {
 
-    def springSecurityService
-
     static allowedMethods = [save: "POST", update: "PUT", updateProfileImage: 'POST', delete: "DELETE"]
 
     // Mime-types allowed in image
@@ -117,9 +115,6 @@ class UserController {
                 userInstance.avatar = null
                 userInstance.avatarType = null
             }
-
-            // Encoding password
-            userInstance.password = springSecurityService.encodePassword(userInstance.password)
 
             // Save user data
             userInstance.save(flush: true, failOnError: true)

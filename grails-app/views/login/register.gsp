@@ -60,12 +60,13 @@
 
             <!-- Alert -->
             <g:if test='${flash.errorRegisterMessage}'>
-                <div class="alert alert-block alert-danger alert-danger-custom alert-dismissable alert-register fade in">
+                <div class="alert alert-block alert-danger alert-danger-custom alert-dismissable alert-register-error fade in">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden='true'></button>
                     <p> ${raw(flash.errorRegisterMessage)} </p>
                 </div>
 
                 <g:javascript>
+                    createAutoClosingAlert('.alert-register-error');
                 </g:javascript>
             </g:if>
 
@@ -79,11 +80,12 @@
                 </div>
 
                 <g:javascript>
+                    createAutoClosingAlert('.alert-register-error');
                 </g:javascript>
             </g:hasErrors>
 
             <!-- Creation form -->
-            <g:form controller="customTasksUser" action="saveUserRegistered" autocomplete="on" class="horizontal-form register-form">
+            <g:form controller="customTasksUser" action="saveUserRegistered" autocomplete="off" class="horizontal-form register-form">
                 <fieldset class="form form-responsive">
                     <g:render template="/login/formRegister"/>
                 </fieldset>
@@ -98,8 +100,8 @@
     </div> <!-- /.Register -->
 
     <!-- LOAD JAVASCRIPT  -->
-    <g:javascript src="password/custom-passwordRegister.js"/>
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
+    <g:javascript src="password/custom-passwordRegister.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="select/bootstrap-select.min.js"/>
     <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>

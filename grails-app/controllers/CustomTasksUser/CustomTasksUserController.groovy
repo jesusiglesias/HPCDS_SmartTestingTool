@@ -5,7 +5,7 @@ import User.User
 import Security.SecRole
 import Security.SecUserSecRole
 import grails.converters.JSON
-
+import static grails.async.Promises.*
 import java.text.SimpleDateFormat
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
@@ -275,17 +275,16 @@ class CustomTasksUserController {
 
         try {
 
-            // Encoding password
-            userRegisterInstance.password = springSecurityService.encodePassword(userRegisterInstance.password)
-
             // Save user data
             userRegisterInstance.save(flush: true, failOnError: true)
 
-            // Obtain user role
-            def normalRole = SecRole.findByAuthority("ROLE_USER")
+            // Save relation with user role - Asynchronous/Multi-thread
+            def normalRole = SecRole.async.findByAuthority('ROLE_USER')
+
+            def resultRole = waitAll(normalRole)
 
             // Save relation with normal user role
-            SecUserSecRole.create userRegisterInstance, normalRole, true
+            SecUserSecRole.create userRegisterInstance, resultRole.getAt(0), true
 
             // Send mail to enable the user account
             if (!customTasksUserService.send_emailNewUser(userRegisterInstance.email)) {

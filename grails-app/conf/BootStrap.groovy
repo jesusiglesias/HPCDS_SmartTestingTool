@@ -19,7 +19,6 @@ class BootStrap {
 
     def authenticationProcessingFilter
     def concurrentSessionControlStrategy
-    def springSecurityService
 
     /**
      * Initial operations when application start.
@@ -104,7 +103,7 @@ class BootStrap {
 
             def newUserSwitch = User.findByUsername('admin_switch') ?: new User( // Normal user to switch
                     username: 'admin_switch',
-                    password: springSecurityService.encodePassword('7g4sOmmm'),
+                    password: '7g4sOmmm',
                     email: 'admin_switch@stt.com',
                     name:   'Usuario',
                     surname: 'Conmutar',
@@ -115,7 +114,7 @@ class BootStrap {
 
             def newUser = User.findByUsername('user_stt') ?: new User( // Normal user
                     username: 'user_stt',
-                    password: springSecurityService.encodePassword('7g4sOmmm'),
+                    password: '7g4sOmmm',
                     email: 'user_stt@stt.com',
                     name: 'Usuario STT',
                     surname: 'Apellido STT',
