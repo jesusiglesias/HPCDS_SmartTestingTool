@@ -233,154 +233,164 @@ class CustomTasksBackendController {
         log.debug("CustomTasksBackendController:scoresTest()")
 
         // Obtaining number of scores of test - [0-1)
-        DetachedCriteria detachedZero = Test.where {
-            name == params.test
+        def criteriaZero = Test.createCriteria()
+        def resultZero = criteriaZero.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 0 as Float)
-                    lt("testScore", 1 as Float)
-                }
+                ge("testScore", 0 as Float)
+                lt("testScore", 1 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseZero = detachedZero.async.list()
         // It obtains result of promise
-        def zero = promiseZero.get().size()
+        def zero = resultZero.getAt(0)
 
         // Obtaining number of scores of test - [1-2)
-        DetachedCriteria detachedOne = Test.where {
-            name == params.test
+        def criteriaOne = Test.createCriteria()
+        def resultOne = criteriaOne.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 1 as Float)
-                    lt("testScore", 2 as Float)
-                }
+                ge("testScore", 1 as Float)
+                lt("testScore", 2 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseOne = detachedOne.async.list()
         // It obtains result of promise
-        def one = promiseOne.get().size()
+        def one = resultOne.getAt(0)
 
         // Obtaining number of scores of test - [2-3)
-        DetachedCriteria detachedTwo = Test.where {
-            name == params.test
+        def criteriaTwo = Test.createCriteria()
+        def resultTwo = criteriaTwo.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 2 as Float)
-                    lt("testScore", 3 as Float)
-                }
+                ge("testScore", 2 as Float)
+                lt("testScore", 3 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseTwo = detachedTwo.async.list()
         // It obtains result of promise
-        def two = promiseTwo.get().size()
+        def two = resultTwo.getAt(0)
 
         // Obtaining number of scores of test - [3-4)
-        DetachedCriteria detachedThree = Test.where {
-            name == params.test
+        def criteriaThree = Test.createCriteria()
+        def resultThree = criteriaThree.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 3 as Float)
-                    lt("testScore", 4 as Float)
-                }
+                ge("testScore", 3 as Float)
+                lt("testScore", 4 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseThree = detachedThree.async.list()
         // It obtains result of promise
-        def three = promiseThree.get().size()
+        def three = resultThree.getAt(0)
 
         // Obtaining number of scores of test - [4-5)
-        DetachedCriteria detachedFour = Test.where {
-            name == params.test
+        def criteriaFour = Test.createCriteria()
+        def resultFour = criteriaFour.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 4 as Float)
-                    lt("testScore", 5 as Float)
-                }
+                ge("testScore", 4 as Float)
+                lt("testScore", 5 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseFour = detachedFour.async.list()
         // It obtains result of promise
-        def four = promiseFour.get().size()
+        def four = resultFour.getAt(0)
 
         // Obtaining number of scores of test - [5-6)
-        DetachedCriteria detachedFive = Test.where {
-            name == params.test
+        def criteriaFive = Test.createCriteria()
+        def resultFive = criteriaFive.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 5 as Float)
-                    lt("testScore", 6 as Float)
-                }
+                ge("testScore", 5 as Float)
+                lt("testScore", 6 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseFive = detachedFive.async.list()
         // It obtains result of promise
-        def five = promiseFive.get().size()
+        def five = resultFive.getAt(0)
 
         // Obtaining number of scores of test - [6-7)
-        DetachedCriteria detachedSix = Test.where {
-            name == params.test
+        def criteriaSix = Test.createCriteria()
+        def resultSix = criteriaSix.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 6 as Float)
-                    lt("testScore", 7 as Float)
-                }
+                ge("testScore", 6 as Float)
+                lt("testScore", 7 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseSix = detachedSix.async.list()
         // It obtains result of promise
-        def six = promiseSix.get().size()
+        def six = resultSix.getAt(0)
 
         // Obtaining number of scores of test - [7-8)
-        DetachedCriteria detachedSeven = Test.where {
-            name == params.test
+        def criteriaSeven = Test.createCriteria()
+        def resultSeven = criteriaSeven.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 7 as Float)
-                    lt("testScore", 8 as Float)
-                }
+                ge("testScore", 7 as Float)
+                lt("testScore", 8 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseSeven = detachedSeven.async.list()
         // It obtains result of promise
-        def seven = promiseSeven.get().size()
+        def seven = resultSeven.getAt(0)
 
         // Obtaining number of scores of test - [8-9)
-        DetachedCriteria detachedEight = Test.where {
-            name == params.test
+        def criteriaEight = Test.createCriteria()
+        def resultEight = criteriaEight.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 8 as Float)
-                    lt("testScore", 9 as Float)
-                }
+                ge("testScore", 8 as Float)
+                lt("testScore", 9 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseEight = detachedEight.async.list()
         // It obtains result of promise
-        def eight = promiseEight.get().size()
+        def eight = resultEight.getAt(0)
 
         // Obtaining number of scores of test - [9-10]
-        DetachedCriteria detachedNine = Test.where {
-            name == params.test
+        def criteriaNine = Test.createCriteria()
+        def resultNine = criteriaNine.list {
+            eq 'name', params.test
             evaluationsTest {
-                and {
-                    ge("testScore", 9 as Float)
-                    le("testScore", 10 as Float)
-                }
+                ge("testScore", 9 as Float)
+                le("testScore", 10 as Float)
             }
-        } as DetachedCriteria
+            projections {
+                count()
+            }
+        }
 
-        def promiseNine = detachedNine.async.list()
         // It obtains result of promise
-        def nine = promiseNine.get().size()
+        def nine = resultNine.getAt(0)
 
         def dataTS = [
                 'zero':  zero,
