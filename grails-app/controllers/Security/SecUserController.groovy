@@ -121,7 +121,7 @@ class SecUserController {
 
             def resultRole = waitAll(adminRole)
 
-            // Save relation with normal user role
+            // Save relation with admin role
             SecUserSecRole.create secUserInstance, resultRole.getAt(0), true
 
             request.withFormat {
@@ -433,5 +433,24 @@ class SecUserController {
             ]
         }
         render responseData as JSON
+    }
+
+    /**
+     * It shows the admin import page.
+     */
+    def importAdmin () {
+        log.debug("CustomTasksBackendController:importAdmin()")
+
+        render view: 'import'
+    }
+
+    /**
+     * It processes the import functionality.
+     */
+    def uploadFileAdmin () {
+        log.debug("CustomTasksBackendController:uploadFileAdmin()")
+
+        sleep(10000)
+
     }
 }

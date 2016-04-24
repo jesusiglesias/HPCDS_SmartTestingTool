@@ -1,46 +1,36 @@
-<%@ page import="User.User" %>
-<%@ page import="org.springframework.validation.FieldError" %>
+<%@ page import="Security.SecUser" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="layout" content="main_auth_admin">
-	<title><g:message code="layouts.main_auth_admin.head.title.user" default="STT | Users management"/></title>
-	<link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
+    <meta name="layout" content="main_auth_admin">
+    <title><g:message code="layouts.main_auth_admin.head.title.admin" default="STT | Administrators management"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/fileInput', file: 'bootstrap-fileinput.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'multi-select.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css/date', file: 'bootstrap-datepicker3.min.css')}" type="text/css"/>
 
-	<script>
+    <script>
+        // Auto close alert TODO
+        function createAutoClosingAlert(selector) {
+            var alert = $(selector);
+
+            window.setTimeout(function() {
+                alert.slideUp(1000, function(){
+                    $(this).remove();
+                });
+            }, 5000);
+        }
+    </script>
+</head>
+
+<body>
+    <script>
 
         // Variables to use in script
-        var _weak = '${g.message(code:'default.password.strength.weak', default:'Weak')}';
-        var _normal = '${g.message(code:'default.password.strength.normal', default:'Normal')}';
-        var _medium = '${g.message(code:'default.password.strength.medium', default:'Medium')}';
-        var _strong = '${g.message(code:'default.password.strength.strong', default:'Strong')}';
-        var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
-        var _checkerUsernameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.username', default:'Type a username and check its availability.')}';
-        var _checkUsernameAvailibility = '${g.createLink(controller: "secUser", action: 'checkUsernameAvailibility')}';
-        var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
-        var _checkEmailAvailibility = '${g.createLink(controller: "secUser", action: 'checkEmailAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
-        var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
-        var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
-        var _equalPasswordUsername = '${raw(g.message(code:'default.password.username', default:'<strong>Password</strong> field must not be equal to username.'))}';
-        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
+        var _fullscreenTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.fullscreen', default:'Fullscreen!')}';
+        var _removeTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.remove', default:'Remove')}';
+        var _collapseTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.collapse', default:'Collapse/Expand')}';
+        var _importingData = '${message(code: "default.import.process", default: "Importing data...")}';
 
-		// Handler auto close alert
-		function createAutoClosingAlert(selector) {
-			var alert = $(selector);
-			window.setTimeout(function () {
-				alert.slideUp(1000, function () {
-					$(this).remove();
-				});
-			}, 5000);
-		}
-	</script>
-</head>
-<body>
+    </script>
 
     <!-- Page-sidebar-wrapper -->
     <div class="page-sidebar-wrapper">
@@ -89,11 +79,12 @@
                 </li>
 
                 <!-- Admin user -->
-                <li class="nav-item">
+                <li class="nav-item active open">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-user-secret"></i>
                         <span class="title"><g:message code="layouts.main_auth_admin.sidebar.admin" default="Admin user"/></span>
-                        <span class="arrow"></span>
+                        <span class="selected"></span>
+                        <span class="arrow open"></span>
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item">
@@ -108,22 +99,22 @@
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                             </g:link>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active open">
                             <g:link uri="/administrator/import" class="nav-link">
                                 <i class="fa fa-cloud-upload"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                                <span class="selected"></span>
                             </g:link>
                         </li>
                     </ul>
                 </li>
 
                 <!-- Normal user -->
-                <li class="nav-item active open">
+                <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-user"></i>
                         <span class="title"><g:message code="layouts.main_auth_admin.sidebar.normalUser" default="Normal user"/></span>
-                        <span class="selected"></span>
-                        <span class="arrow open"></span>
+                        <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item">
@@ -132,11 +123,10 @@
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.new" default="New"/></span>
                             </g:link>
                         </li>
-                        <li class="nav-item active open">
+                        <li class="nav-item">
                             <g:link uri="/user" class="nav-link">
                                 <i class="fa fa-list"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
-                                <span class="selected"></span>
                             </g:link>
                         </li>
                     </ul>
@@ -339,96 +329,103 @@
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
-                        <span><g:message code="layouts.main_auth_admin.pageBreadcrumb.subtitle.user" default="Normal user"/></span>
+                        <span><g:message code="layouts.main_auth_admin.pageBreadcrumb.subtitle.admin" default="Administrator user"/></span>
                     </li>
                 </ul>
             </div> <!-- /.Page-bar -->
 
             <!-- Page-title -->
             <h3 class="page-title">
-                <g:link uri="/user"><g:message code="layouts.main_auth_admin.body.title.user" default="Users management"/></g:link>
+                <g:link uri="/administrator"><g:message code="layouts.main_auth_admin.body.title.admin" default="Administrators management"/></g:link>
                 <i class="icon-arrow-right icon-title-domain"></i>
-                <small><g:message code="layouts.main_auth_admin.body.subtitle.user.edit" default="Edit user"/></small>
+                <small><g:message code="layouts.main_auth_admin.body.subtitle.admin.import" default="Import administrators"/></small>
             </h3>
 
             <!-- Contain page -->
-            <div id="edit-domain">
+            <div id="list-panel">
 
-                <!-- Alerts -->
-                <g:if test="${flash.userErrorMessage}">
-                    <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
-                        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span class="xthin" role="status"> ${raw(flash.userErrorMessage)} </span>
+                <div class="row panel-row-import">
+                    <div class="col-md-12 col-lg-10 col-lg-offset-1">
+
+                        <!-- Alerts TODO -->
+
+                        <!-- Portlet -->
+                        <div class="portlet light bg-inverse logConfig-portlet">
+                            <div class="portlet-title">
+                                <div class="caption font-green-dark">
+                                    <i class="icon-speech font-green-dark"></i>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.subject" default="Important information"/></span>
+                                </div>
+                                <div class="tools">
+                                    <a href="" class="collapse"> </a>
+                                    <a href="" class="fullscreen"> </a>
+                                    <a href="" class="remove"> </a>
+                                </div>
+                                <div>
+                                    <a href="${resource(dir: 'files', file: 'STT_AdministratorsTemplate.csv')}" download="" class="btn green-dark button-template"><i class="fa fa-download" aria-hidden="true"></i><g:message code="default.import.template" default="Template"/></a>
+                                </div>
+                            </div>
+
+                            <div class="portlet-body">
+                                <div class="scroller" style="height:450px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                    <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
+                                                '<ul><li> The file to import must have the format <strong>.csv</strong>.</li>' +
+                                                '<li>The separator character must be the <strong>semicolon ;</strong>.</li>' +
+                                                '<li><strong>The first row is ignored </strong>, corresponding for example to the name of each field.</li>' +
+                                                '<li>Each field has the same restrictions as in its manual creation or editing (character limit, pattern to follow, etc.)</li>' +
+                                                '<li>At the end of the process, a result message is displayed.</li>' +
+                                                '<li>The import process may take several minutes depending on the size of the file.</li></ul>'))}
+                                    </p>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description.admin', default: 'To import correctly the admininstrators, you must follow the following scheme: <strong> Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> | Enabled account | Locked account | Expired account | Expired password</strong>; ' +
+                                                'where username and email must be unique, ie, be available. <br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
+                                    </p>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description.admin.recommendation', default: 'Fields that represents the state of the user account can have two values (<strong>true</strong> and <strong>false</strong>) depending on their activation or not, being recommended to enable the <strong>Enabled account</strong> by word: <strong>true</strong>.'))}
+                                    </p>
+                                </div>
+                            </div>
+                        </div> <!-- /. Portlet -->
                     </div>
+                </div>
 
-                    <g:javascript>
-                        createAutoClosingAlert('.alert-entity-error');
-                    </g:javascript>
-                </g:if>
-
-                <!-- Error in validation -->
-                <g:hasErrors bean="${userInstance}">
-                    <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
-                        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <g:eachError bean="${userInstance}" var="error">
-                            <p role="status" class="xthin" <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></p>
-                        </g:eachError>
-                    </div>
-
-                    <g:javascript>
-                        createAutoClosingAlert('.alert-entity-error');
-                    </g:javascript>
-                </g:hasErrors>
-
-                <!-- Delete button -->
-                <g:form url="[resource:userInstance, controller:'user', action:'delete']" method="DELETE" class="form-delete">
-                    <div class="btn-group delete-confirm-popover-custom">
-                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
-                                data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
-                                data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
-                                data-btnOkIcon="glyphicon glyphicon-ok" data-btnOkClass="btn btn-sm btn-success"
-                                data-btnCancelIcon="glyphicon glyphicon-remove" data-btnCancelClass="btn btn-sm btn-danger">
-                            <i class="fa fa-trash"></i>
-                            <g:message code="layouts.main_auth_admin.body.content.user.delete" default="Delete user"/>
-                        </button>
-                    </div>
-                    <p class="delete-text">
-                        <g:message code="default.delete.relation.user.evaluation.message" default="Important! Remember that deleting an user, all associated evaluations are eliminated."/>
-                    </p>
-                </g:form>
-
-                <!-- Edit form -->
-                <g:form url="[resource:userInstance, action:'update']" method="PUT" autocomplete="on" class="horizontal-form user-form">
-                    <g:hiddenField name="version" value="${userInstance?.version}" />
-                    <fieldset class="form">
-                        <g:render template="formEdit"/>
-                    </fieldset>
-                    <div class="domain-button-group">
-                        <!-- Cancel button -->
-                        <g:link type="button" uri="/user" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
-                        <button type="submit" class="btn green-dark" name="update">
-                            <i class="fa fa-check"></i>
-                            <g:message code="default.button.update.label" default="Update"/>
-                        </button>
-                    </div>
-                </g:form>
+                <!-- Select button -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-10 col-lg-offset-1">
+                        <!-- Upload CSV file -->
+                        <g:uploadForm uri="/administrator/uploadFile" class="admin-import-form">
+                            <div class="fileinput fileinput-new fileinput-import" data-provides="fileinput">
+                                <div class="input-group btn-block input-import">
+                                    <div class="form-control uneditable-input input-fixed" data-trigger="fileinput">
+                                        <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                        <span class="fileinput-filename"> </span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-block grey-gallery btn-file">
+                                        <span class="fileinput-new"><g:message code="default.import.select.button" default="Select file"/></span>
+                                        <span class="fileinput-exists"><g:message code="default.imageProfile.change" default="Change"/></span>
+                                        <input type="file" accept="text/csv" name="importFileAdmin" id="importFileAdmin" required>
+                                    </span>
+                                    <a href="javascript:;" class="input-group-addon btn red-soft fileinput-exists" data-dismiss="fileinput"><g:message code="default.imageProfile.remove" default="Remove"/></a>
+                                </div>
+                            </div>
+                            <!-- Submit button -->
+                            <div class="importData-button">
+                                <button type="submit" name="admin-import-button" id="admin-import-button" class="btn green-dark btn-block">
+                                    <i class="fa fa-refresh fa-lg refresh-icon-stop refreshIcon"></i>
+                                    <span><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                                </button>
+                            </div>
+                        </g:uploadForm>
+                    </div> <!-- /.Col -->
+                </div> <!-- /.Row -->
             </div> <!-- /.Content page -->
         </div> <!-- /.Page-content -->
     </div> <!-- /. Page-content-wrapper -->
 
-    <!-- LOAD JAVASCRIPT -->
-    <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
-    <g:javascript src="confirmation/custom-delete.js"/>
-    <g:javascript src="iCheck/icheck.min.js"/>
-    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
-    <g:javascript src="select/bootstrap-select.min.js"/>
-    <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
-    <g:javascript src="date/bootstrap-datepicker.min.js"/>
-    <g:javascript src="date/bootstrap-datepicker.es.min.js"/>
-    <g:javascript src="select/jquery.multi-select.js"/>
-    <g:javascript src="customIcons/user-handler.js"/>
-    <g:javascript src="domain-validation/user-validation.js"/>
+    <g:javascript src="fileInput/bootstrap-fileinput.js"/>
+    <g:javascript src="import-validation/adminImport-validation.js"/>
 
 </body>
 </html>

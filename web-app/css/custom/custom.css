@@ -90,6 +90,10 @@ input:-webkit-autofill:active {
     margin-top: 40px;
 }
 
+.panel-row-import {
+    margin-top: 40px;
+}
+
 .space-checkboxCol {
     margin-top: 10px;
 }
@@ -207,6 +211,23 @@ input:-webkit-autofill:active {
 
 .show-title {
     border-bottom: 1px solid #99BD97;
+}
+
+.button-template {
+    margin-top: 2px;
+    float: right;
+    display: inline-block;
+    right: 10px;
+}
+
+/* Import functionality */
+.fileinput-import {
+    margin: 35px 0 0 0;
+    display: block !important;
+}
+
+.importData-button {
+    margin: 40px 0 40px 0;
 }
 
 /* Multi-select - Create view
@@ -1034,6 +1055,25 @@ input:-webkit-autofill:active {
     }
 }
 
+/* Max-width: 660px */
+@media (max-width: 660px) {
+
+    .input-import {
+        display: inline !important;
+    }
+}
+
+/* Max-width: 485px */
+@media (max-width: 485px) {
+
+    .button-template {
+        margin: 2px 0 10px 0;
+        float: right;
+        display: inline-block;
+        right: -58px;
+    }
+}
+
 /* Max-width: 480px */
 @media (max-width: 480px) {
 
@@ -1154,6 +1194,17 @@ input:-webkit-autofill:active {
     .portlet-scoreSex .portlet-body .scroller,
     .portlet-scoresTest .portlet-body .scroller {
         height: 275px !important;
+    }
+}
+
+/* Max-width: 377px */
+@media (max-width: 377px) {
+
+    .button-template {
+        float: right;
+        display: inline-block;
+        margin: 2px 0 10px 0;
+        right: 5px;
     }
 }
 

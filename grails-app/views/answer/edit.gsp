@@ -99,6 +99,12 @@
 								<span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
 							</g:link>
 						</li>
+						<li class="nav-item">
+							<g:link uri="/administrator/import" class="nav-link">
+								<i class="fa fa-cloud-upload"></i>
+								<span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+							</g:link>
+						</li>
 					</ul>
 				</li>
 

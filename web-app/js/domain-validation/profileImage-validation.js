@@ -25,7 +25,7 @@ var DomainProfileImageValidation = function () {
                 messages: {
                     avatar: {
                         required: _requiredField
-                    },
+                    }
                 },
 
                 // Render error placement for each input type

@@ -151,6 +151,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/**/css/**':       ['permitAll'],
     '/**/images/**':    ['permitAll'],
     '/**/favicon.ico':  ['permitAll'],
+    // CSV templates
+    '/**/files/**':     ['ROLE_ADMIN'],
 
     /* Login controller
     ======================================================*/
@@ -209,6 +211,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksBackend/userEachDepartment':  ['ROLE_ADMIN'],
     '/customTasksBackend/scoresRank':          ['ROLE_ADMIN'],
     '/customTasksBackend/averageScoreSex':     ['ROLE_ADMIN'],
+    '/customTasksBackend/scoresTest':          ['ROLE_ADMIN'],
         // TODO
     '/customTasksBackend/profileImage':        ['ROLE_ADMIN', 'ROLE_USER'],
     '/customTasksBackend/reloadLogConfig':     ['ROLE_ADMIN'],

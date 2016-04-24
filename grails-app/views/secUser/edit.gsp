@@ -105,6 +105,12 @@
                                 <span class="selected"></span>
                             </g:link>
                         </li>
+                        <li class="nav-item">
+                            <g:link uri="/administrator/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                            </g:link>
+                        </li>
                     </ul>
                 </li>
 
@@ -234,7 +240,6 @@
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-pencil"></i>
                         <span class="title"><g:message code="layouts.main_auth_admin.sidebar.answer" default="Answer"/></span>
-                        <span class="selected"></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">

@@ -75,6 +75,8 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:2.5.7"
         // Cache
         compile ':cache:1.1.8'
+        // CSV
+        compile ":csv:0.3.1"
         // Brute force Defender
         compile "org.grails.plugins:bruteforce-defender:1.1"
         // Jasypt encryption

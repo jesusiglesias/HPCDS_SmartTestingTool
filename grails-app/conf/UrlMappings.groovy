@@ -28,6 +28,8 @@ class UrlMappings {
             "/edit-error/$id?(.$format)?"(controller: 'secUser', action: 'update')
             "/edit/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'editProfileImage')
             "/edit-error/profileImage/$id?(.$format)?"(controller: 'secUser', action: 'updateProfileImage')
+            "/import"(controller: 'secUser', action: 'importAdmin')
+            "/uploadFile"(controller: 'secUser', action: 'uploadFileAdmin')
         }
         // User - Grouping URLs
         group("/user") {
