@@ -162,50 +162,53 @@
         // It draws the chart pie when the window resizes
         function drawChartResizeTS() {
 
-            // Create the data table out of JSON data loaded from server
-            var dataResizeTS = google.visualization.arrayToDataTable([
-                [_SRTitle, _SRSubtitle, { role: "style" } ],
-                [_TSZero, dataJSONTS.zero, "#4DB3A2"],
-                [_TSOne, dataJSONTS.one, "#4DB3A2"],
-                [_TSTwo, dataJSONTS.two, "#4DB3A2"],
-                [_TSThree, dataJSONTS.three, "#4DB3A2"],
-                [_TSFour, dataJSONTS.four, "#4DB3A2"],
-                [_TSFive, dataJSONTS.five, "#4DB3A2"],
-                [_TSSix, dataJSONTS.six, "#4DB3A2"],
-                [_TSSeven, dataJSONTS.seven, "#4DB3A2"],
-                [_TSEight, dataJSONTS.eight, "#4DB3A2"],
-                [_TSNine, dataJSONTS.nine, "#4DB3A2"]
-            ]);
+            if (dataJSONTS != null) {
 
-            var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
-            var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
+                // Create the data table out of JSON data loaded from server
+                var dataResizeTS = google.visualization.arrayToDataTable([
+                    [_SRTitle, _SRSubtitle, { role: "style" } ],
+                    [_TSZero, dataJSONTS.zero, "#4DB3A2"],
+                    [_TSOne, dataJSONTS.one, "#4DB3A2"],
+                    [_TSTwo, dataJSONTS.two, "#4DB3A2"],
+                    [_TSThree, dataJSONTS.three, "#4DB3A2"],
+                    [_TSFour, dataJSONTS.four, "#4DB3A2"],
+                    [_TSFive, dataJSONTS.five, "#4DB3A2"],
+                    [_TSSix, dataJSONTS.six, "#4DB3A2"],
+                    [_TSSeven, dataJSONTS.seven, "#4DB3A2"],
+                    [_TSEight, dataJSONTS.eight, "#4DB3A2"],
+                    [_TSNine, dataJSONTS.nine, "#4DB3A2"]
+                ]);
 
-            var viewTSResize = new google.visualization.DataView(dataResizeTS);
-            viewTSResize.setColumns([0, 1,
-                { calc: "stringify",
-                    sourceColumn: 1,
-                    type: "string",
-                    role: "annotation" },
-                2]);
+                var chartHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 'px';
+                var chartWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + 'px';
 
-            var options = {
-                fontName: "Open Sans",
-                chartArea: {width: '90%', height: '75%'},
-                legend: "none",
-                height: chartHeight,
-                width: chartWidth,
-                backgroundColor: {fill: "transparent"},
-                vAxis: {
-                    minValue: 0,
-                    maxValue: 10,
-                    gridlines:{count:6},
-                    format:'0'
-                }
-            };
+                var viewTSResize = new google.visualization.DataView(dataResizeTS);
+                viewTSResize.setColumns([0, 1,
+                    { calc: "stringify",
+                        sourceColumn: 1,
+                        type: "string",
+                        role: "annotation" },
+                    2]);
 
-            // Instantiate and draw the chart, passing in some options
-            var chartTSResize =  new google.visualization.ColumnChart(document.getElementById('chart_TS'));
-            chartTSResize.draw(viewTSResize, options);
+                var options = {
+                    fontName: "Open Sans",
+                    chartArea: {width: '90%', height: '75%'},
+                    legend: "none",
+                    height: chartHeight,
+                    width: chartWidth,
+                    backgroundColor: {fill: "transparent"},
+                    vAxis: {
+                        minValue: 0,
+                        maxValue: 10,
+                        gridlines:{count:6},
+                        format:'0'
+                    }
+                };
+
+                // Instantiate and draw the chart, passing in some options
+                var chartTSResize =  new google.visualization.ColumnChart(document.getElementById('chart_TS'));
+                chartTSResize.draw(viewTSResize, options);
+            }
         }
 
         // It draws the chart pie (user in each department)
@@ -612,6 +615,12 @@
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                             </g:link>
                         </li>
+                        <li class="nav-item">
+                            <g:link uri="/administrator/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                            </g:link>
+                        </li>
                     </ul>
                 </li>
 
@@ -741,7 +750,6 @@
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-pencil"></i>
                         <span class="title"><g:message code="layouts.main_auth_admin.sidebar.answer" default="Answer"/></span>
-                        <span class="selected"></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
