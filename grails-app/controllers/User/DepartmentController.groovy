@@ -14,7 +14,7 @@ class DepartmentController {
 
     def CustomDeleteService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", uploadFileDepartment: "POST"]
 
     // Default value of pagination
     @Value('${paginate.defaultValue:10}')
@@ -252,5 +252,24 @@ class DepartmentController {
             ]
         }
         render responseData as JSON
+    }
+
+    /**
+     * It shows the department import page.
+     */
+    def importDepartment () {
+        log.debug("CustomTasksBackendController:importDepartment()")
+
+        render view: 'import'
+    }
+
+    /**
+     * It processes the import functionality.
+     */
+    def uploadFileDepartment () {
+        log.debug("CustomTasksBackendController:uploadFileDepartment()")
+
+        sleep(10000)
+
     }
 }

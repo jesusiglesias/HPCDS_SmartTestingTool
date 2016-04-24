@@ -1,29 +1,3 @@
-
-
-
-
-				</thead>
-				<tbody>
-				<g:each in="${testInstanceList}" status="i" var="testInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${testInstance.id}">${fieldValue(bean: testInstance, field: "active")}</g:link></td>
-					
-						<td>${fieldValue(bean: testInstance, field: "description")}</td>
-					
-						<td><g:formatDate date="${testInstance.endDate}" /></td>
-					
-						<td><g:formatDate date="${testInstance.initDate}" /></td>
-					
-						<td>${fieldValue(bean: testInstance, field: "lockTime")}</td>
-					
-						<td>${fieldValue(bean: testInstance, field: "maxAttempts")}</td>
-					
-					</tr>
-				</g:each>
-
-
-
 <%@ page import="Test.Test" %>
 <!DOCTYPE html>
 <html>
@@ -212,6 +186,12 @@
 								<span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
 							</g:link>
 						</li>
+						<li class="nav-item">
+							<g:link uri="/department/import" class="nav-link">
+								<i class="fa fa-cloud-upload"></i>
+								<span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+							</g:link>
+						</li>
 					</ul>
 				</li>
 
@@ -233,6 +213,12 @@
 							<g:link uri="/topic" class="nav-link">
 								<i class="fa fa-list"></i>
 								<span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
+							</g:link>
+						</li>
+						<li class="nav-item">
+							<g:link uri="/topic/import" class="nav-link">
+								<i class="fa fa-cloud-upload"></i>
+								<span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
 							</g:link>
 						</li>
 					</ul>
@@ -302,6 +288,12 @@
 							<g:link uri="/answer" class="nav-link">
 								<i class="fa fa-list"></i>
 								<span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
+							</g:link>
+						</li>
+						<li class="nav-item">
+							<g:link uri="/answer/import" class="nav-link">
+								<i class="fa fa-cloud-upload"></i>
+								<span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
 							</g:link>
 						</li>
 					</ul>

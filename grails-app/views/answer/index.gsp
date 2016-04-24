@@ -198,6 +198,12 @@
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                             </g:link>
                         </li>
+                        <li class="nav-item">
+                            <g:link uri="/department/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                            </g:link>
+                        </li>
                     </ul>
                 </li>
 
@@ -219,6 +225,12 @@
                             <g:link uri="/topic" class="nav-link">
                                 <i class="fa fa-list"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
+                            </g:link>
+                        </li>
+                        <li class="nav-item">
+                            <g:link uri="/topic/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
                             </g:link>
                         </li>
                     </ul>
@@ -290,6 +302,12 @@
                                 <i class="fa fa-list"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                                 <span class="selected"></span>
+                            </g:link>
+                        </li>
+                        <li class="nav-item">
+                            <g:link uri="/answer/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
                             </g:link>
                         </li>
                     </ul>

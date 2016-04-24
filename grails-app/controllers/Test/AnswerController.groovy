@@ -14,7 +14,7 @@ class AnswerController {
 
     def CustomDeleteService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", uploadFileAnswer: "POST"]
 
     // Default value of pagination
     @Value('${paginate.defaultValue:10}')
@@ -262,6 +262,25 @@ class AnswerController {
             ]
         }
         render responseData as JSON
+    }
+
+    /**
+     * It shows the answer import page.
+     */
+    def importAnswer () {
+        log.debug("CustomTasksBackendController:importAnswer()")
+
+        render view: 'import'
+    }
+
+    /**
+     * It processes the import functionality.
+     */
+    def uploadFileAnswer () {
+        log.debug("CustomTasksBackendController:uploadFileAnswer()")
+
+        sleep(10000)
+
     }
 }
 

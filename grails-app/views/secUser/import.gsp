@@ -1,4 +1,3 @@
-<%@ page import="Security.SecUser" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -158,6 +157,12 @@
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                             </g:link>
                         </li>
+                        <li class="nav-item">
+                            <g:link uri="/department/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                            </g:link>
+                        </li>
                     </ul>
                 </li>
 
@@ -179,6 +184,12 @@
                             <g:link uri="/topic" class="nav-link">
                                 <i class="fa fa-list"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
+                            </g:link>
+                        </li>
+                        <li class="nav-item">
+                            <g:link uri="/topic/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
                             </g:link>
                         </li>
                     </ul>
@@ -248,6 +259,12 @@
                             <g:link uri="/answer" class="nav-link">
                                 <i class="fa fa-list"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
+                            </g:link>
+                        </li>
+                        <li class="nav-item">
+                            <g:link uri="/answer/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
                             </g:link>
                         </li>
                     </ul>
@@ -343,7 +360,6 @@
 
             <!-- Contain page -->
             <div id="list-panel">
-
                 <div class="row panel-row-import">
                     <div class="col-md-12 col-lg-10 col-lg-offset-1">
 
@@ -362,7 +378,7 @@
                                     <a href="" class="remove"> </a>
                                 </div>
                                 <div>
-                                    <a href="${resource(dir: 'files', file: 'STT_AdministratorsTemplate.csv')}" download="" class="btn green-dark button-template"><i class="fa fa-download" aria-hidden="true"></i><g:message code="default.import.template" default="Template"/></a>
+                                    <a href="${resource(dir: 'files', file: 'STT_AdministratorTemplate.csv')}" download="" class="btn green-dark button-template"><i class="fa fa-download" aria-hidden="true"></i><g:message code="default.import.template" default="Template"/></a>
                                 </div>
                             </div>
 
@@ -371,7 +387,7 @@
                                     <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
-                                                '<ul><li> The file to import must have the format <strong>.csv</strong>.</li>' +
+                                                '<ul><li>The file to import must have the format <strong>.csv</strong>.</li>' +
                                                 '<li>The separator character must be the <strong>semicolon ;</strong>.</li>' +
                                                 '<li><strong>The first row is ignored </strong>, corresponding for example to the name of each field.</li>' +
                                                 '<li>Each field has the same restrictions as in its manual creation or editing (character limit, pattern to follow, etc.)</li>' +
@@ -379,7 +395,8 @@
                                                 '<li>The import process may take several minutes depending on the size of the file.</li></ul>'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.admin', default: 'To import correctly the admininstrators, you must follow the following scheme: <strong> Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> | Enabled account | Locked account | Expired account | Expired password</strong>; ' +
+                                        ${raw(g.message(code: 'default.import.description.admin', default: 'To import correctly the admininstrators, you must follow the following scheme: <strong>| Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> | Enabled account<span style="color: #D05454">*</span> | Locked account<span style="color: #D05454">*</span>' +
+                                                ' | Expired account<span style="color: #D05454">*</span> | Expired password<span style="color: #D05454">*</span> | </strong>; ' +
                                                 'where username and email must be unique, ie, be available. <br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
                                     </p>
                                     <p>

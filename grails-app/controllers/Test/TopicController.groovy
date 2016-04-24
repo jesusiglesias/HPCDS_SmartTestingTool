@@ -14,7 +14,7 @@ class TopicController {
 
     def CustomDeleteService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", uploadFileTopic: "POST"]
 
     // Default value of pagination
     @Value('${paginate.defaultValue:10}')
@@ -250,5 +250,24 @@ class TopicController {
             ]
         }
         render responseData as JSON
+    }
+
+    /**
+     * It shows the topic import page.
+     */
+    def importTopic () {
+        log.debug("CustomTasksBackendController:importTopic()")
+
+        render view: 'import'
+    }
+
+    /**
+     * It processes the import functionality.
+     */
+    def uploadFileTopic () {
+        log.debug("CustomTasksBackendController:uploadFileTopic()")
+
+        sleep(10000)
+
     }
 }

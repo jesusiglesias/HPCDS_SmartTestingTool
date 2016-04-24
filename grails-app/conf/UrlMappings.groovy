@@ -42,11 +42,15 @@ class UrlMappings {
         group("/department") {
             "/create-error"(controller: 'department', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'department', action: 'update')
+            "/import"(controller: 'department', action: 'importDepartment')
+            "/uploadFile"(controller: 'department', action: 'uploadFileDepartment')
         }
         // Topic - Grouping URLs
         group("/topic") {
             "/create-error"(controller: 'topic', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'topic', action: 'update')
+            "/import"(controller: 'topic', action: 'importTopic')
+            "/uploadFile"(controller: 'topic', action: 'uploadFileTopic')
         }
         // Catalog - Grouping URLs
         group("/catalog") {
@@ -62,6 +66,8 @@ class UrlMappings {
         group("/answer") {
             "/create-error"(controller: 'answer', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'answer', action: 'update')
+            "/import"(controller: 'answer', action: 'importAnswer')
+            "/uploadFile"(controller: 'answer', action: 'uploadFileAnswer')
         }
         // Test - Grouping URLs
         group("/test") {
