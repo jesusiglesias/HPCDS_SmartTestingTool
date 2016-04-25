@@ -34,6 +34,8 @@
 
         // Load the Visualization API and the piechart package.
         google.charts.load("current", {packages:['corechart']});
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.setOnLoadCallback(drawVisualization);
 
         var dataJSONUD, dataJSONSR, dataJSONAVS, dataJSONTS;
 
@@ -53,9 +55,6 @@
             drawChartScoresRank();
             drawChartAVScoreSex();
         }
-
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.setOnLoadCallback(drawVisualization);
 
         // It draws the chart pie when the window resizes
         function drawChartResize() {

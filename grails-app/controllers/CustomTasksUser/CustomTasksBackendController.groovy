@@ -233,8 +233,7 @@ class CustomTasksBackendController {
         log.debug("CustomTasksBackendController:scoresTest()")
 
         // Obtaining number of scores of test - [0-1)
-        def criteriaZero = Test.createCriteria()
-        def resultZero = criteriaZero.list {
+        def criteriaZero = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 0 as Float)
@@ -244,13 +243,12 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultZero = criteriaZero.get()
         def zero = resultZero.getAt(0)
 
         // Obtaining number of scores of test - [1-2)
-        def criteriaOne = Test.createCriteria()
-        def resultOne = criteriaOne.list {
+        def criteriaOne = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 1 as Float)
@@ -260,13 +258,12 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultOne = criteriaOne.get()
         def one = resultOne.getAt(0)
 
         // Obtaining number of scores of test - [2-3)
-        def criteriaTwo = Test.createCriteria()
-        def resultTwo = criteriaTwo.list {
+        def criteriaTwo = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 2 as Float)
@@ -276,13 +273,12 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultTwo = criteriaTwo.get()
         def two = resultTwo.getAt(0)
 
         // Obtaining number of scores of test - [3-4)
-        def criteriaThree = Test.createCriteria()
-        def resultThree = criteriaThree.list {
+        def criteriaThree = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 3 as Float)
@@ -292,13 +288,12 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultThree = criteriaThree.get()
         def three = resultThree.getAt(0)
 
         // Obtaining number of scores of test - [4-5)
-        def criteriaFour = Test.createCriteria()
-        def resultFour = criteriaFour.list {
+        def criteriaFour = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 4 as Float)
@@ -308,13 +303,12 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultFour = criteriaFour.get()
         def four = resultFour.getAt(0)
 
         // Obtaining number of scores of test - [5-6)
-        def criteriaFive = Test.createCriteria()
-        def resultFive = criteriaFive.list {
+        def criteriaFive = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 5 as Float)
@@ -324,13 +318,12 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultFive = criteriaFive.get()
         def five = resultFive.getAt(0)
 
         // Obtaining number of scores of test - [6-7)
-        def criteriaSix = Test.createCriteria()
-        def resultSix = criteriaSix.list {
+        def criteriaSix = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 6 as Float)
@@ -340,13 +333,12 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultSix = criteriaSix.get()
         def six = resultSix.getAt(0)
 
         // Obtaining number of scores of test - [7-8)
-        def criteriaSeven = Test.createCriteria()
-        def resultSeven = criteriaSeven.list {
+        def criteriaSeven = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 7 as Float)
@@ -356,13 +348,12 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultSeven = criteriaSeven.get()
         def seven = resultSeven.getAt(0)
 
         // Obtaining number of scores of test - [8-9)
-        def criteriaEight = Test.createCriteria()
-        def resultEight = criteriaEight.list {
+        def criteriaEight = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 8 as Float)
@@ -372,13 +363,12 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultEight = criteriaEight.get()
         def eight = resultEight.getAt(0)
 
         // Obtaining number of scores of test - [9-10]
-        def criteriaNine = Test.createCriteria()
-        def resultNine = criteriaNine.list {
+        def criteriaNine = Test.async.withCriteria() {
             eq 'name', params.test
             evaluationsTest {
                 ge("testScore", 9 as Float)
@@ -388,8 +378,8 @@ class CustomTasksBackendController {
                 count()
             }
         }
-
         // It obtains result of promise
+        def resultNine = criteriaNine.get()
         def nine = resultNine.getAt(0)
 
         def dataTS = [
