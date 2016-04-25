@@ -87,6 +87,8 @@ grails.project.dependency.resolution = {
         compile "org.grails.plugins:spring-security-core:2.0.0"
         // Scaffolding method
         compile ":scaffolding:2.1.2"
+        // Tika
+        compile ":tika-parser:1.9.0"
 
         // Plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.10" // or ":hibernate:3.6.10.18"

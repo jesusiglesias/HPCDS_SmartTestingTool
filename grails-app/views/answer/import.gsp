@@ -389,6 +389,7 @@
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
                                                 '<ul><li>The file to import must have the format <strong>.csv</strong>.</li>' +
                                                 '<li>The separator character must be the <strong>semicolon ;</strong>.</li>' +
+                                                '<li>The set of coding used is: <strong>UTF-8</strong>.</li>' +
                                                 '<li><strong>The first row is ignored </strong>, corresponding for example to the name of each field.</li>' +
                                                 '<li>Each field has the same restrictions as in its manual creation or editing (character limit, pattern to follow, etc.)</li>' +
                                                 '<li>At the end of the process, a result message is displayed.</li>' +
