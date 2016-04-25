@@ -376,13 +376,13 @@
                         </g:if>
 
                         <g:if test="${flash.departmentImportMessage}">
-                            <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity alert-entity-success fade in'>
+                            <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity alert-entity-info fade in'>
                                 <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
                                 <span class="xthin" role="status">${raw(flash.departmentImportMessage)}</span>
                             </div>
 
                             <g:javascript>
-                                createAutoClosingAlert('.alert-entity-success');
+                                createAutoClosingAlert('.alert-entity-info');
                             </g:javascript>
                         </g:if>
 

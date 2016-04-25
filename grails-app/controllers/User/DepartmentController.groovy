@@ -260,7 +260,7 @@ class DepartmentController {
      * It shows the department import page.
      */
     def importDepartment () {
-        log.debug("CustomTasksBackendController:importDepartment()")
+        log.debug("DepartmentController():importDepartment()")
 
         render view: 'import'
     }
@@ -270,7 +270,7 @@ class DepartmentController {
      */
     @Transactional
     def uploadFileDepartment () {
-        log.debug("CustomTasksBackendController:uploadFileDepartment()")
+        log.debug("DepartmentController():uploadFileDepartment()")
 
         // Record counter
         def lineCounter = 0
@@ -286,7 +286,7 @@ class DepartmentController {
 
         // ID fields (attribute) does not used
         totalNumberFields = numberFields - 1
-        log.debug("CustomTasksBackendController:uploadFileDepartment():numberFieldsClass:${totalNumberFields}")
+        log.debug("DepartmentController():uploadFileDepartment():numberFieldsClass:${totalNumberFields}")
 
         // Obtain file
         def csvFileLoad = request.getFile("importFileDepartment")
@@ -306,11 +306,11 @@ class DepartmentController {
         csvFileLoad.storageDescription
         */
 
-        log.debug("CustomTasksBackendController:uploadFileDepartment():contentTypeFile:${csvContentType}")
+        log.debug("DepartmentController():uploadFileDepartment():contentTypeFile:${csvContentType}")
 
         // Check CSV type - Global
         if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
-            log.error("CustomTasksBackendController():uploadFileDepartment():csvContentType!=CSV&&checkExtension!=CSV")
+            log.error("DepartmentController():uploadFileDepartment():csvContentType!=CSV&&checkExtension!=CSV")
 
             flash.departmentImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>\".csv\"</strong>.", args: ["${csvFilename}"])
             redirect uri: '/department/import'
@@ -319,7 +319,7 @@ class DepartmentController {
 
         // File empty
         if (csvFileLoad.isEmpty()) {
-            log.error("CustomTasksBackendController():uploadFileDepartment():csvFileLoad.isEmpty()")
+            log.error("DepartmentController():uploadFileDepartment():csvFileLoad.isEmpty()")
 
             flash.departmentImportErrorMessage = g.message(code: "default.import.error.empty", default: "<strong>{0}</strong> file is empty.", args: ["${csvFilename}"])
             redirect uri: '/department/import'
@@ -337,7 +337,7 @@ class DepartmentController {
 
                     // It checks name because is unique
                     if(Department.findByName(tokens[0].trim())){
-                        log.error("CustomTasksBackendController():uploadFileDepartment():toCsvReader():recordsExists")
+                        log.error("DepartmentController():uploadFileDepartment():toCsvReader():recordsExists")
 
                         existingFieldsList.push(lineCounter)
 
@@ -350,17 +350,17 @@ class DepartmentController {
 
                         // Error in save record CSV
                         if (!instanceCSV) {
-                            log.error("CustomTasksBackendController():uploadFileDepartment():errorSave:!instanceCSV")
+                            log.error("DepartmentController():uploadFileDepartment():errorSave:!instanceCSV")
 
                             transactionStatus.setRollbackOnly()
 
                             if (departmentInstace?.hasErrors()) {
-                                log.error("CustomTasksBackendController():uploadFileDepartment():!contactCSV.hasErrors():Validation")
+                                log.error("DepartmentController():uploadFileDepartment():!contactCSV.hasErrors():Validation")
 
                                 flash.departmentImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
 
                             } else {
-                                log.error("CustomTasksBackendController():uploadFileDepartment():!contactCSV.Error:NotSaved")
+                                log.error("DepartmentController():uploadFileDepartment():!contactCSV.Error:NotSaved")
 
                                 flash.departmentImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
                             }
@@ -369,7 +369,7 @@ class DepartmentController {
                     }
 
                 } else {
-                    log.error("CustomTasksBackendController():uploadFileDepartment():recordCSV!=totalNumberFields")
+                    log.error("DepartmentController():uploadFileDepartment():recordCSV!=totalNumberFields")
 
                     transactionStatus.setRollbackOnly()
 
@@ -393,7 +393,7 @@ class DepartmentController {
 
         // Single header file
         if (lineCounter == 0) {
-            log.error("CustomTasksBackendController():uploadFileDepartment():lineCounter==0")
+            log.error("DepartmentController():uploadFileDepartment():lineCounter==0")
 
             flash.departmentImportErrorMessage = g.message(code: "default.import.error.lineCounter", default: "<strong>{0}</strong> file does not contain any record. It only contains the header.", args: ["${csvFilename}"])
             redirect uri: '/department/import'
@@ -401,18 +401,18 @@ class DepartmentController {
         } else {
 
             if (existingFieldsList.size() == 0) { // Any previously existing record
-                log.debug("CustomTasksBackendController():uploadFileDepartment():lineCounter!=0:${lineCounter}recordsImported")
+                log.debug("DepartmentController():uploadFileDepartment():lineCounter!=0:${lineCounter}recordsImported")
 
                 flash.departmentImportMessage = g.message(code: "default.import.success", default: "<strong>{0}</strong> file has been imported correctly - Records imported: <strong>{1}</strong>.", args: ["${csvFilename}", "${lineCounter}"])
 
             } else if (lineCounter - existingFieldsList.size() == 0){ // Any record imported
-                log.debug("CustomTasksBackendController():uploadFileDepartment():lineCounter!=0:anyRecordImported")
+                log.debug("DepartmentController():uploadFileDepartment():lineCounter!=0:anyRecordImported")
 
                 flash.departmentImportMessage = g.message(code: 'default.import.success.allRecords.exist', default: '<strong>{0}</strong> file has been processed correctly. However it has not imported any records because all previously ' +
                         'existed in the system. Total number of records in the file: <strong>{1}</strong>.', args: ["${csvFilename}", "${lineCounter}"])
 
             } else { // Some previously existing records
-                log.debug("CustomTasksBackendController():uploadFileDepartment():lineCounter!=0:${lineCounter}:numberExistingFields:${existingFieldsList.size()}")
+                log.debug("DepartmentController():uploadFileDepartment():lineCounter!=0:${lineCounter}:numberExistingFields:${existingFieldsList.size()}")
 
                 flash.departmentImportMessage = g.message(code: 'default.import.success.someRecords.exist', default: '<strong>{0}</strong> file has been imported correctly.<br/><ul><li><strong>Total number of records:</strong> {1}.</li>' +
                         '<li><strong>Number of imported records:</strong> {2}.</li><li><strong>Number of existing records:</strong> {3}.</li></ul>', args: ["${csvFilename}", "${lineCounter}", "${lineCounter - existingFieldsList.size()}", "${existingFieldsList.size()}"])
