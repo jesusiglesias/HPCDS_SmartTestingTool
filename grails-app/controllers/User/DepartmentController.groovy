@@ -284,7 +284,7 @@ class DepartmentController {
             numberFields ++
         }
 
-        // ID fields (attribute) does not used
+        // ID field (attribute) does not used
         totalNumberFields = numberFields - 1
         log.debug("DepartmentController():uploadFileDepartment():numberFieldsClass:${totalNumberFields}")
 
@@ -312,7 +312,7 @@ class DepartmentController {
         if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
             log.error("DepartmentController():uploadFileDepartment():csvContentType!=CSV&&checkExtension!=CSV")
 
-            flash.departmentImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>\".csv\"</strong>.", args: ["${csvFilename}"])
+            flash.departmentImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>.csv</strong>.", args: ["${csvFilename}"])
             redirect uri: '/department/import'
             return
         }
@@ -335,18 +335,18 @@ class DepartmentController {
                 // Each row has 1 column (name). Length of the row
                 if (tokens.length == totalNumberFields) {
 
-                    // It checks name because is unique
+                    // It checks the name because is an unique property
                     if(Department.findByName(tokens[0].trim())){
                         log.error("DepartmentController():uploadFileDepartment():toCsvReader():recordsExists")
 
                         existingFieldsList.push(lineCounter)
 
                     } else {
-                        Department departmentInstace = new Department(
+                        Department departmentInstance = new Department(
                                 name: tokens[0].trim()
                         )
 
-                        def instanceCSV = customImportService.saveRecordCSV(departmentInstace) // Assign "saveCSV" method to variable
+                        def instanceCSV = customImportService.saveRecordCSVDepartment(departmentInstance) // It saves the record
 
                         // Error in save record CSV
                         if (!instanceCSV) {
@@ -354,7 +354,7 @@ class DepartmentController {
 
                             transactionStatus.setRollbackOnly()
 
-                            if (departmentInstace?.hasErrors()) {
+                            if (departmentInstance?.hasErrors()) {
                                 log.error("DepartmentController():uploadFileDepartment():!contactCSV.hasErrors():Validation")
 
                                 flash.departmentImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])

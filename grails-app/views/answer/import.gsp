@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="${resource(dir: 'css/fileInput', file: 'bootstrap-fileinput.css')}" type="text/css"/>
 
     <script>
-        // Auto close alert TODO
+        // Auto close alert
         function createAutoClosingAlert(selector) {
             var alert = $(selector);
 
@@ -363,7 +363,28 @@
                 <div class="row panel-row-import">
                     <div class="col-md-12 col-lg-10 col-lg-offset-1">
 
-                        <!-- Alerts TODO -->
+                        <!-- Alerts -->
+                        <g:if test="${flash.answerImportErrorMessage}">
+                            <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
+                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+                                <span class="xthin" role="status">${raw(flash.answerImportErrorMessage)}</span>
+                            </div>
+
+                            <g:javascript>
+                                createAutoClosingAlert('.alert-entity-error');
+                            </g:javascript>
+                        </g:if>
+
+                        <g:if test="${flash.answerImportMessage}">
+                            <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity alert-entity-info fade in'>
+                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+                                <span class="xthin" role="status">${raw(flash.answerImportMessage)}</span>
+                            </div>
+
+                            <g:javascript>
+                                createAutoClosingAlert('.alert-entity-info');
+                            </g:javascript>
+                        </g:if>
 
                         <!-- Portlet -->
                         <div class="portlet light bg-inverse logConfig-portlet">
@@ -383,7 +404,7 @@
                             </div>
 
                             <div class="portlet-body">
-                                <div class="scroller" style="height:390px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                <div class="scroller" style="height:410px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
                                     <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +

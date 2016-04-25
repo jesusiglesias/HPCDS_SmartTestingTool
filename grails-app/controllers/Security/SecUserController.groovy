@@ -4,6 +4,7 @@ import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import static grails.async.Promises.*
+import org.apache.tika.Tika
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value
  */
 @Transactional(readOnly = true)
 class SecUserController {
+
+    def CustomImportService
 
     static allowedMethods = [save: "POST", update: "PUT", updateProfileImage: 'POST', delete: "DELETE", uploadFileAdmin: "POST"]
 
@@ -439,7 +442,7 @@ class SecUserController {
      * It shows the admin import page.
      */
     def importAdmin () {
-        log.debug("CustomTasksBackendController:importAdmin()")
+        log.debug("SecUserController():importAdmin()")
 
         render view: 'import'
     }
@@ -447,10 +450,162 @@ class SecUserController {
     /**
      * It processes the import functionality.
      */
+    @Transactional
     def uploadFileAdmin () {
-        log.debug("CustomTasksBackendController:uploadFileAdmin()")
+        log.debug("SecUserController():uploadFileAdmin()")
 
-        sleep(10000)
+        // Record counter
+        def lineCounter = 0
+        def existingFieldsList = []
+        def back = false
 
+        // Obtaining number of fields in the entity
+        def numberFields = 0
+        def totalNumberFields = 0
+        grailsApplication.getDomainClass('Security.SecUser').persistentProperties.collect {
+            numberFields ++
+        }
+
+        // ID field (attribute) does not used
+        totalNumberFields = numberFields - 3
+        log.debug("SecUserController():uploadFileAdmin():numberFieldsClass:${totalNumberFields}")
+
+        // Obtain file
+        def csvFileLoad = request.getFile("importFileAdmin")
+        // File name and content type
+        def csvFilename = csvFileLoad.originalFilename
+        def csvContentType = csvFileLoad.contentType
+
+        // getFile() fields
+        /*
+        csvFileLoad.contentType
+        csvFileLoad.originalFilename
+        csvFileLoad.name
+        csvFileLoad.size
+        csvFileLoad.bytes
+        csvFileLoad.isEmpty()
+        csvFileLoad.inputStream
+        csvFileLoad.storageDescription
+        */
+
+        log.debug("SecUserController():uploadFileAdmin():contentTypeFile:${csvContentType}")
+
+        // Check CSV type - Global
+        if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
+            log.error("SecUserController():uploadFileAdmin():csvContentType!=CSV&&checkExtension!=CSV")
+
+            flash.adminImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>.csv</strong>.", args: ["${csvFilename}"])
+            redirect uri: '/administrator/import'
+            return
+        }
+
+        // File empty
+        if (csvFileLoad.isEmpty()) {
+            log.error("SecUserController():uploadFileAdmin():csvFileLoad.isEmpty()")
+
+            flash.adminImportErrorMessage = g.message(code: "default.import.error.empty", default: "<strong>{0}</strong> file is empty.", args: ["${csvFilename}"])
+            redirect uri: '/administrator/import'
+            return
+        }
+
+        // Parse CSV file
+        try {
+            csvFileLoad.inputStream.text.toCsvReader(['separatorChar': ';', 'chartset': 'UTF-8', 'skipLines': 1]).eachLine { tokens ->
+
+                lineCounter++
+
+                // Each row has 7 columns. Length of the row
+                if (tokens.length == totalNumberFields) {
+
+                    // It checks the username and email because are unique properties
+                    if(SecUser.findByUsernameOrEmail(tokens[0].trim(), tokens[1].trim())){
+                        log.error("SecUserController():uploadFileAdmin():toCsvReader():recordsExists")
+
+                        existingFieldsList.push(lineCounter)
+
+                    } else {
+                        SecUser adminInstance = new SecUser(
+                                username: tokens[0].trim(),
+                                email: tokens[1].trim(),
+                                password: tokens[2].trim(),
+                                enabled: tokens[3].trim(),
+                                accountLocked: tokens[4].trim(),
+                                accountExpired: tokens[5].trim(),
+                                passwordExpired: tokens[6].trim()
+                        )
+
+                        def instanceCSV = customImportService.saveRecordCSVAdmin(adminInstance) // It saves the record
+
+                        // Error in save record CSV
+                        if (!instanceCSV) {
+                            log.error("SecUserController():uploadFileAdmin():errorSave:!instanceCSV")
+
+                            transactionStatus.setRollbackOnly()
+
+                            if (adminInstance?.hasErrors()) {
+                                log.error("SecUserController():uploadFileAdmin():!contactCSV.hasErrors():Validation")
+
+                                flash.adminImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
+
+                            } else {
+                                log.error("SecUserController():uploadFileAdmin():!contactCSV.Error:NotSaved")
+
+                                flash.adminImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                            }
+                            back = true
+                        }
+                    }
+
+                } else {
+                    log.error("SecUserController():uploadFileAdmin():recordCSV!=totalNumberFields")
+
+                    transactionStatus.setRollbackOnly()
+
+                    flash.adminImportErrorMessage = g.message(code: 'default.import.error.format', default: 'The file <strong>{0}</strong> contains records that has not the right format (number of columns).', args: ["${csvFilename}"])
+                    back = true
+                }
+
+                if (back) {
+                    throw new Exception()
+                }
+            } // Finish CsvReader
+
+        } catch (Exception e) {
+        }
+
+        // Stop the last line with error
+        if (back) {
+            redirect uri: '/administrator/import'
+            return
+        }
+
+        // Single header file
+        if (lineCounter == 0) {
+            log.error("SecUserController():uploadFileAdmin():lineCounter==0")
+
+            flash.adminImportErrorMessage = g.message(code: "default.import.error.lineCounter", default: "<strong>{0}</strong> file does not contain any record. It only contains the header.", args: ["${csvFilename}"])
+            redirect uri: '/administrator/import'
+
+        } else {
+
+            if (existingFieldsList.size() == 0) { // Any previously existing record
+                log.debug("SecUserController():uploadFileAdmin():lineCounter!=0:${lineCounter}recordsImported")
+
+                flash.adminImportMessage = g.message(code: "default.import.success", default: "<strong>{0}</strong> file has been imported correctly - Records imported: <strong>{1}</strong>.", args: ["${csvFilename}", "${lineCounter}"])
+
+            } else if (lineCounter - existingFieldsList.size() == 0){ // Any record imported
+                log.debug("SecUserController():uploadFileAdmin():lineCounter!=0:anyRecordImported")
+
+                flash.adminImportMessage = g.message(code: 'default.import.success.allRecords.exist', default: '<strong>{0}</strong> file has been processed correctly. However it has not imported any records because all previously ' +
+                        'existed in the system. Total number of records in the file: <strong>{1}</strong>.', args: ["${csvFilename}", "${lineCounter}"])
+
+            } else { // Some previously existing records
+                log.debug("SecUserController():uploadFileAdmin():lineCounter!=0:${lineCounter}:numberExistingFields:${existingFieldsList.size()}")
+
+                flash.adminImportMessage = g.message(code: 'default.import.success.someRecords.exist', default: '<strong>{0}</strong> file has been imported correctly.<br/><ul><li><strong>Total number of records:</strong> {1}.</li>' +
+                        '<li><strong>Number of imported records:</strong> {2}.</li><li><strong>Number of existing records:</strong> {3}.</li></ul>', args: ["${csvFilename}", "${lineCounter}", "${lineCounter - existingFieldsList.size()}", "${existingFieldsList.size()}"])
+            }
+            redirect uri: '/administrator/import'
+        }
     }
 }
