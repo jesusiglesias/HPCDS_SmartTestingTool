@@ -15,6 +15,7 @@ import org.codehaus.groovy.grails.core.io.ResourceLocator
 import org.springframework.core.io.Resource
 import org.codehaus.groovy.grails.plugins.log4j.Log4jConfig
 import static grails.async.Promises.*
+import static groovyx.gpars.GParsPool.withPool
 
 /**
  * It contains the habitual custom tasks of the admin (back-end).
@@ -123,26 +124,25 @@ class CustomTasksBackendController {
 
         // Rows
         def rows = []
-        def addRow = { name, value ->
-            rows << [c: [[v: name], [v: value]]]
-        }
 
-        // Add departments
-        departments.each { department ->
-            addRow(department.name, department.users.size())
-        }
+        withPool {
+             // Add departments
+             rows = departments.collectParallel { department ->
+                 [c: [[v: department.name], [v:department.users.size()]]]
+             }
+         }
 
-        def UDData = [cols: cols, rows: rows]
+         def UDData = [cols: cols, rows: rows]
 
-        // Avoid undefined function (Google chart)
-        sleep(100)
+         // Avoid undefined function (Google chart)
+         sleep(100)
 
-        render UDData as JSON
-    }
+         render UDData as JSON
+     }
 
-    /**
-     * It obtains the number of users in each rank of score.
-     */
+     /**
+      * It obtains the number of users in each rank of score.
+      */
     def scoresRank() {
         log.debug("CustomTasksBackendController:scoresRank()")
 
