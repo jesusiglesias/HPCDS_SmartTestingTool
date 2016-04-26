@@ -284,4 +284,13 @@ class TestController {
         }
         render responseData as JSON
     }
+
+    /**
+     * It shows the test import page.
+     */
+    def importTest () {
+        log.debug("TestController():importTest()")
+
+        render view: 'import'
+    }
 }

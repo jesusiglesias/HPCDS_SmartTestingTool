@@ -126,6 +126,12 @@
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                             </g:link>
                         </li>
+                        <li class="nav-item">
+                            <g:link uri="/user/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                            </g:link>
+                        </li>
                     </ul>
                 </li>
                 <!-- /.USERS -->
@@ -213,6 +219,12 @@
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                             </g:link>
                         </li>
+                        <li class="nav-item">
+                            <g:link uri="/catalog/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                            </g:link>
+                        </li>
                     </ul>
                 </li>
 
@@ -234,6 +246,12 @@
                             <g:link uri="/question" class="nav-link">
                                 <i class="fa fa-list"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
+                            </g:link>
+                        </li>
+                        <li class="nav-item">
+                            <g:link uri="/question/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
                             </g:link>
                         </li>
                     </ul>
@@ -294,6 +312,12 @@
                             <g:link uri="/test" class="nav-link">
                                 <i class="fa fa-list"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
+                            </g:link>
+                        </li>
+                        <li class="nav-item">
+                            <g:link uri="/test/import" class="nav-link">
+                                <i class="fa fa-cloud-upload"></i>
+                                <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
                             </g:link>
                         </li>
                     </ul>

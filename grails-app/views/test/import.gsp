@@ -1,23 +1,17 @@
-<%@ page import="org.springframework.validation.FieldError" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main_auth_admin">
-    <title><g:message code="layouts.main_auth_admin.head.title.topic" default="STT | Topics management"/></title>
-    <link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'green.css')}" type="text/css"/>
+    <title><g:message code="layouts.main_auth_admin.head.title.test" default="STT | Test management"/></title>
+    <link rel="stylesheet" href="${resource(dir: 'css/fileInput', file: 'bootstrap-fileinput.css')}" type="text/css"/>
 
     <script>
-        // Variables to use in script
-        var _checkerNameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.topic.create.checker.block.info.name', default:'Type a name of topic and check its availability.')}';
-        var _checkNameTopicAvailibility = '${g.createLink(controller: "topic", action: 'checkNameTopicAvailibility')}';
-        var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
-        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
-
-        // Handler auto close alert
+        // Auto close alert
         function createAutoClosingAlert(selector) {
             var alert = $(selector);
-            window.setTimeout(function () {
-                alert.slideUp(1000, function () {
+
+            window.setTimeout(function() {
+                alert.slideUp(1000, function(){
                     $(this).remove();
                 });
             }, 5000);
@@ -26,6 +20,16 @@
 </head>
 
 <body>
+    <script>
+
+        // Variables to use in script
+        var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
+        var _fullscreenTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.fullscreen', default:'Fullscreen!')}';
+        var _removeTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.remove', default:'Remove')}';
+        var _collapseTooltip = '${g.message(code:'layouts.main_auth_admin.body.content.logConfiguration.tooltip.collapse', default:'Collapse/Expand')}';
+        var _importingData = '${message(code: "default.import.process", default: "Importing data...")}';
+
+    </script>
 
     <!-- Page-sidebar-wrapper -->
     <div class="page-sidebar-wrapper">
@@ -167,19 +171,17 @@
                 </li>
 
                 <!-- Topic -->
-                <li class="nav-item active open">
+                <li class="nav-item">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-briefcase"></i>
                         <span class="title"><g:message code="layouts.main_auth_admin.sidebar.topic" default="Topic"/></span>
-                        <span class="selected"></span>
-                        <span class="arrow open"></span>
+                        <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li class="nav-item active open">
+                        <li class="nav-item">
                             <g:link controller="topic" action="create" class="nav-link">
                                 <i class="fa fa-plus"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.newFemale" default="New"/></span>
-                                <span class="selected"></span>
                             </g:link>
                         </li>
                         <li class="nav-item">
@@ -291,11 +293,12 @@
                 </li>
 
                 <!-- Test -->
-                <li class="nav-item">
+                <li class="nav-item active open">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-file-text"></i>
                         <span class="title"><g:message code="layouts.main_auth_admin.sidebar.test" default="Test"/></span>
-                        <span class="arrow"></span>
+                        <span class="selected"></span>
+                        <span class="arrow open"></span>
                     </a>
                     <ul class="sub-menu">
                         <li class="nav-item">
@@ -310,10 +313,11 @@
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.list" default="List"/></span>
                             </g:link>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active open">
                             <g:link uri="/test/import" class="nav-link">
                                 <i class="fa fa-cloud-upload"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                                <span class="selected"></span>
                             </g:link>
                         </li>
                     </ul>
@@ -366,74 +370,125 @@
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
-                        <span><g:message code="layouts.main_auth_admin.pageBreadcrumb.subtitle.topic" default="Topic"/></span>
+                        <span><g:message code="layouts.main_auth_admin.pageBreadcrumb.subtitle.test" default="Test"/></span>
                     </li>
                 </ul>
             </div> <!-- /.Page-bar -->
 
             <!-- Page-title -->
             <h3 class="page-title">
-                <g:link uri="/topic"><g:message code="layouts.main_auth_admin.body.title.topic" default="Topics management"/></g:link>
+                <g:link uri="/test"><g:message code="layouts.main_auth_admin.body.title.test" default="Test management"/></g:link>
                 <i class="icon-arrow-right icon-title-domain"></i>
-                <small><g:message code="layouts.main_auth_admin.body.subtitle.topic.create" default="Create topic"/></small>
+                <small><g:message code="layouts.main_auth_admin.body.subtitle.test.import" default="Import test"/></small>
             </h3>
 
             <!-- Contain page -->
-            <div id="create-domain">
+            <div id="list-panel">
+                <div class="row panel-row-import">
+                    <div class="col-md-12 col-lg-10 col-lg-offset-1">
 
-                <!-- Alerts -->
-                <g:if test="${flash.topicErrorMessage}">
-                    <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
-                        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <span class="xthin" role="status">${raw(flash.topicErrorMessage)}</span>
+                        <!-- Alerts -->
+                        <g:if test="${flash.testImportErrorMessage}">
+                            <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
+                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+                                <span class="xthin" role="status">${raw(flash.testImportErrorMessage)}</span>
+                            </div>
+
+                            <g:javascript>
+                                createAutoClosingAlert('.alert-entity-error');
+                            </g:javascript>
+                        </g:if>
+
+                        <g:if test="${flash.testImportMessage}">
+                            <div class='alert alert-info alert-info-custom-backend alert-dismissable alert-entity alert-entity-info fade in'>
+                                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+                                <span class="xthin" role="status">${raw(flash.testImportMessage)}</span>
+                            </div>
+
+                            <g:javascript>
+                                createAutoClosingAlert('.alert-entity-info');
+                            </g:javascript>
+                        </g:if>
+
+                        <!-- Portlet -->
+                        <div class="portlet light bg-inverse logConfig-portlet">
+                            <div class="portlet-title">
+                                <div class="caption font-green-dark">
+                                    <i class="icon-speech font-green-dark"></i>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.content.logConfiguration.portlet.subject" default="Important information"/></span>
+                                </div>
+                                <div class="tools">
+                                    <a href="" class="collapse"> </a>
+                                    <a href="" class="fullscreen"> </a>
+                                    <a href="" class="remove"> </a>
+                                </div>
+                                <div>
+                                    <a href="${resource(dir: 'files', file: 'STT_TestTemplate.csv')}" download="" class="btn green-dark button-template"><i class="fa fa-download" aria-hidden="true"></i><g:message code="default.import.template" default="Template"/></a>
+                                </div>
+                            </div>
+
+                            <div class="portlet-body">
+                                <div class="scroller" style="height:470px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                    <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
+                                                '<ul><li>The file to import must have the format <strong>.csv</strong>.</li>' +
+                                                '<li>The separator character must be the <strong>semicolon ;</strong>.</li>' +
+                                                '<li>The set of coding used is: <strong>UTF-8</strong>.</li>' +
+                                                '<li><strong>The first row is ignored </strong>, corresponding for example to the name of each field.</li>' +
+                                                '<li>Each field has the same restrictions as in its manual creation or editing (character limit, pattern to follow, etc.)</li>' +
+                                                '<li>At the end of the process, a result message is displayed.</li>' +
+                                                '<li>The import process may take several minutes depending on the size of the file.</li></ul>'))}
+                                    </p>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description.admin', default: 'To import correctly the admininstrators, you must follow the following scheme: <strong>| Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> | Enabled account<span style="color: #D05454">*</span> | Locked account<span style="color: #D05454">*</span>' +
+                                                ' | Expired account<span style="color: #D05454">*</span> | Expired password<span style="color: #D05454">*</span> | </strong>; ' +
+                                                'where username and email must be unique, ie, be available. <br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
+                                    </p>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description.admin.recommendation', default: 'Fields that represents the state of the user account can have two values (<strong>true</strong> and <strong>false</strong>) depending on their activation or not, being recommended to enable the <strong>Enabled account</strong> by word: <strong>true</strong>.'))}
+                                    </p>
+                                </div>
+                            </div>
+                        </div> <!-- /. Portlet -->
                     </div>
+                </div>
 
-                    <g:javascript>
-                        createAutoClosingAlert('.alert-entity-error');
-                    </g:javascript>
-                </g:if>
-
-                <!-- Error in validation -->
-                <g:hasErrors bean="${topicInstance}">
-                    <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error fade in'>
-                        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-                        <g:eachError bean="${topicInstance}" var="error">
-                            <p role="status" class="xthin"
-                               <g:if test="${error in FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/>
-                            </p>
-                        </g:eachError>
-                    </div>
-
-                    <g:javascript>
-                        createAutoClosingAlert('.alert-entity-error');
-                    </g:javascript>
-                </g:hasErrors>
-
-                <!-- Creation form -->
-                <g:form url="[resource: topicInstance, action: 'save']" autocomplete="on" class="horizontal-form topic-form">
-                    <fieldset class="form">
-                        <g:render template="form"/>
-                    </fieldset>
-
-                    <div class="domain-button-group">
-                        <!-- Cancel button -->
-                        <g:link type="button" uri="/topic" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
-                        <button type="submit" class="btn green-dark" name="create">
-                            <i class="fa fa-check"></i>
-                            <g:message code="default.button.create.label" default="Create"/>
-                        </button>
-                    </div>
-                </g:form>
+                <!-- Select button -->
+                <div class="row">
+                    <div class="col-md-12 col-lg-10 col-lg-offset-1">
+                        <!-- Upload CSV file -->
+                        <g:uploadForm uri="/test/uploadFile" class="test-import-form">
+                            <div class="fileinput fileinput-new fileinput-import" data-provides="fileinput">
+                                <div class="input-group btn-block input-import">
+                                    <div class="form-control uneditable-input input-fixed" data-trigger="fileinput">
+                                        <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                        <span class="fileinput-filename"> </span>
+                                    </div>
+                                    <span class="input-group-addon btn btn-block grey-gallery btn-file">
+                                        <span class="fileinput-new"><g:message code="default.import.select.button" default="Select file"/></span>
+                                        <span class="fileinput-exists"><g:message code="default.imageProfile.change" default="Change"/></span>
+                                        <input type="file" accept="text/csv" name="importFileTest" id="importFileTest" required>
+                                    </span>
+                                    <a href="javascript:;" class="input-group-addon btn red-soft fileinput-exists" data-dismiss="fileinput"><g:message code="default.imageProfile.remove" default="Remove"/></a>
+                                </div>
+                            </div>
+                            <!-- Submit button -->
+                            <div class="importData-button">
+                                <button type="submit" name="test-import-button" id="test-import-button" class="btn green-dark btn-block">
+                                    <i class="fa fa-refresh fa-lg refresh-icon-stop refreshIcon"></i>
+                                    <span><g:message code="layouts.main_auth_admin.sidebar.import" default="Import"/></span>
+                                </button>
+                            </div>
+                        </g:uploadForm>
+                    </div> <!-- /.Col -->
+                </div> <!-- /.Row -->
             </div> <!-- /.Content page -->
         </div> <!-- /.Page-content -->
     </div> <!-- /. Page-content-wrapper -->
 
-    <!-- LOAD JAVASCRIPT -->
-    <g:javascript src="iCheck/icheck.min.js"/>
-    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
-    <g:javascript src="autosize/autosize.min.js"/>
-    <g:javascript src="customIcons/topic-handler.js"/>
-    <g:javascript src="domain-validation/topic-validation.js"/>
+    <g:javascript src="fileInput/bootstrap-fileinput.js"/>
+    <g:javascript src="import-validation/testImport-validation.js"/>
 
 </body>
 </html>

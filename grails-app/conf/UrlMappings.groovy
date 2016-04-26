@@ -37,6 +37,8 @@ class UrlMappings {
             "/edit-error/$id?(.$format)?"(controller: 'user', action: 'update')
             "/edit/profileImage/$id?(.$format)?"(controller: 'user', action: 'editProfileImage')
             "/edit-error/profileImage/$id?(.$format)?"(controller: 'user', action: 'updateProfileImage')
+            "/import"(controller: 'user', action: 'importUser')
+            "/uploadFile"(controller: 'user', action: 'uploadFileUser')
         }
         // Department - Grouping URLs
         group("/department") {
@@ -56,11 +58,15 @@ class UrlMappings {
         group("/catalog") {
             "/create-error"(controller: 'catalog', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'catalog', action: 'update')
+            "/import"(controller: 'catalog', action: 'importCatalog')
+            "/uploadFile"(controller: 'catalog', action: 'uploadFileCatalog')
         }
         // Question - Grouping URLs
         group("/question") {
             "/create-error"(controller: 'question', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'question', action: 'update')
+            "/import"(controller: 'question', action: 'importQuestion')
+            "/uploadFile"(controller: 'question', action: 'uploadFileQuestion')
         }
         // Answer - Grouping URLs
         group("/answer") {
@@ -73,6 +79,8 @@ class UrlMappings {
         group("/test") {
             "/create-error"(controller: 'test', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'test', action: 'update')
+            "/import"(controller: 'test', action: 'importTest')
+            "/uploadFile"(controller: 'test', action: 'uploadFileTest')
         }
 
         /* Errors

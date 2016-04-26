@@ -251,4 +251,13 @@ class CatalogController {
         }
         render responseData as JSON
     }
+
+    /**
+     * It shows the catalog import page.
+     */
+    def importCatalog () {
+        log.debug("CatalogController():importCatalog()")
+
+        render view: 'import'
+    }
 }

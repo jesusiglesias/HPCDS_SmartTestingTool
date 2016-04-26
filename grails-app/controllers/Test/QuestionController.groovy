@@ -257,4 +257,13 @@ class QuestionController {
         }
         render responseData as JSON
     }
+
+    /**
+     * It shows the question import page.
+     */
+    def importQuestion () {
+        log.debug("QuestionController():importQuestion()")
+
+        render view: 'import'
+    }
 }

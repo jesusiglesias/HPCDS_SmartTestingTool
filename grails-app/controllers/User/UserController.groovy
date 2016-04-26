@@ -380,4 +380,13 @@ class UserController {
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    /**
+     * It shows the user import page.
+     */
+    def importUser () {
+        log.debug("UserController():importUser()")
+
+        render view: 'import'
+    }
 }
