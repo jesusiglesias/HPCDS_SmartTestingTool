@@ -3,6 +3,7 @@ package Test
 import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
+import org.apache.tika.Tika
 import grails.transaction.Transactional
 import org.springframework.beans.factory.annotation.Value
 
@@ -13,8 +14,9 @@ import org.springframework.beans.factory.annotation.Value
 class CatalogController {
 
     def CustomDeleteService
+    def CustomImportService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", uploadFileCatalog: "POST"]
 
     // Default value of pagination
     @Value('${paginate.defaultValue:10}')
@@ -259,5 +261,163 @@ class CatalogController {
         log.debug("CatalogController():importCatalog()")
 
         render view: 'import'
+    }
+
+    /**
+     * It processes the import functionality.
+     */
+    @Transactional
+    def uploadFileCatalog () {
+        log.debug("CatalogController():uploadFileCatalog()")
+
+        // Record counter
+        def lineCounter = 0
+        def existingFieldsList = []
+        def back = false
+
+        // Obtaining number of fields in the entity - numberFields: TODO
+        def numberFields = 0
+        def totalNumberFields = 0
+        grailsApplication.getDomainClass('Test.Catalog').persistentProperties.collect {
+            numberFields ++
+        }
+
+        log.error(numberFields)
+
+        // ID field (attribute) does not used TODO
+        totalNumberFields = numberFields - 1
+        log.debug("CatalogController():uploadFileCatalog():numberFieldsClass:${totalNumberFields}")
+
+        // Obtain file
+        def csvFileLoad = request.getFile("importFileCatalog")
+        // File name and content type
+        def csvFilename = csvFileLoad.originalFilename
+        def csvContentType = csvFileLoad.contentType
+
+        // getFile() fields
+        /*
+        csvFileLoad.contentType
+        csvFileLoad.originalFilename
+        csvFileLoad.name
+        csvFileLoad.size
+        csvFileLoad.bytes
+        csvFileLoad.isEmpty()
+        csvFileLoad.inputStream
+        csvFileLoad.storageDescription
+        */
+
+        log.debug("CatalogController():uploadFileCatalog():contentTypeFile:${csvContentType}")
+
+        // Check CSV type - Global
+        if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
+            log.error("CatalogController():uploadFileCatalog():errorCSVContentType:contentType:${csvContentType}")
+
+            flash.catalogImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>.csv</strong>.", args: ["${csvFilename}"])
+            redirect uri: '/catalog/import'
+            return
+        }
+
+        // File empty
+        if (csvFileLoad.isEmpty()) {
+            log.error("CatalogController():uploadFileCatalog():csvFileLoad.isEmpty()")
+
+            flash.catalogImportErrorMessage = g.message(code: "default.import.error.empty", default: "<strong>{0}</strong> file is empty.", args: ["${csvFilename}"])
+            redirect uri: '/catalog/import'
+            return
+        }
+
+        // Parse CSV file
+        try {
+            csvFileLoad.inputStream.text.toCsvReader(['separatorChar': ';', 'chartset': 'UTF-8', 'skipLines': 1]).eachLine { tokens ->
+
+                lineCounter++
+
+                // Each row has 1 column (name). Length of the row
+                if (tokens.length == totalNumberFields) {
+
+                    // It checks the name because is an unique property TODO
+                    if(Catalog.findByName(tokens[0].trim())){
+                        log.error("CatalogController():uploadFileCatalog():toCsvReader():recordsExists")
+
+                        existingFieldsList.push(lineCounter)
+
+                    } else {
+                        Catalog catalogInstance = new User(
+                                name: tokens[0].trim()
+                        )
+
+                        def instanceCSV = customImportService.saveRecordCSVCatalog(catalogInstance) // It saves the record
+
+                        // Error in save record CSV
+                        if (!instanceCSV) {
+                            log.error("CatalogController():uploadFileCatalog():errorSave:!instanceCSV")
+
+                            transactionStatus.setRollbackOnly()
+
+                            if (catalogInstance?.hasErrors()) {
+                                log.error("CatalogController():uploadFileCatalog():catalogInstanceCSV.hasErrors():validation")
+
+                                flash.catalogImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
+
+                            } else {
+                                log.error("CatalogController():uploadFileCatalog():catalogInstanceCSV:notSaved")
+
+                                flash.catalogImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                            }
+                            back = true
+                        }
+                    }
+
+                } else {
+                    log.error("CatalogController():uploadFileCatalog():recordCSV!=numberColumns")
+
+                    transactionStatus.setRollbackOnly()
+
+                    flash.catalogImportErrorMessage = g.message(code: 'default.import.error.format', default: 'The file <strong>{0}</strong> contains records that has not the right format (number of columns).', args: ["${csvFilename}"])
+                    back = true
+                }
+
+                if (back) {
+                    throw new Exception()
+                }
+            } // Finish CsvReader
+
+        } catch (Exception e) {
+        }
+
+        // Stop the last line with error
+        if (back) {
+            redirect uri: '/catalog/import'
+            return
+        }
+
+        // Single header file
+        if (lineCounter == 0) {
+            log.error("CatalogController():uploadFileCatalog():lineCounter==0")
+
+            flash.catalogImportErrorMessage = g.message(code: "default.import.error.lineCounter", default: "<strong>{0}</strong> file does not contain any record. It only contains the header.", args: ["${csvFilename}"])
+            redirect uri: '/catalog/import'
+
+        } else {
+
+            if (existingFieldsList.size() == 0) { // Any previously existing record
+                log.debug("CatalogController():uploadFileCatalog():lineCounter!=0:${lineCounter}recordsImported")
+
+                flash.catalogImportMessage = g.message(code: "default.import.success", default: "<strong>{0}</strong> file has been imported correctly - Records imported: <strong>{1}</strong>.", args: ["${csvFilename}", "${lineCounter}"])
+
+            } else if (lineCounter - existingFieldsList.size() == 0){ // Any record imported
+                log.debug("CatalogController():uploadFileCatalog():lineCounter!=0:anyRecordImported")
+
+                flash.catalogImportMessage = g.message(code: 'default.import.success.allRecords.exist', default: '<strong>{0}</strong> file has been processed correctly. However it has not imported any records because all previously ' +
+                        'existed in the system. Total number of records in the file: <strong>{1}</strong>.', args: ["${csvFilename}", "${lineCounter}"])
+
+            } else { // Some previously existing records
+                log.debug("CatalogController():uploadFileCatalog():lineCounter!=0:${lineCounter}:numberExistingFields:${existingFieldsList.size()}")
+
+                flash.catalogImportMessage = g.message(code: 'default.import.success.someRecords.exist', default: '<strong>{0}</strong> file has been imported correctly.<br/><ul><li><strong>Total number of records:</strong> {1}.</li>' +
+                        '<li><strong>Number of imported records:</strong> {2}.</li><li><strong>Number of existing records:</strong> {3}.</li></ul>', args: ["${csvFilename}", "${lineCounter}", "${lineCounter - existingFieldsList.size()}", "${existingFieldsList.size()}"])
+            }
+            redirect uri: '/catalog/import'
+        }
     }
 }

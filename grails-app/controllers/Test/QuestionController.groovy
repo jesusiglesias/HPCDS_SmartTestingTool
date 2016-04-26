@@ -1,6 +1,7 @@
 package Test
 
 import grails.converters.JSON
+import org.apache.tika.Tika
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -13,8 +14,9 @@ import org.springframework.beans.factory.annotation.Value
 class QuestionController {
 
     def CustomDeleteService
+    def CustomImportService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", uploadFileQuestion: "POST"]
 
     // Default value of pagination
     @Value('${paginate.defaultValue:10}')
@@ -265,5 +267,163 @@ class QuestionController {
         log.debug("QuestionController():importQuestion()")
 
         render view: 'import'
+    }
+
+    /**
+     * It processes the import functionality.
+     */
+    @Transactional
+    def uploadFileQuestion () {
+        log.debug("QuestionController():uploadFileQuestion()")
+
+        // Record counter
+        def lineCounter = 0
+        def existingFieldsList = []
+        def back = false
+
+        // Obtaining number of fields in the entity - numberFields: TODO
+        def numberFields = 0
+        def totalNumberFields = 0
+        grailsApplication.getDomainClass('Test.Question').persistentProperties.collect {
+            numberFields ++
+        }
+
+        log.error(numberFields)
+
+        // ID field (attribute) does not used TODO
+        totalNumberFields = numberFields - 1
+        log.debug("QuestionController():uploadFileQuestion():numberFieldsClass:${totalNumberFields}")
+
+        // Obtain file
+        def csvFileLoad = request.getFile("importFileQuestion")
+        // File name and content type
+        def csvFilename = csvFileLoad.originalFilename
+        def csvContentType = csvFileLoad.contentType
+
+        // getFile() fields
+        /*
+        csvFileLoad.contentType
+        csvFileLoad.originalFilename
+        csvFileLoad.name
+        csvFileLoad.size
+        csvFileLoad.bytes
+        csvFileLoad.isEmpty()
+        csvFileLoad.inputStream
+        csvFileLoad.storageDescription
+        */
+
+        log.debug("QuestionController():uploadFileQuestion():contentTypeFile:${csvContentType}")
+
+        // Check CSV type - Global
+        if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
+            log.error("QuestionController():uploadFileQuestion():errorCSVContentType:contentType:${csvContentType}")
+
+            flash.questionImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>.csv</strong>.", args: ["${csvFilename}"])
+            redirect uri: '/question/import'
+            return
+        }
+
+        // File empty
+        if (csvFileLoad.isEmpty()) {
+            log.error("QuestionController():uploadFileQuestion():csvFileLoad.isEmpty()")
+
+            flash.questionImportErrorMessage = g.message(code: "default.import.error.empty", default: "<strong>{0}</strong> file is empty.", args: ["${csvFilename}"])
+            redirect uri: '/question/import'
+            return
+        }
+
+        // Parse CSV file
+        try {
+            csvFileLoad.inputStream.text.toCsvReader(['separatorChar': ';', 'chartset': 'UTF-8', 'skipLines': 1]).eachLine { tokens ->
+
+                lineCounter++
+
+                // Each row has 1 column (name). Length of the row
+                if (tokens.length == totalNumberFields) {
+
+                    // It checks the name because is an unique property TODO
+                    if(Question.findByName(tokens[0].trim())){
+                        log.error("QuestionController():uploadFileQuestion():toCsvReader():recordsExists")
+
+                        existingFieldsList.push(lineCounter)
+
+                    } else {
+                        Test questionInstance = new Question(
+                                name: tokens[0].trim()
+                        )
+
+                        def instanceCSV = customImportService.saveRecordCSVQuestion(questionInstance) // It saves the record
+
+                        // Error in save record CSV
+                        if (!instanceCSV) {
+                            log.error("QuestionController():uploadFileQuestion():errorSave:!instanceCSV")
+
+                            transactionStatus.setRollbackOnly()
+
+                            if (questionInstance?.hasErrors()) {
+                                log.error("QuestionController():uploadFileQuestion():testInstanceCSV.hasErrors():validation")
+
+                                flash.questionImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
+
+                            } else {
+                                log.error("QuestionController():uploadFileQuestion():testInstanceCSV:notSaved")
+
+                                flash.questionImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                            }
+                            back = true
+                        }
+                    }
+
+                } else {
+                    log.error("QuestionController():uploadFileQuestion():recordCSV!=numberColumns")
+
+                    transactionStatus.setRollbackOnly()
+
+                    flash.questionImportErrorMessage = g.message(code: 'default.import.error.format', default: 'The file <strong>{0}</strong> contains records that has not the right format (number of columns).', args: ["${csvFilename}"])
+                    back = true
+                }
+
+                if (back) {
+                    throw new Exception()
+                }
+            } // Finish CsvReader
+
+        } catch (Exception e) {
+        }
+
+        // Stop the last line with error
+        if (back) {
+            redirect uri: '/question/import'
+            return
+        }
+
+        // Single header file
+        if (lineCounter == 0) {
+            log.error("QuestionController():uploadFileQuestion():lineCounter==0")
+
+            flash.questionImportErrorMessage = g.message(code: "default.import.error.lineCounter", default: "<strong>{0}</strong> file does not contain any record. It only contains the header.", args: ["${csvFilename}"])
+            redirect uri: '/question/import'
+
+        } else {
+
+            if (existingFieldsList.size() == 0) { // Any previously existing record
+                log.debug("QuestionController():uploadFileQuestion():lineCounter!=0:${lineCounter}recordsImported")
+
+                flash.questionImportMessage = g.message(code: "default.import.success", default: "<strong>{0}</strong> file has been imported correctly - Records imported: <strong>{1}</strong>.", args: ["${csvFilename}", "${lineCounter}"])
+
+            } else if (lineCounter - existingFieldsList.size() == 0){ // Any record imported
+                log.debug("QuestionController():uploadFileQuestion():lineCounter!=0:anyRecordImported")
+
+                flash.questionImportMessage = g.message(code: 'default.import.success.allRecords.exist', default: '<strong>{0}</strong> file has been processed correctly. However it has not imported any records because all previously ' +
+                        'existed in the system. Total number of records in the file: <strong>{1}</strong>.', args: ["${csvFilename}", "${lineCounter}"])
+
+            } else { // Some previously existing records
+                log.debug("QuestionController():uploadFileQuestion():lineCounter!=0:${lineCounter}:numberExistingFields:${existingFieldsList.size()}")
+
+                flash.questionImportMessage = g.message(code: 'default.import.success.someRecords.exist', default: '<strong>{0}</strong> file has been imported correctly.<br/><ul><li><strong>Total number of records:</strong> {1}.</li>' +
+                        '<li><strong>Number of imported records:</strong> {2}.</li><li><strong>Number of existing records:</strong> {3}.</li></ul>', args: ["${csvFilename}", "${lineCounter}", "${lineCounter - existingFieldsList.size()}", "${existingFieldsList.size()}"])
+            }
+            redirect uri: '/question/import'
+        }
     }
 }

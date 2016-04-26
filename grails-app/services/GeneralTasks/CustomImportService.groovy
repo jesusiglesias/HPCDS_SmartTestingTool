@@ -4,8 +4,12 @@ import Security.SecRole
 import Security.SecUser
 import Security.SecUserSecRole
 import Test.Answer
+import Test.Catalog
+import Test.Question
+import Test.Test
 import Test.Topic
 import User.Department
+import User.User
 import grails.transaction.Transactional
 
 /**
@@ -125,6 +129,52 @@ class CustomImportService {
     }
 
     /*-------------------------------------------------------------------------------------------*
+     *                                           USER                                            *
+     *-------------------------------------------------------------------------------------------*/
+
+    /**
+     * It validates the instance.
+     *
+     * @param userValidation It represents the user instance to save.
+     * @return true If instance is valid.
+     */
+    def validateUser (User userValidation) {
+        log.debug("CustomImportService():validateUser()")
+
+        // User is null, has errors or isn't valid
+        if (userValidation == null || userValidation.hasErrors() || !userValidation.validate()) {
+            return false
+        }
+        return true
+    }
+
+    /**
+     * It saves an user in database from record of CSV file.
+     *
+     * @param user It represents the user instance to save.
+     * @return return If the user instance is null or has errors.
+     */
+    def saveRecordCSVUser (User user) {
+        log.debug("CustomImportService():saveRecordCSVUser()")
+
+        if (validateUser(user)) {
+            try { // Save
+                user.save(flush: true, failOnError: true)
+
+                // Save relation with user role
+                def normalRole = SecRole.findByAuthority('ROLE_USER')
+
+                SecUserSecRole.create user, normalRole, true
+
+                return true
+            } catch (Exception e) {
+                return false
+            }
+        }
+        return false // User isn't valid
+    }
+
+    /*-------------------------------------------------------------------------------------------*
      *                                          ANSWER                                           *
      *-------------------------------------------------------------------------------------------*/
 
@@ -165,6 +215,86 @@ class CustomImportService {
     }
 
     /*-------------------------------------------------------------------------------------------*
+     *                                         QUESTION                                          *
+     *-------------------------------------------------------------------------------------------*/
+
+    /**
+     * It validates the instance.
+     *
+     * @param questionValidation It represents the question instance to save.
+     * @return true If instance is valid.
+     */
+    def validateQuestion (Question questionValidation) {
+        log.debug("CustomImportService():validateQuestion()")
+
+        // Question is null, has errors or isn't valid
+        if (questionValidation == null || questionValidation.hasErrors() || !questionValidation.validate()) {
+            return false
+        }
+        return true
+    }
+
+    /**
+     * It saves a question in database from record of CSV file.
+     *
+     * @param question It represents the question instance to save.
+     * @return return If the question instance is null or has errors.
+     */
+    def saveRecordCSVQuestion (Question question) {
+        log.debug("CustomImportService():saveRecordCSVQuestion()")
+
+        if (validateQuestion(question)) {
+            try { // Save
+                question.save(flush: true, failOnError: true)
+                return true
+            } catch (Exception e) {
+                return false
+            }
+        }
+        return false // Question isn't valid
+    }
+
+    /*-------------------------------------------------------------------------------------------*
+     *                                         CATALOG                                          *
+     *-------------------------------------------------------------------------------------------*/
+
+    /**
+     * It validates the instance.
+     *
+     * @param catalogValidation It represents the catalog instance to save.
+     * @return true If instance is valid.
+     */
+    def validateCatalog (Catalog catalogValidation) {
+        log.debug("CustomImportService():validateCatalog()")
+
+        // Catalog is null, has errors or isn't valid
+        if (catalogValidation == null || catalogValidation.hasErrors() || !catalogValidation.validate()) {
+            return false
+        }
+        return true
+    }
+
+    /**
+     * It saves a catalog in database from record of CSV file.
+     *
+     * @param catalog It represents the catalog instance to save.
+     * @return return If the catalog instance is null or has errors.
+     */
+    def saveRecordCSVCatalog (Catalog catalog) {
+        log.debug("CustomImportService():saveRecordCSVCatalog()")
+
+        if (validateCatalog(catalog)) {
+            try { // Save
+                catalog.save(flush: true, failOnError: true)
+                return true
+            } catch (Exception e) {
+                return false
+            }
+        }
+        return false // Catalog isn't valid
+    }
+
+    /*-------------------------------------------------------------------------------------------*
      *                                            TOPIC                                          *
      *-------------------------------------------------------------------------------------------*/
 
@@ -202,5 +332,45 @@ class CustomImportService {
             }
         }
         return false // Topic isn't valid
+    }
+
+    /*-------------------------------------------------------------------------------------------*
+     *                                            TEST                                          *
+     *-------------------------------------------------------------------------------------------*/
+
+    /**
+     * It validates the instance.
+     *
+     * @param testValidation It represents the test instance to save.
+     * @return true If instance is valid.
+     */
+    def validateTest (Test testValidation) {
+        log.debug("CustomImportService():validateTest()")
+
+        // Test is null, has errors or isn't valid
+        if (testValidation == null || testValidation.hasErrors() || !testValidation.validate()) {
+            return false
+        }
+        return true
+    }
+
+    /**
+     * It saves a test in database from record of CSV file.
+     *
+     * @param test It represents the test instance to save.
+     * @return return If the test instance is null or has errors.
+     */
+    def saveRecordCSVTest (Test test) {
+        log.debug("CustomImportService():saveRecordCSVTest()")
+
+        if (validateTest(test)) {
+            try { // Save
+                test.save(flush: true, failOnError: true)
+                return true
+            } catch (Exception e) {
+                return false
+            }
+        }
+        return false // Test isn't valid
     }
 }

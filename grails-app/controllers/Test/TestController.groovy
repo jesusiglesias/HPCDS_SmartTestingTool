@@ -1,6 +1,7 @@
 package Test
 
 import grails.converters.JSON
+import org.apache.tika.Tika
 import org.springframework.dao.DataIntegrityViolationException
 import java.text.SimpleDateFormat
 import static org.springframework.http.HttpStatus.*
@@ -13,7 +14,9 @@ import org.springframework.beans.factory.annotation.Value
 @Transactional(readOnly = true)
 class TestController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def CustomImportService
+
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", uploadFileTest: "POST"]
 
     // Default value of pagination
     @Value('${paginate.defaultValue:10}')
@@ -292,5 +295,163 @@ class TestController {
         log.debug("TestController():importTest()")
 
         render view: 'import'
+    }
+
+    /**
+     * It processes the import functionality.
+     */
+    @Transactional
+    def uploadFileTest () {
+        log.debug("TestController():uploadFileTest()")
+
+        // Record counter
+        def lineCounter = 0
+        def existingFieldsList = []
+        def back = false
+
+        // Obtaining number of fields in the entity - numberFields: TODO
+        def numberFields = 0
+        def totalNumberFields = 0
+        grailsApplication.getDomainClass('Test.Test').persistentProperties.collect {
+            numberFields ++
+        }
+
+        log.error(numberFields)
+
+        // ID field (attribute) does not used TODO
+        totalNumberFields = numberFields - 1
+        log.debug("TestController():uploadFileTest():numberFieldsClass:${totalNumberFields}")
+
+        // Obtain file
+        def csvFileLoad = request.getFile("importFileTest")
+        // File name and content type
+        def csvFilename = csvFileLoad.originalFilename
+        def csvContentType = csvFileLoad.contentType
+
+        // getFile() fields
+        /*
+        csvFileLoad.contentType
+        csvFileLoad.originalFilename
+        csvFileLoad.name
+        csvFileLoad.size
+        csvFileLoad.bytes
+        csvFileLoad.isEmpty()
+        csvFileLoad.inputStream
+        csvFileLoad.storageDescription
+        */
+
+        log.debug("TestController():uploadFileTest():contentTypeFile:${csvContentType}")
+
+        // Check CSV type - Global
+        if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
+            log.error("TestController():uploadFileTest():errorCSVContentType:contentType:${csvContentType}")
+
+            flash.testImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>.csv</strong>.", args: ["${csvFilename}"])
+            redirect uri: '/test/import'
+            return
+        }
+
+        // File empty
+        if (csvFileLoad.isEmpty()) {
+            log.error("TestController():uploadFileTest():csvFileLoad.isEmpty()")
+
+            flash.testImportErrorMessage = g.message(code: "default.import.error.empty", default: "<strong>{0}</strong> file is empty.", args: ["${csvFilename}"])
+            redirect uri: '/test/import'
+            return
+        }
+
+        // Parse CSV file
+        try {
+            csvFileLoad.inputStream.text.toCsvReader(['separatorChar': ';', 'chartset': 'UTF-8', 'skipLines': 1]).eachLine { tokens ->
+
+                lineCounter++
+
+                // Each row has 1 column (name). Length of the row
+                if (tokens.length == totalNumberFields) {
+
+                    // It checks the name because is an unique property TODO
+                    if(Test.findByName(tokens[0].trim())){
+                        log.error("TestController():uploadFileTest():toCsvReader():recordsExists")
+
+                        existingFieldsList.push(lineCounter)
+
+                    } else {
+                        Test testInstance = new User(
+                                name: tokens[0].trim()
+                        )
+
+                        def instanceCSV = customImportService.saveRecordCSVTest(testInstance) // It saves the record
+
+                        // Error in save record CSV
+                        if (!instanceCSV) {
+                            log.error("TestController():uploadFileTest():errorSave:!instanceCSV")
+
+                            transactionStatus.setRollbackOnly()
+
+                            if (testInstance?.hasErrors()) {
+                                log.error("TestController():uploadFileTest():testInstanceCSV.hasErrors():validation")
+
+                                flash.testImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
+
+                            } else {
+                                log.error("TestController():uploadFileTest():testInstanceCSV:notSaved")
+
+                                flash.testImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                            }
+                            back = true
+                        }
+                    }
+
+                } else {
+                    log.error("TestController():uploadFileTest():recordCSV!=numberColumns")
+
+                    transactionStatus.setRollbackOnly()
+
+                    flash.testImportErrorMessage = g.message(code: 'default.import.error.format', default: 'The file <strong>{0}</strong> contains records that has not the right format (number of columns).', args: ["${csvFilename}"])
+                    back = true
+                }
+
+                if (back) {
+                    throw new Exception()
+                }
+            } // Finish CsvReader
+
+        } catch (Exception e) {
+        }
+
+        // Stop the last line with error
+        if (back) {
+            redirect uri: '/test/import'
+            return
+        }
+
+        // Single header file
+        if (lineCounter == 0) {
+            log.error("TestController():uploadFileTest():lineCounter==0")
+
+            flash.testImportErrorMessage = g.message(code: "default.import.error.lineCounter", default: "<strong>{0}</strong> file does not contain any record. It only contains the header.", args: ["${csvFilename}"])
+            redirect uri: '/test/import'
+
+        } else {
+
+            if (existingFieldsList.size() == 0) { // Any previously existing record
+                log.debug("TestController():uploadFileTest():lineCounter!=0:${lineCounter}recordsImported")
+
+                flash.testImportMessage = g.message(code: "default.import.success", default: "<strong>{0}</strong> file has been imported correctly - Records imported: <strong>{1}</strong>.", args: ["${csvFilename}", "${lineCounter}"])
+
+            } else if (lineCounter - existingFieldsList.size() == 0){ // Any record imported
+                log.debug("TestController():uploadFileTest():lineCounter!=0:anyRecordImported")
+
+                flash.testImportMessage = g.message(code: 'default.import.success.allRecords.exist', default: '<strong>{0}</strong> file has been processed correctly. However it has not imported any records because all previously ' +
+                        'existed in the system. Total number of records in the file: <strong>{1}</strong>.', args: ["${csvFilename}", "${lineCounter}"])
+
+            } else { // Some previously existing records
+                log.debug("TestController():uploadFileTest():lineCounter!=0:${lineCounter}:numberExistingFields:${existingFieldsList.size()}")
+
+                flash.testImportMessage = g.message(code: 'default.import.success.someRecords.exist', default: '<strong>{0}</strong> file has been imported correctly.<br/><ul><li><strong>Total number of records:</strong> {1}.</li>' +
+                        '<li><strong>Number of imported records:</strong> {2}.</li><li><strong>Number of existing records:</strong> {3}.</li></ul>', args: ["${csvFilename}", "${lineCounter}", "${lineCounter - existingFieldsList.size()}", "${existingFieldsList.size()}"])
+            }
+            redirect uri: '/test/import'
+        }
     }
 }
