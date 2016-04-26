@@ -286,8 +286,9 @@ class AnswerController {
         def lineCounter = 0
         def existingFieldsList = []
         def back = false
+        def score = 0
 
-        // Obtaining number of fields in the entity
+        // Obtaining number of fields in the entity - numberFields: 5
         def numberFields = 0
         def totalNumberFields = 0
         grailsApplication.getDomainClass('Test.Answer').persistentProperties.collect {
@@ -320,7 +321,7 @@ class AnswerController {
 
         // Check CSV type - Global
         if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
-            log.error("AnswerController():uploadFileAnswer():csvContentType!=CSV&&checkExtension!=CSV")
+            log.error("AnswerController():uploadFileAnswer():errorCSVContentType:contentType:${csvContentType}")
 
             flash.answerImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>.csv</strong>.", args: ["${csvFilename}"])
             redirect uri: '/answer/import'
@@ -352,11 +353,19 @@ class AnswerController {
                         existingFieldsList.push(lineCounter)
 
                     } else {
+
+                        // It checks if answer is correct or incorrect
+                        if (tokens[2].trim() == 'true') {
+                            score = tokens[3].trim()
+                        } else {
+                            score = 0
+                        }
+
                         Answer answerInstance = new Answer(
                                 titleAnswerKey: tokens[0].trim(),
                                 description: tokens[1].trim(),
                                 correct: tokens[2].trim(),
-                                score: tokens[3].trim()
+                                score: score
                         )
 
                         def instanceCSV = customImportService.saveRecordCSVAnswer(answerInstance) // It saves the record
@@ -368,12 +377,12 @@ class AnswerController {
                             transactionStatus.setRollbackOnly()
 
                             if (answerInstance?.hasErrors()) {
-                                log.error("AnswerController():uploadFileAnswer():!contactCSV.hasErrors():Validation")
+                                log.error("AnswerController():uploadFileAnswer():answerInstanceCSV.hasErrors():validation")
 
                                 flash.answerImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
 
                             } else {
-                                log.error("AnswerController():uploadFileAnswer():!contactCSV.Error:NotSaved")
+                                log.error("AnswerController():uploadFileAnswer():answerInstanceCSV:notSaved")
 
                                 flash.answerImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
                             }
@@ -382,7 +391,7 @@ class AnswerController {
                     }
 
                 } else {
-                    log.error("AnswerController():uploadFileAnswer():recordCSV!=totalNumberFields")
+                    log.error("AnswerController():uploadFileAnswer():recordCSV!=numberColumns")
 
                     transactionStatus.setRollbackOnly()
 
