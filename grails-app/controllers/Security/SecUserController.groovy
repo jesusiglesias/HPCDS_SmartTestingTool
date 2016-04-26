@@ -459,7 +459,7 @@ class SecUserController {
         def existingFieldsList = []
         def back = false
 
-        // Obtaining number of fields in the entity
+        // Obtaining number of fields in the entity - numberFields: 10
         def numberFields = 0
         def totalNumberFields = 0
         grailsApplication.getDomainClass('Security.SecUser').persistentProperties.collect {
@@ -492,7 +492,7 @@ class SecUserController {
 
         // Check CSV type - Global
         if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
-            log.error("SecUserController():uploadFileAdmin():csvContentType!=CSV&&checkExtension!=CSV")
+            log.error("SecUserController():uploadFileAdmin():errorCSVContentType:contentType:${csvContentType}")
 
             flash.adminImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>.csv</strong>.", args: ["${csvFilename}"])
             redirect uri: '/administrator/import'
@@ -543,12 +543,12 @@ class SecUserController {
                             transactionStatus.setRollbackOnly()
 
                             if (adminInstance?.hasErrors()) {
-                                log.error("SecUserController():uploadFileAdmin():!contactCSV.hasErrors():Validation")
+                                log.error("SecUserController():uploadFileAdmin():adminInstanceCSV.hasErrors():validation")
 
                                 flash.adminImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
 
                             } else {
-                                log.error("SecUserController():uploadFileAdmin():!contactCSV.Error:NotSaved")
+                                log.error("SecUserController():uploadFileAdmin():adminInstanceCSV:notSaved")
 
                                 flash.adminImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
                             }
@@ -557,7 +557,7 @@ class SecUserController {
                     }
 
                 } else {
-                    log.error("SecUserController():uploadFileAdmin():recordCSV!=totalNumberFields")
+                    log.error("SecUserController():uploadFileAdmin():recordCSV!=numberColumns")
 
                     transactionStatus.setRollbackOnly()
 

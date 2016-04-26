@@ -275,7 +275,7 @@ class TopicController {
         def existingFieldsList = []
         def back = false
 
-        // Obtaining number of fields in the entity
+        // Obtaining number of fields in the entity - numberFields: 4
         def numberFields = 0
         def totalNumberFields = 0
         grailsApplication.getDomainClass('Test.Topic').persistentProperties.collect {
@@ -308,7 +308,7 @@ class TopicController {
 
         // Check CSV type - Global
         if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
-            log.error("TopicController():uploadFileTopic():csvContentType!=CSV&&checkExtension!=CSV")
+            log.error("TopicController():uploadFileTopic():errorCSVContentType:contentType:${csvContentType}")
 
             flash.topicImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>.csv</strong>.", args: ["${csvFilename}"])
             redirect uri: '/topic/import'
@@ -355,12 +355,12 @@ class TopicController {
                             transactionStatus.setRollbackOnly()
 
                             if (topicInstance?.hasErrors()) {
-                                log.error("TopicController():uploadFileTopic():!contactCSV.hasErrors():Validation")
+                                log.error("TopicController():uploadFileTopic():topicInstanceCSV.hasErrors():validation")
 
                                 flash.topicImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
 
                             } else {
-                                log.error("TopicController():uploadFileTopic():!contactCSV.Error:NotSaved")
+                                log.error("TopicController():uploadFileTopic():topicInstanceCSV:notSaved")
 
                                 flash.topicImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
                             }
@@ -369,7 +369,7 @@ class TopicController {
                     }
 
                 } else {
-                    log.error("TopicController():uploadFileTopic():recordCSV!=totalNumberFields")
+                    log.error("TopicController():uploadFileTopic():recordCSV!=numberColumns")
 
                     transactionStatus.setRollbackOnly()
 

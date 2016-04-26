@@ -404,7 +404,7 @@
                             </div>
 
                             <div class="portlet-body">
-                                <div class="scroller" style="height:410px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                <div class="scroller" style="height:450px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
                                     <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
@@ -421,6 +421,9 @@
                                                 'Correct<span style="color: #D05454">*</span> | Score<span style="color: #D05454">*</span> | </strong>; \\\n' +
                                                 '  where answer key must be unique, ie, be available. <br><br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the' +
                                                 ' corresponding fields in each row are empty.'))}
+                                    </p>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description.answer.recommendation', default: '<strong>Remember:</strong> the answers marked as incorrect should have a score of <storng>0</strong> points.'))}
                                     </p>
                                 </div>
                             </div>

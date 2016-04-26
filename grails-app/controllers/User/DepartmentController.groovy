@@ -277,7 +277,7 @@ class DepartmentController {
         def existingFieldsList = []
         def back = false
 
-        // Obtaining number of fields in the entity
+        // Obtaining number of fields in the entity - numberFields: 2
         def numberFields = 0
         def totalNumberFields = 0
         grailsApplication.getDomainClass('User.Department').persistentProperties.collect {
@@ -310,7 +310,7 @@ class DepartmentController {
 
         // Check CSV type - Global
         if ((new Tika().detect(csvFilename) != grailsApplication.config.grails.mime.types.csv) || !(customImportService.checkExtension(csvFilename)))  {
-            log.error("DepartmentController():uploadFileDepartment():csvContentType!=CSV&&checkExtension!=CSV")
+            log.error("DepartmentController():uploadFileDepartment():errorCSVContentType:contentType:${csvContentType}")
 
             flash.departmentImportErrorMessage = g.message(code: "default.import.error.csv", default: "<strong>{0}</strong> file has not the right format: <strong>.csv</strong>.", args: ["${csvFilename}"])
             redirect uri: '/department/import'
@@ -355,12 +355,12 @@ class DepartmentController {
                             transactionStatus.setRollbackOnly()
 
                             if (departmentInstance?.hasErrors()) {
-                                log.error("DepartmentController():uploadFileDepartment():!contactCSV.hasErrors():Validation")
+                                log.error("DepartmentController():uploadFileDepartment():departmentInstanceCSV.hasErrors():validation")
 
                                 flash.departmentImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
 
                             } else {
-                                log.error("DepartmentController():uploadFileDepartment():!contactCSV.Error:NotSaved")
+                                log.error("DepartmentController():uploadFileDepartment():departmentInstanceCSV:notSaved")
 
                                 flash.departmentImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
                             }
@@ -369,7 +369,7 @@ class DepartmentController {
                     }
 
                 } else {
-                    log.error("DepartmentController():uploadFileDepartment():recordCSV!=totalNumberFields")
+                    log.error("DepartmentController():uploadFileDepartment():recordCSV!=numberColumns")
 
                     transactionStatus.setRollbackOnly()
 
