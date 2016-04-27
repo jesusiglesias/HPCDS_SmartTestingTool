@@ -189,7 +189,7 @@ class BootStrap {
             )
 
             def securityCatalog = Catalog.findByName('Catálogo seguridad') ?: new Catalog(
-                    name: 'Seguridad inicial',
+                    name: 'Catálogo seguridad',
                     questions: [se1Question, se2Question, se3Question]
             )
 

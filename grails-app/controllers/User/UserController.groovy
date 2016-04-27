@@ -481,7 +481,7 @@ class UserController {
                             birthDateValid = true
 
                         } catch (Exception e) {
-                            log.error("UserController():uploadFileUser():birthdate:formatInvalid")
+                            log.error("UserController():uploadFileUser():birthdate:formatInvalid:${tokens[9].trim()}")
 
                             birthDateValid = false
                             back = true
@@ -499,7 +499,7 @@ class UserController {
                             sexValue = Sex.FEMALE
                             sexValid = true
                         } else { // Sex value invalid
-                            log.error("UserController():uploadFileUser():sexInvalid")
+                            log.error("UserController():uploadFileUser():sexInvalid:${tokens[14].trim()}")
 
                             sexValid = false
                             back = true
@@ -514,7 +514,7 @@ class UserController {
 
                         // Checking the department
                         if (departmentInstance == null) {
-                            log.error("UserController():uploadFileUser():departmentInvalid")
+                            log.error("UserController():uploadFileUser():departmentInvalid:${tokens[15].trim()}")
 
                             departmentValid = false
                             back = true

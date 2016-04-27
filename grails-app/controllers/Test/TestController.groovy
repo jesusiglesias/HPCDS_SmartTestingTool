@@ -308,17 +308,17 @@ class TestController {
         def lineCounter = 0
         def existingFieldsList = []
         def back = false
+        def initDateValid = false, endDateValid = false, topicValid = false, catalogValid = false
+        def initDateInstance, endDateInstance
 
-        // Obtaining number of fields in the entity - numberFields: TODO
+        // Obtaining number of fields in the entity - numberFields: 11
         def numberFields = 0
         def totalNumberFields = 0
         grailsApplication.getDomainClass('Test.Test').persistentProperties.collect {
             numberFields ++
         }
 
-        log.error(numberFields)
-
-        // ID field (attribute) does not used TODO
+        // ID field (attribute) does not used
         totalNumberFields = numberFields - 1
         log.debug("TestController():uploadFileTest():numberFieldsClass:${totalNumberFields}")
 
@@ -369,36 +369,119 @@ class TestController {
                 // Each row has 1 column (name). Length of the row
                 if (tokens.length == totalNumberFields) {
 
-                    // It checks the name because is an unique property TODO
+                    // It checks the name because is an unique property
                     if(Test.findByName(tokens[0].trim())){
                         log.error("TestController():uploadFileTest():toCsvReader():recordsExists")
 
                         existingFieldsList.push(lineCounter)
 
                     } else {
-                        Test testInstance = new Test(
-                                name: tokens[0].trim()
-                        )
 
-                        def instanceCSV = customImportService.saveRecordCSVTest(testInstance) // It saves the record
+                        // Parsing initial date field
+                        try {
+                            initDateInstance = new SimpleDateFormat('dd-MM-yyyy').parse(tokens[4].trim())
 
-                        // Error in save record CSV
-                        if (!instanceCSV) {
-                            log.error("TestController():uploadFileTest():errorSave:!instanceCSV")
+                            initDateValid = true
+
+                        } catch (Exception e) {
+                            log.error("TestController():uploadFileTest():initialDate:formatInvalid:${tokens[4].trim()}")
+
+                            initDateValid = false
+                            back = true
 
                             transactionStatus.setRollbackOnly()
 
-                            if (testInstance?.hasErrors()) {
-                                log.error("TestController():uploadFileTest():testInstanceCSV.hasErrors():validation")
+                            flash.testImportErrorMessage = g.message(code: 'default.import.error.test.initialDate.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth format in the <strong>Initial date</strong> field.', args: ["${lineCounter+1}", "${csvFilename}"])
+                        }
 
-                                flash.testImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
+                        // Parsing end date field
+                        try {
+                            endDateInstance = new SimpleDateFormat('dd-MM-yyyy').parse(tokens[5].trim())
 
-                            } else {
-                                log.error("TestController():uploadFileTest():testInstanceCSV:notSaved")
+                            endDateValid = true
 
-                                flash.testImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
-                            }
+                        } catch (Exception e) {
+                            log.error("TestController():uploadFileTest():endDate:formatInvalid:${tokens[5].trim()}")
+
+                            endDateValid = false
                             back = true
+
+                            transactionStatus.setRollbackOnly()
+
+                            flash.testImportErrorMessage = g.message(code: 'default.import.error.test.endDate.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth format in the <strong>End date</strong> field.', args: ["${lineCounter+1}", "${csvFilename}"])
+                        }
+
+                        // Obtaining topic
+                        def topicInstance = Topic.findByName(tokens[8].trim())
+
+                        // Checking the topic
+                        if (topicInstance == null) {
+                            log.error("TestController():uploadFileTest():topicInvalid:${tokens[8].trim()}")
+
+                            topicValid = false
+                            back = true
+
+                            transactionStatus.setRollbackOnly()
+
+                            flash.testImportErrorMessage = g.message(code: 'default.import.error.test.topic.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth value ' +
+                                    'in the <strong>Topic</strong> field.', args: ["${lineCounter+1}", "${csvFilename}"])
+                        } else {
+                            topicValid = true
+                        }
+
+                        // Obtaining catalog
+                        def catalogInstance = Catalog.findByName(tokens[9].trim())
+
+                        // Checking the catalog
+                        if (catalogInstance == null) {
+                            log.error("TestController():uploadFileTest():catalogInvalid:${tokens[9].trim()}")
+
+                            catalogValid = false
+                            back = true
+
+                            transactionStatus.setRollbackOnly()
+
+                            flash.testImportErrorMessage = g.message(code: 'default.import.error.test.catalog.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth value ' +
+                                    'in the <strong>Catalog</strong> field.', args: ["${lineCounter+1}", "${csvFilename}"])
+                        } else {
+                            catalogValid = true
+                        }
+
+                        if (topicValid && catalogValid && initDateValid && endDateValid) {
+
+                            Test testInstance = new Test(
+                                    name: tokens[0].trim(),
+                                    description: tokens[1].trim(),
+                                    active: tokens[2].trim(),
+                                    numberOfQuestions: tokens[3].trim(),
+                                    initDate: initDateInstance,
+                                    endDate: endDateInstance,
+                                    lockTime: tokens[6].trim(),
+                                    maxAttempts: tokens[7].trim(),
+                                    topic: topicInstance,
+                                    catalog: catalogInstance,
+                            )
+
+                            def instanceCSV = customImportService.saveRecordCSVTest(testInstance) // It saves the record
+
+                            // Error in save record CSV
+                            if (!instanceCSV) {
+                                log.error("TestController():uploadFileTest():errorSave:!instanceCSV")
+
+                                transactionStatus.setRollbackOnly()
+
+                                if (testInstance?.hasErrors()) {
+                                    log.error("TestController():uploadFileTest():testInstanceCSV.hasErrors():validation")
+
+                                    flash.testImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter + 1}"])
+
+                                } else {
+                                    log.error("TestController():uploadFileTest():testInstanceCSV:notSaved")
+
+                                    flash.testImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                                }
+                                back = true
+                            }
                         }
                     }
 

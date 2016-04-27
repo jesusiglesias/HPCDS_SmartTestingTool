@@ -428,7 +428,7 @@
                             </div>
 
                             <div class="portlet-body">
-                                <div class="scroller" style="height:470px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                <div class="scroller" style="height:540px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
                                     <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
@@ -441,12 +441,23 @@
                                                 '<li>The import process may take several minutes depending on the size of the file.</li></ul>'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.admin', default: 'To import correctly the admininstrators, you must follow the following scheme: <strong>| Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> | Enabled account<span style="color: #D05454">*</span> | Locked account<span style="color: #D05454">*</span>' +
-                                                ' | Expired account<span style="color: #D05454">*</span> | Expired password<span style="color: #D05454">*</span> | </strong>; ' +
-                                                'where username and email must be unique, ie, be available. <br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
+                                        ${raw(g.message(code: 'default.import.description.test', default: 'To import correctly the test, you must follow the following scheme: <strong>| Name<span style="color: #D05454">*</span> | Description<span style="color: #D05454">*</span> | ' +
+                                                'Active<span style="color: #D05454">*</span> | Number of questions<span style="color: #D05454">*</span> | Initial date<span style="color: #D05454">*</span> | End date<span style="color: #D05454">*</span> | ' +
+                                                'Maximum time<span style="color: #D05454">*</span> | Maximum number of attempts<span style="color: #D05454">*</span> | Topic<span style="color: #D05454">*</span> | Catalog<span style="color: #D05454">*</span> | ' +
+                                                '</strong>; where name must be unique, ie, be available. <br><br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> ' +
+                                                'document although the corresponding fields in each row are empty.'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.admin.recommendation', default: 'Fields that represents the state of the user account can have two values (<strong>true</strong> and <strong>false</strong>) depending on their activation or not, being recommended to enable the <strong>Enabled account</strong> by word: <strong>true</strong>.'))}
+                                        ${raw(g.message(code: 'default.import.description.test.recommendation', default: '<i>Active</i> field can have two values (<strong>true</strong> and <strong>false</strong>) depending on whether the test is active or not.'))}
+                                    </p>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description.test.remember', default: 'Besides, <strong>remember:</strong><ul><li>The number of question must be <strong>less or equal</strong> to number of question that the catalog selected ' +
+                                                'contains.</li><li>Initial date of the test must have the following format <strong>dd-MM-yyyy</strong>; where <i>dd</i>: day, <i>MM</i>: month and <i>yyyy</i>: year in numeric format. <strong>Important!</strong> You must ' +
+                                                'configure the date format in the sotfware used. Example: In <i>Microsoft Excel</i>, this configutarion can be found in: <i>Format -> Cells -> Date</i>.</li><li>End date of the test must have the following format <strong>dd-MM-yyyy</strong>; ' +
+                                                'where <i>dd</i>: day, <i>MM</i>: month and <i>yyyy</i>: year in numeric format. In addition, it can not be earlier than the initial date.</li><li><i>Maximum time</i> field must be expressed in <strong>minutes</strong>.</li><li><i>Maximum ' +
+                                                'number of attempts</i> field must have a value between <strong>1</strong> and <strong>5</strong>.</li><li>In the <i>Topic</i> field, you must type <strong>only the name</strong> of the topic relationed to test. <strong>It is important, the ' +
+                                                'prior existence in the system of the topic indicated.</strong></li></ul><li>In the <i>Catalog</i> field, you must type <strong>only the name</strong> of the catalog relationed to test. <strong>It is important, the prior existence in the system ' +
+                                                'of the catalog indicated.</strong></li></ul>'))}
                                     </p>
                                 </div>
                             </div>
