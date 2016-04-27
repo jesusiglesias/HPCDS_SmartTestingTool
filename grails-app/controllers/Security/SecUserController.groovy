@@ -466,7 +466,7 @@ class SecUserController {
             numberFields ++
         }
 
-        // ID field (attribute) does not used
+        // Several fields (attributes) does not used
         totalNumberFields = numberFields - 3
         log.debug("SecUserController():uploadFileAdmin():numberFieldsClass:${totalNumberFields}")
 

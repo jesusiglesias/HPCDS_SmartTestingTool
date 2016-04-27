@@ -84,6 +84,10 @@ var DatatableUserList = function () {
                 {
                     "targets": [14], // Sex
                     "visible": false
+                },
+                {
+                    "targets": [15], // Number of evaluations
+                    "visible": false
                 }
             ],
 

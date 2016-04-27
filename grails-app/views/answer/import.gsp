@@ -428,7 +428,7 @@
                             </div>
 
                             <div class="portlet-body">
-                                <div class="scroller" style="height:450px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                <div class="scroller" style="height:470px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
                                     <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
@@ -447,7 +447,7 @@
                                                 ' corresponding fields in each row are empty.'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.answer.recommendation', default: '<strong>Remember:</strong> the answers marked as incorrect should have a score of <storng>0</strong> points.'))}
+                                        ${raw(g.message(code: 'default.import.description.answer.recommendation', default: '<strong>Remember:</strong> <i>Correct</i> field can have two values (<strong>true</strong> and <strong>false</strong>) depending on whether the answer is correct or not. If it is correct, it must have a score between <strong>1</strong> and <strong>5</strong> points, otherwise it must be <strong>0</strong> points.'))}
                                     </p>
                                 </div>
                             </div>

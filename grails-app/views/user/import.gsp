@@ -428,7 +428,7 @@
                             </div>
 
                             <div class="portlet-body">
-                                <div class="scroller" style="height:470px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                <div class="scroller" style="height:540px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
                                     <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
@@ -441,12 +441,20 @@
                                                 '<li>The import process may take several minutes depending on the size of the file.</li></ul>'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.admin', default: 'To import correctly the admininstrators, you must follow the following scheme: <strong>| Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> | Enabled account<span style="color: #D05454">*</span> | Locked account<span style="color: #D05454">*</span>' +
-                                                ' | Expired account<span style="color: #D05454">*</span> | Expired password<span style="color: #D05454">*</span> | </strong>; ' +
-                                                'where username and email must be unique, ie, be available. <br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
+                                        ${raw(g.message(code: 'default.import.description.user', default: 'To import correctly the users, you must follow the following scheme: <strong>| Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> ' +
+                                                '| Enabled account<span style="color: #D05454">*</span> | Locked account<span style="color: #D05454">*</span> | Expired account<span style="color: #D05454">*</span> | Expired password<span style="color: #D05454">*</span> | Name<span style="color: #D05454">*</span> | ' +
+                                                'Surname<span style="color: #D05454">*</span> | Birthdate<span style="color: #D05454">*</span> | Address | City | Country | Phone | Sex<span style="color: #D05454">*</span> | Departament<span style="color: #D05454">*</span> | </strong>; where username and email must be unique, ' +
+                                                'ie, be available. <br><br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.admin.recommendation', default: 'Fields that represents the state of the user account can have two values (<strong>true</strong> and <strong>false</strong>) depending on their activation or not, being recommended to enable the <strong>Enabled account</strong> by word: <strong>true</strong>.'))}
+                                        ${raw(g.message(code: 'default.import.description.user.recommendation', default: 'Fields that represents the state of the user account can have two values (<strong>true</strong> and <strong>false</strong>) depending on their activation or not, being recommended to enable the <strong>Enabled account</strong> by word: <strong>true</strong>.'))}
+                                    </p>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description.user.remember', default: 'Besides, <strong>remember:</strong>' +
+                                                '<ul><li>Birthdate must have the following format <strong>dd-MM-yyyy</strong>; where <i>dd</i>: day, <i>MM</i>: month and <i>yyyy</i>: year in numeric format. <strong>Important!</strong> You must configure the ' +
+                                                'date format in the sotfware used. Example: In <i>Microsoft Excel</i>, this configutarion can be found in: <i>Format -> Cells -> Date</i>.</li>' +
+                                                '<li><i>Sex</i> field can have two values: <strong>Masculino/Male</strong> or <strong>Femenino/Female</strong>.</li>' +
+                                                '<li>In the <i>Departament</i> field, you must type <strong>only the name</strong> of the department to which the user belongs. <strong>It is important, the prior existence in the system of the department indicated.</strong></li></ul>'))}
                                     </p>
                                 </div>
                             </div>

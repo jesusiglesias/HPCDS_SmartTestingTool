@@ -342,7 +342,7 @@ class CatalogController {
                         existingFieldsList.push(lineCounter)
 
                     } else {
-                        Catalog catalogInstance = new User(
+                        Catalog catalogInstance = new Catalog(
                                 name: tokens[0].trim()
                         )
 

@@ -376,7 +376,7 @@ class TestController {
                         existingFieldsList.push(lineCounter)
 
                     } else {
-                        Test testInstance = new User(
+                        Test testInstance = new Test(
                                 name: tokens[0].trim()
                         )
 

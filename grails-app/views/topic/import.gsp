@@ -428,7 +428,7 @@
                             </div>
 
                             <div class="portlet-body">
-                                <div class="scroller" style="height:410px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                <div class="scroller" style="height:470px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
                                     <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
@@ -445,6 +445,10 @@
                                                 'Description<span style="color: #D05454">*</span> | Visibility<span style="color: #D05454">*</span> | </strong>; \\\n' +
                                                 '  where name of topic must be unique, ie, be available. <br><br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional ' +
                                                 'being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
+                                    </p>
+                                    <p>
+                                        ${raw(g.message(code: 'default.import.description.topic.recommendation', default: '<strong>Remember:</strong> <i>Visibility</i> field can have two values (<strong>true</strong> and <strong>false</strong>) ' +
+                                                'depending on whether the topic and its content is visible or not to user.'))}
                                     </p>
                                 </div>
                             </div>

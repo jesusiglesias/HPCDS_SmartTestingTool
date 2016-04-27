@@ -1,5 +1,6 @@
 package User
 
+import Enumerations.Sex
 import Security.SecRole
 import Security.SecUserSecRole
 import org.apache.tika.Tika
@@ -404,18 +405,18 @@ class UserController {
         def lineCounter = 0
         def existingFieldsList = []
         def back = false
+        def sexValue, sexValid = false, birthDateValid = false, departmentValid = false
+        def birthDateInstance
 
-        // Obtaining number of fields in the entity - numberFields: TODO
+        // Obtaining number of fields in the entity - numberFields: 20
         def numberFields = 0
         def totalNumberFields = 0
         grailsApplication.getDomainClass('User.User').persistentProperties.collect {
             numberFields ++
         }
 
-        log.error(numberFields)
-
-        // ID field (attribute) does not used TODO
-        totalNumberFields = numberFields - 1
+        // Several fields (attributes) does not used
+        totalNumberFields = numberFields - 4
         log.debug("UserController():uploadFileUser():numberFieldsClass:${totalNumberFields}")
 
         // Obtain file
@@ -465,36 +466,109 @@ class UserController {
                 // Each row has 1 column (name). Length of the row
                 if (tokens.length == totalNumberFields) {
 
-                    // It checks the name because is an unique property TODO
-                    if(User.findByName(tokens[0].trim())){
+                    // It checks the username and email because are unique properties
+                    if(User.findByUsernameOrEmail(tokens[0].trim(), tokens[1].trim())) {
                         log.error("UserController():uploadFileUser():toCsvReader():recordsExists")
 
                         existingFieldsList.push(lineCounter)
 
                     } else {
-                        User userInstance = new User(
-                                name: tokens[0].trim()
-                        )
 
-                        def instanceCSV = customImportService.saveRecordCSVUser(userInstance) // It saves the record
+                        // Parsing birthdate field
+                        try {
+                            birthDateInstance = new SimpleDateFormat('dd-MM-yyyy').parse(tokens[9].trim())
 
-                        // Error in save record CSV
-                        if (!instanceCSV) {
-                            log.error("UserController():uploadFileUser():errorSave:!instanceCSV")
+                            birthDateValid = true
+
+                        } catch (Exception e) {
+                            log.error("UserController():uploadFileUser():birthdate:formatInvalid")
+
+                            birthDateValid = false
+                            back = true
 
                             transactionStatus.setRollbackOnly()
 
-                            if (userInstance?.hasErrors()) {
-                                log.error("UserController():uploadFileUser():userInstanceCSV.hasErrors():validation")
+                            flash.userImportErrorMessage = g.message(code: 'default.import.error.user.birthdate.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth format in the <strong>Birthdate</strong> field.', args: ["${lineCounter+1}", "${csvFilename}"])
+                        }
 
-                                flash.userImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
+                        // Parsing the sex field
+                        if (tokens[14].trim() == 'Masculino' || tokens[14].trim() == 'Male') {
+                            sexValue = Sex.MALE
+                            sexValid = true
+                        } else if (tokens[14].trim() == 'Femenino' || tokens[14].trim() == 'Female') {
+                            sexValue = Sex.FEMALE
+                            sexValid = true
+                        } else { // Sex value invalid
+                            log.error("UserController():uploadFileUser():sexInvalid")
 
-                            } else {
-                                log.error("UserController():uploadFileUser():userInstanceCSV:notSaved")
-
-                                flash.userImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
-                            }
+                            sexValid = false
                             back = true
+
+                            transactionStatus.setRollbackOnly()
+
+                            flash.userImportErrorMessage = g.message(code: 'default.import.error.user.sex.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth value in the <strong>Sex</strong> field.', args: ["${lineCounter+1}", "${csvFilename}"])
+                        }
+
+                        // Obtaining department
+                        def departmentInstance = Department.findByName(tokens[15].trim())
+
+                        // Checking the department
+                        if (departmentInstance == null) {
+                            log.error("UserController():uploadFileUser():departmentInvalid")
+
+                            departmentValid = false
+                            back = true
+
+                            transactionStatus.setRollbackOnly()
+
+                            flash.userImportErrorMessage = g.message(code: 'default.import.error.user.department.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth value ' +
+                                    'in the <strong>Department</strong> field.', args: ["${lineCounter+1}", "${csvFilename}"])
+                        } else {
+                            departmentValid = true
+                        }
+
+                        if (sexValid && birthDateValid && departmentValid) {
+
+                            User userInstance = new User(
+                                    username: tokens[0].trim(),
+                                    email: tokens[1].trim(),
+                                    password: tokens[2].trim(),
+                                    enabled: tokens[3].trim(),
+                                    accountLocked: tokens[4].trim(),
+                                    accountExpired: tokens[5].trim(),
+                                    passwordExpired: tokens[6].trim(),
+                                    name: tokens[7].trim(),
+                                    surname: tokens[8].trim(),
+                                    birthDate: birthDateInstance,
+                                    address: tokens[10].trim(),
+                                    city: tokens[11].trim(),
+                                    country: tokens[12].trim(),
+                                    phone: tokens[13].trim(),
+                                    sex: sexValue,
+                                    department: departmentInstance,
+                            )
+
+
+                            def instanceCSV = customImportService.saveRecordCSVUser(userInstance) // It saves the record
+
+                            // Error in save record CSV
+                            if (!instanceCSV) {
+                                log.error("UserController():uploadFileUser():errorSave:!instanceCSV")
+
+                                transactionStatus.setRollbackOnly()
+
+                                if (userInstance?.hasErrors()) {
+                                    log.error("UserController():uploadFileUser():userInstanceCSV.hasErrors():validation")
+
+                                    flash.userImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
+
+                                } else {
+                                    log.error("UserController():uploadFileUser():userInstanceCSV:notSaved")
+
+                                    flash.userImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                                }
+                                back = true
+                            }
                         }
                     }
 
