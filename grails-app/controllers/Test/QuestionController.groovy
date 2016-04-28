@@ -1,5 +1,7 @@
 package Test
 
+import Enumerations.DifficultyLevel
+import com.google.common.base.Strings
 import grails.converters.JSON
 import org.apache.tika.Tika
 import org.springframework.dao.DataIntegrityViolationException
@@ -280,17 +282,19 @@ class QuestionController {
         def lineCounter = 0
         def existingFieldsList = []
         def back = false
+        def answerValid = false, difficultyValid = false
+        def difficultyValue
+        String[] answersArray
+        List<String> answerInstanceArray = new ArrayList<String>();
 
-        // Obtaining number of fields in the entity - numberFields: TODO
+        // Obtaining number of fields in the entity - numberFields: 5
         def numberFields = 0
         def totalNumberFields = 0
         grailsApplication.getDomainClass('Test.Question').persistentProperties.collect {
             numberFields ++
         }
 
-        log.error(numberFields)
-
-        // ID field (attribute) does not used TODO
+        // ID field (attribute) does not used
         totalNumberFields = numberFields - 1
         log.debug("QuestionController():uploadFileQuestion():numberFieldsClass:${totalNumberFields}")
 
@@ -341,36 +345,98 @@ class QuestionController {
                 // Each row has 1 column (name). Length of the row
                 if (tokens.length == totalNumberFields) {
 
-                    // It checks the name because is an unique property TODO
-                    if(Question.findByName(tokens[0].trim())){
+                    // It checks the name because is an unique property
+                    if(Question.findByTitleQuestionKey(tokens[0].trim())){
                         log.error("QuestionController():uploadFileQuestion():toCsvReader():recordsExists")
 
                         existingFieldsList.push(lineCounter)
 
                     } else {
-                        Test questionInstance = new Question(
-                                name: tokens[0].trim()
-                        )
 
-                        def instanceCSV = customImportService.saveRecordCSVQuestion(questionInstance) // It saves the record
+                        // Answers field not null or empty
+                        if (!Strings.isNullOrEmpty(tokens[3].trim())) {
 
-                        // Error in save record CSV
-                        if (!instanceCSV) {
-                            log.error("QuestionController():uploadFileQuestion():errorSave:!instanceCSV")
+                            // Obtaining each answer
+                            answersArray = tokens[3].trim().split("\\s*,\\s*");
+
+                            answersArray.each { answer ->
+
+                                // Obtaining answer
+                                def answerInstance = Answer.findByTitleAnswerKey(answer)
+
+                                // Checking the answer
+                                if (answerInstance == null) {
+                                    log.error("QuestionController():uploadFileQuestion():answerInvalid:${answer}")
+
+                                    answerValid = false
+                                    back = true
+
+                                    transactionStatus.setRollbackOnly()
+
+                                    flash.questionImportErrorMessage = g.message(code: 'default.import.error.question.answer.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth value ' +
+                                            'in the <strong>Answers</strong> field.', args: ["${lineCounter + 1}", "${csvFilename}"])
+
+                                    return true
+                                } else {
+                                    answerValid = true
+                                    answerInstanceArray.add(answerInstance)
+                                }
+                            }
+                        } else {
+                            answerValid = true
+                        }
+
+                        // Parsing the difficulty level field
+                        if (tokens[2].trim() == 'Fácil' || tokens[2].trim() == 'Easy') {
+                            difficultyValue = DifficultyLevel.EASY
+                            difficultyValid = true
+                        } else if (tokens[2].trim() == 'Medio' || tokens[2].trim() == 'Medium') {
+                            difficultyValue = DifficultyLevel.MEDIUM
+                            difficultyValid = true
+                        } else if (tokens[2].trim() == 'Difícil' || tokens[2].trim() == 'Difficult') {
+                            difficultyValue = DifficultyLevel.DIFFICULT
+                            difficultyValid = true
+                        } else { // Difficulty level value invalid
+                            log.error("QuestionController():uploadFileQuestion():difficultyLevelInvalid:${tokens[2].trim()}")
+
+                            difficultyValid = false
+                            back = true
 
                             transactionStatus.setRollbackOnly()
 
-                            if (questionInstance?.hasErrors()) {
-                                log.error("QuestionController():uploadFileQuestion():testInstanceCSV.hasErrors():validation")
+                            flash.questionImportErrorMessage = g.message(code: 'default.import.error.question.difficulty.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth value in the <strong>Difficulty level</strong> field.', args: ["${lineCounter+1}", "${csvFilename}"])
+                        }
 
-                                flash.questionImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
+                        if (answerValid && difficultyValid) {
 
-                            } else {
-                                log.error("QuestionController():uploadFileQuestion():testInstanceCSV:notSaved")
+                            Question questionInstance = new Question(
+                                    titleQuestionKey: tokens[0].trim(),
+                                    description: tokens[1].trim(),
+                                    difficultyLevel: difficultyValue,
+                                    answers: answerInstanceArray
+                            )
 
-                                flash.questionImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                            def instanceCSV = customImportService.saveRecordCSVQuestion(questionInstance)
+                            // It saves the record
+
+                            // Error in save record CSV
+                            if (!instanceCSV) {
+                                log.error("QuestionController():uploadFileQuestion():errorSave:!instanceCSV")
+
+                                transactionStatus.setRollbackOnly()
+
+                                if (questionInstance?.hasErrors()) {
+                                    log.error("QuestionController():uploadFileQuestion():testInstanceCSV.hasErrors():validation")
+
+                                    flash.questionImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter + 1}"])
+
+                                } else {
+                                    log.error("QuestionController():uploadFileQuestion():testInstanceCSV:notSaved")
+
+                                    flash.questionImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                                }
+                                back = true
                             }
-                            back = true
                         }
                     }
 

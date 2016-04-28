@@ -366,7 +366,7 @@ class CatalogController {
                                     transactionStatus.setRollbackOnly()
 
                                     flash.catalogImportErrorMessage = g.message(code: 'default.import.error.catalog.question.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth value ' +
-                                            'in the <strong>Question</strong> field.', args: ["${lineCounter + 1}", "${csvFilename}"])
+                                            'in the <strong>Questions</strong> field.', args: ["${lineCounter + 1}", "${csvFilename}"])
 
                                     return true
                                 } else {

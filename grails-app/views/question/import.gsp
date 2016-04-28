@@ -441,12 +441,15 @@
                                                 '<li>The import process may take several minutes depending on the size of the file.</li></ul>'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.admin', default: 'To import correctly the admininstrators, you must follow the following scheme: <strong>| Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> | Enabled account<span style="color: #D05454">*</span> | Locked account<span style="color: #D05454">*</span>' +
-                                                ' | Expired account<span style="color: #D05454">*</span> | Expired password<span style="color: #D05454">*</span> | </strong>; ' +
-                                                'where username and email must be unique, ie, be available. <br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
+                                        ${raw(g.message(code: 'default.import.description.question', default: 'Para importar correctamente las preguntas, debe seguir el siguiente esquema: <strong>| Clave de pregunta<span style="color: #D05454">*</span> | Descripción<span style="color: #D05454">*</span> | ' +
+                                                'Nivel de dificultad<span style="color: #D05454">*</span> | Respuestas | </strong>; donde clave de pregunta debe ser única, es decir, estar disponible. <br><br> Los campos marcados con <span style="color: #D05454">*</span> son ' +
+                                                'obligatorios, el resto son opcionales siendo obligatorio que se encuentre la columna en el documento <strong>.csv</strong> aunque los campos correspondientes en cada fila se encuentren vacíos.'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.admin.recommendation', default: 'Fields that represents the state of the user account can have two values (<strong>true</strong> and <strong>false</strong>) depending on their activation or not, being recommended to enable the <strong>Enabled account</strong> by word: <strong>true</strong>.'))}
+                                        ${raw(g.message(code: 'default.import.description.question.recommendation', default: '<strong>Remember:</strong><ul><li><i>Difficulty level</i> field can have three values: <strong>Facil/Easy</strong>, <strong>Medio/Medium</strong> or ' +
+                                                '<strong>Dificil/Difficult</strong>.</li><li>The importation of questions does not require necessarily associate answers.</li><li>To associate answers to question, you must specify the <strong>key answer</strong>. ' +
+                                                '<strong>It is important, the prior existence in the system of the answer or answers indicated.</strong></li><li>To associate an answer, you must only define its key in the <i>Answers</i> field. Example: <strong>keyAnswer1</strong></li>' +
+                                                '<li>To associate several answers, you must define them separated by <strong>comma</strong> in the <i>Answers</i> field. Example: <strong>keyAnswer1, keyAnswer2, keyAnswer3</strong></li></ul>'))}
                                     </p>
                                 </div>
                             </div>

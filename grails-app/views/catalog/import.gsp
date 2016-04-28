@@ -449,7 +449,7 @@
                                         ${raw(g.message(code: 'default.import.description.catalog.recommendation', default: '<strong>Remember:</strong><ul><li>The importation of catalogs does not require necessarily associate questions.</li><li>To associate questions ' +
                                                 'to catalog, you must specify the <strong>key question</strong>. <strong>It is important, the prior existence in the system of the question or questions indicated.</strong></li><li>To associate a ' +
                                                 'question, you must only define its key in the <i>Questions</i> field. Example: <strong>keyQuestion1</strong></li><li>To associate several questions, you must define them separated by <strong>comma</strong> in the' +
-                                                ' <i>Questions</i> field. Example: <strong>keyQuestion1, keyQuestion2, keyQuestion3</strong></li>'))}
+                                                ' <i>Questions</i> field. Example: <strong>keyQuestion1, keyQuestion2, keyQuestion3</strong></li></ul>'))}
                                     </p>
                                 </div>
                             </div>
