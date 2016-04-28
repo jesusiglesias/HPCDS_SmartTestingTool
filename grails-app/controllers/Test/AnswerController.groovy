@@ -339,7 +339,7 @@ class AnswerController {
 
         // Parse CSV file
         try {
-            csvFileLoad.inputStream.text.toCsvReader(['separatorChar': ';', 'chartset': 'UTF-8', 'skipLines': 1]).eachLine { tokens ->
+            csvFileLoad.inputStream.toCsvReader(['separatorChar': ';', 'charset': 'UTF-8', 'skipLines': 1]).eachLine { tokens ->
 
                 lineCounter++
 
