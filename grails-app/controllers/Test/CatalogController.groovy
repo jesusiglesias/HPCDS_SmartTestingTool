@@ -1,5 +1,6 @@
 package Test
 
+import com.google.common.base.Strings
 import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
@@ -274,17 +275,18 @@ class CatalogController {
         def lineCounter = 0
         def existingFieldsList = []
         def back = false
+        def questionValid = false
+        String[] questionsArray
+        List<String> questionInstanceArray = new ArrayList<String>();
 
-        // Obtaining number of fields in the entity - numberFields: TODO
+        // Obtaining number of fields in the entity - numberFields:
         def numberFields = 0
         def totalNumberFields = 0
         grailsApplication.getDomainClass('Test.Catalog').persistentProperties.collect {
             numberFields ++
         }
 
-        log.error(numberFields)
-
-        // ID field (attribute) does not used TODO
+        // ID field (attribute) does not used
         totalNumberFields = numberFields - 1
         log.debug("CatalogController():uploadFileCatalog():numberFieldsClass:${totalNumberFields}")
 
@@ -335,36 +337,77 @@ class CatalogController {
                 // Each row has 1 column (name). Length of the row
                 if (tokens.length == totalNumberFields) {
 
-                    // It checks the name because is an unique property TODO
+                    // It checks the name because is an unique property
                     if(Catalog.findByName(tokens[0].trim())){
                         log.error("CatalogController():uploadFileCatalog():toCsvReader():recordsExists")
 
                         existingFieldsList.push(lineCounter)
 
                     } else {
-                        Catalog catalogInstance = new Catalog(
-                                name: tokens[0].trim()
-                        )
 
-                        def instanceCSV = customImportService.saveRecordCSVCatalog(catalogInstance) // It saves the record
+                        // Questions field not null or empty
+                        if (!Strings.isNullOrEmpty(tokens[1].trim())) {
 
-                        // Error in save record CSV
-                        if (!instanceCSV) {
-                            log.error("CatalogController():uploadFileCatalog():errorSave:!instanceCSV")
+                            // Obtaining each question
+                            questionsArray = tokens[1].trim().split("\\s*,\\s*");
 
-                            transactionStatus.setRollbackOnly()
+                            questionsArray.each { question ->
 
-                            if (catalogInstance?.hasErrors()) {
-                                log.error("CatalogController():uploadFileCatalog():catalogInstanceCSV.hasErrors():validation")
+                                // Obtaining question
+                                def questionInstance = Question.findByTitleQuestionKey(question)
 
-                                flash.catalogImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter+1}"])
+                                // Checking the question
+                                if (questionInstance == null) {
+                                    log.error("CatalogController():uploadFileCatalog():questionInvalid:${question}")
 
-                            } else {
-                                log.error("CatalogController():uploadFileCatalog():catalogInstanceCSV:notSaved")
+                                    questionValid = false
+                                    back = true
 
-                                flash.catalogImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                                    transactionStatus.setRollbackOnly()
+
+                                    flash.catalogImportErrorMessage = g.message(code: 'default.import.error.catalog.question.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth value ' +
+                                            'in the <strong>Question</strong> field.', args: ["${lineCounter + 1}", "${csvFilename}"])
+
+                                    return true
+                                } else {
+                                    questionValid = true
+                                    questionInstanceArray.add(questionInstance)
+                                }
                             }
-                            back = true
+                        } else {
+                            questionValid = true
+                        }
+
+                        if (questionValid) {
+
+                            Catalog catalogInstance = new Catalog(
+                                    name: tokens[0].trim(),
+                                    questions: questionInstanceArray
+                            )
+
+                            log.error(catalogInstance.errors)
+
+                            def instanceCSV = customImportService.saveRecordCSVCatalog(catalogInstance)
+                            // It saves the record
+
+                            // Error in save record CSV
+                            if (!instanceCSV) {
+                                log.error("CatalogController():uploadFileCatalog():errorSave:!instanceCSV")
+
+                                transactionStatus.setRollbackOnly()
+
+                                if (catalogInstance?.hasErrors()) {
+                                    log.error("CatalogController():uploadFileCatalog():catalogInstanceCSV.hasErrors():validation")
+
+                                    flash.catalogImportErrorMessage = g.message(code: 'default.import.hasErrors', default: 'Error in the validation of the record <strong>{0}</strong>. Check the validation rules of the entity.', args: ["${lineCounter + 1}"])
+
+                                } else {
+                                    log.error("CatalogController():uploadFileCatalog():catalogInstanceCSV:notSaved")
+
+                                    flash.catalogImportErrorMessage = g.message(code: 'default.import.error.general', default: 'Error importing the <strong>{0}</strong> file.', args: ["${csvFilename}"])
+                                }
+                                back = true
+                            }
                         }
                     }
 

@@ -441,12 +441,15 @@
                                                 '<li>The import process may take several minutes depending on the size of the file.</li></ul>'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.admin', default: 'To import correctly the admininstrators, you must follow the following scheme: <strong>| Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> | Enabled account<span style="color: #D05454">*</span> | Locked account<span style="color: #D05454">*</span>' +
-                                                ' | Expired account<span style="color: #D05454">*</span> | Expired password<span style="color: #D05454">*</span> | </strong>; ' +
-                                                'where username and email must be unique, ie, be available. <br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
+                                        ${raw(g.message(code: 'default.import.description.catalog', default: 'To import correctly the catalogs, you must follow the following scheme: <strong>| Name<span style="color: #D05454">*</span> | Questions | </strong>; ' +
+                                                'where name must be unique, ie, be available. <br><br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document ' +
+                                                'although the corresponding fields in each row are empty.'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.admin.recommendation', default: 'Fields that represents the state of the user account can have two values (<strong>true</strong> and <strong>false</strong>) depending on their activation or not, being recommended to enable the <strong>Enabled account</strong> by word: <strong>true</strong>.'))}
+                                        ${raw(g.message(code: 'default.import.description.catalog.recommendation', default: '<strong>Remember:</strong><ul><li>The importation of catalogs does not require necessarily associate questions.</li><li>To associate questions ' +
+                                                'to catalog, you must specify the <strong>key question</strong>. <strong>It is important, the prior existence in the system of the question or questions indicated.</strong></li><li>To associate a ' +
+                                                'question, you must only define its key in the <i>Questions</i> field. Example: <strong>keyQuestion1</strong></li><li>To associate several questions, you must define them separated by <strong>comma</strong> in the' +
+                                                ' <i>Questions</i> field. Example: <strong>keyQuestion1, keyQuestion2, keyQuestion3</strong></li>'))}
                                     </p>
                                 </div>
                             </div>
