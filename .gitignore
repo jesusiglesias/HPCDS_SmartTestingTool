@@ -63,8 +63,6 @@ stacktrace.log
 # Output directory (classes generated from sources)
 /target/
 
-/cobertura.ser
-/.link_to_grails_plugins/
 .metadata/*
 Servers/*
 
