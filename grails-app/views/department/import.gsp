@@ -428,13 +428,18 @@
                             </div>
 
                             <div class="portlet-body">
-                                <div class="scroller" style="height:350px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                <div class="scroller" style="height:510px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
                                     <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
                                                 '<ul><li>The file to import must have the format <strong>.csv</strong>.</li>' +
                                                 '<li>The separator character must be the <strong>semicolon ;</strong>.</li>' +
                                                 '<li>The set of coding used is: <strong>UTF-8</strong>.</li>' +
+                                                '<li><strong>Due to problems in encoding special characters <i>eg.: tildes</i> appeared to save the file with the software <i>Microsoft Excel</i>, it is advisable not to use this tool.</strong> In case of ' +
+                                                'not use these special characters, this software can be used perfectly with the template or a new file.</li>' +
+                                                '<li><strong>Free software: <i>LibreOffice</i> presents a problem</strong> when a file already created (eg.: the downloadable template) is used. This file when it is edited and saved with this software and ' +
+                                                'later it is imported, the columns are not recognized correctly and the following error is displayed: <strong><i>incorrect number of columns</i></strong> so it is advisable to create a new file for import.</strong></li>' +
+                                                '<li><strong>It is recommend using the free software: <i>OpenOffice</i> with the template or with a new file.</strong></li>' +
                                                 '<li><strong>The first row is ignored </strong>, corresponding for example to the name of each field.</li>' +
                                                 '<li>Each field has the same restrictions as in its manual creation or editing (character limit, pattern to follow, etc.)</li>' +
                                                 '<li>At the end of the process, a result message is displayed.</li>' +

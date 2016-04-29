@@ -435,6 +435,11 @@
                                                 '<ul><li>The file to import must have the format <strong>.csv</strong>.</li>' +
                                                 '<li>The separator character must be the <strong>semicolon ;</strong>.</li>' +
                                                 '<li>The set of coding used is: <strong>UTF-8</strong>.</li>' +
+                                                '<li><strong>Due to problems in encoding special characters <i>eg.: tildes</i> appeared to save the file with the software <i>Microsoft Excel</i>, it is advisable not to use this tool.</strong> In case of ' +
+                                                'not use these special characters, this software can be used perfectly with the template or a new file.</li>' +
+                                                '<li><strong>Free software: <i>LibreOffice</i> presents a problem</strong> when a file already created (eg.: the downloadable template) is used. This file when it is edited and saved with this software and ' +
+                                                'later it is imported, the columns are not recognized correctly and the following error is displayed: <strong><i>incorrect number of columns</i></strong> so it is advisable to create a new file for import.</strong></li>' +
+                                                '<li><strong>It is recommend using the free software: <i>OpenOffice</i> with the template or with a new file.</strong></li>' +
                                                 '<li><strong>The first row is ignored </strong>, corresponding for example to the name of each field.</li>' +
                                                 '<li>Each field has the same restrictions as in its manual creation or editing (character limit, pattern to follow, etc.)</li>' +
                                                 '<li>At the end of the process, a result message is displayed.</li>' +
@@ -453,7 +458,7 @@
                                     <p>
                                         ${raw(g.message(code: 'default.import.description.test.remember', default: 'Besides, <strong>remember:</strong><ul><li>The number of question must be <strong>less or equal</strong> to number of question that the catalog selected ' +
                                                 'contains.</li><li>Initial date of the test must have the following format <strong>dd-MM-yyyy</strong>; where <i>dd</i>: day, <i>MM</i>: month and <i>yyyy</i>: year in numeric format. <strong>Important!</strong> You must ' +
-                                                'configure the date format in the sotfware used. Example: In <i>Microsoft Excel</i>, this configutarion can be found in: <i>Format -> Cells -> Date</i>.</li><li>End date of the test must have the following format <strong>dd-MM-yyyy</strong>; ' +
+                                                'configure the date format in the sotfware used. Example: The exact path depends on the software used. Approximate path: <i>Configuration/Preferences -> Format -> Cells -> Date</i>.</li><li>End date of the test must have the following format <strong>dd-MM-yyyy</strong>; ' +
                                                 'where <i>dd</i>: day, <i>MM</i>: month and <i>yyyy</i>: year in numeric format. In addition, it can not be earlier than the initial date.</li><li><i>Maximum time</i> field must be expressed in <strong>minutes</strong>.</li><li><i>Maximum ' +
                                                 'number of attempts</i> field must have a value between <strong>1</strong> and <strong>5</strong>.</li><li>In the <i>Topic</i> field, you must type <strong>only the name</strong> of the topic relationed to test. <strong>It is important, the ' +
                                                 'prior existence in the system of the topic indicated.</strong></li></ul><li>In the <i>Catalog</i> field, you must type <strong>only the name</strong> of the catalog relationed to test. <strong>It is important, the prior existence in the system ' +

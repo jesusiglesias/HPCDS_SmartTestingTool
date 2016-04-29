@@ -416,8 +416,7 @@ class QuestionController {
                                     answers: answerInstanceArray
                             )
 
-                            def instanceCSV = customImportService.saveRecordCSVQuestion(questionInstance)
-                            // It saves the record
+                            def instanceCSV = customImportService.saveRecordCSVQuestion(questionInstance) // It saves the record
 
                             // Error in save record CSV
                             if (!instanceCSV) {

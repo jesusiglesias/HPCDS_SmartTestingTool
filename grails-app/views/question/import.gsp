@@ -428,17 +428,20 @@
                             </div>
 
                             <div class="portlet-body">
-                                <div class="scroller" style="height:470px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
+                                <div class="scroller" style="height:490px" data-rail-visible="1" data-rail-color="#105d41" data-handle-color="#4A9F60">
                                     <h4 class="log-portlet-h4 bold"><g:message code="default.import.title" default="Instructions for importing data"/></h4>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description', default: 'Importing information allows a simple and quick way to enter data into the system. Then, general information to follow for proper operation is shown:' +
                                                 '<ul><li>The file to import must have the format <strong>.csv</strong>.</li>' +
                                                 '<li>The separator character must be the <strong>semicolon ;</strong>.</li>' +
                                                 '<li>The set of coding used is: <strong>UTF-8</strong>.</li>' +
-                                                '<li><strong>The first row is ignored </strong>, corresponding for example to the name of each field.</li>' +
-                                                '<li>Each field has the same restrictions as in its manual creation or editing (character limit, pattern to follow, etc.)</li>' +
-                                                '<li>At the end of the process, a result message is displayed.</li>' +
-                                                '<li>The import process may take several minutes depending on the size of the file.</li></ul>'))}
+                                                '<li><strong>Due to problems in encoding special characters <i>eg.: tildes</i> appeared to save the file with the software <i>Microsoft Excel</i>, it is advisable not to use this tool.</strong> In case of ' +
+                                                'not use these special characters, this software can be used perfectly with the template or a new file.</li>' +
+                                                '<li><strong>Free software: <i>LibreOffice</i> presents a problem</strong> when a file already created (eg.: the downloadable template) is used. This file when it is edited and saved with this software and ' +
+                                                'later it is imported, the columns are not recognized correctly and the following error is displayed: <strong><i>incorrect number of columns</i></strong> so it is advisable to create a new file for import.</strong></li>' +
+                                                '<li><strong>It is recommend using the free software: <i>OpenOffice</i> with the template or with a new file.</strong></li>' +
+                                                '<li><strong>The first row is ignored </strong>, corresponding for example to the name of each field.</li><li>Each field has the same restrictions as in its manual creation or editing (character ' +
+                                                'limit, pattern to follow, etc.)</li><li>At the end of the process, a result message is displayed.</li><li>The import process may take several minutes depending on the size of the file.</li></ul>'))}
                                     </p>
                                     <p>
                                         ${raw(g.message(code: 'default.import.description.question', default: 'Para importar correctamente las preguntas, debe seguir el siguiente esquema: <strong>| Clave de pregunta<span style="color: #D05454">*</span> | Descripción<span style="color: #D05454">*</span> | ' +
@@ -446,8 +449,8 @@
                                                 'obligatorios, el resto son opcionales siendo obligatorio que se encuentre la columna en el documento <strong>.csv</strong> aunque los campos correspondientes en cada fila se encuentren vacíos.'))}
                                     </p>
                                     <p>
-                                        ${raw(g.message(code: 'default.import.description.question.recommendation', default: '<strong>Remember:</strong><ul><li><i>Difficulty level</i> field can have three values: <strong>Facil/Easy</strong>, <strong>Medio/Medium</strong> or ' +
-                                                '<strong>Dificil/Difficult</strong>.</li><li>The importation of questions does not require necessarily associate answers.</li><li>To associate answers to question, you must specify the <strong>key answer</strong>. ' +
+                                        ${raw(g.message(code: 'default.import.description.question.recommendation', default: '<strong>Remember:</strong><ul><li><i>Difficulty level</i> field can have three values: <strong>Fácil/Easy</strong>, <strong>Medio/Medium</strong> or ' +
+                                                '<strong>Difícil/Difficult</strong>.</li><li>The importation of questions does not require necessarily associate answers.</li><li>To associate answers to question, you must specify the <strong>key answer</strong>. ' +
                                                 '<strong>It is important, the prior existence in the system of the answer or answers indicated.</strong></li><li>To associate an answer, you must only define its key in the <i>Answers</i> field. Example: <strong>keyAnswer1</strong></li>' +
                                                 '<li>To associate several answers, you must define them separated by <strong>comma</strong> in the <i>Answers</i> field. Example: <strong>keyAnswer1, keyAnswer2, keyAnswer3</strong></li></ul>'))}
                                     </p>
