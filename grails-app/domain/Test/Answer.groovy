@@ -7,7 +7,7 @@ class Answer {
 
     UUID id
     // Attributes
-    boolean correct
+    boolean correct = false
     String description
     Integer score
     String titleAnswerKey
