@@ -5,5 +5,12 @@ package CustomTasksUser
  */
 class CustomTasksFrontEndController {
 
-    def index() { }
+    /**
+     * It shows the home page of user.
+     */
+    def home() {
+        log.debug("CustomTasksFrontEndController():home()")
+
+        render view: 'home'
+    }
 }

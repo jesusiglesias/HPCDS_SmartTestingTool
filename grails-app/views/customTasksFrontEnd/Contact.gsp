@@ -1,16 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jesusiglesias
-  Date: 13/4/16
-  Time: 17:59
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <meta name="layout" content="main_auth_user">
+    <title><g:message code="layouts.main_auth_user.head.title.contact" default="STT | Contact"/></title>
 </head>
-
 <body>
 
 </body>

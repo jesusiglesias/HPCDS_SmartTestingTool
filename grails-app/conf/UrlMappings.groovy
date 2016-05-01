@@ -83,16 +83,6 @@ class UrlMappings {
             "/uploadFile"(controller: 'test', action: 'uploadFileTest')
         }
 
-        /* Errors
-        ======================================================*/
-        "400"(view: '/error/badRequest')
-        "401"(view: '/error/unauthorized')
-        "403"(view: '/login/denied')
-        "404"(view: '/error/notFound')
-        "405"(view: '/error/notAllowed')
-        "500"(view: '/error/internalError')
-        "503"(view: '/error/unavailableService')
-
         /* Login controller
         ======================================================*/
         "/reauthenticate"(controller: 'login', action: 'full')
@@ -127,9 +117,22 @@ class UrlMappings {
 
         /* Custom general tasks normal user (front-end)
         ======================================================*/
+        "/home"(controller: 'customTasksFrontEnd', action: 'home')
+        // TODO
+        "/profile/$id?(.$format)?"(controller: 'user', action: 'edit')
         "/contact"(view: "customTasksFrontEnd/Contact")
-        "/cookiePolicy"(view: "customTasksFrontEnd/CookiePolicy")
+        "/cookiesPolicy"(view: "customTasksFrontEnd/CookiesPolicy")
         "/FAQ"(view: "customTasksFrontEnd/FAQ")
+
+        /* Errors
+        ======================================================*/
+        "400"(view: '/error/badRequest')
+        "401"(view: '/error/unauthorized')
+        "403"(view: '/login/denied')
+        "404"(view: '/error/notFound')
+        "405"(view: '/error/notAllowed')
+        "500"(view: '/error/internalError')
+        "503"(view: '/error/unavailableService')
 
         /* Information files
         ======================================================*/

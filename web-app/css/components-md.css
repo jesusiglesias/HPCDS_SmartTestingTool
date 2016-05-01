@@ -6127,6 +6127,11 @@ Customized Bootstrap Close Icon
     white-space: nowrap;
 }
 
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover {
+    color: #6e6e6e !important;
+}
+
 .dropdown-menu > li > form {
     padding: 6px 0;
     color: #6e6e6e;
@@ -6327,8 +6332,8 @@ Customized Bootstrap Close Icon
     }
 
     .navbar-nav .open .dropdown-menu > li > a {
-        padding: 6px 0 6px 13px;
-        color: #333;
+        padding: 8px 16px;
+        color: #6e6e6e;
     }
 
     /* Dropdown elements color */

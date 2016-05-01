@@ -170,15 +170,7 @@ class CustomTasksUserController {
         flash.errorSwitchUser = switchFailMessage
 
         // Redirection to admin url
-        if (SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')) {
-            log.debug("CustomTasksUserController:switchFail():adminRole:admin_switch")
-            redirect uri: adminUrlRedirection
-
-            /* TODO Añadir en user layout */
-        } else if (SpringSecurityUtils.ifAllGranted('ROLE_USER')) {  // Redirection to user url
-            log.debug("CustomTasksUserController:switchFail():userRole:admin_switch")
-            redirect uri: userUrlRedirection
-        }
+        redirect uri: adminUrlRedirection
     }
 
     /*-------------------------------------------------------------------------------------------*

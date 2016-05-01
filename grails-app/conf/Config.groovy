@@ -212,7 +212,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksBackend/scoresRank':          ['ROLE_ADMIN'],
     '/customTasksBackend/averageScoreSex':     ['ROLE_ADMIN'],
     '/customTasksBackend/scoresTest':          ['ROLE_ADMIN'],
-        // TODO
     '/customTasksBackend/profileImage':        ['ROLE_ADMIN', 'ROLE_USER'],
     '/customTasksBackend/reloadLogConfig':     ['ROLE_ADMIN'],
     '/customTasksBackend/reloadLogConfigAJAX': ['ROLE_ADMIN'],
@@ -220,6 +219,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
     /* Custom tasks normal user (front-end)
     ======================================================*/
+    '/home':                                   ['ROLE_USER'],
     '/contact':                                ['ROLE_USER'],
     '/cookiePolicy':                           ['ROLE_USER'],
     '/FAQ':                                    ['ROLE_USER'],
@@ -267,5 +267,5 @@ grails.plugin.springsecurity.switchUser.usernameParameter = 'stt_hp_username'
 
 // URL redirection based on role
 springsecurity.urlredirection.admin = '/dashboard'
-springsecurity.urlredirection.user = '/register'
+springsecurity.urlredirection.user = '/home'
 springsecurity.urlredirection.noRole = '/noRole'

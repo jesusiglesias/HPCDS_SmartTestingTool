@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main_auth_user">
-    <title><g:message code="layouts.main_auth_user.head.title.faq" default="STT | FAQ"/></title>
+    <title><g:message code="layouts.main_auth_user.head.title.home" default="STT | Home page"/></title>
 </head>
 <body>
 

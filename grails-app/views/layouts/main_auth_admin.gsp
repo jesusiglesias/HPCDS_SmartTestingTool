@@ -56,9 +56,6 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-    <!-- Cookie message -->
-    <g:javascript src="cookies/cookies.js"/>
-
     <!-- HTML5 SHIV, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
 		<script src="/js/html5shiv.min.js" type="text/javascript"></script>
@@ -82,7 +79,6 @@
 
 <!-- BODY -->
 <body class="page-header-fixed page-header-fixed-mobile page-sidebar-closed-hide-logo page-content-white page-md">
-
 
     <!-- Account states notification -->
     <g:if test='${flash.errorSwitchUser}'>
@@ -207,22 +203,6 @@
             <g:link uri="https://www.hpcds.com/es/">
                 <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
             </g:link>
-        </div>
-    </div>
-
-    <!-- Cookie block -->
-    <div id="cookie-container" class="row">
-        <div id="cookie-message" class="col-xs-12">
-            <p>
-                <i class="fa fa-exclamation-circle fa-custom" aria-hidden="true"></i>
-                <g:message code="layouts.main_auth_user.body.content.cookie.message" default="This site uses cookies for the correct user navigation. If you continue browsing, it considers that you accept its use."/>
-            </p>
-            <div>
-                <g:link controller="customTasksBackend" action="dashboard" class="btn blue-chambray btn-sm"><g:message code="layouts.main_auth_user.body.content.cookie.information" default="More information"/></g:link>
-                <a onclick="acceptCookies();" style="cursor:pointer;" class="btn blue-chambray btn-sm">
-                    <g:message code="layouts.main_auth_user.body.content.cookie.close" default="Close"/>
-                </a>
-            </div>
         </div>
     </div>
 
