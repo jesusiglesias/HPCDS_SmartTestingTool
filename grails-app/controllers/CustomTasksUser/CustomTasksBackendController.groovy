@@ -135,7 +135,7 @@ class CustomTasksBackendController {
          def UDData = [cols: cols, rows: rows]
 
          // Avoid undefined function (Google chart)
-         sleep(100)
+         sleep(90)
 
          render UDData as JSON
      }
@@ -221,7 +221,7 @@ class CustomTasksBackendController {
         ]
 
         // Avoid undefined function (Google chart)
-        sleep(100)
+        sleep(110)
 
         render dataAVS as JSON
     }
@@ -394,9 +394,6 @@ class CustomTasksBackendController {
                 'eight': eight,
                 'nine':  nine,
         ]
-
-        // Avoid undefined function (Google chart)
-        sleep(100)
 
         render dataTS as JSON
     }

@@ -1053,7 +1053,7 @@
                         <div class="portlet light bg-inverse portlet-scoresTest">
                             <div class="portlet-title">
                                 <div class="caption font-green-dark">
-                                    <i class="fa fa-bar-chart font-green-dark"></i>
+                                    <i class="fa fa-line-chart font-green-dark"></i>
                                     <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.scores.test.title" default="Score by test"/></span>
                                 </div>
                                 <div class="tools">

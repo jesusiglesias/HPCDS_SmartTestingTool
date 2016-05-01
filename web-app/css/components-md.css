@@ -8673,10 +8673,6 @@ body[ng-controller] .modal {
     margin-bottom: 0;
 }
 
-.portlet.light .portlet-body {
-    padding-top: 8px;
-}
-
 .portlet.light.portlet-fullscreen > .portlet-body {
     padding: 8px 0;
 }
