@@ -13,7 +13,7 @@ var Contact = function () {
 
 		// New Google map
 		map = new GMaps({
-			div: '#gmapbg',
+			div: '#gmapSTT',
 			lat: 40.522794,
 			lng: -3.888638
 		});
@@ -38,24 +38,65 @@ var Contact = function () {
 		$('.tooltips').tooltip();
 
 		// Portlet tooltips
-		$('.c-content-iconlist-1 .li-site').tooltip({
+		$('.iconlist .li-site').tooltip({
 			container: 'body',
 			title: _webSite
 		});
 
-		$('.c-content-iconlist-1 .li-google').tooltip({
+		$('.iconlist .li-google').tooltip({
 			container: 'body',
 			title: "Google plus"
 		});
 
-		$('.c-content-iconlist-1 .li-youtube').tooltip({
+		$('.iconlist .li-youtube').tooltip({
 			container: 'body',
 			title: "Youtube"
 		});
 
-		$('.c-content-iconlist-1 .li-linkedin').tooltip({
+		$('.iconlist .li-linkedin').tooltip({
 			container: 'body',
 			title: "Linkedin"
+		});
+	};
+
+	/**
+	 * It handles the max length of the fields
+	 */
+	var handlerMaxlengthForm = function() {
+
+		/* Name field */
+		$('#name').maxlength({
+			limitReachedClass: "label label-danger",
+			threshold: 20,
+			placement: 'top',
+			validate: true
+		});
+
+		/* Email field */
+		$('#email').maxlength({
+			limitReachedClass: "label label-danger",
+			threshold: 20,
+			placement: 'top',
+			validate: true
+		});
+
+		/* Message field */
+		$('#message').maxlength({
+			limitReachedClass: "label label-danger",
+			alwaysShow: true,
+			placement: 'top-right-inside',
+			validate: true
+		});
+	};
+
+	/**
+	 * It handles the select
+	 */
+	var handlerBootstrapSelectForm = function () {
+
+		$('.bs-select').selectpicker({
+			iconBase: 'fa',
+			tickIcon: 'fa-check'
 		});
 	};
 
@@ -64,6 +105,8 @@ var Contact = function () {
 		init: function () {
 			handlerGMaps();
 			handlerTooltip();
+			handlerMaxlengthForm();
+			handlerBootstrapSelectForm();
 		}
 	};
 }();

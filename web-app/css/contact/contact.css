@@ -2,21 +2,26 @@
 *                                      CONTACT PAGE                                          *
 *-------------------------------------------------------------------------------------------*/
 
-.c-content-contact-1 {
+.contactPage-container {
     width: 100%;
     position: relative;
-    margin-bottom: 70px;
+    margin-bottom: 40px;
 }
 
-.c-content-contact-1:before {
+.contactPage-container:before {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.c-content-contact-1:after {
+.contactPage-container:after {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.c-content-contact-1 > .row .c-body {
+.contactPage-container > .row,
+.contentPage-form > .row {
+    margin-right: 0 !important;
+}
+
+.contactPage-container > .row .body {
     position: relative;
     z-index: 100;
     background: rgba(108, 177, 145, 0.85);
@@ -24,39 +29,39 @@
     padding: 60px 40px;
 }
 
-.c-content-contact-1 > .row .c-body > .c-section {
+.contactPage-container > .row .body > .section {
     margin-bottom: 15px;
     text-align: right;
     color: #ffffff;
 }
 
-.c-content-contact-1 > .row .c-body > .c-section > .c-content-label {
+.contactPage-container > .row .body > .section > .label {
     display: inline;
     padding: 3px 7px;
     color: #fff;
     background-color: rgba(212, 190, 103, 0.92);
 }
 
-.c-content-contact-1 > .row .c-body > .c-section > h3 {
-    font-size: 26px;
+.contactPage-container > .row .body > .section > h3 {
+    font-size: 24px;
     margin: 0 0 30px 0;
     text-transform: uppercase;
 }
 
-.c-content-contact-1 > .row .c-body > .c-section > p {
+.contactPage-container > .row .body > .section > p {
     font-size: 16px;
     line-height: 24px;
     color: #ffffff;
     font-weight: 300;
 }
 
-.c-content-contact-1 > .row .c-body > .c-section > p,
-.c-content-contact-1 > .row .c-body > .c-section > .c-content-iconlist-1 {
+.contactPage-container > .row .body > .section > p,
+.contactPage-container > .row .body > .section > .iconlist {
     margin-top: 20px;
 }
 
-.c-content-contact-1 > .row .c-body > .c-section > p > li,
-.c-content-contact-1 > .row .c-body > .c-section > .c-content-iconlist-1 > li {
+.contactPage-container > .row .body > .section > p > li,
+.contactPage-container > .row .body > .section > .iconlist > li {
     list-style: none;
     display: inline-block;
     font-size: 24px;
@@ -81,8 +86,12 @@
     font-size: 25px !important;
 }
 
-.c-content-contact-1 > .row .c-body > .c-section > p > li:hover,
-.c-content-contact-1 > .row .c-body > .c-section > .c-content-iconlist-1 > li:hover {
+.contactPageFAQ {
+    padding-right: 0 !important;
+}
+
+.contactPage-container > .row .body > .section > p > li:hover,
+.contactPage-container > .row .body > .section > .iconlist > li:hover {
     background-color: rgb(84, 83, 83);
     -webkit-transition: background-color 700ms ease-in-out;
     -moz-transition: background-color 700ms ease-in-out;
@@ -95,12 +104,12 @@
     transform: scale(1.2);
 }
 
-.c-content-contact-1 > .row .c-body > .c-section > p > li > a,
-.c-content-contact-1 > .row .c-body > .c-section > .c-content-iconlist-1 > li > a {
+.contactPage-container > .row .body > .section > p > li > a,
+.contactPage-container > .row .body > .section > .iconlist > li > a {
     color: #ffffff;
 }
 
-.c-content-contact-1-gmap {
+.contactPage-gmap {
     display: block;
     top: 0;
     bottom: 0;
@@ -110,93 +119,98 @@
     width: 100%;
 }
 
-.c-content-feedback-1 {
+.contentPage-form {
     width: 100%;
 }
 
-.c-content-feedback-1 > .row > div .c-content-title-1 > h3 {
+.contentPage-form > .row > div .title > h3 {
     margin-top: 10px;
     margin-bottom: 20px;
 }
 
-.c-content-feedback-1 > .row > div .c-content-title-1 > .c-line-left {
+.contentPage-form > .row > div .title > .line-left {
     margin-bottom: 30px;
     height: 3px;
     width: 40px;
 }
 
-.c-content-feedback-1 > .row > div .c-content-title-1 > p {
+.contentPage-form > .row > div .title > p {
     margin-bottom: 30px;
-    font-weight: 300;
+    font-weight: 400;
+    text-align: justify;
 }
 
-.c-content-feedback-1 > .row > div > .c-container {
+.contentPage-form > .row > div > .containerContactPage {
     background-size: auto;
     padding: 30px;
     margin: 0 0 30px 0;
+    background-color: rgba(212, 174, 59, 0.37) !important;
 }
 
-.c-content-feedback-1 > .row > div > .c-container > .c-inverse > h3 {
-    color: #ffffff;
-    margin-top: 10px;
+.contentPage-form > .row > div > .containerContactPage > .inverse > h3 {
+    color: #000000;
+    font-weight: 400;
 }
 
-.c-content-feedback-1 > .row > div > .c-container > .c-inverse > .c-line-left {
+.contentPage-form > .row > div > .containerContactPage > .inverse > .line-left {
     background-color: #ffffff;
 }
 
-.c-content-feedback-1 > .row > div > .c-container > .c-inverse > p {
-    color: #ffffff;
+.contentPage-form > .row > div > .containerContactPage > .inverse > p {
+    color: #000000;
 }
 
-.c-content-feedback-1 > .row > div > .c-container:last-child {
+.contentPage-form > .row > div > .containerContactPage:last-child {
     margin-bottom: 0;
 }
 
-.c-content-feedback-1 > .row > div > .c-container:last-child p {
-    margin-bottom: 0;
-}
-
-.c-content-feedback-1 > .row > div form {
+.contentPage-form > .row > div > .containerContactPage:last-child p {
     margin-bottom: 20px;
 }
 
-.c-content-feedback-1 > .row > div form .input-group {
-    width: 340px;
+.contentPage-form > .row > div > .containerMailcontact {
+    padding: 30px;
+    margin: 0;
 }
 
-.c-content-feedback-1 .input-group {
-    border: 0;
+.contactMapCol {
+    padding-right: 0 !important;
 }
 
-.c-content-feedback-1 .input-group .input-group-addon,
-.c-content-feedback-1 .input-group .btn {
-    border: 0;
+.icofont-phone-circle {
+    font-size: 19px;
 }
 
-/* Max-width: 1024px */
-@media (max-width: 1024px) {
+.contact-map-email {
+    color: #ffffff;
+}
 
-    .c-content-feedback-1 > .row > div form .input-group {
-        width: 100%;
-    }
+.contact-map-email:hover,
+.contact-map-email:active,
+.contact-map-email:focus {
+    text-decoration: none;
+    color: #000000;
+}
+
+.contact-form-button {
+    margin-top: 40px;
 }
 
 /* Max-width: 991px */
 @media (max-width: 991px) {
 
-    .c-content-contact-1-gmap {
+    .contactPage-gmap {
         display: block;
         position: static;
         width: 100%;
-        height: 450px !important;
+        height: 450px;
     }
 
-    .c-content-contact-1 > .row > div {
+    .contactPage-container > .row > div {
         width: 100%;
     }
 
-    .c-content-contact-1 > .row > div .c-body {
+    .contactPage-container > .row > div .body {
         position: static;
         display: block;
         padding: 30px 20px 10px 20px;
@@ -205,19 +219,68 @@
         text-align: left;
     }
 
-    .c-content-feedback-1 > .row > div > .c-container {
+    .contentPage-form > .row > div > .containerContactPage {
         margin-right: 0;
         margin-bottom: 40px;
     }
 
-    .c-content-feedback-1 > .row > div > .c-contact {
-        padding: 40px 30px 0 30px;
-        margin: 0;
+    .contactPage-container {
+        margin-bottom: 30px !important;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+
+    .page-title-user {
+        padding: 50px 0 50px 0;
+        font-size: 32px;
     }
 
-    .c-content-feedback-1.c-option-2 > .row > div > .c-contact {
-        padding: 30px;
-        margin-top: 40px;
-        background-color: #ffffff;
+    .contactPage-container > .row .body > .section > h3 {
+        font-size: 23px !important;
+    }
+
+    .contentPage-form > .row > div > .containerContactPage > .inverse > h3 {
+        font-size: 23px !important;
+    }
+}
+
+/* Max-width: 480px */
+@media (max-width: 480px) {
+
+    .page-title-user {
+        padding: 40px 0 40px 0;
+        font-size: 31px;
+    }
+
+    .contactPage-container > .row .body > .section > h3 {
+        font-size: 22px !important;
+    }
+
+    .contentPage-form > .row > div > .containerContactPage > .inverse > h3 {
+        font-size: 22px !important;
+    }
+}
+
+/* Max-width: 320px */
+@media (max-width: 320px) {
+
+    /* Google map */
+    .contactPage-gmap {
+        height: 400px;
+    }
+
+    .page-title-user {
+        padding: 35px 0 35px 0;
+        font-size: 29px;
+    }
+
+    .contactPage-container > .row .body > .section > h3 {
+        font-size: 20px !important;
+    }
+
+    .contentPage-form > .row > div > .containerContactPage > .inverse > h3 {
+        font-size: 20px !important;
     }
 }

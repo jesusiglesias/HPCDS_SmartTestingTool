@@ -1232,6 +1232,14 @@
     content: "\f116";
 }
 
+.icofont-ui-home:before {
+    content: "\ed3b";
+}
+
+.icofont-ui-email:before {
+    content: "\ed32";
+}
+
 /*Font size*/
 .icofont-lg {
     font-size: 1.33333333em;

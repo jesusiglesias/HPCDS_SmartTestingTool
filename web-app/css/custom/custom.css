@@ -300,12 +300,94 @@ table.dataTable tbody tr:hover {
 .page-title-user {
     letter-spacing: -1px;
     display: block;
-    font-weight: 300;
+    font-weight: 400;
     margin: 0;
-    padding: 50px 0 50px 0;
+    padding: 60px 0 60px 0;
     background: white;
-    font-size: 26px;
+    font-size: 33px;
     text-align: center;
+    font-variant: small-caps;
+}
+
+/* Page-bar */
+.page-bar-user {
+    background-color: #6CB191;
+    position: relative;
+    padding: 0 20px;
+    margin: 0;
+}
+
+.page-bar-user:before,
+.page-bar-user:after {
+    content: " ";
+    display: table;
+}
+
+.page-bar-user:after {
+    clear: both;
+}
+
+/* Breadcrumb */
+.page-bar-user .page-breadcrumb {
+    display: inline-block;
+    float: left;
+    padding: 11px 7px;
+    margin: 0;
+    list-style: none;
+}
+
+.page-bar-user .page-breadcrumb > li {
+    display: inline-block;
+}
+
+.ie8 .page-bar .page-breadcrumb > li {
+    margin-right: 1px;
+}
+
+.page-bar-user .page-breadcrumb > li > a {
+    color: #ffffff;
+    font-size: 14px;
+    text-shadow: none;
+    text-decoration:none;
+    font-weight: 600;
+    font-variant: small-caps;
+}
+
+.page-bar-user .page-breadcrumb > li > span {
+    color: #ffffff;
+    font-size: 14px;
+    text-shadow: none;
+    text-decoration:none;
+    font-weight: 400;
+    font-variant: small-caps;
+}
+
+.page-bar-user .page-breadcrumb > li > a:hover {
+    color: #CCBE6A;
+}
+
+.icofont-ui-home:hover {
+    color: #CCBE6A !important;
+}
+
+.ui-home-hover {
+    color: #CCBE6A !important;
+}
+
+.page-bar-user .page-breadcrumb > li > i {
+    color: #ffffff;
+    font-size: 14px;
+    text-shadow: none;
+    margin-right: 3px;
+}
+
+.page-bar-user .page-breadcrumb > li > i.fa-circle {
+    font-size: 5px;
+    margin: 0 5px;
+    position: relative;
+    top: -3px;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
 }
 
 /* Multi-select - Edit view
@@ -1348,6 +1430,10 @@ table.dataTable tbody tr:hover {
 
     .panel-row {
         margin-top: -8px;
+    }
+
+    .page-bar-user {
+        margin: 0 0 0 -9px;
     }
 }
 

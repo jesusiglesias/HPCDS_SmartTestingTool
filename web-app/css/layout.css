@@ -281,18 +281,6 @@ body {
     padding-right: 0;
 }
 
-/* TODO Dropdown-toggle badge
-.page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle > .badge {
-    font-family: "Open Sans", sans-serif;
-    position: absolute;
-    top: 12px;
-    right: 20px;
-    font-weight: 300;
-    padding: 3px 6px;
-}
-
-*/
-
 .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:focus {
     background: none;
 }
@@ -394,23 +382,6 @@ body {
     font-size: 15px;
     font-weight: 500;
 }
-
-/* TODO
-.page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-menu > li > a .badge {
-            margin-right: 10px;
-} */
-
-/* TODO Dropdown-dark
-.page-header.navbar .top-menu .navbar-nav li.dropdown-dark .dropdown-menu:before {
-    border-left: none;
-    border-right: none;
-}
-
-.page-header.navbar .top-menu .navbar-nav li.dropdown-dark .dropdown-menu .dropdown-menu-list > li.external a {
-    background: none !important;
-    border: none !important;
-}
-*/
 
 /* TODO Hor-menu
 /* Horizontal Menu
@@ -653,10 +624,6 @@ body {
         margin: 0 10px 0 0;
     }
 
-    /* TODO Delete. In bootstrap.css esta
-    .page-header.navbar .top-menu .navbar-nav > li {
-        float: left;
-    } */
     .page-header.navbar .top-menu .navbar-nav .nav li.dropdown i {
         display: inline-block;
         position: relative;
@@ -669,12 +636,8 @@ body {
     }
 }
 
-/* Allow expanded search for above 768px */
+/* Max-width: 768px */
 @media (min-width: 768px) {
-    /* 768px */
-    .page-header.navbar {
-        /* Search box */
-    }
 
     .page-header.navbar .search-form.search-form-expanded {
         width: 200px;
@@ -699,9 +662,6 @@ body {
     /* Page header */
     .page-header.navbar {
         padding: 0 15px 0 20px;
-        /* Header logo TODO */
-        /* Search box */
-        /* Top navigation menu*/
     }
 
     .page-header.navbar .page-logo {
@@ -1116,15 +1076,6 @@ body {
     content: "\f107";
 }
 
-
-/* TODO
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a > .arrow:before,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a > .arrow.open:before,
-.page-sidebar .page-sidebar-menu > li > a > .arrow:before,
-.page-sidebar .page-sidebar-menu > li > a > .arrow.open:before {
-    color: #AAAAAA;
-} */
-
 /* Sidebar-menu arrow active open */
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a > .arrow:before,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a > .arrow.open:before,
@@ -1136,14 +1087,6 @@ body {
 .page-sidebar .page-sidebar-menu > li.active.open > a > .arrow.open:before {
     color: #ffffff;
 }
-
-/* TODO Badge
-.page-sidebar .page-sidebar-menu li > a > .badge,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a > .badge {
-    float: right;
-    margin-top: 1px;
-    margin-right: 0;
-} */
 
 .page-sidebar .page-sidebar-menu .sub-menu,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu {
@@ -1177,33 +1120,6 @@ body {
     font-size: 14px;
 }
 
-/* TODO 3 nivel de submenu - No se utiliza
-.page-sidebar .page-sidebar-menu .sub-menu li > .sub-menu,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li > .sub-menu {
-    margin: 0;
-}
-
-.page-sidebar .page-sidebar-menu .sub-menu li > .sub-menu > li,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li > .sub-menu > li {
-            /* 3rd level sub menu
-}
-
-.page-sidebar .page-sidebar-menu .sub-menu li > .sub-menu > li > a,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li > .sub-menu > li > a {
-    padding-left: 60px;
-}
-
-.page-sidebar .page-sidebar-menu .sub-menu li > .sub-menu > li > .sub-menu,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li > .sub-menu > li > .sub-menu {
-    margin: 0;
-}
-
-.page-sidebar .page-sidebar-menu .sub-menu li > .sub-menu > li > .sub-menu > li > a,
-.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li > .sub-menu > li > .sub-menu > li > a {
-    padding-left: 80px;
-}
-*/
-
 .page-sidebar .page-sidebar-menu li.active > .sub-menu,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li.active > .sub-menu {
     display: block;
@@ -1234,7 +1150,7 @@ body {
     margin-top: 0 !important;
 }
 
-/* TODO Search */
+/* Search */
 .page-sidebar .sidebar-search,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search {
     padding: 0;
@@ -1799,7 +1715,32 @@ body {
     color: #105D5D;
 }
 
-/* Page bar */
+
+
+/* Page content */
+.page-content {
+    margin-top: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.page-container-bg-solid .page-content {
+    background: #eef1f5;
+}
+
+/* Page-bar line */
+.page-content .page-bar {
+    border-bottom: 1px solid #C8C8C8;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+}
+
+.page-full-width .page-content {
+    margin-left: 0 !important;
+}
+
+/* Page-bar */
 .page-bar {
     background-color: #ffffff;
     position: relative;
@@ -1874,59 +1815,6 @@ body {
 .page-bar .page-breadcrumb > li > i[class^="icon-"],
 .page-bar .page-breadcrumb > li > i[class*="icon-"] {
     color: #8c8c8c;
-}
-/* TODO
-.page-bar .page-toolbar {
-    display: inline-block;
-    float: right;
-    padding: 6px 0;
-}
-
-.page-bar .page-toolbar .btn-fit-height {
-    -webkit-border-radius: 0 4px 4px 0;
-    -moz-border-radius: 0 4px 4px 0;
-    -ms-border-radius: 0 4px 4px 0;
-    -o-border-radius: 0 4px 4px 0;
-    border-radius: 0 4px 4px 0;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-
-.page-md .page-bar .page-toolbar .btn-fit-height {
-    padding-top: 9px;
-    padding-bottom: 9px;
-    box-shadow: none !important;
-}
-
-.page-content-white .page-bar .page-toolbar .btn {
-    margin-top: -2px;
-}
-
-.page-content-white .page-bar .page-toolbar .btn.btn-sm {
-    margin-top: 0;
-}*/
-
-/* Page content */
-.page-content {
-    margin-top: 0;
-    padding: 0;
-    background-color: #fff;
-}
-
-.page-container-bg-solid .page-content {
-    background: #eef1f5;
-}
-
-/* Page-bar line */
-.page-content .page-bar {
-    border-bottom: 1px solid #C8C8C8;
-    border-radius: 0 !important;
-    -webkit-border-radius: 0 !important;
-    -moz-border-radius: 0 !important;
-}
-
-.page-full-width .page-content {
-    margin-left: 0 !important;
 }
 
 /* Media queries - Page content

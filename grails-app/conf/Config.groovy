@@ -150,6 +150,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/**/js/**':        ['permitAll'],
     '/**/css/**':       ['permitAll'],
     '/**/images/**':    ['permitAll'],
+    '/**/fonts/**':     ['permitAll'],
     '/**/favicon.ico':  ['permitAll'],
     // CSV templates
     '/**/files/**':     ['ROLE_ADMIN'],
@@ -219,8 +220,9 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
     /* Custom tasks normal user (front-end)
     ======================================================*/
-    '/home':                                   ['ROLE_USER'],
-    '/contact':                                ['ROLE_USER'],
+    '/customTasksFrontEnd/home':               ['ROLE_USER'],
+    '/customTasksFrontEnd/contact':            ['ROLE_USER'],
+    '/customTasksFrontEnd/contactForm':        ['ROLE_USER'],
     '/cookiePolicy':                           ['ROLE_USER'],
     '/FAQ':                                    ['ROLE_USER'],
     '/customTasksFrontEnd/**':                 ['ROLE_USER']

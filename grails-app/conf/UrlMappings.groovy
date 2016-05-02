@@ -120,7 +120,7 @@ class UrlMappings {
         "/home"(controller: 'customTasksFrontEnd', action: 'home')
         // TODO
         "/profile/$id?(.$format)?"(controller: 'user', action: 'edit')
-        "/contact"(view: "customTasksFrontEnd/Contact")
+        "/contact"(controller: 'customTasksFrontEnd', action: 'contact')
         "/cookiesPolicy"(view: "customTasksFrontEnd/CookiesPolicy")
         "/FAQ"(view: "customTasksFrontEnd/FAQ")
 

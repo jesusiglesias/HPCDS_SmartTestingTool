@@ -318,6 +318,23 @@ var CustomScript = function () {
         toggleClasses(); // And also on document ready
     };
 
+    /**
+     * It handles the icon colour in user pages (page bar)
+     */
+    var handlerIconColourPageBar = function() {
+
+        var homePageBreadcumb = $('.page-bar-user .page-breadcrumb > li > a');
+        var iconHomeBreadcumb = $('.page-bar-user .page-breadcrumb .icofont-ui-home');
+
+        homePageBreadcumb.mouseover(function () {
+            iconHomeBreadcumb.addClass('ui-home-hover')
+        });
+
+        homePageBreadcumb.mouseout(function () {
+            iconHomeBreadcumb.removeClass('ui-home-hover')
+        });
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
@@ -326,6 +343,7 @@ var CustomScript = function () {
             handlerDatatable();
             handlerDisallowSpaces();
             handlerIconQuickSearch();
+            handlerIconColourPageBar();
         }
     };
 }();

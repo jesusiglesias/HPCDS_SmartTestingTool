@@ -7,7 +7,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder
 
 /**
- * Service that contains the habitual custom tasks of the user.
+ * Service that contains the habitual security tasks of the user.
  */
 @Transactional
 class CustomTasksUserService {

@@ -24,7 +24,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND
  */
 class CustomTasksUserController {
 
-    static allowedMethods = [saveUserRegistered: "POST"]
+    static allowedMethods = [saveUserRegistered: "POST", sendEmail: "POST", updatePass: "POST"]
 
     def springSecurityService
     def customTasksUserService
@@ -189,8 +189,9 @@ class CustomTasksUserController {
         if(valid_email.valid && valid_email.exist){
 
             if (!customTasksUserService.send_emailAccountState(params.email, params.type)) { // Error
-                log.debug("CustomTasksUserController:statusNotification():NOTMailSent")
+                log.error("CustomTasksUserController:statusNotification():NOTMailSent:from:${params.email}")
                 render("notSent")
+
             } else { // Mail sent
                 log.debug("CustomTasksUserController:statusNotification():mailSent")
                 render("sent")
@@ -405,7 +406,7 @@ class CustomTasksUserController {
         if(valid_email.valid && valid_email.exist){
 
             if (!customTasksUserService.send_email(params.email)) {
-                log.debug("CustomTasksUserController:sendEmail():NOTMailSent")
+                log.error("CustomTasksUserController:sendEmail():NOTMailSent:to:${params.email}")
 
                 // Roll back in database
                 transactionStatus.setRollbackOnly()
