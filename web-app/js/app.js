@@ -389,40 +389,7 @@ var App = function() {
             $(this).removeData('bs.modal');
         });
     };
-
-    // It handles Bootstrap Tooltips.
-    /* TODO Tooltips
-    var handleTooltips = function() {
-
-        // Global tooltips
-        $('.tooltips').tooltip();
-
-        // Portlet tooltips
-        $('.portlet > .portlet-title .fullscreen').tooltip({
-            container: 'body',
-            title: 'Fullscreen'
-        });
-        // TODO
-        $('.portlet > .portlet-title > .tools > .reload').tooltip({
-            container: 'body',
-            title: 'Reload'
-        });
-        $('.portlet > .portlet-title > .tools > .remove').tooltip({
-            container: 'body',
-            title: 'Remove'
-        });
-
-        // TODO
-        $('.portlet > .portlet-title > .tools > .config').tooltip({
-            container: 'body',
-            title: 'Settings'
-        });
-        $('.portlet > .portlet-title > .tools > .collapse, .portlet > .portlet-title > .tools > .expand').tooltip({
-            container: 'body',
-            title: 'Collapse/Expand'
-        });
-    }; */
-
+    
     // It handles Bootstrap Dropdowns
     var handleDropdowns = function() {
         /*
