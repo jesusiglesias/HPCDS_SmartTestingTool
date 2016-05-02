@@ -5,6 +5,7 @@
     <meta name="layout" content="main_auth_user">
     <title><g:message code="layouts.main_auth_user.head.title.contact" default="STT | Contact"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/contact', file: 'contact.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/iconfont', file: 'icofont.css')}" type="text/css"/>
 
     <script>
         // Variables to use in script
@@ -42,7 +43,7 @@
                         <ul class="c-content-iconlist-1 ">
                             <li>
                                 <a href="https://www.hpcds.com/">
-                                    <i class="fa fa-rss"></i>
+                                    <i class="icofont icofont-web"></i>
                                 </a>
                             </li>
                             <li>

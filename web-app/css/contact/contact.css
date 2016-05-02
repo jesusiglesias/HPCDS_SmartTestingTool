@@ -76,13 +76,13 @@
     color: #DB4A39;
 }
 
-.fa-rss {
+.icofont-web {
     color: #00B388;
 }
 
 .c-content-contact-1 > .row .c-body > .c-section > p > li:hover,
 .c-content-contact-1 > .row .c-body > .c-section > .c-content-iconlist-1 > li:hover {
-    background-color: #484848;
+    background-color: rgb(84, 83, 83);
     -webkit-transition: background-color 700ms ease-in-out;
     -moz-transition: background-color 700ms ease-in-out;
     -o-transition: background-color 700ms ease-in-out;

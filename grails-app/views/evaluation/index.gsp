@@ -111,7 +111,7 @@
                     <ul class="sub-menu">
                         <li class="nav-item start">
                             <g:link controller="customTasksBackend" action="dashboard" class="nav-link">
-                                <i class="fa fa-bar-chart"></i>
+                                <i class="icofont icofont-dashboard-web"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.title.dashboard.statistics" default="Statistics"/></span>
                             </g:link>
                         </li>

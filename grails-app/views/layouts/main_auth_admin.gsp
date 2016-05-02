@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/placeholder', file: 'placeholder_polyfill.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/iconfont', file: 'icofont.css')}" type="text/css"/>
     <!-- Notification switch user -->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
@@ -142,19 +143,19 @@
                         </a>
                         <ul class="dropdown-menu">
                             <!-- Profile -->
-                            <li>
+                            <li class="li-iconId-admin">
                                 <g:link controller="secUser" action="edit" id="${sec.loggedInUserInfo(field:"id")}">
-                                    <i class="icon-user"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
+                                    <i class="icofont icofont-id iconId-admin"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
                                 </g:link>
                             </li>
                             <!-- Switch user -->
-                            <li>
+                            <li class="li-exchange-admin">
                                 <sec:ifNotSwitched>
                                     <sec:ifAllGranted roles='ROLE_ADMIN'>
                                         <form action='${request.contextPath}/j_spring_security_switch_user' method='POST'>
                                             <g:hiddenField name="stt_hp_username" value="admin_switch" />
                                             <button class="exit-switch-button">
-                                            <i class="fa fa-exchange"></i> <g:message code="layouts.main_auth_admin.head.switchUser" default="Normal user"/>
+                                            <i class="fa fa-exchange iconExchange-admin"></i> <g:message code="layouts.main_auth_admin.head.switchUser" default="Normal user"/>
                                         </button>
                                         </form>
                                     </sec:ifAllGranted>
@@ -164,10 +165,10 @@
                             <li class="divider"> </li>
 
                             <!-- Logout -->
-                            <li>
+                            <li class="li-logout-admin">
                                 <form name="logout" method="POST" action="${createLink(controller:'logout')}">
                                     <button class="exit-switch-button">
-                                        <i class="fa fa-sign-out"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
+                                        <i class="fa fa-sign-out iconLogout-admin"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
                                     </button>
                                 </form>
                             </li>
@@ -200,7 +201,7 @@
     <div class="page-footer">
         <div class="copyright-admin"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias" class="author-link"> Jesús Iglesias García </g:link></div>
         <div class="logoHP-admin">
-            <g:link uri="https://www.hpcds.com/es/">
+            <g:link uri="https://www.hpcds.com/">
                 <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
             </g:link>
         </div>
@@ -219,6 +220,7 @@
     <g:javascript src="dropdown/bootstrap-hover-dropdown.min.js"/>
     <g:javascript src="slimScroll/jquery.slimscroll.min.js"/>
     <g:javascript src="custom/custom.js"/>
+    <g:javascript src="custom/icon.js"/>
     <g:javascript src="placeholder/placeholder_polyfill.jquery.min.combo.js"/>
 
     <!-- THEME GLOBAL SCRIPTS -->

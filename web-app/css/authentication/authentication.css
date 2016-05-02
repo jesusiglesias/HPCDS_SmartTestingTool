@@ -3,7 +3,7 @@
 *-------------------------------------------------------------------------------------------*/
 
 .login {
-  background-color: #75B191;
+    background-color: #75B191;
 }
 
 /* Sign up button and author link */
@@ -14,321 +14,322 @@
 
 /* Logo image */
 .login .logo {
-  margin: 120px 10px 70px auto;
-  padding: 15px;
-  text-align: center;
+    margin: 120px 10px 70px auto;
+    padding: 15px;
+    text-align: center;
 }
 
 /* Form box */
 .login .content {
-  width: 400px;
-  margin: 60px auto 60px auto;
+    width: 400px;
+    margin: 60px auto 60px auto;
 }
 
 /* Title and subtitle */
 .login .content .form-title {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 /* Title */
 .login .form-title {
-  color: #ffffff;
-  font-size: 19px;
-  font-weight: 500 !important;
+    color: #ffffff;
+    font-size: 25px !important;
+    font-weight: 500 !important;
+    font-variant: small-caps;
 }
 
 /* Subtitle */
 .login .form-subtitle {
-  color: #D8ECDD;
-  font-size: 17px;
-  font-weight: 300 !important;
-  padding-left: 10px;
+    color: #ECF9EF;
+    font-size: 17px;
+    font-weight: 300 !important;
+    padding-left: 10px;
 }
 
 /* Login and forget form */
 .login .content .login-form,
 .login .content .forget-form {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 /* Remember me and password
 ======================================================*/
 /* Remember me and forgot password */
 .login .content .form-actions {
-  clear: both;
-  padding: 0 32px 20px 32px;
-  margin-left: -30px;
-  margin-right: -30px;
+    clear: both;
+    padding: 0 32px 20px 32px;
+    margin-left: -30px;
+    margin-right: -30px;
 }
 
 /* Remember me and forgot password block */
 .action-remember-password {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 /* Remember me */
 .form-actions .rememberme {
-  margin: 8px 5px 0 0;
-  color: #ffffff !important;
-  font-size: 15px;
-  font-weight: 400 !important;
+    margin: 8px 5px 0 0;
+    color: #ffffff !important;
+    font-size: 15px;
+    font-weight: 400 !important;
 }
 
 .form-actions .rememberme:active,
 .form-actions .rememberme:focus,
-.form-actions .rememberme:hover{
-  color: #105d41 !important;
+.form-actions .rememberme:hover {
+    color: #105d41 !important;
 }
 
 /* Forgot password */
 .form-actions .forget-password-block {
-  margin-top: 8px;
+    margin-top: 8px;
 }
 
 .login .content .forget-password {
-  color: #ffffff !important;
-  font-size: 15px;
-  font-weight: 400 !important;
-  text-decoration: none; /* Delete underline */
+    color: #ffffff !important;
+    font-size: 15px;
+    font-weight: 400 !important;
+    text-decoration: none; /* Delete underline */
 }
 
 .login .content .forget-password:active,
 .login .content .forget-password:focus,
-.login .content .forget-password:hover{
-  color: #105d41 !important;
+.login .content .forget-password:hover {
+    color: #105d41 !important;
 }
 
 /* Line */
 .login-options {
-  margin: 20px 0 35px 0;
-  border-top: 1px solid #105d41;
+    margin: 20px 0 35px 0;
+    border-top: 1px solid #105d41;
 }
 
 /* Buttons */
 .login .btn {
-  padding: 10px 30px !important;
-  font-size: 13px;
+    padding: 10px 30px !important;
+    font-size: 13px;
 }
 
 /* Create an account button
 ======================================================*/
 /* Sign up button */
 .login .content .create-account {
-  text-align: center;
+    text-align: center;
 }
 
 .login .content .create-account p a {
-  font-size: 15px;
-  color: #ffffff;
+    font-size: 15px;
+    color: #ffffff;
 }
 
 .login .content .create-account a {
-  display: inline-block;
-  margin-top: 5px;
+    display: inline-block;
+    margin-top: 5px;
 }
 
 .login .content .form-actions .btn {
-  margin-top: 1px;
+    margin-top: 1px;
 }
 
 /*  Copyright */
 .login .copyright {
-  text-align: center;
-  margin: 70px auto 0 0;
-  padding: 0;
-  color: black;
-  font-size: 14px;
-  font-weight: 600;
+    text-align: center;
+    margin: 70px auto 0 0;
+    padding: 0;
+    color: black;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 /* Author's name */
 .login .copyright a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .login .copyright a:active,
 .login .copyright a:focus,
-.login .copyright a:hover{
-  color: #ffffff !important;
+.login .copyright a:hover {
+    color: #ffffff !important;
 }
 
 /* Logo HP CDS*/
-.logoHP{
-  text-align: center;
-  width: 100%;
-  margin: 50px 0 20px 0;
+.logoHP {
+    text-align: center;
+    width: 100%;
+    margin: 35px 0 35px 0;
 }
 
 .logoHP img {
-  width: 120px;
-  height: 120px;
+    width: 120px;
+    height: 120px;
 }
 
 /* Forget form
 ======================================================*/
 /* Buttons block */
 .login .content .forget-form .form-actions {
-  border: 0;
-  margin-bottom: 0;
-  padding-bottom: 0;
+    border: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* New password form */
 .newPassword-form {
-  margin-bottom: 50px !important;
+    margin-bottom: 50px !important;
 }
 
 /* Position of title and subtitle */
 .login .content .forget-form .form-title {
-  margin-bottom: -15px;
+    margin-bottom: -15px;
 }
 
 /* Distance between title and subtitle*/
-.login .content .forget-form .form-title p{
-  margin: 5px 0 0 0 !important;
+.login .content .forget-form .form-title p {
+    margin: 5px 0 0 0 !important;
 }
 
 /* Subtitle */
 .login .content .forget-form .form-title .form-subtitle {
-  padding-left: 0;
+    padding-left: 0;
 }
 
 /* Buttons block */
 .login .content .forget-form .form-actions {
-  margin-top: 50px;
+    margin-top: 50px;
 }
 
 /* Register form
 ======================================================*/
 .content-register {
-  width: auto !important;
-  margin: 60px 10% 60px 10% !important;
+    width: auto !important;
+    margin: 60px 10% 60px 10% !important;
 }
 
 .register-contentTitle {
-  margin-bottom: 50px !important;
-  text-align: center;
+    margin-bottom: 50px !important;
+    text-align: center;
 }
 
 .title-register {
-  font-size: 22px !important;
+    font-size: 22px !important;
 }
 
 .subtitle-register {
-  padding-left: 0 !important;
-  font-size: 19px !important;
+    padding-left: 0 !important;
+    font-size: 20px !important;
 }
 
 .legend-register,
 .legend-register-account {
-  margin: 60px 0 30px 0;
-  border-bottom: 3px solid #F5F1E2;
-  height: 34px;
+    margin: 60px 0 30px 0;
+    border-bottom: 3px solid #F5F1E2;
+    height: 34px;
 }
 
 .title-legend-register {
-  font-weight: 600;
-  font-variant: small-caps;
-  font-size: 22px;
-  text-align: center;
-  margin-top: -1px;
-  color: black;
+    font-weight: 600;
+    font-variant: small-caps;
+    font-size: 22px;
+    text-align: center;
+    margin-top: -1px;
+    color: black;
 }
 
 .content-register-btn {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
 .content-register-btn .btn {
-  padding: 10px 100px 10px 100px !important;
+    padding: 10px 100px 10px 100px !important;
 }
 
 .alert-register-error {
-  margin: 60px 0 -60px 0;
+    margin: 60px 0 -60px 0;
 }
 
 .pwstrength-viewport-progress {
-  margin-top: 35px;
+    margin-top: 35px;
 }
 
 .pwstrength-viewport-verdict {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 .pwstrength-viewport-verdict > span {
-  color: black;
-  font-weight: 600;
+    color: black;
+    font-weight: 600;
 }
 
 .birthDate-input-register {
-  background-color: #F5F1E2;
-  border: 0;
-  height: 38px;
+    background-color: #F5F1E2;
+    border: 0;
+    height: 38px;
 }
 
 .col-register {
-  top: 10px
+    top: 10px
 }
 
 .h5-register {
-  color: #105D41;
+    color: #105D41;
 }
 
 .form-responsive {
-  margin-top: 70px;
+    margin-top: 70px;
 }
 
 .text-agreement {
-  text-align: center;
-  color: white;
-  font-weight: 400;
+    text-align: center;
+    color: white;
+    font-weight: 400;
 }
 
 /* Notifications
 ======================================================*/
 .alert-notuser-reauth-invalidsession {
-  margin: 35px 0 20px 0;
+    margin: 35px 0 20px 0;
 }
 
 /* Forgot password alert */
 .alert-restorePassword {
-  margin: 50px 0 -20px 0;
+    margin: 50px 0 -20px 0;
 }
 
 /* New password successful index */
 .alert-restorePasswordSuccessful,
 .alert-newUserRegistered {
-  margin: 30px 0 0 0;
+    margin: 30px 0 0 0;
 }
 
 /* New password alert */
 .alert-newPassword {
-  margin: 40px 0 -20px 0;
+    margin: 40px 0 -20px 0;
 }
 
 .alert-danger-custom {
-  background-color: #C16868 !important;
-  border-color: #040202 !important;
-  color: #FFFFFF !important;
+    background-color: #C16868 !important;
+    border-color: #040202 !important;
+    color: #FFFFFF !important;
 }
 
 .alert-success-custom {
-  background-color: #5F9A75 !important;
-  border-color: #040202 !important;
-  color: #FFFFFF !important;
+    background-color: #5F9A75 !important;
+    border-color: #040202 !important;
+    color: #FFFFFF !important;
 }
 
 .alert-warning-custom {
-  color: #76610E;
+    color: #76610E;
 }
 
 .alert-warning-custom h5 {
-  color: #534510;
+    color: #534510;
 }
 
 .alert-reauthentication {
-  margin-top: 0 !important;
+    margin-top: 0 !important;
 }
 
 /* Media queries
@@ -337,113 +338,125 @@
 /* Max-width: 991px */
 @media (max-width: 991px) {
 
-  .content-register {
-    margin: 60px 7% 60px 7% !important;
-  }
+    .content-register {
+        margin: 60px 7% 60px 7% !important;
+    }
 
-  .legend-register {
-    margin: 50px 0 0 0;
-  }
+    .legend-register {
+        margin: 50px 0 0 0;
+    }
 
-  .legend-register-account {
-    margin: -10px 0 0 0;
-  }
+    .legend-register-account {
+        margin: -10px 0 0 0;
+    }
 
-  .space-register-nameRow {
-    margin-top: 110px !important;
-  }
+    .space-register-nameRow {
+        margin-top: 110px !important;
+    }
 
-  .space-register-birthDateRow {
-    margin-top: 10px;
-  }
+    .space-register-birthDateRow {
+        margin-top: 10px;
+    }
 
-  .alert-register-error {
-    margin: 60px 0 80px 0;
-  }
+    .alert-register-error {
+        margin: 60px 0 80px 0;
+    }
 }
 
 /* MAx-width: 767px */
 @media (max-width: 767px) {
 
-  .content-register-btn .btn {
-    padding: 10px 60px !important;
-  }
+    .content-register-btn .btn {
+        padding: 10px 60px !important;
+    }
 }
 
 /* Landscape phones and down */
 @media (max-width: 480px) {
 
-  /* Logo image */
-  .login .logo {
-    margin: 70px 5px 70px auto;
-    padding: 0;
-  }
+    /* Logo image */
+    .login .logo {
+        margin: 70px 5px 70px auto;
+        padding: 0;
+    }
 
-  /* Form box */
-  .login .content {
-    width: 300px;
-  }
+    /* Form box */
+    .login .content {
+        width: 300px;
+    }
 
-  .form-group.form-md-line-input {
-    position: relative;
-    margin: 35px 0 45px 0;
-    padding-top: 20px;
-  }
+    .form-group.form-md-line-input {
+        position: relative;
+        margin: 35px 0 45px 0;
+        padding-top: 20px;
+    }
 
-  /* Remember me */
-  .form-actions .rememberme {
-    font-size: 14px;
-  }
+    /* Remember me */
+    .form-actions .rememberme {
+        font-size: 14px;
+    }
 
-  /* Forgot password */
-  .login .content .forget-password {
-    font-size: 14px;
-  }
+    /* Forgot password */
+    .login .content .forget-password {
+        font-size: 14px;
+    }
 
-  .content-register {
-    margin: 60px 6% 60px 6% !important;
-  }
+    .content-register {
+        margin: 60px 6% 60px 6% !important;
+    }
 
-  .legend-register,
-  .legend-register-account {
-    margin-bottom: 25px;
-  }
+    .legend-register,
+    .legend-register-account {
+        margin-bottom: 25px;
+    }
 
-  .content-register-btn .btn {
-    padding: 10px 30px !important;
-  }
+    .content-register-btn .btn {
+        padding: 10px 30px !important;
+    }
 
-  .register-contentTitle {
-    margin-bottom: 30px !important;
-  }
+    .register-contentTitle {
+        margin-bottom: 30px !important;
+    }
 
-  .alert-register-error {
-    margin: 45px 0 -5px 0;
-  }
+    .alert-register-error {
+        margin: 45px 0 -5px 0;
+    }
 
-  .login .checkbox {
-    font-size: 13px;
-  }
+    .login .checkbox {
+        font-size: 13px;
+    }
+
+    .login .form-title {
+        font-size: 24px !important;
+    }
 }
 
 /* Max-width: 375px */
 @media (max-width: 375px) {
 
-  /* Form box */
-  .login .content {
-    width: 280px;
-  }
+    /* Form box */
+    .login .content {
+        width: 280px;
+    }
 
-  .content-register {
-    margin: 60px 4% 60px 4% !important;
-  }
+    .content-register {
+        margin: 60px 4% 60px 4% !important;
+    }
 
-  .title-register,
-  .title-legend-register {
-    font-size: 20px !important;
-  }
+    .title-register,
+    .title-legend-register {
+        font-size: 20px !important;
+    }
 
-  .subtitle-register {
-    font-size: 17px !important;
-  }
+    .subtitle-register {
+        font-size: 17px !important;
+    }
+}
+
+/* Max-width: 320 px */
+@media (max-width: 320px) {
+
+    .login .form-title {
+        font-size: 22px !important;
+    }
 }

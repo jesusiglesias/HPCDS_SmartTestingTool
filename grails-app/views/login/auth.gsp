@@ -264,8 +264,8 @@
     <!-- Only it shows when is root path. In reauthentication path is not displayed -->
     <g:if test='${!flash.reauthenticate}'>
         <div class="copyright"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias" class="author-link"> Jesús Iglesias García </g:link></div>
-        <div class="logoHP">
-            <g:link uri="https://www.hpcds.com/es/">
+        <div class="logoHP logoAuth">
+            <g:link uri="https://www.hpcds.com/">
                 <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
             </g:link>
         </div>

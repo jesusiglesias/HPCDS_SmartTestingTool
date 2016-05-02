@@ -6160,21 +6160,24 @@ Customized Bootstrap Close Icon
     color: #579277;
 }
 
-.dropdown-menu > li > a > [class^="fa-"]:hover,
- .dropdown-menu > li > a > [class*=" fa-"]:hover,
- .dropdown-menu > li > a > [class^="icon-"]:hover,
- .dropdown-menu > li > a > [class*=" icon-"]:hover,
- .dropdown-menu > li > form > button > [class^="fa-"]:hover,
- .dropdown-menu > li > form > button > [class*=" fa-"]:hover,
- .dropdown-menu > li > form > button > [class^="icon-"]:hover,
- .dropdown-menu > li > form > button > [class*=" icon-"]:hover {
-     color: #ffffff;
- }
+.dropdown-menu .icofont-id {
+    color: #579277;
+    font-size: 17px !important;
+}
 
-/* TODO */
-.dropdown-menu > li > a > [class^="glyphicon-"],
-.dropdown-menu > li > a > [class*=" glyphicon-"] {
-    color: #888;
+.dropdown-menu > li > a > [class^="fa-"]:hover,
+.dropdown-menu > li > a > [class*=" fa-"]:hover,
+.dropdown-menu > li > a > [class^="icon-"]:hover,
+.dropdown-menu > li > a > [class*=" icon-"]:hover,
+.dropdown-menu > li > form > button > [class^="fa-"]:hover,
+.dropdown-menu > li > form > button > [class*=" fa-"]:hover,
+.dropdown-menu > li > form > button > [class^="icon-"]:hover,
+.dropdown-menu > li > form > button > [class*=" icon-"]:hover {
+     color: #ffffff;
+}
+
+.dropdown-menu .icofont-id:hover {
+    color: #ffffff;
 }
 
 /* Menu elements: a and form */

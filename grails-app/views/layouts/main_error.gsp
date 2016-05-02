@@ -95,7 +95,7 @@
 
     <div class="copyright"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias"> Jesús Iglesias García </g:link></div>
     <div class="logoHP-error-page">
-        <g:link uri="https://www.hpcds.com/es/">
+        <g:link uri="https://www.hpcds.com/">
             <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
         </g:link>
     </div>

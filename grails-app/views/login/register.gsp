@@ -52,9 +52,9 @@
     <!-- Register -->
     <div class="content content-register">
             <div class="form-title register-contentTitle">
-                <span class="form-title title-register"><g:message code="views.login.auth.register.title" default="Join Smart testing tool"/></span>
+                <span class="form-title title-register"><g:message code="views.login.auth.register.title" default="Join smart testing tool!"/></span>
                 <p>
-                    <span class="form-subtitle subtitle-register"><g:message code="views.login.auth.register.subtitle" default="Platform for the online evaluation."/></span>
+                    <span class="form-subtitle subtitle-register"><g:message code="views.login.auth.register.subtitle" default="Platform of online evaluation."/></span>
                 </p>
             </div>
 

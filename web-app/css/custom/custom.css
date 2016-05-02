@@ -240,6 +240,10 @@ table.dataTable tbody tr:hover {
     background-color: rgba(108, 177, 145, 0.35) !important;
 }
 
+.overIcon {
+    color: white !important;
+}
+
 /* Multi-select - Create view
 =================================================================== */
 .ms-container {
@@ -781,6 +785,16 @@ table.dataTable tbody tr:hover {
     margin-top: 20px;
 }
 
+/* Icon */
+.icofont-bars {
+    font-size: 17px !important;
+    margin-top: 0 !important;
+}
+
+.icofont-dashboard-web {
+    font-size: 17px !important;
+}
+
 /* Back to top
 =================================================================== */
 .back-to-top {
@@ -843,7 +857,7 @@ table.dataTable tbody tr:hover {
 /*  Copyright */
 .copyright-admin {
     text-align: center;
-    margin: 30px auto 0 0;
+    margin: 45px auto 0 0;
     padding: 0;
     color: black;
     font-size: 14px;
@@ -866,12 +880,17 @@ table.dataTable tbody tr:hover {
 .logoHP-admin{
     text-align: center;
     width: 100%;
-    margin: 25px 0 20px 0;
+    margin: 25px 0 25px 0;
 }
 
 .logoHP-admin img {
-    width: 95px;
-    height: 95px;
+    width: 100px;
+    height: 100px;
+}
+
+.logoAuth img {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0 4px;
 }
 
 /* Datatable
@@ -1122,15 +1141,20 @@ table.dataTable tbody tr:hover {
         margin-top: -15px;
     }
 
-    /* Copyright */
-    .copyright-admin {
-        font-size: 13px;
+    /* Logo HP CDS*/
+    .logoHP-admin{
+        margin: 20px 0 20px 0;
     }
 
     /* Logo HP */
     .logoHP-admin img {
-        width: 90px;
-        height: 90px;
+        width: 95px;
+        height: 95px;
+    }
+
+    /*  Copyright */
+    .copyright-admin {
+        margin: 40px auto 0 0;
     }
 
     /* Position confirmation delete button */
@@ -1343,5 +1367,10 @@ table.dataTable tbody tr:hover {
     .portlet-scoreSex .portlet-body .scroller,
     .portlet-scoresTest .portlet-body .scroller {
         height: 265px !important;
+    }
+
+    /* Copyright */
+    .copyright-admin {
+        font-size: 13px;
     }
 }

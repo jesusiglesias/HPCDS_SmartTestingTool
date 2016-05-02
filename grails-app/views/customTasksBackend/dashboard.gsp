@@ -581,7 +581,7 @@
                     <ul class="sub-menu">
                         <li class="nav-item start active open">
                             <g:link controller="customTasksBackend" action="dashboard" class="nav-link">
-                                <i class="fa fa-bar-chart"></i>
+                                <i class="icofont icofont-dashboard-web"></i>
                                 <span class="title"><g:message code="layouts.main_auth_admin.sidebar.title.dashboard.statistics" default="Statistics"/></span>
                                 <span class="selected"></span>
                             </g:link>
@@ -1028,7 +1028,7 @@
                         <div class="portlet light bg-inverse portlet-scoreSex">
                             <div class="portlet-title">
                                 <div class="caption font-green-dark">
-                                    <i class="fa fa-bar-chart font-green-dark"></i>
+                                    <i class="icofont icofont-bars font-green-dark"></i>
                                     <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.score.sex" default="Average score by sex"/></span>
                                 </div>
                                 <div class="tools">
