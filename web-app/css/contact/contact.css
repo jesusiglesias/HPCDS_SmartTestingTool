@@ -188,7 +188,7 @@
         display: block;
         position: static;
         width: 100%;
-        height: 300px !important;
+        height: 450px !important;
     }
 
     .c-content-contact-1 > .row > div {
@@ -199,7 +199,7 @@
         position: static;
         display: block;
         padding: 30px 20px 10px 20px;
-        background: #fafafa;
+        background: rgba(108, 177, 145, 0.85);
         margin: 0;
         text-align: left;
     }

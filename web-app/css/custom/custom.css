@@ -289,6 +289,21 @@ table.dataTable tbody tr:hover {
     color: #000;
 }
 
+/* User pages
+=================================================================== */
+
+/* Main title */
+.page-title-user {
+    letter-spacing: -1px;
+    display: block;
+    font-weight: 300;
+    margin: 0;
+    padding: 50px 0 50px 0;
+    background: white;
+    font-size: 26px;
+    text-align: center;
+}
+
 /* Multi-select - Edit view
 =================================================================== */
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {

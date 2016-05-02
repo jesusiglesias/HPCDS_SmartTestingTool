@@ -15,9 +15,10 @@
 <body>
 
     <!-- BEGIN PAGE TITLE-->
-    <h3 class="page-title"> Contact Us
-        <small>contact us page</small>
+    <h3 class="page-title-user">
+        <g:message code="layouts.main_auth_user.body.title.contactUs" default="Contact us"/>
     </h3>
+
     <!-- END PAGE HEADER-->
     <div class="c-content-contact-1 c-opt-1">
         <div class="row" data-auto-height=".c-height">
