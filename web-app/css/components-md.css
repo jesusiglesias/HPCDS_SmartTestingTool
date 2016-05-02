@@ -6129,7 +6129,8 @@ Customized Bootstrap Close Icon
 
 .dropdown-menu > li > a:focus,
 .dropdown-menu > li > a:hover {
-    color: #6e6e6e !important;
+    color: #ffffff !important;
+    background-color: rgba(108, 177, 145, 0.78);
 }
 
 .dropdown-menu > li > form {
@@ -6142,6 +6143,11 @@ Customized Bootstrap Close Icon
     white-space: nowrap;
 }
 
+.dropdown-menu > li > form:focus,
+.dropdown-menu > li > form:hover {
+    color: #ffffff;
+}
+
 /* Icon colour - Fontawasome icons and simple icons*/
 .dropdown-menu > li > a > [class^="fa-"],
 .dropdown-menu > li > a > [class*=" fa-"],
@@ -6151,8 +6157,19 @@ Customized Bootstrap Close Icon
 .dropdown-menu > li > form > button > [class*=" fa-"],
 .dropdown-menu > li > form > button > [class^="icon-"],
 .dropdown-menu > li > form > button > [class*=" icon-"] {
-    color: #5fa159;
+    color: #579277;
 }
+
+.dropdown-menu > li > a > [class^="fa-"]:hover,
+ .dropdown-menu > li > a > [class*=" fa-"]:hover,
+ .dropdown-menu > li > a > [class^="icon-"]:hover,
+ .dropdown-menu > li > a > [class*=" icon-"]:hover,
+ .dropdown-menu > li > form > button > [class^="fa-"]:hover,
+ .dropdown-menu > li > form > button > [class*=" fa-"]:hover,
+ .dropdown-menu > li > form > button > [class^="icon-"]:hover,
+ .dropdown-menu > li > form > button > [class*=" icon-"]:hover {
+     color: #ffffff;
+ }
 
 /* TODO */
 .dropdown-menu > li > a > [class^="glyphicon-"],
@@ -6168,7 +6185,7 @@ Customized Bootstrap Close Icon
 .dropdown-menu > li.active > form,
 .dropdown-menu > li.active:hover > form {
     text-decoration: none;
-    background: #D8ECDD;
+    background: rgba(108, 177, 145, 0.78);
     filter: none;
 }
 

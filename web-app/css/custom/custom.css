@@ -179,14 +179,14 @@ input:-webkit-autofill:active {
 }
 
 .form-control:focus {
-    border-color: rgb(77, 179, 162) !important;
+    border-color: rgba(108, 177, 145, 0.5) !important;
     outline: 0 !important;
 }
 
 .form-shadow:focus {
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(51, 146, 98, 0.6) !important;
-    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(51, 146, 98, 0.6) !important;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(51, 146, 98, 0.6) !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(108, 177, 145, 0.5), 0 0 8px rgba(108, 177, 145, 0.5) !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(108, 177, 145, 0.5), 0 0 8px rgba(108, 177, 145, 0.5) !important;
+    box-shadow: inset 0 1px 1px rgba(108, 177, 145, 0.5), 0 0 8px rgba(108, 177, 145, 0.5) !important;
 }
 
 /* Questions in answer */
@@ -230,6 +230,16 @@ input:-webkit-autofill:active {
     margin: 50px 0 40px 0;
 }
 
+/* Quick seach icon */
+.icon-magnifier,
+.search-datatable {
+    color: rgba(50, 148, 103, 0.7) !important;
+}
+
+table.dataTable tbody tr:hover {
+    background-color: rgba(108, 177, 145, 0.35) !important;
+}
+
 /* Multi-select - Create view
 =================================================================== */
 .ms-container {
@@ -239,8 +249,8 @@ input:-webkit-autofill:active {
 
 .ms-container .ms-selectable li.ms-hover,
 .ms-container .ms-selection li.ms-hover {
-    color: #000000 !important;
-    background-color: #D8ECDD !important;
+    color: #ffffff !important;
+    background-color: rgba(108, 177, 145, 0.78) !important;
     font-weight: 400 !important;
 }
 
@@ -258,9 +268,9 @@ input:-webkit-autofill:active {
 
 .custom-header {
     text-align: center;
-    background-color: #4DB3A2;
+    background-color: #717171;
     color: white;
-    border: #8B8C7F 2px solid;
+    border: #717171 2px solid;
     font-variant: small-caps;
     font-weight: 400;
     font-size: 15px;
@@ -273,7 +283,9 @@ input:-webkit-autofill:active {
 }
 
 .dropdown-menu > .active > a,
-.dropdown-menu > .active > a:hover {
+.dropdown-menu > .active > a:hover ,
+.dropdown-menu>.active>a:focus {
+    background-color: rgba(108, 177, 145, 0.78);
     color: #000;
 }
 
@@ -281,7 +293,8 @@ input:-webkit-autofill:active {
 =================================================================== */
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice {
     color: #FFFFFF !important;
-    background: #4DB3A2 !important;
+    border: 1px solid #ffffff !important;
+    background: rgb(64, 144, 115) !important;
     margin: 5px 0 5px 6px !important;
 }
 
@@ -306,8 +319,8 @@ input:-webkit-autofill:active {
 }
 
 .select2-container--bootstrap .select2-results__option--highlighted[aria-selected] {
-    background-color: #D8ECDD !important;
-    color: black !important;
+    background-color: rgba(108, 177, 145, 0.78) !important;
+    color: white !important;
 }
 
 .select2-container--bootstrap.select2-container--focus .select2-selection, .select2-container--bootstrap.select2-container--open .select2-selection {
@@ -335,7 +348,7 @@ input:-webkit-autofill:active {
 }
 
 .select2-container--bootstrap .select2-results__option[aria-selected=true] {
-    background-color: #C4CFC8 !important;
+    background-color: rgba(113, 113, 113, 0.24) !important;
     color: black !important;
     font-weight: 600 !important;
 }
@@ -577,14 +590,14 @@ input:-webkit-autofill:active {
 =================================================================== */
 .btn-success {
     color: #fff;
-    background-color: #5F9A75 !important;
-    border-color: #5F9A75 !important;
+    background-color: #1B7E5A !important;
+    border-color: #1B7E5A !important;
 }
 
 .btn-success:hover {
     color: #fff;
-    background-color: #3D7B57 !important;
-    border-color: #3D7B57 !important;
+    background-color: #4C947A !important;
+    border-color: #4C947A !important;
 }
 
 .btn-danger {
@@ -634,8 +647,8 @@ input:-webkit-autofill:active {
 }
 
 .mt-comments .mt-comment{
-    padding: 10px;
-    margin: 0 0 10px;
+    padding: 10px 14px 10px 10px;
+    margin: 0 0 10px 0;
 }
 
 .mt-comments .mt-comment .mt-comment-img{
@@ -723,7 +736,7 @@ input:-webkit-autofill:active {
 }
 
 .mt-comments .mt-comment:hover{
-    background: #CCE4DE;
+    background: rgba(108, 177, 145, 0.40);
 }
 
 .mt-comments .mt-comment:hover .mt-comment-body .mt-comment-details .mt-comment-actions{

@@ -102,7 +102,7 @@
             <div class="top-menu">
                 <ul class="nav navbar-nav pull-right">
                     <!-- User dropdown -->
-                    <li class="dropdown dropdown-user open">
+                    <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <!-- Profile image -->
                             <img class="img-circle" alt="Profile image" src="${createLink(controller:'customTasksBackend', action:'profileImage')}"/>

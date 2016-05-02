@@ -471,7 +471,7 @@
                             </div>
 
                             <div class="portlet-body">
-                                <table class="table table-striped table-bordered table-hover" id="entity-table">
+                                <table class="table table-striped table-bordered table-hover table-user" id="entity-table">
                                     <thead>
                                     <tr>
                                         <td><g:message code="user.avatar.label" default="Profile image"/></td>

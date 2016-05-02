@@ -81,10 +81,6 @@ table.dataTable tbody tr {
     background-color: #ffffff !important;
 }
 
-table.dataTable tbody tr:hover {
-    background-color: #D7E8DF !important;
-}
-
 table.dataTable tbody tr.selected {
     background-color: #B0BED9;
 }

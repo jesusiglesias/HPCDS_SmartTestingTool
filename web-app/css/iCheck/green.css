@@ -9,8 +9,7 @@
     font-size: 13px;
     line-height: 17px;
     color: #fff;
-    /* background: #1b7e5a; */
-    background: #5F9A75;
+    background: #1b7e5a;
     border: none;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -35,14 +34,12 @@
 .icheckbox_line-green.hover,
 .icheckbox_line-green.checked.hover,
 .iradio_line-green.hover {
-    /* background: #24AA7A; */
-    background: #3D7B57;
+    background: #4C947A;
 }
 
 .icheckbox_line-green.checked,
 .iradio_line-green.checked {
-    /* background: #1b7e5a; */
-    background: #5F9A75;
+    background: #717171;
 }
 
 .icheckbox_line-green.checked .icheck_line-icon,
