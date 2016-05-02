@@ -95,8 +95,6 @@ body {
 .menu-toggler {
     display: block;
     cursor: pointer;
-    opacity: 0.7;
-    filter: alpha(opacity=70);
     height: 24px;
     background: center center no-repeat;
 }
@@ -109,7 +107,20 @@ body {
 /* Hamburguer position */
 .sidebar-toggler {
     float: right;
-    margin: 18px 0 0 0;
+    margin: 19px 0 0 0;
+}
+
+.menu-toggler .icofont-navigation-menu {
+    font-size: 22px;
+    color: #ffffff;
+}
+
+.menu-toggler .icofont-navigation-menu:hover {
+    color: #CCBE6A;
+}
+
+.menu-toggler:hover {
+    text-decoration: none;
 }
 
 .page-sidebar-closed.page-sidebar-closed-hide-logo .page-header.navbar .menu-toggler.sidebar-toggler {
@@ -1287,13 +1298,13 @@ body {
 
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search .input-group,
 .page-sidebar .sidebar-search .input-group {
-    border-bottom: 1px solid #e4e4e4;
+    border-bottom: 1px solid #AFAFAF;
 }
 
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search .input-group .form-control,
 .page-sidebar .sidebar-search .input-group .form-control {
     background-color: #F6F6F6;
-    color: #999999;
+    color: #757575;
 }
 
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search .input-group .form-control::-moz-placeholder,

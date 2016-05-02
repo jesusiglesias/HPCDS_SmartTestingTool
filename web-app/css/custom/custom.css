@@ -497,7 +497,12 @@ table.dataTable tbody tr:hover {
     top: 3px;
     z-index: 1999;
     font-size: 15px;
-    color: #AAAAAA !important;
+    color: #757575 !important;
+}
+
+.i-delete-quickSearch-closed {
+    top: 11px !important;
+    margin-right: 3px;
 }
 
 .i-delete, .i-show, .i-show-confirm,

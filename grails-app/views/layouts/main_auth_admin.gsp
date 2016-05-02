@@ -118,12 +118,12 @@
                 </g:link>
                 <!-- Hamburguer -->
                 <div class="menu-toggler sidebar-toggler">
-                    <asset:image src="hamburguer/toggler_icon.png" alt="Toggler"/>
+                    <i class="icofont  icofont-navigation-menu"></i>
                 </div>
             </div> <!-- /.Logo -->
             <!-- Responsive hamburguer -->
             <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-                <asset:image src="hamburguer/toggler_icon.png" alt="Toggler"/>
+                <i class="icofont  icofont-navigation-menu"></i>
             </a>
 
             <!-- Top navigation menu -->

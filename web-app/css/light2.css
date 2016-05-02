@@ -301,38 +301,28 @@ TODO
     }
 }
 
+/* Max-width: 991px */
 @media (max-width: 991px) {
-    /* 991px */
+
     /* Page sidebar */
     .page-sidebar {
-        background-color: #dedede;
-        /* light sidebar */
+        background-color: rgba(222, 222, 222, 0.55);
     }
 
     .page-sidebar .page-sidebar-menu > li > a {
         border-top: 1px solid #F6F6F6;
     }
 
-    /* TODO
-    .page-sidebar .page-sidebar-menu > li:hover > a,
-    .page-sidebar .page-sidebar-menu > li.open > a {
-        background: #d0d0d0;
-    } */
-
     .page-sidebar .page-sidebar-menu > li:last-child > a {
         border-bottom: 0 !important;
     }
 
     .page-sidebar .page-sidebar-menu > li .sub-menu {
-        background-color: #dedede !important;
+        background-color: rgba(222, 222, 222, 0.70) !important;
     }
 
     .page-sidebar .page-sidebar-menu .sidebar-search input {
-        background-color: #dedede !important;
-    }
-
-    .page-sidebar .page-sidebar-menu.page-sidebar-menu-light {
-        /* 1st level links */
+        background-color: rgba(222, 222, 222, 0) !important;
     }
 
     .page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li:hover > a,
@@ -359,14 +349,11 @@ TODO
     .page-sidebar .page-sidebar-menu.page-sidebar-menu-light > li .sub-menu > li.active > a {
         background: #d2d2d2 !important;
     }
-}
 
-/****
- CSS3 Spinner Bar
-****/
-.page-spinner-bar > div,
-.block-spinner-bar > div {
-    background: #54dac7;
+    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a,
+    .page-sidebar .page-sidebar-menu > li > a {
+        border-top: 1px solid #EEEEEE;
+    }
 }
 
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a,
@@ -378,13 +365,3 @@ TODO
 .page-sidebar .page-sidebar-menu li .sub-menu li > a {
     font-weight: 400;
 }
-
-@media (max-width: 991px) {
-
-    /* 991px */
-    .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a,
-    .page-sidebar .page-sidebar-menu > li > a {
-        border-top: 1px solid #EEEEEE;
-    }
-}
-

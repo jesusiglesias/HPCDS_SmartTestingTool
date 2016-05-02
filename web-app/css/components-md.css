@@ -6353,13 +6353,6 @@ Customized Bootstrap Close Icon
 
     .navbar-nav .open .dropdown-menu > li > a {
         padding: 8px 16px;
-        color: #6e6e6e;
-    }
-
-    /* Dropdown elements color */
-    .navbar-nav .open .dropdown-menu > li > a:hover,
-    .navbar-nav .open .dropdown-menu > li > a:active {
-        background-color: #D8ECDD;
     }
 }
 

@@ -137,10 +137,12 @@ var Layout = function () {
         $('.page-sidebar').on('click', '.sidebar-search .remove', function (e) {
             e.preventDefault();
             sidebarSearch.removeClass("open");
+            $('.i-delete-quickSearch').removeClass('i-delete-quickSearch-closed');
         });
 
         // Handle the search query submit on enter press
         $('.page-sidebar .sidebar-search').on('keypress', 'input.form-control', function (e) {
+
             if (e.which == 13) {
                 sidebarSearch.submit();
                 return false;
@@ -149,6 +151,7 @@ var Layout = function () {
 
         // Handle the search submit (for sidebar search and responsive mode of the header search)
         $('.sidebar-search .submit').on('click', function (e) {
+
             e.preventDefault();
             if (body.hasClass("page-sidebar-closed")) {
                 if (sidebarSearch.hasClass('open') === false) {
@@ -156,6 +159,7 @@ var Layout = function () {
                         $('.page-sidebar .sidebar-toggler').click(); //trigger sidebar toggle button
                     }
                     sidebarSearch.addClass("open");
+                    $('.i-delete-quickSearch').addClass('i-delete-quickSearch-closed');
                 } else {
                     sidebarSearch.submit();
                 }
@@ -173,6 +177,7 @@ var Layout = function () {
             body.on('click', function() {
                 if (sidebarSearch.hasClass('open')) {
                     sidebarSearch.removeClass("open");
+                    $('.i-delete-quickSearch').removeClass('i-delete-quickSearch-closed');
                 }
             });
         }
