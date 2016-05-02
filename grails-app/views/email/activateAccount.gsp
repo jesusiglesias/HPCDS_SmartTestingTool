@@ -208,11 +208,11 @@
             <!-- Email Footer -->
             <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%" style="max-width: 680px;">
                 <tr>
-                    <td style="padding: 40px 10px;width: 100%;font-size: 12px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; text-align: center; color: #888888;">
+                    <td style="padding: 40px 10px;width: 100%;font-size: 14px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; text-align: center; color: #888888;">
                         <p style="color:#555555 !important; text-decoration:underline; font-weight: bold;">2016 © <g:link style="text-decoration: none; color:#555555 !important;" uri="http://es.linkedin.com/in/jesusgiglesias"> Jesús Iglesias García</g:link></p>
-                        <br><br>
-                        <g:link uri="https://www.hpcds.com/es/">
-                            <img src="http://i.imgur.com/Rc60jfx.png" width="100" height="100"/>
+                        <br>
+                        <g:link uri="https://www.hpcds.com/">
+                            <img src="http://i.imgur.com/ANpojrH.png" width="100" height="100"/>
                         </g:link>
                     </td>
                 </tr>
