@@ -370,7 +370,7 @@
                 <!-- Evaluation -->
                 <li class="nav-item active open">
                     <a href="javascript:;" class="nav-link nav-toggle">
-                        <i class="fa fa-graduation-cap"></i>
+                        <i class="icofont icofont-badge"></i>
                         <span class="title"><g:message code="layouts.main_auth_admin.sidebar.evaluation" default="Evaluation"/></span>
                         <span class="selected"></span>
                         <span class="arrow open"></span>
