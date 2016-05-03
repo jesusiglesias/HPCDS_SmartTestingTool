@@ -53,9 +53,6 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-    <!-- Cookie message -->
-    <g:javascript src="cookies/cookies.js"/>
-
     <!-- HTML5 SHIV, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
 		<script src="/js/html5shiv.min.js" type="text/javascript"></script>
@@ -98,66 +95,65 @@
             <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
                 <i class="icofont  icofont-navigation-menu"></i>
             </a>
+            <sec:ifLoggedIn>
+                <!-- Top navigation menu -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- User dropdown -->
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <!-- Profile image -->
+                                <img class="img-circle" alt="Profile image" src="${createLink(controller:'customTasksBackend', action:'profileImage')}"/>
+                                <span class="username username-hide-on-mobile">
+                                        <sec:username/>
+                                </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- Profile TODO -->
+                                <li class="li-iconId-user">
+                                    <g:link uri="/profile" id="${sec.loggedInUserInfo(field:"id")}">
+                                        <i class="icofont icofont-id iconId-user"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
+                                    </g:link>
+                                </li>
+                                <!-- Switch user -->
+                                <li class="li-exchange-user">
+                                    <sec:ifSwitched>
+                                        <sec:ifAllGranted roles='ROLE_USER'>
+                                            <form action='${request.contextPath}/j_spring_security_exit_user' method='POST'>
+                                                <button class="exit-switch-button">
+                                                    <i class="fa fa-exchange iconExchange-user"></i> <g:message code="layouts.main_auth_user.head.switchUser" default="Administrator user"/>
+                                                </button>
+                                            </form>
+                                        </sec:ifAllGranted>
+                                    </sec:ifSwitched>
+                                </li>
 
-            <!-- Top navigation menu -->
-            <div class="top-menu">
-                <ul class="nav navbar-nav pull-right">
-                    <!-- User dropdown -->
-                    <li class="dropdown dropdown-user">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                            <!-- Profile image -->
-                            <img class="img-circle" alt="Profile image" src="${createLink(controller:'customTasksBackend', action:'profileImage')}"/>
-                            <span class="username username-hide-on-mobile">
-                                <sec:ifLoggedIn>
-                                    <sec:username/>
-                                </sec:ifLoggedIn>
-                            </span>
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- Profile TODO -->
-                            <li class="li-iconId-user">
-                                <g:link uri="/profile" id="${sec.loggedInUserInfo(field:"id")}">
-                                    <i class="icofont icofont-id iconId-user"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
-                                </g:link>
-                            </li>
-                            <!-- Switch user -->
-                            <li class="li-exchange-user">
-                                <sec:ifSwitched>
-                                    <sec:ifAllGranted roles='ROLE_USER'>
-                                        <form action='${request.contextPath}/j_spring_security_exit_user' method='POST'>
-                                            <button class="exit-switch-button">
-                                                <i class="fa fa-exchange iconExchange-user"></i> <g:message code="layouts.main_auth_user.head.switchUser" default="Administrator user"/>
-                                            </button>
-                                        </form>
-                                    </sec:ifAllGranted>
-                                </sec:ifSwitched>
-                            </li>
+                                <li class="divider"> </li>
 
-                            <li class="divider"> </li>
+                                <!-- Logout -->
+                                <li class="li-logout-user">
+                                    <form name="logout" method="POST" action="${createLink(controller:'logout')}">
+                                        <button class="exit-switch-button">
+                                            <i class="fa fa-sign-out iconLogout-user"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li> <!-- /. User dropdown -->
 
+                        <!-- Exit button -->
+                        <li class="dropdown">
                             <!-- Logout -->
-                            <li class="li-logout-user">
-                                <form name="logout" method="POST" action="${createLink(controller:'logout')}">
-                                    <button class="exit-switch-button">
-                                        <i class="fa fa-sign-out iconLogout-user"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li> <!-- /. User dropdown -->
-
-                    <!-- Exit button -->
-                    <li class="dropdown">
-                        <!-- Logout -->
-                        <form name="logout" method="POST" action="${createLink(controller:'logout')}">
-                            <button class="exit-button dropdown-toggle">
-                                <i class="icon-logout"></i>
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-            </div> <!-- /.Top navigation menu -->
+                            <form name="logout" method="POST" action="${createLink(controller:'logout')}">
+                                <button class="exit-button dropdown-toggle">
+                                    <i class="icon-logout"></i>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div> <!-- /.Top navigation menu -->
+            </sec:ifLoggedIn>
         </div> <!-- /.Header inner -->
     </div><!-- /.HEADER -->
 
@@ -176,22 +172,6 @@
             <g:link uri="https://www.hpcds.com/">
                 <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
             </g:link>
-        </div>
-    </div>
-
-    <!-- Cookie block -->
-    <div id="cookie-container" class="row">
-        <div id="cookie-message" class="col-xs-12">
-            <p>
-                <i class="fa fa-exclamation-circle fa-custom" aria-hidden="true"></i>
-                <g:message code="layouts.main_auth_user.body.content.cookie.message" default="This site uses cookies for the correct user navigation. If you continue browsing, it considers that you accept its use."/>
-            </p>
-            <div>
-                <g:link controller="customTasksBackend" action="dashboard" class="btn blue-chambray btn-sm"><g:message code="layouts.main_auth_user.body.content.cookie.information" default="More information"/></g:link>
-                <a onclick="acceptCookies();" style="cursor:pointer;" class="btn blue-chambray btn-sm">
-                    <g:message code="layouts.main_auth_user.body.content.cookie.close" default="Close"/>
-                </a>
-            </div>
         </div>
     </div>
 

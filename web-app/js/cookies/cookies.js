@@ -29,16 +29,9 @@ function GetCookie(name) {
 }
 
 
-function acceptCookies() {
+function closeCookies() {
 
     var contentCookie = $('#cookie-container');
-
-    // Expired date
-    var expire=new Date();
-    expire=new Date(expire.getTime()+7776000000);
-
-    // New cookie
-    document.cookie="STT_cookie_policy=accepted; expires="+expire;
 
     var visit=GetCookie("STT_cookie_policy");
 
@@ -54,12 +47,12 @@ jQuery(function() {
     // Get cookie
     var visit=GetCookie("STT_cookie_policy");
 
-    if ( visit == 1 ){
-        contentCookie.toggle();
+    if ( visit != 1 ){
 
-    } else {
+        contentCookie.show();
+
 	    var expire=new Date();
 	    expire=new Date(expire.getTime()+7776000000);
 	    document.cookie="STT_cookie_policy=accepted; expires="+expire;
-	}
+    }
 });

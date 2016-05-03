@@ -11,6 +11,8 @@
     <title><g:message code="views.login.auth.register.head.title" default="STT | User registration"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/date', file: 'bootstrap-datepicker3.min.css')}" type="text/css"/>
+    <!-- Cookie message -->
+    <g:javascript src="cookies/cookies.js"/>
 
     <script type="text/javascript">
 
@@ -90,7 +92,7 @@
                     <g:render template="/login/formRegister"/>
                 </fieldset>
 
-                <p class="text-agreement"><g:message code="views.login.body.auth.register.agreement" default="By registering, you agree to our terms of service and privacy policy."/></p>
+                <p class="text-agreement"><g:link uri="/cookiesPolicy"><g:message code="views.login.body.auth.register.agreement" default="By registering, you agree to our terms of service and privacy policy."/></g:link></p>
 
                 <div class="form-actions content-register-btn">
                     <g:link type="button" uri="/" id="back-btn" class="btn green-dark back-button"><g:message code="views.login.auth.newPassword.homepage" default="Homepage"/></g:link>
@@ -98,6 +100,22 @@
                 </div>
             </g:form> <!-- /. Register form -->
     </div> <!-- /.Register -->
+
+    <!-- Cookie block -->
+    <div id="cookie-container" class="row" style="display: none">
+        <div id="cookie-message" class="col-xs-12">
+            <p>
+                <i class="fa fa-exclamation-circle fa-custom" aria-hidden="true"></i>
+                <g:message code="layouts.main_auth_user.body.content.cookie.message" default="This site uses cookies for the correct user navigation. If you continue browsing, it considers that you accept its use."/>
+            </p>
+            <div>
+                <g:link controller="customTasksBackend" action="dashboard" class="btn blue-chambray btn-sm"><g:message code="layouts.main_auth_user.body.content.cookie.information" default="More information"/></g:link>
+                <a onclick="closeCookies();" style="cursor:pointer;" class="btn blue-chambray btn-sm">
+                    <g:message code="layouts.main_auth_user.body.content.cookie.close" default="Close"/>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- LOAD JAVASCRIPT  -->
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
