@@ -4,8 +4,29 @@
 <head>
     <meta name="layout" content="main_auth_user">
     <title><g:message code="layouts.main_auth_user.head.title.cookie" default="STT | Cookie policy"/></title>
+    <link rel="stylesheet" href="${resource(dir: 'css/iconfont', file: 'icofont.css')}" type="text/css"/>
 </head>
 <body>
+
+    <!-- Page-bar -->
+    <div class="page-bar-user">
+        <ul class="page-breadcrumb">
+            <li>
+                <i class="icofont icofont-ui-home"></i>
+                <g:link uri="/"><g:message code="layouts.main_auth_admin.pageBreadcrumb.title" default="Homepage"/></g:link>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span><g:message code="layouts.main_auth_user.body.title.cookie" default="Cookie policy"/></span>
+            </li>
+        </ul>
+    </div> <!-- /.Page-bar -->
+
+    <!-- Page-title -->
+<div class="page-title-user">
+    <h3 >
+        <g:message code="layouts.main_auth_user.body.title.cookie" default="Cookie policy"/>
+    </h3>
     <p>
         Este sitio web, al igual que la mayoría de los sitios en Internet, usa <i>cookies</i> para mejorar y optimizar la experiencia del usuario. A continuación, podrá encontrar información detallada
     sobre qué son las “<i>Cookies</i>”, qué tipología utiliza este sitio web, cómo puede desactivarlas en su navegador y cómo bloquear específicamente la instalación de cookies de terceros.
@@ -14,6 +35,7 @@
     que hacemos de ellas. Sin embargo, el usuario tiene la opción de impedir la generación y eliminación de las mismas mediante la selección de la correspondiente opción en su navegador.
     En caso de bloquear el uso de <i>cookies</i> en su navegador es posible que algunos servicios o funcionalidades de la página web no estén disponibles o presenten un funcionamiento incorrecto.
     </p>
+</div>
 
 <h2>
     ¿Qué es una cookie?

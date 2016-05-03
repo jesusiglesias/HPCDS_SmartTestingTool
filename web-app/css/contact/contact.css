@@ -232,11 +232,6 @@
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
 
-    .page-title-user {
-        padding: 50px 0 50px 0;
-        font-size: 32px;
-    }
-
     .contactPage-container > .row .body > .section > h3 {
         font-size: 23px !important;
     }
@@ -248,11 +243,6 @@
 
 /* Max-width: 480px */
 @media (max-width: 480px) {
-
-    .page-title-user {
-        padding: 40px 0 40px 0;
-        font-size: 31px;
-    }
 
     .contactPage-container > .row .body > .section > h3 {
         font-size: 22px !important;
@@ -269,11 +259,6 @@
     /* Google map */
     .contactPage-gmap {
         height: 400px;
-    }
-
-    .page-title-user {
-        padding: 35px 0 35px 0;
-        font-size: 29px;
     }
 
     .contactPage-container > .row .body > .section > h3 {

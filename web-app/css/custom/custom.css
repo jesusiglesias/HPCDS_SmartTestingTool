@@ -1200,6 +1200,11 @@ table.dataTable tbody tr:hover {
     .domain-button-group-less {
         margin-top: 20px;
     }
+
+    .page-title-user {
+        padding: 50px 0 50px 0;
+        font-size: 32px;
+    }
 }
 
 /* Max-width: 660px */
@@ -1322,6 +1327,11 @@ table.dataTable tbody tr:hover {
     .portlet-scoreSex .portlet-body .scroller,
     .portlet-scoresTest .portlet-body .scroller {
         height: 315px !important;
+    }
+
+    .page-title-user {
+        padding: 40px 0 40px 0;
+        font-size: 31px;
     }
 }
 
@@ -1467,5 +1477,10 @@ table.dataTable tbody tr:hover {
     /* Copyright */
     .copyright-admin {
         font-size: 13px;
+    }
+
+    .page-title-user {
+        padding: 35px 0 35px 0;
+        font-size: 29px;
     }
 }
