@@ -223,8 +223,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksFrontEnd/home':               ['ROLE_USER'],
     '/customTasksFrontEnd/contact':            ['ROLE_USER'],
     '/customTasksFrontEnd/contactForm':        ['ROLE_USER'],
-    '/cookiePolicy':                           ['ROLE_USER'],
-    '/FAQ':                                    ['ROLE_USER'],
+    '/customTasksFrontEnd/cookiesPolicy':      ['permitAll'],
+    '/faq':                                    ['ROLE_USER'],
     '/customTasksFrontEnd/**':                 ['ROLE_USER']
 ]
 

@@ -309,6 +309,56 @@ table.dataTable tbody tr:hover {
     font-variant: small-caps;
 }
 
+/* Title */
+.page-title-user-cookie {
+    letter-spacing: -1px;
+    display: block;
+    font-weight: 400;
+    margin: 0;
+    padding: 40px 0 50px 0;
+    background: white;
+}
+
+.page-title-user-cookie-title {
+    text-align: center;
+    font-size: 33px;
+    font-variant: small-caps;
+    font-weight: 400;
+}
+
+.page-title-user-cookie-description,
+.page-title-user-cookie-section-description {
+    text-align: center;
+    margin-top: 35px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+/* Section */
+.page-title-user-cookie-section {
+    display: block;
+    font-weight: 400;
+    margin: 0;
+}
+
+.page-title-user-cookie-section-title {
+    letter-spacing: -1px;
+    text-align: center;
+    font-size: 27px;
+    font-variant: small-caps;
+    padding: 20px 16px 20px 16px;
+    margin: 0;
+    background-color: rgba(212, 174, 59, 0.37);
+}
+
+.row-userLayoutTitle {
+    margin-right: 0 !important;
+}
+
+.col-userLayoutTitle {
+    padding-right: 0 !important;
+}
+
 /* Page-bar */
 .page-bar-user {
     background-color: #6CB191;
@@ -1205,6 +1255,25 @@ table.dataTable tbody tr:hover {
         padding: 50px 0 50px 0;
         font-size: 32px;
     }
+
+    .page-title-user-cookie {
+        padding: 40px 0 45px 0;
+    }
+
+    .page-title-user-cookie-title {
+        font-size: 32px;
+    }
+
+    .page-title-user-cookie-description,
+    .page-title-user-cookie-section-description {
+        text-align: justify;
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+
+    .page-title-user-cookie-section-title {
+        font-size: 26px;
+    }
 }
 
 /* Max-width: 660px */
@@ -1332,6 +1401,24 @@ table.dataTable tbody tr:hover {
     .page-title-user {
         padding: 40px 0 40px 0;
         font-size: 31px;
+    }
+
+    .page-title-user-cookie {
+        padding: 26px 0 30px 0;
+    }
+
+    .page-title-user-cookie-title {
+        font-size: 31px;
+    }
+
+    .page-title-user-cookie-description,
+    .page-title-user-cookie-section-description {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    .page-title-user-cookie-section-title {
+        font-size: 25px;
     }
 }
 
@@ -1482,5 +1569,23 @@ table.dataTable tbody tr:hover {
     .page-title-user {
         padding: 35px 0 35px 0;
         font-size: 29px;
+    }
+
+    .page-title-user-cookie {
+        padding: 2px 0 25px 0;
+    }
+
+    .page-title-user-cookie-title {
+        font-size: 29px;
+    }
+
+    .page-title-user-cookie-description,
+    .page-title-user-cookie-section-description {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .page-title-user-cookie-section-title {
+        font-size: 24px;
     }
 }

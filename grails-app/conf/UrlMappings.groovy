@@ -121,8 +121,8 @@ class UrlMappings {
         // TODO
         "/profile/$id?(.$format)?"(controller: 'user', action: 'edit')
         "/contact"(controller: 'customTasksFrontEnd', action: 'contact')
-        "/cookiesPolicy"(view: "customTasksFrontEnd/CookiesPolicy")
-        "/FAQ"(view: "customTasksFrontEnd/FAQ")
+        "/cookiesPolicy"(controller: 'customTasksFrontEnd', action: 'cookiesPolicy')
+        "/faq"(view: "customTasksFrontEnd/faq")
 
         /* Errors
         ======================================================*/

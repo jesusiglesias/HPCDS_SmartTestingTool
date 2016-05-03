@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="main_auth_user">
-    <title><g:message code="layouts.main_auth_user.head.title.faq" default="STT | FAQ"/></title>
+    <title><g:message code="layouts.main_auth_user.head.title.faq" default="STT | FAQs"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/iconfont', file: 'icofont.css')}" type="text/css"/>
 </head>
 <body>

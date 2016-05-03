@@ -108,7 +108,7 @@
 
 /* Buttons */
 .login .btn {
-    padding: 10px 30px !important;
+    padding: 10px 30px;
     font-size: 13px;
 }
 
@@ -282,8 +282,19 @@
 
 .text-agreement {
     text-align: center;
-    color: white;
     font-weight: 400;
+}
+
+.text-agreement > a:active,
+.text-agreement > a:hover,
+.text-agreement > a:focus {
+    cursor: pointer;
+    color: black !important;
+    text-decoration: none;
+}
+
+.text-agreement > a {
+    color: white !important;
 }
 
 /* Notifications

@@ -21,6 +21,14 @@ class CustomTasksFrontEndController {
         render view: 'home'
     }
 
+    /**
+     * It shows the cookies policy page of user.
+     */
+    def cookiesPolicy() {
+        log.debug("CustomTasksFrontEndController():cookiesPolicy()")
+
+        render view: 'cookiesPolicy'
+    }
 
     /**
      * It shows the contact page.
@@ -50,7 +58,7 @@ class CustomTasksFrontEndController {
         def anotherSubject = g.message(code: "layouts.main_auth_user.body.map.contact.form.subject.another", default: 'Another')
         subjectList.push(anotherSubject)
 
-        render view: 'Contact', model: [subjectList: subjectList]
+        render view: 'contact', model: [subjectList: subjectList]
     }
 
     /**
