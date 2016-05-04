@@ -28,7 +28,6 @@ function GetCookie(name) {
     return null;
 }
 
-
 function closeCookies() {
 
     var contentCookie = $('#cookie-container');
