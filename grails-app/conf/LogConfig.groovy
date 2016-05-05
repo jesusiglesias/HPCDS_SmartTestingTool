@@ -85,9 +85,9 @@ log4j.main = {
                 )
 
                 // Rolling policy
-                // Rollover each day, compress and save in logs/backups directory.
+                // Rollover each week, compress and save in logs/backups directory.
                 def rollingPolicy = new TimeBasedRollingPolicy(
-                        fileNamePattern: "${backupDir}${myAppName}.%d{yyyy-MM-dd}.log.gz",
+                        fileNamePattern: "${backupDir}${myAppName}.%d{yyyy-ww}.log.gz",
                         activeFileName: logName('Error'),
                 )
 
