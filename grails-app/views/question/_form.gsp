@@ -17,7 +17,7 @@
 
                 <div class="input-group input-icon right">
                     <i class="fa icon-offset"></i>
-                    <g:textField name="titleQuestionKey" class="form-control form-shadow key-question backend-input" maxlength="25" value="${questionInstance?.titleQuestionKey}"/>
+                    <g:textField name="titleQuestionKey" class="form-control form-shadow emptySpaces key-question backend-input" maxlength="25" value="${questionInstance?.titleQuestionKey}"/>
                     <span class="input-group-btn">
                         <a href="javascript:;" class="btn green-dark" id="keyQuestion-checker">
                             <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>

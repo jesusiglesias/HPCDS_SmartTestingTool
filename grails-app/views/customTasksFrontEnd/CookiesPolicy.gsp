@@ -89,7 +89,7 @@
                 <h3 class="page-title-user-cookie-section-title">
                     <g:message code="layouts.main_auth_user.body.title.cookie.section.three.title" default="Revocation and deleting cookies"/>
                 </h3>
-                <p class="page-title-user-cookie-section-description">
+                <p class="page-title-user-cookie-section-description break-word">
                     ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.three.description", default:"You may stop accepting browser cookies, or stop accepting cookies from a particular service by modifying your browser settings. " +
                             "These adjustments are normally found in the <i>Options</i> or <i>Preferences</i> tab in the main menu. The instructions for the major browsers are listed below: <br><br> <span class='sbold'>GOOGLE CHROME</span> <br> " +
                             "<a href='https://support.google.com/chrome/answer/95647?hl=es'>https://support.google.com/chrome/answer/95647?hl=es</a>.<br><br> <span class='sbold'>MOZILLA FIREFOX</span> <br>" +
@@ -110,7 +110,7 @@
                 <h3 class="page-title-user-cookie-section-title">
                     <g:message code="layouts.main_auth_user.body.title.cookie.section.four.title" default="Acceptance of cookies policy"/>
                 </h3>
-                <p class="page-title-user-cookie-section-description">
+                <p class="page-title-user-cookie-section-description break-word">
                     ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.four.description", default:"<strong>If you continue browsing once informed about the cookies policy, we understand that you accept the use of cookies by the platform.</strong> However, you can change your " +
                             "cookie settings at any time, configuring your browser for acceptance or not. SMART TESTING TOOL thank you the acceptance of cookies because this helps us to obtain more precise data and improve the content and design of the platform to suit their preferences. <br><br>" +
                             "<strong>Update of the policy cookies?</strong> <br> This <i>cookies policy</i> can be modified depending on, regulations, or in order to adapt the policy to the instructions issued by the Spanish Data Protection Agency, so it is recommended that the users visit it " +
