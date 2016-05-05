@@ -5,7 +5,7 @@
     <meta name="layout" content="main_auth_user">
     <title><g:message code="layouts.main_auth_user.head.title.contact" default="STT | Contact"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css/contact', file: 'contact.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/normalUser', file: 'contactFAQ.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/iconfont', file: 'icofont.css')}" type="text/css"/>
 
     <script>
@@ -107,8 +107,8 @@
                     <div class="title inverse">
                         <h3 class="uppercase"><g:message code="layouts.main_auth_user.body.map.faq.title" default="Need to know more?"/></h3>
                         <div class="line-left"></div>
-                        <p><g:message code="layouts.main_auth_user.body.map.faq.description" default="Visit our FAQ page to learn more about SMART TESTING TOOL."/></p>
-                        <g:link uri="/FAQ" class="btn green-dark"><g:message code="layouts.main_auth_user.body.map.faq.button" default="Visit FAQ"/></g:link>
+                        <p>${raw(g.message(code:"layouts.main_auth_user.body.map.faq.description", default:"Visit our FAQs page to learn more about <strong>SMART TESTING TOOL</strong>."))}</p>
+                        <g:link uri="/faq" class="btn green-dark"><g:message code="layouts.main_auth_user.body.map.faq.button" default="Visit FAQs"/></g:link>
                     </div>
                 </div>
             </div>

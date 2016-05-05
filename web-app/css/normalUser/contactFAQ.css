@@ -86,7 +86,22 @@
     font-size: 25px !important;
 }
 
-.contactPageFAQ {
+.btn.customContact {
+    color: #000000;
+    background-color: rgb(234, 220, 177);
+    border-color: rgb(234, 220, 177);
+}
+
+.btn.customContact:hover,
+.btn.customContact:active,
+.btn.customContact:focus {
+    color: #000000;
+    background-color: rgb(200, 188, 148);
+    border-color: rgb(200, 188, 148);
+}
+
+.contactPageFAQ,
+.contactPageContact {
     padding-right: 0 !important;
 }
 
@@ -138,6 +153,7 @@
     margin-bottom: 30px;
     font-weight: 400;
     text-align: justify;
+    font-size: 15px;
 }
 
 .contentPage-form > .row > div > .containerContactPage {
@@ -147,8 +163,20 @@
     background-color: rgba(212, 174, 59, 0.37) !important;
 }
 
+.contentPage-form > .row > div > .containerFaqPage {
+    background-size: auto;
+    padding: 30px;
+    margin: 0 0 30px 0;
+    background-color: rgba(108, 177, 145, 0.8) !important;
+}
+
 .contentPage-form > .row > div > .containerContactPage > .inverse > h3 {
     color: #000000;
+    font-weight: 400;
+}
+
+.contentPage-form > .row > div > .containerFaqPage > .inverse > h3 {
+    color: #ffffff;
     font-weight: 400;
 }
 
@@ -156,11 +184,17 @@
     background-color: #ffffff;
 }
 
-.contentPage-form > .row > div > .containerContactPage > .inverse > p {
+.contentPage-form > .row > div > .containerFaqPage > .inverse > .line-left {
+    background-color: #000000;
+}
+
+.contentPage-form > .row > div > .containerContactPage > .inverse > p,
+.contentPage-form > .row > div > .containerFaqPage > .inverse > p {
     color: #000000;
 }
 
-.contentPage-form > .row > div > .containerContactPage:last-child {
+.contentPage-form > .row > div > .containerContactPage:last-child,
+.contentPage-form > .row > div > .containerFaqPage:last-child {
     margin-bottom: 0;
 }
 
@@ -236,7 +270,8 @@
         text-align: left;
     }
 
-    .contentPage-form > .row > div > .containerContactPage {
+    .contentPage-form > .row > div > .containerContactPage,
+    .contentPage-form > .row > div > .containerFaqPage {
         margin-right: 0;
         margin-bottom: 40px;
     }
@@ -253,7 +288,8 @@
         font-size: 23px !important;
     }
 
-    .contentPage-form > .row > div > .containerContactPage > .inverse > h3 {
+    .contentPage-form > .row > div > .containerContactPage > .inverse > h3,
+    .contentPage-form > .row > div > .containerFaqPage > .inverse > h3 {
         font-size: 23px !important;
     }
 }
@@ -265,11 +301,13 @@
         font-size: 22px !important;
     }
 
-    .contentPage-form > .row > div > .containerContactPage > .inverse > h3 {
+    .contentPage-form > .row > div > .containerContactPage > .inverse > h3,
+    .contentPage-form > .row > div > .containerFaqPage > .inverse > h3 {
         font-size: 22px !important;
     }
 
-    .contentPage-form > .row > div > .containerContactPage {
+    .contentPage-form > .row > div > .containerContactPage,
+    .contentPage-form > .row > div > .containerFaqPage {
         padding: 20px;
     }
 
@@ -290,7 +328,8 @@
         font-size: 20px !important;
     }
 
-    .contentPage-form > .row > div > .containerContactPage > .inverse > h3 {
+    .contentPage-form > .row > div > .containerContactPage > .inverse > h3,
+    .contentPage-form > .row > div > .containerFaqPage > .inverse > h3 {
         font-size: 20px !important;
     }
 }
