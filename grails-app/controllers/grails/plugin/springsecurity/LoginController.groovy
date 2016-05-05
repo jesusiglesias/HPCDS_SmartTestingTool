@@ -75,9 +75,8 @@ class LoginController {
 
 		if (springSecurityService.isLoggedIn() &&
 				authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
+
 			// Have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
-			// TODO Delete
-			// redirect action: 'full', params: params
 			redirect uri: '/reauthenticate'
 		}
 	}
@@ -92,8 +91,6 @@ class LoginController {
 
 		flash.reauthenticate = g.message(code: "views.login.auth.warning.reauthentication", default: 'For security reasons, it is necessary to authenticate again to do this action.')
 
-		// TODO Delete
-		//render view: 'auth', params: params,
 		render view: 'auth',
 			model: [hasCookie: authenticationTrustResolver.isRememberMe(SCH.context?.authentication),
 			        postUrl: "${request.contextPath}${config.apf.filterProcessesUrl}"]

@@ -53,7 +53,7 @@ var AdminImportValidation = function () {
 
                     form.submit(); // Submit the form
                 }
-            });
+        });
     };
 
     /**

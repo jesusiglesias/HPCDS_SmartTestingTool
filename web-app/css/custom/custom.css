@@ -537,7 +537,8 @@ table.dataTable tbody tr:hover {
 /* Remove IE default X */
 .user-input::-ms-clear,
 .backend-input::-ms-clear,
-.register-input::-ms-clear {
+.register-input::-ms-clear,
+.contact-input::-ms-clear {
     display: none;
     width:0;
     height:0 !important;
@@ -636,6 +637,20 @@ table.dataTable tbody tr:hover {
     top: 11px !important;
     margin-right: 3px;
 }
+
+.i-delete-name-contact,
+.i-delete-message-contact {
+    display: none;
+    position: absolute !important;
+    right: 34px !important;
+    cursor: pointer;
+    top: 11px;
+    z-index: 1999 !important;
+    font-size: 15px !important;
+    color: #AAAAAA !important;
+    margin: 0 !important;
+}
+
 
 .i-delete, .i-show, .i-show-confirm,
 .i-show-admin-password,
@@ -1252,7 +1267,7 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user {
-        padding: 50px 0 50px 0;
+        padding: 56px 0 56px 0;
         font-size: 32px;
     }
 
@@ -1399,7 +1414,7 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user {
-        padding: 40px 0 40px 0;
+        padding: 46px 0 46px 0;
         font-size: 31px;
     }
 
@@ -1567,12 +1582,12 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user {
-        padding: 35px 0 35px 0;
+        padding: 38px 0 42px 0;
         font-size: 29px;
     }
 
     .page-title-user-cookie {
-        padding: 2px 0 25px 0;
+        padding: 20px 0 25px 0;
     }
 
     .page-title-user-cookie-title {

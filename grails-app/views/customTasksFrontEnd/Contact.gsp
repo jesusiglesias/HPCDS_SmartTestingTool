@@ -13,6 +13,13 @@
         var _address = '${g.message(code:'layouts.main_auth_user.body.map.address', default:'José Echegaray street,')}';
         var _country = '${g.message(code:'layouts.main_auth_user.body.map.country', default:'Spain')}';
         var _webSite = '${g.message(code:'layouts.main_auth_user.body.map.icon.web', default:'Web site')}';
+        var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
+        var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
+        var _sendEmail = '${message(code: "layouts.main_auth_user.body.map.contact.form.button", default: "Send")}';
+        var _sendingEmail = '${message(code: "customTasksUser.login.stateAccount.sending", default: "Sending...")}';
+        var _responseError = '${message(code: "customTasksUser.sendEmail.error", default: "An internal error has occurred during the sending email. You try it again later.")}';
+        var _contactFormUrl = '${g.createLink(controller: "customTasksFrontEnd", action: 'contactForm')}';
     </script>
 </head>
 
@@ -32,10 +39,16 @@
         </ul>
     </div> <!-- /.Page-bar -->
 
+
+
     <!-- Page-title -->
-    <h3 class="page-title-user">
-        <g:message code="layouts.main_auth_user.body.title.contactUs" default="Contact us"/>
-    </h3>
+    <div class="row row-userLayoutTitle">
+        <div class="col-md-12 col-userLayoutTitle">
+            <h3 class="page-title-user">
+                <g:message code="layouts.main_auth_user.body.title.contactUs" default="Contact us"/>
+            </h3>
+        </div>
+    </div>
 
     <!-- Google maps-->
     <div class="contactPage-container">
@@ -52,7 +65,7 @@
                         </div>
                         <div class="section">
                             <div class="label uppercase"><g:message code="layouts.main_auth_user.body.map.title.contact" default="Contact"/></div>
-                            <p><i class="icofont icofont-ui-email"></i> <a href="mailto:smartestingtool.info@gmail.com" class="contact-map-email">smartestingtool.info@gmail.com</a></p>
+                            <p><i class="icofont icofont-ui-email"></i> <a href="mailto:smartestingtool.info@gmail.com" class="contact-map-email break-word">smartestingtool.info@gmail.com</a></p>
                             <p><i class="icofont icofont-phone-circle"></i> +34 91 631 16 84 </p>
                         </div>
                         <div class="section">
@@ -110,7 +123,7 @@
                         <p><g:message code="layouts.main_auth_user.body.map.contact.form.description" default="Our helpline is always open to receive any inquiry or feedback. Please feel free to drop us an email from the form below and we will get back to you as soon as we can."/></p>
                     </div>
                     <!-- Form contact -->
-                    <g:form controller="customTasksFrontEnd" action="contactForm" method="POST">
+                    <form class="contact-form" autocomplete="on">
                         <!-- Name -->
                         <div class="form-group">
                             <label for="name" class="control-label">
@@ -121,9 +134,9 @@
                             </label>
                             <div class="input-icon right">
                                 <i class="fa"></i>
-                                <g:textField name="name" maxlength="65" class="form-control form-shadow name-user backend-input input-md"/>
+                                <g:textField name="name" maxlength="65" class="form-control form-shadow name-contact contact-input input-md"/>
+                                <i class="fa fa-times i-delete-name-contact"></i> <!-- Delete text icon -->
                             </div>
-                            <i class="fa fa-times i-delete-without-name-backend i-delete-user-name"></i> <!-- Delete text icon -->
                         </div>
                         <!-- Email -->
                         <div class="form-group">
@@ -134,8 +147,8 @@
                                     </h5>
                                 </label>
                                 <div class="input-icon right">
-                                    <i class="fa icon-offset"></i>
-                                    <g:field type="email" name="email" maxlength="60" class="form-control form-shadow emptySpaces email-user backend-input input-md" disabled="true" value="${sec.loggedInUserInfo(field:"email")}"/>
+                                    <i class="fa"></i>
+                                    <g:field type="email" name="email" maxlength="60" class="form-control form-shadow emptySpaces input-md" disabled="true" value="${sec.loggedInUserInfo(field:"email")}"/>
                                 </div>
                         </div>
 
@@ -159,13 +172,17 @@
                             </label>
                             <div class="input-icon right">
                                 <i class="fa"></i>
-                                <g:textArea name="message" class="form-control autosizeme form-shadow description-topic backend-input input-md" cols="40" rows="4" maxlength="1000"/>
+                                <g:textArea name="message" class="form-control autosizeme form-shadow message-contact contact-input input-md" cols="40" rows="4" maxlength="1000"/>
+                                <i class="fa fa-times i-delete-message-contact"></i> <!-- Delete text icon -->
                             </div>
-                            <i class="fa fa-times i-delete-textArea-backend i-delete-topic-description"></i> <!-- Delete text icon -->
                         </div>
                         <!-- Button -->
-                        <g:submitButton name="sendMail" class="btn green-dark btn-block contact-form-button" value="${message(code: 'layouts.main_auth_user.body.map.contact.form.button', default: 'Send')}" />
-                    </g:form>
+                        <button type="submit" name="sendMail" id="sendMail" class="btn green-dark btn-block contact-form-button">
+                            <i class="fa fa-refresh fa-lg refresh-icon-stop refreshIcon"></i>
+                            <span><g:message code="layouts.main_auth_user.body.map.contact.form.button" default="Send"/></span>
+                        </button>
+                    </form>
+                    <div id="response"></div>
                 </div>
             </div>
         </div>

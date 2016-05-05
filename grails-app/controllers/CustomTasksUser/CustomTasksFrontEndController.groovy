@@ -1,6 +1,7 @@
 package CustomTasksUser
 
 import Security.SecUser
+import grails.converters.JSON
 
 /**
  * It contains the habitual custom tasks of the normal user (front-end).
@@ -9,6 +10,7 @@ class CustomTasksFrontEndController {
 
     def customNormalUserService
     def springSecurityService
+    def mailService
 
     static allowedMethods = [formContact: "POST"]
 
@@ -69,21 +71,38 @@ class CustomTasksFrontEndController {
     def contactForm() {
         log.debug("CustomTasksFrontEndController():contactForm()")
 
+        def responseData
         def mailTo = grailsApplication.config.grails.mail.username
 
         // Email of current user
         def emailCurrentUser = SecUser.get(springSecurityService.currentUser.id).email
 
-        if (!customNormalUserService.sendEmail_contactForm(params.name, emailCurrentUser, mailTo, params.subject as String, params.message)) {
+        try {
+
+            mailService.sendMail {
+                to mailTo
+                subject g.message(code: "layouts.main_auth_user.body.map.contact.form.email.subject", default: '[STT: Contact form] - User: {0}, subject: {1}', args: [params.name, params.subject])
+                html(view: '/email/contactForm', model: [name: params.name, email: emailCurrentUser, subject: params.subject, message: params.message])
+            }
+
+            log.debug("CustomTasksFrontEndController:contactForm():mailSent:from:${emailCurrentUser}")
+
+            responseData = [
+                        'status': "successContact",
+                        'message': g.message(code: 'customTasksUser.sendEmail.success', default: 'Notification processed. You will receive an email to reset the password in the indicated address.')
+            ]
+
+            render responseData as JSON
+
+        } catch (Exception e) {
             log.error("CustomTasksFrontEndController:contactForm():NOTMailSent:from:${emailCurrentUser}")
 
-            flash.errorContactForm = g.message(code: 'customTasksUser.sendEmail.error', default: 'An internal error has occurred during the sending email. You try it again later.')
+            responseData = [
+                    'status': "errorContact",
+                    'message': g.message(code: 'customTasksUser.sendEmail.error', default: 'An internal error has occurred during the sending email. You try it again later.')
+            ]
 
-        } else {
-            log.debug("CustomTasksFrontEndController:contactForm():mailSent:from:${emailCurrentUser}")
-            flash.successContactForm = g.message(code: 'customTasksUser.sendEmail.success', default: 'Notification processed. You will receive an email to reset the password in the indicated address.')
+            render responseData as JSON
         }
-
-        redirect uri: '/contact'
     }
 }

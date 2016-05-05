@@ -176,8 +176,8 @@
                             <tr>
                                 <td style="padding: 30px 30px 25px 30px; text-align: center; font-family: roboto, sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
                                     <h3> <g:message code="layouts.main_auth_user.body.map.contact.form.email.title" default="Receiving email through the contact form"/> </h3>
-                                    <p style="margin-top: 30px;"> ${raw(g.message(code: 'layouts.main_auth_user.body.map.contact.form.email.descripcion', default: 'The user {0} with email: <i>{1}</i> recently contacted through the contact form ' +
-                                            'with the subject: <i>{2}</i>. Please contact to user as soon as possible.', args: "[${name}, ${email}, ${subject}]"))}</p>
+                                    <p style="margin-top: 30px;"> ${raw(g.message(code: 'layouts.main_auth_user.body.map.contact.form.email.descripcion', default: 'The user <strong>{0}</strong> with email: <i>{1}</i> recently contacted through the contact form ' +
+                                            'with the subject: <i>{2}</i>. Please contact to user as soon as possible.', args:["${name}", "${email}", "${subject}"]))}</p>
                                 </td>
                             </tr>
                         </table>

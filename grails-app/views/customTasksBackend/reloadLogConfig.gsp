@@ -130,7 +130,6 @@
                         }
                     },
                     error: function(){
-                      console.log("error");
 
                       if (!$('.alert-log-internalError').length) {
 

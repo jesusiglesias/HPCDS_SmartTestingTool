@@ -196,6 +196,23 @@
     margin-top: 40px;
 }
 
+/* Response */
+.contact-responseForm-success {
+    background: #79B794;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    margin-top: 55px;
+}
+
+.contact-responseForm-error {
+    background: #C16868;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    margin-top: 55px;
+}
+
 /* Max-width: 991px */
 @media (max-width: 991px) {
 
@@ -250,6 +267,14 @@
 
     .contentPage-form > .row > div > .containerContactPage > .inverse > h3 {
         font-size: 22px !important;
+    }
+
+    .contentPage-form > .row > div > .containerContactPage {
+        padding: 20px;
+    }
+
+    .contentPage-form > .row > div > .containerMailcontact {
+        padding: 20px 6px 20px 20px;
     }
 }
 
