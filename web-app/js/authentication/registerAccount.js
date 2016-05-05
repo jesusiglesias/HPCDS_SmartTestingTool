@@ -148,6 +148,49 @@ var RegisterAccount = function () {
     };
 
     /**
+     * Register form.
+     */
+    var handlerDisabledButtonRegister = function() {
+
+        // Register button activates when user enter data in all mandatory fields
+        var registerForm = $(".register-form");
+        var registerButton =  $("#register-button");
+        var usernameField = $("#username");
+        var emailField = $("#email");
+        var passwordField = $("#password");
+        var confirmPasswordField = $("#confirmPassword");
+        var nameField = $("#name");
+        var surnameField = $("#surname");
+
+        registerButton.attr('disabled', 'disabled');
+
+        registerForm.keyup(function () {
+            // Disable login button
+            registerButton.attr('disabled', 'disabled');
+
+            // Validating fields
+            var username = usernameField.val().trim();
+            var email = emailField.val().trim();
+            var password = passwordField.val().trim();
+            var confirmPassword = confirmPasswordField.val().trim();
+            var name = nameField.val().trim();
+            var surname = surnameField.val().trim();
+
+            // Validating whitespaces
+            var usernameWhitespace = /\s/g.test(username);
+            var emailWhitespace = /\s/g.test(email);
+            var passwordWhitespace = /\s/g.test(password);
+            var confirmPasswordWhitespace = /\s/g.test(confirmPassword);
+
+            if (!(username == "" || email == "" || password == "" || confirmPassword == "" || name == "" || surname == ""
+                || usernameWhitespace || emailWhitespace || passwordWhitespace || confirmPasswordWhitespace)) {
+                // Enable regiuster button
+                registerButton.removeAttr('disabled');
+            }
+        });
+    };
+
+    /**
      * It checks the username availability
      */
     var handleUsernameAvailabilityChecker = function () {
@@ -780,6 +823,7 @@ var RegisterAccount = function () {
         // Main function to initiate the module
         init: function () {
             handlerUserRegisterValidation();
+            handlerDisabledButtonRegister();
             handleUsernameAvailabilityChecker();
             handleEmailAvailabilityChecker();
             handlerIconUserRegister();
