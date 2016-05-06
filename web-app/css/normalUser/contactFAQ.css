@@ -247,6 +247,11 @@
     margin-top: 55px;
 }
 
+.list-faq {
+    margin-left: 50px;
+    margin-right: 40px;
+}
+
 /* Max-width: 991px */
 @media (max-width: 991px) {
 
@@ -292,6 +297,11 @@
     .contentPage-form > .row > div > .containerFaqPage > .inverse > h3 {
         font-size: 23px !important;
     }
+
+    .list-faq {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
 }
 
 /* Max-width: 480px */
@@ -314,6 +324,11 @@
     .contentPage-form > .row > div > .containerMailcontact {
         padding: 20px 6px 20px 20px;
     }
+
+    .list-faq {
+        margin-left: 20px;
+        margin-right: 25px;
+    }
 }
 
 /* Max-width: 320px */
@@ -331,5 +346,10 @@
     .contentPage-form > .row > div > .containerContactPage > .inverse > h3,
     .contentPage-form > .row > div > .containerFaqPage > .inverse > h3 {
         font-size: 20px !important;
+    }
+
+    .list-faq {
+        margin-left: 10px;
+        margin-right: 25px;
     }
 }

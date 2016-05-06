@@ -41,94 +41,100 @@
 
     <!-- Frequently questions -->
     <div class="row row-userLayoutTitle">
-        <div class="col-md-6 col-lg-4 col-userLayoutTitle-faq">
+        <div class="col-md-6 col-userLayoutTitle-faq">
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
-                <h3 class="page-title-user-faq-section-title">
-                    <g:message code="la" default="¿Qué es smart testing tool?"/>
+                <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionOne" default="What is smart testing tool?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.one.description", default:""))}
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionOne.description" encodeAs="raw"/>
                 </p>
             </div>
         </div>
-        <div class="col-md-6 col-lg-4 col-userLayoutTitle-faq">
+        <div class="col-md-6 col-userLayoutTitle-faq colLine-rowLeft">
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
-                <h3 class="page-title-user-faq-section-title">
-                    <g:message code="la" default="No recuerdo mis datos de acceso: usuario o contraseña. ¿Qué puedo hacer?"/>
+                <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionTwo" default="I do not remember my password, what can I do?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.one.description", default:""))}
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionTwo.description" encodeAs="raw" args="[link(uri: '/forgotPassword') { message(code:'layouts.main_auth_user.body.title.faq.questionTwo.description.link', default: 'Restore password')}]"/>
                 </p>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 col-userLayoutTitle-faq">
+    <div class="row row-userLayoutTitle">
+        <div class="col-md-6 col-userLayoutTitle-faq colLine-rowRigth">
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
-                <h3 class="page-title-user-faq-section-title">
-                    <g:message code="la" default="¿Cómo cambio los datos de mi perfil Usuario"/>
+                <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionThree" default="How can I modify my profile data?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.one.description", default:""))}
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionThree.description" encodeAs="raw" args="[link(uri: '/contact') { message(code:'layouts.main_auth_user.body.title.faq.question.link.contactForm', default: 'Contact form')}]"/>
                 </p>
             </div>
         </div>
-        <div class="col-md-6 col-lg-4 col-userLayoutTitle-faq">
+        <div class="col-md-6 col-userLayoutTitle-faq">
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
-                <h3 class="page-title-user-faq-section-title">
-                    <g:message code="la" default="Deseo eliminar mi cuenta, ¿cómo lo hago?"/>
+                <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionFour" default="I want to delete my user account, how do I do?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.one.description", default:""))}
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionFour.description" encodeAs="raw" args="[link(uri: '/contact') { message(code:'layouts.main_auth_user.body.title.faq.question.link.contactForm', default: 'Contact form')}]"/>
                 </p>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 col-userLayoutTitle-faq">
+    <div class="row row-userLayoutTitle">
+        <div class="col-md-6 col-userLayoutTitle-faq">
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
-                <h3 class="page-title-user-faq-section-title">
-                    <g:message code="la" default="He olvidado mi contraseña. ¿Qué debo hacer?"/>
+                <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionFive" default="My account or password is locked or expired."/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.one.description", default:""))}
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionFive.description" encodeAs="raw"/>
                 </p>
             </div>
         </div>
-        <div class="col-md-6 col-lg-4 col-userLayoutTitle-faq">
+        <div class="col-md-6 col-userLayoutTitle-faq colLine-rowLeft">
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
-                <h3 class="page-title-user-faq-section-title">
-                    <g:message code="la" default="¿Cómo cambio mis datos de acceso (email y/o contraseña)?"/>
+                <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionSix" default="What are the topics and how to perform a test?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.one.description", default:""))}
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionSix.description" encodeAs="raw"/>
                 </p>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 col-userLayoutTitle-faq">
+    <div class="row row-userLayoutTitle">
+        <div class="col-md-6 col-userLayoutTitle-faq colLine-rowRigth">
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
-                <h3 class="page-title-user-faq-section-title">
-                    <g:message code="la" default="¿Qué es smart testing tool?"/>
+                <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionSeven" default="Where can I check my evaluations?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.one.description", default:""))}
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionSeven.description" encodeAs="raw"/>
                 </p>
             </div>
         </div>
-        <div class="col-md-6 col-lg-4 col-userLayoutTitle-faq">
+        <div class="col-md-6 col-userLayoutTitle-faq">
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
-                <h3 class="page-title-user-faq-section-title">
-                    <g:message code="la" default="¿Qué es ..."/>
+                <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionEight" default="How do I close the current session?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.one.description", default:""))}
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionEight.description" encodeAs="raw"/>
                 </p>
             </div>
         </div>

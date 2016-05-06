@@ -402,13 +402,15 @@ table.dataTable tbody tr:hover {
 .col-userLayoutTitle-faq {
     padding-right: 0 !important;
     padding-left: 0 !important;
-    border-right: 1px solid rgba(0, 0, 0, 0.21);
 }
 
-.col-userLayoutTitle-faq {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
+.colLine-rowLeft {
+    border-left: 1px solid rgba(0, 0, 0, 0.21);
+}
+
+.colLine-rowRigth {
     border-right: 1px solid rgba(0, 0, 0, 0.21);
+    right: -1px;
 }
 
 /* Page-bar */
@@ -1737,6 +1739,15 @@ table.dataTable tbody tr:hover {
     .col-register {
         top: 22px !important;
     }
+
+    .colLine-rowLeft {
+        border-right: 0;
+    }
+
+    .colLine-rowRigth {
+        border-right: 0;
+        right: 0;
+    }
 }
 
 /* Max-width: 797px */
@@ -1783,10 +1794,15 @@ table.dataTable tbody tr:hover {
 
     .page-title-user-cookie-description,
     .page-title-user-cookie-section-description,
-    .page-title-user-faq-description,
-    .page-title-user-faq-section-description {
+    .page-title-user-faq-description {
         text-align: justify;
         margin-left: 35px;
+        margin-right: 35px;
+    }
+
+    .page-title-user-faq-section-description {
+        text-align: justify;
+        margin-left: 50px;
         margin-right: 35px;
     }
 
@@ -1939,10 +1955,15 @@ table.dataTable tbody tr:hover {
 
     .page-title-user-cookie-description,
     .page-title-user-cookie-section-description,
-    .page-title-user-faq-description,
-    .page-title-user-faq-section-description {
+    .page-title-user-faq-description {
         margin-left: 25px;
         margin-right: 25px;
+    }
+
+    .page-title-user-faq-section-description {
+        text-align: justify;
+        margin-left: 40px;
+        margin-right: 35px;
     }
 
     .page-title-user-cookie-section-title,
@@ -2116,9 +2137,14 @@ table.dataTable tbody tr:hover {
 
     .page-title-user-cookie-description,
     .page-title-user-cookie-section-description,
-    .page-title-user-faq-description,
-    .page-title-user-faq-section-description {
+    .page-title-user-faq-description {
         margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .page-title-user-faq-section-description {
+        text-align: justify;
+        margin-left: 35px;
         margin-right: 20px;
     }
 
