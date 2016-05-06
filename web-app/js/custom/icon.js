@@ -19,10 +19,23 @@ var IconScript = function () {
         // Normal user
         var liIdUser = $('.li-iconId-user');
         var iconIdUser = $('.iconId-user');
-        var liExchangeUser = $('.li-exchange-user');
-        var iconExchangeUser = $('.iconExchange-user');
+        var liEvaluationsUser = $('.li-iconEvaluations-user');
+        var iconEvaluationsUser = $('.iconEvaluations-user');
+        var liExchangeUser = $('.li-evaluations-user');
+        var iconExchangeUser = $('.iconEvaluations-user');
         var liLogoutUser = $('.li-logout-user');
         var iconLogoutUser = $('.iconLogout-user');
+        // Error pages
+        var iconBackButton = $('.content-error');
+        var iconBack = $('.icon-back');
+        // Admin and user pages
+        var iconButtonContainer = $('.icon-button-container');
+        var iconButton = $('.icon-button');
+        var iconDeleteButtonContainer = $('.iconDelete-button-container');
+        var iconDeleteButton = $('.iconDelete-button');
+        // Breadcrumb admin pages
+        var iconBarAdminContainer = $('.iconBar-admin-container');
+        var iconBarAdmin = $('.iconBar-admin');
 
         // Layout administrator
         // My profile
@@ -55,6 +68,13 @@ var IconScript = function () {
         liIdUser.mouseout(function () {
             iconIdUser.removeClass('overIcon')
         });
+        // Evaluations
+        liEvaluationsUser.mouseover(function () {
+            iconEvaluationsUser.addClass('overIcon')
+        });
+        liEvaluationsUser.mouseout(function () {
+            iconEvaluationsUser.removeClass('overIcon')
+        });
         // Switch user
         liExchangeUser.mouseover(function () {
             iconExchangeUser.addClass('overIcon')
@@ -69,9 +89,35 @@ var IconScript = function () {
         liLogoutUser.mouseout(function () {
             iconLogoutUser.removeClass('overIcon')
         });
+        // Error pages
+        iconBackButton.mouseover(function () {
+            iconBack.addClass('icon-back-mouseOver')
+        });
+        iconBackButton.mouseout(function () {
+            iconBack.removeClass('icon-back-mouseOver')
+        });
+        // Admin and user pages
+        iconButtonContainer.mouseover(function () {
+            iconButton.addClass('icon-button-mouseOver')
+        });
+        iconButtonContainer.mouseout(function () {
+            iconButton.removeClass('icon-button-mouseOver')
+        });
+        iconDeleteButtonContainer.mouseover(function () {
+            iconDeleteButton.addClass('iconDelete-button-mouseOver')
+        });
+        iconDeleteButtonContainer.mouseout(function () {
+            iconDeleteButton.removeClass('iconDelete-button-mouseOver')
+        });
+        // Breadcrumb admin pages
+        iconBarAdminContainer.mouseover(function () {
+            iconBarAdmin.addClass('home-icon-hover')
+        });
+        iconBarAdminContainer.mouseout(function () {
+            iconBarAdmin.removeClass('home-icon-hover')
+        });
     };
-
-
+    
     return {
         // Main function to initiate the module
         init: function () {

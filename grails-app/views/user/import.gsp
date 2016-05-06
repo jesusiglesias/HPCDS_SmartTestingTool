@@ -364,8 +364,8 @@
             <!-- Page-bar -->
             <div class="page-bar">
                 <ul class="page-breadcrumb">
-                    <li>
-                        <i class="fa fa-home home-icon"></i>
+                    <li class="iconBar-admin-container">
+                        <i class="fa fa-home home-icon iconBar-admin"></i>
                         <g:link uri="/"><g:message code="layouts.main_auth_admin.pageBreadcrumb.title" default="Homepage"/></g:link>
                         <i class="fa fa-circle"></i>
                     </li>
@@ -423,7 +423,7 @@
                                     <a href="" class="remove"> </a>
                                 </div>
                                 <div>
-                                    <a href="${resource(dir: 'files', file: 'STT_UserTemplate.csv')}" download="" class="btn green-dark button-template"><i class="fa fa-download" aria-hidden="true"></i><g:message code="default.import.template" default="Template"/></a>
+                                    <a href="${resource(dir: 'files', file: 'STT_UserTemplate.csv')}" download="" class="btn green-dark button-template icon-button-container"><i class="fa fa-download icon-button" aria-hidden="true"></i><g:message code="default.import.template" default="Template"/></a>
                                 </div>
                             </div>
 

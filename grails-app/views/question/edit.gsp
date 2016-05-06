@@ -363,8 +363,8 @@
 			<!-- Page-bar -->
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
-					<li>
-						<i class="fa fa-home home-icon"></i>
+					<li class="iconBar-admin-container">
+						<i class="fa fa-home home-icon iconBar-admin"></i>
 						<g:link uri="/"><g:message code="layouts.main_auth_admin.pageBreadcrumb.title" default="Homepage"/></g:link>
 						<i class="fa fa-circle"></i>
 					</li>
@@ -413,13 +413,13 @@
 				<!-- Delete button -->
 				<g:form url="[resource:questionInstance, controller:'question', action:'delete']" method="DELETE" class="form-delete">
 					<div class="btn-group delete-confirm-popover">
-						<button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
+						<button class="btn red-soft btn-block iconDelete-button-container" id="delete-confirm-popover" data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
 								data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
 								data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
 								data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
 								data-btnOkIcon="glyphicon glyphicon-ok" data-btnOkClass="btn btn-sm btn-success"
 								data-btnCancelIcon="glyphicon glyphicon-remove" data-btnCancelClass="btn btn-sm btn-danger">
-							<i class="fa fa-trash"></i>
+							<i class="fa fa-trash iconDelete-button"></i>
 							<g:message code="layouts.main_auth_admin.body.content.question.delete" default="Delete question"/>
 						</button>
 					</div>
@@ -452,8 +452,8 @@
 					<div class="domain-button-group">
 						<!-- Cancel button -->
 						<g:link type="button" uri="/question" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
-						<button type="submit" class="btn green-dark" name="update">
-							<i class="fa fa-check"></i>
+						<button type="submit" class="btn green-dark icon-button-container" name="update">
+							<i class="fa fa-check icon-button"></i>
 							<g:message code="default.button.update.label" default="Update"/>
 						</button>
 					</div>

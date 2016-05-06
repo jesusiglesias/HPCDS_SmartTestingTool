@@ -6160,7 +6160,8 @@ Customized Bootstrap Close Icon
     color: #579277;
 }
 
-.dropdown-menu .icofont-id {
+.dropdown-menu .icofont-id,
+.dropdown-menu .iconEvaluations-user {
     color: #579277;
     font-size: 17px !important;
 }
@@ -8580,7 +8581,7 @@ body[ng-controller] .modal {
 }
 
 #list-domain .portlet.light > .portlet-title > .caption {
-    padding: 20px 0 !important;
+    padding: 13px 0 !important;
 }
 
 .portlet.light > .portlet-title {

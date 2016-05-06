@@ -410,8 +410,8 @@
             <!-- Page-bar -->
             <div class="page-bar">
                 <ul class="page-breadcrumb">
-                    <li>
-                        <i class="fa fa-home home-icon"></i>
+                    <li class="iconBar-admin-container">
+                        <i class="fa fa-home home-icon iconBar-admin"></i>
                         <g:link uri="/"><g:message code="layouts.main_auth_admin.pageBreadcrumb.title" default="Homepage"/></g:link>
                         <i class="fa fa-circle"></i>
                     </li>
@@ -494,7 +494,7 @@
                                                         </span>
                                                 </td>
                                                 <td>
-                                                    <span class="label label-sm label-default show-entity">
+                                                    <span class="label label-sm label-default show-entity-evaluation">
                                                         ${fieldValue(bean: evaluationInstance, field: "attemptNumber")}
                                                     </span>
                                                 </td>

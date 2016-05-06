@@ -49,7 +49,7 @@
         <div class="col-md-12 col-userLayoutTitle">
             <!-- Page-title -->
             <div class="page-title-user-cookie-section">
-                <h3 class="page-title-user-cookie-section-title">
+                <h3 class="page-title-user-cookie-section-title hvr-bubble-float-bottom">
                     <g:message code="layouts.main_auth_user.body.title.cookie.section.one.title" default="What is a cookie?"/>
                 </h3>
                 <p class="page-title-user-cookie-section-description">
@@ -67,7 +67,7 @@
         <div class="col-md-12 col-userLayoutTitle">
             <!-- Page-title -->
             <div class="page-title-user-cookie-section">
-                <h3 class="page-title-user-cookie-section-title">
+                <h3 class="page-title-user-cookie-section-title hvr-bubble-float-bottom">
                     <g:message code="layouts.main_auth_user.body.title.cookie.section.two.title" default="What cookies does smart testing tool use?"/>
                 </h3>
                 <p class="page-title-user-cookie-section-description">
@@ -86,7 +86,7 @@
         <div class="col-md-12 col-userLayoutTitle">
             <!-- Page-title -->
             <div class="page-title-user-cookie-section">
-                <h3 class="page-title-user-cookie-section-title">
+                <h3 class="page-title-user-cookie-section-title hvr-bubble-float-bottom">
                     <g:message code="layouts.main_auth_user.body.title.cookie.section.three.title" default="Revocation and deleting cookies"/>
                 </h3>
                 <p class="page-title-user-cookie-section-description break-word">
@@ -107,7 +107,7 @@
         <div class="col-md-12 col-userLayoutTitle">
             <!-- Page-title -->
             <div class="page-title-user-cookie-section">
-                <h3 class="page-title-user-cookie-section-title">
+                <h3 class="page-title-user-cookie-section-title hvr-bubble-float-bottom">
                     <g:message code="layouts.main_auth_user.body.title.cookie.section.four.title" default="Acceptance of cookies policy"/>
                 </h3>
                 <p class="page-title-user-cookie-section-description break-word">

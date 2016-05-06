@@ -152,7 +152,7 @@
 	<!-- Logo -->
 	<div class="logo-error">
 		<g:link uri="/">
-			<asset:image src="logo/logo_error_pages.png" alt="SMART TESTING TOOL"/>
+			<asset:image src="logo/logo_error_pages.png" alt="SMART TESTING TOOL" class="hvr-wobble-vertical"/>
 		</g:link>
 	</div>
 
@@ -195,7 +195,7 @@
 	<div class="copyright"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias"> Jesús Iglesias García </g:link></div>
 	<div class="logoHP-error-page">
 		<g:link uri="https://www.hpcds.com/">
-			<asset:image src="logo/logo_hp.png" alt="HP CDS"/>
+			<asset:image src="logo/logo_hp.png" alt="HP CDS" class="hvr-wobble-vertical"/>
 		</g:link>
 	</div>
 
@@ -210,6 +210,7 @@
 
 	<!-- CORE PLUGINS -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<g:javascript src="custom/icon.js"/>
 	<g:javascript src="custom/custom.js"/>
 
 </body>

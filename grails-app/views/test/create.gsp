@@ -365,8 +365,8 @@
             <!-- Page-bar -->
             <div class="page-bar">
                 <ul class="page-breadcrumb">
-                    <li>
-                        <i class="fa fa-home home-icon"></i>
+                    <li class="iconBar-admin-container">
+                        <i class="fa fa-home home-icon iconBar-admin"></i>
                         <g:link uri="/"><g:message code="layouts.main_auth_admin.pageBreadcrumb.title" default="Homepage"/></g:link>
                         <i class="fa fa-circle"></i>
                     </li>
@@ -421,8 +421,8 @@
                     <div class="domain-button-group">
                         <!-- Cancel button -->
                         <g:link type="button" uri="/test" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
-                        <button type="submit" class="btn green-dark" name="create">
-                            <i class="fa fa-check"></i>
+                        <button type="submit" class="btn green-dark icon-button-container" name="create">
+                            <i class="fa fa-check icon-button"></i>
                             <g:message code="default.button.create.label" default="Create"/>
                         </button>
                     </div>

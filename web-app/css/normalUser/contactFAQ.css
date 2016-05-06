@@ -96,8 +96,8 @@
 .btn.customContact:active,
 .btn.customContact:focus {
     color: #000000;
-    background-color: rgb(200, 188, 148);
-    border-color: rgb(200, 188, 148);
+    background-color: rgb(210, 198, 157);
+    border-color: rgb(210, 198, 157);
 }
 
 .contactPageFAQ,
@@ -112,11 +112,11 @@
     -moz-transition: background-color 700ms ease-in-out;
     -o-transition: background-color 700ms ease-in-out;
     transition: background-color 700ms ease-in-out;
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-    transform: scale(1.2);
+    -webkit-transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    -o-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    transform: scale(1.15);
 }
 
 .contactPage-container > .row .body > .section > p > li > a,

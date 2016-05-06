@@ -84,7 +84,7 @@
             <div class="page-logo">
                 <!-- Image -->
                 <g:link uri="/">
-                    <asset:image src="logo/logo.png" alt="HP CDS - Smart Testing Tool" class="logo-default"/>
+                    <asset:image src="logo/logo.png" alt="HP CDS - Smart Testing Tool" class="logo-default hvr-wobble-horizontal"/>
                 </g:link>
                 <!-- Hamburguer -->
                 <div class="menu-toggler sidebar-toggler">
@@ -114,6 +114,12 @@
                                 <li class="li-iconId-user">
                                     <g:link uri="/profile" id="${sec.loggedInUserInfo(field:"id")}">
                                         <i class="icofont icofont-id iconId-user"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
+                                    </g:link>
+                                </li>
+                                <!-- Evaluations TODO -->
+                                <li class="li-evaluations-user">
+                                    <g:link uri="/profile" id="${sec.loggedInUserInfo(field:"id")}">
+                                        <i class="icofont icofont-badge iconEvaluations-user"></i> <g:message code="layouts.main_auth_user.head.evaluations" default="My qualifications"/>
                                     </g:link>
                                 </li>
                                 <!-- Switch user -->
@@ -170,7 +176,7 @@
         <div class="copyright-admin"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias" class="author-link"> Jesús Iglesias García </g:link></div>
         <div class="logoHP-admin">
             <g:link uri="https://www.hpcds.com/">
-                <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
+                <asset:image src="logo/logo_hp.png" alt="HP CDS" class="hvr-wobble-vertical"/>
             </g:link>
         </div>
     </div>

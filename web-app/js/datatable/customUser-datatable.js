@@ -92,12 +92,12 @@ var DatatableUserList = function () {
             ],
 
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [1, 2, 7, 8, 9, 14, 15, 17]} },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]} },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _userFile, title: _userTableTitle, exportOptions: {columns: [1, 2, 7, 8, 9, 14, 15, 17]} },
-                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _userFile, exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]} },
-                { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
-                { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
+                { extend: 'print', className: 'btn dark btn-outline transparent hvr-bounce-to-top-print', text: _print, exportOptions: {columns: [1, 2, 7, 8, 9, 14, 15, 17]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline transparent hvr-bounce-to-top-copy', text: _copy, exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline transparent hvr-bounce-to-top-pdf', text: _pdf, filename: _userFile, title: _userTableTitle, exportOptions: {columns: [1, 2, 7, 8, 9, 14, 15, 17]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline transparent hvr-bounce-to-top-csv', text: _csv, fieldSeparator: ';', filename: _userFile, exportOptions: {columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]} },
+                { extend: 'colvis', className: 'btn yellow-casablanca btn-outline transparent hvr-bounce-to-top-colvis', text: _columns },
+                { extend: 'colvisRestore', className: 'btn yellow btn-outline transparent hvr-bounce-to-top-colvisRestore', text: _restore }
             ],
 
             // Pagination type

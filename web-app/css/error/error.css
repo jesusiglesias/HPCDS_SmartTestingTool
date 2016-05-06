@@ -102,7 +102,12 @@
 .icon-back:active,
 .icon-back:hover,
 .icon-back:focus {
-    color:  #3FD5C0;
+    color: rgb(234, 220, 177);
+}
+
+.icon-back-mouseOver {
+    color: rgb(234, 220, 177);
+    padding-right: 10px !important;
 }
 
 /*  Copyright */

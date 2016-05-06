@@ -404,8 +404,8 @@
             <!-- Page-bar -->
             <div class="page-bar">
                 <ul class="page-breadcrumb">
-                    <li>
-                        <i class="fa fa-home home-icon"></i>
+                    <li class="iconBar-admin-container">
+                        <i class="fa fa-home home-icon iconBar-admin"></i>
                         <g:link uri="/"><g:message code="layouts.main_auth_admin.pageBreadcrumb.title" default="Homepage"/></g:link>
                         <i class="fa fa-circle"></i>
                     </li>
@@ -457,8 +457,8 @@
                             <div class="portlet-title">
                                 <div class="caption font-green-dark">
                                     <div class="btn-group">
-                                        <g:link uri="/question/create" class="btn green-dark">
-                                            <i class="fa fa-plus"></i>
+                                        <g:link uri="/question/create" class="btn green-dark icon-button-container">
+                                            <i class="fa fa-plus icon-button"></i>
                                             <g:message code="layouts.main_auth_admin.body.content.question.new" default="New question"/>
                                         </g:link>
                                     </div>

@@ -39,8 +39,6 @@
         </ul>
     </div> <!-- /.Page-bar -->
 
-
-
     <!-- Page-title -->
     <div class="row row-userLayoutTitle">
         <div class="col-md-12 col-userLayoutTitle">
@@ -72,22 +70,22 @@
                             <div class="label uppercase"><g:message code="layouts.main_auth_user.body.map.title.social" default="Social"/></div>
                             <br/>
                             <ul class="iconlist">
-                                <li class="li-site">
+                                <li class="li-site hvr-bounce-to-top-contact">
                                     <a href="https://www.hpcds.com/">
                                         <i class="icofont icofont-web"></i>
                                     </a>
                                 </li>
-                                <li class="li-google">
+                                <li class="li-google hvr-bounce-to-top-contact">
                                     <a href="https://plus.google.com/103304739299282206903">
                                         <i class="fa fa-google"></i>
                                     </a>
                                 </li>
-                                <li class="li-youtube">
+                                <li class="li-youtube hvr-bounce-to-top-contact">
                                     <a href="https://www.youtube.com/user/HPCDSNL">
                                         <i class="fa fa-youtube-play"></i>
                                     </a>
                                 </li>
-                                <li class="li-linkedin">
+                                <li class="li-linkedin hvr-bounce-to-top-contact">
                                     <a href="https://www.linkedin.com/company/hp-cds">
                                         <i class="fa fa-linkedin"></i>
                                     </a>

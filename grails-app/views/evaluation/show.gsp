@@ -340,8 +340,8 @@
             <!-- Page-bar -->
             <div class="page-bar">
                 <ul class="page-breadcrumb">
-                    <li>
-                        <i class="fa fa-home home-icon"></i>
+                    <li class="iconBar-admin-container">
+                        <i class="fa fa-home home-icon iconBar-admin"></i>
                         <g:link uri="/"><g:message code="layouts.main_auth_admin.pageBreadcrumb.title" default="Homepage"/></g:link>
                         <i class="fa fa-circle"></i>
                     </li>
@@ -355,7 +355,7 @@
             <h3 class="page-title">
                 <g:link uri="/evaluation"><g:message code="layouts.main_auth_admin.body.title.evaluation" default="Evaluations management"/></g:link>
                 <i class="icon-arrow-right icon-title-domain"></i>
-                <small><g:message code="layouts.main_auth_admin.body.subtitle.evaluation.show" default="Shoe evaluation"/></small>
+                <small><g:message code="layouts.main_auth_admin.body.subtitle.evaluation.show" default="Show evaluation"/></small>
             </h3>
 
             <!-- Contain page -->
@@ -364,13 +364,13 @@
                 <!-- Delete button -->
                 <g:form url="[resource:evaluationInstance, controller:'evaluation', action:'delete']" method="DELETE" class="form-delete">
                     <div class="btn-group">
-                        <button class="btn red-soft btn-block" id="delete-confirm-popover" data-toggle="confirmation" data-placement="top" data-popout="true" data-singleton="true"
+                        <button class="btn red-soft btn-block iconDelete-button-container" id="delete-confirm-popover" data-toggle="confirmation" data-placement="top" data-popout="true" data-singleton="true"
                                 data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
                                 data-btn-ok-label="${message(code: 'default.button.delete.label', default: 'Delete')}"
                                 data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
                                 data-btnOkIcon="glyphicon glyphicon-ok" data-btnOkClass="btn btn-sm btn-success"
                                 data-btnCancelIcon="glyphicon glyphicon-remove" data-btnCancelClass="btn btn-sm btn-danger">
-                            <i class="fa fa-trash"></i>
+                            <i class="fa fa-trash iconDelete-button"></i>
                             <g:message code="layouts.main_auth_admin.body.content.evaluation.delete" default="Delete evaluation"/>
                         </button>
                     </div>

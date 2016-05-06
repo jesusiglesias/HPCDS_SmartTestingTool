@@ -1,5 +1,5 @@
 <%@ page import="User.Evaluation" %>
-<div class="form-body">
+<div class="form-body form-evaluation">
 	<!-- Row -->
 	<div class="row">
 		<!-- Username -->
@@ -54,7 +54,7 @@
 				<h5 class="sbold show-title">
 					<g:message code="evaluation.show.maxAttempts" default="Number of current attempt" />
 				</h5>
-				<span class="label label-sm label-default show-entity">
+				<span class="label label-sm label-default show-entity-evaluation">
 					${fieldValue(bean: evaluationInstance, field: "attemptNumber")}
 				</span>
 			</g:if>

@@ -44,12 +44,12 @@ var DatatableAnswerList = function () {
             "autoWidth": true,
 
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
-                { extend: 'pdf', className: 'btn green-dark btn-outline', text: _pdf, filename: _answerFile, title: _answerTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
-                { extend: 'csv', className: 'btn blue-steel btn-outline', text: _csv, fieldSeparator: ';', filename: _answerFile, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
-                { extend: 'colvis', className: 'btn yellow-casablanca btn-outline', text: _columns },
-                { extend: 'colvisRestore', className: 'btn yellow btn-outline ', text: _restore }
+                { extend: 'print', className: 'btn dark btn-outline transparent hvr-bounce-to-top-print', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline transparent hvr-bounce-to-top-copy', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline transparent hvr-bounce-to-top-pdf', text: _pdf, filename: _answerFile, title: _answerTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline transparent hvr-bounce-to-top-csv', text: _csv, fieldSeparator: ';', filename: _answerFile, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
+                { extend: 'colvis', className: 'btn yellow-casablanca btn-outline transparent hvr-bounce-to-top-colvis', text: _columns },
+                { extend: 'colvisRestore', className: 'btn yellow btn-outline transparent hvr-bounce-to-top-colvisRestore', text: _restore }
             ],
 
             // Pagination type

@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="${resource(dir: 'css/custom', file: 'custom.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/placeholder', file: 'placeholder_polyfill.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/iconfont', file: 'icofont.css')}" type="text/css"/>
+
     <!-- Notification switch user -->
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
@@ -114,7 +115,7 @@
             <div class="page-logo">
                 <!-- Image -->
                 <g:link uri="/">
-                    <asset:image src="logo/logo.png" alt="HP CDS - Smart Testing Tool" class="logo-default"/>
+                    <asset:image src="logo/logo.png" alt="HP CDS - Smart Testing Tool" class="logo-default hvr-wobble-horizontal"/>
                 </g:link>
                 <!-- Hamburguer -->
                 <div class="menu-toggler sidebar-toggler">
@@ -202,7 +203,7 @@
         <div class="copyright-admin"> 2016 © <g:link uri="http://es.linkedin.com/in/jesusgiglesias" class="author-link"> Jesús Iglesias García </g:link></div>
         <div class="logoHP-admin">
             <g:link uri="https://www.hpcds.com/">
-                <asset:image src="logo/logo_hp.png" alt="HP CDS"/>
+                <asset:image src="logo/logo_hp.png" alt="HP CDS" class="hvr-wobble-vertical"/>
             </g:link>
         </div>
     </div>

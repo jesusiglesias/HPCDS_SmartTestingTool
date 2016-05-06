@@ -81,7 +81,7 @@
     <!-- Logo -->
     <div class="logo">
         <g:link uri="/">
-            <asset:image src="logo/logo_auth.png" alt="SMART TESTING TOOL"/>
+            <asset:image src="logo/logo_auth.png" alt="SMART TESTING TOOL" class="hvr-wobble-vertical"/>
         </g:link>
     </div>
 
