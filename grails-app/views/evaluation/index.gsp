@@ -468,8 +468,10 @@
                                     <tr>
                                         <td><g:message code="evaluation.usernameEval.label" default="User"/></td>
                                         <td><g:message code="evaluation.testName.label" default="Test"/></td>
+                                        <td><g:message code="evaluation.attemptNumber.label" default="Number of current attempt"/></td>
+                                        <td><g:message code="evaluation.maxAttempt.label" default="Maximum number of attempts"/></td>
                                         <td><g:message code="evaluation.testScore.label" default="Final score"/></td>
-                                        <td><g:message code="evaluation.attemptNumber.label" default="Number of attempt"/></td>
+                                        <td><g:message code="evaluation.completenessDate.label" default="Completeness date"/></td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -477,6 +479,16 @@
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                                 <td><g:link controller="evaluation" action="show" id="${evaluationInstance.id}" class="break-word">${fieldValue(bean: evaluationInstance, field: "user.username")}</g:link></td>
                                                 <td class="break-word">${fieldValue(bean: evaluationInstance, field: "testName")}</td>
+                                                <td>
+                                                    <span class="label label-sm label-default show-entity-evaluation">
+                                                        ${fieldValue(bean: evaluationInstance, field: "attemptNumber")}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="label label-sm label-primary show-entity-evaluation">
+                                                        ${fieldValue(bean: evaluationInstance, field: "maxAttempt")}
+                                                    </span>
+                                                </td>
                                                 <td>
                                                     <g:if test="${evaluationInstance.testScore >= 9}">
                                                         <span class="label label-sm label-outstanding">
@@ -490,14 +502,10 @@
                                                     <g:elseif test="${evaluationInstance.testScore < 5}">
                                                         <span class="label label-sm label-danger">
                                                     </g:elseif>
-                                                        ${fieldValue(bean: evaluationInstance, field: "testScore")}
-                                                        </span>
+                                                    ${fieldValue(bean: evaluationInstance, field: "testScore")}
+                                                </span>
                                                 </td>
-                                                <td>
-                                                    <span class="label label-sm label-default show-entity-evaluation">
-                                                        ${fieldValue(bean: evaluationInstance, field: "attemptNumber")}
-                                                    </span>
-                                                </td>
+                                                <td class="space-date"><g:formatDate formatName="custom.date.evaluation.format" date="${evaluationInstance?.completenessDate}"/></td>
                                             </tr>
                                         </g:each>
                                     </tbody>

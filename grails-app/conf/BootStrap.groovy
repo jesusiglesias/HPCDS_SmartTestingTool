@@ -216,6 +216,8 @@ class BootStrap {
             def evalUserSTT1 = new Evaluation(
                     testName: 'Seguridad I',
                     attemptNumber: 1,
+                    maxAttempt: 2,
+                    completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('03-05-2016 14:56:12'),
                     testScore: 7.55,
                     user: newUser,
             )
@@ -223,6 +225,8 @@ class BootStrap {
             def evalUserSwitchSTT1 = new Evaluation(
                     testName: 'Seguridad I',
                     attemptNumber: 1,
+                    maxAttempt: 2,
+                    completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('14-04-2016 20:18:45'),
                     testScore: 7.23,
                     user: newUserSwitch,
             )
@@ -367,59 +371,9 @@ class BootStrap {
     void createInitialUsersProd() {
 
         // It checks data existence
-        if (!SecUser.count() && !SecRole.count()) {
+     /*   if (!SecUser.count() && !SecRole.count()) {
 
-            // Creating roles
-            def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN')
-            def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER')
 
-            // Creating new users
-            def newAdmin = SecUser.findByUsername('admin_stt') ?: new SecUser( // Admin
-                    username: 'admin_stt',
-                    password: '7g4sOmmm',
-                    email: 'info.smartestingtool@gmail.com')
-
-            def newAdminUser = SecUser.findByUsername('admin_switch') ?: new SecUser( // Normal user to switch
-                    username: 'admin_switch',
-                    password: '7g4sOmmm',
-                    email: 'admin_switch_prod@stt.com')
-
-            //----------TEST TODO
-            def newUser = SecUser.findByUsername('user_stt') ?: new SecUser( // Normal user
-                    username: 'user_stt',
-                    password: '7g4sOmmm',
-                    email: 'user_stt_prod@stt.com')
-
-            // Validation of new user
-            def validAdmin = newAdmin.validate()
-            def validAdminUser = newAdminUser.validate()
-            // TODO
-            def validUser = newUser.validate()
-            // TODO
-            if (validAdmin & validAdminUser & validUser) {
-                // Saving roles
-                adminRole.save(flush: true, failOnError: true)
-                userRole.save(flush: true, failOnError: true)
-
-                // Saving new users
-                newAdmin.save(flush: true, failOnError: true)
-                newAdminUser.save(flush: true, failOnError: true)
-
-                //----------TEST TODO
-                newUser.save(flush: true, failOnError: true)
-
-                // Assign user to role
-                if (!newAdmin.authorities.contains(adminRole)) { // Admin
-                    SecUserSecRole.create newAdmin, adminRole, true
-                }
-                if (!newAdminUser.authorities.contains(userRole)) { // Normal user to switch
-                    SecUserSecRole.create newAdminUser, userRole, true
-                }
-
-                //----------TEST TODO
-                if (!newUser.authorities.contains(userRole)) { // Normal user
-                    SecUserSecRole.create newUser, userRole, true
-                }
 
             } else {
                 log.error("BootStrap:init():Admin users have not been created. You verify that the initial data complies with the rules")
@@ -427,7 +381,6 @@ class BootStrap {
             }
         } else {
             log.error("BooStrap:init():Existing admin or role data. Initial data were not created")
-        }
+        }*/
     }
-
 }

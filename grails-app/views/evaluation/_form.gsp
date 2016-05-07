@@ -25,7 +25,34 @@
 
 	<!-- Row -->
 	<div class="row space-secondRow">
-		<!-- Username -->
+		<!-- Number of current attempt -->
+		<div class="col-md-6">
+			<g:if test="${evaluationInstance?.attemptNumber}">
+				<h5 class="sbold show-title">
+					<g:message code="evaluation.attemptNumber.label" default="Number of current attempt" />
+				</h5>
+				<span class="label label-sm label-default show-entity-evaluation">
+					${fieldValue(bean: evaluationInstance, field: "attemptNumber")}
+				</span>
+			</g:if>
+		</div>
+
+		<!-- Maximum number of attempt -->
+		<div class="col-md-6 space-betweenCol">
+			<g:if test="${evaluationInstance?.maxAttempt}">
+				<h5 class="sbold show-title">
+					<g:message code="evaluation.maxAttempt.label" default="Maximum number of attempts" />
+				</h5>
+				<span class="label label-sm label-primary show-entity-evaluation">
+					${fieldValue(bean: evaluationInstance, field: "maxAttempt")}
+				</span>
+			</g:if>
+		</div>
+	</div>
+
+	<!-- Row -->
+	<div class="row space-secondRow">
+		<!-- Final score -->
 		<div class="col-md-6">
 			<g:if test="${evaluationInstance?.testScore}">
 				<h5 class="sbold show-title">
@@ -48,14 +75,14 @@
 			</g:if>
 		</div>
 
-		<!-- Name of the test -->
+		<!-- Completeness date -->
 		<div class="col-md-6 space-betweenCol">
-			<g:if test="${evaluationInstance?.attemptNumber}">
+			<g:if test="${evaluationInstance?.maxAttempt}">
 				<h5 class="sbold show-title">
-					<g:message code="evaluation.show.maxAttempts" default="Number of current attempt" />
+					<g:message code="evaluation.completenessDate.label" default="Completeness date" />
 				</h5>
-				<span class="label label-sm label-default show-entity-evaluation">
-					${fieldValue(bean: evaluationInstance, field: "attemptNumber")}
+				<span class="space-date">
+					<g:formatDate formatName="custom.date.evaluation.format" date="${evaluationInstance?.completenessDate}" />
 				</span>
 			</g:if>
 		</div>
