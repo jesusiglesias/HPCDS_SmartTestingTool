@@ -118,6 +118,7 @@ class UrlMappings {
         /* Custom general tasks normal user (front-end)
         ======================================================*/
         "/home"(controller: 'customTasksFrontEnd', action: 'home')
+        "/scores"(controller: 'customTasksFrontEnd', action: 'scores')
         // TODO
         "/profile/$id?(.$format)?"(controller: 'user', action: 'edit')
         "/contact"(controller: 'customTasksFrontEnd', action: 'contact')

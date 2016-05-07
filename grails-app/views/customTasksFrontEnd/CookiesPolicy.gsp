@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta name="layout" content="main_auth_user">
-    <title><g:message code="layouts.main_auth_user.head.title.cookie" default="STT | Cookie policy"/></title>
-    <link rel="stylesheet" href="${resource(dir: 'css/iconfont', file: 'icofont.css')}" type="text/css"/>
+    <title><g:message code="layouts.main_auth_user.head.title.cookie" default="STT | Cookies policy"/></title>
     <!-- Cookie message -->
     <g:javascript src="cookies/cookies.js"/>
 </head>
@@ -20,7 +19,7 @@
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
-                    <span><g:message code="layouts.main_auth_user.body.title.cookie" default="Cookie policy"/></span>
+                    <span><g:message code="layouts.main_auth_user.body.title.cookie" default="Cookies policy"/></span>
                 </li>
             </ul>
         </div> <!-- /.Page-bar -->

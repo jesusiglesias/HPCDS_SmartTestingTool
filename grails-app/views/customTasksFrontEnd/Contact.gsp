@@ -6,7 +6,6 @@
     <title><g:message code="layouts.main_auth_user.head.title.contact" default="STT | Contact"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/normalUser', file: 'contactFAQ.css')}" type="text/css"/>
-    <link rel="stylesheet" href="${resource(dir: 'css/iconfont', file: 'icofont.css')}" type="text/css"/>
 
     <script>
         // Variables to use in script
@@ -42,9 +41,15 @@
     <!-- Page-title -->
     <div class="row row-userLayoutTitle">
         <div class="col-md-12 col-userLayoutTitle">
-            <h3 class="page-title-user">
-                <g:message code="layouts.main_auth_user.body.title.contactUs" default="Contact us"/>
-            </h3>
+            <!-- Page-title -->
+            <div class="page-title-user-contact">
+                <h3 class="page-title-user-contact-title">
+                    <g:message code="layouts.main_auth_user.body.title.contactUs" default="Contact us"/>
+                </h3>
+                <p class="page-title-user-contact-description">
+                    ${raw(g.message(code:"layouts.main_auth_user.body.title.contactUs.description", default:"In this section you can check more information about us and contact us through the form established for it."))}
+                </p>
+            </div>
         </div>
     </div>
 

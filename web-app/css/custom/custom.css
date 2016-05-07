@@ -277,6 +277,20 @@ table.dataTable tbody tr:hover {
     padding-right: 3px;
 }
 
+/* Button in list action */
+.transparent {
+    background: none !important;
+}
+
+.back-white {
+    background: white !important;
+}
+
+.space-date {
+    letter-spacing: 1px;
+}
+
+
 /* Multi-select - Create view
 =================================================================== */
 .ms-container {
@@ -330,21 +344,10 @@ table.dataTable tbody tr:hover {
 =================================================================== */
 
 /* Main title */
-.page-title-user {
-    letter-spacing: -1px;
-    display: block;
-    font-weight: 400;
-    margin: 0;
-    padding: 60px 0 60px 0;
-    background: white;
-    font-size: 33px;
-    text-align: center;
-    font-variant: small-caps;
-}
-
-/* Title */
+.page-title-user-contact,
 .page-title-user-cookie,
-.page-title-user-faq {
+.page-title-user-faq,
+.page-title-user-scores {
     letter-spacing: -1px;
     display: block;
     font-weight: 400;
@@ -354,8 +357,10 @@ table.dataTable tbody tr:hover {
     font-size: 15px;
 }
 
+.page-title-user-contact-title,
 .page-title-user-cookie-title,
-.page-title-user-faq-title {
+.page-title-user-faq-title,
+.page-title-user-scores-title {
     text-align: center;
     font-size: 33px;
     font-variant: small-caps;
@@ -365,7 +370,9 @@ table.dataTable tbody tr:hover {
 .page-title-user-cookie-description,
 .page-title-user-cookie-section-description,
 .page-title-user-faq-description,
-.page-title-user-faq-section-description {
+.page-title-user-faq-section-description,
+.page-title-user-scores-description,
+.page-title-user-contact-description {
     text-align: center;
     margin-top: 35px;
     margin-left: 40px;
@@ -1183,11 +1190,6 @@ table.dataTable tbody tr:hover {
     font-size: 26px !important;
 }
 
-/* Button in list action */
-.transparent {
-    background: none !important;
-}
-
 /* Effect in buttons
 =================================================================== */
 /* Wobble Vertical */
@@ -1777,24 +1779,25 @@ table.dataTable tbody tr:hover {
         margin-top: 20px;
     }
 
-    .page-title-user {
-        padding: 56px 0 56px 0;
-        font-size: 32px;
-    }
-
+    .page-title-user-contact,
     .page-title-user-cookie,
-    .page-title-user-faq {
+    .page-title-user-faq,
+    .page-title-user-scores {
         padding: 40px 0 45px 0;
     }
 
+    .page-title-user-contact-title,
     .page-title-user-cookie-title,
-    .page-title-user-faq-title {
+    .page-title-user-faq-title,
+    .page-title-user-scores-title {
         font-size: 32px;
     }
 
     .page-title-user-cookie-description,
     .page-title-user-cookie-section-description,
-    .page-title-user-faq-description {
+    .page-title-user-faq-description,
+    .page-title-user-scores-description,
+    .page-title-user-contact-description {
         text-align: justify;
         margin-left: 35px;
         margin-right: 35px;
@@ -1938,24 +1941,30 @@ table.dataTable tbody tr:hover {
         height: 315px !important;
     }
 
-    .page-title-user {
-        padding: 46px 0 46px 0;
-        font-size: 31px;
-    }
-
+    .page-title-user-contact,
     .page-title-user-cookie,
-    .page-title-user-faq {
+    .page-title-user-faq,
+    .page-title-user-scores {
         padding: 26px 0 30px 0;
     }
 
-    .page-title-user-cookie-title,
+    .page-title-user-contact-title,
+    .page-title-user-scores-title,
+    .page-title-user-cookie-title {
+        font-size: 31px;
+    }
+
     .page-title-user-faq-title {
         font-size: 31px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
 
     .page-title-user-cookie-description,
     .page-title-user-cookie-section-description,
-    .page-title-user-faq-description {
+    .page-title-user-faq-description,
+    .page-title-user-scores-description,
+    .page-title-user-contact-description {
         margin-left: 25px;
         margin-right: 25px;
     }
@@ -2120,24 +2129,25 @@ table.dataTable tbody tr:hover {
         font-size: 13px;
     }
 
-    .page-title-user {
-        padding: 38px 0 42px 0;
-        font-size: 29px;
-    }
-
+    .page-title-user-contact,
     .page-title-user-cookie,
-    .page-title-user-faq {
+    .page-title-user-faq,
+    .page-title-user-scores {
         padding: 20px 0 25px 0;
     }
 
+    .page-title-user-contact-title,
     .page-title-user-cookie-title,
-    .page-title-user-faq-title {
+    .page-title-user-faq-title,
+    .page-title-user-scores-title {
         font-size: 29px;
     }
 
     .page-title-user-cookie-description,
     .page-title-user-cookie-section-description,
-    .page-title-user-faq-description {
+    .page-title-user-faq-description,
+    .page-title-user-scores-description,
+    .page-title-user-contact-description {
         margin-left: 20px;
         margin-right: 20px;
     }

@@ -1,14 +1,16 @@
 package CustomTasksUser
 
+import User.User
 import Security.SecUser
+import Test.Test
+import User.Evaluation
 import grails.converters.JSON
 
 /**
- * It contains the habitual custom tasks of the normal user (front-end).
+ * It contains the habitual custom tasks of the normal user.
  */
 class CustomTasksFrontEndController {
 
-    def customNormalUserService
     def springSecurityService
     def mailService
 
@@ -21,6 +23,19 @@ class CustomTasksFrontEndController {
         log.debug("CustomTasksFrontEndController():home()")
 
         render view: 'home'
+    }
+
+    /**
+     * It shows the scores of the current user.
+     */
+    def scores() {
+        log.debug("CustomTasksFrontEndController():scores()")
+
+        // ID of current user
+        def currentUser = User.get(springSecurityService.currentUser.id)
+        def evaluations = Evaluation.findAllByUser(currentUser)
+
+        render view: 'scores', model: [evaluations: evaluations]
     }
 
     /**

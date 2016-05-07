@@ -18,7 +18,7 @@ import static grails.async.Promises.*
 import static groovyx.gpars.GParsPool.withPool
 
 /**
- * It contains the habitual custom tasks of the admin (back-end).
+ * It contains the habitual custom tasks of the admin (control panel).
  */
 class CustomTasksBackendController {
 

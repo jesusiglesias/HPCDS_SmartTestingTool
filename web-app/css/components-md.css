@@ -6161,6 +6161,7 @@ Customized Bootstrap Close Icon
 }
 
 .dropdown-menu .icofont-id,
+.dropdown-menu .icofont-info-square,
 .dropdown-menu .iconEvaluations-user {
     color: #579277;
     font-size: 17px !important;
@@ -6177,7 +6178,8 @@ Customized Bootstrap Close Icon
      color: #ffffff;
 }
 
-.dropdown-menu .icofont-id:hover {
+.dropdown-menu .icofont-id:hover,
+.dropdown-menu .icofont-info-square:hover {
     color: #ffffff;
 }
 
@@ -7675,12 +7677,12 @@ h6 .label {
 }
 
 .label-primary {
-    background-color: #337ab7;
+    background-color: #4E588A;
 }
 
 .label-primary[href]:hover,
 .label-primary[href]:focus {
-    background-color: #286090;
+    background-color: #39488a;
 }
 
 .label-success {
@@ -8573,6 +8575,35 @@ body[ng-controller] .modal {
 /* Color inverse portlet */
 .portlet.light.bg-inverse {
     background: #F6F6F6;
+}
+
+.portlet.light.customColor {
+    padding: 60px 60px 40px 60px !important;
+    background: rgba(212, 174, 59, 0.37);
+}
+
+/* Max-width: 991px */
+@media(max-width: 991px) {
+
+    .portlet.light.customColor {
+        padding: 60px 40px 40px 40px !important;
+    }
+}
+
+/* Max-width: 480px */
+@media(max-width: 480px) {
+
+    .portlet.light.customColor {
+        padding: 40px 30px 30px 30px !important;
+    }
+}
+
+/* Max-width: 320px */
+@media(max-width: 320px) {
+
+    .portlet.light.customColor {
+        padding: 40px 20px 30px 20px !important;
+    }
 }
 
 /* Custom portlet all domains */
