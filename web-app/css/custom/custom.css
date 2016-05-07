@@ -347,7 +347,8 @@ table.dataTable tbody tr:hover {
 .page-title-user-contact,
 .page-title-user-cookie,
 .page-title-user-faq,
-.page-title-user-scores {
+.page-title-user-scores,
+.page-title-user-profile {
     letter-spacing: -1px;
     display: block;
     font-weight: 400;
@@ -360,7 +361,8 @@ table.dataTable tbody tr:hover {
 .page-title-user-contact-title,
 .page-title-user-cookie-title,
 .page-title-user-faq-title,
-.page-title-user-scores-title {
+.page-title-user-scores-title,
+.page-title-user-profile-title {
     text-align: center;
     font-size: 33px;
     font-variant: small-caps;
@@ -372,6 +374,7 @@ table.dataTable tbody tr:hover {
 .page-title-user-faq-description,
 .page-title-user-faq-section-description,
 .page-title-user-scores-description,
+.page-title-user-profile-description,
 .page-title-user-contact-description {
     text-align: center;
     margin-top: 35px;
@@ -1782,14 +1785,16 @@ table.dataTable tbody tr:hover {
     .page-title-user-contact,
     .page-title-user-cookie,
     .page-title-user-faq,
-    .page-title-user-scores {
+    .page-title-user-scores,
+    .page-title-user-profile {
         padding: 40px 0 45px 0;
     }
 
     .page-title-user-contact-title,
     .page-title-user-cookie-title,
     .page-title-user-faq-title,
-    .page-title-user-scores-title {
+    .page-title-user-scores-title,
+    .page-title-user-profile-title {
         font-size: 32px;
     }
 
@@ -1797,6 +1802,7 @@ table.dataTable tbody tr:hover {
     .page-title-user-cookie-section-description,
     .page-title-user-faq-description,
     .page-title-user-scores-description,
+    .page-title-user-profile-description,
     .page-title-user-contact-description {
         text-align: justify;
         margin-left: 35px;
@@ -1944,12 +1950,14 @@ table.dataTable tbody tr:hover {
     .page-title-user-contact,
     .page-title-user-cookie,
     .page-title-user-faq,
-    .page-title-user-scores {
+    .page-title-user-scores,
+    .page-title-user-profile {
         padding: 26px 0 30px 0;
     }
 
     .page-title-user-contact-title,
     .page-title-user-scores-title,
+    .page-title-user-profile-title,
     .page-title-user-cookie-title {
         font-size: 31px;
     }
@@ -1964,6 +1972,7 @@ table.dataTable tbody tr:hover {
     .page-title-user-cookie-section-description,
     .page-title-user-faq-description,
     .page-title-user-scores-description,
+    .page-title-user-profile-description,
     .page-title-user-contact-description {
         margin-left: 25px;
         margin-right: 25px;
@@ -2132,14 +2141,16 @@ table.dataTable tbody tr:hover {
     .page-title-user-contact,
     .page-title-user-cookie,
     .page-title-user-faq,
-    .page-title-user-scores {
+    .page-title-user-scores,
+    .page-title-user-profile {
         padding: 20px 0 25px 0;
     }
 
     .page-title-user-contact-title,
     .page-title-user-cookie-title,
     .page-title-user-faq-title,
-    .page-title-user-scores-title {
+    .page-title-user-scores-title,
+    .page-title-user-profile-title {
         font-size: 29px;
     }
 
@@ -2147,6 +2158,7 @@ table.dataTable tbody tr:hover {
     .page-title-user-cookie-section-description,
     .page-title-user-faq-description,
     .page-title-user-scores-description,
+    .page-title-user-profile-description,
     .page-title-user-contact-description {
         margin-left: 20px;
         margin-right: 20px;

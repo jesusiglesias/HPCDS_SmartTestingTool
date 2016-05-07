@@ -119,8 +119,7 @@ class UrlMappings {
         ======================================================*/
         "/home"(controller: 'customTasksFrontEnd', action: 'home')
         "/scores"(controller: 'customTasksFrontEnd', action: 'scores')
-        // TODO
-        "/profile/$id?(.$format)?"(controller: 'user', action: 'edit')
+        "/profile"(controller: 'customTasksFrontEnd', action: 'profile')
         "/contact"(controller: 'customTasksFrontEnd', action: 'contact')
         "/cookiesPolicy"(controller: 'customTasksFrontEnd', action: 'cookiesPolicy')
         "/faq"(view: "customTasksFrontEnd/faq")

@@ -26,6 +26,18 @@ class CustomTasksFrontEndController {
     }
 
     /**
+     * It shows the profile of the current user.
+     */
+    def profile() {
+        log.debug("CustomTasksFrontEndController():profile()")
+
+        // ID of current user
+        def currentUser = User.get(springSecurityService.currentUser.id)
+
+        render view: 'profile', model: [currentUser: currentUser]
+    }
+
+    /**
      * It shows the scores of the current user.
      */
     def scores() {

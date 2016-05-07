@@ -988,34 +988,6 @@
     content: "\f0d9";
 }
 
-.icofont-spinner-alt-1:before {
-    content: "\f0da";
-}
-
-.icofont-spinner-alt-2:before {
-    content: "\f0db";
-}
-
-.icofont-spinner-alt-3:before {
-    content: "\f0dc";
-}
-
-.icofont-spinner-alt-4:before {
-    content: "\f0dd";
-}
-
-.icofont-spinner-alt-5:before {
-    content: "\f0de";
-}
-
-.icofont-spinner-alt-6:before {
-    content: "\f0df";
-}
-
-.icofont-spinner:before {
-    content: "\f0e0";
-}
-
 .icofont-spreadsheet:before {
     content: "\f0e1";
 }
@@ -1212,14 +1184,6 @@
     content: "\f111";
 }
 
-.icofont-wifi-alt:before {
-    content: "\f112";
-}
-
-.icofont-wifi:before {
-    content: "\f113";
-}
-
 .icofont-world:before {
     content: "\f114";
 }
@@ -1238,6 +1202,14 @@
 
 .icofont-ui-email:before {
     content: "\ed32";
+}
+
+.icofont-ui-password:before {
+    content: "\ed4f";
+}
+
+.icofont-user-alt-2:before {
+    content: "\edd3";
 }
 
 /*Font size*/
