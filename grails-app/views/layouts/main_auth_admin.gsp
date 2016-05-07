@@ -130,7 +130,7 @@
             <!-- Top navigation menu -->
             <div class="top-menu">
                 <ul class="nav navbar-nav pull-right">
-                    <!-- User dropdown -->
+                    <!-- Admin dropdown -->
                     <li class="dropdown dropdown-user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <!-- Profile image -->
@@ -147,6 +147,12 @@
                             <li class="li-iconId-admin">
                                 <g:link controller="secUser" action="edit" id="${sec.loggedInUserInfo(field:"id")}">
                                     <i class="icofont icofont-id iconId-admin"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
+                                </g:link>
+                            </li>
+                            <!-- Cookie policy -->
+                            <li class="li-iconCookie-admin">
+                                <g:link uri="/cookiesPolicy">
+                                    <i class="icofont icofont-info-square iconCookie-admin"></i> <g:message code="layout.main_auth_user.horizontal.menu.cookie" default="Cookies policy"/>
                                 </g:link>
                             </li>
                             <!-- Switch user -->
@@ -174,7 +180,7 @@
                                 </form>
                             </li>
                         </ul>
-                    </li> <!-- /. User dropdown -->
+                    </li> <!-- /. Admin dropdown -->
 
                     <!-- Exit button -->
                     <li class="dropdown">

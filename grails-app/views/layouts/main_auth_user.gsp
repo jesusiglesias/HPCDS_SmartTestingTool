@@ -99,54 +99,110 @@
                 <!-- Top navigation menu -->
                 <div class="top-menu">
                     <ul class="nav navbar-nav pull-right">
-                        <!-- User dropdown -->
-                        <li class="dropdown dropdown-user">
-                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                <!-- Profile image -->
-                                <img class="img-circle" alt="Profile image" src="${createLink(controller:'customTasksBackend', action:'profileImage')}"/>
-                                <span class="username username-hide-on-mobile">
-                                        <sec:username/>
-                                </span>
-                                <i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- Profile TODO -->
-                                <li class="li-iconId-user">
-                                    <g:link uri="/profile" id="${sec.loggedInUserInfo(field:"id")}">
-                                        <i class="icofont icofont-id iconId-user"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
-                                    </g:link>
-                                </li>
-                                <!-- Evaluations TODO -->
-                                <li class="li-evaluations-user">
-                                    <g:link uri="/profile" id="${sec.loggedInUserInfo(field:"id")}">
-                                        <i class="icofont icofont-badge iconEvaluations-user"></i> <g:message code="layouts.main_auth_user.head.evaluations" default="My qualifications"/>
-                                    </g:link>
-                                </li>
-                                <!-- Switch user -->
-                                <li class="li-exchange-user">
-                                    <sec:ifSwitched>
-                                        <sec:ifAllGranted roles='ROLE_USER'>
-                                            <form action='${request.contextPath}/j_spring_security_exit_user' method='POST'>
-                                                <button class="exit-switch-button">
-                                                    <i class="fa fa-exchange iconExchange-user"></i> <g:message code="layouts.main_auth_user.head.switchUser" default="Administrator user"/>
-                                                </button>
-                                            </form>
-                                        </sec:ifAllGranted>
-                                    </sec:ifSwitched>
-                                </li>
+                        <sec:ifAllGranted roles="ROLE_USER">
+                            <!-- User dropdown -->
+                            <li class="dropdown dropdown-user">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <!-- Profile image -->
+                                    <img class="img-circle" alt="Profile image" src="${createLink(controller:'customTasksBackend', action:'profileImage')}"/>
+                                    <span class="username username-hide-on-mobile">
+                                            <sec:username/>
+                                    </span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- Profile TODO -->
+                                    <li class="li-iconId-user">
+                                        <g:link uri="/profile" id="${sec.loggedInUserInfo(field:"id")}">
+                                            <i class="icofont icofont-id iconId-user"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
+                                        </g:link>
+                                    </li>
+                                    <!-- Evaluations -->
+                                    <li class="li-evaluations-user">
+                                        <g:link uri="/scores">
+                                            <i class="icofont icofont-badge iconEvaluations-user"></i> <g:message code="layouts.main_auth_user.head.evaluations" default="My scores"/>
+                                        </g:link>
+                                    </li>
+                                    <!-- Switch user -->
+                                    <li class="li-exchange-user">
+                                        <sec:ifSwitched>
+                                            <sec:ifAllGranted roles='ROLE_USER'>
+                                                <form action='${request.contextPath}/j_spring_security_exit_user' method='POST'>
+                                                    <button class="exit-switch-button">
+                                                        <i class="fa fa-exchange iconExchange-user"></i> <g:message code="layouts.main_auth_user.head.switchUser" default="Administrator user"/>
+                                                    </button>
+                                                </form>
+                                            </sec:ifAllGranted>
+                                        </sec:ifSwitched>
+                                    </li>
 
-                                <li class="divider"> </li>
+                                    <li class="divider"> </li>
 
-                                <!-- Logout -->
-                                <li class="li-logout-user">
-                                    <form name="logout" method="POST" action="${createLink(controller:'logout')}">
-                                        <button class="exit-switch-button">
-                                            <i class="fa fa-sign-out iconLogout-user"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li> <!-- /. User dropdown -->
+                                    <!-- Logout -->
+                                    <li class="li-logout-user">
+                                        <form name="logout" method="POST" action="${createLink(controller:'logout')}">
+                                            <button class="exit-switch-button">
+                                                <i class="fa fa-sign-out iconLogout-user"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li> <!-- /. User dropdown -->
+                        </sec:ifAllGranted>
+
+                        <sec:ifAllGranted roles="ROLE_ADMIN">
+                            <!-- Admin dropdown -->
+                            <li class="dropdown dropdown-user">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <!-- Profile image -->
+                                    <img class="img-circle" alt="Profile image" src="${createLink(controller:'customTasksBackend', action:'profileImage')}"/>
+                                    <span class="username username-hide-on-mobile">
+                                        <sec:ifLoggedIn>
+                                            <sec:username/>
+                                        </sec:ifLoggedIn>
+                                    </span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- Profile -->
+                                    <li class="li-iconId-admin">
+                                        <g:link controller="secUser" action="edit" id="${sec.loggedInUserInfo(field:"id")}">
+                                            <i class="icofont icofont-id iconId-admin"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
+                                        </g:link>
+                                    </li>
+                                    <!-- Cookie policy -->
+                                    <li class="li-iconCookie-admin">
+                                        <g:link uri="/cookiesPolicy">
+                                            <i class="icofont icofont-info-square iconCookie-admin"></i> <g:message code="layout.main_auth_user.horizontal.menu.cookie" default="Cookies policy"/>
+                                        </g:link>
+                                    </li>
+                                    <!-- Switch user -->
+                                    <li class="li-exchange-admin">
+                                        <sec:ifNotSwitched>
+                                            <sec:ifAllGranted roles='ROLE_ADMIN'>
+                                                <form action='${request.contextPath}/j_spring_security_switch_user' method='POST'>
+                                                    <g:hiddenField name="stt_hp_username" value="admin_switch" />
+                                                    <button class="exit-switch-button">
+                                                        <i class="fa fa-exchange iconExchange-admin"></i> <g:message code="layouts.main_auth_admin.head.switchUser" default="Normal user"/>
+                                                    </button>
+                                                </form>
+                                            </sec:ifAllGranted>
+                                        </sec:ifNotSwitched>
+                                    </li>
+
+                                    <li class="divider"> </li>
+
+                                    <!-- Logout -->
+                                    <li class="li-logout-admin">
+                                        <form name="logout" method="POST" action="${createLink(controller:'logout')}">
+                                            <button class="exit-switch-button">
+                                                <i class="fa fa-sign-out iconLogout-admin"></i> <g:message code="layouts.main_auth_admin.head.logout" default="Logout"/>
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li> <!-- /. Admin dropdown -->
+                        </sec:ifAllGranted>
 
                         <!-- Exit button -->
                         <li class="dropdown">
@@ -177,7 +233,7 @@
                         </g:link>
                     </li>
                     <li class="classic-menu-dropdown active">
-                        <g:link uri="/cookiesPolicy"><g:message code="layout.main_auth_user.horizontal.menu.cookie" default="Cookie policy"/>
+                        <g:link uri="/cookiesPolicy"><g:message code="layout.main_auth_user.horizontal.menu.cookie" default="Cookies policy"/>
                             <span class="selected"> </span>
                         </g:link>
                     </li>

@@ -12,6 +12,8 @@ var IconScript = function () {
         // Administrator
         var liIdAdmin = $('.li-iconId-admin');
         var iconIdAdmin = $('.iconId-admin');
+        var liCookieAdmin = $('.li-iconCookie-admin');
+        var iconCookieAdmin = $('.iconCookie-admin');
         var liExchangeAdmin = $('.li-exchange-admin');
         var iconExchangeAdmin = $('.iconExchange-admin');
         var liLogoutAdmin = $('.li-logout-admin');
@@ -44,6 +46,13 @@ var IconScript = function () {
         });
         liIdAdmin.mouseout(function () {
             iconIdAdmin.removeClass('overIcon')
+        });
+        // Cookies policy
+        liCookieAdmin.mouseover(function () {
+            iconCookieAdmin.addClass('overIcon')
+        });
+        liCookieAdmin.mouseout(function () {
+            iconCookieAdmin.removeClass('overIcon')
         });
         // Switch user
         liExchangeAdmin.mouseover(function () {
