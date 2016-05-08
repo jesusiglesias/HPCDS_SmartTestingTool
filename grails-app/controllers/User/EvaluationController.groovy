@@ -57,6 +57,10 @@ class EvaluationController {
     def delete(Evaluation evaluationInstance) {
 
         if (evaluationInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }

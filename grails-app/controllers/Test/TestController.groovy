@@ -72,6 +72,10 @@ class TestController {
         }
 
         if (testInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -145,6 +149,10 @@ class TestController {
         }
 
         if (testInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -220,6 +228,10 @@ class TestController {
     def delete(Test testInstance) {
 
         if (testInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }

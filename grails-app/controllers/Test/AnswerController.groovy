@@ -61,6 +61,10 @@ class AnswerController {
     def save(Answer answerInstance) {
 
         if (answerInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -122,6 +126,10 @@ class AnswerController {
     def update(Answer answerInstance) {
 
         if (answerInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -193,6 +201,10 @@ class AnswerController {
     def delete(Answer answerInstance) {
 
         if (answerInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }

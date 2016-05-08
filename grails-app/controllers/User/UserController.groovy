@@ -74,6 +74,10 @@ class UserController {
         }
 
         if (userInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -180,6 +184,10 @@ class UserController {
         }
 
         if (userInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -255,6 +263,10 @@ class UserController {
     def updateProfileImage(User userInstance) {
 
         if (userInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -335,6 +347,10 @@ class UserController {
     def delete(User userInstance) {
 
         if (userInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }

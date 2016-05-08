@@ -61,6 +61,10 @@ class DepartmentController {
     def save(Department departmentInstance) {
 
         if (departmentInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -117,6 +121,10 @@ class DepartmentController {
     def update(Department departmentInstance) {
 
         if (departmentInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -183,6 +191,10 @@ class DepartmentController {
     def delete(Department departmentInstance) {
 
         if (departmentInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }

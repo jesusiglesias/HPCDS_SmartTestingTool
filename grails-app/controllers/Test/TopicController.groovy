@@ -61,6 +61,10 @@ class TopicController {
     def save(Topic topicInstance) {
 
         if (topicInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -116,6 +120,10 @@ class TopicController {
     def update(Topic topicInstance) {
 
         if (topicInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -181,6 +189,10 @@ class TopicController {
     def delete(Topic topicInstance) {
 
         if (topicInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }

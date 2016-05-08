@@ -62,6 +62,10 @@ class CatalogController {
     def save(Catalog catalogInstance) {
 
         if (catalogInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -117,6 +121,10 @@ class CatalogController {
     def update(Catalog catalogInstance) {
 
         if (catalogInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -182,6 +190,10 @@ class CatalogController {
     def delete(Catalog catalogInstance) {
 
         if (catalogInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }

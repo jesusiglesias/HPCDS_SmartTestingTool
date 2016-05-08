@@ -70,6 +70,10 @@ class SecUserController {
     def save(SecUser secUserInstance) {
 
         if (secUserInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -169,6 +173,10 @@ class SecUserController {
     def update(SecUser secUserInstance) {
 
         if (secUserInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -267,6 +275,10 @@ class SecUserController {
     def updateProfileImage(SecUser secUserInstance) {
 
         if (secUserInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
@@ -347,6 +359,10 @@ class SecUserController {
     def delete(SecUser secUserInstance) {
 
         if (secUserInstance == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
             notFound()
             return
         }
