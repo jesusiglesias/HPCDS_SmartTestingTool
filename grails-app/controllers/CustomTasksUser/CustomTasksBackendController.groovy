@@ -38,22 +38,22 @@ class CustomTasksBackendController {
         def roleUser = SecRole.findByAuthority("ROLE_USER")
         def normalUsers = SecUserSecRole.findAllBySecRole(roleUser).secUser
 
-        // Obtaining number of test in system - Asynchronous/Multi-thread
-        def testPromise = Test.async.findAll()
+        // Obtaining number of active test in system - Asynchronous/Multi-thread
+        def testPromise = Test.async.findAllByActive(true)
 
         // Obtaining number of evaluations in system - Asynchronous/Multi-thread
         def evaluationsPromise = Evaluation.async.findAll()
 
-        // Wait all promise
+        // Wait all promises
         def results = waitAll(testPromise, evaluationsPromise)
 
-        def numberTest = results[0].size()
+        def numberActiveTest = results[0].size()
         def evaluations = results[1].size()
 
         // Obtaining the lastest 10 registered users
         def lastUsers = SecUser.executeQuery("from SecUser where id in (select secUser.id from SecUserSecRole where secRole.id = :roleId) order by dateCreated desc", [roleId: roleUser.id], [max: 10])
 
-        render view: 'dashboard', model: [normalUsers: normalUsers.async.size(), numberTest: numberTest, evaluations: evaluations, lastUsers: lastUsers]
+        render view: 'dashboard', model: [normalUsers: normalUsers.async.size(), numberActiveTest: numberActiveTest, evaluations: evaluations, lastUsers: lastUsers]
     }
 
     /**
@@ -152,7 +152,7 @@ class CustomTasksBackendController {
         def remarkablePromise = Evaluation.async.findAllByTestScoreGreaterThanEqualsAndTestScoreLessThan(7, 9)
         def outstandingPromise = Evaluation.async.findAllByTestScoreGreaterThanEquals(9)
 
-        // Wait all promise
+        // Wait all promises
         def results = waitAll(suspensePromise, approvedPromise, remarkablePromise, outstandingPromise)
 
         def suspense = results[0].size()

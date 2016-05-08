@@ -10,7 +10,7 @@
         <div class="col-md-6 space-username">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'username', 'error')}">
                 <div class="input-icon right">
-                    <g:textField name='username' maxlength="30" class="form-control register-input username-input-register emptySpaces autofill-input" autocomplete="off"/>
+                    <g:textField name='username' maxlength="30" class="form-control register-input username-input-register emptySpaces autofill-input" value="${userRegisterInstance?.username}" autocomplete="off"/>
                     <label for="username" class="control-label control-labelError"><g:message code="user.username.label" default="Username"/><span class="required"> * </span></label>
                     <span class="help-block username-register-block"></span>
                     <i class="fa fa-times i-delete-register-username" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->

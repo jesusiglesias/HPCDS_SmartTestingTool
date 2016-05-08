@@ -120,6 +120,7 @@ class UrlMappings {
         "/home"(controller: 'customTasksFrontEnd', action: 'home')
         "/scores"(controller: 'customTasksFrontEnd', action: 'scores')
         "/profile"(controller: 'customTasksFrontEnd', action: 'profile')
+        "/profile-error"(controller: 'customTasksFrontEnd', action: 'updatePersonalInfo')
         "/contact"(controller: 'customTasksFrontEnd', action: 'contact')
         "/cookiesPolicy"(controller: 'customTasksFrontEnd', action: 'cookiesPolicy')
         "/faq"(view: "customTasksFrontEnd/faq")

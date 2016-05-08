@@ -222,6 +222,9 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     ======================================================*/
     '/customTasksFrontEnd/home':               ['ROLE_USER'],
     '/customTasksFrontEnd/profile':            ['ROLE_USER'],
+    '/customTasksFrontEnd/testStats':          ['ROLE_USER'],
+    '/customTasksFrontEnd/updatePersonalInfo': ['ROLE_USER'],
+    '/customTasksFrontEnd/notFound':           ['ROLE_USER'],
     '/customTasksFrontEnd/scores':             ['ROLE_USER'],
     '/customTasksFrontEnd/cookiesPolicy':      ['permitAll'],
     '/customTasksFrontEnd/contact':            ['ROLE_USER'],

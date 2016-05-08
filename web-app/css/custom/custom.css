@@ -766,6 +766,12 @@ table.dataTable tbody tr:hover {
     margin: 0 0 50px 0;
 }
 
+/* Entity error message in profile user */
+.alert-entity-error-profile,
+.alert-entity-info-profile {
+    margin: 0 0 20px 0;
+}
+
 /* Log configuration */
 .logConfig-button {
     margin: 70px 0 40px 0;

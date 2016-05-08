@@ -8577,6 +8577,10 @@ body[ng-controller] .modal {
     background: #F6F6F6;
 }
 
+.portlet.light.customColor-profile {
+    background: rgba(212, 174, 59, 0.37);
+}
+
 .portlet.light.customColor {
     padding: 60px 60px 40px 60px !important;
     background: rgba(212, 174, 59, 0.37);

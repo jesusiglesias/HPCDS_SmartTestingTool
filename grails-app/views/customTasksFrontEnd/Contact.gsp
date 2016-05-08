@@ -64,7 +64,7 @@
                         </div>
                         <div class="section">
                             <div class="label uppercase"><g:message code="layouts.main_auth_user.body.map.title.address" default="Address"/></div>
-                            <p><g:message code="layouts.main_auth_user.body.map.address" default="José Echegaray street,"/><br/>Las Rozas 28232 Madrid,<br/><g:message code="layouts.main_auth_user.body.map.country" default="Spain"/></p>
+                            <p><i class="icofont icofont-social-google-map"></i> <g:message code="layouts.main_auth_user.body.map.address" default="José Echegaray street,"/><br/>Las Rozas 28232 Madrid,<br/><g:message code="layouts.main_auth_user.body.map.country" default="Spain"/></p>
                         </div>
                         <div class="section">
                             <div class="label uppercase"><g:message code="layouts.main_auth_user.body.map.title.contact" default="Contact"/></div>

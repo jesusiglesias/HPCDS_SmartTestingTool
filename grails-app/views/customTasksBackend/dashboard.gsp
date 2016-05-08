@@ -925,7 +925,7 @@
                                 <i class="widget-thumb-icon bg-red icon-note"></i>
                                 <div class="widget-thumb-body">
                                     <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
-                                    <span class="widget-thumb-body-stat counterTest" data-counter="counterup" data-value="${numberTest}">${numberTest}</span>
+                                    <span class="widget-thumb-body-stat counterTest" data-counter="counterup" data-value="${numberActiveTest}">${numberActiveTest}</span>
                                 </div>
                             </div>
                         </div> <!-- /.Widget thumb -->
@@ -933,7 +933,7 @@
                     <div class="col-md-4">
                         <!-- Widget thumb -->
                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-evaluations">
-                            <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.evaluation" default="Qualified evaluations"/></h4>
+                            <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.evaluation" default="Completed evaluations"/></h4>
                             <i class="fa fa-refresh iconReload reloadEvaluations"></i>
                             <div class="widget-thumb-wrap">
                                 <i class="widget-thumb-icon bg-yellow-saffron icon-star"></i>

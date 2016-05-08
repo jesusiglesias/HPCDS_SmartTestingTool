@@ -6,7 +6,7 @@
 
         <!-- Username -->
         <div class="col-md-6">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'username', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'username', 'error')}">
                 <label for="username" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.username.label" default="Username"/>
@@ -33,7 +33,7 @@
 
         <!-- Email -->
         <div class="col-md-6 space-betweenCol">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'email', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'email', 'error')}">
                 <label for="email" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.email.label" default="Email"/>
@@ -64,7 +64,7 @@
 
         <!-- Name -->
         <div class="col-md-6">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'name', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'name', 'error')}">
                 <label for="name" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.name.label" default="Name"/>
@@ -81,7 +81,7 @@
 
         <!-- Surname -->
         <div class="col-md-6 space-betweenCol">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'surname', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'surname', 'error')}">
                 <label for="surname" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.surname.label" default="Surname"/>
@@ -101,7 +101,7 @@
     <div class="row space-secondRow">
         <!-- Birthdate -->
         <div class="col-md-6">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'birthDate', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'birthDate', 'error')}">
                 <label for="birthDate" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.birthDate.label" default="Birthdate"/>
@@ -133,7 +133,7 @@
 
         <!-- Address -->
         <div class="col-md-6 space-betweenCol">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'address', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'address', 'error')}">
                 <label for="address" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.address.label" default="Address"/>
@@ -152,7 +152,7 @@
     <div class="row space-secondRow">
         <!-- City -->
         <div class="col-md-6">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'city', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'city', 'error')}">
                 <label for="city" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.city.label" default="City"/>
@@ -168,7 +168,7 @@
 
         <!-- Country -->
         <div class="col-md-6 space-betweenCol">
-            <div class="form-group ${hasErrors(bean: userInstance, field: 'country', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'country', 'error')}">
                 <label for="country" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.country.label" default="Country"/>
@@ -187,7 +187,7 @@
     <div class="row space-secondRow">
         <!-- Phone -->
         <div class="col-md-6">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'phone', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'phone', 'error')}">
                 <label for="phone" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.phone.label" default="Phone"/>
@@ -203,7 +203,7 @@
 
         <!-- Sex -->
         <div class="col-md-6 space-betweenCol">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'sex', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'sex', 'error')}">
                 <label for="sex" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.sex.label" default="Sex"/>
@@ -225,7 +225,7 @@
     <div class="row space-secondRow">
         <!-- Department -->
         <div class="col-xs-12">
-            <div class="form-group ${hasErrors(bean: currentUser, field: 'department', 'error')}">
+            <div class="form-group ${hasErrors(bean: currentUserInstance, field: 'department', 'error')}">
                 <label for="department" class="control-label">
                     <h5 class="sbold">
                         <g:message code="user.department.label" default="Department"/>

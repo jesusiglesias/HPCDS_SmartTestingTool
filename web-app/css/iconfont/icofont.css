@@ -1212,6 +1212,10 @@
     content: "\edd3";
 }
 
+.icofont-social-google-map:before {
+    content: "\ee10";
+}
+
 /*Font size*/
 .icofont-lg {
     font-size: 1.33333333em;
