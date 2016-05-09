@@ -95,7 +95,57 @@ var CustomDashboardScript = function () {
             });
         });
 
-        // Call AJAX to upload the number of test
+        // Call AJAX to upload the number of registered test
+        $('.reloadRegisteredTest').click(function () {
+
+            var counterRegisteredTest = $('.counterRegisteredTest');
+            var widgetRegisteredTest = $('.widget-testRegistered');
+
+            $.ajax({
+                url: reloadRegisteredTestURL,
+                beforeSend: function () {
+
+                    widgetRegisteredTest.LoadingOverlay("show", {
+                        image: "",
+                        fontawesome: "fa fa-spinner fa-spin"
+                    });
+                },
+                success: function (data) {
+                    counterRegisteredTest.attr('data-value', data);
+                    counterRegisteredTest.text(data);
+
+                    counterRegisteredTest.counterUp({});
+                },
+                error: function () {
+                    toastr["error"](reloadAjaxError);
+
+                    toastr.options = {
+                        "closeButton": true,
+                        "debug": false,
+                        "newestOnTop": false,
+                        "progressBar": true,
+                        "positionClass": "toast-top-right",
+                        "preventDuplicates": false,
+                        "onclick": null,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+                },
+                complete: function () {
+                    setTimeout(function () {
+                        widgetRegisteredTest.LoadingOverlay("hide");
+                    }, 500);
+                }
+            });
+        });
+
+        // Call AJAX to upload the number of active test
         $('.reloadTest').click(function () {
 
             var counterTest = $('.counterTest');

@@ -1216,6 +1216,10 @@
     content: "\ee10";
 }
 
+.icofont-paper:before {
+    content: "\eba0";
+}
+
 /*Font size*/
 .icofont-lg {
     font-size: 1.33333333em;

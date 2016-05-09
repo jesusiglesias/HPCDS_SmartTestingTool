@@ -541,6 +541,7 @@
         var reloadTooltip = '${g.message(code:'default.button.reload.tooltip', default:'Reload')}';
         var reloadAjaxError = '${g.message(code:'default.ajax.error', default:'Error on reloading the content. Please, you try again later.')}';
         var reloadUsersURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadUsers')}';
+        var reloadRegisteredTestURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadRegisteredTest')}';
         var reloadTestURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadTest')}';
         var reloadEvaluationsURL = '${g.createLink(controller: "customTasksBackend", action: 'reloadEvaluations')}';
 
@@ -902,7 +903,7 @@
 
                 <!-- Widget -->
                 <div class="row panel-row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <!-- Widget thumb -->
                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-users">
                             <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.user" default="Normal users"/></h4>
@@ -916,21 +917,7 @@
                             </div>
                         </div> <!-- /.Widget thumb -->
                     </div>
-                    <div class="col-md-4">
-                        <!-- Widget thumb -->
-                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-test">
-                            <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.test" default="Active test"/></h4>
-                            <i class="fa fa-refresh iconReload reloadTest"></i>
-                            <div class="widget-thumb-wrap">
-                                <i class="widget-thumb-icon bg-red icon-note"></i>
-                                <div class="widget-thumb-body">
-                                    <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
-                                    <span class="widget-thumb-body-stat counterTest" data-counter="counterup" data-value="${numberActiveTest}">${numberActiveTest}</span>
-                                </div>
-                            </div>
-                        </div> <!-- /.Widget thumb -->
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <!-- Widget thumb -->
                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-evaluations">
                             <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.evaluation" default="Completed evaluations"/></h4>
@@ -944,6 +931,38 @@
                             </div>
                         </div> <!-- /.Widget thumb -->
                     </div>
+                </div>
+
+                <div class="row panel-row">
+                    <div class="col-md-6">
+                        <!-- Widget thumb -->
+                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-testRegistered">
+                            <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.test.total" default="Registered test"/></h4>
+                            <i class="fa fa-refresh iconReload reloadRegisteredTest"></i>
+                            <div class="widget-thumb-wrap">
+                                <i class="widget-thumb-icon bg-blue-steel icofont icofont-paper"></i>
+                                <div class="widget-thumb-body">
+                                    <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
+                                    <span class="widget-thumb-body-stat counterRegisteredTest" data-counter="counterup" data-value="${numberRegisteredTest}">${numberRegisteredTest}</span>
+                                </div>
+                            </div>
+                        </div> <!-- /.Widget thumb -->
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Widget thumb -->
+                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-test">
+                            <h4 class="widget-thumb-heading"><g:message code="layouts.main_auth_admin.body.widget.test" default="Active test"/></h4>
+                            <i class="fa fa-refresh iconReload reloadTest"></i>
+                            <div class="widget-thumb-wrap">
+                                <i class="widget-thumb-icon bg-red icon-note"></i>
+                                <div class="widget-thumb-body">
+                                    <span class="widget-thumb-subtitle"><g:message code="layouts.main_auth_admin.body.widget.total" default="Total"/></span>
+                                    <span class="widget-thumb-body-stat counterTest" data-counter="counterup" data-value="${numberActiveTest}">${numberActiveTest}</span>
+                                </div>
+                            </div>
+                        </div> <!-- /.Widget thumb -->
+                    </div>
+
                 </div> <!-- /.Widget -->
 
                 <!-- Graphs -->
