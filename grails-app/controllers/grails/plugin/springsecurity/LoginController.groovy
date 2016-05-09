@@ -1,16 +1,8 @@
 package grails.plugin.springsecurity
 
 import grails.converters.JSON
-
 import javax.servlet.http.HttpServletResponse
-
-import org.springframework.security.access.annotation.Secured
-import org.springframework.security.authentication.AccountExpiredException
-import org.springframework.security.authentication.CredentialsExpiredException
-import org.springframework.security.authentication.DisabledException
-import org.springframework.security.authentication.LockedException
 import org.springframework.security.core.context.SecurityContextHolder as SCH
-import org.springframework.security.web.WebAttributes
 
 /**
  * Actions of login of the users.

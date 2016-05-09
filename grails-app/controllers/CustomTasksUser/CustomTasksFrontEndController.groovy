@@ -6,12 +6,10 @@ import Test.Test
 import User.Evaluation
 import grails.converters.JSON
 import grails.transaction.Transactional
-
+import org.apache.commons.lang.StringUtils
 import java.text.SimpleDateFormat
-
 import static grails.async.Promises.*
 import static org.springframework.http.HttpStatus.NOT_FOUND
-import static org.springframework.http.HttpStatus.OK
 
 /**
  * It contains the habitual custom tasks of the normal user.
@@ -261,6 +259,39 @@ class CustomTasksFrontEndController {
 
         def responseData
         def mailTo = grailsApplication.config.grails.mail.username
+
+        // Back-end validation
+        if ( !StringUtils.isNotBlank(params.name) || !StringUtils.isNotBlank(params.subject) || !StringUtils.isNotBlank(params.message)  ) {
+            responseData = [
+                    'status': "errorValidationContact",
+                    'message': g.message(code: 'layouts.main_auth_user.body.map.contact.validation.backend.null', default: 'Please fill out all current fields to send the contact form.')
+            ]
+
+            render responseData as JSON
+            return
+        }
+
+        // Back-end validation - Maxlength, name
+        if ( params.name.length() > 65) {
+            responseData = [
+                    'status': "errorMaxLengthNameContact",
+                    'message': g.message(code: 'layouts.main_auth_user.body.map.contact.validation.backend.maxlength.name', default: '<strong>Name</strong> field can not exceed 65 characters.')
+            ]
+
+            render responseData as JSON
+            return
+        }
+
+        // Back-end validation - Maxlength, message
+        if ( params.message.length() > 1000) {
+            responseData = [
+                    'status': "errorMaxLengthMessageContact",
+                    'message': g.message(code: 'layouts.main_auth_user.body.map.contact.validation.backend.maxlength.message', default: '<strong>Message</strong> field cant not exceed 1000 characters.')
+            ]
+
+            render responseData as JSON
+            return
+        }
 
         // Email of current user
         def emailCurrentUser = SecUser.get(springSecurityService.currentUser.id).email

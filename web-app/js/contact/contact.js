@@ -88,6 +88,18 @@ var Contact = function () {
 	};
 
 	/**
+	 * 	Handler auto close alert
+	 */
+	function createAutoClosingAlert(selector) {
+		var alert = $(selector);
+		window.setTimeout(function () {
+			alert.slideUp(1000, function () {
+				$(this).remove();
+			});
+		}, 5000);
+	}
+
+	/**
 	 * Contact form validation
 	 */
 	var handlerContactFormValidation = function() {
@@ -188,6 +200,45 @@ var Contact = function () {
 
 							responseForm.addClass("contact-responseForm-error");
 							responseForm.html(data.message).hide().slideDown("slow");
+							
+						// Email has not been sent. Error in validation
+						} else if (data.status == "errorValidationContact") {
+							
+							if (!$('.alert-errorContact').length) {
+
+								contactForm.before(
+									"<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-errorContact fade in'>" +
+									"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+									"<span class='xthin'>" + data.message + "</span>" +
+									"</div>");
+							}
+							createAutoClosingAlert('.alert-errorContact');
+
+						// Email has not been sent. Error in validation - Maxlength, name
+						} else if (data.status == "errorMaxLengthNameContact") {
+
+							if (!$('.alert-errorNameContact').length) {
+
+								contactForm.before(
+									"<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-errorNameContact fade in'>" +
+									"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+									"<span class='xthin'>" + data.message + "</span>" +
+									"</div>");
+							}
+							createAutoClosingAlert('.alert-errorNameContact');
+
+						// Email has not been sent. Error in validation - Maxlength, message
+						} else if (data.status == "errorMaxLengthMessageContact") {
+
+							if (!$('.alert-errorMessageContact').length) {
+
+								contactForm.before(
+									"<div class='alert alert-danger alert-danger-custom-backend alert-dismissable alert-errorMessageContact fade in'>" +
+									"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>" +
+									"<span class='xthin'>" + data.message + "</span>" +
+									"</div>");
+							}
+							createAutoClosingAlert('.alert-errorMessageContact');
 						}
 					},
 					error: function(){
