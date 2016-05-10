@@ -13,6 +13,7 @@
         // Variables to use in script
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
+        var _confirming = '${g.message(code: "customTasksUser.updatePassword.submitButton.confirming", default: "Confirming...")}';
 
         // Auto close alert
         function createAutoClosingAlert(selector) {
@@ -110,11 +111,15 @@
 
             <div class="form-actions">
                 <g:link type="button" uri="/" id="back-btn" class="btn green-dark back-button"><g:message code="views.login.auth.newPassword.homepage" default="Homepage"/></g:link>
-                <g:submitButton name="${g.message(code:'views.login.auth.newPassword.send', default:'Confirm')}" id="newPassword-button" class="btn green-dark pull-right"/>
+                <button type="submit" id="newPassword-button" class="btn green-dark pull-right">
+                    <i class="fa fa-refresh refresh-icon-stop refreshIcon"></i>
+                    <span><g:message code="views.login.auth.newPassword.send" default="Confirm"/></span>
+                </button>
             </div>
         </g:form> <!-- /. Forgot password form -->
     </div> <!-- /.Authentication -->
 
+    <g:javascript src="media-match/media.match.min.js"/>
     <g:javascript src="authentication/newPassword.js"/>
 
 </body>

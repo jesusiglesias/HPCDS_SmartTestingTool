@@ -91,6 +91,7 @@
     <!-- Cookie block - Template -->
     <g:render template="../template/cookieBanner"/>
 
+    <g:javascript src="media-match/media.match.min.js"/>
     <g:javascript src="authentication/resetPassword.js"/>
 
 </body>

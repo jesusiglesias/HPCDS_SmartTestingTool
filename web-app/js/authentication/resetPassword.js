@@ -86,10 +86,38 @@ var Login = function() {
         });
     };
 
+    /**
+     * It adds classes to buttons depends on size screen
+     */
+    var handleSizeButtons = function () {
+
+        var mediaquery = window.matchMedia("(max-width: 480px)");
+
+        var backButton = $('.back-button');
+        var restoreButton = $('#restore-button');
+
+        function handleOrientationChange(mediaquery) {
+            if (mediaquery.matches) {
+
+                backButton.addClass('btn-block');
+                restoreButton.addClass('btn-block');
+                restoreButton.addClass('space-button-restore-new-size');
+            } else {
+                backButton.removeClass('btn-block');
+                restoreButton.removeClass('btn-block');
+                restoreButton.removeClass('space-button-restore-new-size');
+            }
+        }
+
+        handleOrientationChange(mediaquery);
+        mediaquery.addListener(handleOrientationChange);
+    };
+
     return {
         // Main function to initiate the module
         init: function() {
             handleForgetPassword();
+            handleSizeButtons();
         }
     };
 }();
