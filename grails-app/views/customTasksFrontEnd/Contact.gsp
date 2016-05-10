@@ -105,7 +105,7 @@
 
     <div class="contentPage-form">
         <div class="row">
-            <div class="col-md-12 contactPageFAQ">
+            <div class="col-md-12 contactPageFAQ col-userLayoutTitle">
                 <div class="containerContactPage">
                     <div class="title inverse">
                         <h3 class="uppercase"><g:message code="layouts.main_auth_user.body.map.faq.title" default="Need to know more?"/></h3>
@@ -117,7 +117,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-userLayoutTitle">
                 <div class="containerMailcontact">
                     <!-- Title form -->
                     <div class="title">

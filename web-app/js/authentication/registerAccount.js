@@ -161,12 +161,16 @@ var RegisterAccount = function () {
         var confirmPasswordField = $("#confirmPassword");
         var nameField = $("#name");
         var surnameField = $("#surname");
+        var agreementCheckbox = $("#agreement_policy");
 
         registerButton.attr('disabled', 'disabled');
+        agreementCheckbox.attr('disabled', 'disabled');
 
         registerForm.keyup(function () {
             // Disable login button
             registerButton.attr('disabled', 'disabled');
+            // Disable agreement checkbox
+            agreementCheckbox.attr('disabled', 'disabled');
 
             // Validating fields
             var username = usernameField.val().trim();
@@ -182,12 +186,40 @@ var RegisterAccount = function () {
             var passwordWhitespace = /\s/g.test(password);
             var confirmPasswordWhitespace = /\s/g.test(confirmPassword);
 
+            // Enable agreement checkbox
             if (!(username == "" || email == "" || password == "" || confirmPassword == "" || name == "" || surname == ""
                 || usernameWhitespace || emailWhitespace || passwordWhitespace || confirmPasswordWhitespace)) {
-                // Enable regiuster button
+                agreementCheckbox.removeAttr('disabled');
+            }
+
+            // Enable register button
+            if (!(username == "" || email == "" || password == "" || confirmPassword == "" || name == "" || surname == ""
+                || usernameWhitespace || emailWhitespace || passwordWhitespace || confirmPasswordWhitespace || !agreementCheckbox.is(':checked'))) {
                 registerButton.removeAttr('disabled');
             }
         });
+    };
+
+    /**
+     * It handles the state of button depending on agreement checkbox
+     */
+    var handlerStateButton = function() {
+
+        var registerButton =  $("#register-button");
+        var agreementCheckbox = $("#agreement_policy");
+
+        agreementCheckbox.click(function () {
+            
+            // It checks if checkbox is checked
+            if ($(this).is(':checked')) {
+
+                registerButton.removeAttr('disabled'); //enable input
+
+            } else {
+                registerButton.attr('disabled', true); //disable input
+            }
+        });
+
     };
 
     /**
@@ -824,6 +856,7 @@ var RegisterAccount = function () {
         init: function () {
             handlerUserRegisterValidation();
             handlerDisabledButtonRegister();
+            handlerStateButton();
             handleUsernameAvailabilityChecker();
             handleEmailAvailabilityChecker();
             handlerIconUserRegister();

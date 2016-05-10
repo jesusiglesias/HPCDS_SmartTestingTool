@@ -15,6 +15,7 @@ var Login = function() {
         var passwordField = $("#password");
         var passwordConfirmField = $("#passwordConfirm");
         var formConfirmPassword = $('.form-confirmPassword');
+        var refreshIcon = $('.refreshIcon');
 
         newPasswordButton.attr('disabled', 'disabled');
 
@@ -72,6 +73,11 @@ var Login = function() {
             },
 
             submitHandler: function (form) {
+                newPasswordButton.attr('disabled', true);
+                newPasswordButton.find('span').text(_confirming);
+                refreshIcon.removeClass('refresh-icon-stop');
+                refreshIcon.addClass('refresh-icon');
+
                 form.submit(); // Submit the form
             }
         });
@@ -87,10 +93,38 @@ var Login = function() {
         });
     };
 
+    /**
+     * It adds classes to buttons depends on size screen
+     */
+    var handleSizeButtons = function () {
+
+        var mediaquery = window.matchMedia("(max-width: 480px)");
+
+        var backButton = $('.back-button');
+        var newPasswordButton = $('#newPassword-button');
+
+        function handleOrientationChange(mediaquery) {
+            if (mediaquery.matches) {
+
+                backButton.addClass('btn-block');
+                newPasswordButton.addClass('btn-block');
+                newPasswordButton.addClass('space-button-restore-new-size');
+            } else {
+                backButton.removeClass('btn-block');
+                newPasswordButton.removeClass('btn-block');
+                newPasswordButton.removeClass('space-button-restore-new-size');
+            }
+        }
+
+        handleOrientationChange(mediaquery);
+        mediaquery.addListener(handleOrientationChange);
+    };
+
     return {
         // Main function to initiate the module
         init: function() {
             handleNewPassword();
+            handleSizeButtons();
         }
     };
 }();

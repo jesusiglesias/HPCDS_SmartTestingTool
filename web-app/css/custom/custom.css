@@ -1705,6 +1705,14 @@ table.dataTable tbody tr:hover {
     }
 }
 
+/* Min-width: 991px */
+@media (min-width: 991px) {
+
+    .panel-row-dashboard {
+        margin-top: 40px;
+    }
+}
+
 /* Max-width: 991px */
 @media (max-width: 991px) {
 
@@ -1832,6 +1840,7 @@ table.dataTable tbody tr:hover {
 
     .input-import {
         display: inline !important;
+        display: -moz-groupbox !important;
     }
 }
 

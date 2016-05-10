@@ -8544,6 +8544,10 @@ body[ng-controller] .modal {
     text-align: justify;
 }
 
+.portlet > .portlet-body li {
+    text-align: justify;
+}
+
 .portlet > .portlet-empty {
     min-height: 125px;
 }
@@ -8763,6 +8767,14 @@ body[ng-controller] .modal {
 /* Title h4 log confgiration portlet */
 .log-portlet-h4 {
     margin-bottom: 20px !important;
+}
+
+/* Max-width: 480px */
+@media (max-width: 480px) {
+
+    .log-portlet-h4 {
+        font-size: 17px !important;
+    }
 }
 
 /* Tab pane TODO

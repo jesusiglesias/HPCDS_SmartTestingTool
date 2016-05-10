@@ -92,7 +92,25 @@
                     <g:render template="/login/formRegister"/>
                 </fieldset>
 
-                <p class="text-agreement"><g:link uri="/cookiesPolicy"><g:message code="views.login.body.auth.register.agreement" default="By registering, you agree to our terms of service and privacy policy."/></g:link></p>
+                <!-- Checkbox agreement -->
+                <div class="row text-center row-userLayoutTitle">
+                    <div class="col-xs-2 col-xs-push-4 col-userLayoutTitle">
+                        <div class="md-checkbox check-agreement">
+                            <input type="checkbox" name='agreement_policy' id='agreement_policy' class="md-check"/>
+                            <label for="agreement_policy" class="">
+                                <span class=""></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row text-center row-userLayoutTitle">
+                    <div class="col-xs-12 col-userLayoutTitle">
+                        <p class="text-agreement"><g:link uri="/cookiesPolicy"><g:message code="views.login.body.auth.register.agreement" default="By registering, you agree to our terms of service and privacy policy."/></g:link></p>
+                    </div>
+                </div>
 
                 <div class="form-actions content-register-btn">
                     <g:link type="button" uri="/" id="back-btn" class="btn green-dark back-button"><g:message code="views.login.auth.newPassword.homepage" default="Homepage"/></g:link>

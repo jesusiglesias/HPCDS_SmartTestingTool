@@ -222,6 +222,16 @@ class CustomTasksUserController {
      */
     @Transactional
     def saveUserRegistered(User userRegisterInstance) {
+        log.debug("CustomTasksUserController:saveUserRegistered()")
+
+        // Check if agreement checkbox is active
+        if (params.agreement_policy == null) {
+            userRegisterInstance.clearErrors()
+
+            flash.errorRegisterMessage = g.message(code: 'customTasksUser.saveUserRegistered.agreement.checkbox.inactive', default: 'Please, you accept our <strong>terms of service and privacy policy</strong> to register.')
+            render view: "/login/register", model: [userRegisterInstance: userRegisterInstance]
+            return
+        }
 
         if (params.birthDate != "") {
 

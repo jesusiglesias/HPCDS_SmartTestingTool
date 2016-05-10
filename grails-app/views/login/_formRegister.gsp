@@ -2,12 +2,12 @@
 
 <div class="form-body">
     <!-- Row -->
-    <div class="row space-register-username">
-        <div class="col-xs-12 space-register-legend">
+    <div class="row space-register-username row-userLayoutTitle">
+        <div class="col-xs-12 space-register-legend col-userLayoutTitle">
             <legend class="legend-register-account"><h4 class="title-legend-register"><g:message code="default.accountInformation.title" default="User account"/></h4></legend>
         </div>
         <!-- Username -->
-        <div class="col-md-6 space-username">
+        <div class="col-md-6 space-username col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'username', 'error')}">
                 <div class="input-icon right">
                     <g:textField name='username' maxlength="30" class="form-control register-input username-input-register emptySpaces autofill-input" value="${userRegisterInstance?.username}" autocomplete="off"/>
@@ -20,7 +20,7 @@
         </div>
 
         <!-- Email -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'email', 'error')}">
                 <div class="input-icon right">
                     <g:field type="email" name="email" maxlength="60" class="form-control register-input email-input-register emptySpaces autofill-input" value="${userRegisterInstance?.email}" autocomplete="off"/>
@@ -34,9 +34,9 @@
     </div>
 
     <!-- Row -->
-    <div class="row space-register-password">
+    <div class="row space-register-password row-userLayoutTitle">
         <!-- Password -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'password', 'error')}">
                 <div class="input-icon right">
                     <g:passwordField name="password" class="form-control password-input-register emptySpaces autofill-input popovers" autocomplete="off"
@@ -55,7 +55,7 @@
         </div>
 
         <!-- Confirm password -->
-        <div class="col-md-6 space-betweenCol">
+        <div class="col-md-6 space-betweenCol col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'confirmPassword', 'error')}">
                 <div class="input-icon right">
                     <g:passwordField name="confirmPassword" class="form-control password-confirm-input-register emptySpaces autofill-input" autocomplete="off"/>
@@ -69,12 +69,12 @@
     </div>
 
     <!-- Row -->
-    <div class="row space-register-legendPersonal">
-        <div class="col-xs-12">
+    <div class="row space-register-legendPersonal row-userLayoutTitle">
+        <div class="col-xs-12 col-userLayoutTitle">
             <legend class="legend-register"><h4 class="title-legend-register"><g:message code="default.privateInformation.title" default="Personal information"/></h4></legend>
         </div>
         <!-- Name -->
-        <div class="col-md-6 space-register-nameRow">
+        <div class="col-md-6 space-register-nameRow col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'name', 'error')}">
                 <div class="input-icon right">
                     <g:textField name="name" maxlength="25" value="${userRegisterInstance?.name}" class="form-control register-input name-input-register autofill-input" autocomplete="off"/>
@@ -87,7 +87,7 @@
         </div>
 
         <!-- Surname -->
-        <div class="col-md-6 space-betweenCol">
+        <div class="col-md-6 space-betweenCol col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'surname', 'error')}">
                 <div class="input-icon right">
                     <g:textField name="surname" maxlength="40" value="${userRegisterInstance?.surname}" class="form-control register-input surname-input-register autofill-input" autocomplete="off"/>
@@ -101,9 +101,9 @@
     </div>
 
     <!-- Row -->
-    <div class="row space-register-birthDateRow">
+    <div class="row space-register-birthDateRow row-userLayoutTitle">
         <!-- Birthdate -->
-        <div class="col-md-6 col-register">
+        <div class="col-md-6 col-register col-userLayoutTitle">
             <div class="form-group ${hasErrors(bean: userRegisterInstance, field: 'birthDate', 'error')}">
                 <label for="birthDate" class="control-label">
                     <h5 class="sbold h5-register h5-error">
@@ -130,7 +130,7 @@
         </div>
 
         <!-- Address -->
-        <div class="col-md-6 space-betweenCol">
+        <div class="col-md-6 space-betweenCol col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'address', 'error')}">
                 <div class="input-icon right">
                     <g:textField name="address" maxlength="70" value="${userRegisterInstance?.address}" class="form-control register-input address-input-register autofill-input" autocomplete="off"/>
@@ -144,9 +144,9 @@
     </div>
 
     <!-- Row -->
-    <div class="row space-register-cityRow">
+    <div class="row space-register-cityRow row-userLayoutTitle">
         <!-- City -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'city', 'error')}">
                 <div class="input-icon right">
                     <g:textField name="city" maxlength="70" value="${userRegisterInstance?.city}" class="form-control register-input city-input-register autofill-input" autocomplete="off"/>
@@ -159,7 +159,7 @@
         </div>
 
         <!-- Country -->
-        <div class="col-md-6 space-betweenCol">
+        <div class="col-md-6 space-betweenCol col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'country', 'error')}">
                 <div class="input-icon right">
                     <g:textField name="country" maxlength="70" value="${userRegisterInstance?.country}" class="form-control register-input country-input-register autofill-input" autocomplete="off"/>
@@ -173,9 +173,9 @@
     </div>
 
     <!-- Row -->
-    <div class="row space-register-phoneRow">
+    <div class="row space-register-phoneRow row-userLayoutTitle">
         <!-- Phone -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'phone', 'error')}">
                 <div class="input-icon right">
                     <g:textField name="phone" maxlength="20" value="${userRegisterInstance?.phone}" class="form-control register-input phone-input-register autofill-input" autocomplete="off"/>
@@ -188,7 +188,7 @@
         </div>
 
         <!-- Sex -->
-        <div class="col-md-6 space-betweenCol col-register">
+        <div class="col-md-6 space-betweenCol col-register col-userLayoutTitle">
             <div class="form-group ${hasErrors(bean: userRegisterInstance, field: 'sex', 'error')}">
                 <label for="sex" class="control-label">
                     <h5 class="sbold h5-register h5-error">
@@ -208,9 +208,9 @@
     </div>
 
     <!-- Row -->
-    <div class="row space-register-departmentRow">
+    <div class="row space-register-departmentRow row-userLayoutTitle">
         <!-- Department -->
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-userLayoutTitle">
             <div class="form-group ${hasErrors(bean: userRegisterInstance, field: 'department', 'error')}">
                 <label for="department" class="control-label">
                     <h5 class="sbold h5-register h5-error">

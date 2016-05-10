@@ -58,9 +58,7 @@
 /* Remember me and forgot password */
 .login .content .form-actions {
     clear: both;
-    padding: 0 32px 20px 32px;
-    margin-left: -30px;
-    margin-right: -30px;
+    padding: 0 0 20px 0;
 }
 
 /* Remember me and forgot password block */
@@ -238,7 +236,16 @@
 }
 
 .content-register-btn {
-    margin-top: 40px;
+    margin-top: 55px;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.check-agreement {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 100%;
 }
 
 .content-register-btn .btn {
@@ -283,6 +290,8 @@
 .text-agreement {
     text-align: center;
     font-weight: 400;
+    margin: 0 !important;
+    display: inline;
 }
 
 .text-agreement > a:active,
@@ -295,6 +304,10 @@
 
 .text-agreement > a {
     color: white !important;
+}
+
+.space-button-restore-new-size {
+    margin-top: 30px !important;
 }
 
 /* Notifications
@@ -387,7 +400,7 @@
 
     /* Logo image */
     .login .logo {
-        margin: 70px 5px 70px auto;
+        margin: 70px auto 70px auto;
         padding: 0;
     }
 

@@ -902,7 +902,7 @@
             <div id="list-panel">
 
                 <!-- Widget -->
-                <div class="row panel-row">
+                <div class="row panel-row-dashboard">
                     <div class="col-md-6">
                         <!-- Widget thumb -->
                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-users">
@@ -933,7 +933,7 @@
                     </div>
                 </div>
 
-                <div class="row panel-row">
+                <div class="row panel-row-dashboard">
                     <div class="col-md-6">
                         <!-- Widget thumb -->
                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered widget-testRegistered">

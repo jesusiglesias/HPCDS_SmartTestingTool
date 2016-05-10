@@ -1148,7 +1148,7 @@ Password Strength
 
 /* jQuery Slimscroll */
 .scroller {
-    padding: 0 0 0 0;
+    padding: 0 10px 0 0;
     margin: 0;
     overflow: hidden;
 }
@@ -1169,131 +1169,6 @@ Password Strength
 
 .portlet-body .slimScrollBar {
     margin-right: 0;
-}
-
-/***
-JQVMAP Plugin
-***/
-.jqvmap-zoomout,
-.jqvmap-zoomin {
-    height: 16px;
-    width: 16px;
-    background-color: #666;
-}
-
-.vmaps {
-    position: relative;
-    overflow: hidden;
-    height: 300px;
-}
-
-/***
-Jstree
-***/
-.jstree-default .jstree-clicked {
-    border: 0;
-    background-color: #e1e1e1;
-    box-shadow: none;
-}
-
-.jstree-default .jstree-hovered {
-    border: 0;
-    background-color: #eee;
-    box-shadow: none;
-}
-
-.jstree-default .jstree-wholerow-clicked,
-.jstree-wholerow .jstree-wholerow-clicked {
-    border: 0;
-    background: #e1e1e1 none;
-    box-shadow: none;
-}
-
-.jstree-default .jstree-wholerow-hovered,
-.jstree-wholerow .jstree-wholerow-hovered {
-    border: 0;
-    background-color: #eee;
-    box-shadow: none;
-}
-
-.jstree-icon.icon-lg {
-    margin-top: 1px;
-}
-
-.jstree-open > .jstree-anchor > .fa-folder:before {
-    margin-left: 2px;
-    content: "\f07c";
-}
-
-.jstree-default.jstree-rtl .jstree-last {
-    background: transparent no-repeat;
-}
-
-.vakata-context,
-.vakata-context ul {
-    padding: 0;
-    min-width: 125px;
-    background-color: #ffffff;
-    font-size: 14px;
-    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    box-shadow: 5px 5px rgba(102, 102, 102, 0.1);
-    border: 1px solid #efefef;
-}
-
-.vakata-context li {
-    border: 0;
-}
-
-.vakata-context li a {
-    padding: 0 10px;
-    border: 0;
-}
-
-.vakata-context li a i {
-    display: none;
-}
-
-.vakata-context li a .vakata-contextmenu-sep {
-    display: none;
-}
-
-.vakata-context .vakata-context-hover > a,
-.vakata-context li a:hover {
-    background-color: #eee;
-    color: #333;
-    box-shadow: none;
-    margin: 0;
-}
-
-.vakata-context .vakata-context-hover > a .span,
-.vakata-context .vakata-context-hover > a .ins,
-.vakata-context li a:hover .span,
-.vakata-context li a:hover .ins {
-    border: 0 !important;
-}
-
-.vakata-context li a span,
-.vakata-context li a ins {
-    display: none;
-    border: 0 !important;
-}
-
-.vakata-context .vakata-context-separator a,
-.vakata-context-rtl .vakata-context-separator a {
-    margin: 0;
-    border: 0;
-}
-
-.jstree-rename-input {
-    background-color: #ffffff !important;
-    border: 1px solid #e5e5e5 !important;
-    outline: none !important;
-    padding: 2px 6px !important;
-    margin-right: -4px !important;
-}
-
-iframe[src="about:blank"] {
-    display: none;
 }
 
 .select2-container--bootstrap .select2-search--dropdown .select2-search__field,
