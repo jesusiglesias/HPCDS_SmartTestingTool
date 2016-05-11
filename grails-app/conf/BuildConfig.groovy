@@ -80,7 +80,9 @@ grails.project.dependency.resolution = {
         // Brute force Defender
         compile "org.grails.plugins:bruteforce-defender:1.1"
         // Jasypt encryption
-        compile "org.grails.plugins:jasypt-encryption:1.3.1"
+        compile ("org.grails.plugins:jasypt-encryption:1.3.1") {
+            excludes "bcprov-jdk16"
+        }
         // Mail
         compile "org.grails.plugins:mail:1.0.7"
         // Spring Security Core

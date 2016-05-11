@@ -9,13 +9,15 @@ var RegisterAccount = function () {
      */
     var handlerUserRegisterValidation = function() {
 
-        var userForm = $('.register-form');
+        var registerForm = $('.register-form');
+        var registerButton = $("#register-button");
+        var refreshIcon = $('.refreshIcon');
 
         jQuery.validator.addMethod("notEqualToUsername", function(value, element, param) {
             return this.optional(element) || value.toLowerCase() != $(param).val().toLowerCase();
         }, _equalPasswordUsername);
 
-        userForm.validate({
+        registerForm.validate({
             errorElement: 'span', // Default input error message container
             errorClass: 'help-block help-block-error', // Default input error message class
             focusInvalid: false, // Do not focus the last invalid input
@@ -142,7 +144,29 @@ var RegisterAccount = function () {
             },
 
             submitHandler: function (form) {
+
+                registerButton.attr('disabled', true);
+                registerButton.find('span').text(_registering);
+                refreshIcon.removeClass('refresh-icon-stop');
+                refreshIcon.addClass('refresh-icon');
+
                 form.submit(); // Submit the form
+            }
+        });
+
+        $('.register-form input').keypress(function (e) {
+
+            if (e.which == 13) {
+                if (registerForm.validate().form()) {
+
+                    registerButton.attr('disabled', true);
+                    registerButton.find('span').text(_registering);
+                    refreshIcon.removeClass('refresh-icon-stop');
+                    refreshIcon.addClass('refresh-icon');
+
+                    registerForm.submit();
+                }
+                return false;
             }
         });
     };

@@ -308,7 +308,7 @@ class CustomTasksFrontEndController {
 
             responseData = [
                         'status': "successContact",
-                        'message': g.message(code: 'customTasksUser.sendEmail.success', default: 'Notification processed. You will receive an email to reset the password in the indicated address.')
+                        'message': g.message(code: 'customTasksUser.contactform.success', default: 'Notification has been processed. We will contact you as soon as possible.')
             ]
 
             render responseData as JSON
@@ -318,7 +318,7 @@ class CustomTasksFrontEndController {
 
             responseData = [
                     'status': "errorContact",
-                    'message': g.message(code: 'customTasksUser.sendEmail.error', default: 'An internal error has occurred during the sending email. You try it again later.')
+                    'message': g.message(code: 'customTasksUser.contactform.error', default: 'An internal error has occurred during the sending email. You try it again later.')
             ]
 
             render responseData as JSON

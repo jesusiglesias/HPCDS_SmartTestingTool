@@ -211,7 +211,7 @@
                                         <g:render template="personalData"/>
                                     </fieldset>
 
-                                    <div class="domain-button-group-less">
+                                    <div class="domain-button-group">
                                         <!-- Cancel button -->
                                         <g:link type="button" uri="/" class="btn grey-mint"><g:message code="default.button.cancel.label" default="Cancel"/></g:link>
                                         <button type="submit" class="btn green-dark icon-button-container" name="update">

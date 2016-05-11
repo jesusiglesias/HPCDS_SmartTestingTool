@@ -31,6 +31,7 @@
         var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
         var _equalPasswordUsername = '${raw(g.message(code:'default.password.username', default:'<strong>Password</strong> field must not be equal to username.'))}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
+        var _registering = '${g.message(code: "customTasksUser.user.registering", default: "Registering...")}';
 
         // Auto close alert
         function createAutoClosingAlert(selector) {
@@ -114,7 +115,10 @@
 
                 <div class="form-actions content-register-btn">
                     <g:link type="button" uri="/" id="back-btn" class="btn green-dark back-button"><g:message code="views.login.auth.newPassword.homepage" default="Homepage"/></g:link>
-                    <g:submitButton name="${g.message(code:'views.login.auth.form.createAccount', default:'Sign up')}" id="register-button" class="btn green-dark pull-right"/>
+                    <button type="submit" id="register-button" class="btn green-dark pull-right">
+                        <i class="fa fa-refresh refresh-icon-stop refreshIcon"></i>
+                        <span><g:message code="views.login.auth.form.createAccount" default="Sign up"/></span>
+                    </button>
                 </div>
             </g:form> <!-- /. Register form -->
     </div> <!-- /.Register -->

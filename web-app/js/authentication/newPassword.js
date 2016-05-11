@@ -86,6 +86,12 @@ var Login = function() {
 
             if (e.which == 13) {
                 if (forgetForm.validate().form()) {
+
+                    newPasswordButton.attr('disabled', true);
+                    newPasswordButton.find('span').text(_confirming);
+                    refreshIcon.removeClass('refresh-icon-stop');
+                    refreshIcon.addClass('refresh-icon');
+                    
                     forgetForm.submit();
                 }
                 return false;

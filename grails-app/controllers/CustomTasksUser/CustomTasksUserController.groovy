@@ -119,7 +119,7 @@ class CustomTasksUserController {
             } else {
                 log.debug("CustomTasksUserController:authFail():fail")
 
-                failUserMessage = g.message(code: "customTasksUser.login.fail", default: '<strong>Sorry, we were not able to find a user with these credentials.</strong>')
+                failUserMessage = g.message(code: "customTasksUser.login.fail", default: '<strong>Sorry, we were not able to find a user with these credentials. The user account will be blocked after five failed attempts.</strong>')
             }
         }
 
