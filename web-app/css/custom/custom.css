@@ -614,6 +614,7 @@ table.dataTable tbody tr:hover {
 /* Remove IE default X */
 .user-input::-ms-clear,
 .backend-input::-ms-clear,
+.user-profile-input::-ms-clear,
 .register-input::-ms-clear,
 .contact-input::-ms-clear {
     display: none;
@@ -632,6 +633,7 @@ table.dataTable tbody tr:hover {
 }
 
 .i-delete-backend,
+.i-delete-email-profile,
 .i-delete-username-backend {
     display: none;
     position: absolute !important;
@@ -644,7 +646,8 @@ table.dataTable tbody tr:hover {
 }
 
 .i-delete-without-backend,
-.i-delete-without-name-backend {
+.i-delete-without-name-backend,
+.i-delete-userProfile {
     display: none;
     position: absolute !important;
     right: 50px !important;

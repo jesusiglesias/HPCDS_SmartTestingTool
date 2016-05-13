@@ -10,12 +10,9 @@
 
     <script>
 
-        // Variables to use in script TODO
-        var _checkerUsernameBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.username', default:'Type a username and check its availability.')}';
-        var _checkUsernameAvailibility = '${g.createLink(controller: "secUser", action: 'checkUsernameAvailibility')}';
-        var _checkerEmailBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
-        var _checkEmailAvailibility = '${g.createLink(controller: "secUser", action: 'checkEmailAvailibility')}';
-
+        // Variables to use in script
+        var _checkerEmailProfileBlockInfo = '${g.message(code:'layouts.main_auth_admin.body.content.admin.create.checker.block.info.email', default:'Type an email and check its availability.')}';
+        var _checkEmailProfileAvailibility = '${g.createLink(controller: "customTasksUser", action: 'checkEmailRegisteredAvailibility')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
         var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
@@ -107,19 +104,19 @@
                     <div class="profile-usermenu">
                         <ul class="nav">
                             <li class="active">
-                                <g:link>
+                                <g:link uri="/profile">
                                     <i class="icofont icofont-user-alt-2"></i>
                                     <g:message code="layouts.main_auth_user.content.myProfile.sidebar.personal" default="Personal information"/>
                                 </g:link>
                             </li>
                             <li>
-                                <g:link>
+                                <g:link uri="/profilePassword">
                                     <i class="icofont icofont-ui-password"></i>
                                     <g:message code="layouts.main_auth_user.content.myProfile.sidebar.password" default="Change password"/>
                                 </g:link>
                             </li>
                             <li>
-                                <g:link>
+                                <g:link uri="/profileAvatar">
                                     <i class="icofont icofont-image"></i>
                                     <g:message code="layouts.main_auth_user.content.myProfile.sidebar.avatar" default="Change profile image"/>
                                 </g:link>
@@ -127,29 +124,9 @@
                         </ul>
                     </div>
                 </div>
-                <!-- Sidebar of statistics - left, bottom -->
-                <div class="portlet light customColor-profile">
-                    <div class="row list-separated profile-stat">
-                        <div class="col-xs-6">
-                            <div class="uppercase profile-stat-title" data-counter="counterup" data-value="${numberActiveTest}"> ${numberActiveTest}</div>
-                            <div class="uppercase profile-stat-text"><g:message code="layouts.main_auth_user.content.myProfile.sidebar.bottom.test" default="Active test"/></div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="uppercase profile-stat-title" data-counter="counterup" data-value="${completedTest}"> ${completedTest}</div>
-                            <div class="uppercase profile-stat-text"><g:message code="layouts.main_auth_user.content.myProfile.sidebar.bottom.testDone" default="Completed test"/></div>
-                        </div>
-                    </div>
-                    <div class="row list-separated profile-stat-secondRow">
-                        <div class="col-xs-6">
-                            <div class="uppercase profile-stat-title" data-counter="counterup" data-value="${numberApprovedTest}"> ${numberApprovedTest}</div>
-                            <div class="uppercase profile-stat-text"><g:message code="layouts.main_auth_user.content.myProfile.sidebar.bottom.testApproved" default="Approved test"/></div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="uppercase profile-stat-title-unapproved" data-counter="counterup" data-value="${numberUnapprovedTest}"> ${numberUnapprovedTest}</div>
-                            <div class="uppercase profile-stat-text"><g:message code="layouts.main_auth_user.content.myProfile.sidebar.bottom.testUnapproved" default="Unapproved test"/></div>
-                        </div>
-                    </div>
-                </div>
+
+                <!-- Statistics -->
+                <g:render template="stats"/>
             </div>
 
             <!-- Personal information -->

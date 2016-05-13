@@ -98,7 +98,9 @@ class CustomTasksFrontEndController {
 
         // It obtains the current user
         User currentUserInstance = User.get(springSecurityService.currentUser.id)
-        currentUserInstance.properties = params
+        bindData(currentUserInstance, this.params, [exclude:['username', 'birthDate']])
+
+        log.error(currentUserInstance.username)
 
         // It checks the date
         if (params.birthDate != "") {

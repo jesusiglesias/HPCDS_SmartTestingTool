@@ -9,9 +9,9 @@ var DomainInformationProfileValidation = function () {
      */
     var handlerInformationProfileValidation = function() {
 
-        var userForm = $('.user-form');
-        
-        userForm.validate({
+        var profileInformationForm = $('.profileUser-form');
+
+        profileInformationForm.validate({
                 errorElement: 'span', // Default input error message container
                 errorClass: 'help-block help-block-error', // Default input error message class
                 focusInvalid: false, // Do not focus the last invalid input
@@ -125,21 +125,224 @@ var DomainInformationProfileValidation = function () {
     };
 
     /**
+     * Handler icons in input fields of user profile
+     */
+    var handlerIconUserProfile = function() {
+
+        var userProfileEmail = $('.email-userProfile');
+        var iconUserProfileEmail = $('.i-delete-userProfile-email');
+        var userProfileName = $('.name-userProfile');
+        var iconUserProfileName = $('.i-delete-userProfile-name');
+        var userProfileSurname = $('.surname-userProfile');
+        var iconUserProfileSurname = $('.i-delete-userProfile-surname');
+        var userProfileAddress = $('.address-userProfile');
+        var iconUserProfileAddress = $('.i-delete-userProfile-address');
+        var userProfileCity = $('.city-userProfile');
+        var iconUserProfileCity = $('.i-delete-userProfile-city');
+        var userProfileCountry = $('.country-userProfile');
+        var iconUserProfileCountry = $('.i-delete-userProfile-country');
+        var userProfilePhone = $('.phone-userProfile');
+        var iconUserProfilePhone = $('.i-delete-userProfile-phone');
+
+        /**
+         * Email
+         */
+        // Show delete icon
+        userProfileEmail.keydown(function(){
+            iconUserProfileEmail.show();
+        });
+
+        // Delete text and hide delete icon
+        iconUserProfileEmail.click(function() {
+            userProfileEmail.val('').focus();
+            iconUserProfileEmail.hide();
+        });
+
+        // Hide delete icon when user deletes text with the keyboard
+        var toggleClassesEmailProfile = function() {
+            if (userProfileEmail.val() == '') {
+                iconUserProfileEmail.hide();
+            }
+        };
+
+        userProfileEmail.on('keyup keydown keypress change paste', function() {
+            toggleClassesEmailProfile(); // Still toggles the classes on any of the above events
+        });
+        toggleClassesEmailProfile(); // And also on document ready
+
+        /**
+         * Name
+         */
+        // Show delete icon
+        userProfileName.keydown(function(){
+            iconUserProfileName.show();
+        });
+
+        // Delete text and hide delete icon
+        iconUserProfileName.click(function() {
+            userProfileName.val('').focus();
+            iconUserProfileName.hide();
+        });
+
+        // Hide delete icon when user deletes text with the keyboard
+        var toggleClassesNameProfile = function() {
+            if (userProfileName.val() == '') {
+                iconUserProfileName.hide();
+            }
+        };
+
+        userProfileName.on('keyup keydown keypress change paste', function() {
+            toggleClassesNameProfile(); // Still toggles the classes on any of the above events
+        });
+        toggleClassesNameProfile(); // And also on document ready
+
+        /**
+         * Surname
+         */
+        // Show delete icon
+        userProfileSurname.keydown(function(){
+            iconUserProfileSurname.show();
+        });
+
+        // Delete text and hide delete icon
+        iconUserProfileSurname.click(function() {
+            userProfileSurname.val('').focus();
+            iconUserProfileSurname.hide();
+        });
+
+        // Hide delete icon when user deletes text with the keyboard
+        var toggleClassesSurnameProfile = function() {
+            if (userProfileSurname.val() == '') {
+                iconUserProfileSurname.hide();
+            }
+        };
+
+        userProfileSurname.on('keyup keydown keypress change paste', function() {
+            toggleClassesSurnameProfile(); // Still toggles the classes on any of the above events
+        });
+        toggleClassesSurnameProfile(); // And also on document ready
+
+        /**
+         * Address
+         */
+        // Show delete icon
+        userProfileAddress.keydown(function(){
+            iconUserProfileAddress.show();
+        });
+
+        // Delete text and hide delete icon
+        iconUserProfileAddress.click(function() {
+            userProfileAddress.val('').focus();
+            iconUserProfileAddress.hide();
+        });
+
+        // Hide delete icon when user deletes text with the keyboard
+        var toggleClassesAddressProfile = function() {
+            if (userProfileAddress.val() == '') {
+                iconUserProfileAddress.hide();
+            }
+        };
+
+        userProfileAddress.on('keyup keydown keypress change paste', function() {
+            toggleClassesAddressProfile(); // Still toggles the classes on any of the above events
+        });
+        toggleClassesAddressProfile(); // And also on document ready
+
+        /**
+         * City
+         */
+        // Show delete icon
+        userProfileCity.keydown(function(){
+            iconUserProfileCity.show();
+        });
+
+        // Delete text and hide delete icon
+        iconUserProfileCity.click(function() {
+            userProfileCity.val('').focus();
+            iconUserProfileCity.hide();
+        });
+
+        // Hide delete icon when user deletes text with the keyboard
+        var toggleClassesCityProfile = function() {
+            if (userProfileCity.val() == '') {
+                iconUserProfileCity.hide();
+            }
+        };
+
+        userProfileCity.on('keyup keydown keypress change paste', function() {
+            toggleClassesCityProfile(); // Still toggles the classes on any of the above events
+        });
+        toggleClassesCityProfile(); // And also on document ready
+
+        /**
+         * Country
+         */
+        // Show delete icon
+        userProfileCountry.keydown(function(){
+            iconUserProfileCountry.show();
+        });
+
+        // Delete text and hide delete icon
+        iconUserProfileCountry.click(function() {
+            userProfileCountry.val('').focus();
+            iconUserProfileCountry.hide();
+        });
+
+        // Hide delete icon when user deletes text with the keyboard
+        var toggleClassesCountryProfile = function() {
+            if (userProfileCountry.val() == '') {
+                iconUserProfileCountry.hide();
+            }
+        };
+
+        userProfileCountry.on('keyup keydown keypress change paste', function() {
+            toggleClassesCountryProfile(); // Still toggles the classes on any of the above events
+        });
+        toggleClassesCountryProfile(); // And also on document ready
+
+        /**
+         * Phone
+         */
+        // Show delete icon
+        userProfilePhone.keydown(function(){
+            iconUserProfilePhone.show();
+        });
+
+        // Delete text and hide delete icon
+        iconUserProfilePhone.click(function() {
+            userProfilePhone.val('').focus();
+            iconUserProfilePhone.hide();
+        });
+
+        // Hide delete icon when user deletes text with the keyboard
+        var toggleClassesPhoneProfile = function() {
+            if (userProfilePhone.val() == '') {
+                iconUserProfilePhone.hide();
+            }
+        };
+
+        userProfilePhone.on('keyup keydown keypress change paste', function() {
+            toggleClassesPhoneProfile(); // Still toggles the classes on any of the above events
+        });
+        toggleClassesPhoneProfile(); // And also on document ready
+    };
+
+    /**
      * It checks the email availability
      */
     var handleEmailAvailabilityChecker = function () {
 
-        var email = $('#email');
-        var emailBlock = $('.email-block');
+        var emailProfile = $('#email');
+        var emailProfileBlock = $('.emailProfile-block');
 
-        $("#email-checker").click(function (e) {
+        $("#email-profile-checker").click(function (e) {
 
             // Empty email
-            if (email.val() === "") {
-                email.closest('.form-group').removeClass('has-success').addClass('has-error');
+            if (emailProfile.val() === "") {
+                emailProfile.closest('.form-group').removeClass('has-success').addClass('has-error');
 
-                emailBlock.html(_checkerEmailBlockInfo);
-                emailBlock.addClass('availibility-error');
+                emailProfileBlock.html(_checkerEmailProfileBlockInfo);
+                emailProfileBlock.addClass('availibility-error');
                 return;
             }
 
@@ -147,34 +350,34 @@ var DomainInformationProfileValidation = function () {
 
             btn.attr('disabled', true);
 
-            email.attr("readonly", true).
+            emailProfile.attr("readonly", true).
             attr("disabled", true).
             addClass("spinner");
 
-            $.post(_checkEmailAvailibility, {
+            $.post(_checkEmailProfileAvailibility, {
 
                 // Email value
-                email: email.val()
+                email: emailProfile.val()
 
             }, function (res) {
                 btn.attr('disabled', false);
 
-                email.attr("readonly", false).
+                emailProfile.attr("readonly", false).
                 attr("disabled", false).
                 removeClass("spinner");
 
                 if (res.status == 'OK') {
-                    email.closest('.form-group').removeClass('has-error').addClass('has-success');
+                    emailProfile.closest('.form-group').removeClass('has-error').addClass('has-success');
 
-                    emailBlock.html(res.message);
-                    emailBlock.removeClass('availibility-error');
-                    emailBlock.addClass('availibility-success');
+                    emailProfileBlock.html(res.message);
+                    emailProfileBlock.removeClass('availibility-error');
+                    emailProfileBlock.addClass('availibility-success');
 
                 } else {
-                    email.closest('.form-group').removeClass('has-success').addClass('has-error');
+                    emailProfile.closest('.form-group').removeClass('has-success').addClass('has-error');
 
-                    emailBlock.html(res.message);
-                    emailBlock.addClass('availibility-error');
+                    emailProfileBlock.html(res.message);
+                    emailProfileBlock.addClass('availibility-error');
                 }
             }, 'json');
 
@@ -282,6 +485,7 @@ var DomainInformationProfileValidation = function () {
         // Main function to initiate the module
         init: function () {
             handlerInformationProfileValidation();
+            handlerIconUserProfile();
             handleEmailAvailabilityChecker();
             handlerMaxlength();
             handlerBootstrapSelect();
