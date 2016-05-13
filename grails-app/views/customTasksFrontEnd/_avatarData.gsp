@@ -1,16 +1,15 @@
-<%@ page import="Security.SecUser" %>
+<%@ page import="User.User" %>
 
 <div class="form-body">
     <!-- Row -->
-    <div class="row space-firstRow">
+    <div class="row space-firstRow-profile-user">
         <!-- Image profile -->
         <div class="form-group">
             <div class="col-sm-12">
-                <legend class="control-label legend-profileImage"><h4 class="title-profileImage size-legend"><g:message code="default.imageProfile.title" default="Profile image"/></h4></legend>
                 <div class="fileinput fileinput-new" data-provides="fileinput">
                     <div class="fileinput-new thumbnail" data-trigger="fileinput" style="max-width: 160px; max-height: 300px;">
-                        <g:if test="${secUserInstance.avatar}">
-                            <img name="avatar" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id:secUserInstance.ident())}" />
+                        <g:if test="${currentUser.avatar}">
+                            <img name="avatar" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id:currentUser.ident())}" />
                         </g:if>
                         <g:else>
                             <img name="avatar" alt="Profile image" src="${resource(dir: 'img/profile', file: 'user_profile.png')}"/>
@@ -23,7 +22,7 @@
                         <span class="btn green-dark btn-outline btn-file">
                             <span class="fileinput-new"><g:message code="default.imageProfile.select" default="Select image"/></span>
                             <span class="fileinput-exists"><g:message code="default.imageProfile.change" default="Change"/></span>
-                            <input type="file" accept="image/png,image/jpeg,image/gif" name="avatar" id="avatar">
+                            <input type="file" accept="image/png,image/jpeg,image/gif" name="avatarUser" id="avatarUser">
                         </span>
                         <a href="javascript:;" class="btn red-soft fileinput-exists" data-dismiss="fileinput"><g:message code="default.imageProfile.remove" default="Remove"/></a>
                     </div>

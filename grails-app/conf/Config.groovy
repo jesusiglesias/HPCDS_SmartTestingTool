@@ -92,7 +92,7 @@ environments {
         grails.logging.jul.usebridge = false
 
         // TODO Change to own domain
-        grails.serverURL = "http://192.168.0.201:8080/${appName}"
+        grails.serverURL = "http://localhost:8080/${appName}"
     }
 }
 
@@ -226,6 +226,9 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksFrontEnd/testStats':          ['ROLE_USER'],
     '/customTasksFrontEnd/updatePersonalInfo': ['ROLE_USER'],
     '/customTasksFrontEnd/notFound':           ['ROLE_USER'],
+    '/customTasksFrontEnd/profileAvatar':      ['ROLE_USER'],
+    '/customTasksFrontEnd/updateAvatar':       ['ROLE_USER'],
+    '/customTasksFrontEnd/notFoundAvatar':     ['ROLE_USER'],
     '/customTasksFrontEnd/scores':             ['ROLE_USER'],
     '/customTasksFrontEnd/cookiesPolicy':      ['permitAll'],
     '/customTasksFrontEnd/contact':            ['ROLE_USER'],

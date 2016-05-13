@@ -16,10 +16,13 @@ import static org.springframework.http.HttpStatus.NOT_FOUND
  */
 class CustomTasksFrontEndController {
 
+    // Mime-types allowed in image
+    private static final contentsType = ['image/png', 'image/jpeg', 'image/gif']
+
     def springSecurityService
     def mailService
 
-    static allowedMethods = [formContact: "POST", updatePersonalInfo: "PUT"]
+    static allowedMethods = [formContact: "POST", updatePersonalInfo: "PUT", updateAvatar: "POST"]
 
     /**
      * It shows the home page of user.
@@ -191,6 +194,132 @@ class CustomTasksFrontEndController {
             form multipartForm {
                 flash.userProfileErrorMessage = g.message(code: 'default.not.found.userProfile.message', default:'It has not been able to locate the user. Please. if the problem continues you contact us through the contact form.')
                 redirect action: "profile", method: "GET"
+            }
+            '*'{ render status: NOT_FOUND }
+        }
+    }
+
+    /**
+     * It shows the image of profile page of the current user.
+     */
+    def profileAvatar() {
+        log.debug("CustomTasksFrontEndController():profileAvatar()")
+
+        def userStatsList
+
+        // ID of current user
+        def currentUser = User.get(springSecurityService.currentUser.id)
+
+        userStatsList = testStats(currentUser)
+
+        render view: 'profileAvatar', model: [currentUser: currentUser, completedTest: userStatsList[1], numberActiveTest: userStatsList[0], numberApprovedTest: userStatsList[3], numberUnapprovedTest: userStatsList[2]]
+    }
+
+    /**
+     * It updates the profile image of the current normal user.
+     *
+     * @return return If the current user instance is null or has errors.
+     */
+    @Transactional
+    def updateAvatar() {
+        log.debug("CustomTasksFrontEndController():updateAvatar()")
+
+        def userStatsList
+
+        // User with params received
+        def user = new User(params)
+
+        if (user == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            notFoundAvatar()
+            return
+        }
+
+        // Get the avatar file from the multi-part request
+        def filename = request.getFile('avatarUser')
+
+        // It checks that mime-types is correct: ['image/png', 'image/jpeg', 'image/gif']
+        if (!filename.empty && !contentsType.contains(filename.getContentType())) {
+
+            flash.userProfileAvatarErrorMessage = g.message(code: 'default.validation.mimeType.image', default: 'The profile image must be of type: <strong>.png</strong>, <strong>.jpeg</strong> or <strong>.gif</strong>.')
+            redirect uri: "/profileAvatar"
+            return
+        }
+
+        // It obtains the current user
+        User currentUserInstance = User.get(springSecurityService.currentUser.id)
+
+        // Update the image and mime type
+        currentUserInstance.avatar = filename.bytes
+        currentUserInstance.avatarType = filename.contentType
+
+        // It checks concurrent updates
+        if (params.version) {
+            def version = params.version.toLong()
+
+            if (currentUserInstance.version > version) {
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                // Clear the list of errors
+                currentUserInstance.clearErrors()
+                flash.userProfileAvatarErrorMessage = g.message(code: 'default.optimistic.locking.failure.userProfile', default: 'While you were editing, this user has been update from another device or browser. You try it again later.')
+
+                redirect uri: "/profileAvatar"
+                return
+            }
+        }
+
+        // Validate the instance
+        if (!currentUserInstance.validate()) {
+
+            userStatsList = testStats(currentUserInstance)
+            respond currentUserInstance.errors, view:'profileAvatar', model: [currentUser: currentUserInstance, completedTest: userStatsList[1], numberActiveTest: userStatsList[0], numberApprovedTest: userStatsList[3], numberUnapprovedTest: userStatsList[2]]
+            return
+        }
+
+        try {
+
+            // Update profile image
+            currentUserInstance.save(flush:true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.userProfileAvatarMessage = g.message(code: 'default.myProfile.avatar.success', default: 'The profile image has been updated successfully.')
+                    redirect uri: '/profileAvatar'
+                }
+            }
+
+        } catch (Exception exception) {
+            log.error("CustomTasksFrontEndController():updateAvatar():Exception:NormalUser:${currentUserInstance.username}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.userProfileAvatarErrorMessage = g.message(code: 'default.myProfile.avatar.error', default: 'ERROR! While updating the profile image.')
+
+                    redirect uri: "/profileAvatar"
+                }
+            }
+        }
+    }
+
+    /**
+     * It renders the not found message if the user instance was not found.
+     */
+    protected void notFoundAvatar() {
+        log.debug("CustomTasksFrontEndController():updateProfile:notFoundAvatar():CurrentUser:${springSecurityService.currentUser.username}")
+
+        request.withFormat {
+            form multipartForm {
+                flash.userProfileAvatarErrorMessage = g.message(code: 'default.not.found.userProfile.message', default:'It has not been able to locate the user. Please. if the problem continues you contact us through the contact form.')
+                redirect action: "profileAvatar", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
         }

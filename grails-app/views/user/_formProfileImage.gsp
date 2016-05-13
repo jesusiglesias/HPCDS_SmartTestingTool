@@ -8,7 +8,7 @@
             <div class="col-sm-12">
                 <legend class="control-label legend-profileImage"><h4 class="title-profileImage size-legend"><g:message code="default.imageProfile.title" default="Profile image"/></h4></legend>
                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                    <div class="fileinput-new thumbnail" data-trigger="fileinput" style="max-width: 160px; max-height: 200px;">
+                    <div class="fileinput-new thumbnail" data-trigger="fileinput" style="max-width: 160px; max-height: 300px;">
                         <g:if test="${userInstance.avatar}">
                             <img name="avatar" alt="Profile image"  src="${createLink(controller:'customTasksBackend', action:'profileImage', id:userInstance.ident())}" />
                         </g:if>
@@ -17,7 +17,7 @@
                         </g:else>
                     </div>
 
-                    <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="max-width: 160px; max-height: 200px;"></div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" data-trigger="fileinput" style="max-width: 170px; max-height: 300px;"></div>
 
                     <div>
                         <span class="btn green-dark btn-outline btn-file">
