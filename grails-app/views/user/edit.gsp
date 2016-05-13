@@ -435,7 +435,7 @@
                             <g:message code="layouts.main_auth_admin.body.content.user.delete" default="Delete user"/>
                         </button>
                     </div>
-                    <p class="delete-text">
+                    <p class="delete-text text-justify">
                         <g:message code="default.delete.relation.user.evaluation.message" default="Important! Remember that deleting an user, all associated evaluations are eliminated."/>
                     </p>
                 </g:form>

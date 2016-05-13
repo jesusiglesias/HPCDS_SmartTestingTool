@@ -24,7 +24,7 @@
                 <i class="fa fa-times i-delete-backend i-delete-department-name"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block department-block">
-                <h5>
+                <h5 class="text-justify">
                     <g:message code="layouts.main_auth_admin.body.content.department.create.checker.block.info.name" default="Type a name of department and check its availability."/>
                 </h5>
             </div>

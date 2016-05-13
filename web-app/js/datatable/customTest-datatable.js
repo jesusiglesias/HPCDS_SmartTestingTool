@@ -46,15 +46,11 @@ var DatatableTestList = function () {
             // Visibility of columns
             "columnDefs": [
                 {
-                    "targets": [6], // Lock time
+                    "targets": [1], // Description
                     "visible": false
                 },
                 {
                     "targets": [7], // Maximum attempts
-                    "visible": false
-                },
-                {
-                    "targets": [8], // Number of evaluations
                     "visible": false
                 },
                 {

@@ -25,7 +25,7 @@
             </div>
 
             <div class="help-block catalog-block">
-                <h5>
+                <h5 class="text-justify">
                     <g:message code="layouts.main_auth_admin.body.content.catalog.create.checker.block.info.name" default="Type a name of catalog and check its availability."/>
                 </h5>
             </div>
@@ -41,7 +41,7 @@
                     <h5 class="sbold">
                         <g:message code="catalog.questions.label" default="Questions"/>
                     </h5>
-                    <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.catalog.multiselect.description" default="Select the questions that constitute the catalog."/></h5>
+                    <h5 class="thin text-justify"><g:message code="layouts.main_auth_admin.body.content.catalog.multiselect.description" default="Select the questions that constitute the catalog."/></h5>
                 </label>
                 <div class="input-group select2-bootstrap-append">
                     <g:select name="questions" id="multi-append" from="${Question.list()}" multiple="multiple" optionKey="id" optionValue="titleQuestionKey" size="10" value="${catalogInstance?.questions*.id}" class="many-to-many form-control select2"/>

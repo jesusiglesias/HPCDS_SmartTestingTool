@@ -23,7 +23,7 @@
 				<i class="fa fa-times i-delete-backend i-delete-test-name"></i> <!-- Delete text icon -->
 			</div>
 			<div class="help-block nameTest-block">
-				<h5>
+				<h5 class="text-justify">
 					<g:message code="layouts.main_auth_admin.body.content.admin.create.checker.block.info.username" default="Type a username and check its availability."/>
 				</h5>
 			</div>
@@ -80,6 +80,11 @@
 				</div>
 				<i class="fa fa-times i-delete-testNumberquestions-backend i-delete-test-numberQuestions"></i> <!-- Delete text icon -->
 			</div>
+			<div class="help-block">
+				<h5 class="text-justify">
+					<g:message code="layouts.main_auth_admin.body.content.test.numberOfQuestions.label" default="It must be equal or less than the number of questions contained in the associated catalog."/>
+				</h5>
+			</div>
 		</div>
 	</div>
 
@@ -104,7 +109,7 @@
 						</span>
 					</div>
 					<span class="help-block">
-						<h5>
+						<h5 class="text-justify">
 							<g:message code="custom.date.picker.test.init" default="Select a date to enable the test."/>
 						</h5>
 					</span>
@@ -131,7 +136,7 @@
 						</span>
 					</div>
 					<span class="help-block">
-						<h5>
+						<h5 class="text-justify">
 							<g:message code="custom.date.picker.test.end" default="Select a date to disable the test."/>
 						</h5>
 					</span>
@@ -150,7 +155,7 @@
 						<g:message code="test.lockTime.minute.label" default="Maximum time allowed in minutes"/>
 						<span class="required"> * </span>
 					</h5>
-					<h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.test.lockTime.info.label" default="0 to not restrict the time of the test."/></h5>
+					<h5 class="thin text-justify"><g:message code="layouts.main_auth_admin.body.content.test.lockTime.info.label" default="0 to not restrict the time of the test."/></h5>
 				</label>
 
 				<div class="input-icon right">
@@ -186,7 +191,7 @@
 						<g:message code="test.topic.label" default="Topic"/>
 						<span class="required"> * </span>
 					</h5>
-					<h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.test.topic.select" default="Select the topic to which the test belongs."/></h5>
+					<h5 class="thin text-justify"><g:message code="layouts.main_auth_admin.body.content.test.topic.select" default="Select the topic to which the test belongs."/></h5>
 				</label>
 				<g:select name="topic"
 						  from="${Topic.list()}"
@@ -207,7 +212,7 @@
 						<g:message code="test.catalog.label" default="Catalog"/>
 						<span class="required"> * </span>
 					</h5>
-					<h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.test.catalog.select" default="Select the catalog to which the test belongs."/></h5>
+					<h5 class="thin text-justify"><g:message code="layouts.main_auth_admin.body.content.test.catalog.select" default="Select the catalog to which the test belongs."/></h5>
 				</label>
 				<g:select name="catalog"
 						  from="${Catalog.list()}"

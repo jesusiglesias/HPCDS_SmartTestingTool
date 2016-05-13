@@ -10,7 +10,7 @@
                         <g:message code="question.titleQuestionKey.label" default="Key"/>
                         <span class="required">*</span>
                     </h5>
-                    <h5 class="thin">
+                    <h5 class="thin text-justify">
                         <g:message code="layouts.main_auth_admin.body.content.question.titleQuestionKey.info.label" default="Internal ID. It is not shown to the normal user."/>
                     </h5>
                 </label>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="help-block keyQuestion-block">
-                <h5>
+                <h5 class="text-justify">
                     <g:message code="layouts.main_auth_admin.body.content.question.create.checker.block.info.key" default="Type a key of question and check its availability."/>
                 </h5>
             </div>
@@ -84,7 +84,7 @@
                     <h5 class="sbold">
                         <g:message code="question.answers.label" default="Answers"/>
                     </h5>
-                    <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.question.multiselect.description" default="Select the answers that constitute the question."/></h5>
+                    <h5 class="thin text-justify"><g:message code="layouts.main_auth_admin.body.content.question.multiselect.description" default="Select the answers that constitute the question."/></h5>
                 </label>
                 <div class="input-group select2-bootstrap-append">
                     <g:select name="answers" id="multi-append"  from="${Answer.list()}" multiple="multiple" optionKey="id" optionValue="titleAnswerKey" size="10" value="${questionInstance?.answers*.id}" class="many-to-many form-control select2"/>

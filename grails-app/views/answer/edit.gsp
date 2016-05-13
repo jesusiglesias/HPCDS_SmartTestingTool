@@ -428,7 +428,7 @@
 					</div>
 					<div class="has-error md-checkbox check-delete">
 						<input type="checkbox" name='delete_answer' id='delete_answer' class="md-check"/>
-						<label for="delete_answer" class="sbold">
+						<label for="delete_answer" class="sbold text-justify">
 							<span></span>
 							<span class="check"></span>
 							<span class="box"></span>

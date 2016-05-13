@@ -125,63 +125,6 @@ var DomainInformationProfileValidation = function () {
     };
 
     /**
-     * It checks the username availability
-     */
-    var handleUsernameAvailabilityChecker = function () {
-
-        var username = $('#username');
-        var usernameBlock = $('.username-block');
-
-        $("#username-checker").click(function (e) {
-
-            // Empty username
-            if (username.val() === "") {
-                username.closest('.form-group').removeClass('has-success').addClass('has-error');
-
-                usernameBlock.html(_checkerUsernameBlockInfo);
-                usernameBlock.addClass('availibility-error');
-                return;
-            }
-
-            var btn = $(this);
-
-            btn.attr('disabled', true);
-
-            username.attr("readonly", true).
-            attr("disabled", true).
-            addClass("spinner");
-
-            $.post(_checkUsernameAvailibility, {
-
-                // Username value
-                username: username.val()
-
-            }, function (res) {
-                btn.attr('disabled', false);
-
-                username.attr("readonly", false).
-                attr("disabled", false).
-                removeClass("spinner");
-
-                if (res.status == 'OK') {
-                    username.closest('.form-group').removeClass('has-error').addClass('has-success');
-
-                    usernameBlock.html(res.message);
-                    usernameBlock.removeClass('availibility-error');
-                    usernameBlock.addClass('availibility-success');
-
-                } else {
-                    username.closest('.form-group').removeClass('has-success').addClass('has-error');
-
-                    usernameBlock.html(res.message);
-                    usernameBlock.addClass('availibility-error');
-                }
-            }, 'json');
-
-        });
-    };
-
-    /**
      * It checks the email availability
      */
     var handleEmailAvailabilityChecker = function () {
@@ -339,7 +282,6 @@ var DomainInformationProfileValidation = function () {
         // Main function to initiate the module
         init: function () {
             handlerInformationProfileValidation();
-            handleUsernameAvailabilityChecker();
             handleEmailAvailabilityChecker();
             handlerMaxlength();
             handlerBootstrapSelect();

@@ -24,7 +24,7 @@
                 <i class="fa fa-times i-delete-backend i-delete-admin-username"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block username-block">
-                <h5>
+                <h5 class="text-justify">
                     <g:message code="layouts.main_auth_admin.body.content.admin.create.checker.block.info.username" default="Type a username and check its availability."/>
                 </h5>
             </div>
@@ -51,7 +51,7 @@
                 <i class="fa fa-times i-delete-backend i-delete-admin-email"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block email-block">
-                <h5>
+                <h5 class="text-justify">
                     <g:message code="layouts.main_auth_admin.body.content.admin.create.checker.block.info.email" default="Type an email and check its availability."/>
                 </h5>
             </div>
@@ -101,7 +101,7 @@
         <div class="col-sm-6">
             <div class="${hasErrors(bean: secUserInstance, field: 'accountExpired', 'error')}">
                 <label for="accountExpired" class="control-label">
-                    <h5 class="sbold">
+                    <h5 class="sbold text-justify">
                         <g:message code="default.user.expired.sublabel" default="Indicate whether the user account is expired"/>
                     </h5>
                 </label>
@@ -116,7 +116,7 @@
         <div class="col-sm-6">
             <div class="${hasErrors(bean: secUserInstance, field: 'accountLocked', 'error')}">
                 <label for="accountLocked" class="control-label">
-                    <h5 class="sbold">
+                    <h5 class="sbold text-justify">
                         <g:message code="default.user.locked.sublabel" default="Indicate whether the user account is locked"/>
                     </h5>
                 </label>
@@ -135,7 +135,7 @@
         <div class="col-sm-6">
             <div class="${hasErrors(bean: secUserInstance, field: 'enabled', 'error')}">
                 <label for="enabled" class="control-label">
-                    <h5 class="sbold">
+                    <h5 class="sbold text-justify">
                         <g:message code="default.user.enabled.sublabel" default="Indicate whether the user account is enabled"/>
                     </h5>
                 </label>
@@ -150,7 +150,7 @@
         <div class="col-sm-6">
             <div class="${hasErrors(bean: secUserInstance, field: 'passwordExpired', 'error')}">
                 <label for="passwordExpired" class="control-label">
-                    <h5 class="sbold">
+                    <h5 class="sbold text-justify">
                         <g:message code="default.user.passwordExpired.sublabel" default="Indicate whether the user password is expired"/>
                     </h5>
                 </label>

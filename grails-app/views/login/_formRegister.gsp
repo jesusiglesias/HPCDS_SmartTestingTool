@@ -12,7 +12,7 @@
                 <div class="input-icon right">
                     <g:textField name='username' maxlength="30" class="form-control register-input username-input-register emptySpaces autofill-input" value="${userRegisterInstance?.username}" autocomplete="off"/>
                     <label for="username" class="control-label control-labelError"><g:message code="user.username.label" default="Username"/><span class="required"> * </span></label>
-                    <span class="help-block username-register-block"></span>
+                    <span class="help-block username-register-block text-justify"></span>
                     <i class="fa fa-times i-delete-register-username" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
                     <i class="fa fa-user"></i>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="input-icon right">
                     <g:field type="email" name="email" maxlength="60" class="form-control register-input email-input-register emptySpaces autofill-input" value="${userRegisterInstance?.email}" autocomplete="off"/>
                     <label for="email" class="control-label control-labelError"><g:message code="user.email.label" default="Email"/><span class="required"> * </span></label>
-                    <span class="help-block email-register-block"></span>
+                    <span class="help-block email-register-block text-justify"></span>
                     <i class="fa fa-times i-delete-register-email" style="right: 50px; cursor: pointer"></i> <!-- Delete text icon -->
                     <i class="fa fa-envelope"></i>
                 </div>
@@ -43,7 +43,7 @@
                                      data-container="body" data-trigger="active" data-placement="top" data-content="${g.message(code:'views.login.body.auth.register.popover.password.description', default:'It must contain at least 8 characters with a uppercase letter, lowercase letter and a number. It may contain special characters.')}"
                                      data-original-title="${g.message(code:'views.login.body.auth.register.popover.password.title', default:'Instructions of the password')}"/>
                     <label for="password" class="control-label control-labelError"><g:message code="user.password.label" default="Password"/><span class="required"> * </span></label>
-                    <span class="help-block"><g:message code="views.login.auth.newPassword.password.help" default="Enter a valid password"/></span>
+                    <span class="help-block text-justify"><g:message code="views.login.auth.newPassword.password.help" default="Enter a valid password"/></span>
                     <i class="fa fa-eye i-show-register-password"></i> <!-- Show password icon -->
                     <i class="fa fa-key"></i>
                 </div>
@@ -60,7 +60,7 @@
                 <div class="input-icon right">
                     <g:passwordField name="confirmPassword" class="form-control password-confirm-input-register emptySpaces autofill-input" autocomplete="off"/>
                     <label for="confirmPassword" class="control-label control-labelError"><g:message code="user.confirmPassword.label" default="Confirm password"/><span class="required"> * </span></label>
-                    <span class="help-block"><g:message code="views.login.auth.newPassword.passwordConfirm.help" default="Repeat your password"/></span>
+                    <span class="help-block text-justify"><g:message code="views.login.auth.newPassword.passwordConfirm.help" default="Repeat your password"/></span>
                     <i class="fa fa-eye i-show-register-confirmPassword"></i> <!-- Show password icon -->
                     <i class="fa fa-key"></i>
                 </div>
@@ -121,7 +121,7 @@
                         </span>
                     </div>
                     <span class="help-block">
-                        <h5 class="thin h5-register">
+                        <h5 class="thin h5-register text-justify">
                             <g:message code="custom.date.picker.description" default="Select a date"/>
                         </h5>
                     </span>

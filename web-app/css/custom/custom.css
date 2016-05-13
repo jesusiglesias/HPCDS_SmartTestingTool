@@ -53,6 +53,10 @@ input:-webkit-autofill:active {
     margin: 30px -15px 10px -15px;
 }
 
+.space-secondRow-profile-user {
+    margin: 20px -15px 10px -15px;
+}
+
 .space-imageRow {
     margin: 35px -15px 0 -15px;
 }
@@ -294,6 +298,9 @@ table.dataTable tbody tr:hover {
     letter-spacing: 1px;
 }
 
+.datepicker {
+    z-index: 9999 !important;
+}
 
 /* Multi-select - Create view
 =================================================================== */
@@ -1058,6 +1065,7 @@ table.dataTable tbody tr:hover {
     /* Button becomes visible */
     visibility: visible;
     opacity: 1;
+    z-index: 9999;
 }
 .back-to-top.cd-fade-out {
     /* If the user keeps scrolling down, the button is out of focus and becomes less visible */
@@ -1729,6 +1737,10 @@ table.dataTable tbody tr:hover {
         margin-top: 20px;
     }
 
+    .space-betweenCol-profile-user {
+        margin-top: 30px;
+    }
+
     .widget-thumb {
         margin: 0 0 30px 0;
     }
@@ -2074,7 +2086,15 @@ table.dataTable tbody tr:hover {
     }
 }
 
-/* Max-width: 344px */
+/* Max-width: 343px */
+@media(max-width: 343px) {
+
+    .i-delete-reformat-backend {
+        top: 91px;
+    }
+}
+
+/* Max-width: 342px */
 @media(max-width: 342px) {
 
     .mt-comments .mt-comment .mt-comment-body .mt-comment-details .mt-comment-actions{

@@ -464,7 +464,7 @@
 										<td><g:message code="test.initDate.label" default="Initial date"/></td>
 										<td><g:message code="test.endDate.label" default="End date"/></td>
 										<td><g:message code="test.lockTime.label" default="Maximum time"/></td>
-										<td><g:message code="test.maxAttempts.label" default="Maximum number of attempts"/></td>
+										<td><g:message code="test.maxAttempts.label" default="Maximim number of attempts"/></td>
 										<td><g:message code="test.evaluationsTestCount.label" default="Number of evaluations"/></td>
 										<td><g:message code="layouts.main_auth_admin.body.content.test.evaluation.display" default="Show evaluations"/></td>
 										<td><g:message code="test.topic.label" default="Topic"/></td>
@@ -488,8 +488,8 @@
 														</span>
 												</td>
 												<td>${fieldValue(bean: testInstance, field: "numberOfQuestions")}</td>
-												<td><g:formatDate formatName="custom.date.birthdate.format" date="${testInstance?.initDate}"/></td>
-												<td><g:formatDate formatName="custom.date.birthdate.format" date="${testInstance?.endDate}"/></td>
+												<td class="space-date"><g:formatDate formatName="custom.date.birthdate.format" date="${testInstance?.initDate}"/></td>
+												<td class="space-date"><g:formatDate formatName="custom.date.birthdate.format" date="${testInstance?.endDate}"/></td>
 												<td>${fieldValue(bean: testInstance, field: "lockTime")}</td>
 												<td>${fieldValue(bean: testInstance, field: "maxAttempts")}</td>
 												<td>${testInstance.evaluationsTest?.size()}</td>

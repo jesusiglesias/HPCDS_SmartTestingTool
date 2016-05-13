@@ -10,7 +10,7 @@
                         <g:message code="answer.titleAnswerKey.label" default="Key"/>
                         <span class="required">*</span>
                     </h5>
-                    <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.answer.titleAnswerKey.info.label" default="Internal ID. It is not shown to the normal user."/></h5>
+                    <h5 class="thin text-justify"><g:message code="layouts.main_auth_admin.body.content.answer.titleAnswerKey.info.label" default="Internal ID. It is not shown to the normal user."/></h5>
                 </label>
 
                 <div class="input-group input-icon right">
@@ -25,7 +25,7 @@
                 <i class="fa fa-times i-delete-reformat-backend i-delete-answer-key"></i> <!-- Delete text icon -->
             </div>
             <div class="help-block keyAnswer-block">
-                <h5>
+                <h5 class="text-justify">
                     <g:message code="layouts.main_auth_admin.body.content.answer.create.checker.block.info.key" default="Type a key of answer and check its availability."/>
                 </h5>
             </div>
@@ -56,7 +56,7 @@
         <div class="col-md-6">
             <div class="${hasErrors(bean: answerInstance, field: 'correct', 'error')}">
                 <label for="correct" class="control-label">
-                    <h5 class="sbold">
+                    <h5 class="sbold text-justify">
                         <g:message code="layouts.main_auth_admin.body.content.answer.correctAnswer.label" default="Indicate whether the answer is correct"/>
                     </h5>
                 </label>
@@ -76,7 +76,7 @@
                         <g:message code="answer.score.label" default="Score"/>
                         <span class="required">*</span>
                     </h5>
-                    <h5 class="thin"><g:message code="layouts.main_auth_admin.body.content.answer.score.select.info.label" default="Active only when the answer is correct."/></h5>
+                    <h5 class="thin text-justify"><g:message code="layouts.main_auth_admin.body.content.answer.score.select.info.label" default="Active only when the answer is correct."/></h5>
                 </label>
                 <g:select name="score" from="${1..5}" value="${answerInstance?.score}" disabled="${!answerInstance?.correct}" noSelection="${['': "${g.message(code: 'layouts.main_auth_admin.body.content.answer.score.select.label', default: 'Select a score')}"]}"
                           class="bs-select form-control select-score" data-style="btn-success"/>

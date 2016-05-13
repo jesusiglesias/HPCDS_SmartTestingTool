@@ -425,7 +425,7 @@
 					</div>
 					<div class="has-error md-checkbox check-delete-more">
 						<input type="checkbox" name='delete_question' id='delete_question' class="md-check"/>
-						<label for="delete_question" class="sbold">
+						<label for="delete_question" class="sbold text-justify">
 							<span></span>
 							<span class="check"></span>
 							<span class="box"></span>
@@ -434,7 +434,7 @@
 					</div>
 					<div class="has-error md-checkbox check-delete-more">
 						<input type="checkbox" name='delete_question_answer' id='delete_question_answer' class="md-check"/>
-						<label for="delete_question_answer" class="sbold">
+						<label for="delete_question_answer" class="sbold text-justify">
 							<span></span>
 							<span class="check"></span>
 							<span class="box"></span>

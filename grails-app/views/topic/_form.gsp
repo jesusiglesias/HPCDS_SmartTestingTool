@@ -23,7 +23,7 @@
 				<i class="fa fa-times i-delete-backend i-delete-topic-name"></i> <!-- Delete text icon -->
 			</div>
 			<div class="help-block nameTopic-block">
-                <h5>
+                <h5 class="text-justify">
                     <g:message code="layouts.main_auth_admin.body.content.topic.create.checker.block.info.name" default="Type a name of topic and check its availability."/>
                 </h5>
             </div>
@@ -52,7 +52,7 @@
 		<div class="col-sm-6">
 			<div class="${hasErrors(bean: topicInstance, field: 'visibility', 'error')}">
                 <label for="visibility" class="control-label">
-                    <h5 class="sbold">
+                    <h5 class="sbold text-justify">
                         <g:message code="layouts.main_auth_admin.body.content.topic.visibility.sublabel" default="Indicate whether the topic is visible to the user"/>
                     </h5>
                 </label>

@@ -553,7 +553,7 @@
                                                 </td>
                                                 <td class="break-word">${fieldValue(bean: userInstance, field: "name")}</td>
                                                 <td class="break-word">${fieldValue(bean: userInstance, field: "surname")}</td>
-                                                <td><g:formatDate formatName="custom.date.birthdate.format" date="${userInstance?.birthDate}"/></td>
+                                                <td class="space-date"><g:formatDate formatName="custom.date.birthdate.format" date="${userInstance?.birthDate}"/></td>
                                                 <td class="break-word">${fieldValue(bean: userInstance, field: "address")}</td>
                                                 <td class="break-word">${fieldValue(bean: userInstance, field: "city")}</td>
                                                 <td class="break-word">${fieldValue(bean: userInstance, field: "country")}</td>

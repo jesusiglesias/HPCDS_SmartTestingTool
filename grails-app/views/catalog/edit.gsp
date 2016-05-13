@@ -428,14 +428,14 @@
                     </div>
                     <div class="has-error md-checkbox check-delete-custom">
                         <input type="checkbox" name='delete_catalog' id='delete_catalog' class="md-check"/>
-                        <label for="delete_catalog" class="sbold">
+                        <label for="delete_catalog" class="sbold text-justify">
                             <span></span>
                             <span class="check"></span>
                             <span class="box"></span>
                             <g:message code="layouts.main_auth_admin.body.content.catalog.delete.relation" default="Enable to remove the content associated (questions and answers)."/>
                         </label>
                     </div>
-                    <p class="delete-text">
+                    <p class="delete-text text-justify">
                         <g:message code="default.delete.relation.catalog.test.message" default="Important! Remember that deleting a catalog, all associated test are eliminated."/>
                     </p>
                 </g:form>
