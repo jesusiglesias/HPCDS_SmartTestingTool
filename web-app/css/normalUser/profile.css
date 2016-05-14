@@ -126,6 +126,11 @@
 /* Max width: 991px */
 @media (max-width: 991px) {
 
+    .profile-userpic img {
+        width: 50%;
+        height: 100%;
+    }
+
     .profile-sidebar {
         float: none;
         width: 100% !important;
@@ -133,10 +138,38 @@
     }
 
     .profile-sidebar > .portlet {
-        margin-bottom: 20px;
+        margin-bottom: 1px;
     }
 
     .profile-content {
         overflow: visible;
+        margin: 1px 0 0 0;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+
+    .profile-userpic img {
+        width: 60%;
+        height: 100%;
+    }
+}
+
+/* Max-width: 480px */
+@media (max-width: 480px) {
+
+    .profile-userpic img {
+        width: 70%;
+        height: 100%;
+    }
+}
+
+/* Max-width: 320px */
+@media (max-width: 320px) {
+
+    .profile-userpic img {
+        width: 75%;
+        height: 100%;
     }
 }

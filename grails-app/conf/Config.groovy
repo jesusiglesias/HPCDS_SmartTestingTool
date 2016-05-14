@@ -93,6 +93,7 @@ environments {
 
         // TODO Change to own domain
         grails.serverURL = "http://localhost:8080/${appName}"
+        //grails.serverURL = "http://93.186.255.238:8080/${appName}"
     }
 }
 

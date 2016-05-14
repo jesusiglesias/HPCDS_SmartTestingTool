@@ -98,9 +98,7 @@ class CustomTasksFrontEndController {
 
         // It obtains the current user
         User currentUserInstance = User.get(springSecurityService.currentUser.id)
-        bindData(currentUserInstance, this.params, [exclude:['username', 'birthDate']])
-
-        log.error(currentUserInstance.username)
+        bindData(currentUserInstance, this.params, [exclude:['version', 'username', 'birthDate']])
 
         // It checks the date
         if (params.birthDate != "") {
@@ -129,14 +127,11 @@ class CustomTasksFrontEndController {
                 // Roll back in database
                 transactionStatus.setRollbackOnly()
 
-                userStatsList = testStats(currentUserInstance)
-                infoCurrentUser = User.get(springSecurityService.currentUser.id)
-
                 // Clear the list of errors
                 currentUserInstance.clearErrors()
-                currentUserInstance.errors.rejectValue("version", "default.optimistic.locking.failure.userProfile", "While you were editing, this user has been update from another device or browser. You try it again later.")
+                flash.userProfileErrorMessage = g.message(code:"default.optimistic.locking.failure.userProfile", default:"While you were editing, this user has been update from another device or browser. You try it again later.")
 
-                respond currentUserInstance.errors, view:'profile', model: [infoCurrentUser: infoCurrentUser, currentUser: currentUserInstance, completedTest: userStatsList[1], numberActiveTest: userStatsList[0], numberApprovedTest: userStatsList[3], numberUnapprovedTest: userStatsList[2]]
+                redirect uri: "/profile"
                 return
             }
         }
@@ -147,11 +142,18 @@ class CustomTasksFrontEndController {
             // Roll back in database
             transactionStatus.setRollbackOnly()
 
+            // It obtains the statistics
             userStatsList = testStats(currentUserInstance)
-            infoCurrentUser = User.get(springSecurityService.currentUser.id)
 
-            log.error(infoCurrentUser.name)
-            log.error(infoCurrentUser.department.name)
+            // It obtains the original data of the user
+            User.withNewSession {
+                infoCurrentUser = User.get(springSecurityService.currentUser.id)
+                // Avoid lazy load - without session; stats section (department)
+                User.get(springSecurityService.currentUser.id).department
+            }
+
+            // Avoid lazy load - without session; list of department in _personalData (when user chooses several departments)
+            currentUserInstance.department = User.get(springSecurityService.currentUser.id).department
 
             respond currentUserInstance.errors, view:'profile', model: [infoCurrentUser: infoCurrentUser, currentUser: currentUserInstance, completedTest: userStatsList[1], numberActiveTest: userStatsList[0], numberApprovedTest: userStatsList[3], numberUnapprovedTest: userStatsList[2]]
             return
@@ -160,11 +162,11 @@ class CustomTasksFrontEndController {
         try {
 
             // Save user data
-            currentUserInstancee.save(flush:true, failOnError: true)
+            currentUserInstance.save(flush:true, failOnError: true)
 
             request.withFormat {
                 form multipartForm {
-                    flash.userProfileMessage = g.message(code: 'default.updated.message', default: '{0} <strong>{1}</strong> updated successful.', args: [message(code: 'user.label', default: 'User'), currentUserInstance.username])
+                    flash.userProfileMessage = g.message(code: 'default.myProfile.personalInfo.success', default: 'Your personal information has been successfully updated.')
                     redirect uri: '/profile'
                 }
             }
@@ -174,13 +176,10 @@ class CustomTasksFrontEndController {
             // Roll back in database
             transactionStatus.setRollbackOnly()
 
-            userStatsList = testStats(currentUserInstance)
-            infoCurrentUser = User.get(springSecurityService.currentUser.id)
-
             request.withFormat {
                 form multipartForm {
-                    flash.userProfileErrorMessage = g.message(code: 'default.not.updated.message', default: 'ERROR! {0} <strong>{1}</strong> was not updated.', args: [message(code: 'user.label', default: 'User'), currentUserInstance.username])
-                    render view: "profile", model: [infoCurrentUser: infoCurrentUser, currentUser: currentUserInstance, completedTest: userStatsList.get(1), numberActiveTest: userStatsList.get(0), numberApprovedTest: userStatsList.get(3), numberUnapprovedTest: userStatsList.get(2)]
+                    flash.userProfileErrorMessage = g.message(code: 'default.myProfile.personalInfo.error', default: 'ERROR! While updating your personal information.')
+                    redirect uri: '/profile'
                 }
             }
         }
@@ -291,7 +290,7 @@ class CustomTasksFrontEndController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.userProfileAvatarMessage = g.message(code: 'default.myProfile.avatar.success', default: 'The profile image has been updated successfully.')
+                    flash.userProfileAvatarMessage = g.message(code: 'default.myProfile.avatar.success', default: 'Your profile image has been updated successfully.')
                     redirect uri: '/profileAvatar'
                 }
             }
@@ -304,8 +303,7 @@ class CustomTasksFrontEndController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.userProfileAvatarErrorMessage = g.message(code: 'default.myProfile.avatar.error', default: 'ERROR! While updating the profile image.')
-
+                    flash.userProfileAvatarErrorMessage = g.message(code: 'default.myProfile.avatar.error', default: 'ERROR! While updating your profile image.')
                     redirect uri: "/profileAvatar"
                 }
             }
