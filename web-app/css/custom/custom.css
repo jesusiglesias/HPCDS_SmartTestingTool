@@ -604,6 +604,7 @@ table.dataTable tbody tr:hover {
 .password-input::-ms-clear,
 .password-confirm-input::-ms-clear,
 .backendPassword-input::-ms-clear,
+.profilePassword-input::-ms-clear,
 .password-input-register::-ms-clear,
 .password-confirm-input-register::-ms-clear {
     display: none;
@@ -737,6 +738,9 @@ table.dataTable tbody tr:hover {
 .i-show-admin-confirmPassword,
 .i-show-register-password,
 .i-show-register-confirmPassword,
+.i-show-profile-currentPassword,
+.i-show-profile-newPassword,
+.i-show-profile-confirmPassword,
 .i-delete-register-username,
 .i-delete-register-email,
 .i-delete-register-name,
@@ -757,8 +761,13 @@ table.dataTable tbody tr:hover {
 
 /* General elements
 =================================================================== */
-.password-admin {
+.password-space-progress {
     margin-bottom: 10px;
+}
+
+.password-verdict {
+    color: black;
+    font-weight: 600;
 }
 
 /* Button group in create and edit views */
@@ -1786,6 +1795,12 @@ table.dataTable tbody tr:hover {
     .colLine-rowRigth {
         border-right: 0;
         right: 0;
+    }
+
+    /* Entity error message in profile user */
+    .alert-entity-error-profile,
+    .alert-entity-info-profile {
+        margin: 20px 0 20px 0;
     }
 }
 

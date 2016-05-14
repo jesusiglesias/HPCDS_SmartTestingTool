@@ -32,10 +32,12 @@ var DomainUserValidation = function () {
                     },
                     password: {
                         required: true,
+                        minlength: 8,
                         notEqualToUsername:'#username'
                     },
                     confirmPassword: {
                         required: true,
+                        minlength: 8,
                         equalTo: "#password"
                     },
                     name: {
@@ -81,10 +83,12 @@ var DomainUserValidation = function () {
                     },
                     password: {
                         required: _requiredField,
+                        minlength: _minlengthField,
                         notEqualToUsername: _equalPasswordUsername
                     },
                     confirmPassword: {
                         required: _requiredField,
+                        minlength: _minlengthField,
                         equalTo: _equalPassword
                     },
                     name: {

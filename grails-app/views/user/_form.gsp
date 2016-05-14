@@ -74,7 +74,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="password" class="form-control password-admin form-shadow emptySpaces password-user backendPassword-input" autocomplete="off"/>
+                    <g:passwordField name="password" class="form-control password-space-progress form-shadow emptySpaces password-user backendPassword-input" autocomplete="off"/>
                 </div>
                 <i class="fa fa-eye i-show-user-password"></i> <!-- Show password icon -->
             </div>

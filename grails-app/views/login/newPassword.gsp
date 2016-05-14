@@ -11,6 +11,12 @@
     <script type="text/javascript">
 
         // Variables to use in script
+        var _weak = '${g.message(code:'default.password.strength.weak', default:'Weak')}';
+        var _normal = '${g.message(code:'default.password.strength.normal', default:'Normal')}';
+        var _medium = '${g.message(code:'default.password.strength.medium', default:'Medium')}';
+        var _strong = '${g.message(code:'default.password.strength.strong', default:'Strong')}';
+        var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
+        var _minlengthField = '${g.message(code:'default.validation.minlength', default:'Please, enter more than {0} characters.')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
         var _confirming = '${g.message(code: "customTasksUser.updatePassword.submitButton.confirming", default: "Confirming...")}';
@@ -93,6 +99,10 @@
                     <i class="fa fa-eye i-show"></i> <!-- Show password icon -->
                     <i class="fa fa-key"></i>
                 </div>
+                <div id="container-password">
+                    <div class='pwstrength-viewport-progress'></div>
+                    <div class='pwstrength-viewport-verdict'></div>
+                </div>
             </div>
 
             <!-- Password confirm field -->
@@ -119,6 +129,9 @@
         </g:form> <!-- /. Forgot password form -->
     </div> <!-- /.Authentication -->
 
+    <!-- LOAD JAVASCRIPT  -->
+    <g:javascript src="password/pwstrength-bootstrap.min.js"/>
+    <g:javascript src="password/custom-passwordRegister.js"/>
     <g:javascript src="media-match/media.match.min.js"/>
     <g:javascript src="authentication/newPassword.js"/>
 

@@ -21,8 +21,9 @@ class CustomTasksFrontEndController {
 
     def springSecurityService
     def mailService
+    def passwordEncoder
 
-    static allowedMethods = [formContact: "POST", updatePersonalInfo: "PUT", updateAvatar: "POST"]
+    static allowedMethods = [formContact: "POST", updatePersonalInfo: "PUT", updateAvatar: "POST", updatePassword: "PUT"]
 
     /**
      * It shows the home page of user.
@@ -230,6 +231,7 @@ class CustomTasksFrontEndController {
         // User with params received
         def user = new User(params)
 
+        // Not found
         if (user == null) {
 
             // Roll back in database
@@ -320,6 +322,171 @@ class CustomTasksFrontEndController {
             form multipartForm {
                 flash.userProfileAvatarErrorMessage = g.message(code: 'default.not.found.userProfile.message', default:'It has not been able to locate the user. Please. if the problem continues you contact us through the contact form.')
                 redirect action: "profileAvatar", method: "GET"
+            }
+            '*'{ render status: NOT_FOUND }
+        }
+    }
+
+    /**
+     * It shows the password page of the current user.
+     */
+    def profilePassword() {
+        log.debug("CustomTasksFrontEndController():profilePassword()")
+
+        def userStatsList
+
+        // ID of current user
+        def currentUser = User.get(springSecurityService.currentUser.id)
+
+        userStatsList = testStats(currentUser)
+
+        render view: 'profilePassword', model: [currentUser: currentUser, completedTest: userStatsList[1], numberActiveTest: userStatsList[0], numberApprovedTest: userStatsList[3], numberUnapprovedTest: userStatsList[2]]
+    }
+
+    /**
+     * It updates the password of the current normal user.
+     *
+     * @return return If the current user instance is null or has errors.
+     */
+    @Transactional
+    def updatePassword() {
+        log.debug("CustomTasksFrontEndController():updatePassword()")
+
+        def pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$).{8,}\$"
+
+        // User with params received
+        def user = new User(params)
+
+        // Not found
+        if (user == null) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            notFoundPassword()
+            return
+        }
+
+        // Back-end validation - Current password
+        if (!StringUtils.isNotBlank(params.currentPassword)) {
+
+            flash.userProfilePasswordErrorMessage = g.message(code: 'default.myProfile.password.current', default: '<strong>Current password</strong> field is required.')
+            redirect uri: "/profilePassword"
+            return
+        }
+
+        // It obtains the current user
+        User currentUserInstance = User.get(springSecurityService.currentUser.id)
+
+        // Back-end validation - Current password and password in database
+        if (!passwordEncoder.isPasswordValid(currentUserInstance.password, params.currentPassword, null)) {
+
+            flash.userProfilePasswordErrorMessage = g.message(code: 'default.myProfile.password.current.match', default: '<strong>Current password</strong> field does not match with your password in force.')
+            redirect uri: "/profilePassword"
+            return
+        }
+
+        // Back-end validation - New password
+        if (!StringUtils.isNotBlank(params.password)) {
+
+            flash.userProfilePasswordErrorMessage = g.message(code: 'default.myProfile.password.new', default: '<strong>New password</strong> field is required.')
+            redirect uri: "/profilePassword"
+            return
+        }
+
+        // Back-end validation - New password matches with pattern
+        if (!params.password.matches(pattern)) {
+
+            flash.userProfilePasswordErrorMessage = g.message(code: 'default.myProfile.password.new.match', default: '<strong>New password</strong> field does not match with the required pattern.')
+            redirect uri: "/profilePassword"
+            return
+        }
+
+        // Back-end validation - New password different to username
+        if (params.password.toLowerCase().equals(currentUserInstance.username.toLowerCase())) {
+
+            flash.userProfilePasswordErrorMessage = g.message(code: 'default.myProfile.password.notUsername', default: '<strong>New password</strong> field must not be equal to username.')
+            redirect uri: "/profilePassword"
+            return
+        }
+
+        // Back-end validation - Confirm password
+        if (!StringUtils.isNotBlank(params.confirmPassword)) {
+
+            flash.userProfilePasswordErrorMessage = g.message(code: 'default.myProfile.password.confirm', default: '<strong>Confirm password</strong> field is required.')
+            redirect uri: "/profilePassword"
+            return
+        }
+
+        log.error(params.password)
+        log.error(params.confirmPassword)
+
+        // Back-end validation - New password and confirm password equals
+        if (!params.password.equals(params.confirmPassword)) {
+
+            flash.userProfilePasswordErrorMessage = g.message(code: 'default.myProfile.password.confirm.match.newPassword', default: '<strong>New password</strong> and <strong>Confirm password</strong> fields must match.')
+            redirect uri: "/profilePassword"
+            return
+        }
+
+        // Bind data
+        bindData(currentUserInstance, this.params, [include: ['password', 'confirmPassword']])
+
+        // It checks concurrent updates
+        if (params.version) {
+            def version = params.version.toLong()
+
+            if (currentUserInstance.version > version) {
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+
+                // Clear the list of errors
+                currentUserInstance.clearErrors()
+                flash.userProfilePasswordErrorMessage = g.message(code: 'default.optimistic.locking.failure.userProfile', default: 'While you were editing, this user has been update from another device or browser. You try it again later.')
+
+                redirect uri: "/profilePassword"
+                return
+            }
+        }
+
+        try {
+
+            // Update profile image
+            currentUserInstance.save(flush: true, failOnError: true)
+
+            request.withFormat {
+                form multipartForm {
+                    flash.userProfilePasswordMessage = g.message(code: 'default.myProfile.password.success', default: 'Your password has been successfully updated.')
+                    redirect uri: '/profilePassword'
+                }
+            }
+
+        } catch (Exception exception) {
+            log.error("CustomTasksFrontEndController():updatePassword():Exception:NormalUser:${currentUserInstance.username}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            request.withFormat {
+                form multipartForm {
+                    flash.userProfilePasswordErrorMessage = g.message(code: 'default.myProfile.password.error', default: 'ERROR! While updating your password.')
+                    redirect uri: "/profilePassword"
+                }
+            }
+        }
+    }
+
+    /**
+     * It renders the not found message if the user instance was not found.
+     */
+    protected void notFoundPassword() {
+        log.debug("CustomTasksFrontEndController():updateProfile:notFoundPassword():CurrentUser:${springSecurityService.currentUser.username}")
+
+        request.withFormat {
+            form multipartForm {
+                flash.userProfilePasswordErrorMessage = g.message(code: 'default.not.found.userProfile.message', default:'It has not been able to locate the user. Please. if the problem continues you contact us through the contact form.')
+                redirect action: "profilePassword", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
         }

@@ -10,7 +10,8 @@
     margin-top: 20px;
 }
 
-.profile-content {
+.profile-content,
+.profile-content-password {
     overflow: hidden;
     margin: 20px 20px 0 0;
 }
@@ -123,6 +124,11 @@
     font-weight: 300;
 }
 
+/* Instructions of password */
+.profilePassword-instructions-head {
+    background-color: #EADCB1 !important;
+}
+
 /* Max width: 991px */
 @media (max-width: 991px) {
 
@@ -144,6 +150,11 @@
     .profile-content {
         overflow: visible;
         margin: 1px 0 0 0;
+    }
+
+    .profile-content-password {
+        overflow: visible;
+        margin: 20px 0 0 0;
     }
 }
 

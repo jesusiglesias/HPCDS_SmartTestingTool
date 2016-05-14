@@ -43,12 +43,16 @@ var Login = function() {
             ignore: "",
             rules: {
                 passwordConfirm: {
+                    required: true,
+                    minlength: 8,
                     equalTo: "#password"
                 }
             },
 
             messages: {
                 passwordConfirm: {
+                    required: _requiredField,
+                    minlength: _minlengthField,
                     equalTo: _equalPassword
                 }
             },

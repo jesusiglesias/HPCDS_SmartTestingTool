@@ -123,6 +123,7 @@ class UrlMappings {
         "/profile-error"(controller: 'customTasksFrontEnd', action: 'updatePersonalInfo')
         "/profileAvatar"(controller: 'customTasksFrontEnd', action: 'profileAvatar')
         "/profileAvatar-error"(controller: 'customTasksFrontEnd', action: 'updateAvatar')
+        "/profilePassword"(controller: 'customTasksFrontEnd', action: 'profilePassword')
         "/contact"(controller: 'customTasksFrontEnd', action: 'contact')
         "/cookiesPolicy"(controller: 'customTasksFrontEnd', action: 'cookiesPolicy')
         "/faq"(view: "customTasksFrontEnd/faq")

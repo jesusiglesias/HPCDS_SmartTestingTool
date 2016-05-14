@@ -248,9 +248,9 @@ class CustomTasksUserService {
     def private password_notUsername(String email, String newPassword) {
         log.debug("CustomTasksUserService:password_notUsername()")
 
-        def userOldPassword = SecUser.findByEmail(email).getUsername()
+        def username = SecUser.findByEmail(email).getUsername()
 
-        return [sameUsername: newPassword.toLowerCase().equals(userOldPassword.toLowerCase())]
+        return [sameUsername: newPassword.toLowerCase().equals(username.toLowerCase())]
     }
 
     /**
