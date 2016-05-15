@@ -186,10 +186,6 @@ var Layout = function () {
     // Helper function to calculate sidebar height for fixed sidebar layout.
     var _calculateFixedSidebarViewportHeight = function () {
         var sidebarHeight = App.getViewPort().height - $('.page-header').outerHeight(true);
-        if ($('body').hasClass("page-footer-fixed")) {
-            sidebarHeight = sidebarHeight - $('.page-footer').outerHeight();
-        }
-
         return sidebarHeight;
     };
 
@@ -368,7 +364,5 @@ var Layout = function () {
 }(); // /.Layout function()
 
 jQuery(document).ready(function() {
-    /* TODO */
-    console.log ("Init Layout");
     Layout.init(); // Init core components
 });

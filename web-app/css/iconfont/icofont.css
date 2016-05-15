@@ -1220,6 +1220,10 @@
     content: "\eba0";
 }
 
+.icofont-file-text:before {
+    content: "\ec1e";
+}
+
 /*Font size*/
 .icofont-lg {
     font-size: 1.33333333em;

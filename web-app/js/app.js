@@ -23,23 +23,9 @@ var App = function() {
 
     var body = $('body');
 
-    // Theme layout color set TODO
-    var brandColors = {
-        'blue': '#89C4F4',
-        'red': '#F3565D',
-        'green': '#1bbc9b',
-        'purple': '#9b59b6',
-        'grey': '#95a5a6',
-        'yellow': '#F8CB00'
-    };
 
     // It initializes main settings
     var handleInit = function() {
-
-        /* TODO
-        if (body.css('direction') === 'rtl') {
-            isRTL = true;
-        }*/
 
         isIE8 = !!navigator.userAgent.match(/MSIE 8.0/);
         isIE9 = !!navigator.userAgent.match(/MSIE 9.0/);
@@ -319,14 +305,6 @@ var App = function() {
         });
     };
 
-    // It handles Bootstrap switches
-    var handleBootstrapSwitch = function() {
-        if (!$().bootstrapSwitch) {
-            return;
-        }
-        $('.make-switch').bootstrapSwitch();
-    };
-
     // It handles Bootstrap confirmations
     var handleBootstrapConfirmation = function() {
         if (!$().confirmation) {
@@ -454,27 +432,6 @@ var App = function() {
         App.initSlimScroll('.scroller');
     };
 
-    // HaIt handlesndles Image Preview using jQuery Fancybox plugin
-    var handleFancybox = function() {
-        if (!jQuery.fancybox) {
-            return;
-        }
-
-        if ($(".fancybox-button").size() > 0) {
-            $(".fancybox-button").fancybox({
-                groupAttr: 'data-rel',
-                prevEffect: 'none',
-                nextEffect: 'none',
-                closeBtn: true,
-                helpers: {
-                    title: {
-                        type: 'inside'
-                    }
-                }
-            });
-        }
-    };
-
     // It handles counterup plugin wrapper
     var handleCounterup = function() {
         if (!$().counterUp) {
@@ -577,15 +534,12 @@ var App = function() {
             handleMaterialDesign();         // It handles material design
             handleUniform();                // It handles custom radio & checkboxes
             handleiCheck();                 // It handles custom icheck radio and checkboxes
-            handleBootstrapSwitch();        // It handles bootstrap switch plugin
             handleScrollers();              // It handles slim scrolling contents
-            handleFancybox();               // It handles fancy box
             handleSelect2();                // It handles custom Select2 dropdowns
             handlePortletTools();           // It handles portlet action bar functionality (refresh, configure, toggle, remove)
             handleAlerts();                 // It handles closabled alerts
             handleDropdowns();              // It handles dropdowns
             handleTabs();                   // It handles tabs
-            // TODO Tooltips handleTooltips(); // handle bootstrap tooltips
             handlePopovers();               // It handles bootstrap popovers
             handleAccordions();             // It handles accordions
             handleModals();                 // It handles modals
@@ -604,13 +558,10 @@ var App = function() {
         initAjax: function() {
             handleUniform();                // It handles custom radio & checkboxes
             handleiCheck();                 // It handles custom icheck radio and checkboxes
-            handleBootstrapSwitch();        // It handles bootstrap switch plugin
             handleDropdownHover();          // It handles dropdown hover
             handleScrollers();              // It handles slim scrolling contents
             handleSelect2();                // It handles custom Select2 dropdowns
-            handleFancybox();               // It handles fancy box
             handleDropdowns();              // It handles dropdowns
-            // TODO Tooltips handleTooltips(); // handle bootstrap tooltips
             handlePopovers();               // It handles bootstrap popovers
             handleAccordions();             // It handles accordions
             handleBootstrapConfirmation();  // It handles bootstrap confirmations
@@ -732,87 +683,6 @@ var App = function() {
         // Function to scroll to the top TODO
         scrollTop: function() {
             App.scrollTo();
-        },
-
-        // Wrapper function to  block element(indicate loading)
-        blockUI: function(options) {
-            options = $.extend(true, {}, options);
-            var html = '';
-            if (options.animate) {
-                html = '<div class="loading-message ' + (options.boxed ? 'loading-message-boxed' : '') + '">' + '<div class="block-spinner-bar"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>' + '</div>';
-            } else if (options.iconOnly) {
-                html = '<div class="loading-message ' + (options.boxed ? 'loading-message-boxed' : '') + '"><img src="' + this.getGlobalImgPath() + 'loading-spinner-grey.gif" align=""></div>';
-            } else if (options.textOnly) {
-                html = '<div class="loading-message ' + (options.boxed ? 'loading-message-boxed' : '') + '"><span>&nbsp;&nbsp;' + (options.message ? options.message : 'LOADING...') + '</span></div>';
-            } else {
-                html = '<div class="loading-message ' + (options.boxed ? 'loading-message-boxed' : '') + '"><img src="' + this.getGlobalImgPath() + 'loading-spinner-grey.gif" align=""><span>&nbsp;&nbsp;' + (options.message ? options.message : 'LOADING...') + '</span></div>';
-            }
-
-            if (options.target) { // Element blocking
-                var el = $(options.target);
-                if (el.height() <= ($(window).height())) {
-                    options.cenrerY = true;
-                }
-                el.block({
-                    message: html,
-                    baseZ: options.zIndex ? options.zIndex : 1000,
-                    centerY: options.cenrerY !== undefined ? options.cenrerY : false,
-                    css: {
-                        top: '10%',
-                        border: '0',
-                        padding: '0',
-                        backgroundColor: 'none'
-                    },
-                    overlayCSS: {
-                        backgroundColor: options.overlayColor ? options.overlayColor : '#555',
-                        opacity: options.boxed ? 0.05 : 0.1,
-                        cursor: 'wait'
-                    }
-                });
-            } else { // page blocking
-                $.blockUI({
-                    message: html,
-                    baseZ: options.zIndex ? options.zIndex : 1000,
-                    css: {
-                        border: '0',
-                        padding: '0',
-                        backgroundColor: 'none'
-                    },
-                    overlayCSS: {
-                        backgroundColor: options.overlayColor ? options.overlayColor : '#555',
-                        opacity: options.boxed ? 0.05 : 0.1,
-                        cursor: 'wait'
-                    }
-                });
-            }
-        },
-
-        // Wrapper function to  un-block element(finish loading)
-        unblockUI: function(target) {
-            if (target) {
-                $(target).unblock({
-                    onUnblock: function() {
-                        $(target).css('position', '');
-                        $(target).css('zoom', '');
-                    }
-                });
-            } else {
-                $.unblockUI();
-            }
-        },
-
-        startPageLoading: function(options) {
-            if (options && options.animate) {
-                $('.page-spinner-bar').remove();
-                $('body').append('<div class="page-spinner-bar"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>');
-            } else {
-                $('.page-loading').remove();
-                $('body').append('<div class="page-loading"><img src="' + this.getGlobalImgPath() + 'loading-spinner-grey.gif"/>&nbsp;&nbsp;<span>' + (options && options.message ? options.message : 'Loading...') + '</span></div>');
-            }
-        },
-
-        stopPageLoading: function() {
-            $('.page-loading, .page-spinner-bar').remove();
         },
 
         alert: function(options) {
@@ -954,16 +824,6 @@ var App = function() {
             return isIE9;
         },
 
-        // Check RTL mode TODO
-       /* TODO isRTL: function() {
-            return isRTL;
-        }, */
-
-        // Check IE8 mode
-        /* TODO isAngularJsApp: function() {
-            return (typeof angular == 'undefined') ? false : true;
-        }, */
-
             /* TODO
         getAssetsPath: function() {
             return assetsPath;
@@ -1034,7 +894,4 @@ var App = function() {
 
 jQuery(document).ready(function() {    
    App.init(); // Init core components
-
-
-   console.log("init")
 });

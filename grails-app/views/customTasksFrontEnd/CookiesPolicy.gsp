@@ -25,6 +25,55 @@
         </div> <!-- /.Page-bar -->
     </sec:ifLoggedIn>
 
+    <!-- Horizontal menu -->
+    <content tag="horizontalMenu">
+        <div class="hor-menu hidden-sm hidden-xs">
+            <ul class="nav navbar-nav">
+                <sec:ifAllGranted roles="ROLE_USER">
+                <li>
+                    <g:link uri="/faq"><g:message code="layout.main_auth_user.horizontal.menu.faq" default="Help"/></g:link>
+                </li>
+                <li>
+                    <g:link uri="/contact"><g:message code="layout.main_auth_user.horizontal.menu.contact" default="Contact"/></g:link>
+                </li>
+                </sec:ifAllGranted>
+                <li class="active">
+                    <g:link uri="/cookiesPolicy"><g:message code="layout.main_auth_user.horizontal.menu.cookie" default="Cookies policy"/>
+                        <span class="selected"></span>
+                    </g:link>
+                </li>
+            </ul>
+        </div>
+    </content>
+
+    <!-- Responsive horizontal menu -->
+    <content tag="responsiveHorizontalMenu">
+        <sec:ifAllGranted roles="ROLE_USER">
+            <li class="nav-item">
+                <g:link uri="/faq" class="nav-link">
+                    <i class="icofont icofont-info"></i>
+                    <span class="title"><g:message code="layout.main_auth_user.horizontal.menu.faq" default="Help"/></span>
+                    <span class="arrow"></span>
+                </g:link>
+            </li>
+            <li class="nav-item">
+                <g:link uri="/contact" class="nav-link">
+                    <i class="icofont icofont-speech-comments"></i>
+                    <span class="title"><g:message code="layout.main_auth_user.horizontal.menu.contact" default="Contact"/></span>
+                    <span class="arrow"></span>
+                </g:link>
+            </li>
+        </sec:ifAllGranted>
+        <li class="nav-item active">
+            <g:link uri="/cookiesPolicy" class="nav-link">
+                <i class="icofont icofont-file-text"></i>
+                <span class="title"><g:message code="layout.main_auth_user.horizontal.menu.cookie" default="Cookies policy"/></span>
+                <span class="selected"></span>
+                <span class="arrow"></span>
+            </g:link>
+        </li>
+    </content>
+
     <div class="row row-userLayoutTitle">
         <div class="col-md-12 col-userLayoutTitle">
             <!-- Page-title -->

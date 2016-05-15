@@ -86,16 +86,15 @@
                 <g:link uri="/">
                     <asset:image src="logo/logo.png" alt="HP CDS - Smart Testing Tool" class="logo-default hvr-wobble-horizontal"/>
                 </g:link>
-                <!-- Hamburguer  TODO-->
-                <!--<div class="menu-toggler sidebar-toggler">
-                    <i class="icofont  icofont-navigation-menu"></i>
-                </div> -->
             </div> <!-- /.Logo -->
-            <!-- Responsive hamburguer -->
-            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
-                <i class="icofont  icofont-navigation-menu"></i>
-            </a>
+
             <sec:ifLoggedIn>
+
+                <!-- Responsive hamburguer -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <i class="icofont  icofont-navigation-menu"></i>
+                </a>
+
                 <!-- Top navigation menu -->
                 <div class="top-menu">
                     <ul class="nav navbar-nav pull-right">
@@ -111,7 +110,7 @@
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <!-- Profile TODO -->
+                                    <!-- Profile -->
                                     <li class="li-iconId-user">
                                         <g:link uri="/profile" id="${sec.loggedInUserInfo(field:"id")}">
                                             <i class="icofont icofont-id iconId-user"></i> <g:message code="layouts.main_auth_admin.head.profile" default="My profile"/>
@@ -215,259 +214,28 @@
                         </li>
                     </ul>
                 </div> <!-- /.Top navigation menu -->
+
+                <!-- Load horizontal menu -->
+                <g:pageProperty name="page.horizontalMenu"/>
+
             </sec:ifLoggedIn>
-
-        <!-- DOC: Remove "hor-menu-light" class to have a horizontal menu with theme background instead of white background -->
-        <!-- DOC: This is desktop version of the horizontal menu. The mobile version is defined(duplicated) in the responsive menu below along with sidebar menu. So the horizontal menu has 2 seperate versions -->
-            <div class="hor-menu  hidden-sm hidden-xs">
-                <ul class="nav navbar-nav">
-                    <!-- DOC: Remove data-hover="megamenu-dropdown" and data-close-others="true" attributes below to disable the horizontal opening on mouse hover -->
-                    <li class="classic-menu-dropdown active">
-                        <g:link uri="/faq"><g:message code="layout.main_auth_user.horizontal.menu.faq" default="Help"/>
-                            <span class="selected"> </span>
-                        </g:link>
-                    </li>
-                    <li class="classic-menu-dropdown active">
-                        <g:link uri="/contact"><g:message code="layout.main_auth_user.horizontal.menu.contact" default="Contact"/>
-                            <span class="selected"> </span>
-                        </g:link>
-                    </li>
-                    <li class="classic-menu-dropdown active">
-                        <g:link uri="/cookiesPolicy"><g:message code="layout.main_auth_user.horizontal.menu.cookie" default="Cookies policy"/>
-                            <span class="selected"> </span>
-                        </g:link>
-                    </li>
-
-                    <li class="mega-menu-dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-hover="megamenu-dropdown" data-close-others="true"> Mega
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" style="min-width: 700px;">
-                            <li>
-                                <!-- Content container to add padding -->
-                                <div class="mega-menu-content">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <ul class="mega-menu-submenu">
-                                                <li>
-                                                    <h3>Section 1</h3>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Example Link</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <ul class="mega-menu-submenu">
-                                                <li>
-                                                    <h3>Section 2</h3>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Example Link</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <ul class="mega-menu-submenu">
-                                                <li>
-                                                    <h3>Section 3</h3>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Example Link</a>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="mega-menu-dropdown mega-menu-full" data-hover="megamenu-dropdown" data-close-others="true">
-                        <a href="javascript:;" class="dropdown-toggle" data-hover="megamenu-dropdown" data-close-others="true"> Full Mega
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <!-- Content container to add padding -->
-                            <div class="mega-menu-content ">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <ul class="mega-menu-submenu">
-                                                    <li>
-                                                        <h3>Section 1</h3>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Example Link</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <ul class="mega-menu-submenu">
-                                                    <li>
-                                                        <h3>Section 1</h3>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Example Link</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <ul class="mega-menu-submenu">
-                                                    <li>
-                                                        <h3>Section 1</h3>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Example Link</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <ul class="mega-menu-submenu">
-                                                    <li>
-                                                        <h3>Section 4</h3>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Example Link</a>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div id="accordion" class="panel-group">
-                                            <div class="panel panel-success">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="collapsed"> Mega Menu Info #1 </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseOne" class="panel-collapse in">
-                                                    <div class="panel-body"> Metronic Mega Menu Works for fixed and responsive layout and has the facility to include (almost) any Bootstrap elements. </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-danger">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed"> Mega Menu Info #2 </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseTwo" class="panel-collapse collapse">
-                                                    <div class="panel-body"> Metronic Mega Menu Works for fixed and responsive layout and has the facility to include (almost) any Bootstrap elements. </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-info">
-                                                <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"> Mega Menu Info #3 </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseThree" class="panel-collapse collapse">
-                                                    <div class="panel-body"> Metronic Mega Menu Works for fixed and responsive layout and has the facility to include (almost) any Bootstrap elements. </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li class="classic-menu-dropdown">
-                    <a href="javascript:;" data-hover="megamenu-dropdown" data-close-others="true"> Classic
-                        <i class="fa fa-angle-down"></i>
-                    </a>
-                    <ul class="dropdown-menu pull-left">
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-bookmark-o"></i> Section 1 </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-user"></i> Section 2 </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-puzzle-piece"></i> Section 3 </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-gift"></i> Section 4 </a>
-                        </li>
-                        <li>
-                            <a href="javascript:;">
-                                <i class="fa fa-table"></i> Section 5 </a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a href="javascript:;">
-                                <i class="fa fa-envelope-o"></i> More options </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="javascript:;"> Second level link </a>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:;"> More options </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="index.html"> Third level link </a>
-                                        </li>
-                                        <li>
-                                            <a href="index.html"> Third level link </a>
-                                        </li>
-                                        <li>
-                                            <a href="index.html"> Third level link </a>
-                                        </li>
-                                        <li>
-                                            <a href="index.html"> Third level link </a>
-                                        </li>
-                                        <li>
-                                            <a href="index.html"> Third level link </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="index.html"> Second level link </a>
-                                </li>
-                                <li>
-                                    <a href="index.html"> Second level link </a>
-                                </li>
-                                <li>
-                                    <a href="index.html"> Second level link </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-        <form class="search-form" action="extra_search.html" method="GET">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search..." name="query">
-                <span class="input-group-btn">
-                    <a href="javascript:;" class="btn submit">
-                        <i class="icon-magnifier"></i>
-                    </a>
-                </span>
-            </div>
-        </form>
-        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
-
-
-
         </div> <!-- /.Header inner -->
     </div><!-- /.HEADER -->
 
-    <!-- Container -->
     <div class="page-container">
+        <sec:ifLoggedIn>
+            <div class="page-sidebar-wrapper">
+                <div class="page-sidebar page-sidebar-responsive navbar-collapse collapse">
+                    <div class="page-sidebar-wrapper">
+                        <!-- Responsive horizontal menu -->
+                        <ul class="page-sidebar-menu visible-sm visible-xs page-header-fixed">
+                            <!-- Load responsive horizontal menu -->
+                            <g:pageProperty name="page.responsiveHorizontalMenu"/>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </sec:ifLoggedIn>
 
         <!-- LOAD BODY OTHER VIEWS -->
         <g:layoutBody/>
