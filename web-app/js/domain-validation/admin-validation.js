@@ -33,11 +33,13 @@ var DomainAdminValidation = function () {
                     password: {
                         required: true,
                         minlength: 8,
+                        maxlength: 32,
                         notEqualToUsername:'#username'
                     },
                     confirmPassword: {
                         required: true,
                         minlength: 8,
+                        maxlength: 32,
                         equalTo: "#password"
                     }
                 },
@@ -55,11 +57,13 @@ var DomainAdminValidation = function () {
                     password: {
                         required: _requiredField,
                         minlength: _minlengthField,
+                        maxlength: _maxlengthField,
                         notEqualToUsername: _equalPasswordUsername
                     },
                     confirmPassword: {
                         required: _requiredField,
                         minlength: _minlengthField,
+                        maxlength: _maxlengthField,
                         equalTo: _equalPassword
                     }
                 },
@@ -221,6 +225,22 @@ var DomainAdminValidation = function () {
         $('#email').maxlength({
             limitReachedClass: "label label-danger",
             threshold: 20,
+            placement: 'top',
+            validate: true
+        });
+
+        /* Password field */
+        $('#password').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 10,
+            placement: 'top',
+            validate: true
+        });
+
+        /* Confirm password field */
+        $('#confirmPassword').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 10,
             placement: 'top',
             validate: true
         });

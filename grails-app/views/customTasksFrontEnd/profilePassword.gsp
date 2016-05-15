@@ -16,6 +16,7 @@
         var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This field is required.')}';
         var _minlengthField = '${g.message(code:'default.validation.minlength', default:'Please, enter more than {0} characters.')}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
         var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
         var _equalPasswordUsername = '${raw(g.message(code:'default.password.username', default:'<strong>Password</strong> field must not be equal to username.'))}';
 
@@ -143,7 +144,7 @@
                                     <div id="collapseProfilePassword" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <ul>
-                                                <li> <g:message code="views.login.auth.newPassword.longitude" default="It must contain a minimum length of 8 characters."/> </li>
+                                                <li> <g:message code="views.login.auth.newPassword.longitude" default="It must contain a length between 8 characters and 32 characters."/> </li>
                                                 <li> <g:message code="views.login.auth.newPassword.number" default="It must contain at least one number."/> </li>
                                                 <li> <g:message code="views.login.auth.newPassword.lowercase" default="It must contain at least one lowercase letter."/> </li>
                                                 <li> <g:message code="views.login.auth.newPassword.uppercase" default="It must contain at least one uppercase letter."/> </li>
@@ -199,6 +200,7 @@
     <!-- LOAD JAVASCRIPT -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <g:javascript src="counter/jquery.counterup.min.js"/>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="password/custom-password.js"/>
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
     <g:javascript src="domain-validation/password-profile-validation.js"/>

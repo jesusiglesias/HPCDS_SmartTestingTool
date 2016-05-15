@@ -394,8 +394,8 @@ class CustomTasksFrontEndController {
             return
         }
 
-        // Back-end validation - New password matches with pattern
-        if (!params.password.matches(pattern)) {
+        // Back-end validation - New password matches with pattern and maxlength
+        if (!params.password.matches(pattern) || params.password.length() > 32) {
 
             flash.userProfilePasswordErrorMessage = g.message(code: 'default.myProfile.password.new.match', default: '<strong>New password</strong> field does not match with the required pattern.')
             redirect uri: "/profilePassword"
@@ -417,9 +417,6 @@ class CustomTasksFrontEndController {
             redirect uri: "/profilePassword"
             return
         }
-
-        log.error(params.password)
-        log.error(params.confirmPassword)
 
         // Back-end validation - New password and confirm password equals
         if (!params.password.equals(params.confirmPassword)) {

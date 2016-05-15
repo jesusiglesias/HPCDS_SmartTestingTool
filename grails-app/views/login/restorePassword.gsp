@@ -60,7 +60,6 @@
             <g:if test='${flash.errorRestorePassword}'>
                 <div class="alert alert-block alert-danger alert-danger-custom alert-dismissable alert-restorePassword fade in">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden='true'></button>
-                    <h5 class="alert-heading alert-reauthentication">${raw(g.message(code:'views.login.auth.error.title', default:'<strong>Error!</strong>'))} </h5>
                     <p> ${raw(flash.errorRestorePassword)} </p>
                 </div>
                 <g:javascript>

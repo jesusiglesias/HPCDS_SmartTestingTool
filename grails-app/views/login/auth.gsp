@@ -150,7 +150,6 @@
         <g:if test='${flash.errorInvalidSessionAuthenticationException}'>
             <div class="alert alert-block alert-danger alert-danger-custom alert-dismissable alert-notuser-reauth-invalidsession fade in">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden='true'></button>
-                <h5 class="alert-heading alert-reauthentication">${raw(g.message(code:'views.login.auth.error.title', default:'<strong>Error!</strong>'))} </h5>
                 <p> ${flash.errorInvalidSessionAuthenticationException} </p>
             </div>
             <g:javascript>

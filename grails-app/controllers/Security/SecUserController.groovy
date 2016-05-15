@@ -1,6 +1,7 @@
 package Security
 
 import grails.converters.JSON
+import org.apache.commons.lang.StringUtils
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import static grails.async.Promises.*
@@ -86,22 +87,41 @@ class SecUserController {
             return
         }
 
-        // Check if password and confirm password fields are same
-        if (secUserInstance.password != secUserInstance.confirmPassword) {
-            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
+        // Back-end validation - Password with maxlength
+        if (secUserInstance.password.length() > 32) {
+
+            flash.secUserErrorMessage = g.message(code: 'default.password.maxlength', default: '<strong>Password</strong> field does not match with the required pattern.')
             render view: "create", model: [secUserInstance: secUserInstance]
             return
         }
 
         // Check if password and username are same
         if (secUserInstance.password.toLowerCase() == secUserInstance.username.toLowerCase()) {
+
             flash.secUserErrorMessage = g.message(code: 'default.password.username', default: '<strong>Password</strong> field must not be equal to username.')
+            render view: "create", model: [secUserInstance: secUserInstance]
+            return
+        }
+
+        // Back-end validation - Confirm password
+        if (!StringUtils.isNotBlank(secUserInstance.confirmPassword)) {
+
+            flash.secUserErrorMessage = g.message(code: 'default.password.confirm', default: '<strong>Confirm password</strong> field cannot be null.')
+            render view: "create", model: [secUserInstance: secUserInstance]
+            return
+        }
+
+        // Check if password and confirm password fields are same
+        if (secUserInstance.password != secUserInstance.confirmPassword) {
+
+            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
             render view: "create", model: [secUserInstance: secUserInstance]
             return
         }
 
         // It checks that mime-types is correct: ['image/png', 'image/jpeg', 'image/gif']
         if (!filename.empty && !contentsType.contains(filename.getContentType())) {
+
             flash.secUserErrorMessage = g.message(code: 'default.validation.mimeType.image', default: 'The profile image must be of type: <strong>.png</strong>, <strong>.jpeg</strong> or <strong>.gif</strong>.')
             render  view: "create", model: [secUserInstance: secUserInstance]
             return
@@ -205,13 +225,13 @@ class SecUserController {
             return
         }
 
-        // Check if password and confirm password fields are same
-        if (secUserInstance.password != secUserInstance.confirmPassword) {
+        // Back-end validation - Password with maxlength
+        if (secUserInstance.password.length() > 32) {
 
             // Roll back in database
             transactionStatus.setRollbackOnly()
 
-            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
+            flash.secUserErrorMessage = g.message(code: 'default.password.maxlength', default: '<strong>Password</strong> field does not match with the required pattern.')
             render view: "edit", model: [secUserInstance: secUserInstance]
             return
         }
@@ -223,6 +243,28 @@ class SecUserController {
             transactionStatus.setRollbackOnly()
 
             flash.secUserErrorMessage = g.message(code: 'default.password.username', default: '<strong>Password</strong> field must not be equal to username.')
+            render view: "edit", model: [secUserInstance: secUserInstance]
+            return
+        }
+
+        // Back-end validation - Confirm password
+        if (!StringUtils.isNotBlank(secUserInstance.confirmPassword)) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.secUserErrorMessage = g.message(code: 'default.password.confirm', default: '<strong>Confirm password</strong> field cannot be null.')
+            render view: "edit", model: [secUserInstance: secUserInstance]
+            return
+        }
+
+        // Check if password and confirm password fields are same
+        if (secUserInstance.password != secUserInstance.confirmPassword) {
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.secUserErrorMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
             render view: "edit", model: [secUserInstance: secUserInstance]
             return
         }

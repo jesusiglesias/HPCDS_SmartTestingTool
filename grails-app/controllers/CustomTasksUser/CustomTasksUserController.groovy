@@ -5,6 +5,7 @@ import User.User
 import Security.SecRole
 import Security.SecUserSecRole
 import grails.converters.JSON
+import org.apache.commons.lang.StringUtils
 import static grails.async.Promises.*
 import java.text.SimpleDateFormat
 import grails.transaction.Transactional
@@ -262,16 +263,34 @@ class CustomTasksUserController {
             return
         }
 
-        // Check if password and confirm password fields are same
-        if (userRegisterInstance.password != userRegisterInstance.confirmPassword) {
-            flash.errorRegisterMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
+        // Back-end validation - Password with maxlength
+        if (userRegisterInstance.password.length() > 32) {
+
+            flash.errorRegisterMessage = g.message(code: 'default.password.maxlength', default: '<strong>Password</strong> field does not match with the required pattern.')
             render view: "/login/register", model: [userRegisterInstance: userRegisterInstance]
             return
         }
 
         // Check if password and username are same
         if (userRegisterInstance.password.toLowerCase() == userRegisterInstance.username.toLowerCase()) {
+
             flash.errorRegisterMessage = g.message(code: 'default.password.username', default: '<strong>Password</strong> field must not be equal to username.')
+            render view: "/login/register", model: [userRegisterInstance: userRegisterInstance]
+            return
+        }
+
+        // Back-end validation - Confirm password
+        if (!StringUtils.isNotBlank(userRegisterInstance.confirmPassword)) {
+
+            flash.errorRegisterMessage = g.message(code: 'default.password.confirm', default: '<strong>Confirm password</strong> field cannot be null.')
+            render view: "/login/register", model: [userRegisterInstance: userRegisterInstance]
+            return
+        }
+
+        // Check if password and confirm password fields are same
+        if (userRegisterInstance.password != userRegisterInstance.confirmPassword) {
+
+            flash.errorRegisterMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
             render view: "/login/register", model: [userRegisterInstance: userRegisterInstance]
             return
         }
@@ -479,6 +498,22 @@ class CustomTasksUserController {
 
         if(customTasksUserService.check_token(params.token, 'restore')){ // It checks again the integrity of the token
 
+            // Back-end validation - Password with maxlength
+            if (params.password.length() > 32) {
+
+                flash.errorNewPassword = g.message(code: 'default.myProfile.password.new.match', default: '<strong>New password</strong> field does not match with the required pattern.')
+                redirect uri: '/newPassword', params: [token: params.token, newPasswordAgain: true]
+                return
+            }
+
+            // Back-end validation - Confirm password
+            if (!StringUtils.isNotBlank(params.passwordConfirm)) {
+
+                flash.errorNewPassword = g.message(code: 'default.password.confirm', default: '<strong>Confirm password</strong> field cannot be null.')
+                redirect uri: '/newPassword', params: [token: params.token, newPasswordAgain: true]
+                return
+            }
+
             def update_user = customTasksUserService.update_pass(params) // Password validation
 
             if(update_user.response){ // Response is true
@@ -493,7 +528,7 @@ class CustomTasksUserController {
             if (!update_user.valid) { // Invalid password
                 log.debug("CustomTasksUserController:updatePass():invalidPassword")
 
-                flash.errorNewPassword = g.message(code: 'customTasksUser.updatePassword.invalidPassword', default: 'The password you entered does not meet the requirements.')
+                flash.errorNewPassword = g.message(code: 'default.myProfile.password.new.match', default: '<strong>New password</strong> field does not match with the required pattern.')
 
             } else if (!update_user.match) { // Password not equal that passwordConfirm field
                 log.debug("CustomTasksUserController:updatePass():passwordIsDifferent")

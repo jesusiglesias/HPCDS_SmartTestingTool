@@ -39,8 +39,8 @@
         <div class="col-md-6 col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'password', 'error')}">
                 <div class="input-icon right">
-                    <g:passwordField name="password" class="form-control password-input-register emptySpaces autofill-input popovers" autocomplete="off"
-                                     data-container="body" data-trigger="active" data-placement="top" data-content="${g.message(code:'views.login.body.auth.register.popover.password.description', default:'It must contain at least 8 characters with a uppercase letter, lowercase letter and a number. It may contain special characters.')}"
+                    <g:passwordField name="password" class="form-control password-input-register emptySpaces autofill-input popovers" maxlength="32" autocomplete="off"
+                                     data-container="body" data-trigger="active" data-placement="top" data-content="${g.message(code:'views.login.body.auth.register.popover.password.description', default:'It must contain between 8 and 32 characters with a uppercase letter, a lowercase letter and a number. It may contain special characters.')}"
                                      data-original-title="${g.message(code:'views.login.body.auth.register.popover.password.title', default:'Instructions of the password')}"/>
                     <label for="password" class="control-label control-labelError"><g:message code="user.password.label" default="Password"/><span class="required"> * </span></label>
                     <span class="help-block text-justify"><g:message code="views.login.auth.newPassword.password.help" default="Enter a valid password"/></span>
@@ -58,7 +58,7 @@
         <div class="col-md-6 space-betweenCol col-userLayoutTitle">
             <div class="form-group form-md-line-input form-md-floating-label has-success ${hasErrors(bean: userRegisterInstance, field: 'confirmPassword', 'error')}">
                 <div class="input-icon right">
-                    <g:passwordField name="confirmPassword" class="form-control password-confirm-input-register emptySpaces autofill-input" autocomplete="off"/>
+                    <g:passwordField name="confirmPassword" class="form-control password-confirm-input-register emptySpaces autofill-input" maxlength="32" autocomplete="off"/>
                     <label for="confirmPassword" class="control-label control-labelError"><g:message code="user.confirmPassword.label" default="Confirm password"/><span class="required"> * </span></label>
                     <span class="help-block text-justify"><g:message code="views.login.auth.newPassword.passwordConfirm.help" default="Repeat your password"/></span>
                     <i class="fa fa-eye i-show-register-confirmPassword"></i> <!-- Show password icon -->

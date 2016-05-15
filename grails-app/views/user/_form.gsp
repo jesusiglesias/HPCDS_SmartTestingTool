@@ -74,7 +74,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="password" class="form-control password-space-progress form-shadow emptySpaces password-user backendPassword-input" autocomplete="off"/>
+                    <g:passwordField name="password" class="form-control password-space-progress form-shadow emptySpaces password-user backendPassword-input" maxlength="32" autocomplete="off"/>
                 </div>
                 <i class="fa fa-eye i-show-user-password"></i> <!-- Show password icon -->
             </div>
@@ -91,7 +91,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="confirmPassword" class="form-control form-shadow emptySpaces  passwordConfirm-user backendPassword-input" autocomplete="off"/>
+                    <g:passwordField name="confirmPassword" class="form-control form-shadow emptySpaces  passwordConfirm-user backendPassword-input" maxlength="32" autocomplete="off"/>
                 </div>
                 <i class="fa fa-eye i-show-user-confirmPassword"></i> <!-- Show password icon -->
             </div>

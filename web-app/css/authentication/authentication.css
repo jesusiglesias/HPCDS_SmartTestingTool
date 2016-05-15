@@ -305,6 +305,11 @@
     margin-top: 30px !important;
 }
 
+/* Instructions of new password - Accordion */
+.profileNewPassword-instructions-head {
+    background-color: #EADCB1 !important;
+}
+
 /* Notifications
 ======================================================*/
 .alert-notuser-reauth-invalidsession {

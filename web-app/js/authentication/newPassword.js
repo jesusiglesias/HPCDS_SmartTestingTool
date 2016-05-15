@@ -45,6 +45,7 @@ var Login = function() {
                 passwordConfirm: {
                     required: true,
                     minlength: 8,
+                    maxlength: 32,
                     equalTo: "#password"
                 }
             },
@@ -53,6 +54,7 @@ var Login = function() {
                 passwordConfirm: {
                     required: _requiredField,
                     minlength: _minlengthField,
+                    maxlength: _maxlengthField,
                     equalTo: _equalPassword
                 }
             },
@@ -130,11 +132,34 @@ var Login = function() {
         mediaquery.addListener(handleOrientationChange);
     };
 
+    /**
+     * It handles the max length of the fields
+     */
+    var handlerMaxlength = function() {
+
+        /* Password field */
+        $('#password').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 10,
+            placement: 'top',
+            validate: true
+        });
+
+        /* Confirm password field */
+        $('#passwordConfirm').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 10,
+            placement: 'top',
+            validate: true
+        });
+    };
+
     return {
         // Main function to initiate the module
         init: function() {
             handleNewPassword();
             handleSizeButtons();
+            handlerMaxlength();
         }
     };
 }();

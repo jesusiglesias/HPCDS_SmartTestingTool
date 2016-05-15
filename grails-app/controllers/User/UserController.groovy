@@ -3,6 +3,7 @@ package User
 import Enumerations.Sex
 import Security.SecRole
 import Security.SecUserSecRole
+import org.apache.commons.lang.StringUtils
 import org.apache.tika.Tika
 import org.springframework.dao.DataIntegrityViolationException
 import java.text.SimpleDateFormat
@@ -90,22 +91,41 @@ class UserController {
             return
         }
 
-        // Check if password and confirm password fields are same
-        if (userInstance.password != userInstance.confirmPassword) {
-            flash.userErrorMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
+        // Back-end validation - Password with maxlength
+        if (userInstance.password.length() > 32) {
+
+            flash.userErrorMessage = g.message(code: 'default.password.maxlength', default: '<strong>Password</strong> field does not match with the required pattern.')
             render view: "create", model: [userInstance: userInstance]
             return
         }
 
         // Check if password and username are same
         if (userInstance.password.toLowerCase() == userInstance.username.toLowerCase()) {
+
             flash.userErrorMessage = g.message(code: 'default.password.username', default: '<strong>Password</strong> field must not be equal to username.')
+            render view: "create", model: [userInstance: userInstance]
+            return
+        }
+
+        // Back-end validation - Confirm password
+        if (!StringUtils.isNotBlank(userInstance.confirmPassword)) {
+
+            flash.userErrorMessage = g.message(code: 'default.password.confirm', default: '<strong>Confirm password</strong> field cannot be null.')
+            render view: "create", model: [userInstance: userInstance]
+            return
+        }
+
+        // Check if password and confirm password fields are same
+        if (userInstance.password != userInstance.confirmPassword) {
+
+            flash.userErrorMessage = g.message(code: 'default.password.notsame', default: '<strong>Password</strong> and <strong>Confirm password</strong> fields must match.')
             render view: "create", model: [userInstance: userInstance]
             return
         }
 
         // It checks that mime-types is correct: ['image/png', 'image/jpeg', 'image/gif']
         if (!filename.empty && !contentsType.contains(filename.getContentType())) {
+
             flash.userErrorMessage = g.message(code: 'default.validation.mimeType.image', default: 'The profile image must be of type: <strong>.png</strong>, <strong>.jpeg</strong> or <strong>.gif</strong>.')
             render  view: "create", model: [userInstance: userInstance]
             return
@@ -300,6 +320,7 @@ class UserController {
 
         // It checks that mime-types is correct: ['image/png', 'image/jpeg', 'image/gif']
         if (!filename.empty && !contentsType.contains(filename.getContentType())) {
+
             flash.userErrorMessage = g.message(code: 'default.validation.mimeType.image', default: 'The profile image must be of type: <strong>.png</strong>, <strong>.jpeg</strong> or <strong>.gif</strong>.')
             render  view: "editProfileImage", model: [userInstance: userInstance]
             return

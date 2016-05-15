@@ -14,7 +14,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="currentPassword" class="form-control form-shadow emptySpaces profile-current-password profilePassword-input" autocomplete="off"/>
+                    <g:passwordField name="currentPassword" class="form-control form-shadow emptySpaces profile-current-password profilePassword-input" maxlength="32" autocomplete="off"/>
                 </div>
                 <i class="fa fa-eye i-show-profile-currentPassword"></i> <!-- Show password icon -->
             </div>
@@ -34,7 +34,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="password" class="form-control form-shadow emptySpaces password-space-progress profile-new-password profilePassword-input" autocomplete="off"/>
+                    <g:passwordField name="password" class="form-control form-shadow emptySpaces password-space-progress profile-new-password profilePassword-input" maxlength="32" autocomplete="off"/>
                 </div>
                 <i class="fa fa-eye i-show-profile-newPassword"></i> <!-- Show password icon -->
             </div>
@@ -54,7 +54,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:passwordField name="confirmPassword" class="form-control form-shadow emptySpaces profile-confirm-password profilePassword-input" autocomplete="off"/>
+                    <g:passwordField name="confirmPassword" class="form-control form-shadow emptySpaces profile-confirm-password profilePassword-input" maxlength="32" autocomplete="off"/>
                 </div>
                 <i class="fa fa-eye i-show-profile-confirmPassword"></i> <!-- Show password icon -->
             </div>

@@ -17,6 +17,7 @@
         var _strong = '${g.message(code:'default.password.strength.strong', default:'Strong')}';
         var _veryStrong = '${g.message(code:'default.password.strength.veryStrong', default:'Very strong')}';
         var _minlengthField = '${g.message(code:'default.validation.minlength', default:'Please, enter more than {0} characters.')}';
+        var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
         var _requiredField = '${g.message(code:'default.validation.required', default:'This filed is required.')}';
         var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
         var _confirming = '${g.message(code: "customTasksUser.updatePassword.submitButton.confirming", default: "Confirming...")}';
@@ -55,7 +56,7 @@
             <div class="portlet-body">
                 <div class="panel-group accordion" id="accordionNewPassword">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading profileNewPassword-instructions-head">
                             <h4 class="panel-title">
                                 <a class="accordion-toggle accordion-toggle-styled" data-toggle="collapse" data-parent="#accordionNewPassword" href="#collapseNewPassword"> <g:message code="views.login.auth.newPassword.description" default="New password instructions"/> </a>
                             </h4>
@@ -63,7 +64,7 @@
                         <div id="collapseNewPassword" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <ul>
-                                    <li> <g:message code="views.login.auth.newPassword.longitude" default="It must contain a minimum length of 8 characters."/> </li>
+                                    <li> <g:message code="views.login.auth.newPassword.longitude" default="It must contain a length between 8 characters and 32 characters."/> </li>
                                     <li> <g:message code="views.login.auth.newPassword.number" default="It must contain at least one number."/> </li>
                                     <li> <g:message code="views.login.auth.newPassword.lowercase" default="It must contain at least one lowercase letter."/> </li>
                                     <li> <g:message code="views.login.auth.newPassword.uppercase" default="It must contain at least one uppercase letter."/> </li>
@@ -81,7 +82,6 @@
             <g:if test='${flash.errorNewPassword}'>
                 <div class="alert alert-block alert-danger alert-danger-custom alert-dismissable alert-newPassword fade in">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden='true'></button>
-                    <h5 class="alert-heading alert-reauthentication">${raw(g.message(code:'views.login.auth.error.title', default:'<strong>Error!</strong>'))} </h5>
                     <p> ${raw(flash.errorNewPassword)} </p>
                 </div>
 
@@ -93,7 +93,7 @@
             <!-- Password field -->
             <div class="form-group form-md-line-input form-md-floating-label has-success">
                 <div class="input-icon right">
-                    <g:field type="password" class="form-control password-input autofill-input emptySpaces" id="password" name="password" autocomplete="off"/>
+                    <g:field type="password" class="form-control password-input autofill-input emptySpaces" id="password" name="password" maxlength="32" autocomplete="off"/>
                     <label for="password"><g:message code="views.login.auth.newPassword.password" default="New password"/></label>
                     <span class="help-block"><g:message code="views.login.auth.newPassword.password.help" default="Enter a valid password"/></span>
                     <i class="fa fa-eye i-show"></i> <!-- Show password icon -->
@@ -108,7 +108,7 @@
             <!-- Password confirm field -->
             <div class="form-group form-md-line-input form-md-floating-label has-success form-confirmPassword">
                 <div class="input-icon right">
-                    <g:field type="password" class="form-control password-confirm-input autofill-input emptySpaces" id="passwordConfirm" name="passwordConfirm" autocomplete="off"/>
+                    <g:field type="password" class="form-control password-confirm-input autofill-input emptySpaces" id="passwordConfirm" name="passwordConfirm" maxlength="32" autocomplete="off"/>
                     <label for="passwordConfirm"><g:message code="views.login.auth.newPassword.passwordConfirm" default="Confirm password"/></label>
                     <span class="help-block"><g:message code="views.login.auth.newPassword.passwordConfirm.help" default="Repeat your password"/></span>
                     <i class="fa fa-eye i-show-confirm"></i> <!-- Show password icon -->
@@ -133,6 +133,7 @@
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
     <g:javascript src="password/custom-passwordRegister.js"/>
     <g:javascript src="media-match/media.match.min.js"/>
+    <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="authentication/newPassword.js"/>
 
 </body>

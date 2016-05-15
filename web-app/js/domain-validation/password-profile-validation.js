@@ -23,32 +23,38 @@ var DomainPasswordProfileValidation = function () {
                 rules: {
                     currentPassword: {
                         required: true,
-                        minlength: 8
+                        minlength: 8,
+                        maxlength: 32
                     },
                     password: {
                         required: true,
                         minlength: 8,
+                        maxlength: 32,
                         notEqualToUsername:'#username'
                     },
                     confirmPassword: {
                         required: true,
                         minlength:8,
+                        maxlength: 32,
                         equalTo: "#password"
                     }
                 },
                 messages: {
                     currentPassword: {
                         required: _requiredField,
-                        minlength: _minlengthField
+                        minlength: _minlengthField,
+                        maxlength: _maxlengthField
                     },
                     password: {
                         required: _requiredField,
                         minlength: _minlengthField,
+                        maxlength: _maxlengthField,
                         notEqualToUsername: _equalPasswordUsername
                     },
                     confirmPassword: {
                         required: _requiredField,
                         minlength: _minlengthField,
+                        maxlength: _maxlengthField,
                         equalTo: _equalPassword
                     }
                 },
@@ -391,11 +397,42 @@ var DomainPasswordProfileValidation = function () {
         }
     };
 
+    /**
+     * It handles the max length of the fields
+     */
+    var handlerMaxlengthPassword = function() {
+
+        /* Current password field */
+        $('#currentPassword').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 10,
+            placement: 'top',
+            validate: true
+        });
+
+        /* New password field */
+        $('#password').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 10,
+            placement: 'top',
+            validate: true
+        });
+
+        /* Confirm password field */
+        $('#confirmPassword').maxlength({
+            limitReachedClass: "label label-danger",
+            threshold: 10,
+            placement: 'top',
+            validate: true
+        });
+    };
+
     return {
         // Main function to initiate the module
         init: function () {
             handlerPasswordProfileValidation();
             handlerIconUserProfile();
+            handlerMaxlengthPassword()
         }
     };
 
