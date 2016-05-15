@@ -1,11 +1,15 @@
 package filter
 
 import XSS.MarkupUtils
+import grails.util.Holders
 
 /**
  * Filter to remove the text with xml format in each controller/action (before).
  */
 class SecurityFilters {
+
+    // Referer must match serverURL, optionally https
+    static validRefererPrefix = "^${Holders.config.grails.serverURL}".replace("http", "https?")
 
     def filters = {
         // Filter applied to the entire system
@@ -31,6 +35,19 @@ class SecurityFilters {
 
             }
         }
+
+        // It checks the referer in POST request. Requests must be from the application
+        checkReferer(controller: '*', action: '*') {
+
+            // Before the controller action
+            before = {
+
+                if (request.method.toUpperCase() == "POST" || request.method.toUpperCase() == "PUT") {
+                    def referer = request.getHeader('Referer')
+
+                    return referer && referer =~ validRefererPrefix
+                }
+            }
+        }
     }
 }
-
