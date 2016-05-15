@@ -131,6 +131,9 @@ jasypt {
     keyObtentionIterations = 1000
 }
 
+// Maximum time of token - Expiration in minutes
+token.expiration=30
+
 /* Brute-force Defender configuration
  ============================================================================================= */
 grails.plugin.springsecurity.useSecurityEventListener = true

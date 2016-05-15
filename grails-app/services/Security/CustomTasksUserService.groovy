@@ -5,6 +5,7 @@ import grails.transaction.Transactional
 import org.apache.commons.validator.routines.EmailValidator
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder
+import groovy.time.TimeCategory
 
 /**
  * Service that contains the habitual security tasks of the user.
@@ -174,7 +175,30 @@ class CustomTasksUserService {
     def check_token(String token, String type) {
         log.debug("CustomTasksUserService:check_token()")
 
-        return tokenService.check_token(token, type)
+        // It obtains the expiration time
+        def timeExpiration = grailsApplication.config.token.expiration ?: 30
+
+        // It checks the validity of the token
+        def currentToken = tokenService.check_token(token, type)
+
+        if (currentToken != null) { // Token valid but it must check if token is expired or not - numeric value
+
+            // Parsing to second
+            timeExpiration = timeExpiration.toInteger()
+
+            use(TimeCategory) {
+
+                if(new Date() <= (currentToken.dateCreated + timeExpiration.minutes)) { // Time is valid
+                    return currentToken
+
+                } else { // Time expired
+                    return null
+                }
+            }
+
+        } else { // Token is invalid - Null value
+            return currentToken
+        }
     }
 
     /**
@@ -185,7 +209,9 @@ class CustomTasksUserService {
     def private create_token(String token, String type) {
         log.debug("CustomTasksUserService:create_token()")
 
-        return tokenService.save(new Token(token: token, tokenType: type, tokenStatus: false))
+        def dateCreated = new Date();
+
+        return tokenService.save(new Token(token: token, tokenType: type, tokenStatus: false, dateCreated:dateCreated))
     }
 
     /**

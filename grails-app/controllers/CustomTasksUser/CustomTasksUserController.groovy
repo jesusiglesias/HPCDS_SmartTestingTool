@@ -323,7 +323,7 @@ class CustomTasksUserController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.userRegisterMessage = g.message(code: 'customTasksUser.saveUserRegistered.user.successful', default: 'An email has been sent to the address entered to activate the user account.')
+                    flash.userRegisterMessage = g.message(code: 'customTasksUser.saveUserRegistered.user.successful', default: 'An email valid for 30 minutes has been sent to the address entered to activate the user account. Contact us if you have any problems.')
                     redirect uri: '/'
                 }
                 '*' { respond userRegisterInstance, [status: CREATED] }
@@ -444,7 +444,7 @@ class CustomTasksUserController {
 
             } else {
                 log.debug("CustomTasksUserController:sendEmail():mailSent:${params.email}")
-                flash.successRestorePassword = g.message(code: 'customTasksUser.sendEmail.success', default: 'Notification processed. You will receive an email to reset the password in the indicated address.')
+                flash.successRestorePassword = g.message(code: 'customTasksUser.sendEmail.success', default: 'Notification processed. You will receive an email valid for 30 minutes with the instructions to follow to reset your password.')
 
                 redirect uri: '/forgotPassword'
                 return
@@ -460,7 +460,7 @@ class CustomTasksUserController {
                 log.error("ForgotPassword():email:doesNotExist:${params.email}")
 
                 // It is sent an success email to avoid the user enumeration attack
-                flash.successRestorePassword = g.message(code: 'customTasksUser.sendEmail.success', default: 'Notification processed. You will receive an email to reset the password in the indicated address.')
+                flash.successRestorePassword = g.message(code: 'customTasksUser.sendEmail.success', default: 'Notification processed. You will receive an email valid for 30 minutes with the instructions to follow to reset your password.')
             }
         }
         redirect uri: '/forgotPassword'
@@ -551,7 +551,6 @@ class CustomTasksUserController {
 
             flash.errorNewPassword = g.message(code: 'customTasksUser.updatePassword.invalidToken', default: 'Invalid security token. Please, you enter again your email to send a new email.')
         }
-
         redirect uri: '/newPassword', params: [token: params.token, newPasswordAgain: true]
     }
 }
