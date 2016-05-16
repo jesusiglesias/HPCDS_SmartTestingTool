@@ -3,6 +3,7 @@ package CustomTasksUser
 import User.User
 import Security.SecUser
 import Test.Test
+import Test.Topic
 import User.Evaluation
 import grails.converters.JSON
 import grails.transaction.Transactional
@@ -26,12 +27,73 @@ class CustomTasksFrontEndController {
     static allowedMethods = [formContact: "POST", updatePersonalInfo: "PUT", updateAvatar: "POST", updatePassword: "PUT"]
 
     /**
-     * It shows the home page of user.
+     * It shows the home page of the user.
      */
     def home() {
         log.debug("CustomTasksFrontEndController():home()")
 
-        render view: 'home'
+        // It obtains the active topic
+        def activeTopics = Topic.findAllByVisibility(true, [sort:"name", order:"asc"])
+
+        log.error(activeTopics.name)
+        log.error(activeTopics.tests.active.size())
+
+        def prueba =  Topic.createCriteria().list() {
+            eq 'visibility', true
+            tests {
+                eq 'active', true
+            }
+            order ("name", "asc")
+        }
+
+        /*
+        def users =  UserRole.createCriteria().list(max: 2) {
+            eq "role", role
+            user {
+                order 'dateCreated', 'desc'
+            }
+            projections { property 'user' }
+        }
+*/
+       // log.error(prueba.name)
+        log.error(prueba)
+        log.error(prueba[0].size())
+        log.error(prueba[1].size())
+
+        def statsList = [1,2,3]
+
+        render view: 'home', model: [activeTopics: activeTopics, statsList:statsList]
+    }
+
+    /**
+     * It shows the topic page with test to the user.
+     */
+    def topicSelected() {
+        log.debug("CustomTasksFrontEndController():topicSelected()")
+
+        log.error(params.id)
+
+        // Security in topic
+        if (params.id != null) {
+
+            // It checks if params.id is an UUID type
+            try{
+                UUID uuidTopic = UUID.fromString(params.id);
+
+                // URL maliciously introduced because the topic is not visible
+                if (!Topic.findById(uuidTopic).visibility) {
+                    response.sendError(404)
+                } else {
+                    log.error("Materia visible")
+                }
+            } catch (IllegalArgumentException exception){ // Params.id is not valid UUID
+                log.error("CustomTasksFrontEndController():topicSelected():Exception:paramsTopic:notUUID:${exception}")
+
+                response.sendError(404)
+            }
+        } else {
+            response.sendError(404)
+        }
     }
 
     /**

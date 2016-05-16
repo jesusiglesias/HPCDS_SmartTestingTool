@@ -256,6 +256,8 @@
     <g:javascript src="domain-validation/personalInformation-profile-validation.js"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <g:javascript src="counter/jquery.counterup.min.js"/>
+    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 </body>
 </html>

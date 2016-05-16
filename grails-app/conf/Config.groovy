@@ -92,8 +92,8 @@ environments {
         grails.logging.jul.usebridge = false
 
         // TODO Change to own domain
-        grails.serverURL = "http://localhost:8080/${appName}"
-        //grails.serverURL = "http://93.186.255.238:8080/${appName}"
+        //grails.serverURL = "http://localhost:8080/${appName}"
+        grails.serverURL = "http://93.186.255.238:8080/${appName}"
     }
 }
 
@@ -226,6 +226,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     /* Custom tasks normal user (front-end)
     ======================================================*/
     '/customTasksFrontEnd/home':               ['ROLE_USER'],
+    '/customTasksFrontEnd/topicSelected':      ['ROLE_USER'],
     '/customTasksFrontEnd/profile':            ['ROLE_USER'],
     '/customTasksFrontEnd/testStats':          ['ROLE_USER'],
     '/customTasksFrontEnd/updatePersonalInfo': ['ROLE_USER'],

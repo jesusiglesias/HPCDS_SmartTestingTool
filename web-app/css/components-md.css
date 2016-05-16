@@ -2033,29 +2033,29 @@ fieldset[disabled] .btn.blue-ebonyclay:not(.btn-outline).active {
 
 .btn.blue-hoki:not(.btn-outline) {
     color: #FFFFFF;
-    background-color: #67809F;
-    border-color: #67809F;
+    background-color: rgba(33, 93, 177, 0.69);
+    border-color: rgba(33, 93, 177, 0.69);
 }
 
 .btn.blue-hoki:not(.btn-outline):focus,
 .btn.blue-hoki:not(.btn-outline).focus {
     color: #FFFFFF;
-    background-color: #526781;
-    border-color: #526781;
+    background-color: rgba(3, 60, 132, 0.68);
+    border-color: rgba(3, 60, 132, 0.68);
 }
 
 .btn.blue-hoki:not(.btn-outline):hover {
     color: #FFFFFF;
-    background-color: #526781;
-    border-color: #526781;
+    background-color: rgba(3, 60, 132, 0.68);
+    border-color: rgba(3, 60, 132, 0.68);
 }
 
 .btn.blue-hoki:not(.btn-outline):active,
 .btn.blue-hoki:not(.btn-outline).active,
 .open > .btn.blue-hoki:not(.btn-outline).dropdown-toggle {
     color: #FFFFFF;
-    background-color: #526781;
-    border-color: #526781;
+    background-color: rgba(3, 60, 132, 0.68);
+    border-color: rgba(3, 60, 132, 0.68);
 }
 
 .btn.blue-hoki:not(.btn-outline):active:hover,
@@ -2068,8 +2068,8 @@ fieldset[disabled] .btn.blue-ebonyclay:not(.btn-outline).active {
 .open > .btn.blue-hoki:not(.btn-outline).dropdown-toggle:focus,
 .open > .btn.blue-hoki:not(.btn-outline).dropdown-toggle.focus {
     color: #FFFFFF;
-    background-color: #4c5f78;
-    border-color: #4c5f78;
+    background-color: rgba(3, 60, 132, 0.68);
+    border-color: rgba(3, 60, 132, 0.68);
 }
 
 .btn.blue-hoki:not(.btn-outline):active,
@@ -2096,18 +2096,18 @@ fieldset[disabled] .btn.blue-hoki:not(.btn-outline):focus,
 fieldset[disabled] .btn.blue-hoki:not(.btn-outline).focus,
 fieldset[disabled] .btn.blue-hoki:not(.btn-outline):active,
 fieldset[disabled] .btn.blue-hoki:not(.btn-outline).active {
-    background-color: #67809F;
-    border-color: #67809F;
+    background-color: rgba(3, 60, 132, 0.68);
+    border-color: rgba(3, 60, 132, 0.68);
 }
 
 .btn.blue-hoki:not(.btn-outline) .badge {
-    color: #67809F;
+    color: rgba(3, 60, 132, 0.68);
     background-color: #FFFFFF;
 }
 
 .btn.btn-outline.blue-hoki {
-    border-color: #67809F;
-    color: #67809F;
+    border-color: rgba(3, 60, 132, 0.68);
+    color: rgba(3, 60, 132, 0.68);
     background: none;
 }
 
@@ -2117,13 +2117,13 @@ fieldset[disabled] .btn.blue-hoki:not(.btn-outline).active {
 .btn.btn-outline.blue-hoki:active:focus,
 .btn.btn-outline.blue-hoki:focus,
 .btn.btn-outline.blue-hoki.active {
-    border-color: #67809F;
+    border-color: rgba(3, 60, 132, 0.68);
     color: #FFFFFF;
-    background-color: #67809F;
+    background-color: rgba(3, 60, 132, 0.68);
 }
 
 .btn.blue-hoki-stripe {
-    border-left: 4px solid #67809F !important;
+    border-left: 4px solid rgba(3, 60, 132, 0.68) !important;
 }
 
 .btn.blue-steel:not(.btn-outline) {
@@ -8774,6 +8774,174 @@ body[ng-controller] .modal {
 
     .log-portlet-h4 {
         font-size: 17px !important;
+    }
+}
+
+/* Ribbons
+=================================================================== */
+
+.mt-element-ribbon {
+    padding: 25px;
+    position: relative;
+    margin-bottom: 30px;
+    background-color: rgb(228, 228, 228);
+    min-height: 180px;
+}
+
+.mt-element-ribbon .ribbon-content {
+    margin: 55px 0 20px 0;
+    text-align: justify;
+    letter-spacing: -1px;
+    font-weight: 600;
+}
+
+.mt-element-ribbon .ribbon {
+    position: absolute;
+    padding: 0.5em 1em;
+    z-index: 5;
+}
+
+.mt-element-ribbon .ribbon.ribbon-right {
+    left: auto;
+    right: -2px;
+}
+
+.mt-element-ribbon .ribbon.ribbon-vertical-left {
+    top: -2px;
+    left: 15px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.mt-element-ribbon .ribbon.ribbon-vertical-left > span {
+    font-weight: 600;
+    font-size: 18px;
+    padding-left: 2px;
+    padding-right: 1px;
+}
+
+.mt-element-ribbon .ribbon.ribbon-vertical-right {
+    top: -2px;
+    left: auto;
+    right: 15px;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.mt-element-ribbon .ribbon.ribbon-shadow.ribbon-right,
+.mt-element-ribbon .ribbon.ribbon-shadow.ribbon-vertical-right {
+    box-shadow: -3px 2px 7px rgb(103, 103, 103);
+}
+
+.mt-element-ribbon .ribbon.ribbon-border:after {
+    border: 1px solid;
+    content: '';
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+}
+
+.mt-element-ribbon .ribbon.ribbon-border-dash-hor:after {
+    border-top: 1px dashed #010100;
+    border-right-style: none;
+    border-bottom: 1px dashed #010100;
+    border-left-style: none;
+    content: '';
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+}
+
+.mt-element-ribbon .ribbon.ribbon-clip.ribbon-right {
+    left: auto;
+    right: -10px;
+    top: 10px;
+}
+
+.mt-element-ribbon .ribbon > .ribbon-sub {
+    z-index: -1;
+    position: absolute;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.mt-element-ribbon .ribbon > .ribbon-sub.ribbon-clip:before,
+.mt-element-ribbon .ribbon > .ribbon-sub.ribbon-clip:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-color: transparent !important;
+    bottom: -10px;
+}
+
+.mt-element-ribbon .ribbon > .ribbon-sub.ribbon-clip:before {
+    border-width: 0 10px 10px 0;
+    border-right-color: #222 !important;
+    left: 0;
+}
+
+.mt-element-ribbon .ribbon > .ribbon-sub.ribbon-clip.ribbon-right:before,
+.mt-element-ribbon .ribbon > .ribbon-sub.ribbon-clip.ribbon-right:after {
+    content: '';
+    position: absolute;
+    border: solid transparent;
+    bottom: -10px;
+}
+
+.mt-element-ribbon .ribbon > .ribbon-sub.ribbon-clip.ribbon-right:before {
+    border-right-color: transparent !important;
+}
+
+.mt-element-ribbon .ribbon > .ribbon-sub.ribbon-clip.ribbon-right:after {
+    border-width: 0 0 10px 10px;
+    border-left-color: #222 !important;
+    right: 0;
+}
+
+.mt-element-ribbon .ribbon > .ribbon-sub.ribbon-bookmark:after {
+    border-left: 21px solid;
+    border-right: 20px solid;
+    border-bottom: 1em solid rgb(228, 228, 228) !important;
+    bottom: -1em;
+    content: '';
+    height: 0;
+    left: 0;
+    position: absolute;
+    width: 0;
+}
+
+.mt-element-ribbon .ribbon.ribbon-color {
+    background-color: #E9DBB0;
+    color: #010100;
+}
+
+.mt-element-ribbon .ribbon.ribbon-color-warning:after {
+    border-color: #c29d0b;
+}
+
+.mt-element-ribbon .ribbon.ribbon-color > .ribbon-sub:after {
+    border-color: #614f06;
+    border-left-color: #E9DBB0;
+    border-right-color: #E9DBB0;
+}
+
+.mt-element-ribbon .ribbon.ribbon-color-success {
+    background-color: #579478;
+    color: white;
+}
+
+/* Max-width: 550px */
+@media (max-width: 550px) {
+
+    .mt-element-ribbon .ribbon.ribbon-clip.ribbon-right {
+        margin-left: 120px;
     }
 }
 

@@ -325,6 +325,10 @@
         margin-left: 20px;
         margin-right: 25px;
     }
+
+    .contentPage-form > .row > div .title > p {
+        font-size: 14px;
+    }
 }
 
 /* Max-width: 320px */
