@@ -42,9 +42,6 @@ var DomainTestValidation = function () {
                     numberOfQuestions: {
                         required: true
                     },
-                    active: {
-                        required: true
-                    },
                     topic: {
                         required: true
                     },
@@ -77,9 +74,6 @@ var DomainTestValidation = function () {
                         max: _maxField
                     },
                     numberOfQuestions: {
-                        required: _requiredField
-                    },
-                    active: {
                         required: _requiredField
                     },
                     topic: {
