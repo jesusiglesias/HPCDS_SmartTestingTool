@@ -39,7 +39,7 @@ var DomainQuestionValidation = function () {
                     required: _requiredField,
                     maxlength: _maxlengthField
                 },
-            difficultyLevel: {
+                difficultyLevel: {
                     required: _requiredField
                 }
             },

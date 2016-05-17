@@ -32,37 +32,18 @@ class CustomTasksFrontEndController {
     def home() {
         log.debug("CustomTasksFrontEndController():home()")
 
-        // It obtains the active topic
+        // It obtains the visible topic
         def activeTopics = Topic.findAllByVisibility(true, [sort:"name", order:"asc"])
 
-        log.error(activeTopics.name)
-        log.error(activeTopics.tests.active.size())
+        def numberActiveTest = []
 
-        def prueba =  Topic.createCriteria().list() {
-            eq 'visibility', true
-            tests {
-                eq 'active', true
-            }
-            order ("name", "asc")
+        // It obtains the number of active test for each topic
+        activeTopics.each { topic ->
+            def result = Test.findAllByTopicAndActive(topic, true).size()
+            numberActiveTest.push(result)
         }
 
-        /*
-        def users =  UserRole.createCriteria().list(max: 2) {
-            eq "role", role
-            user {
-                order 'dateCreated', 'desc'
-            }
-            projections { property 'user' }
-        }
-*/
-       // log.error(prueba.name)
-        log.error(prueba)
-        log.error(prueba[0].size())
-        log.error(prueba[1].size())
-
-        def statsList = [1,2,3]
-
-        render view: 'home', model: [activeTopics: activeTopics, statsList:statsList]
+        render view: 'home', model: [activeTopics: activeTopics, numberActiveTest: numberActiveTest]
     }
 
     /**

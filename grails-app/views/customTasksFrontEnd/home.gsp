@@ -133,7 +133,7 @@
                         <!-- Number of test -->
                         <div class="ribbon ribbon-vertical-left ribbon-color ribbon-shadow uppercase">
                             <div class="ribbon-sub ribbon-bookmark"></div>
-                            <span>${activeTopic.tests?.size()}</span>
+                            <span>${numberActiveTest[i]}</span>
                         </div>
                         <!-- Name -->
                         <div class="ribbon ribbon-right ribbon-clip ribbon-shadow ribbon-border-dash-hor ribbon-color-success uppercase">
@@ -145,7 +145,7 @@
                             ${(activeTopic?.description) ?:"${raw(g.message(code: 'layouts.main_auth_user.body.title.topic.without.description', default: 'It has not provided any description for this topic.'))}"}
                         </p>
 
-                        <g:if test="${activeTopic.tests.size() != 0}">
+                        <g:if test="${numberActiveTest[i] != 0}">
                             <!-- Button -->
                             <g:link controller="customTasksFrontEnd" action="topicSelected" id="${activeTopic?.id}" class="btn blue-hoki">
                                 <g:message code="layouts.main_auth_user.body.title.topic.button" default="Enter"/>
