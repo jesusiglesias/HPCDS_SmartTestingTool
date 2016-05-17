@@ -8795,6 +8795,13 @@ body[ng-controller] .modal {
     font-weight: 600;
 }
 
+.mt-element-ribbon .ribbon-content-without-topic {
+    margin: 55px 0 20px 0;
+    text-align: center;
+    letter-spacing: -1px;
+    font-weight: 600;
+}
+
 .mt-element-ribbon .ribbon {
     position: absolute;
     padding: 0.5em 1em;

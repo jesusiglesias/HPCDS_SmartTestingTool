@@ -1224,6 +1224,10 @@
     content: "\ec1e";
 }
 
+.icofont-bag-alt:before {
+    content: "\ec9b";
+}
+
 /*Font size*/
 .icofont-lg {
     font-size: 1.33333333em;

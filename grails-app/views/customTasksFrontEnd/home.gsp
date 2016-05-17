@@ -109,54 +109,65 @@
         </div>
     </div>
 
-<!-- TODO
-<div class="row row-userLayoutTitle">
-    <div class="col-md-12 col-userLayoutTitle">
-        <!-- Page-title
-        <div class="page-title-user-topic-section">
-
-            <p class="page-title-user-topic-section-description">
-               No existe ninguna materia en el sistema.
-            </p>
-        </div>
-    </div>
-</div> -->
-
-    <!-- Topics -->
-    <g:each in="${activeTopics}" status="i" var="activeTopic">
-
-        <g:if test="${(i % 2) == 0 ? 'row' : ''}">
-            <div class="row row-userLayoutTitle-home-ribbons">
-        </g:if>
-                <div class="col-md-6">
-                    <div class="mt-element-ribbon">
-                        <!-- Number of test -->
-                        <div class="ribbon ribbon-vertical-left ribbon-color ribbon-shadow uppercase">
-                            <div class="ribbon-sub ribbon-bookmark"></div>
-                            <span>${numberActiveTest[i]}</span>
-                        </div>
-                        <!-- Name -->
-                        <div class="ribbon ribbon-right ribbon-clip ribbon-shadow ribbon-border-dash-hor ribbon-color-success uppercase">
-                            <div class="ribbon-sub ribbon-clip ribbon-right"></div>
-                            ${activeTopic?.name}
-                        </div>
-                        <!-- Description -->
-                        <p class="ribbon-content">
-                            ${(activeTopic?.description) ?:"${raw(g.message(code: 'layouts.main_auth_user.body.title.topic.without.description', default: 'It has not provided any description for this topic.'))}"}
-                        </p>
-
-                        <g:if test="${numberActiveTest[i] != 0}">
-                            <!-- Button -->
-                            <g:link controller="customTasksFrontEnd" action="topicSelected" id="${activeTopic?.id}" class="btn blue-hoki">
-                                <g:message code="layouts.main_auth_user.body.title.topic.button" default="Enter"/>
-                            </g:link>
-                        </g:if>
+    <!-- No topics -->
+    <g:if test="${activeTopics.size() == 0}">
+        <div class="row row-userLayoutTitle">
+            <div class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2 col-userLayoutTitle">
+                <div class="mt-element-ribbon">
+                    <div class="ribbon ribbon-vertical-left ribbon-color ribbon-shadow uppercase">
+                        <div class="ribbon-sub ribbon-bookmark"></div>
+                        <i class="icofont icofont-bag-alt"></i>
                     </div>
+                    <!-- Name -->
+                    <div class="ribbon ribbon-right ribbon-clip ribbon-shadow ribbon-border-dash-hor ribbon-color-success uppercase">
+                        <div class="ribbon-sub ribbon-clip ribbon-right"></div>
+                            <g:message code="layouts.main_auth_user.body.title.no.topic.title" default="Information"/>
+                    </div>
+                    <!-- Description -->
+                    <p class="ribbon-content-without-topic">
+                        <g:message code="layouts.main_auth_user.body.title.no.topic.description" default="There are not visible topics in the system. Please, contact us if you believe that it exists a problem."/>
+                    </p>
                 </div>
-        <g:if test="${(i % 2) != 0}">
             </div>
-        </g:if>
-    </g:each>
+        </div>
+    </g:if>
+    <g:else>
+        <!-- Topics -->
+        <g:each in="${activeTopics}" status="i" var="activeTopic">
+
+            <g:if test="${(i % 2) == 0 ? 'row' : ''}">
+                <div class="row row-userLayoutTitle-home-ribbons">
+            </g:if>
+            <div class="col-md-6">
+                <div class="mt-element-ribbon">
+                    <!-- Number of test -->
+                    <div class="ribbon ribbon-vertical-left ribbon-color ribbon-shadow uppercase">
+                        <div class="ribbon-sub ribbon-bookmark"></div>
+                        <span>${numberActiveTest[i]}</span>
+                    </div>
+                    <!-- Name -->
+                    <div class="ribbon ribbon-right ribbon-clip ribbon-shadow ribbon-border-dash-hor ribbon-color-success uppercase">
+                        <div class="ribbon-sub ribbon-clip ribbon-right"></div>
+                        ${activeTopic?.name}
+                    </div>
+                    <!-- Description -->
+                    <p class="ribbon-content">
+                        ${(activeTopic?.description) ?:"${raw(g.message(code: 'layouts.main_auth_user.body.title.topic.without.description', default: 'It has not provided any description for this topic.'))}"}
+                    </p>
+
+                    <g:if test="${numberActiveTest[i] != 0}">
+                        <!-- Button -->
+                        <g:link controller="customTasksFrontEnd" action="topicSelected" id="${activeTopic?.id}" class="btn blue-hoki">
+                            <g:message code="layouts.main_auth_user.body.title.topic.button" default="Enter"/>
+                        </g:link>
+                    </g:if>
+                </div>
+            </div>
+            <g:if test="${(i % 2) != 0}">
+                </div>
+            </g:if>
+        </g:each>
+    </g:else>
 
 </body>
 </html>
