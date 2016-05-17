@@ -124,7 +124,7 @@
                             <g:message code="layouts.main_auth_user.body.title.no.topic.title" default="Information"/>
                     </div>
                     <!-- Description -->
-                    <p class="ribbon-content-without-topic">
+                    <p class="ribbon-content-without-topic text-center">
                         <g:message code="layouts.main_auth_user.body.title.no.topic.description" default="There are not visible topics in the system. Please, contact us if you believe that it exists a problem."/>
                     </p>
                 </div>

@@ -359,6 +359,7 @@ table.dataTable tbody tr:hover {
 .page-title-user-cookie,
 .page-title-user-faq,
 .page-title-user-home,
+.page-title-user-topicSelected,
 .page-title-user-scores,
 .page-title-user-profile {
     letter-spacing: -1px;
@@ -374,6 +375,7 @@ table.dataTable tbody tr:hover {
 .page-title-user-cookie-title,
 .page-title-user-faq-title,
 .page-title-user-home-title,
+.page-title-user-topicSelected-title,
 .page-title-user-scores-title,
 .page-title-user-profile-title {
     text-align: center;
@@ -390,6 +392,7 @@ table.dataTable tbody tr:hover {
 .page-title-user-cookie-section-description,
 .page-title-user-faq-description,
 .page-title-user-home-description,
+.page-title-user-topicSelected-description,
 .page-title-user-faq-section-description,
 .page-title-user-scores-description,
 .page-title-user-profile-description,
@@ -400,20 +403,22 @@ table.dataTable tbody tr:hover {
     margin-right: 40px;
 }
 
-.page-title-user-topic-section-description {
+.page-title-user-topic-section-description,
+.page-title-user-test-section-description {
     text-align: center;
     margin: 0;
     padding: 35px;
     letter-spacing: 1px;
     background-color: #ffffff;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 /* Section */
 .page-title-user-cookie-section,
 .page-title-user-faq-section,
-.page-title-user-topic-section {
+.page-title-user-topic-section,
+.page-title-user-test-section {
     display: block;
     font-weight: 400;
     margin: 0;
@@ -421,6 +426,7 @@ table.dataTable tbody tr:hover {
 
 .page-title-user-cookie-section-title,
 .page-title-user-topic-section-title,
+.page-title-user-test-section-title,
 .page-title-user-faq-section-title {
     letter-spacing: -1px;
     text-align: center;
@@ -435,7 +441,8 @@ table.dataTable tbody tr:hover {
     margin-right: 0 !important;
 }
 
-.row-userLayoutTitle-home {
+.row-userLayoutTitle-home,
+.row-userLayoutTitle-topicSelected {
     margin-right: 0 !important;
     margin-bottom: 30px;
 }
@@ -1874,8 +1881,9 @@ table.dataTable tbody tr:hover {
         font-size: 15px;
     }
 
-    .page-title-user-home {
-        padding: 60px 0 40px 0;
+    .page-title-user-home,
+    .page-title-user-topicSelected {
+        padding: 60px 0 45px 0;
         font-size: 15px;
     }
 
@@ -1887,7 +1895,8 @@ table.dataTable tbody tr:hover {
         font-size: 32px;
     }
 
-    .page-title-user-home-title {
+    .page-title-user-home-title,
+    .page-title-user-topicSelected-title {
         font-size: 32px;
         margin: 0 20px 0 20px;
     }
@@ -1903,7 +1912,8 @@ table.dataTable tbody tr:hover {
         margin-right: 35px;
     }
 
-    .page-title-user-home-description {
+    .page-title-user-home-description,
+    .page-title-user-topicSelected-description {
         margin-left: 35px;
         margin-right: 35px;
     }
@@ -1914,8 +1924,14 @@ table.dataTable tbody tr:hover {
         margin-right: 35px;
     }
 
+    .page-title-user-topic-section-description,
+    .page-title-user-test-section-description {
+        text-align: justify;
+    }
+
     .page-title-user-cookie-section-title,
     .page-title-user-topic-section-title,
+    .page-title-user-test-section-title,
     .page-title-user-faq-section-title {
         font-size: 26px;
     }
@@ -2060,16 +2076,17 @@ table.dataTable tbody tr:hover {
     .page-title-user-scores,
     .page-title-user-profile {
         padding: 26px 0 30px 0;
-        font-size: 14px;
     }
 
-    .page-title-user-home {
-        padding: 45px 0 26px 0;
+    .page-title-user-home,
+    .page-title-user-topicSelected {
+        padding: 46px 0 27px 0;
     }
 
     .page-title-user-contact-title,
     .page-title-user-scores-title,
     .page-title-user-home-title,
+    .page-title-user-topicSelected-title,
     .page-title-user-profile-title,
     .page-title-user-cookie-title {
         font-size: 31px;
@@ -2091,14 +2108,15 @@ table.dataTable tbody tr:hover {
         margin-right: 25px;
     }
 
-    .page-title-user-home-description {
+    .page-title-user-home-description,
+    .page-title-user-topicSelected-description {
         text-align: justify;
         margin-left: 25px;
         margin-right: 25px;
     }
 
-    .page-title-user-topic-section-description {
-        text-align: justify;
+    .page-title-user-topic-section-description,
+    .page-title-user-test-section-description {
         padding-left: 25px;
         padding-right: 25px;
         font-size: 14px;
@@ -2111,6 +2129,7 @@ table.dataTable tbody tr:hover {
 
     .page-title-user-cookie-section-title,
     .page-title-user-topic-section-title,
+    .page-title-user-test-section-title,
     .page-title-user-faq-section-title {
         font-size: 25px;
     }
@@ -2280,11 +2299,13 @@ table.dataTable tbody tr:hover {
         padding: 20px 0 25px 0;
     }
 
-    .page-title-user-home {
-        padding: 40px 0 24px 0;
+    .page-title-user-home,
+    .page-title-user-topicSelected {
+        padding: 40px 0 25px 0;
     }
 
-    .page-title-user-topic-section-description {
+    .page-title-user-topic-section-description,
+    .page-title-user-test-section-description {
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -2293,6 +2314,7 @@ table.dataTable tbody tr:hover {
     .page-title-user-cookie-title,
     .page-title-user-faq-title,
     .page-title-user-home-title,
+    .page-title-user-topicSelected-title,
     .page-title-user-scores-title,
     .page-title-user-profile-title {
         font-size: 29px;
@@ -2302,6 +2324,7 @@ table.dataTable tbody tr:hover {
     .page-title-user-cookie-section-description,
     .page-title-user-faq-description,
     .page-title-user-home-description,
+    .page-title-user-topicSelected-description,
     .page-title-user-scores-description,
     .page-title-user-profile-description,
     .page-title-user-contact-description {
@@ -2316,6 +2339,7 @@ table.dataTable tbody tr:hover {
 
     .page-title-user-cookie-section-title,
     .page-title-user-topic-section-title,
+    .page-title-user-test-section-title,
     .page-title-user-faq-section-title {
         font-size: 24px;
     }

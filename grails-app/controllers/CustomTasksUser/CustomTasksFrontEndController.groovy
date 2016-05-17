@@ -61,11 +61,16 @@ class CustomTasksFrontEndController {
             try{
                 UUID uuidTopic = UUID.fromString(params.id);
 
+                def topicInstance = Topic.findById(uuidTopic)
+                def topicInstanceActiveTest = Test.findAllByTopicAndActive(topicInstance, true)
+
                 // URL maliciously introduced because the topic is not visible
-                if (!Topic.findById(uuidTopic).visibility) {
+                if (!topicInstance.visibility || topicInstanceActiveTest.size() == 0 ) {
                     response.sendError(404)
                 } else {
-                    log.error("Materia visible")
+
+                    log.error(topicInstanceActiveTest)
+                    render view: 'topicSelected', model: [topicName: topicInstance.name, availableTotalTest: topicInstanceActiveTest]
                 }
             } catch (IllegalArgumentException exception){ // Params.id is not valid UUID
                 log.error("CustomTasksFrontEndController():topicSelected():Exception:paramsTopic:notUUID:${exception}")
@@ -75,6 +80,15 @@ class CustomTasksFrontEndController {
         } else {
             response.sendError(404)
         }
+    }
+
+    /**
+     * It shows the test page of the topic selected by user.
+     */
+    def testSelected() {
+        log.debug("CustomTasksFrontEndController():testSelected()")
+
+        render view: 'testSelected'
     }
 
     /**

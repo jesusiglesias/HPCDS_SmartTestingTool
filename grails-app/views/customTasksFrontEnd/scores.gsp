@@ -108,7 +108,7 @@
                     <g:message code="layouts.main_auth_user.body.title.scores" default="Scores"/>
                 </h3>
                 <p class="page-title-user-scores-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.scores.description", default:"In this section you can check your current scores obtained after completion of the various active test on the platform."))}
+                    ${raw(g.message(code:"layouts.main_auth_user.body.title.scores.description", default:"Consult your final scores obtained in the different completed test of the platform."))}
                 </p>
             </div>
         </div>

@@ -27,6 +27,19 @@ environments {
             dbCreate = "create-drop"
             url = "" // Defined in DBConfig.groovy
             //logssql=true
+            properties {
+                maxActive = 50
+                maxIdle = 25
+                minIdle = 5
+                initialSize = 5
+                minEvictableIdleTimeMillis = 60000
+                timeBetweenEvictionRunsMillis = 60000
+                maxWait = 10000
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = false
+                validationQuery = "SELECT 1"
+            }
         }
     }
     test {
@@ -34,13 +47,38 @@ environments {
             dbCreate = "update"
             url = "" // Defined in DBConfig.groovy
             //logssql = true
+            properties {
+                maxActive = 50
+                maxIdle = 25
+                minIdle = 5
+                initialSize = 5
+                minEvictableIdleTimeMillis = 60000
+                timeBetweenEvictionRunsMillis = 60000
+                maxWait = 10000
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = false
+                validationQuery = "SELECT 1"
+            }
         }
     }
     production {
         dataSource {
             dbCreate = "update"
             url = "" // Defined in DBConfig.groovy
+            properties {
+                maxActive = 50
+                maxIdle = 25
+                minIdle = 5
+                initialSize = 5
+                minEvictableIdleTimeMillis = 60000
+                timeBetweenEvictionRunsMillis = 60000
+                maxWait = 10000
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = false
+                validationQuery = "SELECT 1"
+            }
         }
     }
 }
-

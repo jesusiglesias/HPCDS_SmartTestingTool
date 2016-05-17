@@ -92,7 +92,7 @@
                     <g:message code="layouts.main_auth_user.body.title.contactUs" default="Contact us"/>
                 </h3>
                 <p class="page-title-user-contact-description">
-                    ${raw(g.message(code:"layouts.main_auth_user.body.title.contactUs.description", default:"In this section you can check more information about us and contact us through the form established for it."))}
+                    ${raw(g.message(code:"layouts.main_auth_user.body.title.contactUs.description", default:"Consult more information about us and contact us through the contact form established for it."))}
                 </p>
             </div>
         </div>
