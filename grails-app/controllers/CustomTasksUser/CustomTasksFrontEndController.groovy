@@ -7,6 +7,7 @@ import Test.Topic
 import User.Evaluation
 import grails.converters.JSON
 import grails.transaction.Transactional
+import groovy.time.TimeCategory
 import org.apache.commons.lang.StringUtils
 import java.text.SimpleDateFormat
 import static grails.async.Promises.*
@@ -52,7 +53,7 @@ class CustomTasksFrontEndController {
     def topicSelected() {
         log.debug("CustomTasksFrontEndController():topicSelected()")
 
-        log.error(params.id)
+        def allowedDate = []
 
         // Security in topic
         if (params.id != null) {
@@ -70,7 +71,30 @@ class CustomTasksFrontEndController {
                 } else {
 
                     log.error(topicInstanceActiveTest)
-                    render view: 'topicSelected', model: [topicName: topicInstance.name, availableTotalTest: topicInstanceActiveTest]
+
+                    // Today
+                    def todayDate = new Date().clearTime()
+
+                    // It checks if each test is accesible by date
+                    topicInstanceActiveTest.each { test ->
+
+                        use(TimeCategory) {
+
+                            if(todayDate >= test.initDate && todayDate <= test.endDate) {
+                                allowedDate.push(true)
+                            } else {
+                                allowedDate.push(false)
+                            }
+                        }
+                    }
+
+                    log.error(allowedDate)
+
+                    // Tooltip messages
+                    def accessible = g.message(code:"layouts.main_auth_user.body.topicSelected.tooltip.accessible", default:"Accessible test")
+                    def inaccessible = g.message(code:"layouts.main_auth_user.body.topicSelected.tooltip.inaccessible", default:"Inaccessible test")
+
+                    render view: 'topicSelected', model: [topicName: topicInstance.name, availableTotalTest: topicInstanceActiveTest, allowedDate:allowedDate, todayDate: todayDate, accessible: accessible, inaccessible: inaccessible]
                 }
             } catch (IllegalArgumentException exception){ // Params.id is not valid UUID
                 log.error("CustomTasksFrontEndController():topicSelected():Exception:paramsTopic:notUUID:${exception}")

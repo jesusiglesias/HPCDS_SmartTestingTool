@@ -6,23 +6,20 @@
     <title><g:message code="layouts.main_auth_user.head.title.topicSelected" default="STT | Topic selected"/></title>
 
     <script type="text/javascript">
-        // Handler tooltips
-        jQuery(document).ready(function() {
 
-            // Variables to use in javascript
-            var _activeTest = '${g.message(code:'layouts.main_auth_user.body.title.topic.tooltip.test', default:'Number of active test')}';
+        // Handler tooltips
+        function tooltipTest (element, _message) {
 
             // Global tooltips
-            $('.tooltips').tooltip();
+            $('.tooltips').tooltip({delay: 2000});
 
             // Portlet tooltips
-            $('.ribbon-vertical-left').tooltip({
+            $(element).tooltip({
                 container: 'body',
-                title: _activeTest
+                title: _message
             });
-        })
+        }
     </script>
-
 </head>
 <body>
 
@@ -115,38 +112,110 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
 
     <!-- Available test -->
     <g:each in="${availableTotalTest}" status="i" var="availableTest">
+        <div class="row row-userLayoutTitle-home-ribbons">
+            <div class="col-md-12">
+                <div class="mt-element-ribbon mt-element-ribbon-custom">
 
-        <g:if test="${(i % 2) == 0 ? 'row' : ''}">
-            <div class="row row-userLayoutTitle-home-ribbons">
-        </g:if>
-        <div class="col-md-6">
-            <div class="mt-element-ribbon">
-                <!-- Number of test -->
-                <div class="ribbon ribbon-vertical-left ribbon-color ribbon-shadow uppercase">
-                    <div class="ribbon-sub ribbon-bookmark"></div>
-                    <span>${availableTest}</span>
-                </div>
-                <!-- Name -->
-                <div class="ribbon ribbon-right ribbon-clip ribbon-shadow ribbon-border-dash-hor ribbon-color-success uppercase">
-                    <div class="ribbon-sub ribbon-clip ribbon-right"></div>
-                    ${availableTest?.name}
-                </div>
-                <!-- Description -->
-                <p class="ribbon-content">
-                    ${(availableTest?.description) ?:"${raw(g.message(code: 'layouts.main_auth_user.body.title.topic.without.description', default: 'It has not provided any description for this topic.'))}"}
-                </p>
+                    <!-- Accessible or not test -->
+                    <div class="ribbon ribbon-vertical-left ribbon-color ribbon-shadow uppercase tooltip-${i}">
+                        <div class="ribbon-sub ribbon-bookmark ribbon-sub-${i}"></div>
+                        <!-- span-icon elements -->
+                    </div>
 
-                <g:if test="${availableTest?.name != 0}">
-                    <!-- Button -->
-                    <g:link controller="customTasksFrontEnd" action="testSelected" id="${availableTest?.id}" class="btn blue-hoki">
-                        <g:message code="layouts.main_auth_user.body.title.topic.button" default="Enter"/>
-                    </g:link>
-                </g:if>
-            </div>
+                    <!-- Name -->
+                    <div class="ribbon ribbon-right ribbon-clip ribbon-shadow ribbon-border-dash-hor ribbon-color-success ribbon-right-custom uppercase">
+                        <div class="ribbon-sub ribbon-clip ribbon-right"></div>
+                        ${availableTest?.name}
+                    </div>
+
+                    <!-- Description -->
+                    <p class="ribbon-content ribbon-content-border">
+                        ${availableTest?.description}
+                    </p>
+
+                    <!-- Dates -->
+                    <p>
+                        <span class="ribbon-content-text"><g:message
+                                code="layouts.main_auth_user.body.topicSelected.information.accesibility" default="Accessible during the dates:"/></span>
+                        <span class="ribbon-content-value"><i class="icofont icofont-calendar"></i> <g:formatDate formatName="custom.date.test" date="${availableTest?.initDate}"/> - <g:formatDate formatName="custom.date.test" date="${availableTest?.endDate}"/></span>
+                    </p>
+
+                    <!-- Maximum number of attempts -->
+                    <p>
+                        <span class="ribbon-content-text"><g:message
+                                code="layouts.main_auth_user.body.topicSelected.information.attempts"
+                                default="Maximum number of attempts allowed:"/>
+                        </span>
+                        <span class="ribbon-content-value"><i class="icofont icofont-pen-alt-2"></i>
+                            ${availableTest?.maxAttempts}
+                            <g:if test="${availableTest?.maxAttempts == 1}">
+                                <g:message code="layouts.main_auth_user.body.topicSelected.information.attempts.attempt" default="attempt"/>
+                            </g:if>
+                            <g:else>
+                                <g:message code="layouts.main_auth_user.body.topicSelected.information.attempts.attempts" default="attempts"/>
+                            </g:else>
+                        </span>
+                    </p>
+
+                    <!-- Limit time -->
+                    <p>
+                        <span class="ribbon-content-text"><g:message code="layouts.main_auth_user.body.topicSelected.information.time" default="Limit time of completeness:"/></span>
+                        <span class="ribbon-content-value"><i class="icofont icofont-clock-time"></i>
+                            <g:if test="${availableTest?.lockTime == 0}">
+                                <g:message code="layouts.main_auth_user.body.topicSelected.information.time.without.limit" default="unlimited"/>
+                            </g:if>
+                            <g:elseif test="${availableTest?.lockTime == 1}">
+                                ${availableTest?.lockTime} <g:message code="layouts.main_auth_user.body.topicSelected.information.time.minute" default="minute"/>
+                            </g:elseif>
+                            <g:else>
+                                ${availableTest?.lockTime} <g:message code="layouts.main_auth_user.body.topicSelected.information.time.minutes" default="minutes"/>
+                            </g:else>
+                        </span>
+                    </p>
+
+                    <!-- Number of questions -->
+                    <p>
+                        <span class="ribbon-content-text"><g:message
+                                code="layouts.main_auth_user.body.topicSelected.information.question"
+                                default="Number of questions:"/></span>
+                        <span class="ribbon-content-value"><i class="icofont icofont-question"></i>
+                            <g:if test="${availableTest?.numberOfQuestions == 0}">
+                                <g:message code="layouts.main_auth_user.body.topicSelected.information.question.without.questions" default="Without questions"/>
+                            </g:if>
+                            <g:elseif test="${availableTest?.numberOfQuestions == 1}">
+                                ${availableTest?.numberOfQuestions} <g:message code="layouts.main_auth_user.body.topicSelected.information.question.question" default="question"/>
+                            </g:elseif>
+                            <g:else>
+                                ${availableTest?.numberOfQuestions} <g:message code="layouts.main_auth_user.body.topicSelected.information.question.questions" default="questions"/>
+                            </g:else>
+                        </span>
+                    </p>
+                </div>
+
+                </div>
+                    <!-- Start test if has questions and is within the time allowed
+                     <g:if test="${allowedDate[i] && availableTest?.numberOfQuestions > 0}">
+                        <!-- Button -->
+                        <g:link controller="customTasksFrontEnd" action="testSelected" id="${availableTest?.id}"
+                                class="btn blue-hoki">
+                            <g:message code="layouts.main_auth_user.body.topicSelected.button" default="Start test"/>
+                        </g:link>
+                    </g:if>
         </div>
-        <g:if test="${(i % 2) != 0}">
-            </div>
+
+        <!-- Call to tooltip function -->
+        <g:if test="${allowedDate[i]}">
+            <script>
+                $("<i class='icofont icofont-check-circled' style='color: #6CB191;'></i>").insertAfter(".ribbon-sub-${i}");
+                tooltipTest(".tooltip-${i}", "${accessible}");
+            </script>
         </g:if>
+        <g:else>
+            <script>
+                $("<i class='icofont icofont-close-circled' style='color: rgb(186, 99, 99);'></i>").insertAfter(".ribbon-sub-${i}");
+                tooltipTest(".tooltip-${i}", "${inaccessible}");
+            </script>
+        </g:else>
     </g:each>
 
 </body>

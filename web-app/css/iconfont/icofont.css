@@ -1228,6 +1228,14 @@
     content: "\ec9b";
 }
 
+.icofont-calendar:before {
+    content: "\efa1";
+}
+
+.icofont-pen-alt-2:before {
+    content: "\ecd6";
+}
+
 /*Font size*/
 .icofont-lg {
     font-size: 1.33333333em;
