@@ -112,8 +112,10 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
 
     <!-- Available test -->
     <g:each in="${availableTotalTest}" status="i" var="availableTest">
-        <div class="row row-userLayoutTitle-home-ribbons">
-            <div class="col-md-12">
+        <g:if test="${(i % 2) == 0 ? 'row' : ''}">
+            <div class="row row-userLayoutTitle-home-ribbons">
+        </g:if>
+            <div class="col-md-6">
                 <div class="mt-element-ribbon mt-element-ribbon-custom">
 
                     <!-- Accessible or not test -->
@@ -134,14 +136,14 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
                     </p>
 
                     <!-- Dates -->
-                    <p>
+                    <p class="ribbon-margin-paragraph">
                         <span class="ribbon-content-text"><g:message
                                 code="layouts.main_auth_user.body.topicSelected.information.accesibility" default="Accessible during the dates:"/></span>
                         <span class="ribbon-content-value"><i class="icofont icofont-calendar"></i> <g:formatDate formatName="custom.date.test" date="${availableTest?.initDate}"/> - <g:formatDate formatName="custom.date.test" date="${availableTest?.endDate}"/></span>
                     </p>
 
                     <!-- Maximum number of attempts -->
-                    <p>
+                    <p class="ribbon-margin-paragraph">
                         <span class="ribbon-content-text"><g:message
                                 code="layouts.main_auth_user.body.topicSelected.information.attempts"
                                 default="Maximum number of attempts allowed:"/>
@@ -158,7 +160,7 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
                     </p>
 
                     <!-- Limit time -->
-                    <p>
+                    <p class="ribbon-margin-paragraph">
                         <span class="ribbon-content-text"><g:message code="layouts.main_auth_user.body.topicSelected.information.time" default="Limit time of completeness:"/></span>
                         <span class="ribbon-content-value"><i class="icofont icofont-clock-time"></i>
                             <g:if test="${availableTest?.lockTime == 0}">
@@ -174,7 +176,7 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
                     </p>
 
                     <!-- Number of questions -->
-                    <p>
+                    <p class="ribbon-margin-paragraph">
                         <span class="ribbon-content-text"><g:message
                                 code="layouts.main_auth_user.body.topicSelected.information.question"
                                 default="Number of questions:"/></span>
@@ -190,33 +192,32 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
                             </g:else>
                         </span>
                     </p>
-                </div>
-
-                </div>
-                    <!-- Start test if has questions and is within the time allowed
-                     <g:if test="${allowedDate[i] && availableTest?.numberOfQuestions > 0}">
+                    <!-- Start test if has questions and is within the time allowed -->
+                    <g:if test="${allowedDate[i] && allowedAttempt[i] && availableTest?.numberOfQuestions > 0}">
                         <!-- Button -->
-                        <g:link controller="customTasksFrontEnd" action="testSelected" id="${availableTest?.id}"
-                                class="btn blue-hoki">
+                        <g:link controller="customTasksFrontEnd" action="testSelected" id="${availableTest?.id}" class="btn blue-hoki ribbon-margin-button">
                             <g:message code="layouts.main_auth_user.body.topicSelected.button" default="Start test"/>
                         </g:link>
                     </g:if>
-        </div>
+                </div>
+            </div>
+        <g:if test="${(i % 2) != 0}">
+            </div>
+        </g:if>
 
         <!-- Call to tooltip function -->
-        <g:if test="${allowedDate[i]}">
+        <g:if test="${allowedDate[i] && allowedAttempt[i] && availableTest?.numberOfQuestions > 0}">
             <script>
-                $("<i class='icofont icofont-check-circled' style='color: #6CB191;'></i>").insertAfter(".ribbon-sub-${i}");
+                $("<i class='icofont icofont-check-circled' style='color: #419C8D;'></i>").insertAfter(".ribbon-sub-${i}");
                 tooltipTest(".tooltip-${i}", "${accessible}");
             </script>
         </g:if>
         <g:else>
             <script>
-                $("<i class='icofont icofont-close-circled' style='color: rgb(186, 99, 99);'></i>").insertAfter(".ribbon-sub-${i}");
+                $("<i class='icofont icofont-close-circled' style='color: rgb(189, 75, 75);'></i>").insertAfter(".ribbon-sub-${i}");
                 tooltipTest(".tooltip-${i}", "${inaccessible}");
             </script>
         </g:else>
     </g:each>
-
 </body>
 </html>

@@ -100,10 +100,10 @@
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
                 <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionTwo" default="I do not remember my password, what can I do?"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionFive" default="My account or password is locked or expired."/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionTwo.description" encodeAs="raw" args="[link(uri: '/forgotPassword') { message(code:'layouts.main_auth_user.body.title.faq.questionTwo.description.link', default: 'Restore password')}]"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionFive.description" encodeAs="raw"/>
                 </p>
             </div>
         </div>
@@ -114,10 +114,10 @@
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
                 <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionThree" default="How can I modify my profile data?"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionTwo" default="I do not remember my password, what can I do?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionThree.description" encodeAs="raw" args="[link(uri: '/contact') { message(code:'layouts.main_auth_user.body.title.faq.question.link.contactForm', default: 'Contact form')}]"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionTwo.description" encodeAs="raw" args="[link(uri: '/forgotPassword') { message(code:'layouts.main_auth_user.body.title.faq.questionTwo.description.link', default: 'Restore password')}]"/>
                 </p>
             </div>
         </div>
@@ -125,10 +125,10 @@
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
                 <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionFour" default="I want to delete my user account, how do I do?"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionThree" default="How can I modify my profile data?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionFour.description" encodeAs="raw" args="[link(uri: '/contact') { message(code:'layouts.main_auth_user.body.title.faq.question.link.contactForm', default: 'Contact form')}]"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionThree.description" encodeAs="raw" args="[link(uri: '/contact') { message(code:'layouts.main_auth_user.body.title.faq.question.link.contactForm', default: 'Contact form')}]"/>
                 </p>
             </div>
         </div>
@@ -139,10 +139,10 @@
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
                 <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionFive" default="My account or password is locked or expired."/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionFour" default="I want to delete my user account, how do I do?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionFive.description" encodeAs="raw"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionFour.description" encodeAs="raw" args="[link(uri: '/contact') { message(code:'layouts.main_auth_user.body.title.faq.question.link.contactForm', default: 'Contact form')}]"/>
                 </p>
             </div>
         </div>

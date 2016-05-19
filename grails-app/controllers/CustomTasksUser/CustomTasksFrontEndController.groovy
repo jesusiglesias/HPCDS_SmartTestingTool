@@ -54,6 +54,7 @@ class CustomTasksFrontEndController {
         log.debug("CustomTasksFrontEndController():topicSelected()")
 
         def allowedDate = []
+        def allowedAttempt = []
 
         // Security in topic
         if (params.id != null) {
@@ -63,38 +64,69 @@ class CustomTasksFrontEndController {
                 UUID uuidTopic = UUID.fromString(params.id);
 
                 def topicInstance = Topic.findById(uuidTopic)
-                def topicInstanceActiveTest = Test.findAllByTopicAndActive(topicInstance, true)
 
-                // URL maliciously introduced because the topic is not visible
-                if (!topicInstance.visibility || topicInstanceActiveTest.size() == 0 ) {
-                    response.sendError(404)
-                } else {
+                if (topicInstance != null) {
 
-                    log.error(topicInstanceActiveTest)
+                    def topicInstanceActiveTest = Test.findAllByTopicAndActive(topicInstance, true, [sort: "name", order: "asc"])
 
-                    // Today
-                    def todayDate = new Date().clearTime()
+                    // URL maliciously introduced because the topic is not visible
+                    if (!topicInstance.visibility || topicInstanceActiveTest.size() == 0) {
+                        response.sendError(404)
+                    } else {
 
-                    // It checks if each test is accesible by date
-                    topicInstanceActiveTest.each { test ->
+                        log.error(topicInstanceActiveTest.name)
 
-                        use(TimeCategory) {
+                        // Today
+                        def todayDate = new Date().clearTime()
 
-                            if(todayDate >= test.initDate && todayDate <= test.endDate) {
-                                allowedDate.push(true)
-                            } else {
-                                allowedDate.push(false)
+                        // It checks if each test is accessible by date
+                        topicInstanceActiveTest.each { test ->
+
+                            use(TimeCategory) {
+
+                                if (todayDate >= test.initDate && todayDate <= test.endDate) {
+                                    allowedDate.push(true)
+                                } else {
+                                    allowedDate.push(false)
+                                }
                             }
                         }
+
+                        // It obtains the current user
+                        def currentUser = User.get(springSecurityService.currentUser.id)
+
+                        // It obtains the number of active test for each topic
+                        topicInstanceActiveTest.each { test ->
+
+                            def result = Evaluation.findAllByUserAndTestName(currentUser, test.name).attemptNumber
+
+                            log.error(result)
+
+                            // It obtains the current attempt of user
+                            if (result.isEmpty()) {
+                                result = 0
+                            } else {
+                                result = result[0]
+                            }
+
+                            // It checks if each test is accessible by maximum number of attemtps
+                            if (result < test.maxAttempts) {
+                                allowedAttempt.push(true)
+                            } else {
+                                allowedAttempt.push(false)
+                            }
+                        }
+
+                        // Tooltip messages
+                        def accessible = g.message(code: "layouts.main_auth_user.body.topicSelected.tooltip.accessible", default: "Accessible test")
+                        def inaccessible = g.message(code: "layouts.main_auth_user.body.topicSelected.tooltip.inaccessible", default: "Inaccessible test")
+
+                        render view: 'topicSelected', model: [topicName: topicInstance.name, availableTotalTest: topicInstanceActiveTest, allowedAttempt: allowedAttempt, allowedDate: allowedDate, accessible: accessible, inaccessible: inaccessible]
                     }
+                } else {
+                    log.error("CustomTasksFrontEndController():topicSelected():Exception:paramsTopic:notExist")
 
-                    log.error(allowedDate)
-
-                    // Tooltip messages
-                    def accessible = g.message(code:"layouts.main_auth_user.body.topicSelected.tooltip.accessible", default:"Accessible test")
-                    def inaccessible = g.message(code:"layouts.main_auth_user.body.topicSelected.tooltip.inaccessible", default:"Inaccessible test")
-
-                    render view: 'topicSelected', model: [topicName: topicInstance.name, availableTotalTest: topicInstanceActiveTest, allowedDate:allowedDate, todayDate: todayDate, accessible: accessible, inaccessible: inaccessible]
+                    response.sendError(404)
                 }
             } catch (IllegalArgumentException exception){ // Params.id is not valid UUID
                 log.error("CustomTasksFrontEndController():topicSelected():Exception:paramsTopic:notUUID:${exception}")

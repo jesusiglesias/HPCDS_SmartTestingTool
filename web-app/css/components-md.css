@@ -7907,8 +7907,7 @@ body[ng-controller] .modal {
 }
 
 .mt-element-ribbon-custom {
-    min-height: 420px !important;
-    /* TODO height: 543px !important; */
+    min-height: 289px !important;
 }
 
 .mt-element-ribbon:hover {
@@ -7925,8 +7924,8 @@ body[ng-controller] .modal {
 
 .mt-element-ribbon .ribbon-content-border {
     border-bottom: 4px double #BBA150;
-   /* TODO min-height: 224px; */
-    min-height: 104px;
+    min-height: 44px;
+    margin-bottom: 20px;
 }
 
 .mt-element-ribbon .ribbon-content-without-topic {
@@ -8079,7 +8078,7 @@ body[ng-controller] .modal {
 }
 
 .mt-element-ribbon .ribbon.ribbon-color-success {
-    background-color: #579478;
+    background-color: #419C8D;
     color: white;
 }
 
@@ -8111,6 +8110,14 @@ body[ng-controller] .modal {
 .ribbon-content-value .icofont-pen-alt-2,
 .ribbon-content-value .icofont-question {
     font-size: 15px;
+}
+
+.ribbon-margin-paragraph {
+    margin: 10px 0 !important;
+}
+
+.ribbon-margin-button {
+    margin-top: 10px !important;
 }
 
 /* Max-width: 1300px */
