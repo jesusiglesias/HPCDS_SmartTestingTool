@@ -33,6 +33,7 @@ class UrlMappings {
         }
         // User - Grouping URLs
         group("/user") {
+            "/"(controller: 'user', action: 'index')
             "/create-error"(controller: 'user', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'user', action: 'update')
             "/edit/profileImage/$id?(.$format)?"(controller: 'user', action: 'editProfileImage')
@@ -42,6 +43,7 @@ class UrlMappings {
         }
         // Department - Grouping URLs
         group("/department") {
+            "/"(controller: 'department', action: 'index')
             "/create-error"(controller: 'department', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'department', action: 'update')
             "/import"(controller: 'department', action: 'importDepartment')
@@ -49,6 +51,7 @@ class UrlMappings {
         }
         // Topic - Grouping URLs
         group("/topic") {
+            "/"(controller: 'topic', action: 'index')
             "/create-error"(controller: 'topic', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'topic', action: 'update')
             "/import"(controller: 'topic', action: 'importTopic')
@@ -56,6 +59,7 @@ class UrlMappings {
         }
         // Catalog - Grouping URLs
         group("/catalog") {
+            "/"(controller: 'catalog', action: 'index')
             "/create-error"(controller: 'catalog', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'catalog', action: 'update')
             "/import"(controller: 'catalog', action: 'importCatalog')
@@ -63,6 +67,7 @@ class UrlMappings {
         }
         // Question - Grouping URLs
         group("/question") {
+            "/"(controller: 'question', action: 'index')
             "/create-error"(controller: 'question', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'question', action: 'update')
             "/import"(controller: 'question', action: 'importQuestion')
@@ -70,6 +75,7 @@ class UrlMappings {
         }
         // Answer - Grouping URLs
         group("/answer") {
+            "/"(controller: 'answer', action: 'index')
             "/create-error"(controller: 'answer', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'answer', action: 'update')
             "/import"(controller: 'answer', action: 'importAnswer')
@@ -77,6 +83,7 @@ class UrlMappings {
         }
         // Test - Grouping URLs
         group("/test") {
+            "/"(controller: 'test', action: 'index')
             "/create-error"(controller: 'test', action: 'save')
             "/edit-error/$id?(.$format)?"(controller: 'test', action: 'update')
             "/import"(controller: 'test', action: 'importTest')
