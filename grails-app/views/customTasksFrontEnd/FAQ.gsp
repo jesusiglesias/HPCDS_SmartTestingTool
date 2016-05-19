@@ -150,10 +150,10 @@
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
                 <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionSix" default="What are the topics and how to perform a test?"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionEight" default="How do I close the current session?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionSix.description" encodeAs="raw"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionEight.description" encodeAs="raw"/>
                 </p>
             </div>
         </div>
@@ -164,10 +164,10 @@
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
                 <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionSeven" default="Where can I check my evaluations?"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionSix" default="What are the topics and how to perform a test?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionSeven.description" encodeAs="raw"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionSix.description" encodeAs="raw"/>
                 </p>
             </div>
         </div>
@@ -175,10 +175,10 @@
             <!-- Page-title -->
             <div class="page-title-user-faq-section">
                 <h3 class="page-title-user-faq-section-title hvr-bubble-float-bottom">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionEight" default="How do I close the current session?"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionSeven" default="Where can I check my evaluations?"/>
                 </h3>
                 <p class="page-title-user-faq-section-description">
-                    <g:message code="layouts.main_auth_user.body.title.faq.questionEight.description" encodeAs="raw"/>
+                    <g:message code="layouts.main_auth_user.body.title.faq.questionSeven.description" encodeAs="raw"/>
                 </p>
             </div>
         </div>
