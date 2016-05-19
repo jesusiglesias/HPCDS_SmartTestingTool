@@ -8141,10 +8141,12 @@ body[ng-controller] .modal {
 =================================================================== */
 .tooltip {
     font-weight: 600 !important;
-    line-height: 2.428571 !important;
     padding-left: 15px !important;
 }
 
+.tooltip-inner {
+    padding: 12px 8px !important;
+}
 .tooltip.in {
     opacity: .7 !important;
 }
