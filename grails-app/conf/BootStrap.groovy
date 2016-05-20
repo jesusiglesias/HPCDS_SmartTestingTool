@@ -239,8 +239,8 @@ class BootStrap {
                     description: 'Test de un solo intento correspondiente a la evaluación de los conceptos de seguridad. Está comprendido de x preguntas...',
                     active: true,
                     numberOfQuestions: 3,
-                    initDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
-                    endDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
+                    initDate: new Date().clearTime(),
+                    endDate: new Date().clearTime() + 1,
                     lockTime: 0,
                     maxAttempts: 1,
                     evaluationsTest: [evalUserSTT1, evalUserSwitchSTT1],
@@ -253,8 +253,8 @@ class BootStrap {
                     description: 'Test de inglés básico...',
                     active: false,
                     numberOfQuestions: 0,
-                    initDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
-                    endDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-05-2016'),
+                    initDate: new Date().clearTime(),
+                    endDate: new Date().clearTime() + 5,
                     lockTime: 0,
                     maxAttempts: 1,
                     topic: languageTopic,
@@ -419,9 +419,9 @@ class BootStrap {
                     username: 'admin_switch',
                     password: '7g4sOmmm',
                     email: 'admin_switch@stt.com',
-                    name: 'Usuario',
+                    name:   'Usuario',
                     surname: 'Conmutar',
-                    birthDate: new SimpleDateFormat('dd-MM-yyyy').parse('19-10-1991'),
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1991'),
                     sex: Sex.FEMALE,
                     department: idDepartment
             )
@@ -432,7 +432,7 @@ class BootStrap {
                     email: 'user_stt@stt.com',
                     name: 'Usuario STT',
                     surname: 'Apellido STT',
-                    birthDate: new SimpleDateFormat('dd-MM-yyyy').parse('22-04-1994'),
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('22-04-1994'),
                     sex: Sex.MALE,
                     department: idDepartment
             )
@@ -523,6 +523,58 @@ class BootStrap {
                     visibility: true
             )
 
+            /*-------------------------------------------------------------------------------------------*
+             *                                       EVALUATION                                          *
+             *-------------------------------------------------------------------------------------------*/
+
+            /*def evalUserSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    maxAttempt: 2,
+                    completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('03-05-2016 14:56:12'),
+                    testScore: 7.55,
+                    user: newUser,
+            )
+
+            def evalUserSwitchSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    maxAttempt: 2,
+                    completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('14-04-2016 20:18:45'),
+                    testScore: 7.23,
+                    user: newUserSwitch,
+            )*/
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                           TEST                                            *
+             *-------------------------------------------------------------------------------------------*/
+            def securityITest = Test.findByName('Seguridad I') ?: new Test(
+                    name: 'Seguridad I',
+                    description: 'Test de un solo intento correspondiente a la evaluación de los conceptos de seguridad. Está comprendido de x preguntas...',
+                    active: true,
+                    numberOfQuestions: 3,
+                    initDate: new Date().clearTime(),
+                    endDate: new Date().clearTime() + 1,
+                    lockTime: 0,
+                    maxAttempts: 1,
+                    //evaluationsTest: [evalUserSTT1, evalUserSwitchSTT1],
+                    topic: securityTopic,
+                    catalog: securityCatalog,
+            )
+
+            def englishTest = Test.findByName('Inglés básico') ?: new Test(
+                    name: 'Inglés básico',
+                    description: 'Test de inglés básico...',
+                    active: false,
+                    numberOfQuestions: 0,
+                    initDate: new Date().clearTime(),
+                    endDate: new Date().clearTime() + 5,
+                    lockTime: 0,
+                    maxAttempts: 1,
+                    topic: languageTopic,
+                    catalog: englishCatalog
+            )
+
             // Validation of admin
             def validAdmin = newAdmin.validate()
             // Validation of department
@@ -549,10 +601,17 @@ class BootStrap {
             // Validation of topic
             def validLanguageTopic = languageTopic.validate()
             def validSecurityTopic = securityTopic.validate()
+            // Validation of test
+            def validSecurityITest = securityITest.validate()
+            def validEnglishTest = englishTest.validate()
+            // Validation of evaluation
+            //def validEvalUserSTT1 = evalUserSTT1.validate()
+            //def validEvalUserSwitchSTT1 = evalUserSwitchSTT1.validate()
 
             if (validAdmin & validAnother & validID & validRRHH & validSecurity & validSupport & validUserSwitch & validUser
                     & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2 & validSe1 & validSe2 & validSe3 & validEnglishCatalog
-                    & validSecurityCatalog & validLanguageTopic & validSecurityTopic) {
+                    & validSecurityCatalog & validLanguageTopic & validSecurityTopic & /*validEvalUserSTT1 & validEvalUserSwitchSTT1 &*/
+                    validSecurityITest & validEnglishTest) {
 
                 // Saving roles
                 adminRole.save(flush: true, failOnError: true)
@@ -602,12 +661,21 @@ class BootStrap {
                 languageTopic.save(flush: true, failOnError: true)
                 securityTopic.save(flush: true, failOnError: true)
 
+                // Saving evaluations
+                //evalUserSTT1.save(flush: true, failOnError: true)
+                //evalUserSwitchSTT1.save(flush: true, failOnError: true)
+
+                // Saving test
+                securityITest.save(flush: true, failOnError: true)
+                englishTest.save(flush: true, failOnError: true)
+
             } else {
                 log.error("BootStrap:init():Admin users have not been created. You verify that the initial data complies with the rules")
-
             }
+
         } else {
             log.error("BooStrap:init():Existing admin or role data. Initial data were not created")
+
         }
     }
 }
