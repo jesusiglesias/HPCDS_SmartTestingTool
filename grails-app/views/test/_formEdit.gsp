@@ -5,14 +5,14 @@
 		<!-- Name -->
 		<div class="col-md-6">
 			<div class="form-group ${hasErrors(bean: testInstance, field: 'name', 'error')}">
-				<label for="name" class="control-label">
+				<label for="nameNotChanged" class="control-label">
 					<h5 class="sbold">
 						<g:message code="test.name.label" default="Name"/>
 						<span class="required"> * </span>
 					</h5>
 				</label>
 				<div class="input-icon right">
-					<g:textField name="name" maxlength="60" class="form-control form-shadow name-test backend-input" value="${testInstance?.name}" disabled="true"/>
+					<g:textField name="nameNotChanged" maxlength="60" class="form-control form-shadow name-test backend-input" value="${testInstance?.name}" disabled="true"/>
 				</div>
 				<div class="help-block">
 					<h5 class="text-justify">
