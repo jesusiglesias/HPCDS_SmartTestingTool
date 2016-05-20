@@ -434,7 +434,7 @@
                 <g:form url="[resource: testInstance, action: 'update']" method="PUT" autocomplete="on" class="horizontal-form test-form">
                     <g:hiddenField name="version" value="${testInstance?.version}"/>
                     <fieldset class="form">
-                        <g:render template="form"/>
+                        <g:render template="formEdit"/>
                     </fieldset>
 
                     <div class="domain-button-group">

@@ -217,7 +217,7 @@ class BootStrap {
                     testName: 'Seguridad I',
                     attemptNumber: 1,
                     maxAttempt: 2,
-                    completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('03-05-2016 14:56:12'),
+                    completenessDate: new Date() - 20,
                     testScore: 7.55,
                     user: newUser,
             )
@@ -226,7 +226,7 @@ class BootStrap {
                     testName: 'Seguridad I',
                     attemptNumber: 1,
                     maxAttempt: 2,
-                    completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('14-04-2016 20:18:45'),
+                    completenessDate: new Date() - 1,
                     testScore: 7.23,
                     user: newUserSwitch,
             )
@@ -242,7 +242,7 @@ class BootStrap {
                     initDate: new Date().clearTime(),
                     endDate: new Date().clearTime() + 1,
                     lockTime: 0,
-                    maxAttempts: 1,
+                    maxAttempts: 2,
                     evaluationsTest: [evalUserSTT1, evalUserSwitchSTT1],
                     topic: securityTopic,
                     catalog: securityCatalog,

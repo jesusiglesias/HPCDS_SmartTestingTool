@@ -4,31 +4,21 @@
 	<div class="row">
 		<!-- Name -->
 		<div class="col-md-6">
-			<div class="form-group group-subtitle ${hasErrors(bean: testInstance, field: 'name', 'error')}">
+			<div class="form-group ${hasErrors(bean: testInstance, field: 'name', 'error')}">
 				<label for="name" class="control-label">
 					<h5 class="sbold">
 						<g:message code="test.name.label" default="Name"/>
 						<span class="required"> * </span>
 					</h5>
-					<h5 class="thin text-justify">
+				</label>
+				<div class="input-icon right">
+					<g:textField name="name" maxlength="60" class="form-control form-shadow name-test backend-input" value="${testInstance?.name}" disabled="true"/>
+				</div>
+				<div class="help-block">
+					<h5 class="text-justify">
 						<g:message code="layouts.main_auth_admin.body.content.test.name.info.label" default="Property not editable once established."/>
 					</h5>
-				</label>
-				<div class="input-group input-icon right">
-					<i class="fa icon-offset"></i>
-					<g:textField name="name" maxlength="60" class="form-control form-shadow name-test backend-input" value="${testInstance?.name}"/>
-					<span class="input-group-btn">
-						<a href="javascript:;" class="btn green-dark" id="nameTest-checker">
-							<i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
-						</a>
-					</span>
 				</div>
-				<i class="fa fa-times i-delete-backend i-delete-test-name"></i> <!-- Delete text icon -->
-			</div>
-			<div class="help-block nameTest-block">
-				<h5 class="text-justify">
-					<g:message code="layouts.main_auth_admin.body.content.test.name.checker.block.info" default="Type a name of test and check its availability."/>
-				</h5>
 			</div>
 		</div>
 

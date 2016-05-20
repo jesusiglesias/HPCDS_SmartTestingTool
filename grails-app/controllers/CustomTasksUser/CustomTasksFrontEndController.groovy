@@ -74,8 +74,6 @@ class CustomTasksFrontEndController {
                         response.sendError(404)
                     } else {
 
-                        log.error(topicInstanceActiveTest.name)
-
                         // Today
                         def todayDate = new Date().clearTime()
 
@@ -95,22 +93,20 @@ class CustomTasksFrontEndController {
                         // It obtains the current user
                         def currentUser = User.get(springSecurityService.currentUser.id)
 
-                        // It obtains the number of active test for each topic
+                        // It checks if each test is accessible by number of attempt
                         topicInstanceActiveTest.each { test ->
 
-                            def result = Evaluation.findAllByUserAndTestName(currentUser, test.name).attemptNumber
-
-                            log.error(result)
+                            def userAttempt = Evaluation.findAllByUserAndTestName(currentUser, test.name).attemptNumber
 
                             // It obtains the current attempt of user
-                            if (result.isEmpty()) {
-                                result = 0
+                            if (userAttempt.isEmpty()) {
+                                userAttempt = 0
                             } else {
-                                result = result[0]
+                                userAttempt = userAttempt[0]
                             }
 
                             // It checks if each test is accessible by maximum number of attemtps
-                            if (result < test.maxAttempts) {
+                            if (userAttempt < test.maxAttempts) {
                                 allowedAttempt.push(true)
                             } else {
                                 allowedAttempt.push(false)
@@ -144,7 +140,67 @@ class CustomTasksFrontEndController {
     def testSelected() {
         log.debug("CustomTasksFrontEndController():testSelected()")
 
-        render view: 'testSelected'
+        def allowedDateTest = false
+
+        // Security in test
+        if (params.id != null) {
+
+            // It checks if params.id is an UUID type
+            try{
+                UUID uuidTest = UUID.fromString(params.id);
+
+                def testInstance = Test.findById(uuidTest)
+
+                if (testInstance != null) {
+
+                   // {allowedDate[i] && allowedAttempt[i] && availableTest?.numberOfQuestions > 0
+
+                    // Today
+                    def todayDate = new Date().clearTime()
+
+                    // It checks if test is accessible by date
+                    use(TimeCategory) {
+                        if (todayDate >= testInstance.initDate && todayDate <= testInstance.endDate) {
+                            allowedDateTest = true
+                        } else {
+                            allowedDateTest = false
+                        }
+                    }
+
+                    // It obtains the current user
+                    def currentUserToTest = User.get(springSecurityService.currentUser.id)
+
+                    // It checks if each test is accessible by number of attempt
+                    def attemptUserTest = Evaluation.findAllByUserAndTestName(currentUserToTest, testInstance.name).attemptNumber
+
+                    // It obtains the current attempt of user
+                    if (attemptUserTest.isEmpty()) {
+                        attemptUserTest = 0
+                    } else {
+                        attemptUserTest = attemptUserTest[0]
+                    }
+
+                    // It checks if test is accessible by date, number of attempts and number of questions
+                    if (!allowedDateTest || attemptUserTest >= testInstance.maxAttempts || testInstance.numberOfQuestions == 0) {
+                        response.sendError(404)
+                    } else {
+
+                        render view: 'testSelected'
+                    }
+
+                } else {
+                    log.error("CustomTasksFrontEndController():testSelected():Exception:paramsTest:notExist")
+
+                    response.sendError(404)
+                }
+            } catch (IllegalArgumentException exception){ // Params.id is not valid UUID
+                log.error("CustomTasksFrontEndController():testSelected():Exception:paramsTest:notUUID:${exception}")
+
+                response.sendError(404)
+            }
+        } else {
+            response.sendError(404)
+        }
     }
 
     /**
