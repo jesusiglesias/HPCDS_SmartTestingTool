@@ -96,13 +96,11 @@ class CustomTasksFrontEndController {
                         // It checks if each test is accessible by number of attempt
                         topicInstanceActiveTest.each { test ->
 
-                            def userAttempt = Evaluation.findAllByUserAndTestName(currentUser, test.name).attemptNumber
+                            def userAttempt = Evaluation.findByUserAndTestName(currentUser, test.name)?.attemptNumber
 
                             // It obtains the current attempt of user
-                            if (userAttempt.isEmpty()) {
+                            if (userAttempt == null) {
                                 userAttempt = 0
-                            } else {
-                                userAttempt = userAttempt[0]
                             }
 
                             // It checks if each test is accessible by maximum number of attemtps
@@ -141,6 +139,7 @@ class CustomTasksFrontEndController {
         log.debug("CustomTasksFrontEndController():testSelected()")
 
         def allowedDateTest = false
+        def attemptUserTest
 
         // Security in test
         if (params.id != null) {
@@ -153,38 +152,68 @@ class CustomTasksFrontEndController {
 
                 if (testInstance != null) {
 
-                   // {allowedDate[i] && allowedAttempt[i] && availableTest?.numberOfQuestions > 0
-
                     // Today
                     def todayDate = new Date().clearTime()
 
                     // It checks if test is accessible by date
                     use(TimeCategory) {
-                        if (todayDate >= testInstance.initDate && todayDate <= testInstance.endDate) {
-                            allowedDateTest = true
-                        } else {
-                            allowedDateTest = false
-                        }
+                        allowedDateTest = todayDate >= testInstance.initDate && todayDate <= testInstance.endDate
                     }
 
                     // It obtains the current user
                     def currentUserToTest = User.get(springSecurityService.currentUser.id)
 
                     // It checks if each test is accessible by number of attempt
-                    def attemptUserTest = Evaluation.findAllByUserAndTestName(currentUserToTest, testInstance.name).attemptNumber
+                    def currentEvaluation = Evaluation.findByUserAndTestName(currentUserToTest, testInstance.name)
 
                     // It obtains the current attempt of user
-                    if (attemptUserTest.isEmpty()) {
+                    if (currentEvaluation?.attemptNumber == null) {
                         attemptUserTest = 0
                     } else {
-                        attemptUserTest = attemptUserTest[0]
+                        attemptUserTest = currentEvaluation.attemptNumber
                     }
 
                     // It checks if test is accessible by date, number of attempts and number of questions
                     if (!allowedDateTest || attemptUserTest >= testInstance.maxAttempts || testInstance.numberOfQuestions == 0) {
                         response.sendError(404)
+
                     } else {
 
+                        if (currentEvaluation == null) {
+
+                            // It creates new evaluation of the user
+                            def newEvaluation = new Evaluation(
+                                    testName: testInstance.name,
+                                    attemptNumber: 1,
+                                    maxAttempt: testInstance.maxAttempts,
+                                    user: currentUserToTest,
+                            )
+
+                            def validNewEvaluation = newEvaluation.validate()
+
+                            if (validNewEvaluation) {
+                                newEvaluation.save(flush: true, failOnError: true)
+                            } else {
+                                log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:newEvaluation:user:${currentUserToTest.username}")
+
+                                response.sendError(404)
+                            }
+                        } else {
+                            // It increases the number of attempt of the user in the evaluation
+
+                            currentEvaluation.attemptNumber += 1
+                            currentEvaluation.completenessDate = null
+
+                            def validExistEvaluation = currentEvaluation.validate()
+
+                            if (validExistEvaluation) {
+                                currentEvaluation.save(flush: true, failOnError: true)
+                            } else {
+                                log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:existingEvaluation:user:${currentUserToTest.username}")
+
+                                response.sendError(404)
+                            }
+                        }
                         render view: 'testSelected'
                     }
 

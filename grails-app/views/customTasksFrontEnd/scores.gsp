@@ -147,10 +147,16 @@
                                     <g:elseif test="${evaluationUser.testScore >= 5 && evaluationUser.testScore < 7}">
                                         <span class="label label-sm label-warning">
                                     </g:elseif>
-                                    <g:elseif test="${evaluationUser.testScore < 5}">
+                                    <g:elseif test="${evaluationUser.testScore < 5 || evaluationUser.testScore == null}">
                                         <span class="label label-sm label-danger">
                                     </g:elseif>
-                                    ${fieldValue(bean: evaluationUser, field: "testScore")}
+
+                                    <g:if test="${evaluationUser.testScore == null }">
+                                        <g:message code="layouts.main_auth_user.body.title.scores.without" default="Without score"/>
+                                    </g:if>
+                                    <g:else>
+                                        ${fieldValue(bean: evaluationUser, field: "testScore")}
+                                    </g:else>
                                     </span>
                                 </td>
                                 <td>
@@ -163,7 +169,15 @@
                                         ${fieldValue(bean: evaluationUser, field: "maxAttempt")}
                                     </span>
                                 </td>
-                                <td class="space-date"><g:formatDate formatName="custom.date.evaluation.format" date="${evaluationUser?.completenessDate}"/></td>
+                                <g:if test="${evaluationUser.completenessDate == null }">
+                                    <td>
+                                    <g:message code="layouts.main_auth_user.body.title.scores.withoutDate" default="Not completed attempt"/>
+                                </g:if>
+                                <g:else>
+                                    <td class="space-date">
+                                    <g:formatDate formatName="custom.date.evaluation.format" date="${evaluationUser?.completenessDate}"/>
+                                </g:else>
+                                </td>
                             </tr>
                         </g:each>
                         </tbody>
