@@ -1,7 +1,5 @@
 package User
 
-import Test.Test
-
 /**
  * It represents the general evaluation information.
  */
