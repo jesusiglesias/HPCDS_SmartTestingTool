@@ -151,7 +151,7 @@
                                         <span class="label label-sm label-danger">
                                     </g:elseif>
 
-                                    <g:if test="${evaluationUser.testScore == null }">
+                                    <g:if test="${evaluationUser.testScore == null}">
                                         <g:message code="layouts.main_auth_user.body.title.scores.without" default="Without score"/>
                                     </g:if>
                                     <g:else>
@@ -171,7 +171,7 @@
                                 </td>
                                 <g:if test="${evaluationUser.completenessDate == null }">
                                     <td>
-                                    <g:message code="layouts.main_auth_user.body.title.scores.withoutDate" default="Not completed attempt"/>
+                                    <g:message code="layouts.main_auth_user.body.title.scores.withoutDate" default="{0} not completed attempt" args="${evaluationUser.attemptNumber}"/>
                                 </g:if>
                                 <g:else>
                                     <td class="space-date">

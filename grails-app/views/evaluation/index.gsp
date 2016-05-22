@@ -499,13 +499,27 @@
                                                     <g:elseif test="${evaluationInstance.testScore >= 5 && evaluationInstance.testScore < 7}">
                                                         <span class="label label-sm label-warning">
                                                     </g:elseif>
-                                                    <g:elseif test="${evaluationInstance.testScore < 5}">
+                                                    <g:elseif test="${evaluationInstance.testScore < 5 || evaluationInstance.testScore == null}">
                                                         <span class="label label-sm label-danger">
                                                     </g:elseif>
-                                                    ${fieldValue(bean: evaluationInstance, field: "testScore")}
-                                                </span>
+
+                                                    <g:if test="${evaluationInstance.testScore == null }">
+                                                        <g:message code="layouts.main_auth_user.body.title.scores.without" default="Without score"/>
+                                                    </g:if>
+                                                    <g:else>
+                                                        ${fieldValue(bean: evaluationInstance, field: "testScore")}
+                                                    </g:else>
+                                                    </span>
                                                 </td>
-                                                <td class="space-date"><g:formatDate formatName="custom.date.evaluation.format" date="${evaluationInstance?.completenessDate}"/></td>
+                                                <g:if test="${evaluationInstance.completenessDate == null }">
+                                                    <td>
+                                                    <g:message code="layouts.main_auth_user.body.title.scores.withoutDate" default="{0} not completed attempt" args="${evaluationInstance.attemptNumber}"/>
+                                                </g:if>
+                                                <g:else>
+                                                    <td class="space-date">
+                                                    <g:formatDate formatName="custom.date.evaluation.format" date="${evaluationInstance?.completenessDate}"/>
+                                                </g:else>
+                                                </td>
                                             </tr>
                                         </g:each>
                                     </tbody>

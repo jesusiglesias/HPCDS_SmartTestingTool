@@ -15,22 +15,32 @@
                         <span class="required"> * </span>
                     </h5>
                 </label>
-                <div class="input-group input-icon right">
-                    <i class="fa icon-offset"></i>
-                    <g:textField name="username" maxlength="30" class="form-control form-shadow emptySpaces username-user backend-input" value="${userInstance?.username}"/>
-                    <span class="input-group-btn">
-                        <a href="javascript:;" class="btn green-dark" id="username-checker">
-                            <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
-                        </a>
-                    </span>
+                <g:if test="${userInstance.username != 'admin_switch'}">
+                    <div class="input-group input-icon right">
+                        <i class="fa icon-offset"></i>
+                        <g:textField name="username" maxlength="30" class="form-control form-shadow emptySpaces username-user backend-input" value="${userInstance?.username}"/>
+                        <span class="input-group-btn">
+                            <a href="javascript:;" class="btn green-dark" id="username-checker">
+                                <i class="fa fa-check"></i><g:message code="default.checker.button" default="Check"/>
+                            </a>
+                        </span>
+                    </div>
+                    <i class="fa fa-times i-delete-username-backend i-delete-user-username"></i> <!-- Delete text icon -->
+                </g:if>
+                <g:else>
+                    <div class="input-icon right">
+                        <g:textField name="username" maxlength="30" class="form-control form-shadow emptySpaces username-user backend-input" value="${userInstance?.username}" disabled="true"/>
+                    </div>
+                </g:else>
+
+            </div>
+            <g:if test="${userInstance.username != 'admin_switch'}">
+                <div class="help-block username-block">
+                    <h5 class="text-justify">
+                        <g:message code="layouts.main_auth_admin.body.content.admin.create.checker.block.info.username" default="Type a username and check its availability."/>
+                    </h5>
                 </div>
-                <i class="fa fa-times i-delete-username-backend i-delete-user-username"></i> <!-- Delete text icon -->
-            </div>
-            <div class="help-block username-block">
-                <h5 class="text-justify">
-                    <g:message code="layouts.main_auth_admin.body.content.admin.create.checker.block.info.username" default="Type a username and check its availability."/>
-                </h5>
-            </div>
+            </g:if>
         </div>
 
         <!-- Email -->

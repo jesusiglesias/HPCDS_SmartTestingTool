@@ -176,7 +176,7 @@ class BootStrap {
             def se3Question = Question.findByTitleQuestionKey('SE-3') ?: new Question(
                     titleQuestionKey: 'SE-3',
                     description: '¿Qué es un ataque de fuerza bruta?',
-                    difficultyLevel: DifficultyLevel.EASY,
+                    difficultyLevel: DifficultyLevel.EASY
             )
 
             /*-------------------------------------------------------------------------------------------*
@@ -219,7 +219,7 @@ class BootStrap {
                     maxAttempt: 2,
                     completenessDate: new Date() - 20,
                     testScore: 7.55,
-                    user: newUser,
+                    user: newUser
             )
 
             def evalUserSwitchSTT1 = new Evaluation(
@@ -228,7 +228,7 @@ class BootStrap {
                     maxAttempt: 2,
                     completenessDate: new Date() - 1,
                     testScore: 7.23,
-                    user: newUserSwitch,
+                    user: newUserSwitch
             )
 
             /*-------------------------------------------------------------------------------------------*
@@ -245,7 +245,7 @@ class BootStrap {
                     maxAttempts: 2,
                     evaluationsTest: [evalUserSTT1, evalUserSwitchSTT1],
                     topic: securityTopic,
-                    catalog: securityCatalog,
+                    catalog: securityCatalog
             )
 
             def englishTest = Test.findByName('Inglés básico') ?: new Test(
@@ -490,7 +490,7 @@ class BootStrap {
             def se3Question = Question.findByTitleQuestionKey('SE-3') ?: new Question(
                     titleQuestionKey: 'SE-3',
                     description: '¿Qué es un ataque de fuerza bruta?',
-                    difficultyLevel: DifficultyLevel.EASY,
+                    difficultyLevel: DifficultyLevel.EASY
             )
 
             /*-------------------------------------------------------------------------------------------*
@@ -533,7 +533,7 @@ class BootStrap {
                     maxAttempt: 2,
                     completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('03-05-2016 14:56:12'),
                     testScore: 7.55,
-                    user: newUser,
+                    user: newUser
             )
 
             def evalUserSwitchSTT1 = new Evaluation(
@@ -542,7 +542,7 @@ class BootStrap {
                     maxAttempt: 2,
                     completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('14-04-2016 20:18:45'),
                     testScore: 7.23,
-                    user: newUserSwitch,
+                    user: newUserSwitch
             )*/
 
             /*-------------------------------------------------------------------------------------------*
@@ -559,7 +559,7 @@ class BootStrap {
                     maxAttempts: 1,
                     //evaluationsTest: [evalUserSTT1, evalUserSwitchSTT1],
                     topic: securityTopic,
-                    catalog: securityCatalog,
+                    catalog: securityCatalog
             )
 
             def englishTest = Test.findByName('Inglés básico') ?: new Test(
