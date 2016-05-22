@@ -477,7 +477,7 @@
                                     <tbody>
                                         <g:each in="${evaluationInstanceList}" status="i" var="evaluationInstance">
                                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                                <td><g:link controller="evaluation" action="show" id="${evaluationInstance.id}" class="break-word">${fieldValue(bean: evaluationInstance, field: "user.username")}</g:link></td>
+                                                <td><g:link controller="evaluation" action="show" id="${evaluationInstance.id}" class="break-word">${fieldValue(bean: evaluationInstance, field: "userName")}</g:link></td>
                                                 <td class="break-word">${fieldValue(bean: evaluationInstance, field: "testName")}</td>
                                                 <td>
                                                     <span class="label label-sm label-default show-entity-evaluation">

@@ -194,7 +194,7 @@ class TestController {
 
         try {
 
-            // Updating in cascade
+            // Updating evaluation in cascade
             testInstance.evaluationsTest.each { evaluation ->
                 def evaluationInstance = Evaluation.get(evaluation.id)
                 evaluationInstance.testName = testInstance.name

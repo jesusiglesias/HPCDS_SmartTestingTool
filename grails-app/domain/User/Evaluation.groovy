@@ -12,9 +12,7 @@ class Evaluation {
     Integer maxAttempt
     String testName
     Float testScore
-
-    // Relations
-    static belongsTo = [user:User]
+    String userName
 
     // Restrictions on the attributes of the entity
     static constraints = {
@@ -23,7 +21,7 @@ class Evaluation {
         maxAttempt blank:false, min: 1, max: 5
         testName blank: false, maxSize: 60
         testScore nullable: true, blank: false, scale: 2, min: 0.00 as Float, max: 10.00 as Float
-        user blank: false, unique: ['testName'], maxSize: 30
+        userName blank: false, unique: ['testName'], maxSize: 30
     }
 
     // It modifies the id type

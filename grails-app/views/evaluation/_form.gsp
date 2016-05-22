@@ -7,8 +7,8 @@
 			<h5 class="sbold show-title">
 				<g:message code="evaluation.show.username" default="Username"/>
 			</h5>
-			<g:if test="${evaluationInstance?.user}">
-				<g:fieldValue bean="${evaluationInstance}" field="user.username"/>
+			<g:if test="${evaluationInstance?.userName}">
+				<g:fieldValue bean="${evaluationInstance}" field="userName"/>
 			</g:if>
 		</div>
 

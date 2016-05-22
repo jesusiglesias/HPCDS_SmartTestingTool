@@ -68,10 +68,16 @@ class EvaluationController {
 
         try {
 
-            // It deletes the relation
+            // It deletes the relation - Test
             def test = Test.findByName(evaluationInstance.testName)
             if (test != null) {
                 test.removeFromEvaluationsTest(evaluationInstance)
+            }
+
+            // It deletes the relation - User
+            def user = User.findByUsername(evaluationInstance.userName)
+            if (user != null) {
+                user.removeFromEvaluations(evaluationInstance)
             }
 
             // Delete evaluation
@@ -80,7 +86,7 @@ class EvaluationController {
             request.withFormat {
                 form multipartForm {
                     flash.evaluationMessage = g.message(code: 'default.deleted.message.evaluation', default: '{0} <strong>{1}-{2}</strong> deleted successful.', args: [message(code: 'evaluation.label', default: 'Evaluation'),
-                                                                                                                                                         evaluationInstance.user.username, evaluationInstance.testName])
+                                                                                                                                                         evaluationInstance.userName, evaluationInstance.testName])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
@@ -94,7 +100,7 @@ class EvaluationController {
             request.withFormat {
                 form multipartForm {
                     flash.evaluationErrorMessage = g.message(code: 'default.not.deleted.message.evaluation', default: 'ERROR! {0} <strong>{1}-{2}</strong> was not deleted.', args: [message(code: 'evaluation.label', default: 'Evaluation'),
-                                                                                                                                                                                     evaluationInstance.user.username, evaluationInstance.testName])
+                                                                                                                                                                                     evaluationInstance.userName, evaluationInstance.testName])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }

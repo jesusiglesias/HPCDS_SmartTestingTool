@@ -239,6 +239,12 @@ class UserController {
 
         try {
 
+            // Updating evaluation in cascade
+            userInstance.evaluations.each { evaluation ->
+                def evaluationInstance = Evaluation.get(evaluation.id)
+                evaluationInstance.userName = userInstance.username
+            }
+
             // Save user data
             userInstance.save(flush:true, failOnError: true)
 
@@ -380,10 +386,16 @@ class UserController {
         try {
             // It deletes the relations
             userInstance.evaluations.each { evaluation ->
+
+                // Test relation
                 def test = Test.findByName(evaluation.testName)
                 if (test != null) {
                     test.removeFromEvaluationsTest(evaluation)
                 }
+
+                // Evaluation relation
+                userInstance.removeFromEvaluations(evaluation)
+                evaluation.delete(flush: true, failOnError: true)
             }
 
             // Delete SecUserSecRole relations

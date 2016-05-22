@@ -109,7 +109,7 @@ class BootStrap {
                     surname: 'Conmutar',
                     birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1991'),
                     sex: Sex.FEMALE,
-                    department: idDepartment
+                    department: idDepartment,
             )
 
             def newUser = User.findByUsername('user_stt') ?: new User( // Normal user
@@ -120,7 +120,7 @@ class BootStrap {
                     surname: 'Apellido STT',
                     birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('22-04-1994'),
                     sex: Sex.MALE,
-                    department: idDepartment
+                    department: idDepartment,
             )
 
             /*-------------------------------------------------------------------------------------------*
@@ -210,30 +210,8 @@ class BootStrap {
             )
 
             /*-------------------------------------------------------------------------------------------*
-             *                                       EVALUATION                                          *
-             *-------------------------------------------------------------------------------------------*/
-
-            def evalUserSTT1 = new Evaluation(
-                    testName: 'Seguridad I',
-                    attemptNumber: 1,
-                    maxAttempt: 2,
-                    completenessDate: new Date() - 20,
-                    testScore: 7.55,
-                    user: newUser
-            )
-
-            def evalUserSwitchSTT1 = new Evaluation(
-                    testName: 'Seguridad I',
-                    attemptNumber: 1,
-                    maxAttempt: 2,
-                    completenessDate: new Date() - 1,
-                    testScore: 7.23,
-                    user: newUserSwitch
-            )
-
-            /*-------------------------------------------------------------------------------------------*
-             *                                           TEST                                            *
-             *-------------------------------------------------------------------------------------------*/
+            *                                           TEST                                            *
+            *-------------------------------------------------------------------------------------------*/
             def securityITest = Test.findByName('Seguridad I') ?: new Test(
                     name: 'Seguridad I',
                     description: 'Test de un solo intento correspondiente a la evaluación de los conceptos de seguridad. Está comprendido de x preguntas...',
@@ -243,7 +221,6 @@ class BootStrap {
                     endDate: new Date().clearTime() + 1,
                     lockTime: 0,
                     maxAttempts: 2,
-                    evaluationsTest: [evalUserSTT1, evalUserSwitchSTT1],
                     topic: securityTopic,
                     catalog: securityCatalog
             )
@@ -259,6 +236,28 @@ class BootStrap {
                     maxAttempts: 1,
                     topic: languageTopic,
                     catalog: englishCatalog
+            )
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                       EVALUATION                                          *
+             *-------------------------------------------------------------------------------------------*/
+
+            def evalUserSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    maxAttempt: securityITest.maxAttempts,
+                    completenessDate: new Date() - 20,
+                    testScore: 7.55,
+                    userName: newUser.username
+            )
+
+            def evalUserSwitchSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    maxAttempt: securityITest.maxAttempts,
+                    completenessDate: new Date() - 1,
+                    testScore: 7.23,
+                    userName: newUserSwitch.username
             )
 
             // Validation of admin
@@ -296,8 +295,7 @@ class BootStrap {
 
             if (validAdmin & validAnother & validID & validRRHH & validSecurity & validSupport & validUserSwitch & validUser
                     & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2 & validSe1 & validSe2 & validSe3 & validEnglishCatalog
-                    & validSecurityCatalog & validLanguageTopic & validSecurityTopic & validEvalUserSTT1 & validEvalUserSwitchSTT1 &
-                    validSecurityITest & validEnglishTest) {
+                    & validSecurityCatalog & validLanguageTopic & validSecurityTopic &  validSecurityITest & validEnglishTest & validEvalUserSTT1 & validEvalUserSwitchSTT1) {
 
                 // Saving roles
                 adminRole.save(flush: true, failOnError: true)
@@ -312,6 +310,10 @@ class BootStrap {
                 anotherDepartment.save(flush: true, failOnError: true)
                 rrhhDepartment.save(flush: true, failOnError: true)
                 supportDepartment.save(flush: true, failOnError: true)
+
+                // It assigns the evaluations
+                newUserSwitch.addToEvaluations(evalUserSwitchSTT1)
+                newUser.addToEvaluations(evalUserSTT1)
 
                 // Saving new users
                 newUserSwitch.save(flush: true, failOnError: true)
@@ -347,13 +349,17 @@ class BootStrap {
                 languageTopic.save(flush: true, failOnError: true)
                 securityTopic.save(flush: true, failOnError: true)
 
-                // Saving evaluations
-                evalUserSTT1.save(flush: true, failOnError: true)
-                evalUserSwitchSTT1.save(flush: true, failOnError: true)
+                // It assigns the evaluations
+                securityITest.addToEvaluationsTest(evalUserSwitchSTT1)
+                securityITest.addToEvaluationsTest(evalUserSTT1)
 
                 // Saving test
                 securityITest.save(flush: true, failOnError: true)
                 englishTest.save(flush: true, failOnError: true)
+
+                // Saving evaluations
+                evalUserSTT1.save(flush: true, failOnError: true)
+                evalUserSwitchSTT1.save(flush: true, failOnError: true)
 
                 log.debug("BootStrap:init():Initial data have been created")
                 log.info("Special config create for development or test - Users: admin_stt/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and user_stt/7g4sOmmm (User)")
@@ -423,7 +429,7 @@ class BootStrap {
                     surname: 'Conmutar',
                     birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1991'),
                     sex: Sex.FEMALE,
-                    department: idDepartment
+                    department: idDepartment,
             )
 
             def newUser = User.findByUsername('user_stt') ?: new User( // Normal user
@@ -434,7 +440,7 @@ class BootStrap {
                     surname: 'Apellido STT',
                     birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('22-04-1994'),
                     sex: Sex.MALE,
-                    department: idDepartment
+                    department: idDepartment,
             )
 
             /*-------------------------------------------------------------------------------------------*
@@ -524,30 +530,8 @@ class BootStrap {
             )
 
             /*-------------------------------------------------------------------------------------------*
-             *                                       EVALUATION                                          *
-             *-------------------------------------------------------------------------------------------*/
-
-            /*def evalUserSTT1 = new Evaluation(
-                    testName: 'Seguridad I',
-                    attemptNumber: 1,
-                    maxAttempt: 2,
-                    completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('03-05-2016 14:56:12'),
-                    testScore: 7.55,
-                    user: newUser
-            )
-
-            def evalUserSwitchSTT1 = new Evaluation(
-                    testName: 'Seguridad I',
-                    attemptNumber: 1,
-                    maxAttempt: 2,
-                    completenessDate: new SimpleDateFormat( 'dd-MM-yyyy HH:mm:ss' ).parse('14-04-2016 20:18:45'),
-                    testScore: 7.23,
-                    user: newUserSwitch
-            )*/
-
-            /*-------------------------------------------------------------------------------------------*
-             *                                           TEST                                            *
-             *-------------------------------------------------------------------------------------------*/
+            *                                           TEST                                            *
+            *-------------------------------------------------------------------------------------------*/
             def securityITest = Test.findByName('Seguridad I') ?: new Test(
                     name: 'Seguridad I',
                     description: 'Test de un solo intento correspondiente a la evaluación de los conceptos de seguridad. Está comprendido de x preguntas...',
@@ -556,8 +540,7 @@ class BootStrap {
                     initDate: new Date().clearTime(),
                     endDate: new Date().clearTime() + 1,
                     lockTime: 0,
-                    maxAttempts: 1,
-                    //evaluationsTest: [evalUserSTT1, evalUserSwitchSTT1],
+                    maxAttempts: 2,
                     topic: securityTopic,
                     catalog: securityCatalog
             )
@@ -573,6 +556,28 @@ class BootStrap {
                     maxAttempts: 1,
                     topic: languageTopic,
                     catalog: englishCatalog
+            )
+
+            /*-------------------------------------------------------------------------------------------*
+             *                                       EVALUATION                                          *
+             *-------------------------------------------------------------------------------------------*/
+
+            def evalUserSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    maxAttempt: securityITest.maxAttempts,
+                    completenessDate: new Date() - 20,
+                    testScore: 7.55,
+                    userName: newUser.username
+            )
+
+            def evalUserSwitchSTT1 = new Evaluation(
+                    testName: 'Seguridad I',
+                    attemptNumber: 1,
+                    maxAttempt: securityITest.maxAttempts,
+                    completenessDate: new Date() - 1,
+                    testScore: 7.23,
+                    userName: newUserSwitch.username
             )
 
             // Validation of admin
@@ -605,13 +610,12 @@ class BootStrap {
             def validSecurityITest = securityITest.validate()
             def validEnglishTest = englishTest.validate()
             // Validation of evaluation
-            //def validEvalUserSTT1 = evalUserSTT1.validate()
-            //def validEvalUserSwitchSTT1 = evalUserSwitchSTT1.validate()
+            def validEvalUserSTT1 = evalUserSTT1.validate()
+            def validEvalUserSwitchSTT1 = evalUserSwitchSTT1.validate()
 
             if (validAdmin & validAnother & validID & validRRHH & validSecurity & validSupport & validUserSwitch & validUser
                     & validR1_se1 & validR2_se1 & validR3_se1 & validR1_se2 & validSe1 & validSe2 & validSe3 & validEnglishCatalog
-                    & validSecurityCatalog & validLanguageTopic & validSecurityTopic & /*validEvalUserSTT1 & validEvalUserSwitchSTT1 &*/
-                    validSecurityITest & validEnglishTest) {
+                    & validSecurityCatalog & validLanguageTopic & validSecurityTopic &  validSecurityITest & validEnglishTest & validEvalUserSTT1 & validEvalUserSwitchSTT1) {
 
                 // Saving roles
                 adminRole.save(flush: true, failOnError: true)
@@ -626,6 +630,10 @@ class BootStrap {
                 anotherDepartment.save(flush: true, failOnError: true)
                 rrhhDepartment.save(flush: true, failOnError: true)
                 supportDepartment.save(flush: true, failOnError: true)
+
+                // It assigns the evaluations
+                newUserSwitch.addToEvaluations(evalUserSwitchSTT1)
+                newUser.addToEvaluations(evalUserSTT1)
 
                 // Saving new users
                 newUserSwitch.save(flush: true, failOnError: true)
@@ -661,13 +669,17 @@ class BootStrap {
                 languageTopic.save(flush: true, failOnError: true)
                 securityTopic.save(flush: true, failOnError: true)
 
-                // Saving evaluations
-                //evalUserSTT1.save(flush: true, failOnError: true)
-                //evalUserSwitchSTT1.save(flush: true, failOnError: true)
+                // It assigns the evaluations
+                securityITest.addToEvaluationsTest(evalUserSwitchSTT1)
+                securityITest.addToEvaluationsTest(evalUserSTT1)
 
                 // Saving test
                 securityITest.save(flush: true, failOnError: true)
                 englishTest.save(flush: true, failOnError: true)
+
+                // Saving evaluations
+                evalUserSTT1.save(flush: true, failOnError: true)
+                evalUserSwitchSTT1.save(flush: true, failOnError: true)
 
             } else {
                 log.error("BootStrap:init():Admin users have not been created. You verify that the initial data complies with the rules")

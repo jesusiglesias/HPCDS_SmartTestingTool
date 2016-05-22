@@ -96,7 +96,7 @@ class CustomTasksFrontEndController {
                         // It checks if each test is accessible by number of attempt
                         topicInstanceActiveTest.each { test ->
 
-                            def userAttempt = Evaluation.findByUserAndTestName(currentUser, test.name)?.attemptNumber
+                            def userAttempt = Evaluation.findByUserNameAndTestName(currentUser.username, test.name)?.attemptNumber
 
                             // It obtains the current attempt of user
                             if (userAttempt == null) {
@@ -165,7 +165,7 @@ class CustomTasksFrontEndController {
                     def currentUserToTest = User.get(springSecurityService.currentUser.id)
 
                     // It checks if each test is accessible by number of attempt
-                    def currentEvaluation = Evaluation.findByUserAndTestName(currentUserToTest, testInstance.name)
+                    def currentEvaluation = Evaluation.findByUserNameAndTestName(currentUserToTest.username, testInstance.name)
 
                     // It obtains the current attempt of user
                     if (currentEvaluation?.attemptNumber == null) {
@@ -187,7 +187,7 @@ class CustomTasksFrontEndController {
                                     testName: testInstance.name,
                                     attemptNumber: 1,
                                     maxAttempt: testInstance.maxAttempts,
-                                    user: currentUserToTest,
+                                    userName: currentUserToTest.username,
                             )
 
                             def validNewEvaluation = newEvaluation.validate()
@@ -195,6 +195,9 @@ class CustomTasksFrontEndController {
                             if (validNewEvaluation) {
 
                                 try {
+                                    // It associates the evaluation to user
+                                    currentUserToTest.addToEvaluations(newEvaluation)
+
                                     // It associates the evaluation to test
                                     testInstance.addToEvaluationsTest(newEvaluation)
                                     newEvaluation.save(flush: true, failOnError: true)
@@ -208,7 +211,7 @@ class CustomTasksFrontEndController {
                                 }
 
                             } else {
-                                log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:newEvaluation:user:${currentUserToTest.username}")
+                                log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:newEvaluation:user:${currentUserToTest.username}:errors:${newEvaluation.errors}")
 
                                 response.sendError(404)
                             }
@@ -281,14 +284,14 @@ class CustomTasksFrontEndController {
         def statsList = []
 
         // Evaluations of the user
-        def completedTest = Evaluation.findAllByUser(currentUser).size()
+        def completedTest = Evaluation.findAllByUserName(currentUser.username).size()
 
         // Obtaining number of active test in system - Asynchronous/Multi-thread
         def testPromise = Test.async.findAllByActive(true)
 
         // Obtaining test approved and unapproved - Asynchronous/Multi-thread
-        def suspensePromise = Evaluation.async.findAllByUserAndTestScoreLessThan(currentUser, 5)
-        def approvedPromise = Evaluation.async.findAllByUserAndTestScoreGreaterThanEquals(currentUser, 5)
+        def suspensePromise = Evaluation.async.findAllByUserNameAndTestScoreLessThan(currentUser.username, 5)
+        def approvedPromise = Evaluation.async.findAllByUserNameAndTestScoreGreaterThanEquals(currentUser.username, 5)
 
         // Wait all promises
         def results = waitAll(testPromise, suspensePromise, approvedPromise)
@@ -720,7 +723,7 @@ class CustomTasksFrontEndController {
 
         // ID of current user
         def currentUser = User.get(springSecurityService.currentUser.id)
-        def evaluations = Evaluation.findAllByUser(currentUser)
+        def evaluations = Evaluation.findAllByUserName(currentUser.username)
 
         render view: 'scores', model: [evaluations: evaluations]
     }
