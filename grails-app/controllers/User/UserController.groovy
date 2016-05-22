@@ -3,6 +3,7 @@ package User
 import Enumerations.Sex
 import Security.SecRole
 import Security.SecUserSecRole
+import Test.Test
 import org.apache.commons.lang.StringUtils
 import org.apache.tika.Tika
 import org.springframework.dao.DataIntegrityViolationException
@@ -377,6 +378,13 @@ class UserController {
         }
 
         try {
+            // It deletes the relations
+            userInstance.evaluations.each { evaluation ->
+                def test = Test.findByName(evaluation.testName)
+                if (test != null) {
+                    test.removeFromEvaluationsTest(evaluation)
+                }
+            }
 
             // Delete SecUserSecRole relations
             SecUserSecRole.findAllBySecUser(userInstance)*.delete(flush: true, failOnError: true)

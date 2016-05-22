@@ -135,6 +135,7 @@ class CustomTasksFrontEndController {
     /**
      * It shows the test page of the topic selected by user.
      */
+    @Transactional
     def testSelected() {
         log.debug("CustomTasksFrontEndController():testSelected()")
 
@@ -192,22 +193,46 @@ class CustomTasksFrontEndController {
                             def validNewEvaluation = newEvaluation.validate()
 
                             if (validNewEvaluation) {
-                                newEvaluation.save(flush: true, failOnError: true)
+
+                                try {
+                                    // It associates the evaluation to test
+                                    testInstance.addToEvaluationsTest(newEvaluation)
+                                    newEvaluation.save(flush: true, failOnError: true)
+
+                                } catch (Exception exception) {
+                                    log.error("CustomTasksFrontEndController():testSelected():Exception:newEvaluation:${currentUserToTest.username}-${testInstance.name}:${exception}")
+
+                                    // Roll back in database
+                                    transactionStatus.setRollbackOnly()
+                                    response.sendError(404)
+                                }
+
                             } else {
                                 log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:newEvaluation:user:${currentUserToTest.username}")
 
                                 response.sendError(404)
                             }
                         } else {
-                            // It increases the number of attempt of the user in the evaluation
 
+                            // It increases the number of attempt of the user in the evaluation
                             currentEvaluation.attemptNumber += 1
                             currentEvaluation.completenessDate = null
 
                             def validExistEvaluation = currentEvaluation.validate()
 
                             if (validExistEvaluation) {
-                                currentEvaluation.save(flush: true, failOnError: true)
+
+                                try {
+                                    currentEvaluation.save(flush: true, failOnError: true)
+
+                                } catch (Exception exception) {
+                                    log.error("CustomTasksFrontEndController():testSelected():Exception:updatingEvaluation:${currentUserToTest.username}-${testInstance.name}:${exception}")
+
+                                    // Roll back in database
+                                    transactionStatus.setRollbackOnly()
+                                    response.sendError(404)
+                                }
+
                             } else {
                                 log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:existingEvaluation:user:${currentUserToTest.username}")
 

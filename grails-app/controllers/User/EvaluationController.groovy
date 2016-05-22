@@ -1,5 +1,6 @@
 package User
 
+import Test.Test
 import org.springframework.dao.DataIntegrityViolationException
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -66,6 +67,12 @@ class EvaluationController {
         }
 
         try {
+
+            // It deletes the relation
+            def test = Test.findByName(evaluationInstance.testName)
+            if (test != null) {
+                test.removeFromEvaluationsTest(evaluationInstance)
+            }
 
             // Delete evaluation
             evaluationInstance.delete(flush:true, failOnError: true)

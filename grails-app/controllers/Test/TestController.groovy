@@ -2,6 +2,7 @@ package Test
 
 import grails.converters.JSON
 import org.apache.tika.Tika
+import User.Evaluation
 import org.springframework.dao.DataIntegrityViolationException
 import java.text.SimpleDateFormat
 import static org.springframework.http.HttpStatus.*
@@ -192,6 +193,13 @@ class TestController {
         }
 
         try {
+
+            // Updating in cascade
+            testInstance.evaluationsTest.each { evaluation ->
+                def evaluationInstance = Evaluation.get(evaluation.id)
+                evaluationInstance.testName = testInstance.name
+                evaluationInstance.maxAttempt = testInstance.maxAttempts
+            }
 
             // Save test data
             testInstance.save(flush:true, failOnError: true)
