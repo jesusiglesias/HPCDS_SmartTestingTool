@@ -302,6 +302,31 @@ table.dataTable tbody tr:hover {
     z-index: 9999 !important;
 }
 
+/* Search form in normal user pages (Home and topicSelected)
+=================================================================== */
+
+.searchForm-home{
+    margin: 35px 0 35px 0;
+}
+
+.searchForm-home > div > label > span {
+    letter-spacing: 1px;
+}
+
+.searchForm-home .input-group {
+    margin-top: 15px;
+}
+
+#search-topic {
+    border-radius: 3px;
+}
+
+.searchForm-home-icon {
+    color: rgba(50, 148, 103, 0.7) !important;
+    z-index: 9999 !important;
+    top: -3px;
+}
+
 /* Multi-select - Create view
 =================================================================== */
 .ms-container {
@@ -653,7 +678,9 @@ table.dataTable tbody tr:hover {
 .backend-input::-ms-clear,
 .user-profile-input::-ms-clear,
 .register-input::-ms-clear,
-.contact-input::-ms-clear {
+.contact-input::-ms-clear,
+#search-topic::-ms-clear,
+#search-test::-ms-clear {
     display: none;
     width:0;
     height:0 !important;

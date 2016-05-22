@@ -6852,17 +6852,6 @@ Custom color buttons
     width: 420px !important;
 }
 
-@media (max-width: 768px) {
-    /* 768px */
-    .input-large {
-        width: 250px !important;
-    }
-
-    .input-xlarge {
-        width: 300px !important;
-    }
-}
-
 .input-inline {
     display: inline-block;
     width: auto;
@@ -6881,14 +6870,39 @@ Custom color buttons
     margin-right: 5px;
 }
 
+/* Max-width: 768px */
 @media (max-width: 768px) {
-    /* 768px */
+
     .input-lg {
         width: 250px !important;
     }
 
     .input-xlg {
         width: 300px !important;
+    }
+
+    .input-large {
+        width: 250px !important;
+    }
+
+    .input-xlarge {
+        width: 350px !important;
+    }
+}
+
+/* Max-width: 390px */
+@media (max-width: 390px) {
+
+    .input-xlarge {
+        width: 300px !important;
+    }
+}
+
+/* Max-width: 338px */
+@media (max-width: 338px) {
+
+    .input-xlarge {
+        width: 284px !important;
     }
 }
 

@@ -110,10 +110,25 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
         </div>
     </div>
 
+    <!-- Search input -->
+    <div class="row row-userLayoutTitle searchForm-home">
+        <div class="col-md-12 text-center">
+            <label for="search-test" class="control-label">
+                <span class="sbold">
+                    <g:message code="layouts.main_auth_user.body.title.topicSelected.search" default="Search test:"/>
+                </span>
+                <div class="input-group input-icon right">
+                    <i class="fa fa-search searchForm-home-icon"></i>
+                    <input id="search-test" name="search-test" type="text" class="form-control form-shadow input-sm input-xlarge input-inline" autocomplete="off">
+                </div>
+            </label>
+        </div>
+    </div>
+
     <!-- Available test -->
     <g:each in="${availableTotalTest}" status="i" var="availableTest">
         <g:if test="${(i % 2) == 0 ? 'row' : ''}">
-            <div class="row row-userLayoutTitle-home-ribbons">
+            <div class="row row-userLayoutTitle-home-ribbons ribbon-search-test">
         </g:if>
             <div class="col-md-6">
                 <div class="mt-element-ribbon mt-element-ribbon-custom">
@@ -219,5 +234,10 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
             </script>
         </g:else>
     </g:each>
+
+    <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="search/jquery.hideseek.min.js"/>
+    <g:javascript src="search/search-initialization.js"/>
+
 </body>
 </html>

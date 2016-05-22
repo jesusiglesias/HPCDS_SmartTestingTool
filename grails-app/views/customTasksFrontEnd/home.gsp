@@ -109,6 +109,21 @@
         </div>
     </div>
 
+    <!-- Search input -->
+    <div class="row row-userLayoutTitle searchForm-home">
+        <div class="col-md-12 text-center">
+            <label for="search-topic" class="control-label">
+                <span class="sbold">
+                    <g:message code="layouts.main_auth_user.body.title.topic.search" default="Search topic:"/>
+                </span>
+                <div class="input-group input-icon right">
+                    <i class="fa fa-search searchForm-home-icon"></i>
+                    <input id="search-topic" name="search-topic" type="text" class="form-control form-shadow input-sm input-xlarge input-inline" autocomplete="off">
+                </div>
+            </label>
+        </div>
+    </div>
+
     <!-- No topics -->
     <g:if test="${activeTopics.size() == 0}">
         <div class="row row-userLayoutTitle">
@@ -136,7 +151,7 @@
         <g:each in="${activeTopics}" status="i" var="activeTopic">
 
             <g:if test="${(i % 2) == 0 ? 'row' : ''}">
-                <div class="row row-userLayoutTitle-home-ribbons">
+                <div class="row row-userLayoutTitle-home-ribbons ribbon-search-topic">
             </g:if>
             <div class="col-md-6">
                 <div class="mt-element-ribbon">
@@ -168,6 +183,10 @@
             </g:if>
         </g:each>
     </g:else>
+
+    <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="search/jquery.hideseek.min.js"/>
+    <g:javascript src="search/search-initialization.js"/>
 
 </body>
 </html>
