@@ -1043,7 +1043,7 @@ body {
 .page-sidebar .sidebar-search,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search {
     padding: 0;
-    margin: 22px 18px 22px 25px;
+    margin: 20px 18px 35px 25px;
 }
 
 .page-sidebar .sidebar-search .remove,
@@ -1173,6 +1173,11 @@ body {
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search.sidebar-search-solid.open .input-group .form-control,
 .page-sidebar .sidebar-search.sidebar-search-solid.open .input-group .form-control {
     background: #F6F6F6;
+}
+
+/* Search icon */
+.search-custom {
+    box-shadow: none !important;
 }
 
 /* Media queries - Page sidebar
