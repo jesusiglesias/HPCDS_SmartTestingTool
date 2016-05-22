@@ -5,8 +5,7 @@ import Security.SecRole
 import Security.SecUser
 import Security.SecUserSecRole
 import Test.Test
-import User.Department
-import User.Evaluation
+import User.*
 import grails.converters.JSON
 import grails.gorm.DetachedCriteria
 import grails.util.Environment
@@ -195,45 +194,39 @@ class CustomTasksBackendController {
     def averageScoreSex() {
         log.debug("CustomTasksBackendController:averageScoreSex()")
 
-        def resultAVSMale, resultAVSFemale
-
-        // Obtaining all male evaluations - Asynchronous/Multi-thread
-        DetachedCriteria detachedMale = Evaluation.where {
-            user.sex == Sex.MALE
-        }.projections {
-            avg('testScore')
-        } as DetachedCriteria
-
-        def promiseMale = detachedMale.async.list()
-
-        // Obtaining all female evaluations - Asynchronous/Multi-thread
-        DetachedCriteria detachedFemale = Evaluation.where {
-            user.sex == Sex.FEMALE
-        }.projections {
-            avg('testScore')
-        } as DetachedCriteria
-
-        def promiseFemale = detachedFemale.async.list()
-
-        // It obtains result of promise
-        def numberAverageMale = promiseMale.get()
-        def numberAverageFemale = promiseFemale.get()
-
-        if (numberAverageMale.getAt(0) == null ) {
-            resultAVSMale = 0
-        } else {
-            resultAVSMale = numberAverageMale.getAt(0)
+        // Obtaining all male evaluations (average scores)
+        def criteriaMale =  User.createCriteria().list() {
+            createAlias('evaluations', 'e')
+            eq 'sex', Sex.MALE
+            projections {
+                avg('e.testScore')
+            }
         }
 
-        if (numberAverageFemale.getAt(0) == null ) {
-            resultAVSFemale = 0
-        } else {
-            resultAVSFemale = numberAverageFemale.getAt(0)
+        // Obtaining all female evaluations (average scores)
+        def criteriaFemale =  User.createCriteria().list() {
+            createAlias('evaluations', 'e')
+            eq 'sex', Sex.FEMALE
+            projections {
+                avg('e.testScore')
+            }
+        }
+
+        // It obtains result of the criteria
+        def numberAverageMale = criteriaMale.getAt(0)
+        def numberAverageFemale = criteriaFemale.getAt(0)
+
+        if (numberAverageMale == null ) {
+            numberAverageMale = 0
+        }
+
+        if (numberAverageFemale == null ) {
+            numberAverageFemale = 0
         }
 
         def dataAVS = [
-                'averageMale': resultAVSMale,
-                'averageFemale': resultAVSFemale
+                'averageMale': numberAverageMale,
+                'averageFemale': numberAverageFemale
         ]
 
         // Avoid undefined function (Google chart)
