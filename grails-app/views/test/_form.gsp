@@ -4,14 +4,11 @@
 	<div class="row">
 		<!-- Name -->
 		<div class="col-md-6">
-			<div class="form-group group-subtitle ${hasErrors(bean: testInstance, field: 'name', 'error')}">
+			<div class="form-group ${hasErrors(bean: testInstance, field: 'name', 'error')}">
 				<label for="name" class="control-label">
 					<h5 class="sbold">
 						<g:message code="test.name.label" default="Name"/>
 						<span class="required"> * </span>
-					</h5>
-					<h5 class="thin text-justify">
-						<g:message code="layouts.main_auth_admin.body.content.test.name.info.label" default="Property not editable once established."/>
 					</h5>
 				</label>
 				<div class="input-group input-icon right">

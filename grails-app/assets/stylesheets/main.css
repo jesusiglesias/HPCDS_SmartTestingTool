@@ -94,9 +94,6 @@ img {
 	margin: 1em;
 }
 
-.content {
-}
-
 .content h1 {
 	border-bottom: 1px solid #CCCCCC;
 	margin: 0.8em 1em 0.3em;
@@ -492,32 +489,7 @@ th:hover, tr:hover {
 	background-color: #EFEFEF;
 }
 
-.pagination a,
-.pagination .currentStep {
-	color: #666666;
-	display: inline-block;
-	margin: 0 0.1em;
-	padding: 0.25em 0.7em;
-	text-decoration: none;
-	   -moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	        border-radius: 0.3em;
-}
 
-.pagination a:hover, .pagination a:focus,
-.pagination .currentStep {
-	background-color: #999999;
-	color: #ffffff;
-	outline: none;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
-}
-
-.no-borderradius .pagination a:hover, .no-borderradius .pagination a:focus,
-.no-borderradius .pagination .currentStep {
-	background-color: transparent;
-	color: #444444;
-	text-decoration: underline;
-}
 
 /* ACTION BUTTONS */
 
