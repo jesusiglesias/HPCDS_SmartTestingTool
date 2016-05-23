@@ -385,6 +385,7 @@ table.dataTable tbody tr:hover {
 .page-title-user-faq,
 .page-title-user-home,
 .page-title-user-topicSelected,
+.page-title-user-testSelected,
 .page-title-user-scores,
 .page-title-user-profile {
     letter-spacing: -1px;
@@ -401,6 +402,7 @@ table.dataTable tbody tr:hover {
 .page-title-user-faq-title,
 .page-title-user-home-title,
 .page-title-user-topicSelected-title,
+.page-title-user-testSelected-title,
 .page-title-user-scores-title,
 .page-title-user-profile-title {
     text-align: center;
@@ -418,6 +420,7 @@ table.dataTable tbody tr:hover {
 .page-title-user-faq-description,
 .page-title-user-home-description,
 .page-title-user-topicSelected-description,
+.page-title-user-testSelected-description,
 .page-title-user-faq-section-description,
 .page-title-user-scores-description,
 .page-title-user-profile-description,
@@ -1909,7 +1912,8 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user-home,
-    .page-title-user-topicSelected {
+    .page-title-user-topicSelected,
+    .page-title-user-testSelected {
         padding: 60px 0 45px 0;
         font-size: 15px;
     }
@@ -1923,7 +1927,8 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user-home-title,
-    .page-title-user-topicSelected-title {
+    .page-title-user-topicSelected-title,
+    .page-title-user-testSelected-title {
         font-size: 32px;
         margin: 0 20px 0 20px;
     }
@@ -1940,7 +1945,8 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user-home-description,
-    .page-title-user-topicSelected-description {
+    .page-title-user-topicSelected-description,
+    .page-title-user-testSelected-description {
         margin-left: 35px;
         margin-right: 35px;
     }
@@ -2106,7 +2112,8 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user-home,
-    .page-title-user-topicSelected {
+    .page-title-user-topicSelected,
+    .page-title-user-testSelected {
         padding: 46px 0 27px 0;
     }
 
@@ -2114,6 +2121,7 @@ table.dataTable tbody tr:hover {
     .page-title-user-scores-title,
     .page-title-user-home-title,
     .page-title-user-topicSelected-title,
+    .page-title-user-testSelected-title,
     .page-title-user-profile-title,
     .page-title-user-cookie-title {
         font-size: 31px;
@@ -2136,7 +2144,8 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user-home-description,
-    .page-title-user-topicSelected-description {
+    .page-title-user-topicSelected-description,
+    .page-title-user-testSelected-description {
         text-align: justify;
         margin-left: 25px;
         margin-right: 25px;
@@ -2327,7 +2336,8 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user-home,
-    .page-title-user-topicSelected {
+    .page-title-user-topicSelected,
+    .page-title-user-testSelected {
         padding: 40px 0 25px 0;
     }
 
@@ -2342,6 +2352,7 @@ table.dataTable tbody tr:hover {
     .page-title-user-faq-title,
     .page-title-user-home-title,
     .page-title-user-topicSelected-title,
+    .page-title-user-testSelected-title,
     .page-title-user-scores-title,
     .page-title-user-profile-title {
         font-size: 29px;
@@ -2352,6 +2363,7 @@ table.dataTable tbody tr:hover {
     .page-title-user-faq-description,
     .page-title-user-home-description,
     .page-title-user-topicSelected-description,
+    .page-title-user-testSelected-description,
     .page-title-user-scores-description,
     .page-title-user-profile-description,
     .page-title-user-contact-description {

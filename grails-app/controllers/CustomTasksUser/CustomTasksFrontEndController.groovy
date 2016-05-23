@@ -218,7 +218,7 @@ class CustomTasksFrontEndController {
                         } else {
 
                             // It increases the number of attempt of the user in the evaluation
-                            currentEvaluation.attemptNumber += 1
+                            // TODO currentEvaluation.attemptNumber += 1
                             currentEvaluation.completenessDate = null
 
                             def validExistEvaluation = currentEvaluation.validate()
@@ -237,12 +237,13 @@ class CustomTasksFrontEndController {
                                 }
 
                             } else {
-                                log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:existingEvaluation:user:${currentUserToTest.username}")
+                                log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:existingEvaluation:user:${currentUserToTest.username}:errors:${currentEvaluation.errors}")
 
                                 response.sendError(404)
                             }
                         }
-                        render view: 'testSelected'
+                        render view: 'testSelected', model: [testName: testInstance.name, maximumTime: testInstance.lockTime]
+
                     }
 
                 } else {
