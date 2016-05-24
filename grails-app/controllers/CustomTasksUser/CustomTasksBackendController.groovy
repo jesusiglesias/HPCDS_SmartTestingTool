@@ -7,7 +7,6 @@ import Security.SecUserSecRole
 import Test.Test
 import User.*
 import grails.converters.JSON
-import grails.gorm.DetachedCriteria
 import grails.util.Environment
 import grails.util.Holders
 import org.codehaus.groovy.grails.core.io.ResourceLocator

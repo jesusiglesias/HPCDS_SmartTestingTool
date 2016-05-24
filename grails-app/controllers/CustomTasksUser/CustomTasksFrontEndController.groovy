@@ -3,6 +3,7 @@ package CustomTasksUser
 import User.User
 import Security.SecUser
 import Test.Test
+import Test.Question
 import Test.Topic
 import User.Evaluation
 import grails.converters.JSON
@@ -141,6 +142,7 @@ class CustomTasksFrontEndController {
 
         def allowedDateTest = false
         def attemptUserTest
+        def totalPossibleScore = 0
 
         // Security in test
         if (params.id != null) {
@@ -180,6 +182,26 @@ class CustomTasksFrontEndController {
 
                     } else {
 
+                        // It obtains random questions from catalog with maximum limit
+                        def questions =  Question.createCriteria().list() {
+                            createAlias('catalogs', 'c', )
+                            eq 'c.name', testInstance.catalog.name
+                            sqlRestriction " 1=1 order by rand()"
+                            maxResults(testInstance.numberOfQuestions)
+                        }
+
+                        // TODO
+                        // It calculates the total possible score of the test in each user
+                        questions.each { question ->
+                            question.answers.each { answer ->
+                                if (answer.correct == true) {
+                                    totalPossibleScore += answer.score
+                                }
+                            }
+                            log.error("ramdom: " + question.titleQuestionKey)
+                        }
+                        log.error("Puntuación total: " + totalPossibleScore)
+
                         if (currentEvaluation == null) {
 
                             // It creates new evaluation of the user
@@ -187,6 +209,7 @@ class CustomTasksFrontEndController {
                                     testName: testInstance.name,
                                     attemptNumber: 1,
                                     maxAttempt: testInstance.maxAttempts,
+                                    maxPossibleScore: totalPossibleScore,
                                     userName: currentUserToTest.username,
                             )
 
@@ -220,6 +243,7 @@ class CustomTasksFrontEndController {
                             // It increases the number of attempt of the user in the evaluation
                             // TODO currentEvaluation.attemptNumber += 1
                             currentEvaluation.completenessDate = null
+                            currentEvaluation.maxPossibleScore = totalPossibleScore
 
                             def validExistEvaluation = currentEvaluation.validate()
 
@@ -242,7 +266,7 @@ class CustomTasksFrontEndController {
                                 response.sendError(404)
                             }
                         }
-                        render view: 'testSelected', model: [testName: testInstance.name, maximumTime: testInstance.lockTime]
+                        render view: 'testSelected', model: [testName: testInstance.name, topicID: testInstance.topic.id, maximumTime: testInstance.lockTime, questions: questions]
 
                     }
 
@@ -259,6 +283,13 @@ class CustomTasksFrontEndController {
         } else {
             response.sendError(404)
         }
+    }
+
+    /**
+     * It calculates the scores of the user when finishes the test.
+     */
+    def calculateEvaluation() {
+        log.debug("CustomTasksFrontEndController():calculateEvaluation()")
     }
 
     /**

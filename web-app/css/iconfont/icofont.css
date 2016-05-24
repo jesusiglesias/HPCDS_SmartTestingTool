@@ -1236,6 +1236,10 @@
     content: "\ecd6";
 }
 
+.icofont-certificate-alt-2:before {
+    content: "\eb93";
+}
+
 /*Font size*/
 .icofont-lg {
     font-size: 1.33333333em;

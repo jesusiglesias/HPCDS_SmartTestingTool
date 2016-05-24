@@ -225,25 +225,26 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
     /* Custom tasks normal user (front-end)
     ======================================================*/
-    '/customTasksFrontEnd/home':               ['ROLE_USER'],
-    '/customTasksFrontEnd/topicSelected':      ['ROLE_USER'],
-    '/customTasksFrontEnd/testSelected':       ['ROLE_USER'],
-    '/customTasksFrontEnd/profile':            ['ROLE_USER'],
-    '/customTasksFrontEnd/testStats':          ['ROLE_USER'],
-    '/customTasksFrontEnd/updatePersonalInfo': ['ROLE_USER'],
-    '/customTasksFrontEnd/notFound':           ['ROLE_USER'],
-    '/customTasksFrontEnd/profileAvatar':      ['ROLE_USER'],
-    '/customTasksFrontEnd/updateAvatar':       ['ROLE_USER'],
-    '/customTasksFrontEnd/notFoundAvatar':     ['ROLE_USER'],
-    '/customTasksFrontEnd/profilePassword':    ['ROLE_USER'],
-    '/customTasksFrontEnd/updatePassword':     ['ROLE_USER'],
-    '/customTasksFrontEnd/notFoundPassword':   ['ROLE_USER'],
-    '/customTasksFrontEnd/scores':             ['ROLE_USER'],
-    '/customTasksFrontEnd/cookiesPolicy':      ['permitAll'],
-    '/customTasksFrontEnd/contact':            ['ROLE_USER'],
-    '/customTasksFrontEnd/contactForm':        ['ROLE_USER'],
-    '/faq':                                    ['ROLE_USER'],
-    '/customTasksFrontEnd/**':                 ['ROLE_USER']
+    '/customTasksFrontEnd/home':                ['ROLE_USER'],
+    '/customTasksFrontEnd/topicSelected':       ['ROLE_USER'],
+    '/customTasksFrontEnd/testSelected':        ['ROLE_USER'],
+    '/customTasksFrontEnd/calculateEvaluation': ['ROLE_USER'],
+    '/customTasksFrontEnd/profile':             ['ROLE_USER'],
+    '/customTasksFrontEnd/testStats':           ['ROLE_USER'],
+    '/customTasksFrontEnd/updatePersonalInfo':  ['ROLE_USER'],
+    '/customTasksFrontEnd/notFound':            ['ROLE_USER'],
+    '/customTasksFrontEnd/profileAvatar':       ['ROLE_USER'],
+    '/customTasksFrontEnd/updateAvatar':        ['ROLE_USER'],
+    '/customTasksFrontEnd/notFoundAvatar':      ['ROLE_USER'],
+    '/customTasksFrontEnd/profilePassword':     ['ROLE_USER'],
+    '/customTasksFrontEnd/updatePassword':      ['ROLE_USER'],
+    '/customTasksFrontEnd/notFoundPassword':    ['ROLE_USER'],
+    '/customTasksFrontEnd/scores':              ['ROLE_USER'],
+    '/customTasksFrontEnd/cookiesPolicy':       ['permitAll'],
+    '/customTasksFrontEnd/contact':             ['ROLE_USER'],
+    '/customTasksFrontEnd/contactForm':         ['ROLE_USER'],
+    '/faq':                                     ['ROLE_USER'],
+    '/customTasksFrontEnd/**':                  ['ROLE_USER']
 ]
 
 // URL of login page (default: "/login/auth")

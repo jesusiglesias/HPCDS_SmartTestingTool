@@ -8,9 +8,24 @@
     <link rel="stylesheet" href="${resource(dir: 'css/counter', file: 'flipclock.css')}" type="text/css"/>
 
     <script type="text/javascript">
+
         // Variables to use in javascript
         var _language = '${g.message(code:'default.remaining.time.language', default:'en')}';
-        var _maximumTime = '${maximumTime}'
+        var _maximumTime = '${maximumTime}';
+        var _exitTestLink = '${g.createLink(controller: "customTasksFrontEnd", action: 'topicSelected', id: "${topicID}")}';
+
+        jQuery(document).ready(function() {
+
+            /**
+             * Redirect in exit action
+             */
+            $('.exit-test').confirmation({
+                onConfirm: function() {
+                    window.location.replace(_exitTestLink);
+                }
+            });
+        });
+
     </script>
 </head>
 <body>
@@ -104,11 +119,51 @@
     </div>
 
     <!-- Test form -->
-    <g:form>
+    <g:form controller="customTasksFrontEnd" action="calculateEvaluation" method="POST" autocomplete="off">
 
+        <!-- Questions -->
+        <g:each in="${questions}" status="i" var="question">
+            <g:if test="${(i % 2) == 0 ? 'row' : ''}">
+                <div class="row">
+            </g:if>
+            <div class="col-md-6">
+                ${question.description}
+
+                <!-- Answers -->
+                <g:each in="${question.answers}" status="j" var="answer">
+                    ${answer.description}
+                </g:each>
+            </div>
+            <g:if test="${(i % 2) != 0}">
+                </div>
+            </g:if>
+        </g:each>
+
+        <!-- Buttons -->
+        <div class="domain-button-group">
+            <!-- Cancel button -->
+            <g:link type="button" class="btn grey-mint exit-test"
+                    data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
+                    data-original-title="${message(code: 'layouts.main_auth_admin.content.delete.confirm.message', default: 'Are you sure?')}"
+                    data-btn-ok-label="${message(code: 'default.test.exit', default: 'Exit')}"
+                    data-btn-cancel-label="${message(code: 'default.button.cancel.label', default: 'Cancel')}"
+                    data-btnOkIcon="glyphicon glyphicon-ok" data-btnOkClass="btn btn-sm btn-success"
+                    data-btnCancelIcon="glyphicon glyphicon-remove" data-btnCancelClass="btn btn-sm btn-danger">
+                <g:message code="default.test.exit" default="Exit"/>
+            </g:link>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn green-dark icon-button-container" name="update">
+                <i class="icofont icofont-certificate-alt-2 icon-button ico-certificate-test"></i>
+                <g:message code="default.test.finish" default="Finish test"/>
+            </button>
+        </div>
     </g:form>
 
     <!-- LOAD JAVASCRIPT -->
+    <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
+
+    <!-- Establishe timer -->
     <g:if test="${maximumTime > 0}">
         <g:javascript src="counter/flipclock.min.js"/>
         <g:javascript src="counter/timer-downcounter.js"/>

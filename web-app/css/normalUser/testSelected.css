@@ -88,6 +88,11 @@
     bottom: 2px !important;
 }
 
+/* Icon in finish button */
+.ico-certificate-test {
+    font-size: 15px;
+}
+
 /* Max-width: 991px */
 @media (max-width: 991px) {
 
