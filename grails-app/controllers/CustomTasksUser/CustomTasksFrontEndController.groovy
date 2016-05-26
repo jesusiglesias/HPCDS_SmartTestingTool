@@ -5,6 +5,7 @@ import Security.SecUser
 import Test.Test
 import Test.Question
 import Test.Topic
+import Test.Answer
 import User.Evaluation
 import grails.converters.JSON
 import grails.transaction.Transactional
@@ -190,7 +191,6 @@ class CustomTasksFrontEndController {
                             maxResults(testInstance.numberOfQuestions)
                         }
 
-                        // TODO
                         // It calculates the total possible score of the test in each user
                         questions.each { question ->
                             question.answers.each { answer ->
@@ -198,9 +198,7 @@ class CustomTasksFrontEndController {
                                     totalPossibleScore += answer.score
                                 }
                             }
-                            log.error("ramdom: " + question.titleQuestionKey)
                         }
-                        log.error("Puntuación total: " + totalPossibleScore)
 
                         if (currentEvaluation == null) {
 
@@ -290,6 +288,77 @@ class CustomTasksFrontEndController {
      */
     def calculateEvaluation() {
         log.debug("CustomTasksFrontEndController():calculateEvaluation()")
+
+        def totalScore = 0
+        def finalScore = 0
+
+        // It obtains the current user
+        def currentUserEvaluation = User.get(springSecurityService.currentUser.id)
+
+        // It iterates through all parameters
+        params.eachWithIndex { param, it ->
+
+            // Only the parameters referring to answers
+            if (params."question${it}") {
+
+                log.error(params."question${it}")
+
+                // Not null
+                if (params."question${it}" != null) {
+
+                    try {
+
+                        UUID uuidAnswer = UUID.fromString(params."question${it}");
+
+                        log.error("UUID: " + uuidAnswer)
+
+                        def answerInstance = Answer.findById(uuidAnswer)
+
+                        // It exists
+                        if (answerInstance != null) {
+                            log.error("entro")
+                            totalScore += answerInstance.score
+                        }
+
+                    } catch (Exception exception) {
+                        log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:radioButton:valueFieldModified:user:${currentUserEvaluation.username}:${exception}")
+                    }
+                }
+            }
+        }
+
+        log.error("puntuación total: " + totalScore)
+
+        // It obtains the user evaluation
+        def userEvaluation = Evaluation.findByUserNameAndTestName(currentUserEvaluation.username, params.testName)
+
+        // It calculate the final score
+        finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
+
+        userEvaluation.completenessDate = new Date()
+        userEvaluation.testScore = finalScore
+        userEvaluation.maxPossibleScore = null
+
+        def validUserEvaluation = userEvaluation.validate()
+
+        if (validUserEvaluation) {
+
+            try {
+                userEvaluation.save(flush: true, failOnError: true)
+
+            } catch (Exception exception) {
+                log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:calculatingScoring:${currentUserEvaluation.username}-${params.testName}:${exception}")
+
+                // Roll back in database
+                transactionStatus.setRollbackOnly()
+                response.sendError(404)
+            }
+
+        } else {
+            log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:notValid:calculatingScoring:user:${currentUserEvaluation.username}:errors:${userEvaluation.errors}")
+
+            response.sendError(404)
+        }
     }
 
     /**

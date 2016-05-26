@@ -26,7 +26,6 @@
     margin: 8px 0 0 0;
 }
 
-
 /* Timer CSS - Override */
 .flip-clock-wrapper {
     left: 5px;
@@ -93,6 +92,54 @@
     font-size: 15px;
 }
 
+/* Form question */
+.form-question {
+    margin-top: 20px;
+}
+
+.row-userLayoutTitle-testSelected {
+    margin: 0 20px 0 20px;
+}
+
+.col-testSelected {
+    border-left: 1px solid #909090;
+    margin: 20px 0 20px 0;
+}
+
+/* Title question */
+.title-question{
+    text-align: justify;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #4DB3A2;
+    text-decoration: underline;
+    margin: 0 0 17px 0;
+}
+
+/* Description question */
+.description-question{
+    text-align: justify;
+    font-weight: 600;
+}
+
+.label-radio {
+    margin-bottom: 17px !important;
+    margin-left: 30px;
+    margin-top: -21px;
+    text-align: justify;
+}
+
+/* Answer */
+.answer-question {
+    font-weight: 300;
+}
+
+/* Button group */
+.domain-button-group-testSelected {
+    margin: 20px 20px 0 20px;
+}
+
 /* Max-width: 991px */
 @media (max-width: 991px) {
 
@@ -118,6 +165,19 @@
         margin: 30px auto 0 auto !important;
         width: 336px !important;
     }
+
+    /* Form question */
+    .form-question {
+        margin-top: 25px;
+    }
+
+    .row-userLayoutTitle-testSelected {
+        margin: -6px 20px 0 20px;
+    }
+
+    .col-testSelected-even {
+        margin: 35px 0 20px 0;
+    }
 }
 
 /* Max-width: 480px */
@@ -129,6 +189,20 @@
 
     .flip-clock-wrapper {
         font: normal 10px "Helvetica Neue", Helvetica, sans-serif !important;
+    }
+
+    /* Form question */
+    .form-question {
+        margin-top: 20px;
+    }
+
+    .row-userLayoutTitle-testSelected {
+        margin: -6px 10px 0 10px;
+    }
+
+    /* Button group */
+    .domain-button-group-testSelected {
+        margin: 20px 10px 0 10px;
     }
 }
 
@@ -174,5 +248,14 @@
     .col-remaining-time {
         left: 0.40%;
         padding-left: 1px;
+    }
+
+    .row-userLayoutTitle-testSelected {
+        margin: -6px 6px 0 6px;
+    }
+
+    /* Button group */
+    .domain-button-group-testSelected {
+        margin: 20px 6px 0 6px;
     }
 }

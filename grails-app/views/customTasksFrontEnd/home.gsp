@@ -181,6 +181,12 @@
             <g:if test="${(i % 2) != 0}">
                 </div>
             </g:if>
+
+            <!-- Last element -->
+            <g:if test="${i == activeTopics.size() - 1 && (i % 2) == 0}">
+                </div>
+            </g:if>
+
         </g:each>
     </g:else>
 

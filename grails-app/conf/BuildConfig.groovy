@@ -80,9 +80,7 @@ grails.project.dependency.resolution = {
         // Brute force Defender
         compile "org.grails.plugins:bruteforce-defender:1.1"
         // Jasypt encryption
-        compile ("org.grails.plugins:jasypt-encryption:1.3.1") {
-            excludes "bcprov-jdk16"
-        }
+        compile "org.grails.plugins:jasypt-encryption:1.3.1"
         // Mail
         compile "org.grails.plugins:mail:1.0.7"
         // Spring Security Core
@@ -90,7 +88,9 @@ grails.project.dependency.resolution = {
         // Scaffolding method
         compile ":scaffolding:2.1.2"
         // Tika
-        compile ":tika-parser:1.9.0"
+        compile (":tika-parser:1.9.0") {
+            excludes "bcprov-jdk15on"
+        }
 
         // Plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.10" // or ":hibernate:3.6.10.18"

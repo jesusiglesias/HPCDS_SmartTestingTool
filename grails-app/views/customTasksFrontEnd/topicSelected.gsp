@@ -216,9 +216,6 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
                     </g:if>
                 </div>
             </div>
-        <g:if test="${(i % 2) != 0}">
-            </div>
-        </g:if>
 
         <!-- Call to tooltip function -->
         <g:if test="${allowedDate[i] && allowedAttempt[i] && availableTest?.numberOfQuestions > 0}">
@@ -233,6 +230,16 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
                 tooltipTest(".tooltip-${i}", "${inaccessible}");
             </script>
         </g:else>
+
+        <g:if test="${(i % 2) != 0}">
+            </div>
+        </g:if>
+
+        <!-- Last element -->
+        <g:if test="${i == availableTotalTest.size() - 1 && (i % 2) == 0}">
+            </div>
+        </g:if>
+
     </g:each>
 
     <!-- LOAD JAVASCRIPT -->

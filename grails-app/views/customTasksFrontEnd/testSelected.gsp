@@ -6,6 +6,7 @@
     <title><g:message code="layouts.main_auth_user.head.title.testSelected" default="STT | Test selected"/></title>
     <link rel="stylesheet" href="${resource(dir: 'css/normalUser', file: 'testSelected.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/counter', file: 'flipclock.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/iCheck', file: 'square-green.css')}" type="text/css"/>
 
     <script type="text/javascript">
 
@@ -98,7 +99,12 @@
     </g:if>
 
     <!-- Page-title -->
-    <div class="row row-userLayoutTitle row-testSelected">
+    <g:if test="${maximumTime > 0}">
+        <div class="row row-userLayoutTitle row-testSelected">
+    </g:if>
+    <g:else>
+        <div class="row row-userLayoutTitle">
+    </g:else>
         <div class="col-md-12 col-userLayoutTitle">
             <!-- Page-title -->
             <div class="page-title-user-testSelected">
@@ -119,28 +125,60 @@
     </div>
 
     <!-- Test form -->
-    <g:form controller="customTasksFrontEnd" action="calculateEvaluation" method="POST" autocomplete="off">
+    <g:form controller="customTasksFrontEnd" action="calculateEvaluation" method="POST" autocomplete="off" class="form-question">
+
+        <!-- Test name -->
+        <g:hiddenField name="testName" value="${testName}" />
 
         <!-- Questions -->
         <g:each in="${questions}" status="i" var="question">
-            <g:if test="${(i % 2) == 0 ? 'row' : ''}">
-                <div class="row">
-            </g:if>
-            <div class="col-md-6">
-                ${question.description}
 
-                <!-- Answers -->
-                <g:each in="${question.answers}" status="j" var="answer">
-                    ${answer.description}
-                </g:each>
-            </div>
+            <g:if test="${(i % 2) == 0}">
+                <div class="row row-userLayoutTitle-testSelected">
+            </g:if>
+
+            <g:if test="${(i % 2) == 0}">
+                <div class="col-md-6 col-testSelected">
+            </g:if>
+            <g:else>
+                <div class="col-md-6 col-testSelected col-testSelected-even">
+            </g:else>
+
+                <!-- Question -->
+                <h5 class="title-question"> <g:message code="layouts.main_auth_user.body.testSelected.title.question" default="Question"/> ${i+1} </h5>
+
+                <!-- Title/Description question -->
+                <p class="description-question">${question.description}</p>
+
+                <div class="input-group">
+                    <div class="icheck-list">
+                    <!-- Answers -->
+                    <g:each in="${question.answers}" status="j" var="answer">
+
+                        <input type="radio" name="question${i}" class="icheck" data-radio="iradio_square-green" value="${answer?.id}">
+
+                        <!-- Each answer -->
+                        <label class="label-radio">
+                            <!-- Title/Description question -->
+                            <span class="answer-question">${answer.description}</span>
+                        </label>
+                    </g:each>
+                    </div> <!-- /.icheck-list -->
+                </div> <!-- input-group -->
+                </div>
+
             <g:if test="${(i % 2) != 0}">
+                </div>
+            </g:if>
+
+            <!-- Last element -->
+            <g:if test="${i == questions.size() - 1 && (i % 2) == 0}">
                 </div>
             </g:if>
         </g:each>
 
         <!-- Buttons -->
-        <div class="domain-button-group">
+        <div class="domain-button-group-testSelected">
             <!-- Cancel button -->
             <g:link type="button" class="btn grey-mint exit-test"
                     data-toggle="confirmation" data-placement="rigth" data-popout="true" data-singleton="true"
@@ -162,6 +200,7 @@
 
     <!-- LOAD JAVASCRIPT -->
     <g:javascript src="confirmation/bootstrap-confirmation.min.js"/>
+    <g:javascript src="iCheck/icheck.min.js"/>
 
     <!-- Establishe timer -->
     <g:if test="${maximumTime > 0}">
