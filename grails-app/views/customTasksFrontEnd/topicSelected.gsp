@@ -19,6 +19,16 @@
                 title: _message
             });
         }
+
+        // Handler auto close alert
+        function createAutoClosingAlert(selector) {
+            var alert = $(selector);
+            window.setTimeout(function () {
+                alert.slideUp(1000, function () {
+                    $(this).remove();
+                });
+            }, 5000);
+        }
     </script>
 </head>
 <body>
@@ -109,6 +119,19 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
             </div>
         </div>
     </div>
+
+    <!-- Alert -->
+    <g:if test="${flash.errorTestSelected}">
+        <div class="col-md-12">
+            <div class='alert alert-error alert-danger-custom-backend alert-dismissable alert-entity-error-topic fade in'>
+                <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+                <span class="xthin" role="status">${raw(flash.errorTestSelected)}</span>
+            </div>
+        </div>
+        <g:javascript>
+            createAutoClosingAlert('.alert-entity-error-topic');
+        </g:javascript>
+    </g:if>
 
     <!-- Search input -->
     <div class="row row-userLayoutTitle searchForm-home">

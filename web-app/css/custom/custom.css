@@ -856,6 +856,12 @@ table.dataTable tbody tr:hover {
     margin: 0 0 50px 0;
 }
 
+/* Error message in topicSelected */
+.alert-entity-error-topic {
+    margin: 0 0 30px 0;
+    text-align: center;
+}
+
 /* Entity error message in profile user */
 .alert-entity-error-profile,
 .alert-entity-info-profile {
@@ -1862,6 +1868,11 @@ table.dataTable tbody tr:hover {
     .colLine-rowRigth {
         border-right: 0;
         right: 0;
+    }
+
+    /* Error message in topicSelected */
+    .alert-entity-error-topic {
+        margin: 35px 0 30px 0;
     }
 
     /* Entity error message in profile user */

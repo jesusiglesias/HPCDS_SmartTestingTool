@@ -10,6 +10,7 @@ var timerDownCounter = function () {
     var handlerDownCounter = function() {
 
         var testTimer;
+        var formQuestion = $('.form-question');
 
         // It transforms to seconds
         testTimer = $('.timer').FlipClock(_maximumTime*60, {
@@ -18,8 +19,10 @@ var timerDownCounter = function () {
             callbacks: {
                 stop: function() {
                     setTimeout(function() {
-                        console.log("fin");
-                        alert('clock fin');
+
+                        // Submit the form
+                        formQuestion.submit()
+
                     }, 1000);
                 }
             }

@@ -191,81 +191,90 @@ class CustomTasksFrontEndController {
                             maxResults(testInstance.numberOfQuestions)
                         }
 
-                        // It calculates the total possible score of the test in each user
-                        questions.each { question ->
-                            question.answers.each { answer ->
-                                if (answer.correct == true) {
-                                    totalPossibleScore += answer.score
+                        // It checks that database has questions
+                        if (questions.size() > 0 && questions.size() >= testInstance.numberOfQuestions) {
+
+                            // It calculates the total possible score of the test in each user
+                            questions.each { question ->
+                                question.answers.each { answer ->
+                                    if (answer.correct == true) {
+                                        totalPossibleScore += answer.score
+                                    }
                                 }
                             }
-                        }
 
-                        if (currentEvaluation == null) {
+                            if (currentEvaluation == null) {
 
-                            // It creates new evaluation of the user
-                            def newEvaluation = new Evaluation(
-                                    testName: testInstance.name,
-                                    attemptNumber: 1,
-                                    maxAttempt: testInstance.maxAttempts,
-                                    maxPossibleScore: totalPossibleScore,
-                                    userName: currentUserToTest.username,
-                            )
+                                // It creates new evaluation of the user
+                                def newEvaluation = new Evaluation(
+                                        testName: testInstance.name,
+                                        attemptNumber: 1,
+                                        maxAttempt: testInstance.maxAttempts,
+                                        maxPossibleScore: totalPossibleScore,
+                                        userName: currentUserToTest.username,
+                                )
 
-                            def validNewEvaluation = newEvaluation.validate()
+                                def validNewEvaluation = newEvaluation.validate()
 
-                            if (validNewEvaluation) {
+                                if (validNewEvaluation) {
 
-                                try {
-                                    // It associates the evaluation to user
-                                    currentUserToTest.addToEvaluations(newEvaluation)
+                                    try {
+                                        // It associates the evaluation to user
+                                        currentUserToTest.addToEvaluations(newEvaluation)
 
-                                    // It associates the evaluation to test
-                                    testInstance.addToEvaluationsTest(newEvaluation)
-                                    newEvaluation.save(flush: true, failOnError: true)
+                                        // It associates the evaluation to test
+                                        testInstance.addToEvaluationsTest(newEvaluation)
+                                        newEvaluation.save(flush: true, failOnError: true)
 
-                                } catch (Exception exception) {
-                                    log.error("CustomTasksFrontEndController():testSelected():Exception:newEvaluation:${currentUserToTest.username}-${testInstance.name}:${exception}")
+                                    } catch (Exception exception) {
+                                        log.error("CustomTasksFrontEndController():testSelected():Exception:newEvaluation:${currentUserToTest.username}-${testInstance.name}:${exception}")
 
-                                    // Roll back in database
-                                    transactionStatus.setRollbackOnly()
+                                        // Roll back in database
+                                        transactionStatus.setRollbackOnly()
+                                        response.sendError(404)
+                                    }
+
+                                } else {
+                                    log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:newEvaluation:user:${currentUserToTest.username}:errors:${newEvaluation.errors}")
+
                                     response.sendError(404)
                                 }
-
                             } else {
-                                log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:newEvaluation:user:${currentUserToTest.username}:errors:${newEvaluation.errors}")
 
-                                response.sendError(404)
+                                // It increases the number of attempt of the user in the evaluation
+                                // TODO currentEvaluation.attemptNumber += 1
+                                currentEvaluation.completenessDate = null
+                                currentEvaluation.maxPossibleScore = totalPossibleScore
+
+                                def validExistEvaluation = currentEvaluation.validate()
+
+                                if (validExistEvaluation) {
+
+                                    try {
+                                        currentEvaluation.save(flush: true, failOnError: true)
+
+                                    } catch (Exception exception) {
+                                        log.error("CustomTasksFrontEndController():testSelected():Exception:updatingEvaluation:${currentUserToTest.username}-${testInstance.name}:${exception}")
+
+                                        // Roll back in database
+                                        transactionStatus.setRollbackOnly()
+                                        response.sendError(404)
+                                    }
+
+                                } else {
+                                    log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:existingEvaluation:user:${currentUserToTest.username}:errors:${currentEvaluation.errors}")
+
+                                    response.sendError(404)
+                                }
                             }
+                            render view: 'testSelected', model: [testName: testInstance.name, topicID: testInstance.topic.id, maximumTime: testInstance.lockTime, questions: questions]
                         } else {
 
-                            // It increases the number of attempt of the user in the evaluation
-                            // TODO currentEvaluation.attemptNumber += 1
-                            currentEvaluation.completenessDate = null
-                            currentEvaluation.maxPossibleScore = totalPossibleScore
+                            flash.errorTestSelected =  g.message(code: "layouts.main_auth_user.body.topicSelected.error.question", default: 'Number of questions associated with the <strong>{0}</strong> test insufficient. Please, if the problem persists please contact us.', args: ["${testInstance.name}"])
 
-                            def validExistEvaluation = currentEvaluation.validate()
-
-                            if (validExistEvaluation) {
-
-                                try {
-                                    currentEvaluation.save(flush: true, failOnError: true)
-
-                                } catch (Exception exception) {
-                                    log.error("CustomTasksFrontEndController():testSelected():Exception:updatingEvaluation:${currentUserToTest.username}-${testInstance.name}:${exception}")
-
-                                    // Roll back in database
-                                    transactionStatus.setRollbackOnly()
-                                    response.sendError(404)
-                                }
-
-                            } else {
-                                log.error("CustomTasksFrontEndController():testSelected():Exception:notValid:existingEvaluation:user:${currentUserToTest.username}:errors:${currentEvaluation.errors}")
-
-                                response.sendError(404)
-                            }
+                            log.error("Entro preguntas 0")
+                            redirect controller: 'customTasksFrontEnd', action: 'topicSelected', id: testInstance.topic.id
                         }
-                        render view: 'testSelected', model: [testName: testInstance.name, topicID: testInstance.topic.id, maximumTime: testInstance.lockTime, questions: questions]
-
                     }
 
                 } else {
@@ -310,8 +319,6 @@ class CustomTasksFrontEndController {
 
                         UUID uuidAnswer = UUID.fromString(params."question${it}");
 
-                        log.error("UUID: " + uuidAnswer)
-
                         def answerInstance = Answer.findById(uuidAnswer)
 
                         // It exists
@@ -332,8 +339,32 @@ class CustomTasksFrontEndController {
         // It obtains the user evaluation
         def userEvaluation = Evaluation.findByUserNameAndTestName(currentUserEvaluation.username, params.testName)
 
-        // It calculate the final score
-        finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
+        // Test without questions
+        if (userEvaluation.maxPossibleScore > 0) {
+
+            log.error("Evaluación " + userEvaluation.testScore)
+            log.error("Evaluación " + userEvaluation.attemptNumber)
+
+            if (userEvaluation.testScore == null && userEvaluation.attemptNumber == 1) {
+                log.error("entro primer intento")
+                // It calculates the final score in the first attempt
+                finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
+            } else {
+                log.error("mas de 1 intento")
+
+                // It calculates the final score in the x attempt
+                finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
+
+                // It calculate the average score
+                finalScore = (finalScore + userEvaluation.testScore)/2
+
+                // It calculates the final score with penalty (10%)
+                def penalty = finalScore/10
+                log.error("penalty: " + penalty)
+
+                finalScore = finalScore - penalty
+            }
+        }
 
         userEvaluation.completenessDate = new Date()
         userEvaluation.testScore = finalScore
