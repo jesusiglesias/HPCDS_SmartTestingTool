@@ -242,7 +242,7 @@ class CustomTasksFrontEndController {
                             } else {
 
                                 // It increases the number of attempt of the user in the evaluation
-                                // TODO currentEvaluation.attemptNumber += 1
+                                currentEvaluation.attemptNumber += 1
                                 currentEvaluation.completenessDate = null
                                 currentEvaluation.maxPossibleScore = totalPossibleScore
 
@@ -267,12 +267,11 @@ class CustomTasksFrontEndController {
                                     response.sendError(404)
                                 }
                             }
-                            render view: 'testSelected', model: [testName: testInstance.name, topicID: testInstance.topic.id, maximumTime: testInstance.lockTime, questions: questions]
+                            render view: 'testSelected', model: [testID: testInstance.id, testName: testInstance.name, attemptNumber: currentEvaluation?.attemptNumber?:10, topicID: testInstance.topic.id, maximumTime: testInstance.lockTime, questions: questions]
                         } else {
 
                             flash.errorTestSelected =  g.message(code: "layouts.main_auth_user.body.topicSelected.error.question", default: 'Number of questions associated with the <strong>{0}</strong> test insufficient. Please, if the problem persists please contact us.', args: ["${testInstance.name}"])
 
-                            log.error("Entro preguntas 0")
                             redirect controller: 'customTasksFrontEnd', action: 'topicSelected', id: testInstance.topic.id
                         }
                     }
@@ -309,8 +308,6 @@ class CustomTasksFrontEndController {
 
             // Only the parameters referring to answers
             if (params."question${it}") {
-
-                log.error(params."question${it}")
 
                 // Not null
                 if (params."question${it}" != null) {
@@ -356,7 +353,7 @@ class CustomTasksFrontEndController {
                 finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
 
                 // It calculate the average score
-                finalScore = (finalScore + userEvaluation.testScore)/2
+                finalScore = (finalScore + userEvaluation.testScore) / 2
 
                 // It calculates the final score with penalty (10%)
                 def penalty = finalScore/10
@@ -377,6 +374,19 @@ class CustomTasksFrontEndController {
             try {
                 userEvaluation.save(flush: true, failOnError: true)
 
+                flash.testName = g.message(code: "layouts.main_auth_user.body.title.testFinished", default: '<span class="text-lowercase">{0}</span> test finished', args: [params.testName])
+                flash.scoreDescription = g.message(code: "layouts.main_auth_user.body.testFinished.description", default: 'His final score after completing the <span class="bold">{0}</span> test in your attempt number <span class="sbold">{1}</span> on a maximum score of 10 points is:', args: [params.testName, userEvaluation.attemptNumber])
+                flash.finalScore = finalScore
+                flash.homepage = g.message(code: "layouts.main_auth_user.body.testFinished.button.homepage", default: 'Homepage')
+
+                // User has more attemtps
+                if (userEvaluation.attemptNumber < userEvaluation.maxAttempt) {
+                    flash.tryAgain = g.message(code: "layouts.main_auth_user.body.testFinished.button.tryAgain", default: 'Try again')
+                    flash.testID = params.testID
+                }
+
+                redirect uri: '/scoreObtained'
+
             } catch (Exception exception) {
                 log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:calculatingScoring:${currentUserEvaluation.username}-${params.testName}:${exception}")
 
@@ -390,6 +400,15 @@ class CustomTasksFrontEndController {
 
             response.sendError(404)
         }
+    }
+
+    /**
+     * It shows the final score to the user.
+     */
+    def scoreObtained() {
+        log.debug("CustomTasksFrontEndController():scoreObtained()")
+
+        render view: 'scoreObtained'
     }
 
     /**

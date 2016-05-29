@@ -302,6 +302,24 @@ table.dataTable tbody tr:hover {
     z-index: 9999 !important;
 }
 
+.score-obtained-container {
+    background: white;
+    text-align: center;
+    padding: 15px 0 45px 0;
+}
+
+.score-obtained {
+    padding: 10px 50px 10px 50px;
+    color: white;
+}
+
+.score-obtained-buttons {
+    text-align: center;
+    background: white;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
 /* Search form in normal user pages (Home and topicSelected)
 =================================================================== */
 
@@ -386,6 +404,7 @@ table.dataTable tbody tr:hover {
 .page-title-user-home,
 .page-title-user-topicSelected,
 .page-title-user-testSelected,
+.page-title-user-scoreObtained,
 .page-title-user-scores,
 .page-title-user-profile {
     letter-spacing: -1px;
@@ -409,6 +428,14 @@ table.dataTable tbody tr:hover {
     font-size: 33px;
     font-variant: small-caps;
     font-weight: 400;
+}
+
+.page-title-user-scoreObtained-title {
+    text-align: center;
+    font-size: 33px;
+    font-variant: small-caps;
+    font-weight: 400;
+    margin-bottom: 20px;
 }
 
 .page-title-user-home-title > span {
@@ -442,11 +469,23 @@ table.dataTable tbody tr:hover {
     font-size: 14px;
 }
 
+.page-title-user-scoreObtained-section-description {
+    text-align: center;
+    margin: 0;
+    padding: 35px;
+    letter-spacing: 1px;
+    background-color: #ffffff;
+    font-weight: 500;
+    font-size: 14px;
+}
+
 /* Section */
 .page-title-user-cookie-section,
 .page-title-user-faq-section,
 .page-title-user-topic-section,
-.page-title-user-test-section {
+.page-title-user-test-section,
+.page-title-user-testSelected-section,
+.page-title-user-scoreObtained-section {
     display: block;
     font-weight: 400;
     margin: 0;
@@ -455,12 +494,23 @@ table.dataTable tbody tr:hover {
 .page-title-user-cookie-section-title,
 .page-title-user-topic-section-title,
 .page-title-user-test-section-title,
+.page-title-user-scoreObtained-section-title,
 .page-title-user-faq-section-title {
     letter-spacing: -1px;
     text-align: center;
     font-size: 27px;
     font-variant: small-caps;
     padding: 20px 25px 20px 16px;
+    margin: 0;
+    background-color: rgba(212, 174, 59, 0.37);
+}
+
+.page-title-user-testSelected-section-title {
+    letter-spacing: -1px;
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 10px 25px 10px 16px;
     margin: 0;
     background-color: rgba(212, 174, 59, 0.37);
 }
@@ -1924,6 +1974,7 @@ table.dataTable tbody tr:hover {
 
     .page-title-user-home,
     .page-title-user-topicSelected,
+    .page-title-user-scoreObtained,
     .page-title-user-testSelected {
         padding: 60px 0 45px 0;
         font-size: 15px;
@@ -1942,6 +1993,11 @@ table.dataTable tbody tr:hover {
     .page-title-user-testSelected-title {
         font-size: 32px;
         margin: 0 20px 0 20px;
+    }
+
+    .page-title-user-scoreObtained-title {
+        font-size: 32px;
+        margin: 0 20px 20px 20px;
     }
 
     .page-title-user-cookie-description,
@@ -1969,6 +2025,7 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user-topic-section-description,
+    .page-title-user-scoreObtained-section-description,
     .page-title-user-test-section-description {
         text-align: justify;
     }
@@ -1976,8 +2033,13 @@ table.dataTable tbody tr:hover {
     .page-title-user-cookie-section-title,
     .page-title-user-topic-section-title,
     .page-title-user-test-section-title,
+    .page-title-user-scoreObtained-section-title,
     .page-title-user-faq-section-title {
         font-size: 26px;
+    }
+
+    .page-title-user-testSelected-section-title {
+        font-size: 19px;
     }
 }
 
@@ -2124,6 +2186,7 @@ table.dataTable tbody tr:hover {
 
     .page-title-user-home,
     .page-title-user-topicSelected,
+    .page-title-user-scoreObtained,
     .page-title-user-testSelected {
         padding: 46px 0 27px 0;
     }
@@ -2140,6 +2203,13 @@ table.dataTable tbody tr:hover {
 
     .page-title-user-faq-title {
         font-size: 31px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .page-title-user-scoreObtained-title {
+        font-size: 31px;
+        margin-bottom: 20px;
         margin-left: 20px;
         margin-right: 20px;
     }
@@ -2163,7 +2233,8 @@ table.dataTable tbody tr:hover {
     }
 
     .page-title-user-topic-section-description,
-    .page-title-user-test-section-description {
+    .page-title-user-test-section-description,
+    .page-title-user-scoreObtained-section-description {
         padding-left: 25px;
         padding-right: 25px;
         font-size: 14px;
@@ -2177,8 +2248,25 @@ table.dataTable tbody tr:hover {
     .page-title-user-cookie-section-title,
     .page-title-user-topic-section-title,
     .page-title-user-test-section-title,
+    .page-title-user-scoreObtained-section-title,
     .page-title-user-faq-section-title {
         font-size: 25px;
+    }
+
+    .page-title-user-testSelected-section-title {
+        font-size: 18px;
+    }
+
+    .score-obtained-buttons > a {
+        display: block;
+    }
+
+    .score-obtained-buttons .homepage {
+        margin: 0 20px 20px 20px;
+    }
+
+    .score-obtained-buttons .tryAgain {
+        margin: 0 20px 0 20px;
     }
 }
 
@@ -2348,12 +2436,14 @@ table.dataTable tbody tr:hover {
 
     .page-title-user-home,
     .page-title-user-topicSelected,
+    .page-title-user-scoreObtained,
     .page-title-user-testSelected {
         padding: 40px 0 25px 0;
     }
 
     .page-title-user-topic-section-description,
-    .page-title-user-test-section-description {
+    .page-title-user-test-section-description,
+    .page-title-user-scoreObtained-section-description {
         padding-left: 20px;
         padding-right: 20px;
     }
@@ -2363,6 +2453,7 @@ table.dataTable tbody tr:hover {
     .page-title-user-faq-title,
     .page-title-user-home-title,
     .page-title-user-topicSelected-title,
+    .page-title-user-scoreObtained-title,
     .page-title-user-testSelected-title,
     .page-title-user-scores-title,
     .page-title-user-profile-title {
@@ -2390,7 +2481,12 @@ table.dataTable tbody tr:hover {
     .page-title-user-cookie-section-title,
     .page-title-user-topic-section-title,
     .page-title-user-test-section-title,
+    .page-title-user-scoreObtained-section-title,
     .page-title-user-faq-section-title {
         font-size: 24px;
+    }
+
+    .page-title-user-testSelected-section-title {
+        font-size: 17px;
     }
 }

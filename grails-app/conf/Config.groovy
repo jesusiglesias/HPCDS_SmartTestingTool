@@ -229,6 +229,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksFrontEnd/topicSelected':       ['ROLE_USER'],
     '/customTasksFrontEnd/testSelected':        ['ROLE_USER'],
     '/customTasksFrontEnd/calculateEvaluation': ['ROLE_USER'],
+    '/customTasksFrontEnd/scoreObtained':       ['ROLE_USER'],
     '/customTasksFrontEnd/profile':             ['ROLE_USER'],
     '/customTasksFrontEnd/testStats':           ['ROLE_USER'],
     '/customTasksFrontEnd/updatePersonalInfo':  ['ROLE_USER'],

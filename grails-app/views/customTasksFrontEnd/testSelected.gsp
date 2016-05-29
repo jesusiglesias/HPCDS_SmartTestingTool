@@ -124,8 +124,23 @@
         </div>
     </div>
 
+    <!-- Number of attempt -->
+    <div class="row row-userLayoutTitle-topicSelected">
+        <div class="col-md-12 col-userLayoutTitle">
+            <!-- Page-title -->
+            <div class="page-title-user-testSelected-section">
+                <h3 class="page-title-user-testSelected-section-title hvr-bubble-float-bottom">
+                    ${g.message(code:"layouts.main_auth_user.body.testSelected.title.numberAttempt", default:"Attempt number {0}", args:["${attemptNumber}"])}
+                </h3>
+            </div>
+        </div>
+    </div>
+
     <!-- Test form -->
     <g:form controller="customTasksFrontEnd" action="calculateEvaluation" method="POST" autocomplete="off" class="form-question">
+
+        <!-- Test ID -->
+        <g:hiddenField name="testID" value="${testID}" />
 
         <!-- Test name -->
         <g:hiddenField name="testName" value="${testName}" />

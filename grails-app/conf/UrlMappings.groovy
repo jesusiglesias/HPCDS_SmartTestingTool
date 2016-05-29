@@ -127,6 +127,8 @@ class UrlMappings {
         "/home"(controller: 'customTasksFrontEnd', action: 'home')
         "/topicSelected/$id?(.$format)?"(controller: 'customTasksFrontEnd', action: 'topicSelected')
         "/testSelected/$id?(.$format)?"(controller: 'customTasksFrontEnd', action: 'testSelected')
+        "/calculateEvaluation"(controller: 'customTasksFrontEnd', action: 'calculateEvaluation')
+        "/scoreObtained"(controller: 'customTasksFrontEnd', action: 'scoreObtained')
         "/scores"(controller: 'customTasksFrontEnd', action: 'scores')
         "/profile"(controller: 'customTasksFrontEnd', action: 'profile')
         "/profile-error"(controller: 'customTasksFrontEnd', action: 'updatePersonalInfo')
