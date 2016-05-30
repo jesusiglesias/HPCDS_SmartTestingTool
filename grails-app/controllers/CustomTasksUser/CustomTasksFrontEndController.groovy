@@ -209,6 +209,7 @@ class CustomTasksFrontEndController {
                                 def newEvaluation = new Evaluation(
                                         testName: testInstance.name,
                                         attemptNumber: 1,
+                                        initDate: new Date(),
                                         maxAttempt: testInstance.maxAttempts,
                                         maxPossibleScore: totalPossibleScore,
                                         userName: currentUserToTest.username,
@@ -245,6 +246,7 @@ class CustomTasksFrontEndController {
                                 currentEvaluation.attemptNumber += 1
                                 currentEvaluation.completenessDate = null
                                 currentEvaluation.maxPossibleScore = totalPossibleScore
+                                currentEvaluation.initDate = new Date()
 
                                 def validExistEvaluation = currentEvaluation.validate()
 
@@ -294,105 +296,129 @@ class CustomTasksFrontEndController {
     /**
      * It calculates the scores of the user when finishes the test.
      */
+    @Transactional
     def calculateEvaluation() {
         log.debug("CustomTasksFrontEndController():calculateEvaluation()")
 
-        def totalScore = 0
-        def finalScore = 0
+        Float totalScore = 0
+        Float finalScore = 0
+        def enter = false
 
         // It obtains the current user
         def currentUserEvaluation = User.get(springSecurityService.currentUser.id)
 
-        // It iterates through all parameters
-        params.eachWithIndex { param, it ->
-
-            // Only the parameters referring to answers
-            if (params."question${it}") {
-
-                // Not null
-                if (params."question${it}" != null) {
-
-                    try {
-
-                        UUID uuidAnswer = UUID.fromString(params."question${it}");
-
-                        def answerInstance = Answer.findById(uuidAnswer)
-
-                        // It exists
-                        if (answerInstance != null) {
-                            totalScore += answerInstance.score
-                        }
-
-                    } catch (Exception exception) {
-                        log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:radioButton:valueFieldModified:user:${currentUserEvaluation.username}:${exception}")
-                    }
-                }
-            }
-        }
-
         // It obtains the user evaluation
         def userEvaluation = Evaluation.findByUserNameAndTestName(currentUserEvaluation.username, params.testName)
 
-        // Test without questions or any question is correct
-        if (userEvaluation.maxPossibleScore > 0) {
+        // It obtains the test
+        def testInstance = Test.findByName(params.testName)
 
-            if (userEvaluation.testScore == null && userEvaluation.attemptNumber == 1) {
+        if (testInstance.lockTime > 0) {
 
-                // It calculates the final score in the first attempt
-                finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
-            } else {
+            use(TimeCategory) {
 
-                // It calculates the final score in the x attempt
-                finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
-
-                // It calculate the average score
-                finalScore = (finalScore + userEvaluation.testScore) / 2
-
-                // It calculates the final score with penalty (10%)
-                def penalty = finalScore/10
-
-                finalScore = finalScore - penalty
+                enter = new Date() <= (userEvaluation.initDate + testInstance.lockTime.minutes) + 10.seconds
             }
+
         } else {
-            log.error("CustomTasksFrontEndController():calculateEvaluation():Error:Evaluation:maxPossibleScore:0:${currentUserEvaluation.username}-${params.testName}")
+            enter = true
         }
 
-        userEvaluation.completenessDate = new Date()
-        userEvaluation.testScore = finalScore
-        userEvaluation.maxPossibleScore = null
+        if (enter) {
 
-        def validUserEvaluation = userEvaluation.validate()
+            // It iterates through all parameters
+            params.eachWithIndex { param, it ->
 
-        if (validUserEvaluation) {
+                // Only the parameters referring to answers
+                if (params."question${it}") {
 
-            try {
-                userEvaluation.save(flush: true, failOnError: true)
+                    // Not null
+                    if (params."question${it}" != null) {
 
-                flash.testName = g.message(code: "layouts.main_auth_user.body.title.testFinished", default: '<span class="text-lowercase">{0}</span> test finished', args: [params.testName])
-                flash.scoreDescription = g.message(code: "layouts.main_auth_user.body.testFinished.description", default: 'His final score after completing the <span class="bold">{0}</span> test in your attempt number <span class="sbold">{1}</span> on a maximum score of 10 points is:', args: [params.testName, userEvaluation.attemptNumber])
-                flash.finalScore = finalScore
-                flash.homepage = g.message(code: "layouts.main_auth_user.body.testFinished.button.homepage", default: 'Homepage')
+                        try {
 
-                // User has more attemtps
-                if (userEvaluation.attemptNumber < userEvaluation.maxAttempt) {
-                    flash.tryAgain = g.message(code: "layouts.main_auth_user.body.testFinished.button.tryAgain", default: 'Try again')
-                    flash.testID = params.testID
+                            UUID uuidAnswer = UUID.fromString(params."question${it}");
+
+                            def answerInstance = Answer.findById(uuidAnswer)
+
+                            // It exists
+                            if (answerInstance != null) {
+                                totalScore += answerInstance.score
+                            }
+
+                        } catch (Exception exception) {
+                            log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:radioButton:valueFieldModified:user:${currentUserEvaluation.username}:${exception}")
+                        }
+                    }
                 }
-
-                redirect uri: '/scoreObtained'
-
-            } catch (Exception exception) {
-                log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:calculatingScoring:${currentUserEvaluation.username}-${params.testName}:${exception}")
-
-                // Roll back in database
-                transactionStatus.setRollbackOnly()
-                response.sendError(404)
             }
 
-        } else {
-            log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:notValid:calculatingScoring:user:${currentUserEvaluation.username}:errors:${userEvaluation.errors}")
+            // Test without questions or any question is correct
+            if (userEvaluation.maxPossibleScore > 0) {
 
-            response.sendError(404)
+                if (userEvaluation.testScore == null && userEvaluation.attemptNumber == 1) {
+
+                    // It calculates the final score in the first attempt
+                    finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
+                } else {
+
+                    // It calculates the final score in the x attempt
+                    finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
+
+                    // It calculate the average score
+                    finalScore = (finalScore + userEvaluation?.testScore) / 2
+
+                    // It calculates the final score with penalty (10%)
+                    def penalty = finalScore / 10
+
+                    finalScore = finalScore - penalty
+                }
+            } else {
+                log.error("CustomTasksFrontEndController():calculateEvaluation():Error:Evaluation:maxPossibleScore:0:${currentUserEvaluation.username}-${params.testName}")
+            }
+
+            userEvaluation.completenessDate = new Date()
+            userEvaluation.testScore = finalScore
+            userEvaluation.maxPossibleScore = null
+
+            def validUserEvaluation = userEvaluation.validate()
+
+            if (validUserEvaluation) {
+
+                try {
+                    userEvaluation.save(flush: true, failOnError: true)
+
+                    flash.testName = g.message(code: "layouts.main_auth_user.body.title.testFinished", default: '<span class="text-lowercase">{0}</span> test finished', args: [params.testName])
+                    flash.scoreDescription = g.message(code: "layouts.main_auth_user.body.testFinished.description", default: 'His final score after completing the <span class="bold">{0}</span> test in your attempt number <span class="sbold">{1}</span> on a maximum score of 10 points is:', args: [params.testName, userEvaluation.attemptNumber])
+                    flash.finalScore = finalScore
+                    flash.homepage = g.message(code: "layouts.main_auth_user.body.testFinished.button.homepage", default: 'Homepage')
+
+                    // User has more attemtps
+                    if (userEvaluation.attemptNumber < userEvaluation.maxAttempt) {
+                        flash.tryAgain = g.message(code: "layouts.main_auth_user.body.testFinished.button.tryAgain", default: 'Try again')
+                        flash.testID = testInstance.id
+                    }
+
+                    redirect uri: '/scoreObtained'
+
+                } catch (Exception exception) {
+                    log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:calculatingScoring:${currentUserEvaluation.username}-${params.testName}:${exception}")
+
+                    // Roll back in database
+                    transactionStatus.setRollbackOnly()
+                    response.sendError(404)
+                }
+
+            } else {
+                log.error("CustomTasksFrontEndController():calculateEvaluation():Exception:notValid:calculatingScoring:user:${currentUserEvaluation.username}:errors:${userEvaluation.errors}")
+
+                response.sendError(404)
+            }
+        } else {
+            log.error("CustomTasksFrontEndController():calculateEvaluation():Error:MAximumTimeModifiedByUser:user:${currentUserEvaluation.username}:test:${testInstance.name}")
+
+            flash.errorTestSelected =  g.message(code: "layouts.main_auth_user.body.topicSelected.error.testDone.time", default: 'The maximum time allowed for the test <strong>{0}</strong> has been intentionally modified by the user. The score has not been stored. Please, if you believe that it is a problem contact us.', args: ["${testInstance.name}"])
+            redirect controller: 'customTasksFrontEnd', action: 'topicSelected', id: testInstance.topic.id
         }
     }
 

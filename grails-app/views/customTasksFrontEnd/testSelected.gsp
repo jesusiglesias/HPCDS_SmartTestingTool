@@ -139,9 +139,6 @@
     <!-- Test form -->
     <g:form controller="customTasksFrontEnd" action="calculateEvaluation" method="POST" autocomplete="off" class="form-question">
 
-        <!-- Test ID -->
-        <g:hiddenField name="testID" value="${testID}" />
-
         <!-- Test name -->
         <g:hiddenField name="testName" value="${testName}" />
 
