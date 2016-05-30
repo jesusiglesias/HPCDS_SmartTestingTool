@@ -30,10 +30,10 @@ class Test {
                 if (val?.compareTo(obj.initDate) < 0) return ['endDateFail']
             }
         initDate blank: false, min: new Date().clearTime()
-        lockTime blank:false
+        lockTime blank:false, min: 0
         maxAttempts blank:false, min: 1, max: 5
         name blank: false, unique: true, maxSize: 60
-        numberOfQuestions blank: false, validator: { val, obj ->
+        numberOfQuestions blank: false, min: 0, validator: { val, obj ->
             if (val > obj.catalog.questions.size()) return ['numberOfQuestionsFail']
         }
     }

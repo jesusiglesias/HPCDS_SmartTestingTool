@@ -32,7 +32,8 @@ var DomainTestValidation = function () {
                         required: true
                     },
                     lockTime: {
-                        required: true
+                        required: true,
+                        min: 0
                     },
                     maxAttempts: {
                         required: true,
@@ -40,7 +41,8 @@ var DomainTestValidation = function () {
                         max: 5
                     },
                     numberOfQuestions: {
-                        required: true
+                        required: true,
+                        min: 0
                     },
                     topic: {
                         required: true
@@ -66,7 +68,8 @@ var DomainTestValidation = function () {
                         required: _requiredField
                     },
                     lockTime: {
-                        required: _requiredField
+                        required: _requiredField,
+                        min: _minField
                     },
                     maxAttempts: {
                         required: _requiredField,
@@ -74,7 +77,8 @@ var DomainTestValidation = function () {
                         max: _maxField
                     },
                     numberOfQuestions: {
-                        required: _requiredField
+                        required: _requiredField,
+                        min: _minField
                     },
                     topic: {
                         required: _requiredField
