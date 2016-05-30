@@ -125,7 +125,7 @@
     </div>
 
     <!-- No topics -->
-    <g:if test="${activeTopics.size() == 0}">
+    <g:if test="${visibleTopics.size() == 0}">
         <div class="row row-userLayoutTitle">
             <div class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2 col-userLayoutTitle">
                 <div class="mt-element-ribbon">
@@ -148,7 +148,7 @@
     </g:if>
     <g:else>
         <!-- Topics -->
-        <g:each in="${activeTopics}" status="i" var="activeTopic">
+        <g:each in="${visibleTopics}" status="i" var="visibleTopic">
 
             <g:if test="${(i % 2) == 0 ? 'row' : ''}">
                 <div class="row row-userLayoutTitle-home-ribbons ribbon-search-topic">
@@ -163,16 +163,16 @@
                     <!-- Name -->
                     <div class="ribbon ribbon-right ribbon-clip ribbon-shadow ribbon-border-dash-hor ribbon-color-success uppercase">
                         <div class="ribbon-sub ribbon-clip ribbon-right"></div>
-                        ${activeTopic?.name}
+                        ${visibleTopic?.name}
                     </div>
                     <!-- Description -->
                     <p class="ribbon-content">
-                        ${(activeTopic?.description) ?:"${raw(g.message(code: 'layouts.main_auth_user.body.title.topic.without.description', default: 'It has not provided any description for this topic.'))}"}
+                        ${(visibleTopic?.description) ?:"${raw(g.message(code: 'layouts.main_auth_user.body.title.topic.without.description', default: 'It has not provided any description for this topic.'))}"}
                     </p>
 
                     <g:if test="${numberActiveTest[i] != 0}">
                         <!-- Button -->
-                        <g:link controller="customTasksFrontEnd" action="topicSelected" id="${activeTopic?.id}" class="btn blue-hoki">
+                        <g:link controller="customTasksFrontEnd" action="topicSelected" id="${visibleTopic?.id}" class="btn blue-hoki">
                             <g:message code="layouts.main_auth_user.body.title.topic.button" default="Enter"/>
                         </g:link>
                     </g:if>
@@ -183,7 +183,7 @@
             </g:if>
 
             <!-- Last element -->
-            <g:if test="${i == activeTopics.size() - 1 && (i % 2) == 0}">
+            <g:if test="${i == visibleTopics.size() - 1 && (i % 2) == 0}">
                 </div>
             </g:if>
 

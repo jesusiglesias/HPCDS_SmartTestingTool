@@ -27,7 +27,7 @@ class CustomTasksFrontEndController {
     def mailService
     def passwordEncoder
 
-    static allowedMethods = [formContact: "POST", updatePersonalInfo: "PUT", updateAvatar: "POST", updatePassword: "PUT"]
+    static allowedMethods = [formContact: "POST", updatePersonalInfo: "PUT", updateAvatar: "POST", updatePassword: "PUT", calculateEvaluation: "POST"]
 
     /**
      * It shows the home page of the user.
@@ -36,17 +36,17 @@ class CustomTasksFrontEndController {
         log.debug("CustomTasksFrontEndController():home()")
 
         // It obtains the visible topic
-        def activeTopics = Topic.findAllByVisibility(true, [sort:"name", order:"asc"])
+        def visibleTopics = Topic.findAllByVisibility(true, [sort:"name", order:"asc"])
 
         def numberActiveTest = []
 
         // It obtains the number of active test for each topic
-        activeTopics.each { topic ->
+        visibleTopics.each { topic ->
             def result = Test.findAllByTopicAndActive(topic, true).size()
             numberActiveTest.push(result)
         }
 
-        render view: 'home', model: [activeTopics: activeTopics, numberActiveTest: numberActiveTest]
+        render view: 'home', model: [visibleTopics: visibleTopics, numberActiveTest: numberActiveTest]
     }
 
     /**
@@ -267,7 +267,7 @@ class CustomTasksFrontEndController {
                                     response.sendError(404)
                                 }
                             }
-                            render view: 'testSelected', model: [testID: testInstance.id, testName: testInstance.name, attemptNumber: currentEvaluation?.attemptNumber?:10, topicID: testInstance.topic.id, maximumTime: testInstance.lockTime, questions: questions]
+                            render view: 'testSelected', model: [testID: testInstance.id, testName: testInstance.name, attemptNumber: currentEvaluation?.attemptNumber?:1, topicID: testInstance.topic.id, maximumTime: testInstance.lockTime, questions: questions]
                         } else {
 
                             flash.errorTestSelected =  g.message(code: "layouts.main_auth_user.body.topicSelected.error.question", default: 'Number of questions associated with the <strong>{0}</strong> test insufficient. Please, if the problem persists please contact us.', args: ["${testInstance.name}"])
@@ -320,7 +320,6 @@ class CustomTasksFrontEndController {
 
                         // It exists
                         if (answerInstance != null) {
-                            log.error("entro")
                             totalScore += answerInstance.score
                         }
 
@@ -331,23 +330,17 @@ class CustomTasksFrontEndController {
             }
         }
 
-        log.error("puntuación total: " + totalScore)
-
         // It obtains the user evaluation
         def userEvaluation = Evaluation.findByUserNameAndTestName(currentUserEvaluation.username, params.testName)
 
-        // Test without questions
+        // Test without questions or any question is correct
         if (userEvaluation.maxPossibleScore > 0) {
 
-            log.error("Evaluación " + userEvaluation.testScore)
-            log.error("Evaluación " + userEvaluation.attemptNumber)
-
             if (userEvaluation.testScore == null && userEvaluation.attemptNumber == 1) {
-                log.error("entro primer intento")
+
                 // It calculates the final score in the first attempt
                 finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
             } else {
-                log.error("mas de 1 intento")
 
                 // It calculates the final score in the x attempt
                 finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
@@ -357,10 +350,11 @@ class CustomTasksFrontEndController {
 
                 // It calculates the final score with penalty (10%)
                 def penalty = finalScore/10
-                log.error("penalty: " + penalty)
 
                 finalScore = finalScore - penalty
             }
+        } else {
+            log.error("CustomTasksFrontEndController():calculateEvaluation():Error:Evaluation:maxPossibleScore:0:${currentUserEvaluation.username}-${params.testName}")
         }
 
         userEvaluation.completenessDate = new Date()
