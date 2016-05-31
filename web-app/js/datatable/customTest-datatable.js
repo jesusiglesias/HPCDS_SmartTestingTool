@@ -54,24 +54,28 @@ var DatatableTestList = function () {
                     "visible": false
                 },
                 {
-                    "targets": [9], // Evaluations
+                    "targets": [8], // Penalty
                     "visible": false
                 },
                 {
-                    "targets": [10], // Topic
+                    "targets": [9], // Incorrect discount
                     "visible": false
                 },
                 {
-                    "targets": [11], // Catalog
+                    "targets": [12], // Topic
+                    "visible": false
+                },
+                {
+                    "targets": [13], // Catalog
                     "visible": false
                 }
             ],
 
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline transparent hvr-bounce-to-top-print', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]} },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline transparent hvr-bounce-to-top-copy', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]} },
-                { extend: 'pdf', className: 'btn green-dark btn-outline transparent hvr-bounce-to-top-pdf', text: _pdf, filename: _testFile, title: _testTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]} },
-                { extend: 'csv', className: 'btn blue-steel btn-outline transparent hvr-bounce-to-top-csv', text: _csv, fieldSeparator: ';', filename: _testFile, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11]} },
+                { extend: 'print', className: 'btn dark btn-outline transparent hvr-bounce-to-top-print', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline transparent hvr-bounce-to-top-copy', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline transparent hvr-bounce-to-top-pdf', text: _pdf, filename: _testFile, title: _testTableTitle, exportOptions: {columns: [0, 3, 4, 5, 6, 7, 8, 9, 10]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline transparent hvr-bounce-to-top-csv', text: _csv, fieldSeparator: ';', filename: _testFile, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13]} },
                 { extend: 'colvis', className: 'btn yellow-casablanca btn-outline transparent hvr-bounce-to-top-colvis', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline transparent hvr-bounce-to-top-colvisRestore', text: _restore }
             ],

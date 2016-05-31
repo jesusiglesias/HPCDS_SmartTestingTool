@@ -12,11 +12,13 @@ class Test {
     boolean active = true
     String description
     Date endDate
+    boolean incorrectDiscount = false
     Date initDate
     Integer lockTime = 0
     Integer maxAttempts = 1
     String name
     Integer numberOfQuestions
+    Integer penalty = 10
 
     // Relations
     static hasMany = [evaluationsTest: Evaluation]
@@ -29,6 +31,7 @@ class Test {
         endDate blank: false, validator: { val, obj ->
                 if (val?.compareTo(obj.initDate) < 0) return ['endDateFail']
             }
+        incorrectDiscount blank: false
         initDate blank: false, min: new Date().clearTime()
         lockTime blank:false, min: 0
         maxAttempts blank:false, min: 1, max: 5
@@ -36,6 +39,7 @@ class Test {
         numberOfQuestions blank: false, min: 0, validator: { val, obj ->
             if (val > obj.catalog.questions.size()) return ['numberOfQuestionsFail']
         }
+        penalty blank:false, min:0, max: 100
     }
 
     // It modifies the id type

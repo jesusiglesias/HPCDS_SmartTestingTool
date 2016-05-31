@@ -17,6 +17,8 @@ var iconTestHandler = function () {
         var iconTestNumberOfQuestions = $('.i-delete-test-numberQuestions');
         var testLockTime = $('.lockTime-test');
         var iconTestLockTime = $('.i-delete-test-lockTime');
+        var testPenalty = $('.penalty-test');
+        var iconTestPenalty = $('.i-delete-test-penalty');
 
         /**
          * Name
@@ -120,6 +122,32 @@ var iconTestHandler = function () {
             toggleClassesLockTime(); // Still toggles the classes on any of the above events
         });
         toggleClassesLockTime(); // And also on document ready
+
+        /**
+         * Penalty
+         */
+        // Show delete icon
+        testPenalty.keydown(function(){
+            iconTestPenalty.show();
+        });
+
+        // Delete text and hide delete icon
+        iconTestPenalty.click(function() {
+            testPenalty.val('').focus();
+            iconTestPenalty.hide();
+        });
+
+        // Hide delete icon when user deletes text with the keyboard
+        var toggleClassesPenalty = function() {
+            if (testPenalty.val() == '') {
+                iconTestPenalty.hide();
+            }
+        };
+
+        testPenalty.on('keyup keydown keypress change paste', function() {
+            toggleClassesPenalty(); // Still toggles the classes on any of the above events
+        });
+        toggleClassesPenalty(); // And also on document ready
     };
 
     return {

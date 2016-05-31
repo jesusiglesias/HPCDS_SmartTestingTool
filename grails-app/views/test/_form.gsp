@@ -166,8 +166,27 @@
 			</div>
 		</div>
 
-		<!-- Max attempts -->
+		<!-- Incorrect discount -->
 		<div class="col-md-6 space-betweenCol space-maxAttemtps">
+			<div class="${hasErrors(bean: testInstance, field: 'incorrectDiscount', 'error')}">
+				<label for="incorrectDiscount" class="control-label">
+					<h5 class="sbold">
+						<g:message code="test.incorrectDiscount.label" default="Do incorrect answers discount?"/>
+					</h5>
+				</label>
+				<div class="input-group inputGroup-checkBox">
+					<div class="icheck-list">
+						<g:checkBox name="incorrectDiscount" value="${testInstance?.incorrectDiscount}" class="icheck" data-checkbox="icheckbox_line-green" data-label="${g.message(code: 'test.active.label', default: 'Active')}"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Row -->
+	<div class="row space-secondRow">
+		<!-- Max attempts -->
+		<div class="col-md-6 space-maxAttemtps">
 			<div class="form-group ${hasErrors(bean: testInstance, field: 'maxAttempts', 'error')}">
 				<label for="maxAttempts" class="control-label">
 					<h5 class="sbold">
@@ -176,7 +195,26 @@
 					</h5>
 				</label>
 				<g:select name="maxAttempts" from="${1..5}" value="${testInstance?.maxAttempts}" noSelection="${['': "${g.message(code: 'layouts.main_auth_admin.body.content.test.maxAttempts.noSelect', default: 'Select the number of attempts allowed')}"]}"
-							  class="bs-select form-control select-maxAttemtps form-shadow backend-input" data-style="btn-success"/>
+						  class="bs-select form-control select-maxAttemtps form-shadow backend-input" data-style="btn-success"/>
+			</div>
+		</div>
+
+		<!-- Penalty -->
+		<div class="col-md-6 space-betweenCol">
+			<div class="form-group ${hasErrors(bean: testInstance, field: 'penalty', 'error')}">
+				<label for="penalty" class="control-label">
+					<h5 class="sbold">
+						<g:message code="layouts.main_auth_admin.body.content.test.penalty.title.label" default="Penalty for each extra attempt (%)"/>
+						<span class="required"> * </span>
+					</h5>
+					<h5 class="thin text-justify"><g:message code="layouts.main_auth_admin.body.content.test.penalty.info.label" default="Active if the number of attempts is greater than 1."/></h5>
+				</label>
+
+				<div class="input-icon right">
+					<i class="fa"></i>
+					<g:field name="penalty" type="number" class="form-control form-shadow penalty-test backend-input" value="${testInstance?.penalty}" disabled="${testInstance?.maxAttempts == 1}"/>
+				</div>
+				<i class="fa fa-times i-delete-testPenalty-backend i-delete-test-penalty"></i> <!-- Delete text icon -->
 			</div>
 		</div>
 	</div>

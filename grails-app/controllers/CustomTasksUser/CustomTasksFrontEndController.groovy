@@ -302,6 +302,7 @@ class CustomTasksFrontEndController {
 
         Float totalScore = 0
         Float finalScore = 0
+        def incorrectAnswers = 0
         def enter = false
 
         // It obtains the current user
@@ -343,7 +344,12 @@ class CustomTasksFrontEndController {
 
                             // It exists
                             if (answerInstance != null) {
-                                totalScore += answerInstance.score
+
+                                if (answerInstance.score == 0) {
+                                    incorrectAnswers ++
+                                } else {
+                                    totalScore += answerInstance.score
+                                }
                             }
 
                         } catch (Exception exception) {
@@ -360,7 +366,8 @@ class CustomTasksFrontEndController {
 
                     // It calculates the final score in the first attempt
                     finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
-                } else {
+
+                } else { // Penalty for each additional attempt
 
                     // It calculates the final score in the x attempt
                     finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
@@ -368,17 +375,35 @@ class CustomTasksFrontEndController {
                     // It calculate the average score
                     finalScore = (finalScore + userEvaluation?.testScore) / 2
 
-                    // It calculates the final score with penalty (10%)
-                    def penalty = finalScore / 10
+                    // It calculates the final score with penalty (Default value: 10%)
+                    def penalty = (finalScore * testInstance.penalty) / 100
 
                     finalScore = finalScore - penalty
                 }
+
+                // Test with incorrect answers penalized
+                if (testInstance.incorrectDiscount) {
+
+                    // Average score of all question
+                    def averageScore = userEvaluation.maxPossibleScore / testInstance.numberOfQuestions
+                    def penaltyAnswers = (incorrectAnswers * averageScore) / 3
+
+                    finalScore = finalScore - penaltyAnswers
+                }
+
             } else {
                 log.error("CustomTasksFrontEndController():calculateEvaluation():Error:Evaluation:maxPossibleScore:0:${currentUserEvaluation.username}-${params.testName}")
             }
 
             userEvaluation.completenessDate = new Date()
-            userEvaluation.testScore = finalScore
+
+            // Avoid errors with negative scores
+            if (finalScore < 0) {
+                userEvaluation.testScore = 0
+            } else {
+                userEvaluation.testScore = finalScore
+            }
+
             userEvaluation.maxPossibleScore = null
 
             def validUserEvaluation = userEvaluation.validate()
@@ -390,7 +415,14 @@ class CustomTasksFrontEndController {
 
                     flash.testName = g.message(code: "layouts.main_auth_user.body.title.testFinished", default: '<span class="text-lowercase">{0}</span> test finished', args: [params.testName])
                     flash.scoreDescription = g.message(code: "layouts.main_auth_user.body.testFinished.description", default: 'His final score after completing the <span class="bold">{0}</span> test in your attempt number <span class="sbold">{1}</span> on a maximum score of 10 points is:', args: [params.testName, userEvaluation.attemptNumber])
-                    flash.finalScore = finalScore
+
+                    // Avoid errors with negative scores
+                    if (finalScore < 0) {
+                        flash.finalScore = 0
+                    } else {
+                        flash.finalScore = finalScore.round(2)
+                    }
+
                     flash.homepage = g.message(code: "layouts.main_auth_user.body.testFinished.button.homepage", default: 'Homepage')
 
                     // User has more attemtps

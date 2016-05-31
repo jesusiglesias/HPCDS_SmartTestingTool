@@ -494,6 +494,8 @@ class BootStrap {
                     endDate: new Date().clearTime() + 5,
                     lockTime: 0,
                     maxAttempts: 1,
+                    penalty: 8,
+                    incorrectDiscount: true,
                     topic: languageTopic,
                     catalog: englishCatalog
             )

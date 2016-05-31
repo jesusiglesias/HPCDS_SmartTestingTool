@@ -432,11 +432,11 @@ class TestController {
                         }
 
                         // Obtaining topic
-                        def topicInstance = Topic.findByName(tokens[8].trim())
+                        def topicInstance = Topic.findByName(tokens[10].trim())
 
                         // Checking the topic
                         if (topicInstance == null) {
-                            log.error("TestController():uploadFileTest():topicInvalid:${tokens[8].trim()}")
+                            log.error("TestController():uploadFileTest():topicInvalid:${tokens[10].trim()}")
 
                             topicValid = false
                             back = true
@@ -450,11 +450,11 @@ class TestController {
                         }
 
                         // Obtaining catalog
-                        def catalogInstance = Catalog.findByName(tokens[9].trim())
+                        def catalogInstance = Catalog.findByName(tokens[11].trim())
 
                         // Checking the catalog
                         if (catalogInstance == null) {
-                            log.error("TestController():uploadFileTest():catalogInvalid:${tokens[9].trim()}")
+                            log.error("TestController():uploadFileTest():catalogInvalid:${tokens[11].trim()}")
 
                             catalogValid = false
                             back = true
@@ -477,7 +477,9 @@ class TestController {
                                     initDate: initDateInstance,
                                     endDate: endDateInstance,
                                     lockTime: tokens[6].trim(),
-                                    maxAttempts: tokens[7].trim(),
+                                    incorrectDiscount: tokens[7].trim(),
+                                    maxAttempts: tokens[8].trim(),
+                                    penalty: tokens[9].trim(),
                                     topic: topicInstance,
                                     catalog: catalogInstance,
                             )

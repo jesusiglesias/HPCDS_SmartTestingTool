@@ -197,6 +197,19 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
                         </span>
                     </p>
 
+                    <!-- Penalty for each extra attempt  -->
+                    <g:if test="${availableTest?.maxAttempts > 1 && availableTest?.penalty > 0}">
+                        <p class="ribbon-margin-paragraph">
+                            <span class="ribbon-content-text"><g:message
+                                    code="layouts.main_auth_user.body.topicSelected.information.penalty"
+                                    default="Penalty for each extra attempt:"/>
+                            </span>
+                            <span class="ribbon-content-value"><i class="icofont icofont-minus"></i>
+                                ${availableTest?.penalty}%
+                            </span>
+                        </p>
+                    </g:if>
+
                     <!-- Limit time -->
                     <p class="ribbon-margin-paragraph">
                         <span class="ribbon-content-text"><g:message code="layouts.main_auth_user.body.topicSelected.information.time" default="Limit time of completeness:"/></span>
@@ -230,6 +243,17 @@ limit time for its realization or maximum number of attempts. <br><br> <strong>R
                             </g:else>
                         </span>
                     </p>
+
+                    <!-- Incorrect discount  -->
+                    <g:if test="${availableTest?.incorrectDiscount}">
+                        <p class="ribbon-margin-paragraph">
+                            <span class="ribbon-content-text"><g:message
+                                    code="layouts.main_auth_user.body.topicSelected.information.incorrect.discount"
+                                    default="Incorrect answers discount 1/3 of the average score of all questions."/>
+                            </span>
+                        </p>
+                    </g:if>
+
                     <!-- Start test if has questions and is within the time allowed -->
                     <g:if test="${allowedDate[i] && allowedAttempt[i] && availableTest?.numberOfQuestions > 0}">
                         <!-- Button -->

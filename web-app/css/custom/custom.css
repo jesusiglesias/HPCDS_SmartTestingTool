@@ -797,7 +797,9 @@ table.dataTable tbody tr:hover {
     color: #AAAAAA !important;
 }
 
-.i-delete-testLockTime-backend {
+.i-delete-testLockTime-backend,
+.i-delete-testPenalty-backend,
+.i-delete-discountRate-backend {
     display: none;
     position: absolute !important;
     right: 75px !important;
@@ -1905,6 +1907,10 @@ table.dataTable tbody tr:hover {
     .space-register-cityRow,
     .space-register-phoneRow {
         margin-top: -5px;
+    }
+
+    .space-maxAttemtps {
+        margin-top: 0;
     }
 
     .col-register {

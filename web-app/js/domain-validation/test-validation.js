@@ -40,6 +40,12 @@ var DomainTestValidation = function () {
                         min: 1,
                         max: 5
                     },
+                    penalty: {
+                        required: true,
+                        min: 0,
+                        max: 100,
+                        digits: true
+                    },
                     numberOfQuestions: {
                         required: true,
                         min: 0
@@ -75,6 +81,12 @@ var DomainTestValidation = function () {
                         required: _requiredField,
                         min: _minField,
                         max: _maxField
+                    },
+                    penalty: {
+                        required: _requiredField,
+                        min: _minField,
+                        max: _maxField,
+                        digits: _digits
                     },
                     numberOfQuestions: {
                         required: _requiredField,
@@ -213,6 +225,30 @@ var DomainTestValidation = function () {
     };
 
     /**
+     * It handles the enabled/disabled option of penalty field
+     */
+    var handlerEnabledPenalty = function () {
+        
+        var selectMaxAttemtps = $('.select-maxAttemtps');
+        var penaltyField = $('.penalty-test ');
+
+        selectMaxAttemtps.on('changed.bs.select', function (e, newValue) {
+            console.log(newValue);
+
+            // Disable penalty field
+            if (newValue == 1) {
+                console.log("valor 1");
+                penaltyField.attr("disabled", true);
+
+            // Enable penalty field
+            } else {
+                console.log("valor distinto de 1");
+                penaltyField.removeAttr("disabled", false);
+            }
+        });
+    };
+
+    /**
      * It handles the date picker
      */
     var handlerDatePickers = function () {
@@ -235,6 +271,7 @@ var DomainTestValidation = function () {
             handlerTestNameAvailabilityChecker();
             handlerMaxlength();
             handlerBootstrapSelect();
+            handlerEnabledPenalty();
             handlerDatePickers();
         }
     };

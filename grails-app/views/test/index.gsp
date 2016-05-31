@@ -449,7 +449,9 @@
 										<td><g:message code="test.initDate.label" default="Initial date"/></td>
 										<td><g:message code="test.endDate.label" default="End date"/></td>
 										<td><g:message code="test.lockTime.label" default="Maximum time"/></td>
-										<td><g:message code="test.maxAttempts.label" default="Maximim number of attempts"/></td>
+										<td><g:message code="test.maxAttempts.label" default="Maximum number of attempts"/></td>
+										<td><g:message code="test.penalty.label" default="Penalty for each extra attempt"/></td>
+										<td><g:message code="test.incorrectDiscount.label" default="Do incorrect answers discount?"/></td>
 										<td><g:message code="test.evaluationsTestCount.label" default="Number of evaluations"/></td>
 										<td><g:message code="layouts.main_auth_admin.body.content.test.evaluation.display" default="Show evaluations"/></td>
 										<td><g:message code="test.topic.label" default="Topic"/></td>
@@ -475,8 +477,33 @@
 												<td>${fieldValue(bean: testInstance, field: "numberOfQuestions")}</td>
 												<td class="space-date"><g:formatDate formatName="custom.date.birthdate.format" date="${testInstance?.initDate}"/></td>
 												<td class="space-date"><g:formatDate formatName="custom.date.birthdate.format" date="${testInstance?.endDate}"/></td>
-												<td>${fieldValue(bean: testInstance, field: "lockTime")}</td>
+												<td>
+													<g:if test="${testInstance?.lockTime == 0}">
+														<g:message code="default.lockTime.without.limit" default="Unlimited"/>
+													</g:if>
+													<g:elseif test="${testInstance?.lockTime == 1}">
+														${fieldValue(bean: testInstance, field: "lockTime")}
+														<g:message code="layouts.main_auth_user.body.topicSelected.information.time.minute" default="minute"/>
+													</g:elseif>
+													<g:else>
+														${fieldValue(bean: testInstance, field: "lockTime")}
+														<g:message code="layouts.main_auth_user.body.topicSelected.information.time.minutes" default="minutes"/>
+													</g:else>
+												</td>
 												<td>${fieldValue(bean: testInstance, field: "maxAttempts")}</td>
+												<td>
+													<g:if test="${testInstance.penalty > 0}">
+														${fieldValue(bean: testInstance, field: "penalty")}%
+													</g:if>
+													<g:else>
+														<g:message code="layouts.main_auth_admin.body.content.test.no.penalty" default="Without penalty"/>
+													</g:else>
+												</td>
+												<td>
+													<span class="label label-sm label-default show-entity">
+														<g:formatBoolean boolean="${testInstance.incorrectDiscount}" true="${g.message(code: "default.incorrectDiscount.true", default: "Yes")}" false="${g.message(code: "default.incorrectDiscount.false", default: "No")}"/>
+													</span>
+												</td>
 												<td>${testInstance.evaluationsTest?.size()}</td>
 												<td><g:link uri="/evaluation" params="[testEvalSearch: testInstance.name]"><g:message code="test.evaluationsTest.label" default="Evaluations"/></g:link></td>
 												<td>

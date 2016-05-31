@@ -19,6 +19,7 @@
         var _maxlengthField = '${g.message(code:'default.validation.maxlength', default:'Please, enter less than {0} characters.')}';
         var _minField = '${g.message(code:'default.validation.min', default:'Please, enter a value greater or equal to {0}.')}';
         var _maxField = '${g.message(code:'default.validation.max', default:'Please, enter a value less than or equal to {0}.')}';
+        var _digits = '${g.message(code:'default.validation.digits', default:'Please, enter an integer number.')}';
 
         // Handler auto close alert
         function createAutoClosingAlert(selector) {
