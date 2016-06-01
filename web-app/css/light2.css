@@ -3,7 +3,6 @@
 *-------------------------------------------------------------------------------------------*/
 
 /* Dropdown  hover */
-
 .page-header.navbar .top-menu .navbar-nav > li.dropdown.open .dropdown-toggle {
     background-color: rgba(150, 208, 171, 0.79);
 }

@@ -219,8 +219,8 @@
     <g:javascript src="counter/jquery.counterup.min.js"/>
     <g:javascript src="domain-validation/avatar-profile-validation.js"/>
     <g:javascript src="fileInput/bootstrap-fileinput.js"/>
-    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 </body>
 </html>

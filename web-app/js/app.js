@@ -12,15 +12,6 @@ var App = function() {
     var isIE10 = false;
 
     var resizeHandlers = [];
-
-    // var assetsPath = '../assets/';
-
-    var globalImgPath = '../img/';
-
-    var globalPluginsPath = '../js/';
-
-    var globalCssPath = '../css/';
-
     var body = $('body');
 
 
@@ -245,7 +236,7 @@ var App = function() {
             return;
         }
         $('[data-toggle=confirmation]').confirmation({ container: 'body', btnOkClass: 'btn btn-sm btn-success', btnCancelClass: 'btn btn-sm btn-danger'});
-    }
+    };
     
     // It handles Bootstrap Accordions.
     var handleAccordions = function() {
@@ -254,54 +245,6 @@ var App = function() {
         });
     };
 
-    // It handles Bootstrap Tabs.
-    var handleTabs = function() {
-        //activate tab if tab id provided in the URL
-        if (location.hash) {
-            var tabid = encodeURI(location.hash.substr(1));
-            $('a[href="#' + tabid + '"]').parents('.tab-pane:hidden').each(function() {
-                var tabid = $(this).attr("id");
-                $('a[href="#' + tabid + '"]').click();
-            });
-            $('a[href="#' + tabid + '"]').click();
-        }
-
-        if ($().tabdrop) {
-            $('.tabbable-tabdrop .nav-pills, .tabbable-tabdrop .nav-tabs').tabdrop({
-                text: '<i class="fa fa-ellipsis-v"></i>&nbsp;<i class="fa fa-angle-down"></i>'
-            });
-        }
-    };
-
-    // It handles Bootstrap Modals.
-    var handleModals = function() {        
-        // Fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class.
-        body.on('hide.bs.modal', function() {
-            if ($('.modal:visible').size() > 1 && $('html').hasClass('modal-open') === false) {
-                $('html').addClass('modal-open');
-            } else if ($('.modal:visible').size() <= 1) {
-                $('html').removeClass('modal-open');
-            }
-        });
-
-        // Fix page scrollbars issue
-        body.on('show.bs.modal', '.modal', function() {
-            if ($(this).hasClass("modal-scroll")) {
-                $('body').addClass("modal-open-noscroll");
-            }
-        });
-
-        // Fix page scrollbars issue
-        body.on('hide.bs.modal', '.modal', function() {
-            $('body').removeClass("modal-open-noscroll");
-        });
-
-        // Remove ajax content and remove cache on modal closed
-        body.on('hidden.bs.modal', '.modal:not(.modal-cached)', function () {
-            $(this).removeData('bs.modal');
-        });
-    };
-    
     // It handles Bootstrap Dropdowns
     var handleDropdowns = function() {
         /*
@@ -343,7 +286,7 @@ var App = function() {
         if (typeof(autosize) == "function") {
             autosize(document.querySelector('textarea.autosizeme'));
         }
-    }
+    };
 
     // It handles Bootstrap Popovers
 
@@ -361,7 +304,7 @@ var App = function() {
         });
     };
 
-    // It handles scrollable contents using jQuery SlimScroll plugin. TODO
+    // It handles scrollable contents using jQuery SlimScroll plugin
     var handleScrollers = function() {
         App.initSlimScroll('.scroller');
     };
@@ -473,10 +416,8 @@ var App = function() {
             handlePortletTools();           // It handles portlet action bar functionality (refresh, configure, toggle, remove)
             handleAlerts();                 // It handles closabled alerts
             handleDropdowns();              // It handles dropdowns
-            handleTabs();                   // It handles tabs
             handlePopovers();               // It handles bootstrap popovers
             handleAccordions();             // It handles accordions
-            handleModals();                 // It handles modals
             handleBootstrapConfirmation();  // It handles bootstrap confirmations
             handleTextareaAutosize();       // It handles autosize textareas
             handleCounterup();              // It handles counterup instances
@@ -541,7 +482,6 @@ var App = function() {
             }, 'slow');
         },
 
-        // TODO
         initSlimScroll: function(el) {
             $(el).each(function() {
                 if ($(this).attr("data-initialized")) {
@@ -614,7 +554,7 @@ var App = function() {
             });
         },
 
-        // Function to scroll to the top TODO
+        // Function to scroll to the top
         scrollTop: function() {
             App.scrollTo();
         },
@@ -691,11 +631,6 @@ var App = function() {
             $.uniform.update(els); // update the uniform checkbox & radios UI after the actual input control state changed
         },
 
-        // Public function to initialize the fancybox plugin
-        initFancybox: function() {
-            handleFancybox();
-        },
-
         // Public helper function to get actual input value(used in IE9 and IE8 due to placeholder attribute not supported)
         getActualVal: function(el) {
             el = $(el);
@@ -757,51 +692,7 @@ var App = function() {
         isIE9: function() {
             return isIE9;
         },
-
-            /* TODO
-        getAssetsPath: function() {
-            return assetsPath;
-        },
-
-        setAssetsPath: function(path) {
-            assetsPath = path;
-        }, */
-
-        setGlobalImgPath: function(path) {
-            globalImgPath = path;
-        },
-
-            /* TODO
-        getGlobalImgPath: function() {
-            return assetsPath + globalImgPath;
-        },*/
-
-        getGlobalImgPath: function() {
-            return globalImgPath;
-        },
-
-        setGlobalPluginsPath: function(path) {
-            globalPluginsPath = path;
-        },
-
-            /* TODO
-        getGlobalPluginsPath: function() {
-            return assetsPath + globalPluginsPath;
-        },*/
-
-        getGlobalPluginsPath: function() {
-            return globalPluginsPath;
-        },
-
-            /* TODO
-        getGlobalCssPath: function() {
-            return assetsPath + globalCssPath;
-        },*/
-
-        getGlobalCssPath: function() {
-            return globalCssPath;
-        },
-
+        
         // Get layout color code by color name
         getBrandColor: function(name) {
             if (brandColors[name]) {

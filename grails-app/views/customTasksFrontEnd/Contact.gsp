@@ -237,15 +237,15 @@
     </div>
 
     <!-- LOAD JAVASCRIPT -->
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAVkszaEghO-lK3QH156C0w9ANDG2BeHc0" type="text/javascript"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyAVkszaEghO-lK3QH156C0w9ANDG2BeHc0" type="text/javascript"></script>
     <g:javascript src="contact/gmaps.min.js"/>
     <g:javascript src="autosize/autosize.min.js"/>
     <g:javascript src="select/bootstrap-select.min.js"/>
     <g:javascript src="select/boostrap-select_i18n/defaults-es_CL.min.js"/>
     <g:javascript src="maxLength/bootstrap-maxlength.min.js"/>
     <g:javascript src="contact/contact.js"/>
-    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 </body>
 </html>

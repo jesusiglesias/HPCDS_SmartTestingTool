@@ -6,14 +6,10 @@
  * It handles responsive layout on screen size resize or mobile device rotate. **/
 var Layout = function () {
 
-    var layoutImgPath = '../img/';
-    var layoutCssPath = '../css/';
     var resBreakpointMd = App.getResponsiveBreakpoint('md');
 
     // Set proper height for sidebar and content. The content and sidebar height must be synced always.
     var handleSidebarAndContentHeight = function () {
-
-        console.log("handleSidebarAndContentHeight");
 
         var content = $('.page-content');
         var sidebar = $('.page-sidebar');
@@ -39,9 +35,6 @@ var Layout = function () {
 
     // Handle sidebar menu
     var handleSidebarMenu = function () {
-
-        /* TODO */
-        console.log ("HandleSidebarMenu");
 
         var pageSidebarMenu = $('.page-sidebar-menu');
         var body = $('body');
@@ -271,8 +264,6 @@ var Layout = function () {
     // Handle 100% height elements (block, portlet, etc)
     var handle100HeightContent = function () {
 
-        console.log("handle100HeightContent");
-
         $('.full-height-content').each(function(){
             var target = $(this);
             var height;
@@ -350,14 +341,6 @@ var Layout = function () {
 
         initFixedSidebar: function() {
             handleFixedSidebar();
-        },
-
-        getLayoutImgPath: function () {
-            return layoutImgPath;
-        },
-
-        getLayoutCssPath: function () {
-            return layoutCssPath;
         }
     };
 
