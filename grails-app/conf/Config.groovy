@@ -131,7 +131,8 @@ jasypt {
     keyObtentionIterations = 1000
 }
 
-// Maximum time of token - Expiration in minutes
+/* Maximum time of token - Expiration in minutes (Register and restore password)
+ ============================================================================================= */
 token.expiration=30
 
 /* Brute-force Defender configuration
