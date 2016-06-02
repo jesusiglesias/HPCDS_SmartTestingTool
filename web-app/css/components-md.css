@@ -1424,6 +1424,101 @@ fieldset[disabled] .btn.blue-steel:not(.btn-outline).active {
     border-left: 4px solid #4B77BE !important;
 }
 
+.btn.blue-chambray:not(.btn-outline) {
+    color: #FFFFFF;
+    background-color: #2C3E50;
+    border-color: #2C3E50;
+}
+
+.btn.blue-chambray:not(.btn-outline):focus,
+.btn.blue-chambray:not(.btn-outline).focus {
+    color: #FFFFFF;
+    background-color: #1a242f;
+    border-color: #1a242f;
+}
+
+.btn.blue-chambray:not(.btn-outline):hover {
+    color: #FFFFFF;
+    background-color: #1a242f;
+    border-color: #1a242f;
+}
+
+.btn.blue-chambray:not(.btn-outline):active,
+.btn.blue-chambray:not(.btn-outline).active,
+.open > .btn.blue-chambray:not(.btn-outline).dropdown-toggle {
+    color: #FFFFFF;
+    background-color: #1a242f;
+    border-color: #1a242f;
+}
+
+.btn.blue-chambray:not(.btn-outline):active:hover,
+.btn.blue-chambray:not(.btn-outline):active:focus,
+.btn.blue-chambray:not(.btn-outline):active.focus,
+.btn.blue-chambray:not(.btn-outline).active:hover,
+.btn.blue-chambray:not(.btn-outline).active:focus,
+.btn.blue-chambray:not(.btn-outline).active.focus,
+.open > .btn.blue-chambray:not(.btn-outline).dropdown-toggle:hover,
+.open > .btn.blue-chambray:not(.btn-outline).dropdown-toggle:focus,
+.open > .btn.blue-chambray:not(.btn-outline).dropdown-toggle.focus {
+    color: #FFFFFF;
+    background-color: #141d25;
+    border-color: #141d25;
+}
+
+.btn.blue-chambray:not(.btn-outline):active,
+.btn.blue-chambray:not(.btn-outline).active,
+.open > .btn.blue-chambray:not(.btn-outline).dropdown-toggle {
+    background-image: none;
+}
+
+.btn.blue-chambray:not(.btn-outline).disabled,
+.btn.blue-chambray:not(.btn-outline).disabled:hover,
+.btn.blue-chambray:not(.btn-outline).disabled:focus,
+.btn.blue-chambray:not(.btn-outline).disabled.focus,
+.btn.blue-chambray:not(.btn-outline).disabled:active,
+.btn.blue-chambray:not(.btn-outline).disabled.active,
+.btn.blue-chambray:not(.btn-outline)[disabled],
+.btn.blue-chambray:not(.btn-outline)[disabled]:hover,
+.btn.blue-chambray:not(.btn-outline)[disabled]:focus,
+.btn.blue-chambray:not(.btn-outline)[disabled].focus,
+.btn.blue-chambray:not(.btn-outline)[disabled]:active,
+.btn.blue-chambray:not(.btn-outline)[disabled].active,
+fieldset[disabled] .btn.blue-chambray:not(.btn-outline),
+fieldset[disabled] .btn.blue-chambray:not(.btn-outline):hover,
+fieldset[disabled] .btn.blue-chambray:not(.btn-outline):focus,
+fieldset[disabled] .btn.blue-chambray:not(.btn-outline).focus,
+fieldset[disabled] .btn.blue-chambray:not(.btn-outline):active,
+fieldset[disabled] .btn.blue-chambray:not(.btn-outline).active {
+    background-color: #2C3E50;
+    border-color: #2C3E50;
+}
+
+.btn.blue-chambray:not(.btn-outline) .badge {
+    color: #2C3E50;
+    background-color: #FFFFFF;
+}
+
+.btn.btn-outline.blue-chambray {
+    border-color: #2C3E50;
+    color: #2C3E50;
+    background: none;
+}
+
+.btn.btn-outline.blue-chambray:hover,
+.btn.btn-outline.blue-chambray:active,
+.btn.btn-outline.blue-chambray:active:hover,
+.btn.btn-outline.blue-chambray:active:focus,
+.btn.btn-outline.blue-chambray:focus,
+.btn.btn-outline.blue-chambray.active {
+    border-color: #2C3E50;
+    color: #FFFFFF;
+    background-color: #2C3E50;
+}
+
+.btn.blue-chambray-stripe {
+    border-left: 4px solid #2C3E50 !important;
+}
+
 .btn.green-dark:not(.btn-outline) {
     color: #FFFFFF;
     background-color: #4DB3A2;
@@ -4870,6 +4965,42 @@ h6 .label {
 
 .border-right-blue-soft {
     border-right-color: #4c87b9 !important;
+}
+
+.bg-blue-chambray {
+    background: #2C3E50 !important;
+}
+
+.bg-hover-blue-chambray:hover {
+    background: #2C3E50 !important;
+}
+
+.font-blue-chambray {
+    color: #2C3E50 !important;
+}
+
+.bg-font-blue-chambray {
+    color: #FFFFFF !important;
+}
+
+.border-blue-chambray {
+    border-color: #2C3E50 !important;
+}
+
+.border-top-blue-chambray {
+    border-top-color: #2C3E50 !important;
+}
+
+.border-bottom-blue-chambray {
+    border-bottom-color: #2C3E50 !important;
+}
+
+.border-left-blue-chambray {
+    border-left-color: #2C3E50 !important;
+}
+
+.border-right-blue-chambray {
+    border-right-color: #2C3E50 !important;
 }
 
 .bg-green-dark {

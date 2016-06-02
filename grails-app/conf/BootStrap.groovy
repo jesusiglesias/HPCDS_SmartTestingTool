@@ -68,8 +68,8 @@ class BootStrap {
             def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER')
 
             // Administrator
-            def newAdmin = SecUser.findByUsername('admin_stt') ?: new SecUser( // Admin
-                    username: 'admin_stt',
+            def newAdmin = SecUser.findByUsername('jesus_admin') ?: new SecUser( // Admin
+                    username: 'jesus_admin',
                     password: '7g4sOmmm',
                     email: 'info.smartestingtool@gmail.com')
 
@@ -104,21 +104,21 @@ class BootStrap {
             def newUserSwitch = User.findByUsername('admin_switch') ?: new User( // Normal user to switch
                     username: 'admin_switch',
                     password: '7g4sOmmm',
-                    email: 'admin_switch@stt.com',
-                    name:   'Usuario',
-                    surname: 'Conmutar',
-                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1991'),
+                    email: 'switch.smartestingtool@gmail.com',
+                    name:   'Alberto',
+                    surname: 'Sobrín',
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1993'),
                     sex: Sex.FEMALE,
                     department: idDepartment,
             )
 
-            def newUser = User.findByUsername('user_stt') ?: new User( // Normal user
-                    username: 'user_stt',
+            def newUser = User.findByUsername('jesusiglesias') ?: new User( // Normal user
+                    username: 'jesusiglesias',
                     password: '7g4sOmmm',
-                    email: 'user_stt@stt.com',
-                    name: 'Usuario STT',
-                    surname: 'Apellido STT',
-                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('22-04-1994'),
+                    email: 'jesusiglesias.smartestingtool@gmail.com',
+                    name: 'Jesús',
+                    surname: 'Iglesias',
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('22-12-1992'),
                     sex: Sex.MALE,
                     department: idDepartment,
             )
@@ -706,7 +706,7 @@ class BootStrap {
                 evalUserSwitchSTT1.save(flush: true, failOnError: true)
 
                 log.debug("BootStrap:init():Initial data have been created")
-                log.info("Special config create for development or test - Users: admin_stt/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and user_stt/7g4sOmmm (User)")
+                log.info("Special config create for development or test - Users: jesus_admin/7g4sOmmm (Admin), admin_switch/7g4sOmmm (User) and jesusiglesias/7g4sOmmm (User)")
             } else {
                 log.error("BootStrap:init():Initial data have not been created. You verify that the initial data complies with the rules")
             }
@@ -732,8 +732,8 @@ class BootStrap {
             def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER')
 
             // Administrator
-            def newAdmin = SecUser.findByUsername('admin_stt') ?: new SecUser( // Admin
-                    username: 'admin_stt',
+            def newAdmin = SecUser.findByUsername('jesus_admin') ?: new SecUser( // Admin
+                    username: 'jesus_admin',
                     password: '7g4sOmmm',
                     email: 'info.smartestingtool@gmail.com')
 
@@ -768,21 +768,21 @@ class BootStrap {
             def newUserSwitch = User.findByUsername('admin_switch') ?: new User( // Normal user to switch
                     username: 'admin_switch',
                     password: '7g4sOmmm',
-                    email: 'admin_switch@stt.com',
-                    name:   'Usuario',
-                    surname: 'Conmutar',
-                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1991'),
+                    email: 'switch.smartestingtool@gmail.com',
+                    name:   'Alberto',
+                    surname: 'Sobrín',
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1993'),
                     sex: Sex.FEMALE,
                     department: idDepartment,
             )
 
-            def newUser = User.findByUsername('user_stt') ?: new User( // Normal user
-                    username: 'user_stt',
+            def newUser = User.findByUsername('jesusiglesias') ?: new User( // Normal user
+                    username: 'jesusiglesias',
                     password: '7g4sOmmm',
-                    email: 'user_stt@stt.com',
-                    name: 'Usuario STT',
-                    surname: 'Apellido STT',
-                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('22-04-1994'),
+                    email: 'jesusiglesias.smartestingtool@gmail.com',
+                    name: 'Jesús',
+                    surname: 'Iglesias',
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('22-12-1992'),
                     sex: Sex.MALE,
                     department: idDepartment,
             )
@@ -1158,6 +1158,8 @@ class BootStrap {
                     endDate: new Date().clearTime() + 5,
                     lockTime: 0,
                     maxAttempts: 1,
+                    penalty: 8,
+                    incorrectDiscount: true,
                     topic: languageTopic,
                     catalog: englishCatalog
             )
@@ -1366,7 +1368,6 @@ class BootStrap {
                 // Saving evaluations
                 evalUserSTT1.save(flush: true, failOnError: true)
                 evalUserSwitchSTT1.save(flush: true, failOnError: true)
-
 
             } else {
                 log.error("BootStrap:init():Admin users have not been created. You verify that the initial data complies with the rules")
