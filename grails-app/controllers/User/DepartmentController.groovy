@@ -224,7 +224,7 @@ class DepartmentController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.departmentErrorMessage = g.message(code: 'default.not.deleted.message.department', default: 'ERROR! {0} <strong>{1}</strong> was not deleted. First, you must delete the user or users associated with the department.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
+                    flash.departmentErrorMessage = g.message(code: 'default.not.deleted.message.department', default: 'ERROR! {0} <strong>{1}</strong> was not deleted. First, you must delete or disassociate the user/s associated with the department.', args: [message(code: 'department.label', default: 'Department'), departmentInstance.name])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }

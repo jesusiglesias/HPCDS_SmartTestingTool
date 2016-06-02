@@ -229,8 +229,7 @@ class QuestionController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.questionErrorMessage = g.message(code: 'default.not.deleted.message.question', default: 'ERROR! {0} <strong>{1}</strong> was not deleted. First, you must delete the catalog or catalogs associated with the question. ' +
-                            '', args: [message(code: 'question.label', default: 'Question'), questionInstance.titleQuestionKey])
+                    flash.questionErrorMessage = g.message(code: 'default.not.deleted.message.question', default: 'ERROR! {0} <strong>{1}</strong> was not deleted. First, you must delete or disassociate the catalog/s associated with the question.', args: [message(code: 'question.label', default: 'Question'), questionInstance.titleQuestionKey])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }

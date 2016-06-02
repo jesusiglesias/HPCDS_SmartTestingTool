@@ -234,7 +234,7 @@ class AnswerController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.answerErrorMessage = g.message(code: 'default.not.deleted.message.answer', default: 'ERROR! {0} <strong>{1}</strong> was not deleted. First, you must delete the question or questions associated with the answer.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
+                    flash.answerErrorMessage = g.message(code: 'default.not.deleted.message.answer', default: 'ERROR! {0} <strong>{1}</strong> was not deleted. First, you must delete or disassociate the question/s associated with the answer.', args: [message(code: 'answer.label', default: 'Answer'), answerInstance.titleAnswerKey])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }
