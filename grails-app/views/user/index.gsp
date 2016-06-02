@@ -35,6 +35,11 @@
             var _textSearch = '${params.quickSearch}'
         </script>
     </g:elseif>
+    <g:elseif test="${params.userAccessSearch}"> <!-- Search request from test -->
+        <script type="text/javascript">
+            var _textSearch = '${params.userAccessSearch}'
+        </script>
+    </g:elseif>
     <g:else>
         <script type="text/javascript">
             var _textSearch = ''
@@ -477,6 +482,8 @@
                                         <td><g:message code="user.evaluationCount.label" default="Number of evaluations"/></td>
                                         <td><g:message code="layouts.main_auth_admin.body.content.user.evaluation.display" default="Show evaluations"/></td>
                                         <td><g:message code="user.department.label" default="Department"/></td>
+                                        <td><g:message code="user.accessTestsCount.label" default="Number of accessible test"/></td>
+                                        <td><g:message code="layouts.main_auth_admin.body.content.user.accessTests.display" default="Show accessible test"/></td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -552,6 +559,16 @@
                                                             ${fieldValue(bean: userInstance, field: "department.name")}
                                                         </span>
                                                     </g:link>
+                                                </td>
+                                                <td>${userInstance.accessTests?.size()}</td>
+                                                <td>
+                                                    <g:each in="${userInstance?.accessTests?}" var="test">
+                                                        <g:link controller="test" action="edit" id="${test.id}" class="show-entity-link">
+                                                            <span class="label label-sm label-default show-entity">
+                                                                ${test.name?.encodeAsHTML()}
+                                                            </span>
+                                                        </g:link>
+                                                    </g:each>
                                                 </td>
                                             </tr>
                                         </g:each>

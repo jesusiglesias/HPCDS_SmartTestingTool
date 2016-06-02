@@ -11,10 +11,10 @@ class Evaluation {
     Date completenessDate
     Date initDate
     Integer failedQuestions
-    Integer rightQuestions
     Integer maxAttempt
     Integer maxPossibleScore
     Integer questionsUnanswered
+    Integer rightQuestions
     String testName
     Float testScore
     String userName
@@ -25,10 +25,10 @@ class Evaluation {
         completenessDate nullable: true, blank: false
         initDate nullable: true, blank: false
         failedQuestions nullable: true, blank: false, min: 0
-        rightQuestions nullable: true, blank: false, min: 0
         maxAttempt blank:false, min: 1, max: 5
         maxPossibleScore nullable: true, blank: false, min: 0
         questionsUnanswered nullable: true, blank: false, min: 0
+        rightQuestions nullable: true, blank: false, min: 0
         testName blank: false, maxSize: 60
         testScore nullable: true, blank: false, scale: 2, min: 0.00 as Float, max: 10.00 as Float
         userName blank: false, unique: ['testName'], maxSize: 30

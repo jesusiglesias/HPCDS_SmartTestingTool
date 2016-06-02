@@ -4,6 +4,7 @@ import Enumerations.Sex
 import Security.SecRole
 import Security.SecUserSecRole
 import Test.Test
+import com.google.common.base.Strings
 import org.apache.commons.lang.StringUtils
 import org.apache.tika.Tika
 import org.springframework.dao.DataIntegrityViolationException
@@ -462,8 +463,10 @@ class UserController {
         def lineCounter = 0
         def existingFieldsList = []
         def back = false
-        def sexValue, sexValid = false, birthDateValid = false, departmentValid = false
+        def sexValue, sexValid = false, birthDateValid = false, departmentValid = false, testValid = false
         def birthDateInstance
+        String[] testArray
+        List<String> testInstanceArray = new ArrayList<String>();
 
         // Obtaining number of fields in the entity - numberFields: 20
         def numberFields = 0
@@ -584,7 +587,40 @@ class UserController {
                             departmentValid = true
                         }
 
-                        if (sexValid && birthDateValid && departmentValid) {
+                        // Test field not null or empty
+                        if (!Strings.isNullOrEmpty(tokens[16].trim())) {
+
+                            // Obtaining test
+                            testArray = tokens[16].trim().split("\\s*,\\s*");
+
+                            testArray.each { test ->
+
+                                // Obtaining each test
+                                def testInstance = Test.findByName(test)
+
+                                // Checking the test
+                                if (testInstance == null) {
+                                    log.error("UserController():uploadFileUser():testInvalid:${test}")
+
+                                    testValid = false
+                                    back = true
+
+                                    transactionStatus.setRollbackOnly()
+
+                                    flash.questionImportErrorMessage = g.message(code: 'default.import.error.user.test.invalid', default: 'The record <strong>{0}</strong> of the file <strong>{1}</strong> has not the rigth value ' +
+                                            'in the <strong>Test</strong> field.', args: ["${lineCounter + 1}", "${csvFilename}"])
+
+                                    return true
+                                } else {
+                                    testValid = true
+                                    testInstanceArray.add(testInstance)
+                                }
+                            }
+                        } else {
+                            testValid = true
+                        }
+
+                        if (sexValid && birthDateValid && departmentValid && testValid) {
 
                             User userInstance = new User(
                                     username: tokens[0].trim(),
@@ -603,6 +639,7 @@ class UserController {
                                     phone: tokens[13].trim(),
                                     sex: sexValue,
                                     department: departmentInstance,
+                                    accessTests: testInstanceArray
                             )
 
 

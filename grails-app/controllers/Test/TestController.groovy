@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value
 class TestController {
 
     def CustomImportService
+    def CustomDeleteService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", uploadFileTest: "POST"]
 
@@ -246,6 +247,11 @@ class TestController {
 
         try {
 
+            // Delete test relation if checkbox is true
+            if (params.delete_test) {
+                customDeleteService.customDeleteTest(testInstance)
+            }
+
             // Delete test
             testInstance.delete(flush:true, failOnError: true)
 
@@ -264,7 +270,7 @@ class TestController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.testErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'test.label', default: 'Test'), testInstance.name])
+                    flash.testErrorMessage = g.message(code: 'default.not.deleted.message.test', default: 'ERROR! {0} <strong>{1}</strong> was not deleted. First, you must delete or disassociate the user/s associated with the test.', args: [message(code: 'test.label', default: 'Test'), testInstance.name])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }

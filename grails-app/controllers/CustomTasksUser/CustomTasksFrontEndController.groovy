@@ -35,15 +35,38 @@ class CustomTasksFrontEndController {
     def home() {
         log.debug("CustomTasksFrontEndController():home()")
 
-        // It obtains the visible topic
-        def visibleTopics = Topic.findAllByVisibility(true, [sort:"name", order:"asc"])
-
+        def visibleTopics
         def numberActiveTest = []
 
-        // It obtains the number of active test for each topic
-        visibleTopics.each { topic ->
-            def result = Test.findAllByTopicAndActive(topic, true).size()
-            numberActiveTest.push(result)
+        // It obtains the current user
+        def currentUser = User.get(springSecurityService.currentUser.id)
+
+        // Avoid error if user has not associated test
+        if (currentUser.accessTests.size() == 0) {
+            visibleTopics = []
+
+        } else{
+
+            // It obtains the visible topic
+            visibleTopics = Topic.createCriteria().listDistinct {
+                createAlias('tests', 't',)
+                'in'('t.id', currentUser.accessTests*.id)
+                eq 'visibility', true
+                order("name", "asc")
+            }
+
+            // It obtains the number of active test for each topic
+            visibleTopics.each { topic ->
+
+                def result = Test.createCriteria().list() {
+                    createAlias('allowedUsers', 'u',)
+                    eq 'u.id', currentUser.id
+                    eq 'topic', topic
+                    eq 'active', true
+                }
+
+                numberActiveTest.push(result.size())
+            }
         }
 
         render view: 'home', model: [visibleTopics: visibleTopics, numberActiveTest: numberActiveTest]
@@ -69,7 +92,16 @@ class CustomTasksFrontEndController {
 
                 if (topicInstance != null) {
 
-                    def topicInstanceActiveTest = Test.findAllByTopicAndActive(topicInstance, true, [sort: "name", order: "asc"])
+                    // It obtains the current user
+                    def currentUser = User.get(springSecurityService.currentUser.id)
+
+                    def topicInstanceActiveTest = Test.createCriteria().list() {
+                        createAlias('allowedUsers', 'u',)
+                        eq 'u.id', currentUser.id
+                        eq 'topic', topicInstance
+                        eq 'active', true
+                        order("name", "asc")
+                    }
 
                     // URL maliciously introduced because the topic is not visible
                     if (!topicInstance.visibility || topicInstanceActiveTest.size() == 0) {
@@ -91,9 +123,6 @@ class CustomTasksFrontEndController {
                                 }
                             }
                         }
-
-                        // It obtains the current user
-                        def currentUser = User.get(springSecurityService.currentUser.id)
 
                         // It checks if each test is accessible by number of attempt
                         topicInstanceActiveTest.each { test ->
@@ -176,9 +205,9 @@ class CustomTasksFrontEndController {
                     } else {
                         attemptUserTest = currentEvaluation.attemptNumber
                     }
-
-                    // It checks if test is accessible by date, number of attempts and number of questions
-                    if (!allowedDateTest || attemptUserTest >= testInstance.maxAttempts || testInstance.numberOfQuestions == 0) {
+                    
+                    // It checks if test is active and is accessible by user, date, number of attempts and number of questions
+                    if (!testInstance.active || !currentUserToTest.accessTests*.id.contains(testInstance.id) || !allowedDateTest || attemptUserTest >= testInstance.maxAttempts || testInstance.numberOfQuestions == 0) {
                         response.sendError(404)
 
                     } else {

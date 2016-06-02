@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="${resource(dir: 'css/fileInput', file: 'bootstrap-fileinput.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'bootstrap-select.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'multi-select.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'select2.min.css')}" type="text/css"/>
+    <link rel="stylesheet" href="${resource(dir: 'css/select', file: 'select2-bootstrap.min.css')}" type="text/css"/>
     <link rel="stylesheet" href="${resource(dir: 'css/date', file: 'bootstrap-datepicker3.min.css')}" type="text/css"/>
 
 	<script>
@@ -455,8 +457,10 @@
     <g:javascript src="date/bootstrap-datepicker.min.js"/>
     <g:javascript src="date/bootstrap-datepicker.es.min.js"/>
     <g:javascript src="select/jquery.multi-select.js"/>
+    <g:javascript src="select/select2.full.min.js"/>
+    <g:javascript src="select/select2_i18n/es.js"/>
     <g:javascript src="customIcons/user-handler.js"/>
-    <g:javascript src="domain-validation/user-validation.js"/>
+    <g:javascript src="domain-validation/userSelectEdit-validation.js"/>
 
 </body>
 </html>

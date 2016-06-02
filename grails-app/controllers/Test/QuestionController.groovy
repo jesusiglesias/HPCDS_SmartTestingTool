@@ -367,12 +367,12 @@ class QuestionController {
                         // Answers field not null or empty
                         if (!Strings.isNullOrEmpty(tokens[3].trim())) {
 
-                            // Obtaining each answer
+                            // Obtaining answers
                             answersArray = tokens[3].trim().split("\\s*,\\s*");
 
                             answersArray.each { answer ->
 
-                                // Obtaining answer
+                                // Obtaining each answer
                                 def answerInstance = Answer.findByTitleAnswerKey(answer)
 
                                 // Checking the answer

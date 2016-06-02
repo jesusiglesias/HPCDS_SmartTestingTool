@@ -433,7 +433,7 @@
                                     <p>
                                         ${raw(g.message(code: 'default.import.description.user', default: 'To import correctly the users, you must follow the following scheme: <strong>| Username<span style="color: #D05454">*</span> | Email<span style="color: #D05454">*</span> | Password<span style="color: #D05454">*</span> ' +
                                                 '| Enabled account<span style="color: #D05454">*</span> | Locked account<span style="color: #D05454">*</span> | Expired account<span style="color: #D05454">*</span> | Expired password<span style="color: #D05454">*</span> | Name<span style="color: #D05454">*</span> | ' +
-                                                'Surname<span style="color: #D05454">*</span> | Birthdate<span style="color: #D05454">*</span> | Address | City | Country | Phone | Sex<span style="color: #D05454">*</span> | Departament<span style="color: #D05454">*</span> | </strong>; where username and email must be unique, ' +
+                                                'Surname<span style="color: #D05454">*</span> | Birthdate<span style="color: #D05454">*</span> | Address | City | Country | Phone | Sex<span style="color: #D05454">*</span> | Department<span style="color: #D05454">*</span> | Test | </strong>; where username and email must be unique, ' +
                                                 'ie, be available. <br><br> Fields marked with <span style="color: #D05454">*</span> are required, the rest are optional being mandatory that the column is in the <strong>.csv</strong> document although the corresponding fields in each row are empty.'))}
                                     </p>
                                     <p>
@@ -444,7 +444,10 @@
                                                 '<ul><li>Birthdate must have the following format <strong>dd-MM-yyyy</strong>; where <i>dd</i>: day, <i>MM</i>: month and <i>yyyy</i>: year in numeric format. <strong>Important!</strong> You must configure the ' +
                                                 'date format in the sotfware used. Example: The exact path depends on the software used. Approximate path: <i>Configuration/Preferences -> Format -> Cells -> Date</i>.</li>' +
                                                 '<li><i>Sex</i> field can have two values: <strong>Masculino/Male</strong> or <strong>Femenino/Female</strong>.</li>' +
-                                                '<li>In the <i>Departament</i> field, you must type <strong>only the name</strong> of the department to which the user belongs. <strong>It is important, the prior existence in the system of the department indicated.</strong></li></ul>'))}
+                                                '<li>In the <i>Departament</i> field, you must type <strong>only the name</strong> of the department to which the user belongs. <strong>It is important, the prior existence in the system of the department indicated.</strong></li>' +
+                                                '<li>The importation of users does not require necessarily associate test.</li><li>To associate test to user, you must specify the <strong>test name</strong>. <strong>It is important, the prior existence in the system of the' +
+                                                ' test indicated.</strong></li><li>To associate a test, you must only define its name in the <i>Test</i> field. Example: <strong>testName1</strong></li><li>To associate several test, you must define them separated by <strong>comma</strong> ' +
+                                                'in the <i>Test</i> field. Example: <strong>testName1, testName2, testName3</strong></li></ul>'))}
                                     </p>
                                 </div>
                             </div>

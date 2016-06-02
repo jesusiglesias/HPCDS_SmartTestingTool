@@ -1,6 +1,7 @@
 package Test
 
 import User.Evaluation
+import User.User
 
 /**
  * It represents the general test information.
@@ -19,10 +20,12 @@ class Test {
     String name
     Integer numberOfQuestions
     Integer penalty = 10
+    Topic topic
+    Catalog catalog
 
     // Relations
-    static hasMany = [evaluationsTest: Evaluation]
-    static belongsTo = [topic: Topic, catalog: Catalog]
+    static hasMany = [evaluationsTest: Evaluation, allowedUsers: User]
+    static belongsTo = [User, Topic, Catalog]
 
     // Restrictions on the attributes of the entity
     static constraints = {

@@ -16,7 +16,7 @@
             $('.tooltips').tooltip();
 
             // Portlet tooltips
-            $('.ribbon-vertical-left').tooltip({
+            $('.ribbon-custom-left').tooltip({
                 container: 'body',
                 title: _activeTest
             });
@@ -156,7 +156,7 @@
             <div class="col-md-6">
                 <div class="mt-element-ribbon">
                     <!-- Number of test -->
-                    <div class="ribbon ribbon-vertical-left ribbon-color ribbon-shadow uppercase">
+                    <div class="ribbon ribbon-vertical-left ribbon-custom-left ribbon-color ribbon-shadow uppercase">
                         <div class="ribbon-sub ribbon-bookmark"></div>
                         <span>${numberActiveTest[i]}</span>
                     </div>

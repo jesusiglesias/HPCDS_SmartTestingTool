@@ -456,6 +456,8 @@
 										<td><g:message code="layouts.main_auth_admin.body.content.test.evaluation.display" default="Show evaluations"/></td>
 										<td><g:message code="test.topic.label" default="Topic"/></td>
 										<td><g:message code="test.catalog.label" default="Catalog"/></td>
+										<td><g:message code="test.allowedUsersCount.label" default="Number of users with access"/></td>
+										<td><g:message code="layouts.main_auth_admin.body.content.test.allowedUsers.display" default="Show users with access"/></td>
 									</tr>
 									</thead>
 									<tbody>
@@ -520,6 +522,8 @@
 														</span>
 													</g:link>
 												</td>
+												<td>${testInstance.allowedUsers?.size()}</td>
+												<td><g:link uri="/user" params="[userAccessSearch: testInstance.name]"><g:message code="test.allowedUsers.label" default="Users with access"/></g:link></td>
 											</tr>
 										</g:each>
 									</tbody>

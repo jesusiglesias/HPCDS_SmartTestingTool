@@ -414,6 +414,15 @@
                             <g:message code="layouts.main_auth_admin.body.content.test.delete" default="Delete test"/>
                         </button>
                     </div>
+                    <div class="has-error md-checkbox check-delete">
+                        <input type="checkbox" name='delete_test' id='delete_test' class="md-check"/>
+                        <label for="delete_test" class="sbold text-justify">
+                            <span></span>
+                            <span class="check"></span>
+                            <span class="box"></span>
+                            <g:message code="layouts.main_auth_admin.body.content.test.delete.relation" default="Enable to remove the test even if it is associated with one or more users."/>
+                        </label>
+                    </div>
                 </g:form>
 
                 <!-- Edit form -->

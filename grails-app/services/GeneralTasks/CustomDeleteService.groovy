@@ -43,6 +43,30 @@ class CustomDeleteService {
     }
 
     /**
+     * It deletes the test even if it is associated with a user.
+     *
+     * @param testInstance It represents to the test.
+     * @return true If the action was completed successful.
+     */
+    def customDeleteTest (testInstance) {
+        log.debug("CustomDeleteService:customDeleteTest()")
+
+        List queriesAnswerToExecute = []
+
+        // Remove each relation of the test with the user
+        def users = [] + testInstance.allowedUsers ?: []
+
+        // Delete relations - Asynchronous/Multi-thread
+        users.each { User user ->
+            def userTask = tasks {
+                user.removeFromAccessTests(testInstance)
+            }
+            queriesAnswerToExecute << userTask
+        }
+        waitAll(queriesAnswerToExecute)
+    }
+
+    /**
      * It deletes the answer even if it is associated with a question.
      *
      * @param answerInstance It represents to the answer.

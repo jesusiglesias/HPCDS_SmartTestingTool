@@ -1,4 +1,4 @@
-<%@ page import="Enumerations.Sex; User.User; User.Department" %>
+<%@ page import="Test.Test; Enumerations.Sex; User.User; User.Department" %>
 
 <div class="form-body">
     <!-- Row -->
@@ -323,6 +323,29 @@
                           noSelection="${['': "${g.message(code: 'layouts.main_auth_admin.body.content.user.department.select', default: 'Select a department')}"]}"
                           class="bs-select form-control" data-style="btn-success"
                           data-live-search="true"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row -->
+    <div class="row space-secondRow">
+        <!-- Accessible test -->
+        <div class="col-md-12">
+            <div class="form-group ${hasErrors(bean: userInstance, field: 'accessTests', 'error')}">
+                <label for="accessTests" class="control-label">
+                    <h5 class="sbold">
+                        <g:message code="user.accessTests.label" default="Accessible test"/>
+                    </h5>
+                    <h5 class="thin text-justify"><g:message code="layouts.main_auth_admin.body.content.user.multiselect.description" default="Select the test that the user can access."/></h5>
+                </label>
+                <div class="input-group select2-bootstrap-append">
+                    <g:select name="accessTests" id="multi-append"  from="${Test.list()}" multiple="multiple" optionKey="id" optionValue="name" size="10" value="${userInstance?.accessTests*.id}" class="many-to-many form-control select2"/>
+                    <span class="input-group-btn">
+                        <button class="btn blue-madison btn-multiSearch" type="button" data-select2-open="multi-append">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

@@ -27,6 +27,9 @@
         var _emailField = '${g.message(code:'default.validation.email', default:'Please, enter a valid email address.')}';
 		var _equalPassword = '${raw(g.message(code:'default.password.notsame', default:'<strong>Password</strong> and <strong>Confirm password</strong> fields must match.'))}';
         var _equalPasswordUsername = '${raw(g.message(code:'default.password.username', default:'<strong>Password</strong> field must not be equal to username.'))}';
+        var _search = '${g.message(code: "layouts.main_auth_admin.content.search", default: "Search:")}';
+        var _selectableAccessibleTest = '${g.message(code:'default.multiselect.selectable.test', default:'Selectable test')}';
+        var _selectionAccessibleTest = '${g.message(code:'default.multiselect.selection.test', default:'Selection test')}';
 
 		// Handler auto close alert
 		function createAutoClosingAlert(selector) {
@@ -452,6 +455,7 @@
     </div> <!-- /. Page-content-wrapper -->
 
     <!-- LOAD JAVASCRIPT  -->
+    <g:javascript src="select/jquery.quicksearch.js"/>
     <g:javascript src="iCheck/icheck.min.js"/>
     <g:javascript src="password/custom-password.js"/>
     <g:javascript src="password/pwstrength-bootstrap.min.js"/>
@@ -464,6 +468,5 @@
     <g:javascript src="customIcons/user-handler.js"/>
     <g:javascript src="domain-validation/user-validation.js"/>
     <g:javascript src="fileInput/bootstrap-fileinput.js"/>
-
 </body>
 </html>

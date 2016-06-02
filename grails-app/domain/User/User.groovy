@@ -2,7 +2,7 @@ package User
 
 import Enumerations.Sex
 import Security.SecUser
-import org.grails.databinding.BindingFormat
+import Test.Test
 
 /**
  * It represents the general user information.
@@ -22,7 +22,7 @@ class User extends SecUser {
 
     // Relations
     static belongsTo = [department:Department]
-    static hasMany = [evaluations:Evaluation]
+    static hasMany = [evaluations:Evaluation, accessTests: Test]
 
     // Restrictions on the attributes of the entity
     static constraints = {
