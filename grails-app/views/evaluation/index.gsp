@@ -456,6 +456,9 @@
                                         <td><g:message code="evaluation.attemptNumber.label" default="Number of current attempt"/></td>
                                         <td><g:message code="evaluation.maxAttempt.label" default="Maximum number of attempts"/></td>
                                         <td><g:message code="evaluation.testScore.label" default="Final score"/></td>
+                                        <td><g:message code="evaluation.rightQuestions.label" default="Right questions"/></td>
+                                        <td><g:message code="evaluation.failedQuestions.label" default="Failed questions"/></td>
+                                        <td><g:message code="evaluation.questionsUnanswered.label" default="Questions unanswered"/></td>
                                         <td><g:message code="evaluation.completenessDate.label" default="Completeness date"/></td>
                                     </tr>
                                     </thead>
@@ -488,7 +491,7 @@
                                                         <span class="label label-sm label-danger">
                                                     </g:elseif>
 
-                                                    <g:if test="${evaluationInstance.testScore == null }">
+                                                    <g:if test="${evaluationInstance.testScore == null}">
                                                         <g:message code="layouts.main_auth_user.body.title.scores.without" default="Without score"/>
                                                     </g:if>
                                                     <g:else>
@@ -496,7 +499,31 @@
                                                     </g:else>
                                                     </span>
                                                 </td>
-                                                <g:if test="${evaluationInstance.completenessDate == null }">
+                                                <td>
+                                                    <g:if test="${evaluationInstance.rightQuestions == null}">
+                                                        <g:message code="default.evaluation.without.complete" default="Test not completed"/>
+                                                    </g:if>
+                                                    <g:else>
+                                                        ${fieldValue(bean: evaluationInstance, field: "rightQuestions")}
+                                                    </g:else>
+                                                </td>
+                                                <td>
+                                                    <g:if test="${evaluationInstance.failedQuestions == null}">
+                                                        <g:message code="default.evaluation.without.complete" default="Test not completed"/>
+                                                    </g:if>
+                                                    <g:else>
+                                                        ${fieldValue(bean: evaluationInstance, field: "failedQuestions")}
+                                                    </g:else>
+                                                </td>
+                                                <td>
+                                                    <g:if test="${evaluationInstance.questionsUnanswered == null}">
+                                                        <g:message code="default.evaluation.without.complete" default="Test not completed"/>
+                                                    </g:if>
+                                                    <g:else>
+                                                        ${fieldValue(bean: evaluationInstance, field: "questionsUnanswered")}
+                                                    </g:else>
+                                                </td>
+                                                <g:if test="${evaluationInstance.completenessDate == null}">
                                                     <td>
                                                     <g:message code="layouts.main_auth_user.body.title.scores.withoutDate" default="{0} not completed attempt" args="${evaluationInstance.attemptNumber}"/>
                                                 </g:if>

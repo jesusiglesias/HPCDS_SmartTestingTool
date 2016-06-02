@@ -93,4 +93,49 @@
 			</g:else>
 		</div>
 	</div>
+
+	<!-- Row -->
+	<div class="row space-secondRow">
+		<!-- Right questions -->
+		<div class="col-md-6">
+			<h5 class="sbold show-title">
+				<g:message code="evaluation.rightQuestions.label" default="Right questions"/>
+			</h5>
+			<g:if test="${evaluationInstance?.rightQuestions == null}">
+				<g:message code="default.evaluation.without.complete" default="Test not completed"/>
+			</g:if>
+			<g:else>
+				${fieldValue(bean: evaluationInstance, field: "rightQuestions")}
+			</g:else>
+		</div>
+
+		<!-- Failed questions -->
+		<div class="col-md-6 space-betweenCol">
+			<h5 class="sbold show-title">
+				<g:message code="evaluation.failedQuestions.label" default="Failed questions"/>
+			</h5>
+			<g:if test="${evaluationInstance?.failedQuestions == null}">
+				<g:message code="default.evaluation.without.complete" default="Test not completed"/>
+			</g:if>
+			<g:else>
+				${fieldValue(bean: evaluationInstance, field: "failedQuestions")}
+			</g:else>
+		</div>
+	</div>
+
+	<!-- Row -->
+	<div class="row space-secondRow">
+		<!-- Questions unanswered -->
+		<div class="col-md-6">
+			<h5 class="sbold show-title">
+				<g:message code="evaluation.questionsUnanswered.label" default="Questions unanswered"/>
+			</h5>
+			<g:if test="${evaluationInstance?.questionsUnanswered == null}">
+				<g:message code="default.evaluation.without.complete" default="Test not completed"/>
+			</g:if>
+			<g:else>
+				${fieldValue(bean: evaluationInstance, field: "questionsUnanswered")}
+			</g:else>
+		</div>
+	</div>
 </div> <!-- /.Form-body -->

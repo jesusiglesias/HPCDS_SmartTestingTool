@@ -104,6 +104,18 @@
                     <g:formatNumber number="${flash.finalScore}" type="number" maxFractionDigits="2"/>
                     </span>
                 </div>
+                <div class="score-detailed-container">
+                    <g:if test="${flash.rightQuestions}">
+                        <p><span><g:message code="evaluation.rightQuestions.label" default="Right questions"/>:</span> ${flash.rightQuestions}</p>
+                    </g:if>
+                    <g:if test="${flash.failedQuestions}">
+                        <p><span><g:message code="evaluation.failedQuestions.label" default="Failed questions"/>:</span> ${flash.failedQuestions}</p>
+                    </g:if>
+                    <g:if test="${flash.questionsUnanswered}">
+                        <p><span><g:message code="evaluation.questionsUnanswered.label" default="Questions unanswered"/>:</span> ${flash.questionsUnanswered}</p>
+                    </g:if>
+                </div>
+
                 <!-- Buttons -->
                 <div class="score-obtained-buttons">
                     <g:if test="${flash.homepage}">

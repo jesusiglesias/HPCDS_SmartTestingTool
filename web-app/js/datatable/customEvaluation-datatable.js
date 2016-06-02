@@ -43,11 +43,27 @@ var DatatableEvaluationList = function () {
             // Auto width
             "autoWidth": true,
 
+            // Visibility of columns
+            "columnDefs": [
+                {
+                    "targets": [5], // Right questions
+                    "visible": false
+                },
+                {
+                    "targets": [6], // Failed questions
+                    "visible": false
+                },
+                {
+                    "targets": [7], // Questions unanswered
+                    "visible": false
+                }
+            ],
+            
             buttons: [
-                { extend: 'print', className: 'btn dark btn-outline transparent hvr-bounce-to-top-print', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
-                { extend: 'copy', className: 'btn red-sunglo btn-outline transparent hvr-bounce-to-top-copy', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
-                { extend: 'pdf', className: 'btn green-dark btn-outline transparent hvr-bounce-to-top-pdf', text: _pdf, filename: _evaluationFile, title: _evaluationTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
-                { extend: 'csv', className: 'btn blue-steel btn-outline transparent hvr-bounce-to-top-csv', text: _csv, fieldSeparator: ';', filename: _evaluationFile, exportOptions: {columns: [0, 1, 2, 3, 4, 5]} },
+                { extend: 'print', className: 'btn dark btn-outline transparent hvr-bounce-to-top-print', text: _print, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]} },
+                { extend: 'copy', className: 'btn red-sunglo btn-outline transparent hvr-bounce-to-top-copy', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]} },
+                { extend: 'pdf', className: 'btn green-dark btn-outline transparent hvr-bounce-to-top-pdf', text: _pdf, filename: _evaluationFile, title: _evaluationTableTitle, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]} },
+                { extend: 'csv', className: 'btn blue-steel btn-outline transparent hvr-bounce-to-top-csv', text: _csv, fieldSeparator: ';', filename: _evaluationFile, exportOptions: {columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]} },
                 { extend: 'colvis', className: 'btn yellow-casablanca btn-outline transparent hvr-bounce-to-top-colvis', text: _columns },
                 { extend: 'colvisRestore', className: 'btn yellow btn-outline transparent hvr-bounce-to-top-colvisRestore', text: _restore }
             ],

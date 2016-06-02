@@ -510,6 +510,9 @@ class BootStrap {
                     maxAttempt: securityITest.maxAttempts,
                     completenessDate: new Date() - 20,
                     testScore: 7.55,
+                    rightQuestions: 8,
+                    failedQuestions: 1,
+                    questionsUnanswered: 1,
                     userName: newUser.username
             )
 
@@ -518,7 +521,10 @@ class BootStrap {
                     attemptNumber: 1,
                     maxAttempt: securityITest.maxAttempts,
                     completenessDate: new Date() - 1,
-                    testScore: 7.23,
+                    testScore: 5.34,
+                    rightQuestions: 6,
+                    failedQuestions: 2,
+                    questionsUnanswered: 2,
                     userName: newUserSwitch.username
             )
 
@@ -1174,6 +1180,9 @@ class BootStrap {
                     maxAttempt: securityITest.maxAttempts,
                     completenessDate: new Date() - 20,
                     testScore: 7.55,
+                    rightQuestions: 8,
+                    failedQuestions: 1,
+                    questionsUnanswered: 1,
                     userName: newUser.username
             )
 
@@ -1182,7 +1191,10 @@ class BootStrap {
                     attemptNumber: 1,
                     maxAttempt: securityITest.maxAttempts,
                     completenessDate: new Date() - 1,
-                    testScore: 7.23,
+                    testScore: 5.34,
+                    rightQuestions: 6,
+                    failedQuestions: 2,
+                    questionsUnanswered: 2,
                     userName: newUserSwitch.username
             )
 

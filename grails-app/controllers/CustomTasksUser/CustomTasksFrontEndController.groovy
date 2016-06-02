@@ -303,6 +303,7 @@ class CustomTasksFrontEndController {
         Float totalScore = 0
         Float finalScore = 0
         def incorrectAnswers = 0
+        def rightAnswers = 0
         def enter = false
 
         // It obtains the current user
@@ -348,6 +349,7 @@ class CustomTasksFrontEndController {
                                 if (answerInstance.score == 0) {
                                     incorrectAnswers ++
                                 } else {
+                                    rightAnswers ++
                                     totalScore += answerInstance.score
                                 }
                             }
@@ -404,6 +406,9 @@ class CustomTasksFrontEndController {
                 userEvaluation.testScore = finalScore
             }
 
+            userEvaluation.rightQuestions = rightAnswers
+            userEvaluation.failedQuestions = incorrectAnswers
+            userEvaluation.questionsUnanswered = testInstance.numberOfQuestions - (rightAnswers + incorrectAnswers)
             userEvaluation.maxPossibleScore = null
 
             def validUserEvaluation = userEvaluation.validate()
@@ -422,6 +427,10 @@ class CustomTasksFrontEndController {
                     } else {
                         flash.finalScore = finalScore.round(2)
                     }
+
+                    flash.rightQuestions= rightAnswers
+                    flash.failedQuestions= incorrectAnswers
+                    flash.questionsUnanswered= testInstance.numberOfQuestions - (rightAnswers + incorrectAnswers)
 
                     flash.homepage = g.message(code: "layouts.main_auth_user.body.testFinished.button.homepage", default: 'Homepage')
 

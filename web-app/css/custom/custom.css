@@ -308,6 +308,20 @@ table.dataTable tbody tr:hover {
     padding: 15px 0 45px 0;
 }
 
+.score-detailed-container {
+    text-align: center;
+    background-color: white;
+}
+
+.score-detailed-container > p > span {
+    font-weight: 600;
+}
+
+.score-detailed-container > p {
+    padding: 5px 0;
+    margin: 0;
+}
+
 .score-obtained {
     padding: 10px 50px 10px 50px;
     color: white;
@@ -317,7 +331,7 @@ table.dataTable tbody tr:hover {
     text-align: center;
     background: white;
     padding-bottom: 30px;
-    padding-top: 10px;
+    padding-top: 35px;
 }
 
 /* Search form in normal user pages (Home and topicSelected)
