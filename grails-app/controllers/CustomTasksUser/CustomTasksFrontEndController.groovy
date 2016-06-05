@@ -47,7 +47,7 @@ class CustomTasksFrontEndController {
 
         } else{
 
-            // It obtains the visible topic
+            // It obtains the visible topics with accessible test by user
             visibleTopics = Topic.createCriteria().listDistinct {
                 createAlias('tests', 't',)
                 'in'('t.id', currentUser.accessTests*.id)
@@ -63,6 +63,7 @@ class CustomTasksFrontEndController {
                     eq 'u.id', currentUser.id
                     eq 'topic', topic
                     eq 'active', true
+                    order("name", "asc")
                 }
 
                 numberActiveTest.push(result.size())
