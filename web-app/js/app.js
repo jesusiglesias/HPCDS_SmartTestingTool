@@ -112,6 +112,18 @@ var App = function() {
                 portlet.children('.portlet-body').css('height', height);
             }
         });
+
+        body.on('click', '.portlet > .portlet-title > .tools > .collapse, .portlet .portlet-title > .tools > .expand', function(e) {
+            e.preventDefault();
+            var el = $(this).closest(".portlet").children(".portlet-body");
+            if ($(this).hasClass("collapse")) {
+                $(this).removeClass("collapse").addClass("expand");
+                el.slideUp(200);
+            } else {
+                $(this).removeClass("expand").addClass("collapse");
+                el.slideDown(200);
+            }
+        });
     };
 
     // It handles custom checkboxes & radios using jQuery Uniform plugin
