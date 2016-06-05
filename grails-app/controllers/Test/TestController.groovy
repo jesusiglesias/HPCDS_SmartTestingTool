@@ -1,5 +1,6 @@
 package Test
 
+import User.User
 import grails.converters.JSON
 import org.apache.tika.Tika
 import User.Evaluation
@@ -275,6 +276,43 @@ class TestController {
                 }
                 '*' { render status: NO_CONTENT }
             }
+        }
+    }
+
+    /**
+     * It deletes the users' relation that have accessible test.
+     *
+     * @return return true If the action was successful.
+     */
+    @Transactional
+    def deleteRelations() {
+
+        def testInstanceRelation = null
+
+        try {
+
+            // It obtains the test
+            testInstanceRelation = Test.findById(params.id)
+
+            // Remove each relation of the test with the user
+            def usersAssigned = [] + testInstanceRelation?.allowedUsers ?: []
+
+            // Delete relations
+            usersAssigned.each { User user ->
+                user.removeFromAccessTests(testInstanceRelation)
+            }
+
+            flash.testMessage = g.message(code: 'default.unlink.message.test', default: 'Users of the test <strong>{0}</strong> unlink successful.', args: [testInstanceRelation.name])
+            redirect action: "index", method: "GET"
+
+        } catch (Exception exception) {
+            log.error("TestController():deleteRelations():Exception:Test:${testInstanceRelation?.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.testErrorMessage = g.message(code: 'default.not.unlink.message.test', default: 'It has not been able to unlink the users of the test <strong>{0}</strong>.', args: [testInstanceRelation?.name])
+            redirect action: "index", method: "GET"
         }
     }
 

@@ -334,6 +334,17 @@ table.dataTable tbody tr:hover {
     padding-top: 35px;
 }
 
+.btn-relation {
+    color: #ffffff;
+    background: #DAAA78;
+}
+
+.btn-relation:hover,
+.btn-relation:active,
+.btn-relation:focus {
+    background: #d7aa7a;
+}
+
 /* Search form in normal user pages (Home and topicSelected)
 =================================================================== */
 

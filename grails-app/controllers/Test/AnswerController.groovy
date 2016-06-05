@@ -243,6 +243,43 @@ class AnswerController {
     }
 
     /**
+     * It deletes the questions' relation of the answers.
+     *
+     * @return return true If the action was successful.
+     */
+    @Transactional
+    def deleteRelations() {
+
+        def answerInstanceRelation = null
+
+        try {
+
+            // It obtains the answer
+            answerInstanceRelation = Answer.get(params.id)
+
+            // Remove each relation of the answer with the question
+            def questionsAssigned = [] + answerInstanceRelation?.questionsAnswer ?: []
+
+            // Delete relations
+            questionsAssigned.each { Question question ->
+                question.removeFromAnswers(answerInstanceRelation)
+            }
+
+            flash.answerMessage = g.message(code: 'default.unlink.message.answer', default: 'Questions of the answer <strong>{0}</strong> unlink successful.', args: [answerInstanceRelation.titleAnswerKey])
+            redirect action: "index", method: "GET"
+
+        } catch (Exception exception) {
+            log.error("AnswerController():deleteRelations():Exception:Answer:${answerInstanceRelation?.titleAnswerKey}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.answerErrorMessage = g.message(code: 'default.not.unlink.message.answer', default: 'It has not been able to unlink the questions of the answer <strong>{0}</strong>.', args: [answerInstanceRelation?.titleAnswerKey])
+            redirect action: "index", method: "GET"
+        }
+    }
+
+    /**
      * It renders the not found message if the answer instance was not found.
      */
     protected void notFound() {

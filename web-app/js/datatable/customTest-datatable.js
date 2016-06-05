@@ -62,15 +62,15 @@ var DatatableTestList = function () {
                     "visible": false
                 },
                 {
+                    "targets": [11], // Show evaluations
+                    "visible": false
+                },
+                {
                     "targets": [12], // Topic
                     "visible": false
                 },
                 {
                     "targets": [13], // Catalog
-                    "visible": false
-                },
-                {
-                    "targets": [14], // Number of users with access
                     "visible": false
                 },
                 {

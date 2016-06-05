@@ -458,6 +458,7 @@
 										<td><g:message code="test.catalog.label" default="Catalog"/></td>
 										<td><g:message code="test.allowedUsersCount.label" default="Number of users with access"/></td>
 										<td><g:message code="layouts.main_auth_admin.body.content.test.allowedUsers.display" default="Show users with access"/></td>
+										<td><g:message code="layouts.main_auth_admin.body.content.test.delete.relations" default="Unlink users"/></td>
 									</tr>
 									</thead>
 									<tbody>
@@ -524,6 +525,13 @@
 												</td>
 												<td>${testInstance.allowedUsers?.size()}</td>
 												<td><g:link uri="/user" params="[userAccessSearch: testInstance.name]"><g:message code="test.allowedUsers.label" default="Users with access"/></g:link></td>
+												<td>
+													<g:if test="${testInstance.allowedUsers?.size() > 0}">
+														<g:link controller="test" action="deleteRelations" id="${testInstance.id}" class="btn btn-xs btn-circle btn-relation">
+															<g:message code="default.button.unlink.relation" default="Unlink"/>
+														</g:link>
+													</g:if>
+												</td>
 											</tr>
 										</g:each>
 									</tbody>

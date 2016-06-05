@@ -105,9 +105,9 @@ class BootStrap {
                     username: 'admin_switch',
                     password: '7g4sOmmm',
                     email: 'switch.smartestingtool@gmail.com',
-                    name:   'Alberto',
-                    surname: 'Sobrín',
-                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1993'),
+                    name:   'David',
+                    surname: 'Martínez',
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('28-05-1970'),
                     sex: Sex.FEMALE,
                     department: idDepartment,
             )
@@ -730,8 +730,8 @@ class BootStrap {
         if (!SecUser.count() && !SecRole.count()) {
 
             /*-------------------------------------------------------------------------------------------*
-             *                                        ADMIN AND ROLE                                     *
-             *-------------------------------------------------------------------------------------------*/
+            *                                        ADMIN AND ROLE                                     *
+            *-------------------------------------------------------------------------------------------*/
 
             // Role
             def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN')
@@ -775,9 +775,9 @@ class BootStrap {
                     username: 'admin_switch',
                     password: '7g4sOmmm',
                     email: 'switch.smartestingtool@gmail.com',
-                    name:   'Alberto',
-                    surname: 'Sobrín',
-                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('19-10-1993'),
+                    name:   'David',
+                    surname: 'Martínez',
+                    birthDate: new SimpleDateFormat( 'dd-MM-yyyy' ).parse('28-05-1970'),
                     sex: Sex.FEMALE,
                     department: idDepartment,
             )

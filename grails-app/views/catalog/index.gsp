@@ -445,6 +445,7 @@
                                             <td><g:message code="catalog.name.label" default="Name"/></td>
                                             <td><g:message code="catalog.questionCount.label" default="Number of questions"/></td>
                                             <td><g:message code="layouts.main_auth_admin.body.content.catalog.questions.display" default="Show questions"/></td>
+                                            <td><g:message code="layouts.main_auth_admin.body.content.catalog.delete.relations" default="Unlink questions"/></td>
                                             <td><g:message code="catalog.testCatalogCount.label" default="Number of test"/></td>
                                             <td><g:message code="layouts.main_auth_admin.body.content.catalog.testCatalogs.display" default="Show test"/></td>
                                         </tr>
@@ -455,6 +456,13 @@
                                                 <td><g:link controller="catalog" action="edit" id="${catalogInstance.id}" class="break-word">${fieldValue(bean: catalogInstance, field: "name")}</g:link></td>
                                                 <td>${catalogInstance.questions?.size()}</td>
                                                 <td><g:link uri="/question" params="[questionSearch: catalogInstance.name]"><g:message code="catalog.questions.label" default="Questions"/></g:link></td>
+                                                <td>
+                                                    <g:if test="${catalogInstance.questions?.size() > 0}">
+                                                        <g:link controller="catalog" action="deleteRelations" id="${catalogInstance.id}" class="btn btn-xs btn-circle btn-relation">
+                                                            <g:message code="default.button.unlink.relation" default="Unlink"/>
+                                                        </g:link>
+                                                    </g:if>
+                                                </td>
                                                 <td>${catalogInstance.testCatalogs?.size()}</td>
                                                 <td>
                                                     <g:each in="${catalogInstance?.testCatalogs?}" var="testCatalog">

@@ -460,6 +460,7 @@
                                             <td><g:message code="answer.correctType.label" default="Answer type"/></td>
                                             <td><g:message code="answer.questionAnswerCount.label" default="Number of questions"/></td>
                                             <td><g:message code="layouts.main_auth_admin.body.content.answer.questionsAnswer.display" default="Show questions"/></td>
+                                            <td><g:message code="layouts.main_auth_admin.body.content.answer.delete.relations" default="Unlink questions"/></td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -486,6 +487,13 @@
                                                             </span>
                                                         </g:link>
                                                     </g:each>
+                                                </td>
+                                                <td>
+                                                    <g:if test="${answerInstance.questionsAnswer?.size() > 0}">
+                                                        <g:link controller="answer" action="deleteRelations" id="${answerInstance.id}" class="btn btn-xs btn-circle btn-relation">
+                                                            <g:message code="default.button.unlink.relation" default="Unlink"/>
+                                                        </g:link>
+                                                    </g:if>
                                                 </td>
                                             </tr>
                                         </g:each>

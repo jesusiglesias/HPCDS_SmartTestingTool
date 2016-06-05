@@ -201,8 +201,17 @@ class TopicController {
 
             // Delete the content associated (catalogs, questions and answers) if checkbox is true
             if (params.delete_topic) {
+
+                // Delete the relation about users with accessible test
+                customDeleteService.customDeleteTopicUsersTest(topicInstance)
+
                 customDeleteService.customDeleteTopic(topicInstance)
+
             } else {
+
+                // Delete the relation about users with accessible test
+                customDeleteService.customDeleteTopicUsersTest(topicInstance)
+
                 // Delete topic
                 topicInstance.delete(flush:true, failOnError: true)
             }
@@ -222,7 +231,7 @@ class TopicController {
 
             request.withFormat {
                 form multipartForm {
-                    flash.topicErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'admin.label', default: 'Administrator'), topicInstance.name])
+                    flash.topicErrorMessage = g.message(code: 'default.not.deleted.message', default: 'ERROR! {0} <strong>{1}</strong> was not deleted.', args: [message(code: 'topic.label', default: 'Administrator'), topicInstance.name])
                     redirect action: "index", method: "GET"
                 }
                 '*' { render status: NO_CONTENT }

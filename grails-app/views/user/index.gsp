@@ -484,6 +484,7 @@
                                         <td><g:message code="user.department.label" default="Department"/></td>
                                         <td><g:message code="user.accessTestsCount.label" default="Number of accessible test"/></td>
                                         <td><g:message code="layouts.main_auth_admin.body.content.user.accessTests.display" default="Show accessible test"/></td>
+                                        <td><g:message code="layouts.main_auth_admin.body.content.user.delete.relations" default="Unlink test"/></td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -569,6 +570,13 @@
                                                             </span>
                                                         </g:link>
                                                     </g:each>
+                                                </td>
+                                                <td>
+                                                    <g:if test="${userInstance.accessTests?.size() > 0}">
+                                                        <g:link controller="user" action="deleteRelations" id="${userInstance.id}" class="btn btn-xs btn-circle btn-relation">
+                                                            <g:message code="default.button.unlink.relation" default="Unlink"/>
+                                                        </g:link>
+                                                    </g:if>
                                                 </td>
                                             </tr>
                                         </g:each>

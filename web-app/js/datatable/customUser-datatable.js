@@ -46,6 +46,10 @@ var DatatableUserList = function () {
             // Visibility of columns
             "columnDefs": [
                 {
+                    "targets": [3], // Enabled account
+                    "visible": false
+                },
+                {
                     "targets": [5], // Expired account
                     "visible": false
                 },
@@ -86,11 +90,7 @@ var DatatableUserList = function () {
                     "visible": false
                 },
                 {
-                    "targets": [15], // Number of evaluations
-                    "visible": false
-                },
-                {
-                    "targets": [18], // Number of accessible test
+                    "targets": [16], // Number of evaluations
                     "visible": false
                 },
                 {

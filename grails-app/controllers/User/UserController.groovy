@@ -240,6 +240,17 @@ class UserController {
 
         try {
 
+            // It updates the accessible test related with the user
+            userInstance.accessTests.clear()
+
+            if (params.accessTests instanceof String) {
+                params.accessTests = [params.accessTests]
+            }
+
+            params.accessTests.each { it ->
+                userInstance.accessTests.add(Test.findById(UUID.fromString(it)))
+            }
+
             // Updating evaluation in cascade
             userInstance.evaluations.each { evaluation ->
                 def evaluationInstance = Evaluation.get(evaluation.id)
@@ -425,6 +436,43 @@ class UserController {
                 }
                 '*' { render status: NO_CONTENT }
             }
+        }
+    }
+
+    /**
+     * It deletes the accessible test relation of the user.
+     *
+     * @return return true If the action was successful.
+     */
+    @Transactional
+    def deleteRelations() {
+
+        def userInstanceRelation = null
+
+        try {
+
+            // It obtains the user
+            userInstanceRelation = User.get(params.id)
+
+            // Remove each relation of the test with the user
+            def accessibleTest = [] + userInstanceRelation?.accessTests ?: []
+
+            // Delete relations
+            accessibleTest.each { Test test ->
+                test.removeFromAllowedUsers(userInstanceRelation)
+            }
+
+            flash.userMessage = g.message(code: 'default.unlink.message.user', default: 'Accessible test of the user <strong>{0}</strong> unlink successful.', args: [userInstanceRelation.username])
+            redirect action: "index", method: "GET"
+
+        } catch (Exception exception) {
+            log.error("UserController():deleteRelations():Exception:NormalUser:${userInstanceRelation?.username}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.userErrorMessage = g.message(code: 'default.not.unlink.message.user', default: 'It has not been able to unlink the accessible test of the user <strong>{0}</strong>.', args: [userInstanceRelation?.username])
+            redirect action: "index", method: "GET"
         }
     }
 

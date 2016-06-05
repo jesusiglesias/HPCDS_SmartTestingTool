@@ -43,6 +43,18 @@ var DatatableQuestionList = function () {
             // Auto width
             "autoWidth": true,
 
+            // Visibility of columns
+            "columnDefs": [
+                {
+                    "targets": [4], // Show answers
+                    "visible": false
+                },
+                {
+                    "targets": [6], // Show catalogs
+                    "visible": false
+                }
+            ],
+
             buttons: [
                 { extend: 'print', className: 'btn dark btn-outline transparent hvr-bounce-to-top-print', text: _print, exportOptions: {columns: [0, 1, 2, 3, 5, 6]} },
                 { extend: 'copy', className: 'btn red-sunglo btn-outline transparent hvr-bounce-to-top-copy', text: _copy, exportOptions: {columns: [0, 1, 2, 3, 5, 6]} },

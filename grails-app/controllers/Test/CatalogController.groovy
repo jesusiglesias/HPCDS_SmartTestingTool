@@ -155,6 +155,17 @@ class CatalogController {
 
         try {
 
+            // It updates the accessible test related with the user
+            catalogInstance.questions.clear()
+
+            if (params.questions instanceof String) {
+                params.questions = [params.questions]
+            }
+
+            params.questions.each { it ->
+                catalogInstance.questions.add(Question.findById(UUID.fromString(it)))
+            }
+
             // Save catalog data
             catalogInstance.save(flush:true, failOnError: true)
 
@@ -205,6 +216,9 @@ class CatalogController {
                 customDeleteService.customDeleteCatalog(catalogInstance)
             }
 
+            // Delete the relation about users with accessible test
+            customDeleteService.customDeleteCatalogUsersTest(catalogInstance)
+
             // Delete catalog
             catalogInstance.delete(flush:true, failOnError: true)
 
@@ -228,6 +242,43 @@ class CatalogController {
                 }
                 '*' { render status: NO_CONTENT }
             }
+        }
+    }
+
+    /**
+     * It deletes the questions' relation of the catalog.
+     *
+     * @return return true If the action was successful.
+     */
+    @Transactional
+    def deleteRelations() {
+
+        def catalogInstanceRelation = null
+
+        try {
+
+            // It obtains the catalog
+            catalogInstanceRelation = Catalog.get(params.id)
+
+            // Remove each relation of the question with the catalog
+            def questionsAssigned = [] + catalogInstanceRelation?.questions ?: []
+
+            // Delete relations
+            questionsAssigned.each { Question question ->
+                question.removeFromCatalogs(catalogInstanceRelation)
+            }
+
+            flash.catalogMessage = g.message(code: 'default.unlink.message.catalog', default: 'Questions of the catalog <strong>{0}</strong> unlink successful.', args: [catalogInstanceRelation.name])
+            redirect action: "index", method: "GET"
+
+        } catch (Exception exception) {
+            log.error("CatalogController():deleteRelations():Exception:Catalog:${catalogInstanceRelation?.name}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.catalogErrorMessage = g.message(code: 'default.not.unlink.message.catalog', default: 'It has not been able to unlink the questions of the catalog <strong>{0}</strong>.', args: [catalogInstanceRelation?.name])
+            redirect action: "index", method: "GET"
         }
     }
 

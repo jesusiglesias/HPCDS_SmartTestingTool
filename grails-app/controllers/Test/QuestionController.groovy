@@ -156,6 +156,17 @@ class QuestionController {
 
         try {
 
+            // It updates the answers related with the question
+            questionInstance.answers.clear()
+
+            if (params.answers instanceof String) {
+                params.answers = [params.answers]
+            }
+
+            params.answers.each { it ->
+                questionInstance.answers.add(Answer.findById(UUID.fromString(it)))
+            }
+
             // Save question data
             questionInstance.save(flush:true, failOnError: true)
 
@@ -234,6 +245,80 @@ class QuestionController {
                 }
                 '*' { render status: NO_CONTENT }
             }
+        }
+    }
+
+    /**
+     * It deletes the catalogs' relation of the question.
+     *
+     * @return return true If the action was successful.
+     */
+    @Transactional
+    def deleteRelationsCatalogs() {
+
+        def questionInstanceRelation = null
+
+        try {
+
+            // It obtains the question
+            questionInstanceRelation = Question.get(params.id)
+
+            // Remove each relation of the catalog with the question
+            def catalogsAssigned = [] + questionInstanceRelation?.catalogs ?: []
+
+            // Delete relations
+            catalogsAssigned.each { Catalog catalog ->
+                catalog.removeFromQuestions(questionInstanceRelation)
+            }
+
+            flash.questionMessage = g.message(code: 'default.unlink.message.question.catalogs', default: 'Catalogs of the question <strong>{0}</strong> unlink successful.', args: [questionInstanceRelation.titleQuestionKey])
+            redirect action: "index", method: "GET"
+
+        } catch (Exception exception) {
+            log.error("QuestionController():deleteRelationsCatalogs():Exception:Question:${questionInstanceRelation?.titleQuestionKey}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.questionErrorMessage = g.message(code: 'default.not.unlink.message.question.catalogs', default: 'It has not been able to unlink the catalogs of the question <strong>{0}</strong>.', args: [questionInstanceRelation?.titleQuestionKey])
+            redirect action: "index", method: "GET"
+        }
+    }
+
+    /**
+     * It deletes the answers' relation of the question.
+     *
+     * @return return true If the action was successful.
+     */
+    @Transactional
+    def deleteRelationsAnswers() {
+
+        def questionInstanceRelation = null
+
+        try {
+
+            // It obtains the question
+            questionInstanceRelation = Question.get(params.id)
+
+            // Remove each relation of the answer with the question
+            def answersAssigned = [] + questionInstanceRelation?.answers ?: []
+
+            // Delete relations
+            answersAssigned.each { Answer answer ->
+                answer.removeFromQuestionsAnswer(questionInstanceRelation)
+            }
+
+            flash.questionMessage = g.message(code: 'default.unlink.message.question.answers', default: 'Answers of the question <strong>{0}</strong> unlink successful.', args: [questionInstanceRelation.titleQuestionKey])
+            redirect action: "index", method: "GET"
+
+        } catch (Exception exception) {
+            log.error("QuestionController():deleteRelationsAnswers():Exception:Question:${questionInstanceRelation?.titleQuestionKey}:${exception}")
+
+            // Roll back in database
+            transactionStatus.setRollbackOnly()
+
+            flash.questionErrorMessage = g.message(code: 'default.not.unlink.message.question.answers', default: 'It has not been able to unlink the answers of the question <strong>{0}</strong>.', args: [questionInstanceRelation?.titleQuestionKey])
+            redirect action: "index", method: "GET"
         }
     }
 
