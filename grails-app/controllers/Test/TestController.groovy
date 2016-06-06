@@ -63,6 +63,8 @@ class TestController {
     @Transactional
     def save(Test testInstance) {
 
+        def numberCatalogs = 0
+
         if (params.initDate != "" && params.endDate != "") {
 
             // Parse initDate from textField
@@ -85,7 +87,31 @@ class TestController {
 
         // It checks if catalog is null
         if (testInstance.catalog == null) {
+
+            testInstance.clearErrors()
             flash.testErrorMessage = g.message(code: 'layouts.main_auth_admin.body.content.test.catalog.null', default: '<strong>Catalog</strong> field cannot be null.')
+            render view: "create", model: [testInstance: testInstance]
+            return
+        }
+
+        // It checks if catalog is more than 1
+        testInstance.catalog.each { catalog ->
+            numberCatalogs ++
+        }
+
+        if (numberCatalogs > 1) {
+
+            testInstance.clearErrors()
+            flash.testErrorMessage = g.message(code: 'layouts.main_auth_admin.body.content.test.catalog', default: 'Please, you only select one catalog.')
+            render view: "create", model: [testInstance: testInstance]
+            return
+        }
+
+        // It check if catalog has enough questions
+        if (testInstance.numberOfQuestions > testInstance.catalog.questions.size()) {
+
+            testInstance.clearErrors()
+            flash.testErrorMessage = g.message(code: 'test.numberOfQuestions.numberOfQuestionsFail', default: 'The number of questions can not exceed the number of questions that contains the associated catalog: <strong>{0}</strong> questions.', args: [testInstance.catalog.questions.size()])
             render view: "create", model: [testInstance: testInstance]
             return
         }
@@ -96,6 +122,7 @@ class TestController {
         }
 
         try {
+
             // Save test data
             testInstance.save(flush:true, failOnError: true)
 
@@ -139,6 +166,8 @@ class TestController {
      */
     @Transactional
     def update(Test testInstance) {
+
+        def numberCatalogs = 0
 
         if (params.initDate != "" && params.endDate != "") {
 
@@ -184,7 +213,29 @@ class TestController {
             transactionStatus.setRollbackOnly()
 
             flash.testErrorMessage = g.message(code: 'layouts.main_auth_admin.body.content.test.catalog.null', default: '<strong>Catalog</strong> field cannot be null.')
-            render view: "create", model: [testInstance: testInstance]
+            render view: "edit", model: [testInstance: testInstance]
+            return
+        }
+
+        // It checks if catalog is more than 1
+        testInstance.catalog.each { catalog ->
+            numberCatalogs ++
+        }
+
+        if (numberCatalogs > 1) {
+
+            testInstance.clearErrors()
+            flash.testErrorMessage = g.message(code: 'layouts.main_auth_admin.body.content.test.catalog', default: 'Please, you only select one catalog.')
+            render view: "edit", model: [testInstance: testInstance]
+            return
+        }
+
+        // It check if catalog has enough questions
+        if (testInstance.numberOfQuestions > testInstance.catalog.questions.size()) {
+
+            testInstance.clearErrors()
+            flash.testErrorMessage = g.message(code: 'test.numberOfQuestions.numberOfQuestionsFail', default: 'The number of questions can not exceed the number of questions that contains the associated catalog: <strong>{0}</strong> questions.', args: [testInstance.catalog.questions.size()])
+            render view: "edit", model: [testInstance: testInstance]
             return
         }
 
@@ -195,7 +246,7 @@ class TestController {
         }
 
         try {
-
+            
             // Updating evaluation in cascade
             testInstance.evaluationsTest.each { evaluation ->
                 def evaluationInstance = Evaluation.get(evaluation.id)

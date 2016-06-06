@@ -39,9 +39,7 @@ class Test {
         lockTime blank:false, min: 0
         maxAttempts blank:false, min: 1, max: 5
         name blank: false, unique: true, maxSize: 60
-        numberOfQuestions blank: false, min: 0, validator: { val, obj ->
-            if (val > obj.catalog.questions.size()) return ['numberOfQuestionsFail']
-        }
+        numberOfQuestions blank: false, min: 0
         penalty blank:false, min:0, max: 100
     }
 

@@ -1146,7 +1146,7 @@ class BootStrap {
                     name: 'Seguridad básico',
                     description: 'Conceptos básicos relacionados con el mundo de la seguridad de la información y de la seguridad informática...',
                     active: true,
-                    numberOfQuestions: 10,
+                    numberOfQuestions: securityCatalog.questions.size() - 1,
                     initDate: new Date().clearTime(),
                     endDate: new Date().clearTime() + 1,
                     lockTime: 0,
