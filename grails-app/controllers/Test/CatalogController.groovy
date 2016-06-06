@@ -211,13 +211,13 @@ class CatalogController {
 
         try {
 
+            // Delete the relation about users with accessible test
+            customDeleteService.customDeleteCatalogUsersTest(catalogInstance)
+
             // Delete the content associated (questions and answers) if checkbox is true
             if (params.delete_catalog) {
                 customDeleteService.customDeleteCatalog(catalogInstance)
             }
-
-            // Delete the relation about users with accessible test
-            customDeleteService.customDeleteCatalogUsersTest(catalogInstance)
 
             // Delete catalog
             catalogInstance.delete(flush:true, failOnError: true)

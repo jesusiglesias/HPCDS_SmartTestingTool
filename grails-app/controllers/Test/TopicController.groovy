@@ -199,22 +199,11 @@ class TopicController {
 
         try {
 
-            // Delete the content associated (catalogs, questions and answers) if checkbox is true
-            if (params.delete_topic) {
+            // Delete the relation about users with accessible test
+            customDeleteService.customDeleteTopicUsersTest(topicInstance)
 
-                // Delete the relation about users with accessible test
-                customDeleteService.customDeleteTopicUsersTest(topicInstance)
-
-                customDeleteService.customDeleteTopic(topicInstance)
-
-            } else {
-
-                // Delete the relation about users with accessible test
-                customDeleteService.customDeleteTopicUsersTest(topicInstance)
-
-                // Delete topic
-                topicInstance.delete(flush:true, failOnError: true)
-            }
+            // Delete topic
+            topicInstance.delete(flush:true, failOnError: true)
 
             request.withFormat {
                 form multipartForm {
