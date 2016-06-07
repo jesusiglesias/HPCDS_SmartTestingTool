@@ -10,6 +10,7 @@ class SecurityFilters {
 
     // Referer must match serverURL, optionally https
     static validRefererPrefix = "^${Holders.config.grails.serverURL}".replace("http", "https?")
+    static validRefererPrefixHTTPS = "^${Holders.config.grails.serverURL}".replace("http", "https?").replace("8080", "8443")
 
     def filters = {
         // Filter applied to the entire system
@@ -45,7 +46,7 @@ class SecurityFilters {
                 if (request.method.toUpperCase() == "POST" || request.method.toUpperCase() == "PUT") {
                     def referer = request.getHeader('Referer')
 
-                    return referer && referer =~ validRefererPrefix
+                    return referer && (referer =~ validRefererPrefix || referer =~ validRefererPrefixHTTPS)
                 }
             }
         }

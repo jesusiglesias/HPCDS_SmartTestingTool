@@ -207,7 +207,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     'customTasksUser/updatePass':          ['permitAll'],
     '/customTasksUser/**':                 ['permitAll'],
 
-    /* Custom tasks admin (back-end)
+    /* Custom tasks admin
     ======================================================*/
     '/customTasksBackend/dashboard':            ['ROLE_ADMIN'],
     '/customTasksBackend/reloadUsers':          ['ROLE_ADMIN'],
@@ -224,7 +224,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksBackend/reloadLogConfigAJAX':  ['ROLE_ADMIN'],
     '/customTasksBackend/**':                   ['ROLE_ADMIN'],
 
-    /* Custom tasks normal user (front-end)
+    /* Custom tasks normal user
     ======================================================*/
     '/customTasksFrontEnd/home':                ['ROLE_USER'],
     '/customTasksFrontEnd/topicSelected':       ['ROLE_USER'],
@@ -242,11 +242,15 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/customTasksFrontEnd/updatePassword':      ['ROLE_USER'],
     '/customTasksFrontEnd/notFoundPassword':    ['ROLE_USER'],
     '/customTasksFrontEnd/scores':              ['ROLE_USER'],
-    '/customTasksFrontEnd/cookiesPolicy':       ['permitAll'],
-    '/customTasksFrontEnd/contact':             ['ROLE_USER'],
-    '/customTasksFrontEnd/contactForm':         ['ROLE_USER'],
-    '/faq':                                     ['ROLE_USER'],
-    '/customTasksFrontEnd/**':                  ['ROLE_USER']
+    '/customTasksFrontEnd/**':                  ['ROLE_USER'],
+
+    /* Custom tasks normal user (information)
+    ======================================================*/
+    '/customTasksUserInformation/cookiesPolicy':       ['permitAll'],
+    '/customTasksUserInformation/contact':             ['ROLE_USER'],
+    '/customTasksUserInformation/contactForm':         ['ROLE_USER'],
+    '/customTasksUserInformation/faq':                 ['ROLE_USER'],
+    '/customTasksUserInformation/**':                  ['ROLE_USER'],
 ]
 
 // URL of login page (default: "/login/auth")
@@ -292,3 +296,16 @@ grails.plugin.springsecurity.switchUser.usernameParameter = 'stt_hp_username'
 springsecurity.urlredirection.admin = '/dashboard'
 springsecurity.urlredirection.user = '/home'
 springsecurity.urlredirection.noRole = '/noRole'
+
+/*  HTTPS-SSL configuration
+======================================================*/
+environments {
+    production {
+        grails.plugin.springsecurity.portMapper.httpPort = 8080
+        grails.plugin.springsecurity.portMapper.httpsPort = 8443
+        grails.plugin.springsecurity.auth.forceHttps = true
+        grails.plugin.springsecurity.secureChannel.definition = [
+                '/**': 'REQUIRES_SECURE_CHANNEL'
+        ]
+    }
+}
