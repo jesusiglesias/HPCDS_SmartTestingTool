@@ -18,7 +18,7 @@
         var _sendEmail = '${message(code: "layouts.main_auth_user.body.map.contact.form.button", default: "Send")}';
         var _sendingEmail = '${message(code: "customTasksUser.login.stateAccount.sending", default: "Sending...")}';
         var _responseError = '${message(code: "customTasksUser.sendEmail.error", default: "An internal error has occurred during the sending email. You try it again later.")}';
-        var _contactFormUrl = '${g.createLink(controller: "customTasksFrontEnd", action: 'contactForm')}';
+        var _contactFormUrl = '${g.createLink(controller: "customTasksUserInformation", action: 'contactForm')}';
     </script>
 </head>
 

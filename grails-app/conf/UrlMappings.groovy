@@ -116,13 +116,13 @@ class UrlMappings {
         // Enabled user account
         "/enabledAccount"(controller: 'customTasksUser', action: 'enabledAccount')
 
-        /* Custom general tasks admin (back-end)
+        /* Custom general tasks admin
         ======================================================*/
         // Reload log config
         "/reloadLogConfig"(controller: 'customTasksBackend', action: 'reloadLogConfig')
         "/dashboard"(controller: 'customTasksBackend', action: 'dashboard')
 
-        /* Custom general tasks normal user (front-end)
+        /* Custom general tasks normal user
         ======================================================*/
         "/home"(controller: 'customTasksFrontEnd', action: 'home')
         "/topicSelected/$id?(.$format)?"(controller: 'customTasksFrontEnd', action: 'topicSelected')
@@ -135,9 +135,12 @@ class UrlMappings {
         "/profileAvatar"(controller: 'customTasksFrontEnd', action: 'profileAvatar')
         "/profileAvatar-error"(controller: 'customTasksFrontEnd', action: 'updateAvatar')
         "/profilePassword"(controller: 'customTasksFrontEnd', action: 'profilePassword')
-        "/contact"(controller: 'customTasksFrontEnd', action: 'contact')
-        "/cookiesPolicy"(controller: 'customTasksFrontEnd', action: 'cookiesPolicy')
-        "/faq"(view: "customTasksFrontEnd/faq")
+
+        /* Custom general tasks normal user (information)
+        ======================================================*/
+        "/contact"(controller: 'customTasksUserInformation', action: 'contact')
+        "/cookiesPolicy"(controller: 'customTasksUserInformation', action: 'cookiesPolicy')
+        "/faq"(controller: "customTasksUserInformation", action: 'faq')
 
         /* Errors
         ======================================================*/
