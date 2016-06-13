@@ -525,21 +525,24 @@ class CustomTasksFrontEndController {
         // Evaluations of the user
         def completedTest = Evaluation.findAllByUserName(currentUser.username).size()
 
-        // Obtaining number of active test in system - Asynchronous/Multi-thread
-        def testPromise = Test.async.findAllByActive(true)
+        // Obtaining number of accessible test in system by user
+        def numberActiveTest = Test.createCriteria().list() {
+            createAlias('allowedUsers', 'u',)
+            eq 'u.id', currentUser.id
+            eq 'active', true
+        }
 
         // Obtaining test approved and unapproved - Asynchronous/Multi-thread
         def suspensePromise = Evaluation.async.findAllByUserNameAndTestScoreLessThan(currentUser.username, 5)
         def approvedPromise = Evaluation.async.findAllByUserNameAndTestScoreGreaterThanEquals(currentUser.username, 5)
 
         // Wait all promises
-        def results = waitAll(testPromise, suspensePromise, approvedPromise)
+        def results = waitAll(suspensePromise, approvedPromise)
 
-        def numberActiveTest = results[0].size()
-        def numberUnapprovedTest = results[1].size()
-        def numberApprovedTest = results[2].size()
+        def numberUnapprovedTest = results[0].size()
+        def numberApprovedTest = results[1].size()
 
-        statsList.push(numberActiveTest)
+        statsList.push(numberActiveTest.size())
         statsList.push(completedTest)
         statsList.push(numberUnapprovedTest)
         statsList.push(numberApprovedTest)

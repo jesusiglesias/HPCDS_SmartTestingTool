@@ -3,7 +3,7 @@
     <div class="row list-separated profile-stat">
         <div class="col-xs-6">
             <div class="uppercase profile-stat-title" data-counter="counterup" data-value="${numberActiveTest}"> ${numberActiveTest}</div>
-            <div class="uppercase profile-stat-text"><g:message code="layouts.main_auth_user.content.myProfile.sidebar.bottom.test" default="Active test"/></div>
+            <div class="uppercase profile-stat-text"><g:message code="layouts.main_auth_user.content.myProfile.sidebar.bottom.test" default="Accessible test"/></div>
         </div>
         <div class="col-xs-6">
             <div class="uppercase profile-stat-title" data-counter="counterup" data-value="${completedTest}"> ${completedTest}</div>
