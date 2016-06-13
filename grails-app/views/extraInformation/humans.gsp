@@ -12,7 +12,7 @@
 
 /* SITE */
 
-	Last update: 2016/07/10
+	Last update: 2016/06/28
 	Language: English and spanish
 	Framework (full-stack): Grails
 	Doctype: HTML5
