@@ -27,7 +27,7 @@ class User extends SecUser {
     // Restrictions on the attributes of the entity
     static constraints = {
         address nullable: true, blank: false, maxSize: 70
-        birthDate blank:false, max: new Date()
+        birthDate blank:false
         city nullable: true, blank: false, maxSize: 70
         country nullable: true, blank: false, maxSize: 70
         name blank: false, maxSize: 25

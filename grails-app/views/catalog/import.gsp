@@ -461,7 +461,7 @@
                                     <span class="input-group-addon btn btn-block grey-gallery btn-file">
                                         <span class="fileinput-new"><g:message code="default.import.select.button" default="Select file"/></span>
                                         <span class="fileinput-exists"><g:message code="default.imageProfile.change" default="Change"/></span>
-                                        <input type="file" accept="text/csv" name="importFileCatalog" id="importFileCatalog" required>
+                                        <input type="file" accept="text/comma-separated-values, text/csv, application/csv" name="importFileCatalog" id="importFileCatalog" required />
                                     </span>
                                     <a href="javascript:;" class="input-group-addon btn red-soft fileinput-exists" data-dismiss="fileinput"><g:message code="default.imageProfile.remove" default="Remove"/></a>
                                 </div>
