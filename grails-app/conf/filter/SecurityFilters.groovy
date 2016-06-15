@@ -50,5 +50,35 @@ class SecurityFilters {
                 }
             }
         }
+
+        // It adds the HSTS header
+        hsts(controller: '*', action: '*') {
+
+            after = { Map model ->
+                // It lets a web site tell browsers that it should only be communicated with using HTTPS, instead of using HTTP
+                if ( request.isSecure() || request.getHeader('X-Forwarded-Proto')?.toLowerCase() == 'https' ) {
+                    response.setHeader('Strict-Transport-Security', "max-age=2628000") // One month
+                }
+
+            }
+        }
+
+        // It adds the XSS-Protection header
+        xssProtection(controller: '*', action: '*') {
+
+            after = { Map model ->
+                // It forces XSS protection (useful if XSS protection was disabled by the user)
+                response.setHeader('X-XSS-Protection', "1; mode=block")
+            }
+        }
+
+        // It adds the X-Content-Type-Options header
+        contentType(controller: '*', action: '*') {
+
+            after = { Map model ->
+                // It prevents "mime" based attacks
+                response.setHeader('X-Content-Type-Options', "nosniff")
+            }
+        }
     }
 }
