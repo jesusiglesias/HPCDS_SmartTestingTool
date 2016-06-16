@@ -51,18 +51,6 @@ class SecurityFilters {
             }
         }
 
-        // It adds the HSTS header
-        hsts(controller: '*', action: '*') {
-
-            after = { Map model ->
-                // It lets a web site tell browsers that it should only be communicated with using HTTPS, instead of using HTTP
-                if ( request.isSecure() || request.getHeader('X-Forwarded-Proto')?.toLowerCase() == 'https' ) {
-                    response.setHeader('Strict-Transport-Security', "max-age=2628000") // One month
-                }
-
-            }
-        }
-
         // It adds the XSS-Protection header
         xssProtection(controller: '*', action: '*') {
 
