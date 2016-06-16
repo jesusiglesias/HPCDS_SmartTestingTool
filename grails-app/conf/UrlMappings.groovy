@@ -89,6 +89,10 @@ class UrlMappings {
             "/import"(controller: 'test', action: 'importTest')
             "/uploadFile"(controller: 'test', action: 'uploadFileTest')
         }
+        // Evaluation - Grouping URLs
+        group("/evaluation") {
+            "/"(controller: 'evaluation', action: 'index')
+        }
 
         /* Login controller
         ======================================================*/
