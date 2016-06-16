@@ -420,7 +420,7 @@ class CustomTasksBackendController {
             currentUser = SecUser.get(params.id)
 
         } else { // Menu
-            currentUser = SecUser.get(springSecurityService.currentUser.id)
+            currentUser = SecUser.get(springSecurityService.currentUser?.id)
         }
 
         if (!currentUser || !currentUser.avatar || !currentUser.avatarType) {
