@@ -190,6 +190,8 @@ class DepartmentController {
     @Transactional
     def delete(Department departmentInstance) {
 
+        def evaluationsToDelete = null
+
         if (departmentInstance == null) {
 
             // Roll back in database
@@ -203,11 +205,16 @@ class DepartmentController {
 
             // Delete users if checkbox is true
             if (params.delete_department) {
-                customDeleteService.customDeleteDepartment(departmentInstance)
+                evaluationsToDelete = customDeleteService.customDeleteDepartment(departmentInstance)
             }
 
             // Delete department
             departmentInstance.delete(flush:true, failOnError: true)
+
+            // Delete evaluations
+            if (params.delete_department && evaluationsToDelete != null) {
+                evaluationsToDelete*.delete(flush: true, failOnError: true)
+            }
 
             request.withFormat {
                 form multipartForm {

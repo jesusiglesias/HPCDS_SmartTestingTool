@@ -386,6 +386,9 @@ class UserController {
     @Transactional
     def delete(User userInstance) {
 
+        def evaluationsUser = userInstance.evaluations
+        def evaluationsTotal = null
+
         if (userInstance == null) {
 
             // Roll back in database
@@ -396,18 +399,22 @@ class UserController {
         }
 
         try {
-            // It deletes the relations
-            userInstance.evaluations.each { evaluation ->
 
-                // Test relation
-                def test = Test.findByName(evaluation.testName)
-                if (test != null) {
-                    test.removeFromEvaluationsTest(evaluation)
+            // It deletes the relations the evaluation with test
+            if (evaluationsUser.size() > 0) {
+
+                evaluationsUser.each { evaluation ->
+
+                    // Test relation
+                    def test = Test.findByName(evaluation.testName)
+
+                    if (test != null) {
+                        test.removeFromEvaluationsTest(evaluation)
+                    }
                 }
 
-                // Evaluation relation
-                userInstance.removeFromEvaluations(evaluation)
-                evaluation.delete(flush: true, failOnError: true)
+                // It obtains all evaluation of this user
+                evaluationsTotal = Evaluation.findAllByUserName(userInstance.username)
             }
 
             // Delete SecUserSecRole relations
@@ -415,6 +422,11 @@ class UserController {
 
             // Delete user
             userInstance.delete(flush: true, failOnError: true)
+
+            // It deletes the evaluations
+            if (evaluationsUser.size() > 0) {
+                evaluationsTotal*.delete(flush: true, failOnError: true)
+            }
 
             request.withFormat {
                 form multipartForm {

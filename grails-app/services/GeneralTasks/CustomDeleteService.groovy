@@ -7,6 +7,7 @@ import Test.Catalog
 import Test.Question
 import Test.Test
 import User.User
+import User.Evaluation
 import static grails.async.Promises.*
 import grails.transaction.Transactional
 
@@ -25,28 +26,38 @@ class CustomDeleteService {
     def customDeleteDepartment (departmentInstance) {
         log.debug("CustomDeleteService:customDeleteDepartment()")
 
+        def evaluationsUser
+        def evaluationsTotal = []
+
         // It searches all users
         def userDeleted = User.findAllByDepartment(departmentInstance)
 
         // Delete SecUserSecRole relations
         userDeleted.each { User user ->
 
-            // It deletes the relation with evaluation and evaluation
-            user.evaluations.each { evaluation ->
+            evaluationsUser = user.evaluations
 
-                // Test relation
-                def test = Test.findByName(evaluation.testName)
-                if (test != null) {
-                    test.removeFromEvaluationsTest(evaluation)
+            // It deletes the relations the evaluation with test
+            if (evaluationsUser.size() > 0) {
+
+                evaluationsUser.each { evaluation ->
+
+                    // Test relation
+                    def test = Test.findByName(evaluation.testName)
+
+                    if (test != null) {
+                        test.removeFromEvaluationsTest(evaluation)
+                    }
                 }
 
-                // Evaluation relation
-                user.removeFromEvaluations(evaluation)
-                evaluation.delete(flush: true, failOnError: true)
+                // It obtains all evaluation of this user
+                evaluationsTotal += Evaluation.findAllByUserName(user.username)
             }
 
             SecUserSecRole.findAllBySecUser(user)*.delete(flush: true, failOnError: true)
         }
+
+        return evaluationsTotal
     }
 
     /**
