@@ -49,7 +49,7 @@ class CustomTasksUserInformationController {
         subjectList.push(suggestionSubject)
 
         // Error en el sistema
-        def errorSubject = g.message(code: "layouts.main_auth_user.body.map.contact.form.subject.error", default: 'Error in system')
+        def errorSubject = g.message(code: "layouts.main_auth_user.body.map.contact.form.subject.error", default: 'Incidence in system')
         subjectList.push(errorSubject)
 
         // Eliminar cuenta
