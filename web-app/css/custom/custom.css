@@ -171,6 +171,7 @@ input:-webkit-autofill:active {
 .profileImage-view {
     float: left;
     height: 38px;
+    width: 40px;
     display: inline-block;
 }
 
