@@ -1058,7 +1058,7 @@
                             <div class="portlet-title">
                                 <div class="caption font-green-dark">
                                     <i class="fa fa-line-chart font-green-dark"></i>
-                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.scores.test.title" default="Score by test"/></span>
+                                    <span class="caption-subject sbold uppercase"><g:message code="layouts.main_auth_admin.body.portlet.scores.test.title" default="Scores by test"/></span>
                                 </div>
                                 <div class="tools">
                                     <i class="fa fa-refresh reloadGraph reloadScoresTest" onclick="drawChartTScore($('#test').val())"></i>
