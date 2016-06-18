@@ -295,10 +295,15 @@ body {
     /* Profile image */
     .page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle > img {
         float: left;
-        margin-top: -8px;
-        margin-right: 8px;
+        margin-top: -6px;
+        margin-right: 5px;
         height: 35px;
         display: inline-block;
+    }
+
+    /* Profile image */
+    .page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle > img {
+        width: 39px;
     }
 }
 
