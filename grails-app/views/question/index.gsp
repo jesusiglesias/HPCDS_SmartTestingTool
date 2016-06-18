@@ -462,8 +462,8 @@
                                         <td><g:message code="layouts.main_auth_admin.body.content.question.answers.display" default="Show answers"/></td>
                                         <td><g:message code="question.catalogCount.label" default="Number of catalogs"/></td>
                                         <td><g:message code="layouts.main_auth_admin.body.content.question.catalogs.display" default="Show catalogs"/></td>
-                                        <td><g:message code="layouts.main_auth_admin.body.content.question.delete.relations.catalogs" default="Unlink catalogs"/></td>
                                         <td><g:message code="layouts.main_auth_admin.body.content.question.delete.relations.answers" default="Unlink answers"/></td>
+                                        <td><g:message code="layouts.main_auth_admin.body.content.question.delete.relations.catalogs" default="Unlink catalogs"/></td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -497,15 +497,15 @@
                                                     </g:each>
                                                 </td>
                                                 <td>
-                                                    <g:if test="${questionInstance.catalogs?.size() > 0}">
-                                                        <g:link controller="question" action="deleteRelationsCatalogs" id="${questionInstance.id}" class="btn btn-xs btn-circle btn-relation">
+                                                    <g:if test="${questionInstance.answers?.size() > 0}">
+                                                        <g:link controller="question" action="deleteRelationsAnswers" id="${questionInstance.id}" class="btn btn-xs btn-circle btn-relation">
                                                             <g:message code="default.button.unlink.relation" default="Unlink"/>
                                                         </g:link>
                                                     </g:if>
                                                 </td>
                                                 <td>
-                                                    <g:if test="${questionInstance.answers?.size() > 0}">
-                                                        <g:link controller="question" action="deleteRelationsAnswers" id="${questionInstance.id}" class="btn btn-xs btn-circle btn-relation">
+                                                    <g:if test="${questionInstance.catalogs?.size() > 0}">
+                                                        <g:link controller="question" action="deleteRelationsCatalogs" id="${questionInstance.id}" class="btn btn-xs btn-circle btn-relation">
                                                             <g:message code="default.button.unlink.relation" default="Unlink"/>
                                                         </g:link>
                                                     </g:if>
