@@ -1078,6 +1078,7 @@ table.dataTable tbody tr:hover {
 .recentUser-image {
     float: left;
     height: 47px;
+    width: 48px;
     display: inline-block;
 }
 
