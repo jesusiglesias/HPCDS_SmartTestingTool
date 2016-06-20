@@ -140,7 +140,7 @@ token.expiration=30
 grails.plugin.springsecurity.useSecurityEventListener = true
 
 bruteforcedefender {
-    time = 5 // Minutes maintaining failed attempts allowed
+    time = 30 // Minutes maintaining failed attempts allowed
     allowedNumberOfAttempts = 5 // Number of failed attempts before blocking the user
 }
 
