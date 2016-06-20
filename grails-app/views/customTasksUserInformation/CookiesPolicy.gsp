@@ -160,10 +160,10 @@
                 </h3>
                 <p class="page-title-user-cookie-section-description">
                     ${raw(g.message(code:"layouts.main_auth_user.body.title.cookie.section.four.description", default:"<strong>If you continue browsing once informed about the cookies policy, we understand that you accept the use of cookies by the platform.</strong> However, you can change your " +
-                            "cookie settings at any time, configuring your browser for acceptance or not. SMART TESTING TOOL thank you the acceptance of cookies because this helps us to obtain more precise data and improve the content and design of the platform to suit their preferences. <br><br>" +
+                            "cookie settings at any time, configuring your browser for acceptance or not. <span class=\"sbold\">SMART TESTING TOOL</span> thank you the acceptance of cookies because this helps us to obtain more precise data and improve the content and design of the platform to suit their preferences. <br><br>" +
                             "<strong>Update of the policy cookies?</strong> <br> This <i>cookies policy</i> can be modified depending on, regulations, or in order to adapt the policy to the instructions issued by the Spanish Data Protection Agency, so it is recommended that the users visit it " +
-                            "periodically in order to be properly informed about how and why we use cookies. <br> <strong>Cookies policy was last updated date time [15 July 2016].</strong> If you have questions about this policy of cookies, you can contact with SMART TESTING TOOL at the " +
-                            "following address: <a href=\"mailto:smartestingtool.info@gmail.com\" class=\"break-word\">smartestingtool.info@gmail.com</a>."))}
+                            "periodically in order to be properly informed about how and why we use cookies. <br> <strong>Cookies policy was last updated date time [28 June 2016].</strong> If you have questions about this policy of cookies, you can contact with <span class=\"sbold\">SMART TESTING TOOL</span> at the " +
+                            "following address: <a href=\"mailto:info.smartestingtool@gmail.com\" class=\"break-word\"><strong>info.smartestingtool@gmail.com</strong></a>."))}
                 </p>
             </div>
         </div>

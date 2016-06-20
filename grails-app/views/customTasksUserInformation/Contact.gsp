@@ -113,7 +113,7 @@
                         </div>
                         <div class="section">
                             <div class="label uppercase"><g:message code="layouts.main_auth_user.body.map.title.contact" default="Contact"/></div>
-                            <p><i class="icofont icofont-ui-email"></i> <a href="mailto:smartestingtool.info@gmail.com" class="contact-map-email break-word">smartestingtool.info@gmail.com</a></p>
+                            <p><i class="icofont icofont-ui-email"></i> <a href="mailto:info.smartestingtool@gmail.com" class="contact-map-email break-word">info.smartestingtool@gmail.com</a></p>
                             <p><i class="icofont icofont-phone-circle"></i> +34 91 631 16 84 </p>
                         </div>
                         <div class="section">
