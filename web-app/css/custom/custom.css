@@ -1306,6 +1306,14 @@ table.dataTable tbody tr:hover {
     margin-left: 10px;
 }
 
+.logoEscuela img {
+    padding: 9px 12px;
+}
+
+.logoAuthEscuela img {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
 /* Datatable
 =================================================================== */
 /* Icon in search box */
