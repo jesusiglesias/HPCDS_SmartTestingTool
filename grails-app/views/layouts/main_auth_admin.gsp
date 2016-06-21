@@ -203,6 +203,9 @@
             <g:link uri="https://www.hpcds.com/">
                 <asset:image src="logo/logo_hp.png" alt="HP CDS" class="hvr-wobble-vertical"/>
             </g:link>
+            <g:link uri="https://www.inf.uva.es/" class="logoEscuela">
+                <asset:image src="logo/logo_escuela.png" alt="UVa" class="hvr-wobble-vertical"/>
+            </g:link>
         </div>
     </div>
 

@@ -1285,7 +1285,7 @@ table.dataTable tbody tr:hover {
 .logoHP-admin{
     text-align: center;
     width: 100%;
-    margin: 25px 0 25px 0;
+    margin: 30px 0 30px 0;
 }
 
 .logoHP-admin img {
@@ -1293,9 +1293,17 @@ table.dataTable tbody tr:hover {
     height: 100px;
 }
 
+.logoHP-admin > a:hover{
+    text-decoration: none;
+}
+
 .logoAuth img {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 0 4px;
+}
+
+.logoEscuela {
+    margin-left: 10px;
 }
 
 /* Datatable
@@ -2119,7 +2127,7 @@ table.dataTable tbody tr:hover {
 
     /* Logo HP CDS*/
     .logoHP-admin{
-        margin: 20px 0 20px 0;
+        margin: 25px 0 25px 0;
     }
 
     /* Logo HP */

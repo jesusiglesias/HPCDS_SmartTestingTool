@@ -159,6 +159,10 @@
     margin: 35px 0 35px 0;
 }
 
+.logoHP > a:hover{
+    text-decoration: none;
+}
+
 .logoHP img {
     width: 115px;
     height: 115px;
