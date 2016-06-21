@@ -454,7 +454,7 @@ class BootStrap {
                     initDate: new Date().clearTime(),
                     endDate: new Date().clearTime() + 7,
                     lockTime: 0,
-                    maxAttempts: 3,
+                    maxAttempts: 1,
                     topic: securityTopic,
                     catalog: securityCatalog
             )
@@ -463,11 +463,11 @@ class BootStrap {
                     name: 'Seguridad básico',
                     description: 'Conceptos introductorios sobre los aspectos más básicos de la seguridad informática.',
                     active: true,
-                    numberOfQuestions: 8,
+                    numberOfQuestions: 5,
                     initDate: new Date().clearTime(),
                     endDate: new Date().clearTime() + 3,
                     lockTime: 0,
-                    maxAttempts: 1,
+                    maxAttempts: 3,
                     topic: securityTopic,
                     catalog: securityCatalog
             )
