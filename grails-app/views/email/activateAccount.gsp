@@ -211,8 +211,11 @@
                     <td style="padding: 40px 10px;width: 100%;font-size: 14px; font-family: sans-serif; mso-height-rule: exactly; line-height:18px; text-align: center; color: #888888;">
                         <p style="color:#555555 !important; text-decoration:underline; font-weight: bold;">2016 © <g:link style="text-decoration: none; color:#555555 !important;" uri="http://es.linkedin.com/in/jesusgiglesias"> Jesús Iglesias García</g:link></p>
                         <br>
-                        <g:link uri="https://www.hpcds.com/">
-                            <img src="http://i.imgur.com/ANpojrH.png" width="100" height="100"/>
+                        <g:link uri="https://www.hpcds.com/" style="text-decoration: none;">
+                            <img src="http://i.imgur.com/ANpojrH.png" alt="HP CDS" width="100" height="100"/>
+                        </g:link>
+                        <g:link uri="https://www.inf.uva.es/" style="margin-left:10px; text-decoration: none;">
+                            <img src="http://i.imgur.com/YULJClW.png?1" alt="UVa" width="85" height="90"/>
                         </g:link>
                     </td>
                 </tr>
