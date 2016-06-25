@@ -402,7 +402,9 @@ class CustomTasksFrontEndController {
                     finalScore = (totalScore * 10) / userEvaluation.maxPossibleScore
 
                     // It calculate the average score
-                    finalScore = (finalScore + userEvaluation?.testScore) / 2
+                    if (userEvaluation.testScore != null) {
+                        finalScore = (finalScore + userEvaluation?.testScore) / 2
+                    }
 
                     // It calculates the final score with penalty (Default value: 10%)
                     def penalty = (finalScore * testInstance.penalty) / 100
@@ -411,7 +413,7 @@ class CustomTasksFrontEndController {
                 }
 
                 // Test with incorrect answers penalized
-                if (testInstance.incorrectDiscount) {
+                if (testInstance.incorrectDiscount && testInstance.numberOfQuestions > 0) {
 
                     // Average score of all question
                     def averageScore = userEvaluation.maxPossibleScore / testInstance.numberOfQuestions
@@ -435,7 +437,14 @@ class CustomTasksFrontEndController {
 
             userEvaluation.rightQuestions = rightAnswers
             userEvaluation.failedQuestions = incorrectAnswers
-            userEvaluation.questionsUnanswered = testInstance.numberOfQuestions - (rightAnswers + incorrectAnswers)
+
+            // Avoid error - Rejected value < 0
+            if ((testInstance.numberOfQuestions - (rightAnswers + incorrectAnswers)) < 0 ) {
+                userEvaluation.questionsUnanswered = 0
+            } else{
+                userEvaluation.questionsUnanswered = testInstance.numberOfQuestions - (rightAnswers + incorrectAnswers)
+            }
+
             userEvaluation.maxPossibleScore = null
 
             def validUserEvaluation = userEvaluation.validate()
@@ -455,9 +464,14 @@ class CustomTasksFrontEndController {
                         flash.finalScore = finalScore.round(2)
                     }
 
-                    flash.rightQuestions= rightAnswers
-                    flash.failedQuestions= incorrectAnswers
-                    flash.questionsUnanswered= testInstance.numberOfQuestions - (rightAnswers + incorrectAnswers)
+                    flash.rightQuestions = rightAnswers
+                    flash.failedQuestions = incorrectAnswers
+
+                    if ((testInstance.numberOfQuestions - (rightAnswers + incorrectAnswers)) < 0 ) {
+                        flash.questionsUnanswered = 0
+                    } else{
+                        flash.questionsUnanswered = testInstance.numberOfQuestions - (rightAnswers + incorrectAnswers)
+                    }
 
                     flash.homepage = g.message(code: "layouts.main_auth_user.body.testFinished.button.homepage", default: 'Homepage')
 
