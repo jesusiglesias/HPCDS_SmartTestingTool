@@ -169,7 +169,7 @@
                 </label>
                 <div class="input-icon right">
                     <i class="fa"></i>
-                    <g:textField name="country" maxlength="70" value="${userInstance?.country}" class="form-control form-shadow country-userProfile user-profile-input"/>
+                    <g:textField name="country" maxlength="70" value="${currentUser?.country}" class="form-control form-shadow country-userProfile user-profile-input"/>
                 </div>
                 <i class="fa fa-times i-delete-userProfile i-delete-userProfile-country"></i> <!-- Delete text icon -->
             </div>
