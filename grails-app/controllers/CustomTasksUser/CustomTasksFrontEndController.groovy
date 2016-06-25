@@ -36,7 +36,7 @@ class CustomTasksFrontEndController {
         def numberActiveTest = []
 
         // It obtains the current user
-        def currentUser = User.get(springSecurityService.currentUser.id)
+        def currentUser = User.get(springSecurityService.currentUser?.id)
 
         // Avoid error if user has not associated test
         if (currentUser.accessTests.size() == 0) {
@@ -91,7 +91,7 @@ class CustomTasksFrontEndController {
                 if (topicInstance != null) {
 
                     // It obtains the current user
-                    def currentUser = User.get(springSecurityService.currentUser.id)
+                    def currentUser = User.get(springSecurityService.currentUser?.id)
 
                     def topicInstanceActiveTest = Test.createCriteria().list() {
                         createAlias('allowedUsers', 'u',)
@@ -192,7 +192,7 @@ class CustomTasksFrontEndController {
                     }
 
                     // It obtains the current user
-                    def currentUserToTest = User.get(springSecurityService.currentUser.id)
+                    def currentUserToTest = User.get(springSecurityService.currentUser?.id)
 
                     // It checks if each test is accessible by number of attempt
                     def currentEvaluation = Evaluation.findByUserNameAndTestName(currentUserToTest.username, testInstance.name)
@@ -334,7 +334,7 @@ class CustomTasksFrontEndController {
         def enter = false
 
         // It obtains the current user
-        def currentUserEvaluation = User.get(springSecurityService.currentUser.id)
+        def currentUserEvaluation = User.get(springSecurityService.currentUser?.id)
 
         // It obtains the user evaluation
         def userEvaluation = Evaluation.findByUserNameAndTestName(currentUserEvaluation.username, params.testName)
@@ -522,7 +522,7 @@ class CustomTasksFrontEndController {
         def userStatsList
 
         // ID of current user
-        def currentUser = User.get(springSecurityService.currentUser.id)
+        def currentUser = User.get(springSecurityService.currentUser?.id)
 
         userStatsList = testStats(currentUser)
 
@@ -580,7 +580,7 @@ class CustomTasksFrontEndController {
         def user = new User(params)
 
         // It obtains the current user
-        User currentUserInstance = User.get(springSecurityService.currentUser.id)
+        User currentUserInstance = User.get(springSecurityService.currentUser?.id)
         bindData(currentUserInstance, this.params, [exclude:['version', 'username', 'birthDate']])
 
         // It checks the date
@@ -630,13 +630,13 @@ class CustomTasksFrontEndController {
 
             // It obtains the original data of the user
             User.withNewSession {
-                infoCurrentUser = User.get(springSecurityService.currentUser.id)
+                infoCurrentUser = User.get(springSecurityService.currentUser?.id)
                 // Avoid lazy load - without session; stats section (department)
                 User.get(springSecurityService.currentUser.id).department
             }
 
             // Avoid lazy load - without session; list of department in _personalData (when user chooses several departments)
-            currentUserInstance.department = User.get(springSecurityService.currentUser.id).department
+            currentUserInstance.department = User.get(springSecurityService.currentUser?.id).department
 
             respond currentUserInstance.errors, view:'profile', model: [infoCurrentUser: infoCurrentUser, currentUser: currentUserInstance, completedTest: userStatsList[1], numberActiveTest: userStatsList[0], numberApprovedTest: userStatsList[3], numberUnapprovedTest: userStatsList[2]]
             return
@@ -672,7 +672,7 @@ class CustomTasksFrontEndController {
      * It renders the not found message if the user instance was not found.
      */
     protected void notFound() {
-        log.debug("CustomTasksFrontEndController():updateProfile:notFound():CurrentUser:${springSecurityService.currentUser.username}")
+        log.debug("CustomTasksFrontEndController():updateProfile:notFound():CurrentUser:${springSecurityService.currentUser?.username}")
 
         request.withFormat {
             form multipartForm {
@@ -692,7 +692,7 @@ class CustomTasksFrontEndController {
         def userStatsList
 
         // ID of current user
-        def currentUser = User.get(springSecurityService.currentUser.id)
+        def currentUser = User.get(springSecurityService.currentUser?.id)
 
         userStatsList = testStats(currentUser)
 
@@ -735,7 +735,7 @@ class CustomTasksFrontEndController {
         }
 
         // It obtains the current user
-        User currentUserInstance = User.get(springSecurityService.currentUser.id)
+        User currentUserInstance = User.get(springSecurityService.currentUser?.id)
 
         // Update the image and mime type
         currentUserInstance.avatar = filename.bytes
@@ -795,10 +795,10 @@ class CustomTasksFrontEndController {
     }
 
     /**
-     * It renders the not found message if the user instance was not found.
+     * It renders the not found message if the user instance was not found.?
      */
     protected void notFoundAvatar() {
-        log.debug("CustomTasksFrontEndController():updateProfile:notFoundAvatar():CurrentUser:${springSecurityService.currentUser.username}")
+        log.debug("CustomTasksFrontEndController():updateProfile:notFoundAvatar():CurrentUser:${springSecurityService.currentUser?.username}")
 
         request.withFormat {
             form multipartForm {
@@ -818,7 +818,7 @@ class CustomTasksFrontEndController {
         def userStatsList
 
         // ID of current user
-        def currentUser = User.get(springSecurityService.currentUser.id)
+        def currentUser = User.get(springSecurityService.currentUser?.id)
 
         userStatsList = testStats(currentUser)
 
@@ -858,7 +858,7 @@ class CustomTasksFrontEndController {
         }
 
         // It obtains the current user
-        User currentUserInstance = User.get(springSecurityService.currentUser.id)
+        User currentUserInstance = User.get(springSecurityService.currentUser?.id)
 
         // Back-end validation - Current password and password in database
         if (!passwordEncoder.isPasswordValid(currentUserInstance.password, params.currentPassword, null)) {
@@ -960,7 +960,7 @@ class CustomTasksFrontEndController {
      * It renders the not found message if the user instance was not found.
      */
     protected void notFoundPassword() {
-        log.debug("CustomTasksFrontEndController():updateProfile:notFoundPassword():CurrentUser:${springSecurityService.currentUser.username}")
+        log.debug("CustomTasksFrontEndController():updateProfile:notFoundPassword():CurrentUser:${springSecurityService.currentUser?.username}")
 
         request.withFormat {
             form multipartForm {
@@ -978,7 +978,7 @@ class CustomTasksFrontEndController {
         log.debug("CustomTasksFrontEndController():scores()")
 
         // ID of current user
-        def currentUser = User.get(springSecurityService.currentUser.id)
+        def currentUser = User.get(springSecurityService.currentUser?.id)
         def evaluations = Evaluation.findAllByUserName(currentUser.username)
 
         render view: 'scores', model: [evaluations: evaluations]
