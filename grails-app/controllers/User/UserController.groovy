@@ -525,8 +525,6 @@ class UserController {
         def back = false
         def sexValue, sexValid = false, birthDateValid = false, departmentValid = false, testValid = false
         def birthDateInstance
-        String[] testArray
-        List<String> testInstanceArray = new ArrayList<String>();
 
         // Obtaining number of fields in the entity - numberFields: 20
         def numberFields = 0
@@ -581,6 +579,8 @@ class UserController {
         try {
             csvFileLoad.inputStream.toCsvReader(['separatorChar': ';', 'charset': 'UTF-8', 'skipLines': 1]).eachLine { tokens ->
 
+                List<String> testInstanceArray = new ArrayList<String>();
+                String[] testArray
                 lineCounter++
 
                 // Each row has 1 column (name). Length of the row

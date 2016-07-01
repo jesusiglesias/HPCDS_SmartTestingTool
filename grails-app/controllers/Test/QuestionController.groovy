@@ -380,8 +380,6 @@ class QuestionController {
         def back = false
         def answerValid = false, difficultyValid = false
         def difficultyValue
-        String[] answersArray
-        List<String> answerInstanceArray = new ArrayList<String>();
 
         // Obtaining number of fields in the entity - numberFields: 5
         def numberFields = 0
@@ -436,6 +434,8 @@ class QuestionController {
         try {
             csvFileLoad.inputStream.toCsvReader(['separatorChar': ';', 'charset': 'UTF-8', 'skipLines': 1]).eachLine { tokens ->
 
+                List<String> answerInstanceArray = new ArrayList<String>();
+                String[] answersArray
                 lineCounter++
 
                 // Each row has 1 column (name). Length of the row

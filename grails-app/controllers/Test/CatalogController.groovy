@@ -339,8 +339,6 @@ class CatalogController {
         def existingFieldsList = []
         def back = false
         def questionValid = false
-        String[] questionsArray
-        List<String> questionInstanceArray = new ArrayList<String>();
 
         // Obtaining number of fields in the entity - numberFields:
         def numberFields = 0
@@ -395,6 +393,8 @@ class CatalogController {
         try {
             csvFileLoad.inputStream.toCsvReader(['separatorChar': ';', 'charset': 'UTF-8', 'skipLines': 1]).eachLine { tokens ->
 
+                List<String> questionInstanceArray = new ArrayList<String>();
+                String[] questionsArray
                 lineCounter++
 
                 // Each row has 1 column (name). Length of the row
