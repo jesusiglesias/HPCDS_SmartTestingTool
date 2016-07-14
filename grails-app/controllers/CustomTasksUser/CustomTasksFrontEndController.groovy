@@ -404,6 +404,8 @@ class CustomTasksFrontEndController {
                     // It calculate the average score
                     if (userEvaluation.testScore != null) {
                         finalScore = (finalScore + userEvaluation?.testScore) / 2
+                    } else {
+                        finalScore = finalScore / 2
                     }
 
                     // It calculates the final score with penalty (Default value: 10%)
